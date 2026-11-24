@@ -1,0 +1,86 @@
+Se agrega ESTADO_PRUEBA solo al dominio; se restaura al terminar.
+
+pnpm lint — código 2
+packages/adapters/in-http/test/coherencia.test.ts(20,71): error TS2344: Type '"BORRADOR" | "COTIZADO" | "LISTO_PARA_RESERVAR" | "HORARIO_RESERVADO" | "CONFIRMADA" | "EN_CLINICA" | "ATENDIDA" | "CANCELADA" | "NO_ASISTIO" | "EXPIRADO" | "ESTADO_PRUEBA"' does not satisfy the constraint '"Expected: literal string: BORRADOR, Actual: never" | "Expected: literal string: COTIZADO, Actual: never" | "Expected: literal string: LISTO_PARA_RESERVAR, Actual: never" | ... 7 more ... | "Expected: literal string: ESTADO_PRUEBA, Actual: never"'.
+  Type '"BORRADOR"' is not assignable to type '"Expected: literal string: BORRADOR, Actual: never" | "Expected: literal string: COTIZADO, Actual: never" | "Expected: literal string: LISTO_PARA_RESERVAR, Actual: never" | ... 7 more ... | "Expected: literal string: ESTADO_PRUEBA, Actual: never"'.
+[ELIFECYCLE] Command failed with exit code 2.
+[ELIFECYCLE] Command failed with exit code 2.
+$ eslint . && pnpm typecheck
+$ pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json
+
+pnpm test — código 1
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ✓ |unitarios| tests/unit/workspace.test.ts (3 tests) 12ms
+ ❯ |unitarios| tests/unit/dominio.test.ts (4 tests | 1 failed) 18ms
+     × declara exactamente los estados vigentes y ninguna fase obsoleta 12ms
+     ✓ exige el tipo de trámite y vincula el payload al evento 2ms
+     ✓ detecta una rama de evento omitida y payloads con claves sensibles 0ms
+     ✓ conserva código y datos de los errores y todos son Error 1ms
+ ✓ |unitarios| tests/unit/puertos.test.ts (3 tests) 10ms
+ ✓ |unitarios| tests/unit/contratos.test.ts (7 tests) 17ms
+ ❯ |unitarios| packages/adapters/in-http/test/coherencia.test.ts (2 tests | 1 failed) 12ms
+     × mantiene las mismas listas y tipos en dominio y contratos 10ms
+     ✓ mapea todos los errores al código HTTP especificado 1ms
+
+ Test Files  2 failed | 3 passed (5)
+      Tests  2 failed | 17 passed (19)
+   Start at  03:30:44
+   Duration  924ms (transform 660ms, setup 0ms, import 1.36s, tests 69ms, environment 2ms)
+
+[ELIFECYCLE] Test failed. See above for more details.
+$ vitest run --project unitarios
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/dominio.test.ts > vocabulario y eventos de dominio > declara exactamente los estados vigentes y ninguna fase obsoleta
+AssertionError: expected [ 'BORRADOR', 'COTIZADO', …(9) ] to deeply equal [ 'BORRADOR', 'COTIZADO', …(8) ]
+
+- Expected
++ Received
+
+@@ -7,6 +7,7 @@
+    "EN_CLINICA",
+    "ATENDIDA",
+    "CANCELADA",
+    "NO_ASISTIO",
+    "EXPIRADO",
++   "ESTADO_PRUEBA",
+  ]
+
+ ❯ tests/unit/dominio.test.ts:10:29
+      8| describe('vocabulario y eventos de dominio', () => {
+      9|   it('declara exactamente los estados vigentes y ninguna fase obsoleta…
+     10|     expect(ESTADOS_TRAMITE).toEqual(['BORRADOR', 'COTIZADO', 'LISTO_PA…
+       |                             ^
+     11|     for (const estado of ['SUSPENDIDO', 'SERVICIO_SELECCIONADO', 'REQU…
+     12|     expect(CASILLAS).toEqual(['servicio', 'sede', 'paciente', 'requisi…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  |unitarios| packages/adapters/in-http/test/coherencia.test.ts > coherencia del vocabulario y errores del adaptador HTTP > mantiene las mismas listas y tipos en dominio y contratos
+AssertionError: expected [ 'BORRADOR', 'COTIZADO', …(8) ] to deeply equal [ 'BORRADOR', 'COTIZADO', …(9) ]
+
+- Expected
++ Received
+
+@@ -7,7 +7,6 @@
+    "EN_CLINICA",
+    "ATENDIDA",
+    "CANCELADA",
+    "NO_ASISTIO",
+    "EXPIRADO",
+-   "ESTADO_PRUEBA",
+  ]
+
+ ❯ packages/adapters/in-http/test/coherencia.test.ts:15:41
+     13|   it('mantiene las mismas listas y tipos en dominio y contratos', () =…
+     14|     expect(CanalSchema.options).toEqual(CANALES);
+     15|     expect(EstadoTramiteSchema.options).toEqual(ESTADOS_TRAMITE);
+       |                                         ^
+     16|     expect(CasillaSchema.options).toEqual(CASILLAS);
+     17|     expect(TipoTramiteSchema.options).toEqual(TIPOS_TRAMITE);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+

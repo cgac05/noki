@@ -98,6 +98,7 @@ Si faltan los scripts o la infraestructura, registra el control como **BLOQUEADO
 ```
 packages/domain/         TS puro. Entidades, máquinas de estados, eventos, políticas, errores de dominio
 packages/application/    Casos de uso + puertos (interfaces). Depende solo de domain
+packages/contracts/      Esquemas Zod y tipos derivados para canales. Solo depende de zod
 packages/adapters/in-http/       Rutas Fastify por canal, webhook WA, validación Zod
 packages/adapters/in-events/     Consumidores Redis Streams, workers BullMQ
 packages/adapters/out-postgres/  Repositorios, event store, outbox, reservas
@@ -127,6 +128,8 @@ tests/load/              k6
 8. **Persistencia y eventos en la misma transacción** (outbox). El relay del outbox publica en Redis.
 9. **Un tipo de trámite nuevo se registra** (máquina de estados + casillas + dependencias) en el registro de tipos. Nunca agregues `if (tipo === 'X')` en el núcleo.
 10. **Toda entrada externa** se valida con Zod en el adaptador de entrada y se convierte en un comando tipado.
+11. **`contracts` solo importa módulos propios y `zod`.** Ni dominio ni aplicación lo importan; la coherencia del vocabulario se prueba en `in-http`.
+12. **`apps/web` consume `contracts`**, nunca dominio, aplicación ni adaptadores.
 
 `pnpm lint:deps` falla si se rompen las reglas 1–3.
 

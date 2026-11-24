@@ -1,0 +1,15 @@
+{
+  "name": "@noki/adapter-out-postgres",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@noki/application": "workspace:*",
+    "@noki/domain": "workspace:*",
+    "kysely": "0.28.8",
+    "pg": "8.16.3"
+  }
+}

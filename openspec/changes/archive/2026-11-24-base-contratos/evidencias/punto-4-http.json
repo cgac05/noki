@@ -1,0 +1,22 @@
+[
+  {
+    "Url": "http://localhost:4000/health",
+    "Status": 200,
+    "Body": "{\"estado\":\"ok\"}"
+  },
+  {
+    "Url": "http://localhost:4001/health",
+    "Status": 200,
+    "Body": "{\"estado\":\"ok\"}"
+  },
+  {
+    "Url": "http://localhost:4000/ready",
+    "Status": 200,
+    "Body": "{\"estado\":\"ok\",\"postgres\":\"ok\",\"redis\":\"ok\"}"
+  },
+  {
+    "Url": "http://localhost:5173",
+    "Status": 200,
+    "Body": "HTML de la página índice recibido"
+  }
+]

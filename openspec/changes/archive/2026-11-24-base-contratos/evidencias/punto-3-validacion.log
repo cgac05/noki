@@ -1,0 +1,15 @@
+$ node --env-file=.env --import tsx packages/adapters/out-postgres/src/cli.ts
+La base ya está actualizada; ninguna migración pendiente.
+$ node --env-file=.env --import tsx packages/adapters/out-postgres/src/cli.ts
+La base ya está actualizada; ninguna migración pendiente.
+$ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ✓ |integracion| tests/integracion/nucleo.test.ts (8 tests) 996ms
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  03:40:22
+   Duration  2.06s (transform 126ms, setup 0ms, import 700ms, tests 996ms, environment 0ms)
+

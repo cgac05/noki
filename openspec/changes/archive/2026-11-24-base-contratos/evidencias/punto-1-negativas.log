@@ -1,0 +1,370 @@
+Punto de control 1 — pruebas de rechazo y permisos
+
+## as any
+Archivo: apps/api/src/pruebaTemporal.ts
+Contenido:
+export const valor = 1 as any;
+
+Comando: pnpm lint
+Código: 1
+
+C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\apps\api\src\pruebaTemporal.ts
+  1:27  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 1 problem (1 error, 0 warnings)
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ eslint . && pnpm typecheck
+
+## ts-ignore
+Archivo: apps/api/src/pruebaTemporal.ts
+Contenido:
+// @ts-ignore
+export const valor: string = 1;
+
+Comando: pnpm lint
+Código: 1
+
+C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\apps\api\src\pruebaTemporal.ts
+  1:1  error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+
+✖ 1 problem (1 error, 0 warnings)
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ eslint . && pnpm typecheck
+
+## ts-nocheck
+Archivo: apps/api/src/pruebaTemporal.ts
+Contenido:
+// @ts-nocheck
+export const valor: string = 1;
+
+Comando: pnpm lint
+Código: 1
+
+C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\apps\api\src\pruebaTemporal.ts
+  1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+
+✖ 1 problem (1 error, 0 warnings)
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ eslint . && pnpm typecheck
+
+## expect-error sin descripción
+Archivo: apps/api/src/pruebaTemporal.ts
+Contenido:
+// @ts-expect-error
+export const valor: string = 1;
+
+Comando: pnpm lint
+Código: 1
+
+C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\apps\api\src\pruebaTemporal.ts
+  1:1  error  Include a description after the "@ts-expect-error" directive to explain why the @ts-expect-error is necessary. The description must be 10 characters or longer  @typescript-eslint/ban-ts-comment
+
+✖ 1 problem (1 error, 0 warnings)
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ eslint . && pnpm typecheck
+
+## new Date()
+Archivo: packages/domain/src/pruebaTemporal.ts
+Contenido:
+export const valor = new Date();
+
+Comando: pnpm lint
+Código: 1
+
+C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\packages\domain\src\pruebaTemporal.ts
+  1:22  error  Obtén el tiempo del puerto Reloj  no-restricted-syntax
+
+✖ 1 problem (1 error, 0 warnings)
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ eslint . && pnpm typecheck
+
+## Date.now()
+Archivo: packages/domain/src/pruebaTemporal.ts
+Contenido:
+export const valor = Date.now();
+
+Comando: pnpm lint
+Código: 1
+
+C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\packages\domain\src\pruebaTemporal.ts
+  1:22  error  'Date.now' is restricted from being used. Obtén el tiempo del puerto Reloj  no-restricted-properties
+
+✖ 1 problem (1 error, 0 warnings)
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ eslint . && pnpm typecheck
+
+## Math.random()
+Archivo: packages/domain/src/pruebaTemporal.ts
+Contenido:
+export const valor = Math.random();
+
+Comando: pnpm lint
+Código: 1
+
+C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\packages\domain\src\pruebaTemporal.ts
+  1:22  error  'Math.random' is restricted from being used. Obtén los IDs del puerto GeneradorId  no-restricted-properties
+
+✖ 1 problem (1 error, 0 warnings)
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ eslint . && pnpm typecheck
+
+## crypto.randomUUID()
+Archivo: packages/domain/src/pruebaTemporal.ts
+Contenido:
+export const valor = crypto.randomUUID();
+
+Comando: pnpm lint
+Código: 1
+
+C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\packages\domain\src\pruebaTemporal.ts
+  1:22  error  'crypto.randomUUID' is restricted from being used. Obtén los IDs del puerto GeneradorId  no-restricted-properties
+
+✖ 1 problem (1 error, 0 warnings)
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ eslint . && pnpm typecheck
+
+## globalThis.crypto.randomUUID()
+Archivo: packages/domain/src/pruebaTemporal.ts
+Contenido:
+export const valor = globalThis.crypto.randomUUID();
+
+Comando: pnpm lint
+Código: 1
+
+C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\packages\domain\src\pruebaTemporal.ts
+  1:22  error  Obtén los IDs del puerto GeneradorId  no-restricted-syntax
+
+✖ 1 problem (1 error, 0 warnings)
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ eslint . && pnpm typecheck
+
+## performance.now()
+Archivo: packages/domain/src/pruebaTemporal.ts
+Contenido:
+export const valor = performance.now();
+
+Comando: pnpm lint
+Código: 1
+
+C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\packages\domain\src\pruebaTemporal.ts
+  1:22  error  'performance.now' is restricted from being used. Obtén el tiempo del puerto Reloj  no-restricted-properties
+
+✖ 1 problem (1 error, 0 warnings)
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ eslint . && pnpm typecheck
+
+## reloj prohibido también en aplicación
+Archivo: packages/application/src/pruebaTemporal.ts
+Contenido:
+export const valor = Date.now();
+
+Comando: pnpm lint
+Código: 1
+
+C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\packages\application\src\pruebaTemporal.ts
+  1:22  error  'Date.now' is restricted from being used. Obtén el tiempo del puerto Reloj  no-restricted-properties
+
+✖ 1 problem (1 error, 0 warnings)
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ eslint . && pnpm typecheck
+
+## fecha con valor permitida
+Archivo: packages/domain/src/pruebaTemporal.ts
+Contenido:
+export const valor = new Date('2026-01-01T00:00:00Z');
+
+Comando: pnpm lint
+Código: 0
+$ eslint . && pnpm typecheck
+$ pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json
+
+## expect-error descrito permitido
+Archivo: apps/api/src/pruebaTemporal.ts
+Contenido:
+// @ts-expect-error: comprueba el rechazo de tipos incompatible
+export const valor: string = 1;
+
+Comando: pnpm lint
+Código: 0
+$ eslint . && pnpm typecheck
+$ pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json
+
+## dominio importa fastify
+Archivo: packages/domain/src/pruebaTemporal.ts
+Contenido:
+import 'fastify';
+
+Comando: pnpm lint:deps
+Código: 2
+
+  error importaciones-resueltas: packages/domain/src/pruebaTemporal.ts → fastify
+  error dominio-aislado: packages/domain/src/pruebaTemporal.ts → fastify
+
+x 2 dependency violations (2 errors, 0 warnings). 15 modules, 1 dependencies cruised.
+
+[ELIFECYCLE] Command failed with exit code 2.
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+## dominio importa externo resuelto
+Archivo: packages/domain/src/pruebaTemporal.ts
+Contenido:
+import type { CompilerOptions } from 'typescript';
+export type Opciones = CompilerOptions;
+
+Comando: pnpm lint:deps
+Código: 0
+
+✔ no dependency violations found (14 modules, 0 dependencies cruised)
+
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+Revalidación de fronteras tras corregir la exclusión de node_modules.
+
+## dominio importa fastify
+Archivo: packages/domain/src/pruebaTemporal.ts
+Contenido:
+import 'fastify';
+
+Comando: pnpm lint:deps
+Código: 2
+
+  error importaciones-resueltas: packages/domain/src/pruebaTemporal.ts → fastify
+  error dominio-aislado: packages/domain/src/pruebaTemporal.ts → fastify
+
+x 2 dependency violations (2 errors, 0 warnings). 15 modules, 1 dependencies cruised.
+
+[ELIFECYCLE] Command failed with exit code 2.
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+## dominio importa externo resuelto
+Archivo: packages/domain/src/pruebaTemporal.ts
+Contenido:
+import type { CompilerOptions } from 'typescript';
+export type Opciones = CompilerOptions;
+
+Comando: pnpm lint:deps
+Código: 1
+
+  error dominio-aislado: packages/domain/src/pruebaTemporal.ts → node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/typescript.js
+
+x 1 dependency violations (1 errors, 0 warnings). 15 modules, 1 dependencies cruised.
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+## aplicación importa adaptador
+Archivo: packages/application/src/pruebaTemporal.ts
+Contenido:
+import '../../adapters/memory/src/index.ts';
+
+Comando: pnpm lint:deps
+Código: 1
+
+  error aplicacion-solo-dominio: packages/application/src/pruebaTemporal.ts → packages/adapters/memory/src/index.ts
+
+x 1 dependency violations (1 errors, 0 warnings). 14 modules, 1 dependencies cruised.
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+## dominio importa contratos
+Archivo: packages/domain/src/pruebaTemporal.ts
+Contenido:
+import '../../contracts/src/index.ts';
+
+Comando: pnpm lint:deps
+Código: 1
+
+  error dominio-aislado: packages/domain/src/pruebaTemporal.ts → packages/contracts/src/index.ts
+
+x 1 dependency violations (1 errors, 0 warnings). 14 modules, 1 dependencies cruised.
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+## aplicación importa contratos
+Archivo: packages/application/src/pruebaTemporal.ts
+Contenido:
+import '../../contracts/src/index.ts';
+
+Comando: pnpm lint:deps
+Código: 1
+
+  error aplicacion-solo-dominio: packages/application/src/pruebaTemporal.ts → packages/contracts/src/index.ts
+
+x 1 dependency violations (1 errors, 0 warnings). 14 modules, 1 dependencies cruised.
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+## adaptador importa otro adaptador
+Archivo: packages/adapters/memory/src/pruebaTemporal.ts
+Contenido:
+import '../../in-http/src/index.ts';
+
+Comando: pnpm lint:deps
+Código: 1
+
+  error adaptador-aislado-memory: packages/adapters/memory/src/pruebaTemporal.ts → packages/adapters/in-http/src/index.ts
+
+x 1 dependency violations (1 errors, 0 warnings). 14 modules, 1 dependencies cruised.
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+## web importa dominio
+Archivo: apps/web/src/pruebaTemporal.ts
+Contenido:
+import '../../../packages/domain/src/index.ts';
+
+Comando: pnpm lint:deps
+Código: 1
+
+  error web-solo-contratos: apps/web/src/pruebaTemporal.ts → packages/domain/src/index.ts
+
+x 1 dependency violations (1 errors, 0 warnings). 14 modules, 1 dependencies cruised.
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+## contratos importa algo distinto de zod
+Archivo: packages/contracts/src/pruebaTemporal.ts
+Contenido:
+import type { CompilerOptions } from 'typescript';
+export type Opciones = CompilerOptions;
+
+Comando: pnpm lint:deps
+Código: 1
+
+  error contratos-solo-zod: packages/contracts/src/pruebaTemporal.ts → node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/typescript.js
+
+x 1 dependency violations (1 errors, 0 warnings). 15 modules, 1 dependencies cruised.
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+## contratos puede importar zod
+Archivo: packages/contracts/src/pruebaTemporal.ts
+Contenido:
+export { z } from 'zod';
+
+Comando: pnpm lint:deps
+Código: 0
+
+✔ no dependency violations found (15 modules, 1 dependencies cruised)
+
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+## .env ignorado
+git status --short -- .env → salida vacía, código 0.

@@ -1,0 +1,57 @@
+Instantánea aislada del código entregado, sin node_modules ni .env. No crea commits.
+
+Comando: pnpm install --offline --frozen-lockfile
+Código: 0
+Scope: all 14 workspace projects
+✓ Lockfile passes supply-chain policies (verified 5m ago)
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +190
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Packages are hard linked from the content-addressable store to the virtual store.
+  Content-addressable store is at: C:\Users\Luis Rodriguez\AppData\Local\pnpm\store\v11
+  Virtual store is at:             node_modules/.pnpm
+Progress: resolved 190, reused 190, downloaded 0, added 64
+Progress: resolved 190, reused 190, downloaded 0, added 190, done
+.../esbuild@0.28.2/node_modules/esbuild postinstall$ node install.js
+.../esbuild@0.25.12/node_modules/esbuild postinstall$ node install.js
+.../esbuild@0.28.2/node_modules/esbuild postinstall: Done
+.../esbuild@0.25.12/node_modules/esbuild postinstall: Done
+
+devDependencies:
++ @eslint/js 9.39.1
++ @types/node 24.10.1
++ dependency-cruiser 17.2.0
++ eslint 9.39.1
++ tsx 4.20.6
++ typescript 5.9.3
++ typescript-eslint 8.48.0
++ vitest 4.0.14
+
+Done in 3.2s using pnpm v11.25.0
+
+Comando: pnpm lint
+Código: 0
+$ eslint . && pnpm typecheck
+$ pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json
+
+Comando: pnpm lint:deps
+Código: 0
+
+✔ no dependency violations found (13 modules, 0 dependencies cruised)
+
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+Comando: pnpm test
+Código: 0
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki/.tools/punto-1-limpio
+
+ ✓ |unitarios| tests/unit/workspace.test.ts (3 tests) 9ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  03:22:21
+   Duration  391ms (transform 46ms, setup 0ms, import 66ms, tests 9ms, environment 0ms)
+
+$ vitest run --project unitarios

@@ -1,0 +1,15 @@
+{
+  "name": "@noki/adapter-in-http",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@noki/application": "workspace:*",
+    "@noki/contracts": "workspace:*",
+    "@noki/domain": "workspace:*",
+    "zod": "4.1.13"
+  }
+}

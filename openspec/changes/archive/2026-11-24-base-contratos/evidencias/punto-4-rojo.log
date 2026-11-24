@@ -1,0 +1,81 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ✓ |integracion| tests/integracion/nucleo.test.ts (8 tests) 997ms
+ ❯ |integracion| tests/integracion/aplicaciones.test.ts (4 tests | 4 failed) 7ms
+     × responde salud aunque las dependencias no estén accesibles 4ms
+     × está lista únicamente si Postgres y Redis responden 1ms
+     × señala Redis caído y no muestra la URL ni credenciales 1ms
+     × señala Postgres caído dentro del límite 1ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |integracion| tests/integracion/semilla.test.ts [ tests/integracion/semilla.test.ts ]
+Error: Cannot find package 'argon2' imported from 'C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki/tests/integracion/semilla.test.ts'
+ ❯ tests/integracion/semilla.test.ts:3:1
+      1| import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+      2| import { Pool } from 'pg';
+      3| import { verify } from 'argon2';
+       | ^
+      4| import { migrar } from '../../packages/adapters/out-postgres/src/index…
+      5| import { sembrar } from '../../apps/api/src/semilla/sembrar.ts';
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |integracion| tests/integracion/aplicaciones.test.ts > salud y disponibilidad con dependencias reales > responde salud aunque las dependencias no estén accesibles
+TypeError: (0 , __vite_ssr_import_1__.crearApi) is not a function
+ ❯ tests/integracion/aplicaciones.test.ts:9:17
+      7| describe('salud y disponibilidad con dependencias reales', () => {
+      8|   it('responde salud aunque las dependencias no estén accesibles', asy…
+      9|     const api = crearApi({ databaseUrl: 'postgres://demo:demo@127.0.0.…
+       |                 ^
+     10|     const mock = crearSdMock(false);
+     11|     try {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  |integracion| tests/integracion/aplicaciones.test.ts > salud y disponibilidad con dependencias reales > está lista únicamente si Postgres y Redis responden
+TypeError: (0 , __vite_ssr_import_1__.crearApi) is not a function
+ ❯ tests/integracion/aplicaciones.test.ts:20:17
+     18|   });
+     19|   it('está lista únicamente si Postgres y Redis responden', async () =…
+     20|     const api = crearApi({ databaseUrl, redisUrl, logger: false });
+       |                 ^
+     21|     try {
+     22|       const salida = await api.inject('/ready');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  |integracion| tests/integracion/aplicaciones.test.ts > salud y disponibilidad con dependencias reales > señala Redis caído y no muestra la URL ni credenciales
+TypeError: (0 , __vite_ssr_import_1__.crearApi) is not a function
+ ❯ tests/integracion/aplicaciones.test.ts:28:17
+     26|   });
+     27|   it('señala Redis caído y no muestra la URL ni credenciales', async (…
+     28|     const api = crearApi({ databaseUrl, redisUrl: 'redis://:secreto-no…
+       |                 ^
+     29|     try {
+     30|       const comienzo = performance.now();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  |integracion| tests/integracion/aplicaciones.test.ts > salud y disponibilidad con dependencias reales > señala Postgres caído dentro del límite
+TypeError: (0 , __vite_ssr_import_1__.crearApi) is not a function
+ ❯ tests/integracion/aplicaciones.test.ts:39:17
+     37|   });
+     38|   it('señala Postgres caído dentro del límite', async () => {
+     39|     const api = crearApi({ databaseUrl: 'postgres://demo:secreto-no-re…
+       |                 ^
+     40|     try {
+     41|       const comienzo = performance.now();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  2 failed | 1 passed (3)
+      Tests  4 failed | 8 passed (12)
+   Start at  03:44:53
+   Duration  2.68s (transform 132ms, setup 0ms, import 700ms, tests 1.00s, environment 0ms)
+

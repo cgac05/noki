@@ -87,6 +87,7 @@ El cerebro atiende **varios tipos de trámite** dentro del mismo hilo, cada uno 
 packages/
   domain/          # TS puro, CERO dependencias externas
   application/     # casos de uso + puertos (interfaces). Solo depende de domain
+  contracts/       # esquemas Zod y tipos para canales; solo depende de zod
   adapters/
     in-http/       # rutas por canal + webhook WA (Zod)
     in-events/     # consumidores Redis Streams, workers BullMQ
@@ -104,11 +105,13 @@ tests/load/        # k6
 ```
 
 **Reglas (se validan con dependency-cruiser):**
-1. `domain` no importa nada de `application`, `adapters` ni `node_modules`.
-2. `application` no importa `adapters`.
+1. `domain` no importa nada de `application`, `contracts`, `adapters` ni `node_modules`.
+2. `application` solo depende de `domain`; no importa `contracts`, `adapters`, aplicaciones ni módulos externos.
 3. Los adaptadores no se importan entre sí.
 4. Toda entrada externa se valida con Zod **en el adaptador** y se convierte en un comando tipado.
 5. Cada puerto tiene un **adaptador en memoria** para pruebas y como respaldo del demo.
+6. `contracts` solo importa módulos propios y `zod`; los adaptadores de entrada validan con sus esquemas.
+7. `apps/web` consume contratos desde `contracts` y no importa `domain`, `application` ni adaptadores.
 
 ---
 

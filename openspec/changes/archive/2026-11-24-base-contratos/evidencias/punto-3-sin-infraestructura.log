@@ -1,0 +1,3 @@
+$ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
+No hay infraestructura de pruebas disponible. Inicia PostgreSQL y Redis: docker compose -f infra/docker-compose.yml up -d postgres redis. No se omitieron pruebas ni se declaró éxito.
+[ELIFECYCLE] Command failed with exit code 1.

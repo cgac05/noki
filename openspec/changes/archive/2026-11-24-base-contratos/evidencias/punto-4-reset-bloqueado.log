@@ -1,0 +1,3 @@
+$ node --env-file=.env --import tsx apps/api/src/semilla/reset.ts
+El reinicio requiere DEMO_MODE=true; no se abrió ninguna conexión.
+[ELIFECYCLE] Command failed with exit code 1.

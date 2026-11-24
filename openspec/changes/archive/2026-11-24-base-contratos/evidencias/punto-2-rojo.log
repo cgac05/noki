@@ -1,0 +1,129 @@
+$ vitest run --project unitarios
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ✓ |unitarios| tests/unit/workspace.test.ts (3 tests) 10ms
+ ❯ |unitarios| tests/unit/dominio.test.ts (4 tests | 2 failed) 22ms
+     × declara exactamente los estados vigentes y ninguna fase obsoleta 15ms
+     ✓ exige el tipo de trámite y vincula el payload al evento 2ms
+     ✓ detecta una rama de evento omitida y payloads con claves sensibles 0ms
+     × conserva código y datos de los errores y todos son Error 1ms
+ ❯ |unitarios| packages/adapters/in-http/test/coherencia.test.ts (2 tests | 2 failed) 10ms
+     × mantiene las mismas listas y tipos en dominio y contratos 4ms
+     × mapea todos los errores al código HTTP especificado 4ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/contratos.test.ts [ tests/unit/contratos.test.ts ]
+Error: Cannot find package 'zod' imported from 'C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki/tests/unit/contratos.test.ts'
+ ❯ tests/unit/contratos.test.ts:2:1
+      1| import { describe, expect, expectTypeOf, it } from 'vitest';
+      2| import { z } from 'zod';
+       | ^
+      3| import {
+      4|   ComandoRequestSchema, SiguientePreguntaSchema, MensajeBotSchema, Cam…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  |unitarios| tests/unit/puertos.test.ts [ tests/unit/puertos.test.ts ]
+Error: Cannot find module '../../apps/api/src/sistema/RelojSistema.ts' imported from 'C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki/tests/unit/puertos.test.ts'
+ ❯ tests/unit/puertos.test.ts:3:1
+      1| import { describe, expect, it } from 'vitest';
+      2| import { RelojFalso, GeneradorIdSecuencial } from '../../packages/adap…
+      3| import { RelojSistema } from '../../apps/api/src/sistema/RelojSistema.…
+       | ^
+      4| import { GeneradorIdUuidV7 } from '../../apps/api/src/sistema/Generado…
+      5| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/dominio.test.ts > vocabulario y eventos de dominio > declara exactamente los estados vigentes y ninguna fase obsoleta
+AssertionError: expected undefined to deeply equal [ 'BORRADOR', 'COTIZADO', …(8) ]
+
+- Expected: 
+[
+  "BORRADOR",
+  "COTIZADO",
+  "LISTO_PARA_RESERVAR",
+  "HORARIO_RESERVADO",
+  "CONFIRMADA",
+  "EN_CLINICA",
+  "ATENDIDA",
+  "CANCELADA",
+  "NO_ASISTIO",
+  "EXPIRADO",
+]
+
++ Received: 
+undefined
+
+ ❯ tests/unit/dominio.test.ts:10:29
+      8| describe('vocabulario y eventos de dominio', () => {
+      9|   it('declara exactamente los estados vigentes y ninguna fase obsoleta…
+     10|     expect(ESTADOS_TRAMITE).toEqual(['BORRADOR', 'COTIZADO', 'LISTO_PA…
+       |                             ^
+     11|     for (const estado of ['SUSPENDIDO', 'SERVICIO_SELECCIONADO', 'REQU…
+     12|     expect(CASILLAS).toEqual(['servicio', 'sede', 'paciente', 'requisi…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  |unitarios| tests/unit/dominio.test.ts > vocabulario y eventos de dominio > conserva código y datos de los errores y todos son Error
+TypeError: __vite_ssr_import_1__.ReglaViolada is not a constructor
+ ❯ tests/unit/dominio.test.ts:44:7
+     42|   it('conserva código y datos de los errores y todos son Error', () =>…
+     43|     const errores = [
+     44|       new ReglaViolada('SERVICIO_NO_DISPONIBLE_EN_SEDE', { sedeId: 'se…
+       |       ^
+     45|       new StepUpRequerido(3, ['PIN']), new ConflictoVersion(1, 2),
+     46|       new NoEncontrado('tramite', 'id'), new TransicionInvalida('BORRA…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  |unitarios| packages/adapters/in-http/test/coherencia.test.ts > coherencia del vocabulario y errores del adaptador HTTP > mantiene las mismas listas y tipos en dominio y contratos
+TypeError: Cannot read properties of undefined (reading 'options')
+ ❯ packages/adapters/in-http/test/coherencia.test.ts:14:24
+
+ Test Files  4 failed | 1 passed (5)
+      Tests  4 failed | 5 passed (9)
+   Start at  03:26:02
+   Duration  685ms (transform 392ms, setup 0ms, import 338ms, tests 43ms, environment 1ms)
+
+     12| describe('coherencia del vocabulario y errores del adaptador HTTP', ()…
+     13|   it('mantiene las mismas listas y tipos en dominio y contratos', () =…
+     14|     expect(CanalSchema.options).toEqual(CANALES);
+       |                        ^
+     15|     expect(EstadoTramiteSchema.options).toEqual(ESTADOS_TRAMITE);
+     16|     expect(CasillaSchema.options).toEqual(CASILLAS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  |unitarios| packages/adapters/in-http/test/coherencia.test.ts > coherencia del vocabulario y errores del adaptador HTTP > mapea todos los errores al código HTTP especificado
+AssertionError: expected undefined to deeply equal { REGLA_VIOLADA: 422, …(5) }
+
+- Expected: 
+{
+  "CONFLICTO_VERSION": 409,
+  "NO_ENCONTRADO": 404,
+  "REGLA_VIOLADA": 422,
+  "STEP_UP_REQUERIDO": 403,
+  "TRANSICION_INVALIDA": 409,
+  "VALIDACION": 400,
+}
+
++ Received: 
+undefined
+
+ ❯ packages/adapters/in-http/test/coherencia.test.ts:27:32
+     25| 
+     26|   it('mapea todos los errores al código HTTP especificado', () => {
+     27|     expect(MAPEO_ERRORES_HTTP).toEqual({ REGLA_VIOLADA: 422, STEP_UP_R…
+       |                                ^
+     28|     expectTypeOf<keyof typeof MAPEO_ERRORES_HTTP>().toEqualTypeOf<Codi…
+     29|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+[ELIFECYCLE] Test failed. See above for more details.

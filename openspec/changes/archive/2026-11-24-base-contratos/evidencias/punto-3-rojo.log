@@ -1,0 +1,35 @@
+$ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ❯ |integracion| tests/integracion/nucleo.test.ts (8 tests | 8 skipped) 6ms
+     ↓ crea todas las tablas del núcleo y ninguna tabla excluida; tipo es obligatorio
+     ↓ repite la migración sin aplicar nada nuevo
+     ↓ rechaza dos reservas activas para el mismo horario
+     ↓ permite reservar tras una cancelación o expiración
+     ↓ permite exactamente un éxito en 50 reservas concurrentes
+     ↓ impide duplicar eventos por idempotency_key
+     ↓ registra idempotencia por consumidor y tokens de un solo uso
+     ↓ crea pg_trgm y los índices de nombre, sinónimos y outbox pendiente
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |integracion| tests/integracion/nucleo.test.ts [ tests/integracion/nucleo.test.ts ]
+TypeError: (0 , __vite_ssr_import_2__.migrar) is not a function
+ ❯ tests/integracion/nucleo.test.ts:14:9
+     12| 
+     13| beforeAll(async () => {
+     14|   await migrar(url);
+       |         ^
+     15|   await pool.query("INSERT INTO sede (id, nombre, ciudad, lat, lng, zo…
+     16|   await pool.query("INSERT INTO servicio (id, codigo, nombre, categori…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 skipped (8)
+   Start at  03:37:00
+   Duration  563ms (transform 96ms, setup 0ms, import 201ms, tests 6ms, environment 0ms)
+
+[ELIFECYCLE] Command failed with exit code 1.

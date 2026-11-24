@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: #163c31;
+  background: #f7faf6;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --tinta-secundaria: #465e52;
+  --linea: #bacdbd;
+}
+body { margin: 0; min-width: 320px; }
+::selection { background: #c9e8c8; color: #163c31; }
+:focus-visible { outline: 3px solid #21734f; outline-offset: 4px; }
+.cabecera, .contenido, .pie { width: min(100% - 3rem, 72rem); margin-inline: auto; }
+.cabecera { padding-block: 1.5rem; border-bottom: 1px solid var(--linea); }
+.marca { font-size: 2rem; font-weight: 700; letter-spacing: -0.035em; }
+.contexto { font-size: 0.875rem; color: var(--tinta-secundaria); text-align: right; }
+.contenido { padding-block: clamp(3.5rem, 8vw, 7rem); }
+h1 { max-width: 15ch; margin: 0; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; text-wrap: balance; }
+.introduccion { max-width: 46ch; margin-top: 2rem; font-size: 1.125rem; line-height: 1.65; color: var(--tinta-secundaria); }
+.canales { margin-top: 4rem; }
+h2 { margin: 0 0 1rem; font-size: 1rem; font-weight: 600; }
+.canales ul { margin: 0; padding: 0; list-style: none; gap: 1rem; }
+.canales li { padding-block: 1rem; border-top: 1px solid var(--linea); font-size: 1.125rem; }
+.alcance { margin-top: 2rem; max-width: 65ch; color: var(--tinta-secundaria); font-size: 0.9375rem; line-height: 1.6; }
+.pie { border-top: 1px solid var(--linea); padding-block: 1.5rem; color: var(--tinta-secundaria); font-size: 0.8125rem; line-height: 1.5; }
+@media (max-width: 400px) {
+  .cabecera, .contenido, .pie { width: calc(100% - 2rem); }
+  .contexto { max-width: 12ch; }
+}

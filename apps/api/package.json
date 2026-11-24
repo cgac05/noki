@@ -1,0 +1,23 @@
+{
+  "name": "@noki/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@noki/adapter-out-postgres": "workspace:*",
+    "@noki/adapter-out-redis": "workspace:*",
+    "@noki/application": "workspace:*",
+    "@noki/domain": "workspace:*",
+    "argon2": "0.44.0",
+    "fastify": "5.6.2",
+    "kysely": "0.28.8",
+    "pg": "8.16.3",
+    "uuid": "11.1.0"
+  },
+  "scripts": {
+    "dev": "node --env-file=../../.env --import tsx --watch src/main.ts"
+  }
+}

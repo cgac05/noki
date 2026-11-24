@@ -1,0 +1,34 @@
+{
+  "name": "noki",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "typecheck": "pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json",
+    "lint": "eslint . && pnpm typecheck",
+    "lint:deps": "depcruise --config .dependency-cruiser.cjs packages apps",
+    "test": "tsc --project tests/tsconfig.json && vitest run --project unitarios",
+    "test:integracion": "node --env-file=.env --import tsx tests/integracion/ejecutar.ts",
+    "db:migrate": "node --env-file=.env --import tsx packages/adapters/out-postgres/src/cli.ts",
+    "seed": "node --env-file=.env --import tsx apps/api/src/semilla/cli.ts",
+    "demo:reset": "node --env-file=.env --import tsx apps/api/src/semilla/reset.ts",
+    "dev": "pnpm --parallel --filter @noki/api --filter @noki/sd-mock --filter @noki/web dev"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.1",
+    "@types/node": "24.10.1",
+    "@types/pg": "8.15.6",
+    "argon2": "0.44.0",
+    "dependency-cruiser": "17.2.0",
+    "eslint": "9.39.1",
+    "ioredis": "5.8.2",
+    "pg": "8.16.3",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.48.0",
+    "vitest": "4.0.14"
+  }
+}

@@ -1,0 +1,11 @@
+ Container noki-postgres-1 Starting 
+ Container noki-redis-1 Starting 
+ Container noki-postgres-1 Started 
+ Container noki-redis-1 Started 
+ Container noki-postgres-1 Waiting 
+ Container noki-redis-1 Waiting 
+ Container noki-postgres-1 Healthy 
+ Container noki-redis-1 Healthy 
+NAME              IMAGE                COMMAND                  SERVICE    CREATED         STATUS                   PORTS
+noki-postgres-1   postgres:16-alpine   "docker-entrypoint.s…"   postgres   5 minutes ago   Up 3 seconds (healthy)   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp
+noki-redis-1      redis:7-alpine       "docker-entrypoint.s…"   redis      5 minutes ago   Up 3 seconds (healthy)   0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp
