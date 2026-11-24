@@ -6,10 +6,10 @@ Cómo trabajan dos frentes a la vez sobre `main` sin pisarse. Complementa [colab
 
 | Frente | Responsable | Puede apoyar o relevar |
 |---|---|---|
-| **A: núcleo** | `J3sus-esb` (Jesús Aldahir) | Cualquier integrante, si el responsable lo acuerda y queda anotado en esta tabla y en el `handoff.md` del cambio en curso |
+| **A: núcleo** | `J3sus-esb` (Jesús Aldahir) y Christian Avila, co-responsables (usuario de GitHub de Christian por registrar) | Cualquier integrante, si el responsable lo acuerda y queda anotado en esta tabla y en el `handoff.md` del cambio en curso |
 | **B: canales** | `LuisMaster119` | Igual que arriba |
 
-El **responsable de un frente** autoriza la implementación y el cierre de los cambios de su frente. Los cambios a archivos compartidos requieren el visto bueno de ambos responsables.
+El **responsable de un frente** autoriza la implementación y el cierre de los cambios de su frente. Si un frente tiene co-responsables, basta la autorización de uno de ellos. Los cambios a archivos compartidos requieren el visto bueno de un responsable de cada frente.
 
 Para relevar o sumar a alguien en un frente: actualizar esta tabla con un commit en `main`, anotar el relevo en el `handoff.md` de cada cambio abierto y que la persona nueva continúe en la rama existente del cambio, sin abrir otra.
 
