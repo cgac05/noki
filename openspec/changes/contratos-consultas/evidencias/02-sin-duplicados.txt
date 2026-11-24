@@ -1,0 +1,1 @@
+PASS: ningún modelo de lectura compartido se declara en apps/web/src.

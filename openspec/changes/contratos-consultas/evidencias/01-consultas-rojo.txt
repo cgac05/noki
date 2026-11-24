@@ -1,0 +1,222 @@
+
+ RUN  v4.0.14 <repo>
+
+ ❯ |unitarios| tests/unit/consultas.test.ts (17 tests | 17 failed) 16ms
+     × Token del QR no es el folio: rechaza 12345678 4ms
+     × Token del QR no es el folio: rechaza 123456789 1ms
+     × Cita válida: valida UTC, zona de Tepic y tipos derivados exportados 0ms
+     × Zona horaria inválida: indica el campo zonaHoraria 0ms
+     × Precio en centavos: rechaza el monto 250.5 0ms
+     × Precio en centavos: rechaza el monto -1 0ms
+     × acepta un precio de 25000 centavos y rechaza fechas sin UTC y token vacío 0ms
+     × Ficha sin acciones: descarta comandos y claves desconocidas al validar 0ms
+     × Llegada sin comando: solo contiene cita y registrada 0ms
+     × Teléfono completo rechazado: exige la máscara de cuatro dígitos 0ms
+     × Campos sensibles ausentes: recorre todos los modelos y sus objetos anidados 0ms
+     × valida bandeja de demo y métricas con cantidades enteras no negativas 0ms
+     × Ruta construida desde parámetros: conserva el hilo elegido 0ms
+     × Parámetro inválido: no produce ruta con un paciente que no sea UUID v7 5ms
+     × Rutas existentes conservadas: mantiene las cuatro consultas ya publicadas 0ms
+     × publica las nueve rutas y sus esquemas de respuesta sin acciones 0ms
+     × Bandeja marcada como demo: su ruta y respuestas quedan identificadas 0ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 17 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > Token del QR no es el folio: rechaza 12345678
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > Token del QR no es el folio: rechaza 123456789
+TypeError: Cannot read properties of undefined (reading 'safeParse')
+ ❯ tests/unit/consultas.test.ts:20:28
+     18| describe('Modelos compartidos de consultas', () => {
+     19|   it.each(['12345678', '123456789'])('Token del QR no es el folio: rec…
+     20|     expect(CitaVistaSchema.safeParse({ ...cita, tokenQr }).success).to…
+       |                            ^
+     21|   });
+     22| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/17]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > Cita válida: valida UTC, zona de Tepic y tipos derivados exportados
+TypeError: Cannot read properties of undefined (reading 'parse')
+ ❯ tests/unit/consultas.test.ts:24:39
+     22| 
+     23|   it('Cita válida: valida UTC, zona de Tepic y tipos derivados exporta…
+     24|     const resultado = CitaVistaSchema.parse(cita);
+       |                                       ^
+     25|     expect(resultado).toEqual(cita);
+     26|     expectTypeOf(resultado).toEqualTypeOf<CitaVista>();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/17]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > Zona horaria inválida: indica el campo zonaHoraria
+TypeError: Cannot read properties of undefined (reading 'safeParse')
+ ❯ tests/unit/consultas.test.ts:33:39
+     31| 
+     32|   it('Zona horaria inválida: indica el campo zonaHoraria', () => {
+     33|     const resultado = CitaVistaSchema.safeParse({ ...cita, zonaHoraria…
+       |                                       ^
+     34|     expect(resultado.success).toBe(false);
+     35|     if (!resultado.success) expect(resultado.error.issues[0]?.path).to…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/17]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > Precio en centavos: rechaza el monto 250.5
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > Precio en centavos: rechaza el monto -1
+TypeError: Cannot read properties of undefined (reading 'safeParse')
+ ❯ tests/unit/consultas.test.ts:39:33
+     37| 
+     38|   it.each([250.5, -1])('Precio en centavos: rechaza el monto %s', prec…
+     39|     expect(OfertaCatalogoSchema.safeParse({ ...oferta, precioCentavos …
+       |                                 ^
+     40|   });
+     41| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/17]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > acepta un precio de 25000 centavos y rechaza fechas sin UTC y token vacío
+TypeError: Cannot read properties of undefined (reading 'parse')
+ ❯ tests/unit/consultas.test.ts:43:33
+     41| 
+     42|   it('acepta un precio de 25000 centavos y rechaza fechas sin UTC y to…
+     43|     expect(OfertaCatalogoSchema.parse(oferta).precioCentavos).toBe(250…
+       |                                 ^
+     44|     expect(CitaVistaSchema.safeParse({ ...cita, inicio: '2026-11-26T09…
+     45|     expect(CitaVistaSchema.safeParse({ ...cita, tokenQr: '' }).success…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/17]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > Ficha sin acciones: descarta comandos y claves desconocidas al validar
+TypeError: Cannot read properties of undefined (reading 'parse')
+ ❯ tests/unit/consultas.test.ts:49:39
+     47| 
+     48|   it('Ficha sin acciones: descarta comandos y claves desconocidas al v…
+     49|     const resultado = FichaHiloSchema.parse({ ...ficha, acciones: [{ t…
+       |                                       ^
+     50|     expect(resultado).toEqual(ficha);
+     51|     expect(resultado).not.toHaveProperty('acciones');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/17]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > Llegada sin comando: solo contiene cita y registrada
+TypeError: Cannot read properties of undefined (reading 'shape')
+ ❯ tests/unit/consultas.test.ts:57:43
+     55| 
+     56|   it('Llegada sin comando: solo contiene cita y registrada', () => {
+     57|     expect(Object.keys(LlegadaVistaSchema.shape)).toEqual(['cita', 're…
+       |                                           ^
+     58|     expect(LlegadaVistaSchema.parse({ cita, registrada: false, accion:…
+     59|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/17]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > Teléfono completo rechazado: exige la máscara de cuatro dígitos
+TypeError: Cannot read properties of undefined (reading 'safeParse')
+ ❯ tests/unit/consultas.test.ts:62:28
+     60| 
+     61|   it('Teléfono completo rechazado: exige la máscara de cuatro dígitos'…
+     62|     expect(FichaHiloSchema.safeParse({ ...ficha, telefonoEnmascarado: …
+       |                            ^
+     63|     expect(FichaHiloSchema.safeParse({ ...ficha, hiloId: 'no-es-uuid' …
+     64|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/17]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > Campos sensibles ausentes: recorre todos los modelos y sus objetos anidados
+TypeError: Cannot read properties of undefined (reading 'shape')
+ ❯ tests/unit/consultas.test.ts:68:23
+     66|   it('Campos sensibles ausentes: recorre todos los modelos y sus objet…
+     67|     const objetos = [OfertaCatalogoSchema, CitaVistaSchema, FichaHiloS…
+     68|       CitaVistaSchema.shape.tramite, FichaHiloSchema.shape.tramites.el…
+       |                       ^
+     69|       MetricasVistaSchema.shape.porEstado.element];
+     70|     for (const esquema of objetos) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/17]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > valida bandeja de demo y métricas con cantidades enteras no negativas
+TypeError: Cannot read properties of undefined (reading 'safeParse')
+ ❯ tests/unit/consultas.test.ts:76:33
+     74| 
+     75|   it('valida bandeja de demo y métricas con cantidades enteras no nega…
+     76|     expect(MensajeBandejaSchema.safeParse({ id: ids.mensaje, canal: 's…
+       |                                 ^
+     77|     expect(MetricasVistaSchema.safeParse({ porEstado: [{ estado: 'CONF…
+     78|     expect(MetricasVistaSchema.safeParse({ porEstado: [{ estado: 'CONF…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/17]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Tabla compartida de rutas GET > Ruta construida desde parámetros: conserva el hilo elegido
+TypeError: (0 , __vite_ssr_import_1__.rutaConsulta) is not a function
+ ❯ tests/unit/consultas.test.ts:84:12
+     82| describe('Tabla compartida de rutas GET', () => {
+     83|   it('Ruta construida desde parámetros: conserva el hilo elegido', () …
+     84|     expect(rutaConsulta('lineaTiempo', { hiloId: ids.hilo })).toBe(`/a…
+       |            ^
+     85|   });
+     86| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/17]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Tabla compartida de rutas GET > Parámetro inválido: no produce ruta con un paciente que no sea UUID v7
+AssertionError: expected error to match asymmetric matcher
+
+- Expected
++ Received
+
+- ObjectContaining {
+-   "name": "ZodError",
++ TypeError {
++   "message": "(0 , __vite_ssr_import_1__.rutaConsulta) is not a function",
+  }
+
+ ❯ tests/unit/consultas.test.ts:88:85
+     86| 
+     87|   it('Parámetro inválido: no produce ruta con un paciente que no sea U…
+     88|     expect(() => rutaConsulta('citasPaciente', { pacienteId: 'invalido…
+       |                                                                                     ^
+     89|     expect(() => rutaConsulta('citasPaciente', { pacienteId: '9a00b338…
+     90|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/17]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Tabla compartida de rutas GET > Rutas existentes conservadas: mantiene las cuatro consultas ya publicadas
+TypeError: (0 , __vite_ssr_import_1__.rutaConsulta) is not a function
+ ❯ tests/unit/consultas.test.ts:93:12
+     91| 
+     92|   it('Rutas existentes conservadas: mantiene las cuatro consultas ya p…
+     93|     expect(rutaConsulta('tramite', { tramiteId: ids.tramite })).toBe(`…
+       |            ^
+     94|     expect(rutaConsulta('lineaTiempo', { hiloId: ids.hilo })).toBe(`/a…
+     95|     expect(rutaConsulta('tramitesAbiertos', { pacienteId: ids.paciente…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/17]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Tabla compartida de rutas GET > publica las nueve rutas y sus esquemas de respuesta sin acciones
+TypeError: Cannot convert undefined or null to object
+ ❯ tests/unit/consultas.test.ts:100:19
+     98| 
+     99|   it('publica las nueve rutas y sus esquemas de respuesta sin acciones…
+    100|     expect(Object.keys(RUTAS_CONSULTAS)).toHaveLength(9);
+       |                   ^
+    101|     expect(rutaConsulta('catalogo', {})).toBe('/api/catalogo');
+    102|     expect(rutaConsulta('fichaHilo', { hiloId: ids.hilo })).toBe(`/api…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/17]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Tabla compartida de rutas GET > Bandeja marcada como demo: su ruta y respuestas quedan identificadas
+TypeError: Cannot read properties of undefined (reading 'bandeja')
+ ❯ tests/unit/consultas.test.ts:111:28
+    109| 
+    110|   it('Bandeja marcada como demo: su ruta y respuestas quedan identific…
+    111|     expect(RUTAS_CONSULTAS.bandeja.soloDemo).toBe(true);
+       |                            ^
+    112|     expect(rutaConsulta('bandeja', {})).toBe('/api/demo/bandeja');
+    113|     expect(RUTAS_CONSULTAS.bandeja.respuesta.parse([])).toEqual([]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/17]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  17 failed (17)
+   Start at  06:57:48
+   Duration  871ms (transform 145ms, setup 0ms, import 400ms, tests 16ms, environment 0ms)
+

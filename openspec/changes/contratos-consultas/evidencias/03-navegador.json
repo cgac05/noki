@@ -1,0 +1,211 @@
+{
+  "servidor": "http://127.0.0.1:5175",
+  "modo": "mock",
+  "comprobaciones": [
+    {
+      "anchoDocumento": 360,
+      "enlaces": [
+        {
+          "alto": 44,
+          "texto": "Web"
+        },
+        {
+          "alto": 44,
+          "texto": "WhatsApp"
+        },
+        {
+          "alto": 44,
+          "texto": "App"
+        },
+        {
+          "alto": 44,
+          "texto": "Call Center"
+        },
+        {
+          "alto": 44,
+          "texto": "Clínica"
+        },
+        {
+          "alto": 44,
+          "texto": "Admin"
+        },
+        {
+          "alto": 44,
+          "texto": "Bandeja"
+        }
+      ],
+      "precio": "Ficha del hiloPaciente de demoAnaContacto•••• 0001Estado del trámite: COTIZADOServicioPaquete US mamario + PapanicolaouSedeTepicCotización$250.00Continuar por WhatsAppAbrir WhatsApp",
+      "ruta": "/callcenter",
+      "viewport": [
+        375,
+        812
+      ]
+    },
+    {
+      "anchoDocumento": 360,
+      "qr": {
+        "alto": 224,
+        "ancho": 224,
+        "visibleCompleto": true,
+        "x": 16,
+        "y": 352.20001220703125
+      },
+      "ruta": "/app",
+      "texto": "AppTus citas y el QR para continuar en clínica.Paquete US mamario + PapanicolaouEstadoCONFIRMADASedeTepicFecha y hora en la sede26 de noviembre de 2026 a las 09:15America/MazatlanPresenta este QR en recepción.\n",
+      "viewport": [
+        375,
+        812
+      ]
+    },
+    {
+      "anchoDocumento": 360,
+      "ruta": "/clinica",
+      "texto": "ClínicaRecepción · Llegadas esperadasPaquete US mamario + PapanicolaouTepic · 26 de noviembre de 2026 a las 09:15Estado: EN_CLINICALlegada registrada",
+      "viewport": [
+        375,
+        812
+      ]
+    },
+    {
+      "anchoDocumento": 375,
+      "anchoVisible": 375,
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "ruta": "/web",
+      "viewport": [
+        375,
+        812
+      ]
+    },
+    {
+      "anchoDocumento": 375,
+      "anchoVisible": 375,
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "ruta": "/wa",
+      "viewport": [
+        375,
+        812
+      ]
+    },
+    {
+      "anchoDocumento": 360,
+      "anchoVisible": 360,
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "ruta": "/app",
+      "viewport": [
+        375,
+        812
+      ]
+    },
+    {
+      "anchoDocumento": 360,
+      "anchoVisible": 360,
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "ruta": "/callcenter",
+      "viewport": [
+        375,
+        812
+      ]
+    },
+    {
+      "anchoDocumento": 360,
+      "anchoVisible": 360,
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "ruta": "/clinica",
+      "viewport": [
+        375,
+        812
+      ]
+    },
+    {
+      "anchoDocumento": 360,
+      "anchoVisible": 360,
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "ruta": "/admin",
+      "viewport": [
+        375,
+        812
+      ]
+    },
+    {
+      "anchoDocumento": 375,
+      "anchoVisible": 375,
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "ruta": "/bandeja",
+      "viewport": [
+        375,
+        812
+      ]
+    },
+    {
+      "anchoDocumento": 1265,
+      "anchoVisible": 1265,
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "ruta": "/web",
+      "viewport": [
+        1280,
+        900
+      ]
+    },
+    {
+      "anchoDocumento": 1280,
+      "anchoVisible": 1280,
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "ruta": "/wa",
+      "viewport": [
+        1280,
+        900
+      ]
+    },
+    {
+      "anchoDocumento": 1265,
+      "anchoVisible": 1265,
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "ruta": "/app",
+      "viewport": [
+        1280,
+        900
+      ]
+    },
+    {
+      "anchoDocumento": 1265,
+      "anchoVisible": 1265,
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "ruta": "/callcenter",
+      "viewport": [
+        1280,
+        900
+      ]
+    },
+    {
+      "anchoDocumento": 1280,
+      "anchoVisible": 1280,
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "ruta": "/clinica",
+      "viewport": [
+        1280,
+        900
+      ]
+    },
+    {
+      "anchoDocumento": 1265,
+      "anchoVisible": 1265,
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "ruta": "/admin",
+      "viewport": [
+        1280,
+        900
+      ]
+    },
+    {
+      "anchoDocumento": 1265,
+      "anchoVisible": 1265,
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "ruta": "/bandeja",
+      "viewport": [
+        1280,
+        900
+      ]
+    }
+  ],
+  "errores": []
+}

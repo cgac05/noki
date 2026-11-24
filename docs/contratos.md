@@ -23,6 +23,41 @@ Canales: `web | whatsapp | app | callcenter | clinica`. Estados, casillas y tipo
 
 `RespuestaComandoSchema` valida `{ tramite, siguientePregunta, eventos }`. `TramiteVistaSchema` contiene `id, hiloId, tipo, estado, version, servicioId?, sedeId?`; `EventoVistaSchema` contiene `id, tipo, canal, ts`. No exponen datos personales ni payloads internos; los campos desconocidos se descartan.
 
+## consultas.ts
+
+Modelos de lectura compartidos, con tipos derivados de sus esquemas Zod:
+
+| Modelo | Datos |
+|---|---|
+| `OfertaCatalogo` | `servicioId`, `servicio`, `sedeId`, `sede`, `precioCentavos` entero no negativo. |
+| `CitaVista` | `tramite`, `servicio`, `sede`, `inicio` ISO UTC, `zonaHoraria` IANA válida y `tokenQr`. |
+| `FichaHilo` | `hiloId`, `nombrePila`, `telefonoEnmascarado` (`•••• 0001`), `tramites`, `lineaTiempo`, `soloLectura`, `oferta` y `codigoContinuacion` (los últimos dos admiten `null`). |
+| `LlegadaVista` | `cita` y `registrada`. |
+| `MensajeBandeja` | `id`, `canal` (`sms` o `email`), `asunto`, `cuerpo`; solo demo. |
+| `MetricasVista` | `porEstado` con `estado`/`cantidad`, y `kpis` numéricos. |
+
+No declaran fecha de nacimiento, correo del paciente, RFC, PIN ni CURP. El teléfono solo admite el formato enmascarado. Zod descarta las claves adicionales, incluidas `acciones` o `accion`: las respuestas contienen únicamente datos. El canal arma el comando con `ComandoRequestSchema` a partir de los IDs o del token elegidos, y el cliente lo valida antes de enviar. No decide precios, disponibilidad ni transiciones.
+
+El QR contiene el token firmado de un solo uso que debe generar y consumir el núcleo (`PLAN.md` §8), nunca el folio. El esquema rechaza un `tokenQr` vacío o de 8–9 dígitos; no comprueba firmas ni sustituye al cambio de seguridad. Los tokens del mock son ficticios.
+
+`RUTAS_CONSULTAS` asocia cada nombre con la plantilla, el esquema de parámetros y el esquema de respuesta. Todas las entradas representan **GET**; el método es uniforme y no se repite por entrada. Los tipos `NombreConsulta`, `ParametrosConsulta<N>` y `RespuestaConsulta<N>` se derivan de la tabla. `rutaConsulta(nombre, parametros)` valida antes de sustituir la plantilla y lanza un error Zod si los parámetros son inválidos.
+
+| Nombre | Ruta GET | Parámetros | Respuesta |
+|---|---|---|---|
+| `tramite` | `/api/tramites/:tramiteId` | `tramiteId` | `TramiteVista` |
+| `lineaTiempo` | `/api/hilos/:hiloId/linea-tiempo` | `hiloId` | `EventoVista[]` |
+| `tramitesAbiertos` | `/api/pacientes/:pacienteId/tramites-abiertos` | `pacienteId` | `TramiteVista[]` |
+| `catalogo` | `/api/catalogo` | ninguno | `OfertaCatalogo[]` |
+| `fichaHilo` | `/api/hilos/:hiloId/ficha` | `hiloId` | `FichaHilo` |
+| `citasPaciente` | `/api/pacientes/:pacienteId/citas` | `pacienteId` | `CitaVista[]` |
+| `llegadasSede` | `/api/sedes/:sedeId/llegadas` | `sedeId` | `LlegadaVista[]` |
+| `metricas` | `/api/admin/kpis` | ninguno | `MetricasVista` |
+| `bandeja` | `/api/demo/bandeja` | ninguno | `MensajeBandeja[]`, `soloDemo: true` |
+
+Todos los IDs de ruta son UUID v7. Se conservan las rutas anteriores, con nombres explícitos de parámetros en sus plantillas. `GET /api/admin/embudo` y `GET /api/admin/huecos` siguen pendientes de sus cambios y no pertenecen aún a la tabla.
+
+Este contrato no implementa endpoints GET ni autenticación. Las consultas exponen datos personales (nombre de pila, contacto enmascarado, citas con token, llegadas y bandeja) y **solo pueden usarse en la demo** hasta cerrar el cambio de seguridad. La web valida las respuestas en ambos modos con esta tabla; en real, `bandeja` requiere `VITE_DEMO=true`. Historial de WhatsApp y cotización web independiente siguen siendo lecturas exclusivas de demo.
+
 ## siguientePregunta.ts
 
 `{ tipo: 'COMPLETO' }` o `{ tipo: 'PREGUNTA', casilla, pista }`. La pista declara `entrada: TEXTO | BOTONES | LISTA | FLOW | NINGUNA`, opciones y campos cuando apliquen. Solo se define la forma: no se calcula la siguiente pregunta.

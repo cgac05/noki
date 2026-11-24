@@ -1,0 +1,13 @@
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |web| src/vistas/red.test.ts (1 test) 127ms
+ ✓ |web| src/vistas/vistas.test.tsx (14 tests) 2876ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  1277ms
+     ✓ permite escribir texto fuera del guion y muestra ayuda sin avanzar  310ms
+
+ Test Files  2 passed (2)
+      Tests  15 passed (15)
+   Start at  07:19:36
+   Duration  7.91s (transform 816ms, setup 0ms, import 2.78s, tests 3.00s, environment 4.72s)
+

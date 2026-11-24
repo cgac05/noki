@@ -1,0 +1,17 @@
+$ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
+
+ RUN  v4.0.14 <repo>
+
+Reinicio de la base de demo en el host localhost.
+ ✓ |integracion| tests/integracion/semilla.test.ts (5 tests) 2989ms
+     ✓ es idempotente y guarda solo hashes argon2id verificables  899ms
+     ✓ reinicia la base de demo, migra y deja exactamente los datos semilla  975ms
+ ✓ |integracion| tests/integracion/aplicaciones.test.ts (4 tests) 1021ms
+     ✓ señala Postgres caído dentro del límite  907ms
+ ✓ |integracion| tests/integracion/nucleo.test.ts (8 tests) 624ms
+
+ Test Files  3 passed (3)
+      Tests  17 passed (17)
+   Start at  07:28:21
+   Duration  8.22s (transform 360ms, setup 0ms, import 2.68s, tests 4.63s, environment 0ms)
+

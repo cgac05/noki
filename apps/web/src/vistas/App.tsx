@@ -1,12 +1,13 @@
 import { Link } from 'react-router';
-import { useConsulta } from '../cliente/ProveedorCliente.tsx';
+import { useConsulta, useContextoConsulta } from '../cliente/ProveedorCliente.tsx';
 import { EstadoCarga } from '../componentes/EstadoCarga.tsx';
 import { EstadoError } from '../componentes/EstadoError.tsx';
 import { QrCita } from '../componentes/QrCita.tsx';
 import { fechaEnSede } from '../componentes/formato.ts';
 
 export function App() {
-  const citas = useConsulta('citas', {});
+  const { pacienteId } = useContextoConsulta();
+  const citas = useConsulta('citasPaciente', pacienteId ? { pacienteId } : undefined);
   return <>
     <h1>App</h1><p className="introduccion">Tus citas y el QR para continuar en clínica.</p>
     {citas.isPending && <EstadoCarga />}

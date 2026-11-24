@@ -1,0 +1,31 @@
+$ tsc --project tests/tsconfig.json && vitest run --project unitarios --project web
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |unitarios| tests/unit/dominio.test.ts (4 tests) 15ms
+ ✓ |unitarios| tests/unit/nucleo/politica.test.ts (15 tests) 20ms
+ ✓ |unitarios| tests/unit/nucleo/adaptadores.test.ts (5 tests) 18ms
+ ✓ |unitarios| tests/unit/nucleo/tramite.test.ts (6 tests) 21ms
+ ✓ |unitarios| tests/unit/nucleo/casosTramite.test.ts (10 tests) 49ms
+ ✓ |unitarios| tests/unit/contratos.test.ts (7 tests) 34ms
+ ✓ |unitarios| tests/unit/consultas.test.ts (17 tests) 104ms
+ ✓ |unitarios| tests/unit/workspace.test.ts (3 tests) 16ms
+ ✓ |unitarios| tests/unit/nucleo/siguientePregunta.test.ts (3 tests) 16ms
+ ✓ |unitarios| tests/unit/nucleo/registroTipos.test.ts (4 tests) 11ms
+ ✓ |unitarios| tests/unit/puertos.test.ts (3 tests) 12ms
+ ✓ |unitarios| tests/unit/nucleo/agendar.test.ts (1 test) 8ms
+ ✓ |unitarios| packages/adapters/in-http/test/siguientePregunta.test.ts (1 test) 14ms
+ ✓ |unitarios| packages/adapters/in-http/test/coherencia.test.ts (2 tests) 8ms
+ ✓ |unitarios| tests/unit/nucleo/hilo.test.ts (1 test) 7ms
+ ✓ |web| src/vistas/red.test.ts (1 test) 176ms
+ ✓ |web| src/cliente/cliente.test.ts (25 tests) 203ms
+ ✓ |web| src/rutas.test.tsx (10 tests) 820ms
+ ✓ |web| src/vistas/vistas.test.tsx (11 tests) 2647ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo  367ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  1227ms
+
+ Test Files  19 passed (19)
+      Tests  129 passed (129)
+   Start at  07:18:17
+   Duration  10.71s (transform 3.35s, setup 0ms, import 11.53s, tests 4.20s, environment 11.38s)
+

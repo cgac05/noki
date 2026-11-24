@@ -1,20 +1,35 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import type { AccionVista } from './provisional.ts';
-import { useCliente } from './ProveedorCliente.tsx';
+import type { ComandoRequest, RespuestaComando, SolicitudMensajeWa } from '@noki/contracts';
+import { useCliente, useRespuestaComando } from './ProveedorCliente.tsx';
+
+// Operación de UI creada al pulsar un botón; nunca forma parte de una lectura.
+type Accion =
+  | { tipo: 'comando'; titulo: string; comando: ComandoRequest }
+  | { tipo: 'comandos'; titulo: string; comandos: ComandoRequest[] }
+  | { tipo: 'wa'; titulo: string; mensaje: SolicitudMensajeWa };
 
 export function useAccion() {
   const cliente = useCliente();
   const consultas = useQueryClient();
+  const { recordar } = useRespuestaComando();
   const operacion = useMutation({
-    mutationFn: async ({ accion, clave }: { accion: AccionVista; clave: string }) => {
-      if (accion.tipo === 'comando') return await cliente.enviarComando(accion.comando, { idempotencyKey: clave });
-      return await cliente.enviarMensajeWa(accion.mensaje);
+    mutationFn: async ({ accion, claves, progreso }: { accion: Accion; claves: string[]; progreso: { siguiente: number } }) => {
+      if (accion.tipo === 'wa') return await cliente.enviarMensajeWa(accion.mensaje);
+      const comandos = accion.tipo === 'comando' ? [accion.comando] : accion.comandos;
+      let respuesta: RespuestaComando | undefined;
+      for (const [indice, comando] of comandos.entries()) {
+        if (indice < progreso.siguiente) continue;
+        respuesta = await cliente.enviarComando(comando, { idempotencyKey: claves[indice]! });
+        progreso.siguiente = indice + 1;
+        recordar(respuesta);
+      }
+      return respuesta;
     },
     onSuccess: () => consultas.invalidateQueries({ queryKey: ['consulta'] }),
   });
   return {
     ...operacion,
-    ejecutar: (accion: AccionVista) => operacion.mutate({ accion, clave: crypto.randomUUID() }),
+    ejecutar: (accion: Accion) => operacion.mutate({ accion, claves: Array.from({ length: accion.tipo === 'comandos' ? accion.comandos.length : 1 }, () => crypto.randomUUID()), progreso: { siguiente: 0 } }),
     reintentar: () => { if (operacion.variables) operacion.mutate(operacion.variables); },
   };
 }

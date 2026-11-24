@@ -23,6 +23,7 @@ function abrir(ruta = '/callcenter', cliente: ClienteApi = new ClienteMock({ lat
 async function confirmarGuion(cliente: ClienteApi) {
   for (const paso of GUION_FLUJO_A.slice(1, 8)) {
     if (paso.espera!.tipo === 'comando') await cliente.enviarComando(paso.espera!.comando);
+    else if (paso.espera!.tipo === 'comandos') { for (const comando of paso.espera!.comandos) await cliente.enviarComando(comando); }
     else await cliente.enviarMensajeWa(paso.espera!.mensaje);
   }
 }
@@ -61,6 +62,66 @@ describe('Mensajes y siguiente pregunta', () => {
 });
 
 describe('Vistas del guion', () => {
+  it('Registrar llegada desde la cita: copia el token elegido y el canal clinica, sin un comando en la lectura', async () => {
+    const cliente = new ClienteMock({ latenciaMs: 0 });
+    await confirmarGuion(cliente);
+    const llegada = structuredClone(GUION_FLUJO_A[7]!.lecturas.llegadasSede[0]!);
+    llegada.cita.tokenQr = 'demo.qr.cita-elegida.token-distinto';
+    llegada.cita.tramite.id = '019aff00-0000-7000-8000-000000000012';
+    expect(llegada).not.toHaveProperty('accion');
+    const consultar = cliente.consultar.bind(cliente);
+    vi.spyOn(cliente, 'consultar').mockImplementation(async (nombre, parametros) => {
+      const dato = await consultar(nombre, parametros);
+      return nombre === 'llegadasSede' ? [llegada] as typeof dato : dato;
+    });
+    const enviar = vi.spyOn(cliente, 'enviarComando').mockResolvedValue(GUION_FLUJO_A[8]!.respuesta);
+    const { usuario } = abrir('/clinica', cliente);
+    await usuario.click(await screen.findByRole('button', { name: 'Registrar llegada' }));
+    await waitFor(() => expect(enviar).toHaveBeenCalledExactlyOnceWith({
+      canal: 'clinica', actor: 'recepcion:tepic', tipo: 'RegistrarLlegada', tramiteId: llegada.cita.tramite.id,
+      payload: { token: llegada.cita.tokenQr },
+    }, { idempotencyKey: expect.any(String) }));
+  });
+
+  it('Selección de catálogo en call center: copia los IDs de otra oferta y envía servicio antes de sede', async () => {
+    const cliente = new ClienteMock({ latenciaMs: 0 });
+    await cliente.enviarComando({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR' } });
+    const oferta = { servicioId: '019aff00-0000-7000-8000-000000000013', servicio: 'Otra oferta ficticia', sedeId: '019aff00-0000-7000-8000-000000000014', sede: 'Compostela', precioCentavos: 30000 };
+    const consultar = cliente.consultar.bind(cliente);
+    vi.spyOn(cliente, 'consultar').mockImplementation(async (nombre, parametros) => {
+      const dato = await consultar(nombre, parametros);
+      return nombre === 'catalogo' ? [oferta] as typeof dato : dato;
+    });
+    const enviar = vi.spyOn(cliente, 'enviarComando').mockResolvedValue(GUION_FLUJO_A[2]!.respuesta);
+    const { usuario } = abrir('/callcenter', cliente);
+    await usuario.click(await screen.findByRole('button', { name: 'Cotizar paquete en Compostela' }));
+    await waitFor(() => expect(enviar).toHaveBeenCalledTimes(2));
+    expect(enviar.mock.calls.map(([comando]) => comando)).toEqual([
+      { canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SeleccionarServicio', tramiteId: IDS.tramite, payload: { servicioId: oferta.servicioId } },
+      { canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SeleccionarSede', tramiteId: IDS.tramite, payload: { sedeId: oferta.sedeId } },
+    ]);
+    expect(enviar.mock.calls[0]![1]?.idempotencyKey).not.toBe(enviar.mock.calls[1]![1]?.idempotencyKey);
+  });
+
+  it('reintenta solo la sede pendiente y conserva su clave después de seleccionar el servicio', async () => {
+    const cliente = new ClienteMock({ latenciaMs: 0 });
+    await cliente.enviarComando({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR' } });
+    const original = cliente.enviarComando.bind(cliente);
+    let falloPendiente = true;
+    const enviar = vi.spyOn(cliente, 'enviarComando').mockImplementation(async (comando, opciones) => {
+      if (comando.tipo === 'SeleccionarSede' && falloPendiente) {
+        falloPendiente = false;
+        throw new ErrorCliente('RED', 'Fallo de red simulado al elegir sede');
+      }
+      return original(comando, opciones);
+    });
+    const { usuario } = abrir('/callcenter', cliente);
+    await usuario.click(await screen.findByRole('button', { name: 'Cotizar paquete en Tepic' }));
+    await usuario.click(await screen.findByRole('button', { name: 'Reintentar' }));
+    expect(await screen.findByRole('button', { name: 'Continuar por WhatsApp' })).toBeDefined();
+    expect(enviar.mock.calls.map(([comando]) => comando.tipo)).toEqual(['SeleccionarServicio', 'SeleccionarSede', 'SeleccionarSede']);
+    expect(enviar.mock.calls[1]![1]?.idempotencyKey).toBe(enviar.mock.calls[2]![1]?.idempotencyKey);
+  });
   it('Ficha del call center: muestra teléfono enmascarado y datos públicos', async () => {
     const { usuario } = abrir();
     await usuario.click(await screen.findByRole('button', { name: 'Llamada entrante' }));
@@ -112,8 +173,8 @@ describe('Vistas del guion', () => {
     const consultar = cliente.consultar.bind(cliente);
     vi.spyOn(cliente, 'consultar').mockImplementation(async (nombre, parametros) => {
       const dato = await consultar(nombre, parametros);
-      if (nombre === 'citas' && Array.isArray(dato)) {
-        return [{ ...GUION_FLUJO_A[7]!.lecturas.citas[0]!, tramite: { ...GUION_FLUJO_A[7]!.respuesta.tramite, estado: 'EN_CLINICA' } }] as typeof dato;
+      if (nombre === 'citasPaciente' && Array.isArray(dato)) {
+        return [{ ...GUION_FLUJO_A[7]!.lecturas.citasPaciente[0]!, tramite: { ...GUION_FLUJO_A[7]!.respuesta.tramite, estado: 'EN_CLINICA' } }] as typeof dato;
       }
       return dato;
     });

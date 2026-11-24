@@ -1,0 +1,16 @@
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |web| src/vistas/red.test.ts (1 test) 198ms
+ ✓ |web| src/cliente/cliente.test.ts (25 tests) 182ms
+ ✓ |web| src/rutas.test.tsx (10 tests) 734ms
+ ✓ |web| src/vistas/vistas.test.tsx (11 tests) 2478ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo  302ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  1169ms
+     ✓ permite escribir texto fuera del guion y muestra ayuda sin avanzar  309ms
+
+ Test Files  4 passed (4)
+      Tests  47 passed (47)
+   Start at  07:16:11
+   Duration  9.18s (transform 1.28s, setup 0ms, import 5.98s, tests 3.59s, environment 14.43s)
+

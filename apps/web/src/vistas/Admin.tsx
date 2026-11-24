@@ -1,11 +1,12 @@
-import { useConsulta } from '../cliente/ProveedorCliente.tsx';
+import { useConsulta, useContextoConsulta } from '../cliente/ProveedorCliente.tsx';
 import { EstadoCarga } from '../componentes/EstadoCarga.tsx';
 import { EstadoError } from '../componentes/EstadoError.tsx';
 import { LineaTiempo } from '../componentes/LineaTiempo.tsx';
 
 export function Admin() {
   const metricas = useConsulta('metricas', {});
-  const ficha = useConsulta('ficha', {});
+  const { hiloId } = useContextoConsulta();
+  const ficha = useConsulta('fichaHilo', hiloId ? { hiloId } : undefined);
   return <>
     <h1>Administración</h1><p className="introduccion">El mismo hilo, con la trazabilidad de cada canal.</p>
     {metricas.isPending && <EstadoCarga />}

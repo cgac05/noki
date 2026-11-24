@@ -7,6 +7,6 @@ export function crearCliente(opciones: { modo?: string; url?: string } = {}): Cl
   const modo = opciones.modo ?? import.meta.env.VITE_API ?? 'mock';
   const url = opciones.url ?? import.meta.env.VITE_API_URL ?? 'http://localhost:4000';
   if (modo === 'mock') return new ClienteMock();
-  if (modo === 'real') return new ClienteReal({ url });
+  if (modo === 'real') return new ClienteReal({ url, demo: import.meta.env.VITE_DEMO === 'true' });
   throw new ErrorCliente('CONFIGURACION', 'VITE_API debe ser mock o real. Corrige la configuración y vuelve a iniciar.');
 }

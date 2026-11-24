@@ -1,0 +1,1 @@
+PASS: 234 archivos protegidos sin cambios; handoff excluido únicamente por el ajuste de Claude autorizado por el usuario. Comandos, eventos, TramiteVista y código del frente A intactos.

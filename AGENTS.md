@@ -181,7 +181,21 @@ Body:    { canal, actor, tipo, tramiteId?, hiloId?, payload }
 - El **token de contexto** (JWS con jose) lleva `pacienteId`, `nivel`, `canal` y `exp`.
 
 ### Consultas
-`GET /api/tramites/:id` · `GET /api/hilos/:id/linea-tiempo` · `GET /api/pacientes/:id/tramites-abiertos` · `GET /api/admin/embudo` · `GET /api/admin/huecos` · `GET /api/admin/kpis`
+`RUTAS_CONSULTAS` de `@noki/contracts` define las consultas GET, sus parámetros UUID v7 y sus respuestas; `rutaConsulta` valida los parámetros y construye la URL. Detalle en [docs/contratos.md](docs/contratos.md).
+
+- `GET /api/tramites/:tramiteId`
+- `GET /api/hilos/:hiloId/linea-tiempo`
+- `GET /api/pacientes/:pacienteId/tramites-abiertos`
+- `GET /api/catalogo`
+- `GET /api/hilos/:hiloId/ficha`
+- `GET /api/pacientes/:pacienteId/citas`
+- `GET /api/sedes/:sedeId/llegadas`
+- `GET /api/admin/kpis`
+- `GET /api/demo/bandeja` — solo demo.
+
+Pendientes de sus cambios, fuera de esta tabla por ahora: `GET /api/admin/embudo` y `GET /api/admin/huecos`.
+
+Las lecturas contienen solo datos; el canal arma los comandos copiando los IDs del dato elegido y el token del QR de la cita. La definición del contrato no implementa los endpoints. Estas consultas todavía no tienen autenticación y solo se usan en la demo hasta el cambio de seguridad.
 
 ### Simulador de WhatsApp
 `POST /api/canales/wa/mensajes` con `{ waId, texto?, payloadBoton?, flowResponse? }`. Es el **mismo contrato** que tendría el adaptador del webhook real de Meta; el adaptador traduce ambos a comandos.

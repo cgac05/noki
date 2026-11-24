@@ -1,5 +1,5 @@
 import {
-  ESQUEMAS_EVENTOS_SOCKET, RespuestaComandoSchema, RespuestaMensajeWaSchema,
+  ESQUEMAS_EVENTOS_SOCKET, FichaHiloSchema, RUTAS_CONSULTAS, rutaConsulta, RespuestaComandoSchema, RespuestaMensajeWaSchema,
 } from '@noki/contracts';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -7,13 +7,13 @@ import { describe, expect, it, vi } from 'vitest';
 import { crearCliente } from './crearCliente.ts';
 import { ClienteMock } from './mock/ClienteMock.ts';
 import { GUION_FLUJO_A, IDS } from './mock/guionFlujoA.ts';
-import { CATALOGO_DEMO, DATOS_WEB } from './mock/datosWeb.ts';
-import { ESQUEMAS_CONSULTAS, FichaHiloSchema } from './provisional.ts';
+import { CATALOGO_DEMO, COMANDOS_WEB_ESPERADOS, DATOS_WEB } from './mock/datosWeb.ts';
+import { ESQUEMAS_DEMO } from './demo.ts';
 import { ClienteReal } from './real/ClienteReal.ts';
 
 const iniciar = { canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR' } } as const;
 
-describe('Configuración y datos provisionales', () => {
+describe('Configuración y contrato de lecturas', () => {
   it('Valor inválido: explica los modos válidos', () => {
     expect(() => crearCliente({ modo: 'prueba' })).toThrow('VITE_API debe ser mock o real');
   });
@@ -23,32 +23,47 @@ describe('Configuración y datos provisionales', () => {
     expect(crearCliente({ modo: 'real' }).modo).toBe('real');
   });
 
-  it('Módulo provisional único: los esquemas de lectura se declaran juntos', () => {
+  it('Sin duplicados del contrato: la web no declara modelos compartidos', () => {
     const raiz = resolve(import.meta.dirname, '..');
     for (const archivo of readdirSync(raiz, { recursive: true, encoding: 'utf8' })) {
       if (!/\.tsx?$/.test(archivo) || archivo.endsWith('.test.ts') || archivo.endsWith('.test.tsx')) continue;
-      if (archivo.replaceAll('\\', '/') === 'cliente/provisional.ts') continue;
       const codigo = readFileSync(resolve(raiz, archivo), 'utf8');
-      expect(codigo).not.toMatch(/export\s+(?:type|interface|const)\s+(?:CatalogoVista|CitaVista|FichaHilo|LlegadaVista|MensajeBandeja|MetricasVista)(?:Schema)?\b/);
+      expect(codigo).not.toMatch(/export\s+(?:type|interface|const)\s+(?:CatalogoVista|OfertaCatalogo|CitaVista|FichaHilo|LlegadaVista|MensajeBandeja|MetricasVista)(?:Schema)?\b/);
     }
   });
 
-  it('Sin datos sensibles provisionales: rechaza campos sensibles y teléfono completo', () => {
-    const ficha = GUION_FLUJO_A[1]!.lecturas.ficha;
+  it('Sin datos sensibles: descarta campos extra y rechaza el teléfono completo', () => {
+    const ficha = GUION_FLUJO_A[1]!.lecturas.fichaHilo;
     for (const campo of ['fechaNac', 'email', 'correo', 'rfc', 'pin', 'curp', 'telefono']) {
-      expect(FichaHiloSchema.safeParse({ ...ficha, [campo]: 'dato prohibido' }).success).toBe(false);
+      expect(FichaHiloSchema.parse({ ...ficha, [campo]: 'dato prohibido' })).not.toHaveProperty(campo);
     }
     expect(FichaHiloSchema.safeParse({ ...ficha, telefonoEnmascarado: '5210000000001' }).success).toBe(false);
-    expect(readFileSync(resolve(import.meta.dirname, 'provisional.ts'), 'utf8')).toContain('contratos-consultas');
+    expect(readFileSync(resolve(import.meta.dirname, 'demo.ts'), 'utf8')).not.toMatch(/fechaNac|email|rfc|pin|curp/);
   });
 });
 
 describe('Cliente simulado', () => {
+  it('Datos simulados con el contrato compartido: valida todas las consultas en cada paso, sin acciones', async () => {
+    const cliente = new ClienteMock({ latenciaMs: 0 });
+    const parametros = { tramiteId: IDS.tramite, hiloId: IDS.hilo, pacienteId: IDS.paciente, sedeId: IDS.sede };
+    for (const paso of GUION_FLUJO_A) {
+      if (paso.espera?.tipo === 'comando') await cliente.enviarComando(paso.espera.comando);
+      else if (paso.espera?.tipo === 'comandos') { for (const comando of paso.espera.comandos) await cliente.enviarComando(comando); }
+      else if (paso.espera?.tipo === 'wa') await cliente.enviarMensajeWa(paso.espera.mensaje);
+      for (const nombre of Object.keys(RUTAS_CONSULTAS) as Array<keyof typeof RUTAS_CONSULTAS>) {
+        const lectura = await cliente.consultar(nombre, parametros);
+        expect(RUTAS_CONSULTAS[nombre].respuesta.parse(lectura)).toEqual(paso.lecturas[nombre]);
+        expect(JSON.stringify(lectura)).not.toMatch(/"(?:acciones|accion|comando)":/);
+      }
+      expect(await cliente.consultar('web', {})).not.toHaveProperty('acciones');
+    }
+    await expect(cliente.consultar('fichaHilo', { hiloId: 'incorrecto' })).rejects.toMatchObject({ tipo: 'CONTRATO' });
+  });
   it('mantiene el precio del paquete en 25000 centavos en catálogo, cotización y ficha', () => {
     expect(CATALOGO_DEMO.precioCentavos).toBe(25000);
-    expect(DATOS_WEB[1]!.vista.cotizacion?.precioCentavos).toBe(25000);
+    expect(DATOS_WEB[2]!.vista.cotizacion?.precioCentavos).toBe(25000);
     for (const paso of GUION_FLUJO_A) {
-      if (paso.lecturas.ficha.catalogo) expect(paso.lecturas.ficha.catalogo.precioCentavos).toBe(25000);
+      if (paso.lecturas.fichaHilo.oferta) expect(paso.lecturas.fichaHilo.oferta.precioCentavos).toBe(25000);
       expect(paso.lecturas.web.catalogo.precioCentavos).toBe(25000);
     }
   });
@@ -58,7 +73,7 @@ describe('Cliente simulado', () => {
       expect(RespuestaComandoSchema.safeParse(paso.respuesta).success).toBe(true);
       expect(RespuestaMensajeWaSchema.safeParse({ mensajes: paso.lecturas.conversacion.mensajes }).success).toBe(true);
       for (const [nombre, datos] of Object.entries(paso.lecturas)) {
-        const esquema = ESQUEMAS_CONSULTAS[nombre as keyof typeof ESQUEMAS_CONSULTAS];
+        const esquema = nombre === 'web' || nombre === 'conversacion' ? ESQUEMAS_DEMO[nombre] : RUTAS_CONSULTAS[nombre as keyof typeof RUTAS_CONSULTAS].respuesta;
         expect(esquema.safeParse(datos).success, `${paso.paso.id}: ${nombre}`).toBe(true);
       }
       for (const evento of paso.eventosSocket) {
@@ -66,24 +81,23 @@ describe('Cliente simulado', () => {
       }
     }
     for (const paso of DATOS_WEB) {
-      expect(ESQUEMAS_CONSULTAS.web.safeParse(paso.vista).success).toBe(true);
+      expect(ESQUEMAS_DEMO.web.safeParse(paso.vista).success).toBe(true);
       expect(RespuestaComandoSchema.safeParse(paso.respuesta).success).toBe(true);
     }
   });
 
   it('Continuidad simulada: cambia a WhatsApp y retoma en horario', async () => {
     const cliente = new ClienteMock({ latenciaMs: 0 });
-    for (let i = 0; i < 3; i++) {
-      const ficha = await cliente.consultar('ficha', {});
-      const accion = ficha.acciones[0]!;
-      if (accion.tipo === 'comando') await cliente.enviarComando(accion.comando);
-      else await cliente.enviarMensajeWa(accion.mensaje);
-    }
+    await cliente.enviarComando(iniciar);
+    const [oferta] = await cliente.consultar('catalogo', {});
+    await cliente.enviarComando({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SeleccionarServicio', tramiteId: IDS.tramite, payload: { servicioId: oferta!.servicioId } });
+    await cliente.enviarComando({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SeleccionarSede', tramiteId: IDS.tramite, payload: { sedeId: oferta!.sedeId } });
+    await cliente.enviarMensajeWa({ waId: '5210000000001', payloadBoton: 'enviar-continuacion' });
     const conversacion = await cliente.consultar('conversacion', {});
     expect(conversacion.siguientePregunta).toMatchObject({ tipo: 'PREGUNTA', casilla: 'horario' });
     expect(conversacion.mensajes[0]).toMatchObject({ tipo: 'texto', texto: expect.stringContaining('horario') });
     expect(cliente.demo.paso().id).toBe('CONTINUAR_WA');
-    expect((await cliente.consultar('ficha', {})).telefonoEnmascarado).toBe('•••• 0001');
+    expect((await cliente.consultar('fichaHilo', { hiloId: IDS.hilo })).telefonoEnmascarado).toBe('•••• 0001');
   });
 
   it('Eventos de tiempo real: confirma, valida los eventos y permite cancelar la suscripción', async () => {
@@ -94,6 +108,7 @@ describe('Cliente simulado', () => {
     cliente.suscribir('hilo:linea-tiempo', lineaTiempo);
     for (const paso of GUION_FLUJO_A.slice(1, 8)) {
       if (paso.espera!.tipo === 'comando') await cliente.enviarComando(paso.espera!.comando);
+      else if (paso.espera!.tipo === 'comandos') { for (const comando of paso.espera!.comandos) await cliente.enviarComando(comando); }
       else await cliente.enviarMensajeWa(paso.espera!.mensaje);
     }
     expect(actualizado).toHaveBeenLastCalledWith(expect.objectContaining({ estado: 'CONFIRMADA' }));
@@ -110,15 +125,15 @@ describe('Cliente simulado', () => {
     const cambio = vi.fn();
     const dejar = cliente.demo.alCambiar(cambio);
     await cliente.enviarComando(iniciar);
-    await cliente.enviarComando(DATOS_WEB[0]!.vista.acciones[0]!.comando);
+    for (const comando of COMANDOS_WEB_ESPERADOS) await cliente.enviarComando(comando);
     expect((await cliente.consultar('web', {})).cotizacion).not.toBeNull();
     cliente.demo.reiniciar();
     expect(cliente.demo.paso().id).toBe('INICIO');
     expect((await cliente.consultar('web', {})).cotizacion).toBeNull();
-    expect(cambio).toHaveBeenCalledTimes(3);
+    expect(cambio).toHaveBeenCalledTimes(4);
     dejar();
     cliente.demo.reiniciar();
-    expect(cambio).toHaveBeenCalledTimes(3);
+    expect(cambio).toHaveBeenCalledTimes(4);
   });
 
   it('Fuera del guion: devuelve ayuda válida sin avanzar', async () => {
@@ -139,6 +154,51 @@ describe('Cliente simulado', () => {
 });
 
 describe('Cliente real', () => {
+  it('VITE_DEMO=true habilita la bandeja en el cliente creado por configuración', async () => {
+    const peticion = vi.fn<typeof fetch>().mockResolvedValue(Response.json([]));
+    vi.stubGlobal('fetch', peticion);
+    try {
+      vi.stubEnv('VITE_DEMO', 'false');
+      await expect(crearCliente({ modo: 'real' }).consultar('bandeja', {})).rejects.toMatchObject({ tipo: 'NO_DISPONIBLE' });
+      expect(peticion).not.toHaveBeenCalled();
+      vi.stubEnv('VITE_DEMO', 'true');
+      expect(await crearCliente({ modo: 'real' }).consultar('bandeja', {})).toEqual([]);
+    } finally { vi.unstubAllGlobals(); vi.unstubAllEnvs(); }
+  });
+  it('Ruta de la tabla: resuelve todas las consultas compartidas como GET', async () => {
+    const lecturas = GUION_FLUJO_A[7]!.lecturas;
+    const parametros = { tramiteId: IDS.tramite, hiloId: IDS.hilo, pacienteId: IDS.paciente, sedeId: IDS.sede };
+    for (const nombre of Object.keys(RUTAS_CONSULTAS) as Array<keyof typeof RUTAS_CONSULTAS>) {
+      const peticion = vi.fn<typeof fetch>().mockResolvedValue(Response.json(lecturas[nombre]));
+      const cliente = new ClienteReal({ url: 'http://api.test/', fetch: peticion, demo: true });
+      expect(await cliente.consultar(nombre, parametros)).toEqual(lecturas[nombre]);
+      expect(peticion).toHaveBeenCalledExactlyOnceWith(`http://api.test${rutaConsulta(nombre, parametros)}`, { method: 'GET' });
+    }
+  });
+
+  it('Bandeja fuera de demo: no consulta la red; con demo valida la respuesta', async () => {
+    const peticion = vi.fn<typeof fetch>().mockResolvedValue(Response.json([]));
+    await expect(new ClienteReal({ fetch: peticion }).consultar('bandeja', {})).rejects.toMatchObject({ tipo: 'NO_DISPONIBLE' });
+    expect(peticion).not.toHaveBeenCalled();
+    expect(await new ClienteReal({ fetch: peticion, demo: true }).consultar('bandeja', {})).toEqual([]);
+    expect(peticion).toHaveBeenCalledTimes(1);
+  });
+
+  it('Lectura real mal formada: no entrega una cita sin zona horaria', async () => {
+    const cita = { ...GUION_FLUJO_A[7]!.lecturas.citasPaciente[0] } as Record<string, unknown>;
+    delete cita.zonaHoraria;
+    const peticion = vi.fn<typeof fetch>().mockResolvedValue(Response.json([cita]));
+    await expect(new ClienteReal({ fetch: peticion }).consultar('citasPaciente', { pacienteId: IDS.paciente })).rejects.toMatchObject({ tipo: 'CONTRATO' });
+    expect(peticion).toHaveBeenCalledExactlyOnceWith(`http://localhost:4000/api/pacientes/${IDS.paciente}/citas`, { method: 'GET' });
+  });
+
+  it('rechaza parámetros inválidos sin acceder a la red y mantiene las consultas de demo aisladas', async () => {
+    const peticion = vi.fn<typeof fetch>();
+    const cliente = new ClienteReal({ fetch: peticion, demo: true });
+    await expect(cliente.consultar('llegadasSede', { sedeId: 'incorrecto' })).rejects.toMatchObject({ tipo: 'CONTRATO' });
+    for (const nombre of ['web', 'conversacion'] as const) await expect(cliente.consultar(nombre, {})).rejects.toMatchObject({ tipo: 'NO_DISPONIBLE' });
+    expect(peticion).not.toHaveBeenCalled();
+  });
   it('Encabezado de idempotencia: envía cuerpo validado y URL configurable', async () => {
     const peticion = vi.fn<typeof fetch>().mockResolvedValue(Response.json(GUION_FLUJO_A[1]!.respuesta));
     const cliente = new ClienteReal({ url: 'http://api.test/', fetch: peticion });
@@ -205,7 +265,7 @@ describe('Cliente real', () => {
     const cliente = new ClienteReal({ fetch: peticion });
     expect(await cliente.consultar('lineaTiempo', { hiloId: IDS.hilo })).toEqual(GUION_FLUJO_A[7]!.lecturas.lineaTiempo);
     expect(peticion.mock.calls[0]![0]).toBe(`http://localhost:4000/api/hilos/${IDS.hilo}/linea-tiempo`);
-    await expect(cliente.consultar('citas', {})).rejects.toMatchObject({ tipo: 'NO_DISPONIBLE' });
+    await expect(cliente.consultar('web', {})).rejects.toMatchObject({ tipo: 'NO_DISPONIBLE' });
     expect(peticion).toHaveBeenCalledTimes(1);
     expect(cliente.suscribir('admin:metricas', vi.fn())()).toBeUndefined();
   });

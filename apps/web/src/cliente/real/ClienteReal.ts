@@ -1,21 +1,23 @@
 import { z } from 'zod';
 import {
-  ComandoRequestSchema, CuerpoErrorSchema, RespuestaComandoSchema, RespuestaMensajeWaSchema, SolicitudMensajeWaSchema,
+  ComandoRequestSchema, CuerpoErrorSchema, RUTAS_CONSULTAS, rutaConsulta, RespuestaComandoSchema, RespuestaMensajeWaSchema, SolicitudMensajeWaSchema,
 } from '@noki/contracts';
-import type { ComandoRequest, DatosEventoSocket, NombreEventoSocket, RespuestaComando, SolicitudMensajeWa, RespuestaMensajeWa } from '@noki/contracts';
+import type { ComandoRequest, DatosEventoSocket, NombreConsulta, NombreEventoSocket, RespuestaComando, SolicitudMensajeWa, RespuestaMensajeWa } from '@noki/contracts';
 import type { ClienteApi } from '../ClienteApi.ts';
 import { ErrorCliente, validar } from '../errores.ts';
-import { validarConsulta } from '../provisional.ts';
-import type { ConsultasProvisionales, ParametrosConsulta } from '../provisional.ts';
+import { esConsultaCompartida, validarConsulta } from '../consultas.ts';
+import type { NombreConsultaCliente, ParametrosConsultaCliente, RespuestaConsultaCliente } from '../consultas.ts';
 
 export class ClienteReal implements ClienteApi {
   readonly modo = 'real';
   private readonly url: string;
   private readonly peticion: typeof fetch;
+  private readonly demoHabilitada: boolean;
 
-  constructor(opciones: { url?: string; fetch?: typeof fetch } = {}) {
+  constructor(opciones: { url?: string; fetch?: typeof fetch; demo?: boolean } = {}) {
     this.url = (opciones.url ?? 'http://localhost:4000').replace(/\/$/, '');
     this.peticion = opciones.fetch ?? globalThis.fetch.bind(globalThis);
+    this.demoHabilitada = opciones.demo ?? false;
   }
 
   async enviarComando(comando: ComandoRequest, opciones: { idempotencyKey?: string } = {}): Promise<RespuestaComando> {
@@ -29,16 +31,17 @@ export class ClienteReal implements ClienteApi {
     return validar(RespuestaMensajeWaSchema, await this.solicitar('/api/canales/wa/mensajes', cuerpo, crypto.randomUUID()));
   }
 
-  async consultar<K extends keyof ConsultasProvisionales>(nombre: K, parametros: ParametrosConsulta[K]): Promise<ConsultasProvisionales[K]> {
-    let ruta: string;
-    if (nombre === 'lineaTiempo') {
-      const { hiloId } = validar(z.object({ hiloId: z.uuidv7() }), parametros);
-      ruta = `/api/hilos/${hiloId}/linea-tiempo`;
-    } else if (nombre === 'metricas') {
-      ruta = '/api/admin/kpis';
-    } else {
+  async consultar<N extends NombreConsultaCliente>(nombre: N, parametros: ParametrosConsultaCliente<N>): Promise<RespuestaConsultaCliente<N>> {
+    if (!esConsultaCompartida(nombre)) {
       throw new ErrorCliente('NO_DISPONIBLE', 'Esta consulta aún no está disponible en la API. Usa el modo mock para recorrer la demo.');
     }
+    const definicion = RUTAS_CONSULTAS[nombre];
+    if ('soloDemo' in definicion && definicion.soloDemo && !this.demoHabilitada) {
+      throw new ErrorCliente('NO_DISPONIBLE', 'La bandeja solo está disponible con VITE_DEMO=true.');
+    }
+    // Convierte un parámetro inválido en el mismo error público de contrato, antes de acceder a la red.
+    const parametrosValidados = validar(definicion.parametros, parametros);
+    const ruta = rutaConsulta<NombreConsulta>(nombre, parametrosValidados);
     return validarConsulta(nombre, await this.solicitar(ruta));
   }
 

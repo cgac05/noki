@@ -29,6 +29,7 @@ Si no cambiaron dependencias, basta `pnpm --filter @noki/web dev`. Recarga despu
 |---|---|
 | `VITE_API` | `mock` por defecto; `real` selecciona HTTP. Un valor diferente impide iniciar y muestra los valores válidos. |
 | `VITE_API_URL` | URL base del cliente real; por defecto `http://localhost:4000`. Sin barra final obligatoria. |
+| `VITE_DEMO` | Solo el valor `true` habilita la consulta de bandeja en el cliente real; por defecto está deshabilitada. |
 
 Vite incorpora estas variables al compilar. Reinicia el servidor después de cambiarlas y vuelve a compilar para cambiar un bundle de producción. Se pueden configurar también en `apps/web/.env.local` (ignorado por Git); no incluyas secretos en variables `VITE_*`, que son públicas.
 
@@ -64,11 +65,11 @@ pnpm --filter @noki/web build
 pnpm --filter @noki/web exec vite preview --host 127.0.0.1 --port 4173
 ```
 
-Abre `/admin` en la vista previa para intentar `GET /api/admin/kpis`. Si no hay API escuchando, aparece un mensaje de conexión con **Reintentar**. Las demás lecturas sin ruta implementada muestran un aviso de consulta aún no disponible. El modo real no utiliza fixtures como respaldo silencioso. El servidor real deberá permitir el origen de la web para las peticiones entre puertos.
+Abre `/admin` en la vista previa para intentar `GET /api/admin/kpis`. Si no hay API escuchando, aparece un mensaje de conexión con **Reintentar**. El cliente resuelve las nueve consultas compartidas con `RUTAS_CONSULTAS` y valida sus respuestas. Los endpoints GET corresponden al frente A; definir el contrato no significa que ya estén implementados. Las consultas exclusivas de demo (`web`, `conversacion`) muestran un aviso de consulta aún no disponible. El modo real no utiliza fixtures como respaldo silencioso. El servidor real deberá permitir el origen de la web para las peticiones entre puertos.
 
 El cliente está preparado para `POST /api/comandos` y `POST /api/canales/wa/mensajes`, con validación antes de enviar y después de recibir. Genera una clave de idempotencia por intento lógico y la conserva durante un único reintento automático de red. Las acciones de comando también conservan la clave al pulsar **Reintentar**. Un error HTTP válido conserva su código y mensaje públicos; los errores de contrato no muestran los detalles Zod.
 
-Las consultas de línea de tiempo (`GET /api/hilos/:id/linea-tiempo`) y KPIs tienen rutas preparadas y esquemas provisionales. La conexión Socket.IO real está pendiente de `api-comandos`; `suscribir` devuelve por ahora una función de cancelación sin abrir conexiones. Las lecturas y la experiencia completa contra API no se declaran integradas en este cambio.
+Las lecturas compartidas usan los esquemas de `@noki/contracts` y las rutas de [contratos](../../docs/contratos.md). Las vistas toman los IDs de la última respuesta de comando o, en mock, de `cliente.demo.ids`. Sin contexto real muestran un aviso y no inventan IDs; la sesión de paciente real está pendiente del cambio de seguridad. La bandeja real requiere `VITE_DEMO=true`. La conexión Socket.IO real está pendiente de `api-comandos`; `suscribir` devuelve por ahora una función de cancelación sin abrir conexiones. Las lecturas y la experiencia completa contra API no se declaran integradas en este cambio.
 
 Para regresar al modo simulado:
 
@@ -78,24 +79,22 @@ Remove-Item Env:VITE_API_URL -ErrorAction SilentlyContinue
 pnpm --filter @noki/web build
 ```
 
-## Tipos pendientes de contratos-consultas
+## Lecturas compartidas y tipos de demo
 
-Todos se concentran en `src/cliente/provisional.ts`, con esquemas Zod locales:
+Oferta de catálogo, cita, ficha del hilo, llegada, bandeja y métricas se importan de `@noki/contracts`. Sus lecturas contienen solo datos: Call Center y Web copian los IDs de la oferta a los comandos de servicio y sede; Clínica copia el token de la cita a `RegistrarLlegada`. El cliente valida cada comando. El reintento conserva la clave del comando pendiente y no repite los comandos ya completados de la secuencia.
 
-| Tipo | Contenido público |
+`src/cliente/demo.ts` conserva únicamente los tipos exclusivos de demo:
+
+| Tipo | Contenido |
 |---|---|
-| `CatalogoVista` | Servicio, sede, IDs y precio en centavos. |
-| `CitaVista` | Trámite del contrato, servicio, sede, inicio UTC, zona IANA y token del QR. |
-| `FichaHilo` | Nombre de pila ficticio, teléfono enmascarado, trámites, línea de tiempo, resumen de cotización y acciones de presentación. |
-| `LlegadaVista` | Cita, indicación de llegada registrada y comando recibido para registrarla. |
-| `MensajeBandeja` | Canal SMS/correo, asunto y cuerpo ficticios; solo se presenta en la bandeja de demo. |
-| `MetricasVista` | Conteos por estado y KPIs numéricos. |
-| `ConversacionVista` | Mensajes del bot y siguiente pregunta tomados de contratos. |
-| `WebVista`, `PasoWeb` | Catálogo, cotización/código de continuación, acciones y respuesta prefabricada de la cotización web. |
-| `AccionVista`, `PasoGuion` | Acciones de presentación y posición del guion de demo. |
-| `ConsultasProvisionales`, `ParametrosConsulta` | Mapa tipado de consultas y sus parámetros. |
+| `PasoGuion` | Posición y título del paso visible del guion. |
+| `ConversacionVista` | Mensajes y siguiente pregunta del contrato. |
+| `WebVista` | Oferta del contrato y cotización/código de continuación, sin acciones. |
+| `PasoWeb` | Vista y respuesta prefabricada de la cotización web. |
 
-No incluyen fecha de nacimiento, correo del paciente, RFC, PIN ni CURP. No modifiques `@noki/contracts` desde el frente de canales; la migración de estas lecturas requiere el cambio compartido.
+`src/cliente/consultas.ts` deriva los nombres, parámetros y respuestas de la tabla compartida y agrega solo las consultas de demo `conversacion` y `web`. No duplica los modelos compartidos. Los comandos esperados del guion son internos al mock y nunca se devuelven como lecturas.
+
+No se declaran fecha de nacimiento, correo del paciente, RFC, PIN ni CURP en estas lecturas. Las consultas todavía no tienen autenticación y exponen nombre de pila, teléfono enmascarado, citas con token y llegadas; se limitan a la demo hasta el cambio de seguridad.
 
 ## Validar
 
@@ -108,4 +107,4 @@ pnpm --filter @noki/web build
 
 `pnpm test` conserva las comprobaciones TypeScript y ejecuta los proyectos `unitarios` y `web`. Para correr solo las pruebas de la web: `pnpm exec vitest run --project web`. También está disponible la configuración local con `pnpm exec vitest run --root apps/web`.
 
-La revisión visual debe recorrer el guion a 375 × 812 y 1280 × 900, comprobar navegación con Tab, recarga directa en `/wa`, errores de consola y ausencia de desplazamiento horizontal. El estado real de estas comprobaciones y la revisión probada quedan en `openspec/changes/esqueleto-canales/implementacion.md` y su carpeta `evidencias/`.
+La revisión visual debe recorrer el guion a 375 × 812 y 1280 × 900, comprobar navegación con Tab, recarga directa en `/wa`, errores de consola y ausencia de desplazamiento horizontal. El estado real de estas comprobaciones y la revisión probada quedan en `openspec/changes/contratos-consultas/implementacion.md` y su carpeta `evidencias/`.
