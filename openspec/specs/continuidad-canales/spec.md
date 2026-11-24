@@ -7,7 +7,7 @@ Permite que un paciente continúe en otro canal un trámite empezado en uno ante
 ## Requirements
 
 ### Requirement: Resolución por prioridades
-El resolvedor de continuidad SHALL evaluar, en este orden, y usar la primera fuente que aplique: (1) token de continuidad de un solo uso, que hereda el nivel y el trámite del origen; (2) contacto del canal (`wa_id`) vinculado a un paciente con trámites abiertos → nivel 1; (3) `wa_id` igual al teléfono capturado en un hilo con trámites abiertos → nivel 1, que permite mostrar el resumen pero no retomar: como el contacto no está vinculado, la política de identidad exige folio + fecha de nacimiento antes de retomar; (4) folio de 8 a 9 dígitos, que solo localiza y exige fecha de nacimiento antes de revelar o retomar; (5) datos personales declarados que coinciden con un único paciente → verificación por OTP al contacto registrado previamente. Un trámite abierto es uno en estado previo a `ATENDIDA`, `CANCELADA`, `NO_ASISTIO` o `EXPIRADO`. En la prioridad 4, todo folio bien formado sin fecha de nacimiento MUST recibir la misma respuesta (pedir la fecha de nacimiento), exista o no, esté abierto o no, sin consultar el repositorio y sin contar intento; con fecha de nacimiento, un folio inexistente, de un trámite cerrado, de otro paciente admisible o con fecha que no coincide MUST contar como intento fallido y devolver el mismo resultado sin datos.
+El resolvedor de continuidad SHALL evaluar, en este orden, y usar la primera fuente que aplique: (1) token de continuidad de un solo uso, que hereda el nivel y el trámite del origen; (2) contacto del canal (`wa_id`) vinculado a un paciente con trámites abiertos → nivel 1, considerando solo vínculos de nivel 1 o mayor cuyo último uso esté dentro de 180 días según el `Reloj`; los vínculos de nivel 0 (datos declarados) o inactivos MUST ignorarse como si no existieran, sin contar intento; (3) `wa_id` igual, en sus últimos 10 dígitos, al teléfono capturado en un hilo con trámites abiertos → nivel 1, que permite mostrar el resumen pero no retomar: como el contacto no está vinculado, la política de identidad exige folio + fecha de nacimiento antes de retomar; (4) folio de 8 a 9 dígitos, que solo localiza y exige fecha de nacimiento antes de revelar o retomar; (5) datos personales declarados que coinciden con un único paciente → verificación por OTP al contacto registrado previamente. Un trámite abierto es uno en estado previo a `ATENDIDA`, `CANCELADA`, `NO_ASISTIO` o `EXPIRADO`. En la prioridad 4, todo folio bien formado sin fecha de nacimiento MUST recibir la misma respuesta (pedir la fecha de nacimiento), exista o no, esté abierto o no, sin consultar el repositorio y sin contar intento; con fecha de nacimiento, un folio inexistente, de un trámite cerrado, de otro paciente admisible o con fecha que no coincide MUST contar como intento fallido y devolver el mismo resultado sin datos.
 
 #### Scenario: El token gana
 - **WHEN** un `wa_id` vinculado a otro paciente envía un token válido
@@ -28,6 +28,14 @@ El resolvedor de continuidad SHALL evaluar, en este orden, y usar la primera fue
 #### Scenario: Datos personales con coincidencia única
 - **WHEN** los datos declarados coinciden con un solo paciente
 - **THEN** el resultado pide verificar por OTP al contacto registrado y no revela ningún dato del paciente
+
+#### Scenario: Vínculo declarado no revela
+- **WHEN** un `wa_id` cuyo único vínculo es de nivel 0 (creado al declarar la CURP de otra persona) escribe sin token y ese paciente tiene trámites abiertos de otro hilo
+- **THEN** el resultado es igual al de un `wa_id` desconocido y no se cuenta intento
+
+#### Scenario: Número reasignado sin uso reciente
+- **WHEN** un `wa_id` con un vínculo de nivel 1 cuyo último uso fue hace 181 días según el `Reloj` escribe sin token
+- **THEN** el vínculo se ignora y el resultado es igual al de un `wa_id` desconocido
 
 ### Requirement: Revelación mínima y ambigüedad
 Con nivel 1 el resultado SHALL revelar únicamente servicio, sede, fecha del horario si existe y canal de origen de cada trámite abierto. Si la fuente aplicable lleva a más de un paciente, o a ninguno, el resolvedor MUST devolver un único resultado sin datos que sea indistinguible entre "ambiguo" y "sin coincidencia", y MUST NOT confirmar datos que el usuario no dio. Varios trámites abiertos del mismo paciente MAY listarse con la información de nivel 1.
