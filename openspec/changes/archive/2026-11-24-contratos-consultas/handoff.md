@@ -14,4 +14,4 @@
 - Validaciones requeridas: puntos de control 1.3, 2.4, 3.4 y 4.3; comprobación manual 3.3.
 - Detener la parte afectada si: hace falta cambiar comandos, eventos, `TramiteVista` u otro contrato existente; hace falta código del frente A; una vista tendría que decidir reglas de negocio para armar un comando.
 - Riesgo abierto, fuera de alcance: las consultas no tienen autenticación y exponen datos personales (nombre de pila, teléfono enmascarado, citas con token de QR, llegadas, bandeja de demo). Solo se usan en la demo; el cambio de seguridad debe cerrarlo antes de usarlas fuera de ella.
-- Autorización de cierre: PENDIENTE
+- Autorización de cierre: otorgada el 2026-11-24 por un responsable de cada frente, en el chat de Claude Code. Frente A: `J3sus-esb` (Jesús Aldahir), trasladada por `LuisMaster119` y confirmada por él ("Jesus de frente A"); cita: "autorizo sincronizar spect y archivar contratos y consultas". Frente B: `LuisMaster119`; cita: "tambien yo autorizo". Cubre sincronizar `contratos-consultas` y el delta de `cliente-api-canales`, y archivar la revisión integrada en `main` (`11bbd4b`, dictamen PASS). No autoriza commits.
