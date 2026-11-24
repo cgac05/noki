@@ -58,8 +58,19 @@ Las vistas SHALL obtener todo estado de trámite, mensajes, eventos y métricas 
 - **WHEN** el cliente devuelve una `SiguientePregunta` con entrada `BOTONES` y tres opciones
 - **THEN** la vista presenta exactamente esas tres opciones, y al elegir una envía su `payload` sin interpretarlo
 
-### Requirement: Contenido mínimo de cada vista
-Cada ruta SHALL mostrar como mínimo: `/web` cotización por servicio y sede con un botón "Continuar en WhatsApp" que muestra el código de continuación; `/wa` una conversación que presenta mensajes de texto, botones y lista y permite enviar texto o elegir una opción; `/app` las citas del paciente con su estado y el QR de su token; `/callcenter` un botón "Llamada entrante", la ficha del hilo con su línea de tiempo y "Continuar por WhatsApp"; `/clinica` las llegadas esperadas y una acción para registrar una llegada; `/admin` el conteo de trámites por estado, la línea de tiempo de un hilo con el canal de cada evento y los KPIs disponibles; `/bandeja` los mensajes SMS y correo simulados.
+### Requirement: Datos sensibles no expuestos en las vistas
+Ninguna vista SHALL mostrar fecha de nacimiento, correo, teléfono completo, RFC, PIN ni CURP. En `/bandeja` el contenido de un OTP simulado SHALL mostrarse solo en esa vista de demo.
+
+#### Scenario: Ficha del call center
+- **WHEN** `/callcenter` muestra la ficha del hilo
+- **THEN** el teléfono aparece enmascarado salvo los últimos 4 dígitos y no aparece ninguna fecha de nacimiento
+
+#### Scenario: Estados de carga y error
+- **WHEN** el cliente tarda o falla
+- **THEN** la vista muestra un estado de carga o un mensaje de error comprensible, sin detalles internos
+
+### Requirement: Contenido mínimo por vista
+Cada ruta SHALL mostrar como mínimo: `/web` cotización por servicio y sede con un botón "Continuar en WhatsApp" que muestra el código de continuación; `/wa` el simulador de WhatsApp de la capacidad `simulador-whatsapp`; `/app` las citas del paciente con su estado y el QR de su token; `/callcenter` un botón "Llamada entrante", la ficha del hilo con su línea de tiempo y "Continuar por WhatsApp" con el enlace de continuación; `/clinica` las llegadas esperadas y una acción para registrar una llegada; `/admin` el conteo de trámites por estado, la línea de tiempo de un hilo con el canal de cada evento y los KPIs disponibles; `/bandeja` los mensajes SMS y correo simulados.
 
 #### Scenario: QR con token, no con folio
 - **WHEN** `/app` muestra una cita confirmada
@@ -73,17 +84,10 @@ Cada ruta SHALL mostrar como mínimo: `/web` cotización por servicio y sede con
 - **WHEN** `/wa` recibe un mensaje de lista con dos secciones
 - **THEN** se muestran las secciones con sus filas, y elegir una fila envía su `payload`
 
-#### Scenario: Flow fuera de alcance
+#### Scenario: Flow con modal
 - **WHEN** `/wa` recibe un mensaje de tipo `flow`
-- **THEN** se muestra un aviso no interactivo de que esa captura llega con el simulador de WhatsApp, sin pedir los campos como texto libre
+- **THEN** se ofrece abrir un modal con sus campos, nunca se piden esos datos como texto libre en el chat
 
-### Requirement: Datos sensibles no expuestos en las vistas
-Ninguna vista SHALL mostrar fecha de nacimiento, correo, teléfono completo, RFC, PIN ni CURP. En `/bandeja` el contenido de un OTP simulado SHALL mostrarse solo en esa vista de demo.
-
-#### Scenario: Ficha del call center
-- **WHEN** `/callcenter` muestra la ficha del hilo
-- **THEN** el teléfono aparece enmascarado salvo los últimos 4 dígitos y no aparece ninguna fecha de nacimiento
-
-#### Scenario: Estados de carga y error
-- **WHEN** el cliente tarda o falla
-- **THEN** la vista muestra un estado de carga o un mensaje de error comprensible, sin detalles internos
+#### Scenario: Enlace de continuación en el call center
+- **WHEN** `/callcenter` tiene un código de continuación
+- **THEN** "Continuar por WhatsApp" muestra el enlace `/wa?continuar=<código>` y su QR, sin avanzar el trámite por sí mismo
