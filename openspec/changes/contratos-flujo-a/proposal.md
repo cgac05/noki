@@ -10,11 +10,11 @@ Todas las adiciones son compatibles hacia atrás salvo donde se indica:
 
 - **`IniciarTramite`**: `payload.contacto?`, el número del ANI o del canal (10 a 15 dígitos). Es dato de entrada; nunca se devuelve en lecturas.
 - **Comando nuevo `SolicitarContinuacion`**: `{ canal, actor, tipo: 'SolicitarContinuacion', tramiteId, payload: { destino: 'whatsapp' } }`. Registra el consentimiento de contacto por WhatsApp y genera el código de continuación que la ficha muestra en `codigoContinuacion` (`PLAN.md` §9, `/callcenter`).
-- **`TramiteVista.horario?`**: `{ reservaId, inicio, expiraEn }` cuando el trámite tiene una reserva, para que el canal arme `ConfirmarCita`.
+- **`TramiteVista.horario?`**: `{ reservaId, inicio, expiraEn? }` cuando el trámite tiene una reserva; `expiraEn` solo mientras el hold está vigente, porque una cita confirmada no expira (revisión 2), para que el canal arme `ConfirmarCita`.
 - **`FichaHilo`**: `nombrePila` y `telefonoEnmascarado` admiten `null` (hilo sin paciente vinculado o sin teléfono). Cambio de tipo: las vistas deben tolerar `null`.
 - **Código de error `INTERNO`** (HTTP 500) en `CodigoErrorSchema`, con mensaje genérico.
 - **Unión a salas de Socket.IO**: eventos del cliente `sala:unirse` y `sala:salir` con una `Sala` válida según `SalaSchema`, en una constante `EVENTOS_CLIENTE_SOCKET`.
-- **Consulta solo de demo `contextoDemo`**: `GET /api/demo/contexto` → `{ hiloId, pacienteId, sedeId }` (todos nullables) del último hilo con cita confirmada, marcada `soloDemo`. Es la fuente provisional de `pacienteId` en `/app` hasta el cambio de seguridad (token de contexto por enlace mágico).
+- **Consulta solo de demo `contextoDemo`**: `GET /api/demo/contexto` → `{ hiloId, pacienteId, sedeId }` (todos nullables) del último hilo con cita confirmada, marcada `soloDemo`; la API responde 404 si `DEMO_MODE` no es `true` (revisión 2). Es la fuente provisional de `pacienteId` en `/app` hasta el cambio de seguridad (token de contexto por enlace mágico).
 - **Documentación**: `docs/contratos.md` (lo anterior y las claves de `metricas.kpis` definidas en `api-comandos`) y `AGENTS.md` §7 (comando nuevo, unión a salas y la consulta de demo).
 - **Web**: solo lo necesario para que las pruebas de `apps/web` sigan en verde con el contrato nuevo (datos simulados de `contextoDemo`, tipos que aceptan `null` en la ficha). Usar los campos nuevos en las vistas (ANI, botón real de continuar, unión a salas, `/app` en modo real) es trabajo del frente B en su propio cambio.
 

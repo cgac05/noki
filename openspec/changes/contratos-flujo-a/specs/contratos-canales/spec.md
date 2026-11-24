@@ -1,13 +1,9 @@
 # Spec Delta
 
-## Purpose
-
-Completa el contrato de comandos, tiempo real y errores para operar el Flujo A real: contacto al iniciar, comando de continuación, reserva visible en la vista del trámite, unión a salas y código de error interno.
-
 ## MODIFIED Requirements
 
 ### Requirement: Comando y respuesta comunes a todos los canales
-El esquema de `POST /api/comandos` SHALL aceptar `{ canal, actor, tipo, tramiteId?, hiloId?, payload }`, con `canal` en `web | whatsapp | app | callcenter | clinica` y `payload` determinado por `tipo`. `IniciarTramite` SHALL admitir `payload.contacto` opcional con 10 a 15 dígitos. El comando `SolicitarContinuacion` SHALL exigir `tramiteId` y `payload.destino` igual a `whatsapp`. La respuesta SHALL ser `{ tramite, siguientePregunta, eventos }` según `AGENTS.md` §7, y la vista del trámite MUST incluir su `tipo`, SHALL incluir `horario` (`reservaId`, `inicio` y `expiraEn`) cuando el trámite tiene una reserva y MUST NOT incluir datos sensibles.
+El esquema de `POST /api/comandos` SHALL aceptar `{ canal, actor, tipo, tramiteId?, hiloId?, payload }`, con `canal` en `web | whatsapp | app | callcenter | clinica` y `payload` determinado por `tipo`. `IniciarTramite` SHALL admitir `payload.contacto` opcional con 10 a 15 dígitos. El comando `SolicitarContinuacion` SHALL exigir `tramiteId` y `payload.destino` igual a `whatsapp`. La respuesta SHALL ser `{ tramite, siguientePregunta, eventos }` según `AGENTS.md` §7, y la vista del trámite MUST incluir su `tipo`, SHALL incluir `horario` (`reservaId`, `inicio` y, solo mientras el hold está vigente en `HORARIO_RESERVADO`, `expiraEn`) cuando el trámite tiene una reserva; una cita confirmada MUST NOT llevar `expiraEn` y MUST NOT incluir datos sensibles.
 
 #### Scenario: Payload ligado al comando
 - **WHEN** se valida un comando `SeleccionarSede` con el payload de `SeleccionarServicio`
@@ -28,6 +24,10 @@ El esquema de `POST /api/comandos` SHALL aceptar `{ canal, actor, tipo, tramiteI
 #### Scenario: Vista con reserva
 - **WHEN** se valida una vista de trámite `HORARIO_RESERVADO` con `horario` completo
 - **THEN** la validación tiene éxito y una vista sin `horario` también es válida
+
+#### Scenario: Cita confirmada sin vencimiento
+- **WHEN** se valida una vista `CONFIRMADA` con `horario` que tiene `reservaId` e `inicio` pero no `expiraEn`
+- **THEN** la validación tiene éxito
 
 ### Requirement: Tiempo real con nombres compartidos
 Los nombres de eventos de Socket.IO, el esquema del dato de cada evento, las salas `tramite:<id>`, `hilo:<id>`, `paciente:<id>`, `sede:<id>` y `admin`, y los eventos que envía el cliente para unirse a una sala (`sala:unirse`) y salir de ella (`sala:salir`) SHALL definirse una sola vez en el paquete de contratos. El dato de los eventos del cliente MUST ser una sala válida.

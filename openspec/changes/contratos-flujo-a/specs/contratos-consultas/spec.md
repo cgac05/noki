@@ -1,9 +1,5 @@
 # Spec Delta
 
-## Purpose
-
-Permite fichas de hilos todavía sin paciente o sin teléfono y agrega la consulta de demo que da a `/app` el contexto del paciente en modo real.
-
 ## MODIFIED Requirements
 
 ### Requirement: Lecturas sin datos sensibles
@@ -22,7 +18,7 @@ Los modelos de lectura MUST NOT declarar fecha de nacimiento, correo, RFC, PIN n
 - **THEN** la validación tiene éxito
 
 ### Requirement: Tabla de rutas de consulta
-El contrato SHALL publicar una tabla única que asocie cada consulta (`tramite`, `lineaTiempo`, `tramitesAbiertos`, `catalogo`, `fichaHilo`, `citasPaciente`, `llegadasSede`, `metricas`, `bandeja`, `contextoDemo`) con su método `GET`, su plantilla de ruta, el esquema de sus parámetros y el esquema de su respuesta. Las rutas MUST conservar las de `AGENTS.md` §7 que ya existían. `contextoDemo` (`/api/demo/contexto`) SHALL responder `{ hiloId, pacienteId, sedeId }`, cada uno UUID v7 o `null`, y MUST estar marcada como disponible solo en modo demo.
+El contrato SHALL publicar una tabla única que asocie cada consulta (`tramite`, `lineaTiempo`, `tramitesAbiertos`, `catalogo`, `fichaHilo`, `citasPaciente`, `llegadasSede`, `metricas`, `bandeja`, `contextoDemo`) con su método `GET`, su plantilla de ruta, el esquema de sus parámetros y el esquema de su respuesta. Las rutas MUST conservar las de `AGENTS.md` §7 que ya existían. `contextoDemo` (`/api/demo/contexto`) SHALL responder `{ hiloId, pacienteId, sedeId }`, cada uno UUID v7 o `null`, y MUST estar marcada como disponible solo en modo demo. La API MUST responder 404 en `/api/demo/contexto` cuando `DEMO_MODE` no es `true`.
 
 #### Scenario: Ruta construida desde parámetros
 - **WHEN** se arma la ruta de `lineaTiempo` con un `hiloId` UUID v7
@@ -43,3 +39,7 @@ El contrato SHALL publicar una tabla única que asocie cada consulta (`tramite`,
 #### Scenario: Contexto de demo
 - **WHEN** se inspecciona la entrada `contextoDemo` y se valida una respuesta con `pacienteId` nulo
 - **THEN** está marcada como solo demo y la respuesta es válida
+
+#### Scenario: Contexto fuera de modo demo
+- **WHEN** la API corre con `DEMO_MODE` distinto de `true` y se consulta `/api/demo/contexto`
+- **THEN** responde 404
