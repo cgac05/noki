@@ -44,3 +44,28 @@
   - Mensajes iniciados por la empresa: fuera de alcance, previstos en `mensajes-salientes`.
 - Condiciones para recomendar el cierre: cumplidas. No hay hallazgos CRITICAL ni WARNING. Las sugerencias H-01 a H-03 son opcionales y no condicionan el cierre.
 - Próximo responsable: `LuisMaster119` (frente B). Decide si autoriza cerrar `simulador-wa` con esta revisión (sincronizar specs y archivar) o si pide a Codex atender alguna sugerencia antes. La autorización de cierre sigue PENDIENTE en `handoff.md`.
+
+## Reverificación tras el rebase sobre `main` `9de129b` (2026-11-24)
+
+- Dictamen: PASS (se mantiene).
+- Revisión inspeccionada: `feat/simulador-wa` HEAD `4a53cec` (= `a1e5014` rebasado), sobre `main` `9de129b` (incluye `contratos-flujo-a` archivado).
+- Rebase: un conflicto en `apps/web/src/cliente/mock/guionFlujoA.ts` (lecturas del guion). Lo resolvió Claude a pedido de `LuisMaster119`, sin lógica nueva: se conserva la versión de la rama (sin `conversacion`, `codigoContinuacion` desde el paso 3) y se añade `contextoDemo` de `main`. `CallCenter.tsx` (ficha con `nombrePila` / `telefonoEnmascarado` nulos → `—`) y `vistas.test.tsx` se fusionaron sin conflicto.
+- Comprobaciones (Claude, este checkout):
+  - `eslint .` → 0; `pnpm -r exec tsc --noEmit` y `tsc --project tests/tsconfig.json` → 0. (`pnpm lint` no se pudo lanzar tal cual porque el `pnpm` anidado del script no está en el PATH local; se ejecutaron sus dos partes por separado.)
+  - `pnpm lint:deps` → 0; 155 módulos / 403 dependencias, sin violaciones.
+  - `pnpm test` → 0; 34 archivos, 184/184 (incluye las pruebas de la ficha nula de `contratos-flujo-a`).
+  - `VITE_API=mock pnpm --filter @noki/web build` → 0; 246 módulos, JS 445.18 kB / gzip 139.16 kB.
+  - `openspec validate simulador-wa --type change --strict` → válido.
+  - `git diff main..HEAD` fuera de `apps/web/**` y de esta carpeta: vacío; sin cambios en `packages/contracts`.
+- Compatibilidad con `identidad-paciente` (frente A, en curso):
+  - `/wa` pinta lo que llega en `RespuestaMensajeWa.mensajes` según `MensajeBot.tipo` (texto, botones, lista, flow); el contrato de WhatsApp no expone `SiguientePregunta`, que el núcleo traduce a mensajes. Fuera del guion mock no hay casillas, orden ni preguntas de identidad codificadas (búsqueda de `casilla`, `paciente`, `fechaNac`, `curp`).
+  - Las preguntas nuevas («¿para ti o para otra persona?», «¿eres Ana P.?», fecha de nacimiento, CURP o datos básicos) se pintan sin cambios si llegan como botones, lista, texto o Flow. El modal admite `texto`, `fecha`, `sensitive` y `passcode` (`flow.test.tsx`), y el historial solo guarda «Etiqueta ••••».
+  - La pista no tiene un tipo `FECHA`: la fecha llega como campo `captura: 'fecha'` de un Flow. Si el frente A necesitara otra forma, sería un cambio compartido de contratos, no de este cambio.
+  - El guion mock sigue el orden actual del Flujo A. Los pasos de identidad del guion se añaden cuando `identidad-paciente` llegue a `main`, en un cambio aparte.
+
+| Hallazgo | Gravedad | Requisito / tarea | Evidencia | Corrección necesaria / estado |
+|---|---|---|---|---|
+| H-04 | SUGGESTION | — (limpieza) | `componentes/MensajeBot.tsx:19-26`: `EntradaPregunta` ya no se usa en ninguna vista (solo en `vistas.test.tsx:57`), y su texto para `FLOW` («llegará con el simulador de WhatsApp») quedó obsoleto. | Opcional: retirarla o actualizar el texto si una vista la vuelve a usar. |
+
+- Riesgos residuales: los de la revisión original. Sigue pendiente que el frente A acepte `CONTINUAR <código>`, `flowResponse` e `Idempotency-Key` en `POST /api/canales/wa/mensajes`.
+- Próximo responsable: `LuisMaster119`. Autoriza el push de la rama rebasada (reescribe la historia remota, `--force-with-lease`) y la integración. La autorización de cierre registrada cubre esta revisión: tras el merge, Claude sincroniza y archiva en `main`.
