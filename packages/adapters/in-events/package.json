@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@noki/domain": "workspace:*",
-    "@noki/application": "workspace:*"
+    "@noki/application": "workspace:*",
+    "ioredis": "5.8.2"
   }
 }

@@ -1,8 +1,8 @@
-import { expect, it } from 'vitest';
+import { expect, it, vi } from 'vitest';
 import { CasosTramite, ResolvedorContinuidad, type DatosDeclarados } from '../../../packages/application/src/index.ts';
 import {
-  AgendaMemoria, CatalogoMemoria, ContactosMemoria, GeneradorIdSecuencial, HiloRepoMemoria,
-  PacientesMemoria, RegistroIntentosMemoria, RelojFalso, TramiteRepoMemoria, VerificadorTokensMemoria,
+  AgendaExternaMemoria, AgendaMemoria, CatalogoMemoria, ContactosMemoria, GeneradorIdSecuencial, HiloRepoMemoria,
+  PacientesMemoria, RegistroIntentosMemoria, EventosSinTramiteMemoria, RelojFalso, TramiteRepoMemoria, VerificadorTokensMemoria,
 } from '../../../packages/adapters/memory/src/index.ts';
 import {
   crearRegistroTiposTramite, PoliticaIdentidad,
@@ -35,18 +35,20 @@ function escenario() {
   const pacientes = new PacientesMemoria();
   const catalogo = new CatalogoMemoria();
   const agenda = new AgendaMemoria();
+  const agendaExterna = new AgendaExternaMemoria();
   const intentos = new RegistroIntentosMemoria();
   const reloj = new RelojFalso(new Date('2026-11-24T12:00:00Z'));
   const politica = new PoliticaIdentidad();
   const ids = new GeneradorIdSecuencial();
   catalogo.registrar(servicioId, perfil, new Map([[sedeId, 5500]]));
   pacientes.registrar(pacienteId, { ...datos, sexo: 'F' });
-  const resolvedor = new ResolvedorContinuidad(tramites, contactos, tokens, pacientes, intentos);
+  const eventos = new EventosSinTramiteMemoria();
+  const resolvedor = new ResolvedorContinuidad(tramites, contactos, tokens, pacientes, intentos, eventos);
   const casos = new CasosTramite({
-    tramites, hilos, contactos, tokens, pacientes, catalogo, agenda, reloj, politica, ids,
+    tramites, hilos, contactos, tokens, pacientes, catalogo, agenda, agendaExterna, reloj, politica, ids,
     registro: crearRegistroTiposTramite(), resolvedor,
   });
-  return { casos, reloj, contactos, tokens, intentos, tramites };
+  return { casos, reloj, contactos, tokens, intentos, tramites, eventos, agendaExterna };
 }
 
 async function listo(casos: CasosTramite) {
@@ -126,7 +128,7 @@ it('registra llegada con el QR una sola vez', async () => {
 });
 
 it('pide fecha de nacimiento para un folio y bloquea al tercer intento', async () => {
-  const { casos, reloj, intentos } = escenario();
+  const { casos, reloj, eventos } = escenario();
   const id = await listo(casos);
   await casos.reservar(id, '2026-11-25T18:00:00Z', cc);
   const { tramite } = await casos.confirmar(id, cc);
@@ -137,7 +139,8 @@ it('pide fecha de nacimiento para un folio y bloquea al tercer intento', async (
   for (let i = 0; i < 3; i++) {
     await casos.retomar({ ...entrada, fechaNac: '2000-01-01' }, { ...wa, idempotencyKey: 'fallo:' + i });
   }
-  expect(intentos.eventos()).toHaveLength(3);
+  expect(eventos.eventos()).toHaveLength(3);
+  expect(eventos.eventos().map(({ payload }) => payload)).toEqual([1, 2, 3].map((intentos) => ({ metodo: 'FOLIO_FECHA_NAC', intentos })));
   await expect(casos.retomar({ ...entrada, fechaNac: datos.fechaNac }, wa)).resolves.toMatchObject({ tipo: 'BLOQUEADO' });
   reloj.adelantar(15 * 60_000);
   await expect(casos.retomar({ ...entrada, fechaNac: datos.fechaNac }, wa)).resolves.toMatchObject({ tipo: 'RETOMADO' });
@@ -213,4 +216,38 @@ it('protege las guardas del inicio y de la captura y detecta cambios concurrente
   ]);
   expect(capturas.filter(({ status }) => status === 'fulfilled')).toHaveLength(1);
   expect(capturas.find(({ status }) => status === 'rejected')).toMatchObject({ reason: { codigo: 'CONFLICTO_VERSION' } });
+});
+
+it('expira el hold al confirmar sin consultar la agenda externa', async () => {
+  const { casos, reloj, agendaExterna, tramites } = escenario();
+  const registrar = vi.spyOn(agendaExterna, 'registrarCita');
+  const id = await listo(casos);
+  await casos.reservar(id, '2026-11-25T18:00:00Z', cc);
+  reloj.adelantar(600_000);
+  await expect(casos.confirmar(id, cc)).rejects.toMatchObject({ regla: 'HORARIO_NO_DISPONIBLE' });
+  expect(registrar).not.toHaveBeenCalled();
+  expect((await tramites.obtener(id))?.estado).toBe('LISTO_PARA_RESERVAR');
+  expect(tramites.eventos().at(-1)?.tipo).toBe('ReservaExpirada');
+});
+
+it('conserva el hold con agenda externa caída y compensa ante un conflicto posterior', async () => {
+  const { casos, agendaExterna, tramites } = escenario();
+  const id = await listo(casos);
+  const reserva = await casos.reservar(id, '2026-11-25T18:00:00Z', cc);
+  agendaExterna.fallar = true;
+  await expect(casos.confirmar(id, cc)).rejects.toMatchObject({ regla: 'AGENDA_NO_DISPONIBLE' });
+  expect((await tramites.obtener(id))?.version).toBe(reserva.tramite.version);
+  agendaExterna.fallar = false;
+  const registrar = agendaExterna.registrarCita.bind(agendaExterna);
+  vi.spyOn(agendaExterna, 'registrarCita').mockImplementationOnce(async (solicitud) => {
+    const folio = await registrar(solicitud);
+    const actual = await tramites.obtener(id);
+    if (!actual) throw new Error('Falta el trámite.');
+    actual.retomar({ canal: 'whatsapp', actor: 'paciente', nivelAuth: 1, ts: '2026-11-24T12:00:00Z',
+      correlationId: 'conflicto', idempotencyKey: 'conflicto' }, 'TOKEN_CC');
+    await tramites.guardar(actual);
+    return folio;
+  });
+  await expect(casos.confirmar(id, cc)).rejects.toMatchObject({ codigo: 'CONFLICTO_VERSION' });
+  expect(agendaExterna.activa('10000000')).toBe(false);
 });

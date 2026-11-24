@@ -51,8 +51,32 @@ interface DatosTramite {
   ultimoCanal: Canal;
 }
 
+export interface TramiteInstantanea {
+  id: TramiteId;
+  hiloId: HiloId;
+  tipo: TipoTramite;
+  canalOrigen: Canal;
+  datos: DatosTramite;
+}
+
 export class Tramite {
   private readonly pendientes: EventoDominio[] = [];
+
+  static rehidratar(instantanea: TramiteInstantanea, registro: RegistroTiposTramite): Tramite {
+    const { id, hiloId, tipo, canalOrigen, datos } = instantanea;
+    return new Tramite(id, hiloId, tipo, canalOrigen, registro.obtener(tipo),
+      structuredClone(datos), datos.version);
+  }
+
+  instantanea(): TramiteInstantanea {
+    return {
+      id: this.id,
+      hiloId: this.hiloId,
+      tipo: this.tipo,
+      canalOrigen: this.canalOrigen,
+      datos: structuredClone(this.datos),
+    };
+  }
 
   private constructor(
     readonly id: TramiteId,

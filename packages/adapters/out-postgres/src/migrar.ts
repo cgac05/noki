@@ -17,12 +17,15 @@ class ProveedorMigracionesSql implements MigrationProvider {
   }
 }
 
-export async function migrar(connectionString: string): Promise<string[]> {
+export async function migrar(connectionString: string, hasta?: string, esquema?: string): Promise<string[]> {
   const db = new Kysely<unknown>({
     dialect: new PostgresDialect({ pool: new Pool({ connectionString, connectionTimeoutMillis: 1000 }) }),
   });
   try {
-    const { error, results } = await new Migrator({ db, provider: new ProveedorMigracionesSql() }).migrateToLatest();
+    const migrador = new Migrator({
+      db, provider: new ProveedorMigracionesSql(), ...(esquema ? { migrationTableSchema: esquema } : {}),
+    });
+    const { error, results } = hasta ? await migrador.migrateTo(hasta) : await migrador.migrateToLatest();
     if (error) throw error;
     return (results ?? []).filter(r => r.status === 'Success').map(r => r.migrationName);
   } finally { await db.destroy(); }

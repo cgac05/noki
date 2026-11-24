@@ -2,7 +2,7 @@ import type {
   Canal, ContextoOperacion, MetodoVinculo, NivelAuth, PacienteId, SedeId, ServicioId, Tramite, TramiteId,
 } from '@noki/domain';
 import type {
-  Contacto, ContactosPort, DatosDeclarados, PacientesPort, RegistroIntentos,
+  Contacto, ContactosPort, DatosDeclarados, EventosSinTramite, PacientesPort, RegistroIntentos,
   TramiteRepo, VerificadorTokens,
 } from './ports/nucleo.ts';
 
@@ -54,6 +54,7 @@ export class ResolvedorContinuidad {
     private readonly tokens: VerificadorTokens,
     private readonly pacientes: PacientesPort,
     private readonly intentos: RegistroIntentos,
+    private readonly eventos: EventosSinTramite,
   ) {}
 
   async resolver(entrada: EntradaContinuidad, contacto: Contacto, contexto: ContextoOperacion): Promise<ResultadoContinuidad> {
@@ -112,11 +113,12 @@ export class ResolvedorContinuidad {
   private async verificarFolio(entrada: EntradaContinuidad, contacto: Contacto, contexto: ContextoOperacion,
     pacientesAdmisibles?: ReadonlySet<PacienteId | undefined>): Promise<ResultadoContinuidad> {
     const folio = entrada.folio ?? '';
-    const tramite = /^\d{8,9}$/.test(folio) ? await this.tramites.porFolio(folio) : null;
+    if (!/^\d{8,9}$/.test(folio)) return sinResultado;
+    if (!entrada.fechaNac) return { tipo: 'REQUIERE_VERIFICACION', metodo: 'FOLIO_FECHA_NAC' };
+    const tramite = await this.tramites.porFolio(folio);
     const pacienteId = tramite?.pacienteId;
     const abierto = tramite && (await this.tramites.abiertosPorHilo(tramite.hiloId)).some(({ id }) => id === tramite.id);
     const candidato = tramite && pacienteId && abierto && (!pacientesAdmisibles || pacientesAdmisibles.has(pacienteId));
-    if (!entrada.fechaNac) return candidato ? { tipo: 'REQUIERE_VERIFICACION', metodo: 'FOLIO_FECHA_NAC' } : sinResultado;
     if (!candidato || !(await this.pacientes.coincideFechaNac(pacienteId, entrada.fechaNac))) {
       return this.fallo(contacto, contexto, 'FOLIO_FECHA_NAC');
     }
@@ -133,7 +135,11 @@ export class ResolvedorContinuidad {
   }
 
   private async fallo(contacto: Contacto, contexto: ContextoOperacion, metodo: MetodoVinculo): Promise<ResultadoContinuidad> {
-    await this.intentos.fallar(contacto.hiloId, contacto.id, metodo, contexto);
+    const { intentos } = await this.intentos.fallar(contacto.id, contexto.ts);
+    await this.eventos.agregar([{
+      ...contexto, hiloId: contacto.hiloId, tramiteId: null, version: 0,
+      tipo: 'IntentoVerificacionFallido', payload: { metodo, intentos },
+    }]);
     return sinResultado;
   }
 }

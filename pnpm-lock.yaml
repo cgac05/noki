@@ -80,6 +80,9 @@ importers:
       fastify:
         specifier: 5.6.2
         version: 5.6.2
+      zod:
+        specifier: 4.1.13
+        version: 4.1.13
 
   apps/web:
     dependencies:
@@ -141,6 +144,9 @@ importers:
       '@noki/domain':
         specifier: workspace:*
         version: link:../../domain
+      ioredis:
+        specifier: 5.8.2
+        version: 5.8.2(supports-color@7.2.0)
 
   packages/adapters/in-http:
     dependencies:

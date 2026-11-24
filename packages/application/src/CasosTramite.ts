@@ -1,14 +1,14 @@
 import {
-  HiloAtencion, NoEncontrado, ReglaViolada, TransicionInvalida, siguientePregunta,
+  ConflictoVersion, HiloAtencion, NoEncontrado, ReglaViolada, TransicionInvalida, siguientePregunta,
   type ContextoIdentidad, type ContextoOperacion, type Cotizacion, type DatosElegibilidad,
   type EventoDominio, type HiloId, type PacienteId, type PerfilServicio, type PoliticaIdentidad,
-  type RegistroTiposTramite, type ReservaId, type SedeId, type ServicioId,
+  type RecursoId, type RegistroTiposTramite, type ReservaId, type SedeId, type ServicioId,
   type SiguientePreguntaDominio, type TipoTramite, Tramite, type TramiteId,
 } from '@noki/domain';
 import type { GeneradorId } from './ports/GeneradorId.ts';
 import type { Reloj } from './ports/Reloj.ts';
 import type {
-  AgendaPort, CatalogoPort, Contacto, ContactosPort, HiloRepo, PacientesPort, TramiteRepo, VerificadorTokens,
+  AgendaExternaPort, AgendaPort, CatalogoPort, Contacto, ContactosPort, HiloRepo, PacientesPort, TramiteRepo, VerificadorTokens,
 } from './ports/nucleo.ts';
 import type { EntradaContinuidad, ResolvedorContinuidad, ResultadoContinuidad } from './ResolvedorContinuidad.ts';
 
@@ -34,6 +34,8 @@ interface Dependencias {
   pacientes: PacientesPort;
   catalogo: CatalogoPort;
   agenda: AgendaPort;
+  agendaExterna: AgendaExternaPort;
+  registrarError?: (datos: { correlation_id: string; codigo: string }) => void;
   reloj: Reloj;
   ids: GeneradorId;
   politica: PoliticaIdentidad;
@@ -93,7 +95,7 @@ export class CasosTramite {
     return this.modificar(id, comando, (tramite, contexto) => tramite.reconocerElegibilidad(contexto));
   }
 
-  async reservar(id: TramiteId, inicio: string, comando: ContextoComando): Promise<ResultadoComando> {
+  async reservar(id: TramiteId, inicio: string, comando: ContextoComando, recursoId?: RecursoId): Promise<ResultadoComando> {
     this.puertos.politica.exigir('agendar', comando);
     const contexto = this.contexto(comando);
     const tramite = await this.cargar(id);
@@ -103,6 +105,7 @@ export class CasosTramite {
     const reserva = await this.puertos.agenda.apartar({
       inicio, sedeId, servicioId, tramiteId: id, ts: contexto.ts, ttlReservaMin: perfil.ttlReservaMin,
       reservaId: this.puertos.ids.nuevo() as ReservaId,
+      ...(recursoId ? { recursoId } : {}),
     });
     try {
       tramite.apartar({ ...reserva, inicio }, contexto);
@@ -114,13 +117,46 @@ export class CasosTramite {
   }
 
   async confirmar(id: TramiteId, comando: ContextoComando): Promise<ResultadoComando> {
-    return this.modificar(id, comando, async (tramite, contexto) => {
-      tramite.validarConfirmar(contexto.ts);
-      const horario = tramite.horario;
-      if (!horario) throw new TransicionInvalida(tramite.estado, 'confirmar');
-      const folio = await this.puertos.agenda.confirmar(horario.reservaId, contexto.ts);
+    this.puertos.politica.exigir('agendar', comando);
+    const contexto = this.contexto(comando);
+    const tramite = await this.cargar(id);
+    const { horario, sedeId, servicioId } = tramite;
+    if (tramite.estado !== 'HORARIO_RESERVADO' || !horario || !sedeId || !servicioId) {
+      throw new TransicionInvalida(tramite.estado, 'confirmar');
+    }
+    const { reservaId, inicio, expiraEn } = horario;
+    if (Date.parse(expiraEn) <= Date.parse(contexto.ts)) {
+      tramite.expirarHold(contexto);
+      await this.guardar(tramite, contexto);
+      await this.compensar(contexto, () => this.puertos.agenda.liberar(reservaId));
+      throw new ReglaViolada('HORARIO_NO_DISPONIBLE');
+    }
+    const folio = await this.puertos.agendaExterna.registrarCita({ reservaId, sedeId, servicioId, inicio }, contexto.correlationId);
+    try {
+      await this.puertos.agenda.confirmar(reservaId, folio, this.puertos.reloj.ahora().toISOString());
+    } catch (error) {
+      await this.compensar(contexto, () => this.puertos.agendaExterna.cancelarCita(folio, contexto.correlationId));
+      throw error;
+    }
+    try {
       tramite.confirmar(folio, contexto);
-    });
+      return await this.guardar(tramite, contexto);
+    } catch (error) {
+      if (error instanceof ConflictoVersion) {
+        await this.compensar(contexto, async () => {
+          const actual = await this.puertos.tramites.obtener(id);
+          if (actual?.estado === 'CONFIRMADA' && actual.folio === folio) return;
+          await this.compensar(contexto, () => this.puertos.agendaExterna.cancelarCita(folio, contexto.correlationId));
+          await this.puertos.agenda.liberar(reservaId);
+        });
+      }
+      throw error;
+    }
+  }
+
+  private async compensar(contexto: ContextoOperacion, operacion: () => Promise<void>): Promise<void> {
+    try { await operacion(); }
+    catch { this.puertos.registrarError?.({ correlation_id: contexto.correlationId, codigo: 'COMPENSACION_AGENDA_FALLIDA' }); }
   }
 
   async retomar(entrada: EntradaContinuidad, comando: ContextoComando): Promise<ResultadoRetomar> {

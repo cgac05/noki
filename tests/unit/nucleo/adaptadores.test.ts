@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 import {
-  TramiteRepoMemoria, AgendaMemoria, CatalogoMemoria, RegistroIntentosMemoria,
+  TramiteRepoMemoria, AgendaExternaMemoria, AgendaMemoria, CatalogoMemoria, RegistroIntentosMemoria,
   VerificadorTokensMemoria, RelojFalso,
 } from '../../../packages/adapters/memory/src/index.ts';
 import {
@@ -49,19 +49,19 @@ it('devuelve nulo para una oferta inexistente', async () => {
 it('confirma con un folio de ocho o nueve dígitos', async () => {
   const agenda = new AgendaMemoria();
   await agenda.apartar({ reservaId, tramiteId, servicioId, sedeId, inicio: contexto.ts, ts: contexto.ts, ttlReservaMin: 10 });
-  expect(await agenda.confirmar(reservaId, contexto.ts)).toMatch(/^\d{8,9}$/);
+  const externa = new AgendaExternaMemoria();
+  const folio = await externa.registrarCita({ reservaId, sedeId, servicioId, inicio: contexto.ts });
+  expect(folio).toMatch(/^\d{8,9}$/);
+  await expect(agenda.confirmar(reservaId, folio, contexto.ts)).resolves.toBeUndefined();
 });
 
-it('bloquea durante 15 minutos y registra cada intento sin datos personales', async () => {
+it('cuenta los intentos y bloquea durante 15 minutos', async () => {
   const registro = new RegistroIntentosMemoria();
   const reloj = new RelojFalso(new Date(contexto.ts));
   for (let intento = 1; intento <= 3; intento++) {
-    expect(await registro.fallar(hiloId, 'contacto', 'FOLIO_FECHA_NAC', {
-      ...contexto, ts: reloj.ahora().toISOString(), idempotencyKey: String(intento),
-    })).toMatchObject({ intentos: intento });
+    expect(await registro.fallar('contacto', reloj.ahora().toISOString())).toMatchObject({ intentos: intento });
   }
   expect(await registro.bloqueo('contacto', reloj.ahora().toISOString())).toBeDefined();
   reloj.adelantar(15 * 60_000);
   expect(await registro.bloqueo('contacto', reloj.ahora().toISOString())).toBeUndefined();
-  expect(registro.eventos()).toHaveLength(3);
 });

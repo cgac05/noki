@@ -1,6 +1,6 @@
 import type {
-  Canal, ContextoOperacion, DatosElegibilidad, HiloAtencion, HiloId, MetodoVinculo, NivelAuth,
-  PacienteId, PerfilServicio, RelacionVinculo, ReservaId, SedeId, ServicioId, Tramite, TramiteId,
+  Canal, DatosElegibilidad, EventoDominio, HiloAtencion, HiloId, MetodoVinculo, NivelAuth,
+  PacienteId, PerfilServicio, RecursoId, RelacionVinculo, ReservaId, SedeId, ServicioId, Tramite, TramiteId,
 } from '@noki/domain';
 
 export interface TramiteRepo {
@@ -74,6 +74,7 @@ export interface CatalogoPort {
 }
 
 export interface SolicitudReserva {
+  recursoId?: RecursoId;
   reservaId: ReservaId;
   tramiteId: TramiteId;
   servicioId: ServicioId;
@@ -85,8 +86,15 @@ export interface SolicitudReserva {
 
 export interface AgendaPort {
   apartar(solicitud: SolicitudReserva): Promise<{ reservaId: ReservaId; expiraEn: string }>;
-  confirmar(reservaId: ReservaId, ts: string): Promise<string>;
+  confirmar(reservaId: ReservaId, folio: string, ts: string): Promise<void>;
   liberar(reservaId: ReservaId): Promise<void>;
+}
+
+export type SolicitudCitaExterna = Pick<SolicitudReserva, 'reservaId' | 'sedeId' | 'servicioId' | 'inicio'>;
+
+export interface AgendaExternaPort {
+  registrarCita(solicitud: SolicitudCitaExterna, correlationId: string): Promise<string>;
+  cancelarCita(folio: string, correlationId: string): Promise<void>;
 }
 
 export interface ResultadoIntento {
@@ -96,6 +104,10 @@ export interface ResultadoIntento {
 
 export interface RegistroIntentos {
   bloqueo(contactoId: string, ts: string): Promise<string | undefined>;
-  fallar(hiloId: HiloId, contactoId: string, metodo: MetodoVinculo, contexto: ContextoOperacion): Promise<ResultadoIntento>;
+  fallar(contactoId: string, ts: string): Promise<ResultadoIntento>;
   reiniciar(contactoId: string): Promise<void>;
+}
+
+export interface EventosSinTramite {
+  agregar(eventos: readonly (EventoDominio & { tramiteId: null })[]): Promise<void>;
 }

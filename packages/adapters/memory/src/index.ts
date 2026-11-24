@@ -8,3 +8,6 @@ export { PacientesMemoria } from './PacientesMemoria.ts';
 export { CatalogoMemoria } from './CatalogoMemoria.ts';
 export { AgendaMemoria } from './AgendaMemoria.ts';
 export { RegistroIntentosMemoria } from './RegistroIntentosMemoria.ts';
+export { EventosSinTramiteMemoria } from './EventosSinTramiteMemoria.ts';
+export { AgendaExternaMemoria } from './AgendaExternaMemoria.ts';
+export { OutboxMemoria, PublicadorEventosMemoria, RegistroProcesadosMemoria } from './publicacion.ts';

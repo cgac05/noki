@@ -6,3 +6,4 @@ export type TramiteId = Identificador<'Tramite'>;
 export type SedeId = Identificador<'Sede'>;
 export type ServicioId = Identificador<'Servicio'>;
 export type ReservaId = Identificador<'Reserva'>;
+export type RecursoId = Identificador<'Recurso'>;

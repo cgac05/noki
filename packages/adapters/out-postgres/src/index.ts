@@ -1,2 +1,14 @@
 export { migrar } from './migrar.ts';
 export { comprobarPostgres } from './comprobarPostgres.ts';
+export { abrirPostgres } from './abrirPostgres.ts';
+export { particionEvento } from './eventStore.ts';
+export { TramiteRepoPostgres } from './TramiteRepoPostgres.ts';
+export { HiloRepoPostgres } from './HiloRepoPostgres.ts';
+export { ContactosPostgres } from './ContactosPostgres.ts';
+export { PacientesPostgres } from './PacientesPostgres.ts';
+export { CatalogoPostgres } from './CatalogoPostgres.ts';
+export { EventosSinTramitePostgres } from './EventosSinTramitePostgres.ts';
+export { RegistroIntentosPostgres } from './RegistroIntentosPostgres.ts';
+export { AgendaPostgres } from './AgendaPostgres.ts';
+export { OutboxPostgres } from './OutboxPostgres.ts';
+export { RegistroProcesadosPostgres } from './RegistroProcesadosPostgres.ts';
