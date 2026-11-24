@@ -1,2 +1,10 @@
 export { RelojFalso } from './RelojFalso.ts';
 export { GeneradorIdSecuencial } from './GeneradorIdSecuencial.ts';
+export { TramiteRepoMemoria } from './TramiteRepoMemoria.ts';
+export { HiloRepoMemoria } from './HiloRepoMemoria.ts';
+export { ContactosMemoria } from './ContactosMemoria.ts';
+export { VerificadorTokensMemoria } from './VerificadorTokensMemoria.ts';
+export { PacientesMemoria } from './PacientesMemoria.ts';
+export { CatalogoMemoria } from './CatalogoMemoria.ts';
+export { AgendaMemoria } from './AgendaMemoria.ts';
+export { RegistroIntentosMemoria } from './RegistroIntentosMemoria.ts';
