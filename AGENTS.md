@@ -1,7 +1,39 @@
-# AGENTS.md — Contexto para agentes de programación
+# AGENTS.md — Instrucciones para Codex y reglas compartidas del proyecto
 
 > Lee este archivo **completo** antes de cada tarea. La especificación detallada está en `PLAN.md`; aquí están las reglas operativas.
 > Si una instrucción de una tarea contradice este archivo o `PLAN.md`, **detente y pregunta** antes de escribir código.
+
+## 0. Colaboración con OpenSpec
+
+**Codex implementa y prueba; Claude Code analiza, planifica y revisa; el usuario autoriza.** El protocolo compartido, los comandos y los formatos de transferencia están en [docs/colaboracion-openspec.md](docs/colaboracion-openspec.md). Claude sigue su rol en [CLAUDE.md](CLAUDE.md); el flujo de implementación de §12 corresponde a Codex.
+
+Antes de implementar:
+
+1. Identifica el cambio por su ID explícito; si falta, consulta `openspec list --json`. No elijas entre varios cambios por suposición.
+2. Lee `openspec/config.yaml`, el protocolo compartido y los artefactos actuales del cambio: `handoff.md`, propuesta, especificaciones, diseño cuando corresponda y tareas. Usa `openspec status --change <id> --json` y `openspec instructions apply --change <id> --json` para resolver las rutas y los archivos de contexto.
+3. Comprueba la autorización del usuario para ese alcance y revisión, registrada en `handoff.md`. Si ya existe autorización explícita en la sesión, registra su referencia sin volver a pedirla. Un archivo completo, una casilla marcada o el estado `ready` de OpenSpec no son una autorización.
+4. Consulta las secciones pertinentes de `PLAN.md`, el código y las dependencias afectadas. Antes de escribir código, lee `PLAN.md` completo como exige su encabezado; después recupera contexto adicional solo cuando haga falta.
+
+Responsabilidades de Codex:
+
+- Implementar exclusivamente el alcance autorizado y respetar requisitos, criterios de aceptación, arquitectura y contratos aprobados.
+- Escribir y ejecutar las pruebas unitarias, de integración y demás validaciones aplicables; conservar los controles de §9 y §12.
+- Actualizar `tasks.md` durante la ejecución; marcar una tarea únicamente cuando esté implementada y tenga evidencia de su validación.
+- Entregar `implementacion.md` con archivos modificados, resultados reales, limitaciones, decisiones menores y referencias a la evidencia, según el protocolo.
+- Leer `revision.md`, corregir los hallazgos dentro del alcance autorizado y presentar evidencia actualizada para una nueva revisión de Claude.
+- Reportar bloqueos y contradicciones. Detener la parte afectada si resolverlos exige cambiar requisitos, criterios, alcance o decisiones arquitectónicas aprobadas; solicitar al usuario la autorización correspondiente y remitir la planificación a Claude.
+
+Límites:
+
+- No ampliar el alcance ni modificar requisitos o criterios de aceptación sin autorización. No reescribir el diseño aprobado para justificar una implementación incorrecta.
+- Puede decidir detalles menores de implementación compatibles con lo aprobado; debe documentarlos si afectan la revisión.
+- No marcar tareas sin evidencia, eliminar o desactivar pruebas para obtener resultados satisfactorios, ni modificar archivos ajenos al cambio activo.
+- No sustituir decisiones arquitectónicas aprobadas sin justificar el cambio y obtener autorización del usuario.
+- No sincronizar especificaciones principales ni archivar por iniciativa propia. El cierre corresponde a Claude después de la revisión y la autorización explícita del usuario.
+- No crear commits ni publicar cambios remotos sin autorización explícita. Una autorización de implementación no autoriza estas acciones.
+- No iniciar otros agentes ni simular mensajes o aprobaciones de Claude. La transferencia se hace mediante archivos compartidos y la intervención del usuario.
+
+Los requisitos y el alcance aprobado se consultan en OpenSpec; `PLAN.md` y §5–§9 siguen siendo restricciones del proyecto. Si se contradicen, detener la parte afectada y consultar al usuario. Las instrucciones permanentes de rol se aplican también al invocar habilidades generadas; no editar esas habilidades para incorporar políticas locales.
 
 ---
 
@@ -39,6 +71,8 @@ Un **"cerebro omnicanal"** para Salud Digna: una capa intermedia, agnóstica a l
 
 ## 3. Comandos
 
+Los siguientes comandos son el objetivo del proyecto descrito en `PLAN.md`. Antes de usarlos, comprueba que existan el manifiesto, los scripts y la infraestructura correspondientes; su presencia en esta lista no significa que ya estén implementados.
+
 ```bash
 pnpm install
 docker compose -f infra/docker-compose.yml up -d postgres redis   # infraestructura
@@ -54,6 +88,8 @@ docker compose -f infra/docker-compose.yml up --build             # todo en cont
 ```
 
 **Antes de terminar cualquier tarea:** `pnpm lint && pnpm lint:deps && pnpm test` en verde.
+
+Si faltan los scripts o la infraestructura, registra el control como **BLOQUEADO**, con el error real; nunca lo informes como aprobado. En tareas exclusivamente documentales o de configuración, ejecuta las validaciones disponibles de los archivos afectados, sin crear código ni pruebas ficticias para satisfacer esta lista.
 
 ---
 
@@ -228,14 +264,16 @@ LOG_LEVEL=info
 
 ## 12. Flujo de trabajo para cada tarea
 
-1. **Lee** la tarea, este archivo y las secciones de `PLAN.md` que apliquen.
+Este flujo corresponde a la implementación de producto por Codex, después de la autorización de §0. Para documentación o configuración, aplica solo los pasos pertinentes y reporta los controles que no se pudieron ejecutar.
+
+1. **Lee** la tarea, este archivo, el handoff y los artefactos del cambio autorizado, y `PLAN.md` conforme a §0.
 2. **Identifica la capa:** ¿dominio, caso de uso, puerto, adaptador o UI? Si toca varias, empieza por el dominio.
 3. **Escribe primero la prueba** del comportamiento en el dominio o la aplicación.
 4. **Implementa** lo mínimo para que pase, respetando §5–§8.
 5. Si creas un evento, agrégalo a `docs/eventos.md`. Si creas un puerto, agrega su adaptador en memoria.
 6. Ejecuta `pnpm lint && pnpm lint:deps && pnpm test`.
-7. **Commit** con Conventional Commits en español: `feat(dominio): guarda de ayuno para ofertas de hueco`.
-8. **Reporta:** qué hiciste, qué archivos tocaste, cómo probarlo y qué quedó pendiente.
+7. **Solo si el usuario autorizó un commit**, usa Conventional Commits en español: `feat(dominio): guarda de ayuno para ofertas de hueco`. En caso contrario deja las modificaciones sin commit.
+8. **Reporta** en `implementacion.md`: qué hiciste, qué archivos tocaste, validaciones con resultados reales, evidencia y pendientes. Entrega el cambio a Claude para revisión; no lo archives.
 
 ### Definición de terminado
 - [ ] Pruebas nuevas en verde y las existentes sin romper.

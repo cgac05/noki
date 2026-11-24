@@ -1,0 +1,37 @@
+schema: spec-driven
+
+# Solo mecanismos de configuración de proyecto compatibles con OpenSpec 1.14.0.
+# La selección de workflows se administra con openspec config profile (global).
+context: |
+  Escribe los artefactos en español y conserva los encabezados y palabras
+  normativas que el esquema exige para validación.
+  Claude Code analiza, planifica y revisa; Codex implementa y prueba;
+  el usuario autoriza el alcance y el cierre.
+  Lee docs/colaboracion-openspec.md para el protocolo y los formatos persistentes,
+  CLAUDE.md o AGENTS.md para el rol y PLAN.md para las restricciones del proyecto.
+  Prioriza el Flujo A estable. Los artefactos aprobados son la fuente de verdad
+  del alcance; ante contradicciones con las reglas del proyecto, consulta al usuario.
+
+rules:
+  proposal:
+    - Delimita el alcance y lo que queda fuera; identifica riesgos, dependencias e impacto sin inventar funcionalidades para satisfacer el formato.
+    - Presenta los artefactos para autorización del usuario antes de transferir la implementación a Codex.
+  specs:
+    - Define comportamientos observables, criterios verificables y escenarios de error, seguridad o concurrencia cuando apliquen; evita detalles internos de implementación.
+    - Conserva la sintaxis del esquema y referencia capacidades existentes; no rebajes requisitos para acomodar una implementación defectuosa.
+  design:
+    - Respeta PLAN.md y las reglas de AGENTS.md; justifica decisiones, alternativas, riesgos y dependencias sin volver a copiar los requisitos.
+    - Resuelve con el usuario las preguntas que cambien alcance, contratos o decisiones aprobadas antes de entregar las tareas.
+  tasks:
+    - Usa casillas numeradas del esquema y tareas pequeñas ordenadas por dependencias; cada tarea debe indicar cómo verificarla y referenciar los requisitos pertinentes.
+    - Incluye las pruebas y documentación necesarias en cada grupo; distingue los controles requeridos de los que aún están bloqueados por falta de scripts o infraestructura.
+
+operations:
+  apply:
+    guidance:
+      - Sigue AGENTS.md y el handoff del cambio; comprueba la autorización existente del usuario sin pedirla otra vez cuando ya cubra ese alcance y revisión.
+      - Actualiza las tareas solo con evidencia y entrega implementacion.md según la guía compartida; devuelve a Claude los cambios de planificación que requieran autorización.
+  archive:
+    guidance:
+      - Sigue CLAUDE.md y la guía compartida; comprueba la revisión independiente y la autorización explícita del usuario para cerrar ese cambio y revisión antes de sincronizar o archivar.
+      - Informa la sincronización, la ruta archivada y las limitaciones reales; no confundas estas orientaciones con controles automáticos de autorización.
