@@ -55,6 +55,7 @@ export function crearSdMock(logger = true) {
     if (!validado.success) return res.code(400).send(invalidos);
     const { reservaId } = validado.data;
     const anterior = citas.get(reservaId);
+    if (anterior && !anterior.activa) return res.code(409).send({ codigo: 'CITA_CANCELADA' });
     if (anterior) return { folio: anterior.folio };
     const folio = String(secuencia++);
     citas.set(reservaId, { folio, activa: true });

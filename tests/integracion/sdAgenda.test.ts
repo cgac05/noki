@@ -1,5 +1,6 @@
 import { afterEach, expect, it } from 'vitest';
 import { crearSdMock } from '../../apps/sd-mock/src/index.ts';
+import { AgendaExternaMemoria } from '../../packages/adapters/memory/src/index.ts';
 import { AgendaExternaSd } from '../../packages/adapters/out-sd/src/index.ts';
 import type { ReservaId, SedeId, ServicioId } from '../../packages/domain/src/index.ts';
 
@@ -39,5 +40,35 @@ it('se recupera tras dos fallos y señala cuando se agotan los tres intentos', a
     await servidor.inject({ method: 'PUT', url: '/simulacion', payload: { latenciaMs: 0, falloPorcentaje: 100 } });
     await expect(cliente.registrarCita(cita, 'otro')).rejects.toMatchObject({ regla: 'AGENDA_NO_DISPONIBLE' });
     expect(registros.filter((id) => id === 'otro')).toHaveLength(2);
+  } finally { await servidor.close(); }
+});
+
+it('Cita cancelada no se reactiva y una respuesta 4xx no se reintenta', async () => {
+  const servidor = crearSdMock(false);
+  try {
+    const base = await servidor.listen({ host: '127.0.0.1', port: 0 });
+    const reintentos: number[] = [];
+    const cliente = new AgendaExternaSd(base, ({ intento }) => reintentos.push(intento));
+    const folio = await cliente.registrarCita(cita, 'alta');
+    await cliente.cancelarCita(folio, 'baja');
+    const respuesta = await servidor.inject({ method: 'POST', url: '/agenda/citas', payload: cita });
+    expect(respuesta.statusCode).toBe(409);
+    expect(respuesta.json()).toEqual({ codigo: 'CITA_CANCELADA' });
+    await expect(cliente.registrarCita(cita, 'otra-alta')).rejects.toMatchObject({ regla: 'AGENDA_NO_DISPONIBLE' });
+    expect(reintentos).toEqual([]);
+  } finally { await servidor.close(); }
+});
+
+it('Disponibilidad por el puerto coincide en memoria y sd-mock', async () => {
+  const servidor = crearSdMock(false);
+  try {
+    const base = await servidor.listen({ host: '127.0.0.1', port: 0 });
+    const cliente = new AgendaExternaSd(base);
+    const memoria = new AgendaExternaMemoria();
+    const consulta = { sedeId: cita.sedeId, servicioId: cita.servicioId, fecha: '2026-11-25' };
+    const horarios = await cliente.disponibilidad(consulta, 'disponibilidad');
+    expect(horarios).toEqual(await memoria.disponibilidad(consulta));
+    expect(horarios).toHaveLength(15);
+    expect(horarios[0]).toBe('2026-11-25T07:00:00.000Z');
   } finally { await servidor.close(); }
 });

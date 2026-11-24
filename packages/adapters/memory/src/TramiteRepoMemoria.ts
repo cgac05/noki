@@ -29,6 +29,10 @@ export class TramiteRepoMemoria implements TramiteRepo {
     return [...this.tramites.values()].find((tramite) => tramite.folio === folio)?.copiaPersistida() ?? null;
   }
 
+  todos(): Tramite[] {
+    return [...this.tramites.values()].map(tramite => tramite.copiaPersistida());
+  }
+
   eventos(): readonly EventoDominio[] {
     return structuredClone(this.guardados);
   }

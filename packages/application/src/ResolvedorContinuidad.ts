@@ -9,6 +9,8 @@ import type {
 
 export interface EntradaContinuidad {
   valorContacto: string;
+  tramiteElegidoId?: TramiteId;
+  incluirReferencias?: true;
   token?: string;
   folio?: string;
   fechaNac?: string;
@@ -33,7 +35,7 @@ type Retomado = {
 };
 
 export type ResultadoContinuidad = Retomado
-  | { tipo: 'VARIOS'; resumenes: ResumenContinuidad[] }
+  | { tipo: 'VARIOS'; resumenes: ResumenContinuidad[]; tramiteIds?: TramiteId[] }
   | { tipo: 'REQUIERE_VERIFICACION'; metodo: 'FOLIO_FECHA_NAC' | 'OTP'; resumenes?: ResumenContinuidad[] }
   | { tipo: 'SIN_RESULTADO' }
   | { tipo: 'BLOQUEADO'; hasta: string };
@@ -81,13 +83,18 @@ export class ResolvedorContinuidad {
     })))).filter(({ tramites }) => tramites.length > 0);
     if (candidatos.length > 1) return sinResultado;
     const candidato = candidatos[0];
+    if (entrada.tramiteElegidoId) {
+      const elegido = candidato?.tramites.find(tramite => tramite.id === entrada.tramiteElegidoId);
+      return elegido && candidato ? this.retomado(contacto, elegido, 1, candidato.vinculo.metodo, 'VINCULO') : sinResultado;
+    }
     if (candidato) {
       const unTramite = candidato.tramites[0];
       if (candidato.tramites.length === 1 && unTramite) {
         return this.retomado(contacto, unTramite, 1, candidato.vinculo.metodo, 'VINCULO');
       }
       await this.intentos.reiniciar(contacto.id);
-      return { tipo: 'VARIOS', resumenes: candidato.tramites.map(resumen) };
+      return { tipo: 'VARIOS', resumenes: candidato.tramites.map(resumen),
+        ...(entrada.incluirReferencias ? { tramiteIds: candidato.tramites.map(({ id }) => id) } : {}) };
     }
 
     if (contexto.canal === 'whatsapp') {

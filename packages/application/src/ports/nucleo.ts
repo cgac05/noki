@@ -50,7 +50,7 @@ export interface TokenVerificado {
   metodo: 'TOKEN_CC' | 'TOKEN_WEB';
 }
 
-export type UsoToken = 'CONTINUIDAD' | 'LLEGADA';
+export type UsoToken = 'CONTINUIDAD' | 'LLEGADA' | 'CONTEXTO';
 
 export interface VerificadorTokens {
   verificar(token: string, uso?: UsoToken): Promise<TokenVerificado | null>;
@@ -111,7 +111,14 @@ export interface AgendaPort {
 
 export type SolicitudCitaExterna = Pick<SolicitudReserva, 'reservaId' | 'sedeId' | 'servicioId' | 'inicio'>;
 
+export interface ConsultaDisponibilidad {
+  sedeId: SedeId;
+  servicioId: ServicioId;
+  fecha: string;
+}
+
 export interface AgendaExternaPort {
+  disponibilidad(consulta: ConsultaDisponibilidad, correlationId: string): Promise<string[]>;
   registrarCita(solicitud: SolicitudCitaExterna, correlationId: string): Promise<string>;
   cancelarCita(folio: string, correlationId: string): Promise<void>;
 }

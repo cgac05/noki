@@ -30,8 +30,8 @@ it('migra una base con semilla y conserva las claves anteriores y las claves con
   await insertarEvento(base, base);
   await pool.query("INSERT INTO evento_procesado (consumidor, idempotency_key) VALUES ('prueba', $1)", [base]);
   expect(await migrar(url.toString(), '002_persistencia', 'persistencia_incremental')).toEqual(['002_persistencia']);
-  expect(await migrar(url.toString(), undefined, 'persistencia_incremental')).toEqual(['003_identidad']);
-  expect(await migrar(url.toString(), undefined, 'persistencia_incremental')).toEqual([]);
+  expect(await migrar(url.toString(), '003_identidad', 'persistencia_incremental')).toEqual(['003_identidad']);
+  expect(await migrar(url.toString(), '003_identidad', 'persistencia_incremental')).toEqual([]);
   expect((await pool.query('SELECT count(*)::int AS total FROM paciente')).rows[0]?.total).toBeGreaterThan(0);
 
   const registrar = (clave: string) => pool.query(
@@ -58,4 +58,12 @@ it('acepta varias CURP nulas y rechaza una CURP duplicada', async () => {
   await expect(insertar(id(11), 'PELA900228XNTRNN04')).rejects.toMatchObject({ code: '23505' });
   await insertar(id(12), null);
   await insertar(id(13), null);
+});
+
+it('aplica la migración de API una sola vez y conserva los registros', async () => {
+  expect(await migrar(url.toString(), undefined, 'persistencia_incremental')).toEqual(['004_api']);
+  await pool.query("INSERT INTO mensaje_bandeja (id, canal, asunto, cuerpo) VALUES ('01234567-89ab-7def-8123-456789abcde4', 'sms', 'Demo', 'Mensaje de prueba')");
+  expect(await migrar(url.toString(), undefined, 'persistencia_incremental')).toEqual([]);
+  expect((await pool.query('SELECT canal, asunto FROM mensaje_bandeja')).rows).toEqual([{ canal: 'sms', asunto: 'Demo' }]);
+  expect((await pool.query("SELECT to_regclass('comando_idempotente') IS NOT NULL AS comandos, to_regclass('conversacion_wa') IS NOT NULL AS conversaciones, to_regclass('token_emitido') IS NOT NULL AS tokens")).rows).toEqual([{ comandos: true, conversaciones: true, tokens: true }]);
 });

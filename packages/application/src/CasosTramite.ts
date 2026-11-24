@@ -15,6 +15,7 @@ import type {
 import type { EntradaContinuidad, ResolvedorContinuidad, ResultadoContinuidad } from './ResolvedorContinuidad.ts';
 
 export interface ContextoComando extends ContextoIdentidad {
+  pacienteId?: PacienteId;
   correlationId: string;
   idempotencyKey: string;
 }
@@ -75,6 +76,14 @@ export class CasosTramite {
     const tramite = Tramite.iniciar(this.puertos.ids.nuevo() as TramiteId, contacto.hiloId,
       tipo, this.puertos.registro, contexto);
     return this.guardar(tramite, contexto);
+  }
+
+  async solicitarContinuacion(id: TramiteId, comando: ContextoComando): Promise<ResultadoComando> {
+    if (comando.canal !== 'callcenter' || !comando.actor.startsWith('asesor:')) {
+      throw new ReglaViolada('CONTINUACION_SOLO_ASESOR');
+    }
+    return this.modificar(id, comando, (tramite, contexto) =>
+      tramite.consentirContactoWa(this.puertos.ids.nuevo(), contexto));
   }
 
   async seleccionarServicio(id: TramiteId, servicioId: ServicioId, comando: ContextoComando): Promise<ResultadoComando> {
@@ -343,13 +352,13 @@ export class CasosTramite {
     return { tipo: 'RETOMADO', nivel: resultado.nivel, operacion: guardado };
   }
 
-  async registrarLlegada(token: string, comando: ContextoComando): Promise<ResultadoComando> {
+  async registrarLlegada(token: string, comando: ContextoComando, esperado?: TramiteId): Promise<ResultadoComando> {
     const contexto = this.contexto(comando);
     if (contexto.canal !== 'clinica' || !contexto.actor.startsWith('recepcion:')) {
       throw new ReglaViolada('TOKEN_INVALIDO');
     }
     const credencial = await this.puertos.tokens.verificar(token, 'LLEGADA');
-    if (!credencial) throw new ReglaViolada('TOKEN_INVALIDO');
+    if (!credencial || (esperado && credencial.tramiteId !== esperado)) throw new ReglaViolada('TOKEN_INVALIDO');
     const tramite = await this.cargar(credencial.tramiteId);
     if (tramite.hiloId !== credencial.hiloId ||
         (credencial.pacienteId && tramite.pacienteId !== credencial.pacienteId)) {

@@ -326,6 +326,11 @@ export class Tramite {
     this.anotar(contexto, { tipo: 'ReservaExpirada', payload: { reservaId: horario.reservaId } });
   }
 
+  consentirContactoWa(consentimientoId: string, contexto: ContextoOperacion): void {
+    this.exigirEditable('consentirContactoWa');
+    this.anotar(contexto, { tipo: 'ConsentimientoContactoWA', payload: { consentimientoId } });
+  }
+
   registrarLlegada(contexto: ContextoOperacion): void {
     this.transicionar('registrarLlegada', contexto, { tipo: 'PacienteLlego', payload: { sedeId: this.sede('registrarLlegada') } });
   }

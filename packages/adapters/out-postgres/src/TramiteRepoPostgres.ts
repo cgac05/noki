@@ -57,6 +57,12 @@ export class TramiteRepoPostgres implements TramiteRepo {
         throw new ConflictoVersion(esperada, actual.rows[0]?.version ?? 0);
       }
       await insertarEventos(tx, this.ids, eventos, pacienteId);
+      for (const evento of eventos) {
+        if (evento.tipo !== 'ConsentimientoContactoWA') continue;
+        await sql`INSERT INTO token_emitido (jti, tramite_id, uso, expira_en)
+          VALUES (${evento.payload.consentimientoId}, ${id}, 'CONTINUIDAD',
+            ${evento.ts}::timestamptz + interval '24 hours')`.execute(tx);
+      }
     });
     tramite.marcarGuardado();
   }

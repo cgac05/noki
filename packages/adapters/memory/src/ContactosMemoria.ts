@@ -10,6 +10,10 @@ export class ContactosMemoria implements ContactosPort {
 
   constructor(private readonly pacientes?: Pick<PacientesMemoria, 'nombres'>) {}
 
+  valorPorHilo(id: HiloId): string | null {
+    return [...this.contactos.values()].find(({ hiloId }) => hiloId === id)?.valor ?? null;
+  }
+
   async buscar(canal: Canal, valor: string): Promise<Contacto | null> {
     const contacto = this.contactos.get(JSON.stringify([canal, valor]));
     return contacto ? { ...contacto } : null;

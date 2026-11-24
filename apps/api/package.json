@@ -4,20 +4,34 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./pruebas": "./src/pruebas.ts"
   },
   "dependencies": {
+    "@fastify/cors": "11.1.0",
+    "@noki/adapter-in-events": "workspace:*",
+    "@noki/adapter-in-http": "workspace:*",
+    "@noki/adapter-memory": "workspace:*",
     "@noki/adapter-out-postgres": "workspace:*",
     "@noki/adapter-out-redis": "workspace:*",
+    "@noki/adapter-out-sd": "workspace:*",
+    "@noki/adapter-out-security": "workspace:*",
     "@noki/application": "workspace:*",
+    "@noki/contracts": "workspace:*",
     "@noki/domain": "workspace:*",
     "argon2": "0.44.0",
+    "date-fns": "4.1.0",
+    "date-fns-tz": "3.2.0",
     "fastify": "5.6.2",
     "kysely": "0.28.8",
     "pg": "8.16.3",
+    "socket.io": "4.8.4",
     "uuid": "11.1.0"
   },
   "scripts": {
     "dev": "node --env-file=../../.env --import tsx --watch src/main.ts"
+  },
+  "devDependencies": {
+    "socket.io-client": "4.8.4"
   }
 }

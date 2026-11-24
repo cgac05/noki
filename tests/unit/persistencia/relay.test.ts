@@ -18,12 +18,12 @@ it('publica en orden, conserva la partición con error y omite la tomada', async
   const ocupada = await outbox.tomarParticion(2);
   vi.spyOn(publicador, 'publicar').mockImplementationOnce(async () => { throw new Error('secreto de prueba'); });
   const relay = new RelayOutbox(outbox, publicador, reloj);
-  await relay.publicarPendientes();
+  expect(await relay.publicarPendientes()).toBe(false);
   expect(publicador.eventos().map(({ evento }) => evento.idempotencyKey)).toEqual(['tres']);
   expect(outbox.estado('uno')).toMatchObject({ intentos: 1, ultimoError: 'PUBLICACION_FALLIDA' });
   expect(outbox.estado('dos')).toMatchObject({ intentos: 0 });
   await ocupada?.liberar();
-  await relay.publicarPendientes();
+  expect(await relay.publicarPendientes()).toBe(true);
   expect(publicador.eventos().map(({ evento }) => evento.idempotencyKey)).toEqual(['tres', 'uno', 'dos', 'cuatro']);
   expect(publicador.publicar).toHaveBeenCalledTimes(5);
 });

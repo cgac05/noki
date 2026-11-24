@@ -5,7 +5,8 @@ export class RelayOutbox {
   constructor(private readonly outbox: OutboxPort, private readonly publicador: PublicadorEventos,
     private readonly reloj: Reloj, private readonly limite = 100) {}
 
-  async publicarPendientes(): Promise<void> {
+  async publicarPendientes(): Promise<boolean> {
+    let publicadoSinFallos = true;
     for (let numero = 0; numero < 8; numero++) {
       const particion = await this.outbox.tomarParticion(numero);
       if (!particion) continue;
@@ -15,6 +16,7 @@ export class RelayOutbox {
             await this.publicador.publicar(numero, evento);
           } catch {
             await particion.marcarFallo(id, 'PUBLICACION_FALLIDA');
+            publicadoSinFallos = false;
             break;
           }
           await particion.marcarPublicado(id, this.reloj.ahora().toISOString());
@@ -23,5 +25,6 @@ export class RelayOutbox {
         await particion.liberar();
       }
     }
+    return publicadoSinFallos;
   }
 }

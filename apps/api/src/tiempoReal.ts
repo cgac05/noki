@@ -1,0 +1,57 @@
+import type { Server as ServidorHttp } from 'node:http';
+import { Server } from 'socket.io';
+import { formatInTimeZone } from 'date-fns-tz';
+import {
+  ESQUEMAS_EVENTOS_SOCKET, EVENTOS_CLIENTE_SOCKET, EVENTOS_SOCKET, SalaSchema,
+  type DatosEventoSocket, type NombreEventoSocket,
+} from '@noki/contracts';
+import type { LecturasPort, Reloj } from '@noki/application';
+import type { EventoDominio } from '@noki/domain';
+import { vistaTramite } from '@noki/adapter-in-http';
+
+export function crearTiempoReal(servidor: ServidorHttp, origen: string, lecturas: LecturasPort, reloj: Reloj) {
+  const io = new Server(servidor, {
+    cors: { origin: origen },
+    allowRequest: (peticion, callback) => callback(null, !peticion.headers.origin || peticion.headers.origin === origen),
+  });
+  io.on('connection', socket => {
+    socket.on(EVENTOS_CLIENTE_SOCKET.SALA_UNIRSE, (entrada: unknown, confirmar?: unknown) => {
+      const sala = SalaSchema.safeParse(entrada);
+      if (sala.success) void socket.join(sala.data);
+      if (typeof confirmar === 'function') confirmar(sala.success);
+    });
+    socket.on(EVENTOS_CLIENTE_SOCKET.SALA_SALIR, (entrada: unknown) => {
+      const sala = SalaSchema.safeParse(entrada);
+      if (sala.success) void socket.leave(sala.data);
+    });
+  });
+
+  function emitir<K extends NombreEventoSocket>(salas: string | string[], evento: K, datos: DatosEventoSocket[K]): void {
+    io.to(salas).emit(evento, ESQUEMAS_EVENTOS_SOCKET[evento].parse(datos));
+  }
+
+  async function manejar(evento: EventoDominio): Promise<void> {
+    const hilo = 'hilo:' + evento.hiloId;
+    const actual = evento.tramiteId ? await lecturas.tramite(evento.tramiteId) : null;
+    if (actual) {
+      const salas = ['tramite:' + actual.id, hilo];
+      if (actual.pacienteId) salas.push('paciente:' + actual.pacienteId);
+      emitir(salas, EVENTOS_SOCKET.TRAMITE_ACTUALIZADO, vistaTramite(actual));
+    }
+    const linea = await lecturas.lineaTiempo(evento.hiloId);
+    if (linea) emitir(hilo, EVENTOS_SOCKET.HILO_LINEA_TIEMPO, { hiloId: evento.hiloId, eventos: linea.slice(-200) });
+    emitir('admin', EVENTOS_SOCKET.ADMIN_METRICAS, (await lecturas.metricas()).kpis);
+    if (evento.tipo === 'PacienteLlego' && evento.tramiteId) {
+      const { sedeId } = evento.payload;
+      const llegadas = await lecturas.llegadasSede(sedeId, reloj.ahora().toISOString());
+      emitir('sede:' + sedeId, EVENTOS_SOCKET.SEDE_FILA, {
+        tramiteId: evento.tramiteId, posicion: llegadas.filter(cita =>
+          cita.tramite.estado === 'EN_CLINICA' &&
+          formatInTimeZone(cita.inicio, cita.zonaHoraria, 'yyyy-MM-dd') ===
+          formatInTimeZone(reloj.ahora(), cita.zonaHoraria, 'yyyy-MM-dd')).length,
+      });
+    }
+  }
+
+  return { manejar, emitir, cerrar: () => io.close() };
+}

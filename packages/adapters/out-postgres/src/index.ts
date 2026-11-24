@@ -12,3 +12,5 @@ export { RegistroIntentosPostgres } from './RegistroIntentosPostgres.ts';
 export { AgendaPostgres } from './AgendaPostgres.ts';
 export { OutboxPostgres } from './OutboxPostgres.ts';
 export { RegistroProcesadosPostgres } from './RegistroProcesadosPostgres.ts';
+export * from './api.ts';
+export { LecturasComandosPostgres } from './LecturasComandosPostgres.ts';

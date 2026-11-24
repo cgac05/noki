@@ -4,6 +4,11 @@ import { ReglaViolada, type ReservaId } from '@noki/domain';
 export class AgendaMemoria implements AgendaPort {
   private readonly reservas = new Map<ReservaId, SolicitudReserva & { expiraEn: string; folio?: string }>();
 
+  horariosOcupados(sedeId: SolicitudReserva['sedeId'], ts: string): string[] {
+    return [...new Set([...this.reservas.values()].filter(reserva => reserva.sedeId === sedeId &&
+      (reserva.folio || Date.parse(reserva.expiraEn) > Date.parse(ts))).map(reserva => reserva.inicio))].sort();
+  }
+
   async apartar(solicitud: SolicitudReserva): Promise<{ reservaId: ReservaId; expiraEn: string }> {
     const { reservaId, inicio, sedeId, servicioId, ts, ttlReservaMin } = solicitud;
     const ocupado = [...this.reservas.values()].some((reserva) =>

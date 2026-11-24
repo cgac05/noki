@@ -11,3 +11,5 @@ export { RegistroIntentosMemoria } from './RegistroIntentosMemoria.ts';
 export { EventosSinTramiteMemoria } from './EventosSinTramiteMemoria.ts';
 export { AgendaExternaMemoria } from './AgendaExternaMemoria.ts';
 export { OutboxMemoria, PublicadorEventosMemoria, RegistroProcesadosMemoria } from './publicacion.ts';
+export * from './api.ts';
+export { LecturasMemoria } from './LecturasMemoria.ts';

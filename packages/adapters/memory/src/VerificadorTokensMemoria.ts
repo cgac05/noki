@@ -13,7 +13,7 @@ export class VerificadorTokensMemoria implements VerificadorTokens {
   async verificar(token: string, uso: UsoToken = 'CONTINUIDAD'): Promise<TokenVerificado | null> {
     const credencial = this.tokens.get(token);
     if (credencial?.uso !== uso) return null;
-    this.tokens.delete(token);
+    if (uso !== 'CONTEXTO') this.tokens.delete(token);
     return credencial.datos;
   }
 }
