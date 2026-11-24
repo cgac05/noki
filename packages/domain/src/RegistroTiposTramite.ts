@@ -1,7 +1,11 @@
 import { ReglaViolada } from './errores.ts';
 import { CANALES, type Canal, type Casilla, type EstadoTramite, type TipoTramite } from './vocabulario.ts';
 
+import type { IdentificacionPendiente, PasoIdentificacion } from './identidad/identificacion.ts';
+
 export interface PistaDominio {
+  paso?: PasoIdentificacion;
+  opciones?: { id: string; titulo: string; payload: string }[];
   entrada: 'TEXTO' | 'BOTONES' | 'LISTA' | 'FLOW' | 'NINGUNA';
   campos?: { id: string; etiqueta: string; captura: 'texto' | 'fecha' | 'sensitive' | 'passcode'; requerido?: boolean }[];
 }
@@ -11,6 +15,7 @@ export interface DefinicionTipoTramite {
   dependencias: Partial<Record<Casilla, readonly Casilla[]>>;
   ordenPorCanal: Record<Canal, readonly Casilla[]>;
   pistas: Partial<Record<Casilla, PistaDominio>>;
+  pistaPaciente?: (paso: PasoIdentificacion, identificacion?: IdentificacionPendiente) => PistaDominio;
   transiciones: Readonly<Record<string, Partial<Record<EstadoTramite, EstadoTramite>>>>;
   hitos: (casillaLlena: (casilla: Casilla) => boolean) => EstadoTramite;
 }

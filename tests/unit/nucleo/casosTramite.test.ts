@@ -29,10 +29,10 @@ const wa = { ...cc, actor: 'paciente', canal: 'whatsapp', nivel: 0, idempotencyK
 
 function escenario() {
   const tramites = new TramiteRepoMemoria();
-  const hilos = new HiloRepoMemoria();
-  const contactos = new ContactosMemoria();
-  const tokens = new VerificadorTokensMemoria();
   const pacientes = new PacientesMemoria();
+  const hilos = new HiloRepoMemoria();
+  const contactos = new ContactosMemoria(pacientes);
+  const tokens = new VerificadorTokensMemoria();
   const catalogo = new CatalogoMemoria();
   const agenda = new AgendaMemoria();
   const agendaExterna = new AgendaExternaMemoria();
@@ -46,9 +46,9 @@ function escenario() {
   const resolvedor = new ResolvedorContinuidad(tramites, contactos, tokens, pacientes, intentos, eventos);
   const casos = new CasosTramite({
     tramites, hilos, contactos, tokens, pacientes, catalogo, agenda, agendaExterna, reloj, politica, ids,
-    registro: crearRegistroTiposTramite(), resolvedor,
+    registro: crearRegistroTiposTramite(), resolvedor, intentos,
   });
-  return { casos, reloj, contactos, tokens, intentos, tramites, eventos, agendaExterna };
+  return { casos, reloj, contactos, tokens, intentos, tramites, eventos, agendaExterna, pacientes };
 }
 
 async function listo(casos: CasosTramite) {
@@ -250,4 +250,230 @@ it('conserva el hold con agenda externa caída y compensa ante un conflicto post
   });
   await expect(casos.confirmar(id, cc)).rejects.toMatchObject({ codigo: 'CONFLICTO_VERSION' });
   expect(agendaExterna.activa('10000000')).toBe(false);
+});
+
+it('rechaza asignar por ID desde el canal del paciente y conserva la asignación para el asesor', async () => {
+  const { casos, tramites } = escenario();
+  const { tramite } = await casos.iniciar('AGENDAR', '5210000000001', cc);
+  await expect(casos.asignarPaciente(tramite.id, pacienteId, wa)).rejects.toMatchObject({
+    regla: 'ASIGNACION_SOLO_PERSONAL',
+  });
+  const sinAsignar = await tramites.obtener(tramite.id);
+  expect(sinAsignar?.version).toBe(tramite.version);
+  expect(sinAsignar?.pacienteId).toBeUndefined();
+  await expect(casos.asignarPaciente(tramite.id, pacienteId, cc)).resolves.toMatchObject({
+    tramite: { pacienteId },
+  });
+});
+
+it('Vínculo declarado no revela', async () => {
+  const { casos, contactos, reloj, intentos, eventos } = escenario();
+  const numero = '5210000000071';
+  const abierto = await casos.iniciar('AGENDAR', '5210000000072', cc);
+  await casos.asignarPaciente(abierto.tramite.id, pacienteId, cc);
+  const actual = await casos.iniciar('AGENDAR', numero, wa);
+  const contacto = await contactos.buscar('whatsapp', numero);
+  if (!contacto) throw new Error('Falta el contacto.');
+  expect(contacto.hiloId).toBe(actual.tramite.hiloId);
+  expect(contacto.hiloId).not.toBe(abierto.tramite.hiloId);
+  const ts = reloj.ahora().toISOString();
+  await contactos.vincular(contacto.id, {
+    pacienteId, relacion: 'FAMILIAR', metodo: 'FLOW_DECLARADO', nivel: 0, ultimoUso: ts,
+  });
+  const fallar = vi.spyOn(intentos, 'fallar');
+  const agregar = vi.spyOn(eventos, 'agregar');
+  await expect(casos.retomar({ valorContacto: numero }, wa)).resolves.toEqual({ tipo: 'SIN_RESULTADO' });
+  expect(fallar).not.toHaveBeenCalled();
+  expect(agregar).not.toHaveBeenCalled();
+});
+
+it('rechaza CURP_INVALIDA en el caso de uso sin avanzar ni contar intento', async () => {
+  const { casos, intentos, tramites } = escenario();
+  const numero = '5210000000073';
+  const { tramite } = await casos.iniciar('AGENDAR', numero, cc);
+  const pendiente = await casos.identificarPaciente(tramite.id, { paso: 'DESTINATARIO', para: 'OTRA_PERSONA' }, numero, cc);
+  const fallar = vi.spyOn(intentos, 'fallar');
+  await expect(casos.identificarPaciente(tramite.id, { paso: 'CURP', curp: 'PELA900228XNTRNN05' }, numero, cc))
+    .rejects.toMatchObject({ regla: 'CURP_INVALIDA' });
+  const actual = await tramites.obtener(tramite.id);
+  expect(actual?.pasoIdentificacion()).toBe('CURP');
+  expect(actual?.version).toBe(pendiente.tramite.version);
+  expect(fallar).not.toHaveBeenCalled();
+});
+
+it('Declaración no reactiva un vínculo vencido', async () => {
+  const { casos, contactos, pacientes } = escenario();
+  const numero = '5210000000003';
+  const curp = 'PELA900228XNTRNN04';
+  const idPaciente = 'paciente-curp' as PacienteId;
+  await pacientes.registrar(idPaciente, { nombre: 'Ana', apellidoPaterno: 'Pérez', fechaNac: '1990-02-28', sexo: 'X', curp });
+  const { tramite } = await casos.iniciar('AGENDAR', numero, wa);
+  const contacto = await contactos.buscar('whatsapp', numero);
+  if (!contacto) throw new Error('Falta el contacto.');
+  const previo = { pacienteId: idPaciente, nivel: 1, metodo: 'TELEFONO_FECHA_NAC',
+    relacion: 'TITULAR', ultimoUso: '2026-01-01T00:00:00.000Z' } as const;
+  await contactos.vincular(contacto.id, previo);
+  await casos.identificarPaciente(tramite.id, { paso: 'DESTINATARIO', para: 'OTRA_PERSONA' }, numero, wa);
+  await expect(casos.identificarPaciente(tramite.id, { paso: 'CURP', curp }, numero, wa))
+    .resolves.toMatchObject({ tramite: { pacienteId: idPaciente } });
+  expect(await contactos.vinculosDe(contacto.id)).toEqual([previo]);
+  await expect(casos.retomar({ valorContacto: numero }, wa)).resolves.toEqual({ tipo: 'SIN_RESULTADO' });
+  const nuevo = await casos.iniciar('AGENDAR', numero, wa);
+  const titular = await casos.identificarPaciente(nuevo.tramite.id, { paso: 'DESTINATARIO', para: 'MI' }, numero, wa);
+  expect(titular.tramite.pasoIdentificacion()).toBe('FECHA_NAC');
+  expect(titular.tramite.identificacion?.candidatos).toBeUndefined();
+});
+
+it('CURP con sexo X registra sin base y valida los nombres', async () => {
+  const { casos, pacientes } = escenario();
+  const numero = '5210000000004';
+  const curp = 'PELA900228XNTRNN04';
+  const { tramite } = await casos.iniciar('AGENDAR', numero, cc);
+  await casos.identificarPaciente(tramite.id, { paso: 'DESTINATARIO', para: 'OTRA_PERSONA' }, numero, cc);
+  await casos.identificarPaciente(tramite.id, { paso: 'CURP', curp }, numero, cc);
+  const nombres = { paso: 'DATOS', nombre: 'Ana', apellidoPaterno: 'Pérez', apellidoMaterno: 'Luna' } as const;
+  await expect(casos.identificarPaciente(tramite.id, { ...nombres, apellidoPaterno: 'García' }, numero, cc))
+    .rejects.toMatchObject({ regla: 'CURP_NO_COINCIDE' });
+  const resultado = await casos.identificarPaciente(tramite.id, nombres, numero, cc);
+  const id = resultado.tramite.pacienteId;
+  if (!id) throw new Error('Falta el paciente.');
+  expect(await pacientes.buscarPorCurp(curp)).toBe(id);
+  expect(await pacientes.baseDe(id)).toBeUndefined();
+  expect(await pacientes.datosElegibilidad(id)).toEqual({ fechaNac: '1990-02-28', sexo: 'X' });
+  expect(resultado.tramite.identificacion).toEqual({ relacion: 'FAMILIAR' });
+  expect(resultado.eventos.map(evento => evento.tipo)).toEqual(['PacienteRegistrado', 'PacienteAsignado']);
+  expect(JSON.stringify(resultado.eventos)).not.toMatch(/PELA900228|1990-02-28|Pérez/);
+});
+
+it('verifica por fecha solo al candidato elegido y conserva nivel según el método', async () => {
+  const { casos, contactos, pacientes, reloj } = escenario();
+  const waId = '5210000000021';
+  const ani = '0000000021';
+  const origen = await casos.iniciar('AGENDAR', waId, wa);
+  await casos.asignarPaciente(origen.tramite.id, pacienteId, cc);
+  const waContacto = await contactos.buscar('whatsapp', waId);
+  if (!waContacto) throw new Error('Falta el contacto.');
+  const otro = 'otra-persona' as PacienteId;
+  await pacientes.registrar(otro, { nombre: 'Ana', apellidoPaterno: 'Demo', fechaNac: '1988-02-28', sexo: 'F' });
+  for (const id of [pacienteId, otro]) {
+    await contactos.vincular(waContacto.id, { pacienteId: id, nivel: 0, relacion: 'FAMILIAR',
+      metodo: 'FLOW_DECLARADO', ultimoUso: '2026-11-01T00:00:00.000Z' });
+  }
+  const { tramite } = await casos.iniciar('AGENDAR', ani, cc);
+  const destinatario = await casos.identificarPaciente(tramite.id, { paso: 'DESTINATARIO', para: 'MI' }, ani, cc);
+  expect(destinatario.siguientePregunta).toMatchObject({ pista: { paso: 'CONFIRMAR',
+    opciones: expect.arrayContaining([{ id: 'NINGUNO', payload: 'NINGUNO', titulo: 'No soy ninguno' }]) } });
+  const candidatos = destinatario.tramite.identificacion?.candidatos ?? [];
+  expect(candidatos.map(({ nombreVisible }) => nombreVisible)).toEqual(['Ana D.', 'Paciente F.']);
+  const elegido = candidatos.find(candidato => candidato.pacienteId === pacienteId);
+  if (!elegido) throw new Error('Falta el candidato.');
+  for (let intento = 1; intento <= 3; intento++) {
+    await casos.identificarPaciente(tramite.id, { paso: 'CONFIRMAR', candidato: elegido.ref }, ani, cc);
+    const fallo = await casos.identificarPaciente(tramite.id, { paso: 'FECHA_NAC', fechaNac: '1988-02-28' }, ani, cc);
+    expect(fallo.tramite.pasoIdentificacion()).toBe('CONFIRMAR');
+    expect(fallo.eventos).toMatchObject([{ tipo: 'IntentoVerificacionFallido', payload: { intentos: intento } }]);
+  }
+  await casos.identificarPaciente(tramite.id, { paso: 'CONFIRMAR', candidato: elegido.ref }, ani, cc);
+  await expect(casos.identificarPaciente(tramite.id, { paso: 'FECHA_NAC', fechaNac: datos.fechaNac }, ani, cc))
+    .rejects.toMatchObject({ regla: 'IDENTIFICACION_BLOQUEADA' });
+
+  const observado = await casos.retomar({ valorContacto: waId }, wa);
+  expect(observado).toEqual({ tipo: 'SIN_RESULTADO' });
+  reloj.adelantar(15 * 60_000);
+  await expect(casos.identificarPaciente(tramite.id, { paso: 'FECHA_NAC', fechaNac: datos.fechaNac }, ani, cc))
+    .resolves.toMatchObject({ tramite: { pacienteId } });
+});
+
+it('confirma a un paciente por teléfono y fecha, sin pedir CURP', async () => {
+  const { casos, contactos } = escenario();
+  const origen = await casos.iniciar('AGENDAR', '5210000000022', wa);
+  const primario = await contactos.buscar('whatsapp', '5210000000022');
+  if (!primario) throw new Error('Falta el contacto.');
+  await contactos.vincular(primario.id, { pacienteId, nivel: 0, relacion: 'FAMILIAR',
+    metodo: 'FLOW_DECLARADO', ultimoUso: '2026-11-01T00:00:00.000Z' });
+  const ani = '0000000022';
+  const { tramite } = await casos.iniciar('AGENDAR', ani, cc);
+  const titular = await casos.identificarPaciente(tramite.id, { paso: 'DESTINATARIO', para: 'MI' }, ani, cc);
+  const candidato = titular.tramite.identificacion?.candidatos?.[0];
+  if (!candidato) throw new Error('Falta el candidato.');
+  await casos.identificarPaciente(tramite.id, { paso: 'CONFIRMAR', candidato: candidato.ref }, ani, cc);
+  const resultado = await casos.identificarPaciente(tramite.id, { paso: 'FECHA_NAC', fechaNac: datos.fechaNac }, ani, cc);
+  expect(resultado.tramite.pacienteId).toBe(pacienteId);
+  expect(resultado.eventos).toMatchObject([{ tipo: 'IdentidadComprobada' }, { tipo: 'PacienteAsignado' }]);
+  const destino = await contactos.buscar('callcenter', ani);
+  if (!destino) throw new Error('Falta el contacto.');
+  expect(await contactos.vinculosDe(destino.id)).toMatchObject([{ nivel: 1, metodo: 'TELEFONO_FECHA_NAC', relacion: 'TITULAR' }]);
+  expect(await contactos.vinculosDe(primario.id)).toMatchObject([{ nivel: 0, metodo: 'FLOW_DECLARADO' }]);
+  expect(origen.tramite.pacienteId).toBeUndefined();
+});
+
+it('guarda y reutiliza un registro sin CURP, y después completa la CURP por la base', async () => {
+  const { casos, pacientes } = escenario();
+  const n = '5210000000023';
+  const declarado = { paso: 'DATOS', nombre: 'Ana', apellidoPaterno: 'Pérez', apellidoMaterno: 'Luna',
+    fechaNac: '1990-02-28', sexo: 'F', entidadNacimiento: 'NT' } as const;
+  const iniciar = async (numero: string) => {
+    const { tramite } = await casos.iniciar('AGENDAR', numero, cc);
+    await casos.identificarPaciente(tramite.id, { paso: 'DESTINATARIO', para: 'OTRA_PERSONA' }, numero, cc);
+    return tramite.id;
+  };
+  const id = await iniciar(n);
+  const sinCurp = await casos.identificarPaciente(id, { paso: 'CURP', curp: null }, n, cc);
+  expect(sinCurp.siguientePregunta).toMatchObject({ pista: { paso: 'DATOS',
+    campos: expect.arrayContaining([expect.objectContaining({ id: 'sexo' }), expect.objectContaining({ id: 'entidadNacimiento' })]) } });
+  const nuevo = await casos.identificarPaciente(id, declarado, n, cc);
+  const creado = nuevo.tramite.pacienteId;
+  if (!creado) throw new Error('Falta el paciente.');
+  expect(await pacientes.baseDe(creado)).toBe('PELA900228MNTRNN');
+  const repetido = await iniciar(n);
+  await casos.identificarPaciente(repetido, { paso: 'CURP', curp: null }, n, cc);
+  await expect(casos.identificarPaciente(repetido, declarado, n, cc))
+    .resolves.toMatchObject({ tramite: { pacienteId: creado }, eventos: [{ tipo: 'PacienteAsignado' }] });
+  const curp = 'PELA900228MNTRNN00';
+  const completar = await iniciar(n);
+  await expect(casos.identificarPaciente(completar, { paso: 'CURP', curp }, n, cc))
+    .resolves.toMatchObject({ tramite: { pacienteId: creado } });
+  expect(await pacientes.buscarPorCurp(curp)).toBe(creado);
+});
+
+it('retoma en CURP en otro canal tras No soy ninguno, y rechaza una fecha distinta', async () => {
+  const { casos, contactos, intentos, tokens } = escenario();
+  const n = '5210000000025';
+  const { tramite } = await casos.iniciar('AGENDAR', n, cc);
+  const contacto = await contactos.buscar('callcenter', n);
+  if (!contacto) throw new Error('Falta el contacto.');
+  await contactos.vincular(contacto.id, { pacienteId, nivel: 1, metodo: 'TELEFONO_FECHA_NAC',
+    relacion: 'TITULAR', ultimoUso: '2026-11-01T00:00:00.000Z' });
+  await casos.seleccionarServicio(tramite.id, servicioId, cc);
+  await casos.seleccionarSede(tramite.id, sedeId, cc);
+  await casos.cumplirRequisito(tramite.id, 'ORDEN_MEDICA', cc);
+  await casos.identificarPaciente(tramite.id, { paso: 'DESTINATARIO', para: 'MI' }, n, cc);
+  await casos.identificarPaciente(tramite.id, { paso: 'CONFIRMAR', candidato: null }, n, cc);
+  await casos.identificarPaciente(tramite.id, { paso: 'FECHA_NAC', fechaNac: '1990-02-27' }, n, cc);
+  const token = tokens.emitir({ tramiteId: tramite.id, hiloId: tramite.hiloId, nivel: 0,
+    canalOrigen: 'callcenter', metodo: 'TOKEN_CC' });
+  const retomado = await casos.retomar({ valorContacto: n, token }, wa);
+  if (retomado.tipo !== 'RETOMADO') throw new Error('No se retomó el trámite.');
+  expect(retomado.operacion.siguientePregunta).toMatchObject({ casilla: 'paciente', pista: { paso: 'CURP' } });
+  expect(retomado.operacion.tramite.pasoIdentificacion()).toBe('CURP');
+  const estado = retomado.operacion.tramite;
+  expect(estado.identificacion?.ninguno).toBe(true);
+  await expect(casos.identificarPaciente(tramite.id, { paso: 'CURP', curp: 'PELA900228XNTRNN04' }, n, wa))
+    .rejects.toMatchObject({ regla: 'CURP_NO_COINCIDE' });
+  expect(await intentos.fallar(contacto.id, '2026-11-24T12:00:00Z')).toMatchObject({ intentos: 1 });
+});
+
+it('rechaza coincidencias múltiples por base y por datos', async () => {
+  const { casos, pacientes } = escenario();
+  const n = '5210000000026';
+  const declarado = { nombre: 'Ana', apellidoPaterno: 'Pérez', apellidoMaterno: 'Luna',
+    fechaNac: '1990-02-28', sexo: 'F', entidadNacimiento: 'NT', curpBase: 'PELA900228MNTRNN' } as const;
+  for (const id of ['duplicado-a', 'duplicado-b']) await pacientes.registrar(id as PacienteId, declarado);
+  const { tramite } = await casos.iniciar('AGENDAR', n, cc);
+  await casos.identificarPaciente(tramite.id, { paso: 'DESTINATARIO', para: 'OTRA_PERSONA' }, n, cc);
+  await expect(casos.identificarPaciente(tramite.id, { paso: 'CURP', curp: 'PELA900228MNTRNN00' }, n, cc))
+    .rejects.toMatchObject({ regla: 'IDENTIDAD_AMBIGUA' });
+  await casos.identificarPaciente(tramite.id, { paso: 'CURP', curp: null }, n, cc);
+  await expect(casos.identificarPaciente(tramite.id, { paso: 'DATOS', ...declarado }, n, cc))
+    .rejects.toMatchObject({ regla: 'IDENTIDAD_AMBIGUA' });
 });

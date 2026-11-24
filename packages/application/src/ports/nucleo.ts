@@ -1,5 +1,5 @@
 import type {
-  Canal, DatosElegibilidad, EventoDominio, HiloAtencion, HiloId, MetodoVinculo, NivelAuth,
+  Canal, DatosElegibilidad, EntidadNacimiento, EventoDominio, HiloAtencion, HiloId, MetodoVinculo, NivelAuth,
   PacienteId, PerfilServicio, RecursoId, RelacionVinculo, ReservaId, SedeId, ServicioId, Tramite, TramiteId,
 } from '@noki/domain';
 
@@ -29,6 +29,7 @@ export interface Vinculo {
   metodo: MetodoVinculo;
   relacion: RelacionVinculo;
   nivel: NivelAuth;
+  ultimoUso: string;
 }
 
 export interface ContactosPort {
@@ -36,6 +37,7 @@ export interface ContactosPort {
   crear(contacto: Contacto): Promise<Contacto>;
   vinculosDe(contactoId: string): Promise<Vinculo[]>;
   vincular(contactoId: string, vinculo: Vinculo): Promise<void>;
+  pacientesPorTelefono(numero: string, desde: number): Promise<PacientePorTelefono[]>;
   buscarTelefonoCapturado(numero: string): Promise<HiloId[]>;
 }
 
@@ -61,7 +63,24 @@ export interface DatosDeclarados {
   fechaNac: string;
 }
 
+export interface PacientePorTelefono {
+  pacienteId: PacienteId;
+  nombre: string;
+  apellidoPaterno: string;
+}
+
+export interface DatosRegistroPaciente extends DatosDeclarados, DatosElegibilidad {
+  entidadNacimiento?: EntidadNacimiento;
+  curp?: string;
+  curpBase?: string;
+}
+
 export interface PacientesPort {
+  buscarPorCurp(curp: string): Promise<PacienteId | undefined>;
+  buscarPorCurpBase(base: string): Promise<PacienteId[]>;
+  baseDe(id: PacienteId): Promise<string | undefined>;
+  registrar(id: PacienteId, datos: DatosRegistroPaciente): Promise<boolean>;
+  completarCurp(id: PacienteId, curp: string): Promise<boolean>;
   datosElegibilidad(id: PacienteId): Promise<DatosElegibilidad | undefined>;
   coincideFechaNac(id: PacienteId, fechaNac: string): Promise<boolean>;
   buscarPorDatos(datos: DatosDeclarados): Promise<PacienteId[]>;

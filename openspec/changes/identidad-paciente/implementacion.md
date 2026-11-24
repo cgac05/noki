@@ -1,0 +1,29 @@
+# Implementación: identidad-paciente
+
+- **Revisión entregada**. Revisión 4 de `handoff.md`, worktree `noki-identidad`, rama `feat/identidad-paciente`, base `42d6a78` tras avance rápido a `origin/main`. Cambios locales pendientes de revisión independiente.
+- **Autorización**. Revisión 2 autorizada por los dos frentes según `handoff.md`. El usuario confirmó en este chat la excepción de privacidad de `CONFIRMAR`, la concordancia de nombres con CURP en la revisión 3 y la regla de renovación de la revisión 4. Los hashes de los artefactos revisados de la revisión 4 coinciden con el handoff (`84b96846c6f7`, `ef6e9450c5cf`).
+- **Entrega**. Identificación y registro por pasos, con continuación del mismo paso al cambiar de canal. Candidatos enmascarados por teléfono, verificación al candidato elegido, registro por CURP o datos, métodos y niveles de vínculo, protección de candidatos y datos pendientes, migración y semilla sintética. Una operación de menor nivel deja intacto el vínculo. Una de nivel igual o mayor actualiza su nivel y último uso.
+- **Tareas**. 21/21 completadas. En esta revisión se cerraron 2.1–2.5, 4.2–4.3, 4.5 y 5.2–5.3. Se aplica la regla más reciente de la revisión 4 a la renovación descrita en 2.1.
+- **Archivos**. Dominio: `Tramite.ts`, `TramiteRegistro.ts`, `RegistroTiposTramite.ts`, `siguientePregunta.ts`, `tipos/agendar.ts`, `eventos.ts`, `vocabulario.ts`, `index.ts` e `identidad/{curp,identificacion,nombre,telefono}.ts`. Aplicación: `CasosTramite.ts`, `ResolvedorContinuidad.ts`, `ports/nucleo.ts`. Adaptadores: pacientes y contactos de memoria y Postgres. Contratos: `comandos.ts` y `siguientePregunta.ts`. Persistencia: `infra/migraciones/003_identidad.sql` y `apps/api/src/semilla/{datosDemo,sembrar}.ts`. Documentación: `AGENTS.md`, `PLAN.md`, `docs/{contratos,eventos}.md`, `tasks.md` y este informe.
+- **Pruebas modificadas**. El catálogo de eventos espera los dos eventos nuevos. La prueba de pista de paciente comprueba los pasos vigentes, captura sensible sin valores iniciales y referencias opacas, y conserva la cobertura de orden y dependencias. La batería de puertos verifica el comportamiento compartido de memoria y Postgres, incluida la fecha inalterada al declarar con menor nivel. La migración incremental ahora comprueba 003 después de 002. La semilla comprueba CURP válidas y concordantes en lugar de CURP nulas. La prueba de saga recibe el mismo registro de intentos que el resolvedor. La nueva prueba de integración de identidad sincroniza ambas operaciones antes de ejecutar los dos INSERT reales.
+- **Decisiones menores**. Una identificación en curso tiene prioridad al calcular la pregunta y conserva el orden original cuando aún no se eligió destinatario. Los subpasos sin evento de negocio incrementan la versión de la instantánea. La comprobación de columnas permite sembrar en la prueba incremental antes de aplicar 003.
+- **Límite de alcance**. La traducción HTTP y la interfaz de identificación corresponden a los cambios de canales previstos en el handoff. La verificación de esta revisión usa el caso de uso, la comparación del contrato con la vista real y la suite Web existente.
+
+| Validación | Comando o comprobación | Resultado | Evidencia |
+|---|---|---|---|
+| Instalación | pnpm install --frozen-lockfile | PASS | Lockfile vigente. |
+| Dominio | pnpm exec vitest run --project unitarios tests/unit/nucleo tests/unit/dominio.test.ts | PASS | 66 pruebas en 902 ms al verificar el punto 1.5. Se usó el filtro de rutas de Vitest. |
+| Tipos y fronteras | pnpm lint y pnpm lint:deps | PASS | 159 módulos y 416 dependencias tras el avance rápido. |
+| Unitarias y Web | pnpm test | PASS | 212 pruebas en 36 archivos, incluidos los escenarios de H-02 y H-03. |
+| Persistencia y regresiones | pnpm test:integracion | PASS | 32 pruebas en 12 archivos. Postgres local 55432 y Redis. Se comprobó que no había sesiones en noki_test y se ejecutó después de la suite unitaria. El runner reinició la base desechable autorizada. |
+| CURP con sexo X y concurrencia | tests/integracion/identidadPostgres.test.ts | PASS | Dos INSERT concurrentes, un paciente, un evento PacienteRegistrado, dos asignaciones y curp_base nula. La vista de un trámite con CURP pendiente excluye sus datos de identificación. |
+| Declaración no reactiva un vínculo vencido | tests/unit/nucleo/casosTramite.test.ts y batería de puertos compartida | PASS | El vínculo conserva su fecha y nivel y queda fuera de continuidad y CONFIRMAR. |
+| Semilla y reinicio | Suite de integración y punto de entrada del reinicio de demo | PASS | Migración incremental partiendo de 001/002 con datos. Dos CURP sintéticas concordantes, reinicio e idempotencia. |
+| OpenSpec y alcance | openspec validate identidad-paciente --type change --strict --no-interactive y git diff --check | PASS | 21/21 tareas. Sin cambios en apps/web, api-comandos, 001 ni 002. |
+
+## Correcciones de la primera revisión
+
+- **H-02**. `tests/unit/nucleo/casosTramite.test.ts` incluye «Vínculo declarado no revela». Un único vínculo de nivel 0 creado en el instante del reloj de prueba apunta a un paciente con un trámite abierto en otro hilo. `retomar` devuelve exactamente `SIN_RESULTADO` y la prueba verifica que no se registra un intento fallido ni se emite un evento.
+- **H-03**. En el mismo archivo, una CURP con verificador alterado produce `CURP_INVALIDA`, conserva la versión y el paso `CURP` y no cuenta un intento.
+- **H-04**. La optimización opcional del índice de teléfono queda fuera de esta corrección.
+- **Base y validación**. `git merge --ff-only origin/main` adelantó la rama de `9de129b` a `42d6a78` sin conflictos. Pasaron `pnpm lint`, `pnpm lint:deps`, `pnpm test` (212 pruebas) y `pnpm test:integracion` (32 pruebas) sobre esa base. La integración en `noki_test` de Postgres 55432 se ejecutó después de las demás pruebas.

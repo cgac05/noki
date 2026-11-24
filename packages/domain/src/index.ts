@@ -10,3 +10,7 @@ export * from './Tramite.ts';
 export * from './siguientePregunta.ts';
 export * from './identidad/politica.ts';
 export * from './HiloAtencion.ts';
+export * from './identidad/curp.ts';
+export * from './identidad/identificacion.ts';
+export * from './identidad/nombre.ts';
+export * from './identidad/telefono.ts';

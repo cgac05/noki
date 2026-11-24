@@ -29,7 +29,8 @@ it('migra una base con semilla y conserva las claves anteriores y las claves con
   );
   await insertarEvento(base, base);
   await pool.query("INSERT INTO evento_procesado (consumidor, idempotency_key) VALUES ('prueba', $1)", [base]);
-  expect(await migrar(url.toString(), undefined, 'persistencia_incremental')).toEqual(['002_persistencia']);
+  expect(await migrar(url.toString(), '002_persistencia', 'persistencia_incremental')).toEqual(['002_persistencia']);
+  expect(await migrar(url.toString(), undefined, 'persistencia_incremental')).toEqual(['003_identidad']);
   expect(await migrar(url.toString(), undefined, 'persistencia_incremental')).toEqual([]);
   expect((await pool.query('SELECT count(*)::int AS total FROM paciente')).rows[0]?.total).toBeGreaterThan(0);
 
@@ -45,4 +46,16 @@ it('migra una base con semilla y conserva las claves anteriores y las claves con
   await insertarEvento('01234567-89ab-7def-8123-456789abcde2', base + ':2');
   await expect(insertarEvento('01234567-89ab-7def-8123-456789abcde3', base))
     .rejects.toMatchObject({ code: '23505' });
+});
+
+it('acepta varias CURP nulas y rechaza una CURP duplicada', async () => {
+  const insertar = (id: string, curp: string | null) => pool.query(
+    'INSERT INTO paciente (id, nombre, ap_paterno, fecha_nac, sexo, curp) VALUES ($1, $2, $3, $4, $5, $6)',
+    [id, 'Ana', 'Demo', '1990-02-28', 'X', curp],
+  );
+  const id = (sufijo: number) => '01234567-89ab-7def-8123-456789abcd' + sufijo;
+  await insertar(id(10), 'PELA900228XNTRNN04');
+  await expect(insertar(id(11), 'PELA900228XNTRNN04')).rejects.toMatchObject({ code: '23505' });
+  await insertar(id(12), null);
+  await insertar(id(13), null);
 });

@@ -3,6 +3,33 @@ import { CanalSchema, ActorSchema, TipoTramiteSchema, EstadoTramiteSchema } from
 import { SiguientePreguntaSchema } from './siguientePregunta.ts';
 
 const comun = { canal: CanalSchema, actor: ActorSchema, tramiteId: z.uuidv7().optional(), hiloId: z.uuidv7().optional() };
+export const ENTIDADES_NACIMIENTO = [
+  'AS', 'BC', 'BS', 'CC', 'CL', 'CM', 'CS', 'CH', 'DF', 'DG', 'GT', 'GR',
+  'HG', 'JC', 'MC', 'MN', 'MS', 'NT', 'NL', 'OC', 'PL', 'QT', 'QR', 'SP',
+  'SL', 'SR', 'TC', 'TS', 'TL', 'VZ', 'YN', 'ZS', 'NE',
+] as const;
+
+const formatoCurp = new RegExp(
+  '^[A-Z][AEIOUX][A-Z]{2}[0-9]{6}[HMX](' + ENTIDADES_NACIMIENTO.join('|') +
+  ')[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9][0-9]$',
+);
+
+const datosNombre = z.string().trim().min(1);
+export const IdentificarPacienteSchema = z.object({
+  ...comun, tipo: z.literal('IdentificarPaciente'), tramiteId: z.uuidv7(),
+  payload: z.discriminatedUnion('paso', [
+    z.strictObject({ paso: z.literal('DESTINATARIO'), para: z.enum(['MI', 'OTRA_PERSONA']) }),
+    z.strictObject({ paso: z.literal('CONFIRMAR'), candidato: z.string().min(1).nullable() }),
+    z.strictObject({ paso: z.literal('FECHA_NAC'), fechaNac: z.iso.date() }),
+    z.strictObject({ paso: z.literal('CURP'), curp: z.string().regex(formatoCurp).nullable() }),
+    z.strictObject({
+      paso: z.literal('DATOS'), nombre: datosNombre, apellidoPaterno: datosNombre,
+      apellidoMaterno: datosNombre.optional(), fechaNac: z.iso.date().optional(),
+      sexo: z.enum(['F', 'M', 'X']).optional(), entidadNacimiento: z.enum(ENTIDADES_NACIMIENTO).optional(),
+    }),
+    z.strictObject({ paso: z.literal('REINICIAR') }),
+  ]),
+});
 export const ComandoRequestSchema = z.discriminatedUnion('tipo', [
   z.object({ ...comun, tipo: z.literal('IniciarTramite'), payload: z.object({ tipoTramite: TipoTramiteSchema, contacto: z.string().regex(/^\d{10,15}$/).optional() }) }),
   z.object({
@@ -12,6 +39,7 @@ export const ComandoRequestSchema = z.discriminatedUnion('tipo', [
   z.object({ ...comun, tipo: z.literal('SeleccionarServicio'), payload: z.object({ servicioId: z.uuidv7() }) }),
   z.object({ ...comun, tipo: z.literal('SeleccionarSede'), payload: z.object({ sedeId: z.uuidv7() }) }),
   z.object({ ...comun, tipo: z.literal('AsignarPaciente'), payload: z.object({ pacienteId: z.uuidv7() }) }),
+  IdentificarPacienteSchema,
   z.object({ ...comun, tipo: z.literal('ReservarHorario'), payload: z.object({ recursoId: z.uuidv7(), inicio: z.string().datetime() }) }),
   z.object({ ...comun, tipo: z.literal('ConfirmarCita'), payload: z.object({ reservaId: z.uuidv7() }) }),
   z.object({ ...comun, tipo: z.literal('CancelarCita'), payload: z.object({ motivo: z.string().min(1).max(200).optional() }) }),

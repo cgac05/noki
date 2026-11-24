@@ -179,6 +179,7 @@ Body:    { canal, actor, tipo, tramiteId?, hiloId?, payload }
 - `canal`: `web | whatsapp | app | callcenter | clinica`
 - `actor`: `paciente | asesor:<id> | recepcion:<id> | sistema`
 - `SolicitarContinuacion` requiere `tramiteId` y `payload: { destino: 'whatsapp' }` para solicitar la continuación por WhatsApp.
+- `IdentificarPaciente` requiere `tramiteId` y un payload discriminado por `paso`. Consulta los pasos en [docs/contratos.md](docs/contratos.md). `AsignarPaciente` por ID es exclusivo del personal interno y `sistema`.
 - El **token de contexto** (JWS con jose) lleva `pacienteId`, `nivel`, `canal` y `exp`.
 
 ### Consultas
@@ -222,7 +223,7 @@ Salas: `tramite:<id>`, `hilo:<id>`, `paciente:<id>`, `sede:<id>`, `admin`. El cl
 - [ ] Ningún secreto se pide como texto libre en el chat. PIN = campo `passcode`; fecha de nacimiento y datos fiscales = campos `sensitive` en el modal tipo Flow.
 - [ ] **El bot nunca repite datos sensibles** (fecha de nacimiento, correo, RFC, resultados).
 - [ ] En N1 solo se revelan servicio, sede, fecha y canal de origen.
-- [ ] Cuando la búsqueda es ambigua, **no se revela nada**; nunca se confirman datos que el usuario no dio.
+- [ ] Cuando la búsqueda es ambigua, **no se revela nada**. La pista de identificación del paso `CONFIRMAR` puede mostrar el primer nombre y la inicial del apellido paterno de candidatos con vínculo vigente. Elegir un candidato requiere confirmar su fecha de nacimiento antes de asignarlo.
 - [ ] Los QR, enlaces y botones llevan un **token firmado de un solo uso** (`jti` registrado), nunca el folio en texto plano.
 - [ ] El PIN se guarda con argon2. Máximo 3 intentos → bloqueo + `IntentoVerificacionFallido`.
 - [ ] **Logs sin datos personales:** pino con `redact` para `fechaNac`, `email`, `telefono`, `rfc`, `pin`, `curp`. Se registra `correlation_id`, no el contenido.

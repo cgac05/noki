@@ -1,5 +1,7 @@
 import {
   ConflictoVersion, HiloAtencion, NoEncontrado, ReglaViolada, TransicionInvalida, siguientePregunta,
+  coincideNombreCurp, curpBase, enmascararNombre, normalizarTelefono, validarCurp, VIGENCIA_VINCULO_DIAS,
+  type EntidadNacimiento, type MetodoVinculo,
   type ContextoIdentidad, type ContextoOperacion, type Cotizacion, type DatosElegibilidad,
   type EventoDominio, type HiloId, type PacienteId, type PerfilServicio, type PoliticaIdentidad,
   type RecursoId, type RegistroTiposTramite, type ReservaId, type SedeId, type ServicioId,
@@ -8,7 +10,7 @@ import {
 import type { GeneradorId } from './ports/GeneradorId.ts';
 import type { Reloj } from './ports/Reloj.ts';
 import type {
-  AgendaExternaPort, AgendaPort, CatalogoPort, Contacto, ContactosPort, HiloRepo, PacientesPort, TramiteRepo, VerificadorTokens,
+  AgendaExternaPort, AgendaPort, CatalogoPort, Contacto, ContactosPort, DatosRegistroPaciente, HiloRepo, PacientesPort, RegistroIntentos, TramiteRepo, VerificadorTokens,
 } from './ports/nucleo.ts';
 import type { EntradaContinuidad, ResolvedorContinuidad, ResultadoContinuidad } from './ResolvedorContinuidad.ts';
 
@@ -41,7 +43,26 @@ interface Dependencias {
   politica: PoliticaIdentidad;
   registro: RegistroTiposTramite;
   resolvedor: ResolvedorContinuidad;
+  intentos: RegistroIntentos;
 }
+
+type DatosIdentificacion = {
+  paso: 'DATOS';
+  nombre: string;
+  apellidoPaterno: string;
+  apellidoMaterno?: string | undefined;
+  fechaNac?: string | undefined;
+  sexo?: DatosElegibilidad['sexo'] | undefined;
+  entidadNacimiento?: EntidadNacimiento | undefined;
+};
+
+export type IdentificarPacientePayload =
+  | { paso: 'DESTINATARIO'; para: 'MI' | 'OTRA_PERSONA' }
+  | { paso: 'CONFIRMAR'; candidato: string | null }
+  | { paso: 'FECHA_NAC'; fechaNac: string }
+  | { paso: 'CURP'; curp: string | null }
+  | DatosIdentificacion
+  | { paso: 'REINICIAR' };
 
 export class CasosTramite {
   constructor(private readonly puertos: Dependencias) {}
@@ -80,10 +101,140 @@ export class CasosTramite {
   }
 
   async asignarPaciente(id: TramiteId, pacienteId: PacienteId, comando: ContextoComando): Promise<ResultadoComando> {
+    if (comando.actor === 'paciente') throw new ReglaViolada('ASIGNACION_SOLO_PERSONAL');
     return this.modificar(id, comando, async (tramite, contexto) => {
       const datos = await this.datosElegibilidad(pacienteId, tramite.perfil);
       tramite.asignarPaciente(pacienteId, contexto, datos);
     });
+  }
+
+  async identificarPaciente(id: TramiteId, payload: IdentificarPacientePayload, valorContacto: string,
+    comando: ContextoComando): Promise<ResultadoComando> {
+    return this.modificar(id, comando, async (tramite, contexto) => {
+      if (payload.paso === 'REINICIAR') {
+        tramite.reiniciarIdentificacion();
+        return;
+      }
+      tramite.exigirPasoIdentificacion(payload.paso);
+      switch (payload.paso) {
+        case 'DESTINATARIO': {
+          const numero = payload.para === 'MI' ? normalizarTelefono(valorContacto) : undefined;
+          const desde = Date.parse(contexto.ts) - VIGENCIA_VINCULO_DIAS * 86_400_000;
+          const pacientes = numero ? await this.puertos.contactos.pacientesPorTelefono(numero, desde) : [];
+          tramite.declararDestinatario(payload.para === 'MI' ? 'TITULAR' : 'FAMILIAR',
+            pacientes.slice(0, 9).map(({ pacienteId, nombre, apellidoPaterno }) => ({
+              ref: this.puertos.ids.nuevo(), pacienteId, nombreVisible: enmascararNombre(nombre, apellidoPaterno),
+            })), contexto);
+          return;
+        }
+        case 'CONFIRMAR':
+          tramite.elegirCandidato(payload.candidato);
+          return;
+        case 'FECHA_NAC':
+          return this.identificarFecha(tramite, payload.fechaNac, valorContacto, contexto);
+        case 'CURP':
+          return this.identificarCurp(tramite, payload.curp, valorContacto, contexto);
+        case 'DATOS':
+          return this.identificarDatos(tramite, payload, valorContacto, contexto);
+      }
+    });
+  }
+
+  private async identificarFecha(tramite: Tramite, fecha: string, valor: string, contexto: ContextoOperacion): Promise<void> {
+    const estado = tramite.identificacion;
+    const elegido = estado?.candidatos?.find(({ ref }) => ref === estado.elegido);
+    if (!elegido) {
+      tramite.guardarFechaNac(fecha);
+      return;
+    }
+    const contacto = await this.contacto(valor, contexto);
+    const hasta = await this.puertos.intentos.bloqueo(contacto.id, contexto.ts);
+    if (hasta) throw new ReglaViolada('IDENTIFICACION_BLOQUEADA', { hasta });
+    if (!(await this.puertos.pacientes.coincideFechaNac(elegido.pacienteId, fecha))) {
+      const { intentos } = await this.puertos.intentos.fallar(contacto.id, contexto.ts);
+      tramite.rechazarFechaCandidato(intentos, contexto);
+      return;
+    }
+    await this.asignarIdentificado(tramite, elegido.pacienteId, contacto, contexto, 'TELEFONO_FECHA_NAC');
+    await this.puertos.intentos.reiniciar(contacto.id);
+  }
+
+  private async identificarCurp(tramite: Tramite, curp: string | null, valor: string,
+    contexto: ContextoOperacion): Promise<void> {
+    if (curp === null) {
+      tramite.marcarSinCurp();
+      return;
+    }
+    const datos = validarCurp(curp);
+    if (!datos) throw new ReglaViolada('CURP_INVALIDA');
+    const fechaDeclarada = tramite.identificacion?.fechaNac;
+    if (fechaDeclarada && fechaDeclarada !== datos.fechaNac) throw new ReglaViolada('CURP_NO_COINCIDE');
+    const pacientes = this.puertos.pacientes;
+    let pacienteId = await pacientes.buscarPorCurp(curp);
+    if (!pacienteId) {
+      const encontrados = await pacientes.buscarPorCurpBase(curp.slice(0, 16));
+      if (encontrados.length > 1) throw new ReglaViolada('IDENTIDAD_AMBIGUA');
+      const porBase = encontrados[0];
+      if (porBase) {
+        pacienteId = await pacientes.completarCurp(porBase, curp) ? porBase : await pacientes.buscarPorCurp(curp);
+        if (!pacienteId) throw new ReglaViolada('IDENTIDAD_AMBIGUA');
+      }
+    }
+    if (!pacienteId) {
+      tramite.guardarCurp(curp);
+      return;
+    }
+    await this.asignarIdentificado(tramite, pacienteId, await this.contacto(valor, contexto), contexto, 'FLOW_DECLARADO');
+  }
+
+  private async identificarDatos(tramite: Tramite, payload: DatosIdentificacion, valor: string,
+    contexto: ContextoOperacion): Promise<void> {
+    const { nombre, apellidoPaterno, apellidoMaterno } = payload;
+    const nombres = { nombre, apellidoPaterno, ...(apellidoMaterno ? { apellidoMaterno } : {}) };
+    const estado = tramite.identificacion;
+    const curp = estado?.curp;
+    const nacimiento = curp ? validarCurp(curp) : {
+      fechaNac: estado?.fechaNac ?? payload.fechaNac, sexo: payload.sexo, entidadNacimiento: payload.entidadNacimiento,
+    };
+    if (!nacimiento?.fechaNac || !nacimiento.sexo || !nacimiento.entidadNacimiento) {
+      throw new ReglaViolada('DATOS_IDENTIFICACION_INCOMPLETOS');
+    }
+    if (curp && !coincideNombreCurp(curp, nombres)) throw new ReglaViolada('CURP_NO_COINCIDE');
+    const datos = { ...nombres, fechaNac: nacimiento.fechaNac, sexo: nacimiento.sexo,
+      entidadNacimiento: nacimiento.entidadNacimiento };
+    const base = curpBase(datos);
+    const registro: DatosRegistroPaciente = { ...datos, ...(curp ? { curp } : {}), ...(base ? { curpBase: base } : {}) };
+    const pacientes = this.puertos.pacientes;
+    const coincidencias = await pacientes.buscarPorDatos(datos);
+    if (coincidencias.length > 1) throw new ReglaViolada('IDENTIDAD_AMBIGUA');
+    let pacienteId = coincidencias[0];
+    if (pacienteId) {
+      const baseExistente = await pacientes.baseDe(pacienteId);
+      if (baseExistente && baseExistente !== base) pacienteId = undefined;
+    }
+    let registrado = false;
+    if (!pacienteId) {
+      pacienteId = this.puertos.ids.nuevo() as PacienteId;
+      registrado = await pacientes.registrar(pacienteId, registro);
+      if (!registrado) {
+        pacienteId = curp ? await pacientes.buscarPorCurp(curp) : undefined;
+        if (!pacienteId) throw new ReglaViolada('IDENTIDAD_AMBIGUA');
+      }
+    }
+    await this.asignarIdentificado(tramite, pacienteId, await this.contacto(valor, contexto), contexto,
+      'FLOW_DECLARADO', registrado);
+  }
+
+  private async asignarIdentificado(tramite: Tramite, pacienteId: PacienteId, contacto: Contacto,
+    contexto: ContextoOperacion, metodo: Extract<MetodoVinculo, 'FLOW_DECLARADO' | 'TELEFONO_FECHA_NAC'>,
+    registrado = false): Promise<void> {
+    const relacion = tramite.identificacion?.relacion ?? 'TITULAR';
+    const nivel = metodo === 'TELEFONO_FECHA_NAC' ? 1 : 0;
+    const datos = await this.datosElegibilidad(pacienteId, tramite.perfil);
+    const evento = registrado ? { tipo: 'PacienteRegistrado', payload: { pacienteId } } as const
+      : nivel === 1 ? { tipo: 'IdentidadComprobada', payload: { pacienteId, metodo } } as const : undefined;
+    tramite.asignarPaciente(pacienteId, { ...contexto, nivelAuth: nivel }, datos, evento);
+    await this.puertos.contactos.vincular(contacto.id, { pacienteId, relacion, metodo, nivel, ultimoUso: contexto.ts });
   }
 
   async cumplirRequisito(id: TramiteId, requisito: PerfilServicio['requisitos'][number]['tipo'],
@@ -186,7 +337,7 @@ export class CasosTramite {
     await this.puertos.hilos.guardar(hilo);
     if (pacienteId && resultado.fuente !== 'VINCULO') {
       await this.puertos.contactos.vincular(contacto.id, {
-        pacienteId, metodo, relacion: 'TITULAR', nivel: resultado.nivel,
+        pacienteId, metodo, relacion: 'TITULAR', nivel: resultado.nivel, ultimoUso: operacion.ts,
       });
     }
     return { tipo: 'RETOMADO', nivel: resultado.nivel, operacion: guardado };

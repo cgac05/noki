@@ -11,5 +11,5 @@ it('cumple la batería de los puertos de persistencia en memoria', async () => {
     duracionMin: 30, ttlReservaMin: 10, toleranciaMin: 10,
     limiteCambiosHoras: 24, anticipacionMinimaHoras: 0, recordatorios: [],
   }, new Map([[sede, 6200]]));
-  await probarPuertos({ pacientes, catalogo, hilos: new HiloRepoMemoria(), contactos: new ContactosMemoria() });
+  await probarPuertos({ pacientes, catalogo, hilos: new HiloRepoMemoria(), contactos: new ContactosMemoria(pacientes) });
 });

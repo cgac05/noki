@@ -1,9 +1,14 @@
-import type { Contacto, ContactosPort, Vinculo } from '@noki/application';
+import type { Contacto, ContactosPort, PacientePorTelefono, Vinculo } from '@noki/application';
 import type { Canal, HiloId, PacienteId } from '@noki/domain';
+
+import { normalizarTelefono } from '@noki/domain';
+import type { PacientesMemoria } from './PacientesMemoria.ts';
 
 export class ContactosMemoria implements ContactosPort {
   private readonly contactos = new Map<string, Contacto>();
   private readonly vinculos = new Map<string, Map<PacienteId, Vinculo>>();
+
+  constructor(private readonly pacientes?: Pick<PacientesMemoria, 'nombres'>) {}
 
   async buscar(canal: Canal, valor: string): Promise<Contacto | null> {
     const contacto = this.contactos.get(JSON.stringify([canal, valor]));
@@ -24,16 +29,29 @@ export class ContactosMemoria implements ContactosPort {
 
   async vincular(contactoId: string, vinculo: Vinculo): Promise<void> {
     const vinculados = this.vinculos.get(contactoId) ?? new Map<PacienteId, Vinculo>();
-    vinculados.set(vinculo.pacienteId, { ...vinculo });
+    const previo = vinculados.get(vinculo.pacienteId);
+    if (!previo || vinculo.nivel >= previo.nivel) vinculados.set(vinculo.pacienteId, { ...vinculo });
     this.vinculos.set(contactoId, vinculados);
   }
 
+  async pacientesPorTelefono(numero: string, desde: number): Promise<PacientePorTelefono[]> {
+    const encontrados = new Map<PacienteId, PacientePorTelefono>();
+    for (const contacto of this.contactos.values()) {
+      if (normalizarTelefono(contacto.valor) !== numero) continue;
+      for (const vinculo of this.vinculos.get(contacto.id)?.values() ?? []) {
+        if (Date.parse(vinculo.ultimoUso) < desde) continue;
+        const nombres = this.pacientes?.nombres(vinculo.pacienteId);
+        if (nombres) encontrados.set(vinculo.pacienteId, { pacienteId: vinculo.pacienteId, ...nombres });
+      }
+    }
+    return [...encontrados.values()].sort((a, b) => a.pacienteId.localeCompare(b.pacienteId));
+  }
+
   async buscarTelefonoCapturado(numero: string): Promise<HiloId[]> {
-    const normalizar = (valor: string) => valor.replace(/\D/g, '');
-    const normalizado = normalizar(numero);
+    const normalizado = normalizarTelefono(numero);
     if (!normalizado) return [];
     return [...new Set([...this.contactos.values()]
-      .filter(({ canal, valor }) => canal === 'callcenter' && normalizar(valor) === normalizado)
+      .filter(({ canal, valor }) => canal === 'callcenter' && normalizarTelefono(valor) === normalizado)
       .map(({ hiloId }) => hiloId))];
   }
 }

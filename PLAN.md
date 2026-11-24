@@ -118,10 +118,10 @@ tests/load/        # k6
 ## 5. Modelo de datos (mínimo)
 
 ```
-paciente(id uuid, nombre, ap_paterno, ap_materno, fecha_nac, sexo, curp?, nivel_identidad int)
+paciente(id uuid, nombre, ap_paterno, ap_materno, fecha_nac, sexo, curp?, entidad_nac?, curp_base?, nivel_identidad int)
    -- nivel_identidad: 0 declarado · 1 OTP a contacto previo · 2 INE en clínica
 contacto_canal(id, canal, valor_externo, primer_contacto, ultimo_contacto)
-vinculo(contacto_id, paciente_id, relacion, metodo, verificado_en, ultimo_uso)
+vinculo(contacto_id, paciente_id, relacion, metodo, nivel, verificado_en, ultimo_uso)
    -- relacion: TITULAR | FAMILIAR | TUTOR
    -- metodo: FLOW_DECLARADO | OTP_EMAIL | OTP_SMS | TOKEN_WEB | TOKEN_CC | FOLIO_FECHA_NAC | INE_CLINICA
 credencial(paciente_id, tipo, hash, intentos_fallidos, bloqueado_hasta)   -- PIN
@@ -231,13 +231,21 @@ Patrones obligatorios: **outbox** (evento y cambio en la misma transacción) · 
 
 **Principio:** el número de teléfono es un **factor de posesión**, no una identidad. La validación es proporcional al riesgo de la acción.
 
+### Identificación para agendar
+
+Para una cita propia, el trámite guarda el destinatario y, si hay candidatos con vínculo vigente, pregunta «¿Eres X?» con el nombre enmascarado. La fecha de nacimiento confirma al candidato y otorga nivel 1 por el método `TELEFONO_FECHA_NAC`. Para otra persona se empieza por la CURP. Con CURP o datos declarados, el método es `FLOW_DECLARADO` y el nivel es 0. El personal interno y `sistema` pueden usar `AsignarPaciente` por ID.
+
+Una operación de menor nivel conserva el nivel y el último uso del vínculo existente. Una de nivel igual o mayor actualiza ambos.
+
+La CURP completa es única cuando está presente. `curp_base` guarda los 16 caracteres calculables para reutilizar registros sin CURP. Para sexo `X`, la base queda nula.
+
 ### Resolvedor de continuidad (en orden de prioridad)
 1. **Token** firmado (`CONTINUAR <código>` o payload de botón): un solo uso, TTL, hereda el nivel del origen.
-2. **`wa_id` vinculado** con trámites abiertos → N1 (solo se revelan servicio, sede y canal de origen).
+2. **`wa_id` vinculado** con trámites abiertos mediante un vínculo de nivel 1 o mayor con uso en los últimos 180 días → N1 (solo se revelan servicio, sede y canal de origen).
 3. **`wa_id` = teléfono capturado** en el trámite → N1.
 4. **Folio** (8–9 dígitos): solo localiza; exige fecha de nacimiento.
 5. **Datos personales** (Flow) → coincidencia → OTP al contacto registrado previamente.
-- Si es ambiguo, **no se revela nada**. Nunca se confirman datos que el usuario no dio.
+- Si la búsqueda es ambigua, **no se revela nada**. En la identificación del paciente, la pista del paso `CONFIRMAR` puede mostrar el primer nombre y la inicial del apellido paterno de candidatos con vínculo vigente. Elegir un candidato requiere confirmar su fecha de nacimiento antes de asignarlo.
 - Límite de 3 intentos → `IntentoVerificacionFallido` + bloqueo temporal.
 
 ### Política por acción (un solo objeto en el dominio)

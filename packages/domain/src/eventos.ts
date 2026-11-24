@@ -1,7 +1,7 @@
 import type { HiloId, TramiteId, PacienteId, ServicioId, SedeId, ReservaId } from './identificadores.ts';
 import type { Actor, Canal, NivelAuth, TipoTramite, MetodoVinculo } from './vocabulario.ts';
 
-export const EVENTOS_DOMINIO = ["TramiteIniciado","ServicioSeleccionado","SedeSeleccionada","CotizacionGenerada","PreparacionAceptada","RequisitoCumplido","PacienteAsignado","ItinerarioPropuesto","ItinerarioAceptado","HorarioReservado","ReservaExpirada","CitaConfirmada","CitaReprogramada","CitaCancelada","PacienteLlego","TurnoActualizado","AtencionCerrada","Inasistencia","TramiteSuspendido","TramiteExpirado","CanalCambiado","PacienteReconocido","IdentidadVinculada","IdentidadComprobada","ConsentimientoOtorgado","ConsentimientoContactoWA","IntentoVerificacionFallido"] as const;
+export const EVENTOS_DOMINIO = ["TramiteIniciado","ServicioSeleccionado","SedeSeleccionada","CotizacionGenerada","PreparacionAceptada","RequisitoCumplido","PacienteAsignado","DestinatarioDeclarado","PacienteRegistrado","ItinerarioPropuesto","ItinerarioAceptado","HorarioReservado","ReservaExpirada","CitaConfirmada","CitaReprogramada","CitaCancelada","PacienteLlego","TurnoActualizado","AtencionCerrada","Inasistencia","TramiteSuspendido","TramiteExpirado","CanalCambiado","PacienteReconocido","IdentidadVinculada","IdentidadComprobada","ConsentimientoOtorgado","ConsentimientoContactoWA","IntentoVerificacionFallido"] as const;
 
 export interface EnvolturaEvento<T extends string, P> {
   tipo: T;
@@ -25,6 +25,8 @@ export interface PayloadsEvento {
   PreparacionAceptada: { servicioId: ServicioId };
   RequisitoCumplido: { requisitoId: string };
   PacienteAsignado: { pacienteId: PacienteId };
+  DestinatarioDeclarado: { relacion: 'TITULAR' | 'FAMILIAR' };
+  PacienteRegistrado: { pacienteId: PacienteId };
   ItinerarioPropuesto: { itinerarioId: string };
   ItinerarioAceptado: { itinerarioId: string };
   HorarioReservado: { reservaId: ReservaId; expiraEn: string };

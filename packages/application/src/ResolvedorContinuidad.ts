@@ -1,3 +1,4 @@
+import { normalizarTelefono, VIGENCIA_VINCULO_DIAS } from '@noki/domain';
 import type {
   Canal, ContextoOperacion, MetodoVinculo, NivelAuth, PacienteId, SedeId, ServicioId, Tramite, TramiteId,
 } from '@noki/domain';
@@ -72,7 +73,9 @@ export class ResolvedorContinuidad {
       return this.retomado(contacto, tramite, token.nivel, token.metodo, 'TOKEN');
     }
 
-    const vinculados = await this.contactos.vinculosDe(contacto.id);
+    const desde = Date.parse(contexto.ts) - VIGENCIA_VINCULO_DIAS * 86_400_000;
+    const vinculados = (await this.contactos.vinculosDe(contacto.id))
+      .filter(({ nivel, ultimoUso }) => nivel >= 1 && Date.parse(ultimoUso) >= desde);
     const candidatos = (await Promise.all(vinculados.map(async (vinculo) => ({
       vinculo, tramites: await this.tramites.abiertosPorPaciente(vinculo.pacienteId),
     })))).filter(({ tramites }) => tramites.length > 0);
@@ -88,7 +91,8 @@ export class ResolvedorContinuidad {
     }
 
     if (contexto.canal === 'whatsapp') {
-      const hilos = await this.contactos.buscarTelefonoCapturado(entrada.valorContacto);
+      const numero = normalizarTelefono(entrada.valorContacto);
+      const hilos = numero ? await this.contactos.buscarTelefonoCapturado(numero) : [];
       const posibles = (await Promise.all(hilos.map((id) => this.tramites.abiertosPorHilo(id)))).flat();
       const identificados = posibles.filter(({ pacienteId }) => pacienteId !== undefined);
       const pacientes = new Set(identificados.map(({ pacienteId }) => pacienteId));

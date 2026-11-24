@@ -1,5 +1,42 @@
-import { RegistroTiposTramite, type DefinicionTipoTramite } from '../RegistroTiposTramite.ts';
+import { RegistroTiposTramite, type DefinicionTipoTramite, type PistaDominio } from '../RegistroTiposTramite.ts';
 import { CASILLAS, type Casilla } from '../vocabulario.ts';
+
+const campo = (id: string, etiqueta: string, requerido = true) => ({
+  id, etiqueta, captura: 'sensitive' as const, requerido,
+});
+
+const pistaPaciente: NonNullable<DefinicionTipoTramite['pistaPaciente']> = (paso, identificacion) => {
+  const fecha = campo('fechaNac', 'Fecha de nacimiento');
+  const opcion = (payload: string, titulo: string) => ({ id: payload, payload, titulo });
+  switch (paso) {
+    case 'DESTINATARIO':
+      return { paso, entrada: 'BOTONES', opciones: [
+        opcion('MI', 'Para mí'), opcion('OTRA_PERSONA', 'Para otra persona'),
+      ] };
+    case 'CONFIRMAR':
+      return { paso, entrada: 'LISTA', opciones: [
+        ...(identificacion?.candidatos ?? []).map(({ ref, nombreVisible }) => opcion(ref, 'Soy ' + nombreVisible)),
+        opcion('NINGUNO', 'No soy ninguno'),
+      ] };
+    case 'FECHA_NAC':
+      return { paso, entrada: 'FLOW', campos: [fecha] };
+    case 'CURP':
+      return { paso, entrada: 'FLOW', campos: [campo('curp', 'CURP')], opciones: [
+        opcion('SIN_CURP', 'No la tengo'),
+      ] };
+    case 'DATOS': {
+      const campos: NonNullable<PistaDominio['campos']> = [
+        campo('nombre', 'Nombre'), campo('apellidoPaterno', 'Apellido paterno'),
+        campo('apellidoMaterno', 'Apellido materno', false),
+      ];
+      if (!identificacion?.curp) {
+        if (!identificacion?.fechaNac) campos.push(fecha);
+        campos.push(campo('sexo', 'Sexo'), campo('entidadNacimiento', 'Entidad de nacimiento'));
+      }
+      return { paso, entrada: 'FLOW', campos };
+    }
+  }
+};
 
 const remoto = ['servicio', 'sede', 'horario', 'requisitos', 'paciente', 'elegibilidad'] as const;
 
@@ -26,16 +63,8 @@ const agendar: DefinicionTipoTramite = {
     horario: { entrada: 'LISTA' },
     requisitos: { entrada: 'BOTONES' },
     elegibilidad: { entrada: 'BOTONES' },
-    paciente: {
-      entrada: 'FLOW',
-      campos: [
-        { id: 'nombre', etiqueta: 'Nombre', captura: 'sensitive', requerido: true },
-        { id: 'apellidoPaterno', etiqueta: 'Apellido paterno', captura: 'sensitive', requerido: true },
-        { id: 'apellidoMaterno', etiqueta: 'Apellido materno', captura: 'sensitive' },
-        { id: 'fechaNac', etiqueta: 'Fecha de nacimiento', captura: 'sensitive', requerido: true },
-      ],
-    },
   },
+  pistaPaciente,
   transiciones: {
     apartar: { LISTO_PARA_RESERVAR: 'HORARIO_RESERVADO' },
     confirmar: { HORARIO_RESERVADO: 'CONFIRMADA' },
@@ -61,7 +90,7 @@ const agendar: DefinicionTipoTramite = {
 
 export function crearRegistroTiposTramite(): RegistroTiposTramite {
   const registro = new RegistroTiposTramite();
-  const { hitos, ...datos } = agendar;
-  registro.registrar('AGENDAR', { ...structuredClone(datos), hitos });
+  const { hitos, pistaPaciente, ...datos } = agendar;
+  registro.registrar('AGENDAR', { ...structuredClone(datos), hitos, ...(pistaPaciente ? { pistaPaciente } : {}) });
   return registro;
 }

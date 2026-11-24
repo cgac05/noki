@@ -1,9 +1,12 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import {
   CANALES, ESTADOS_TRAMITE, CASILLAS, TIPOS_TRAMITE, CODIGOS_ERROR_DOMINIO,
+  ENTIDADES_NACIMIENTO, PASOS_IDENTIFICACION, crearRegistroTiposTramite, siguientePregunta, Tramite,
+  type HiloId, type PacienteId, type TramiteId,
   type Canal, type EstadoTramite, type Casilla, type TipoTramite, type CodigoErrorDominio,
 } from '@noki/domain';
 import {
+  ENTIDADES_NACIMIENTO as ENTIDADES_CONTRATO, PASOS_IDENTIFICACION as PASOS_CONTRATO, SiguientePreguntaSchema,
   CanalSchema, EstadoTramiteSchema, CasillaSchema, TipoTramiteSchema, CodigoErrorDominioSchema, CodigoErrorSchema,
 } from '@noki/contracts';
 import type { z } from 'zod';
@@ -28,4 +31,35 @@ describe('coherencia del vocabulario y errores del adaptador HTTP', () => {
     expectTypeOf<keyof typeof MAPEO_ERRORES_HTTP>().toEqualTypeOf<CodigoErrorDominio | 'VALIDACION' | 'INTERNO'>();
     expect(Object.keys(MAPEO_ERRORES_HTTP)).toEqual(CodigoErrorSchema.options);
   });
+});
+
+it('mantiene las entidades y los pasos y valida cada pista de identificación real', () => {
+  expect(ENTIDADES_CONTRATO).toEqual(ENTIDADES_NACIMIENTO);
+  expect(PASOS_CONTRATO).toEqual(PASOS_IDENTIFICACION);
+  expectTypeOf<typeof ENTIDADES_CONTRATO[number]>().toEqualTypeOf<typeof ENTIDADES_NACIMIENTO[number]>();
+  expectTypeOf<typeof PASOS_CONTRATO[number]>().toEqualTypeOf<typeof PASOS_IDENTIFICACION[number]>();
+
+  const registro = crearRegistroTiposTramite();
+  const contexto = {
+    canal: 'callcenter', actor: 'asesor:demo', nivelAuth: 0,
+    idempotencyKey: 'demo', correlationId: 'demo', ts: '2026-11-24T12:00:00Z',
+  } as const;
+  const tramite = Tramite.iniciar('tramite' as TramiteId, 'hilo' as HiloId, 'AGENDAR', registro, contexto);
+  const validar = (paso: typeof PASOS_CONTRATO[number]) => {
+    const pregunta = siguientePregunta(tramite, contexto.canal, registro);
+    expect(SiguientePreguntaSchema.parse(pregunta)).toEqual(pregunta);
+    expect(pregunta).toMatchObject({ casilla: 'paciente', pista: { paso } });
+  };
+
+  validar('DESTINATARIO');
+  tramite.declararDestinatario('TITULAR', [
+    { pacienteId: 'paciente' as PacienteId, ref: 'ref', nombreVisible: 'Ana P.' },
+  ], contexto);
+  validar('CONFIRMAR');
+  tramite.elegirCandidato(null);
+  validar('FECHA_NAC');
+  tramite.guardarFechaNac('1990-02-28');
+  validar('CURP');
+  tramite.marcarSinCurp();
+  validar('DATOS');
 });

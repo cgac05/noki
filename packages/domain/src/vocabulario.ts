@@ -16,4 +16,4 @@ export type CodigoErrorDominio = (typeof CODIGOS_ERROR_DOMINIO)[number];
 export type Actor = 'paciente' | 'sistema' | `asesor:${string}` | `recepcion:${string}`;
 export type NivelAuth = 0 | 1 | 2 | 3;
 export type RelacionVinculo = 'TITULAR' | 'FAMILIAR' | 'TUTOR';
-export type MetodoVinculo = 'FLOW_DECLARADO' | 'OTP_EMAIL' | 'OTP_SMS' | 'TOKEN_WEB' | 'TOKEN_CC' | 'FOLIO_FECHA_NAC' | 'INE_CLINICA';
+export type MetodoVinculo = 'FLOW_DECLARADO' | 'OTP_EMAIL' | 'OTP_SMS' | 'TOKEN_WEB' | 'TOKEN_CC' | 'FOLIO_FECHA_NAC' | 'INE_CLINICA' | 'TELEFONO_FECHA_NAC';

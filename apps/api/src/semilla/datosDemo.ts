@@ -23,8 +23,8 @@ export const SERVICIOS_DEMO: readonly ServicioDemo[] = [
     perfil: { ...comun, tipo: 'ESTUDIO', requisitos: [{ tipo: 'CONSENTIMIENTO', documento: 'consentimiento-demo-v1' }], modoAgenda: 'HORARIO', requiereProfesional: true, elegibilidad: { sexo: 'F' }, componentes: ['US_MAMARIO','PAPANICOLAOU'], duracionMin: 40, anticipacionMinimaHoras: 0, reglasItinerario: { separacionMinMin: 10 }, recordatorios: ['T48','T2','POST'] } },
 ];
 export const PACIENTES_DEMO = [
-  { id: idDemo(20), nombre: 'Ana', fechaNac: '1990-01-01', sexo: 'F', wa: '5210000000001', contactoId: idDemo(30), credencialId: idDemo(40) },
-  { id: idDemo(21), nombre: 'Beto', fechaNac: '1988-01-01', sexo: 'M', wa: '5210000000002', contactoId: idDemo(31), credencialId: idDemo(41) },
+  { id: idDemo(20), nombre: 'Ana', curp: 'PADA900101MNTCMN04', entidadNacimiento: 'NT', fechaNac: '1990-01-01', sexo: 'F', wa: '5210000000001', contactoId: idDemo(30), credencialId: idDemo(40) },
+  { id: idDemo(21), nombre: 'Beto', curp: 'PADB880101HNTCMT08', entidadNacimiento: 'NT', fechaNac: '1988-01-01', sexo: 'M', wa: '5210000000002', contactoId: idDemo(31), credencialId: idDemo(41) },
 ] as const;
 export const USUARIOS_DEMO = [
   { id: idDemo(50), usuario: 'asesor1', rol: 'ASESOR', sedeId: null },

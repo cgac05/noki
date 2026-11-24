@@ -1,6 +1,7 @@
 import { ReglaViolada, TransicionInvalida } from './errores.ts';
 import type { EventoDominio, PayloadsEvento } from './eventos.ts';
 import type { HiloId, PacienteId, ReservaId, SedeId, ServicioId, TramiteId } from './identificadores.ts';
+import type { CandidatoIdentificacion, IdentificacionPendiente, PasoIdentificacion, RelacionIdentificacion } from './identidad/identificacion.ts';
 import type { PerfilServicio } from './PerfilServicio.ts';
 import type { DefinicionTipoTramite, RegistroTiposTramite } from './RegistroTiposTramite.ts';
 import type { Actor, Canal, Casilla, EstadoTramite, MetodoVinculo, NivelAuth, TipoTramite } from './vocabulario.ts';
@@ -26,7 +27,7 @@ export interface HorarioReservado {
 }
 
 export interface DatosElegibilidad {
-  sexo: 'F' | 'M';
+  sexo: 'F' | 'M' | 'X';
   fechaNac: string;
 }
 
@@ -49,6 +50,7 @@ interface DatosTramite {
   horario?: HorarioReservado;
   folio?: string;
   ultimoCanal: Canal;
+  identificacion?: IdentificacionPendiente;
 }
 
 export interface TramiteInstantanea {
@@ -162,12 +164,101 @@ export class Tramite {
     this.anotar(contexto, ...eventos);
   }
 
-  asignarPaciente(pacienteId: PacienteId, contexto: ContextoOperacion, paciente?: DatosElegibilidad): void {
+  get identificacion(): IdentificacionPendiente | undefined {
+    return structuredClone(this.datos.identificacion);
+  }
+
+  pasoIdentificacion(): PasoIdentificacion {
+    const datos = this.datos.identificacion;
+    if (!datos) return 'DESTINATARIO';
+    if (datos.relacion === 'TITULAR') {
+      if (datos.candidatos?.length && !datos.elegido && !datos.ninguno) return 'CONFIRMAR';
+      if (!datos.fechaNac) return 'FECHA_NAC';
+    }
+    return datos.curp || datos.sinCurp ? 'DATOS' : 'CURP';
+  }
+
+  exigirPasoIdentificacion(paso: PasoIdentificacion): void {
+    this.exigirEditable('identificarPaciente');
+    const esperado = this.pasoIdentificacion();
+    if (this.pacienteId || esperado !== paso) {
+      throw new ReglaViolada('PASO_IDENTIFICACION_INVALIDO', { esperado });
+    }
+  }
+
+  declararDestinatario(relacion: RelacionIdentificacion, candidatos: readonly CandidatoIdentificacion[],
+    contexto: ContextoOperacion): void {
+    this.exigirPasoIdentificacion('DESTINATARIO');
+    this.datos.identificacion = {
+      relacion,
+      ...(relacion === 'TITULAR' && candidatos.length ? { candidatos: structuredClone(candidatos.slice(0, 9)) } : {}),
+    };
+    this.anotar(contexto, { tipo: 'DestinatarioDeclarado', payload: { relacion } });
+  }
+
+  elegirCandidato(ref: string | null): void {
+    const datos = this.identificacionEn('CONFIRMAR');
+    if (ref === null) datos.ninguno = true;
+    else {
+      if (!datos.candidatos?.some((candidato) => candidato.ref === ref)) {
+        throw new ReglaViolada('PASO_IDENTIFICACION_INVALIDO', { esperado: 'CONFIRMAR' });
+      }
+      datos.elegido = ref;
+    }
+    this.datos.version++;
+  }
+
+  rechazarFechaCandidato(intentos: number, contexto: ContextoOperacion): void {
+    const datos = this.identificacionEn('FECHA_NAC');
+    if (!datos.elegido) throw new ReglaViolada('PASO_IDENTIFICACION_INVALIDO', { esperado: 'FECHA_NAC' });
+    delete datos.elegido;
+    this.anotar(contexto, {
+      tipo: 'IntentoVerificacionFallido', payload: { metodo: 'TELEFONO_FECHA_NAC', intentos },
+    });
+  }
+
+  guardarFechaNac(fechaNac: string): void {
+    const datos = this.identificacionEn('FECHA_NAC');
+    datos.fechaNac = fechaNac;
+    this.datos.version++;
+  }
+
+  guardarCurp(curp: string): void {
+    this.identificacionEn('CURP').curp = curp;
+    this.datos.version++;
+  }
+
+  marcarSinCurp(): void {
+    this.identificacionEn('CURP').sinCurp = true;
+    this.datos.version++;
+  }
+
+  reiniciarIdentificacion(): void {
+    this.exigirEditable('reiniciarIdentificacion');
+    if (!this.datos.identificacion || this.pacienteId) return;
+    delete this.datos.identificacion;
+    this.datos.version++;
+  }
+
+  private identificacionEn(paso: Exclude<PasoIdentificacion, 'DESTINATARIO'>): IdentificacionPendiente {
+    this.exigirPasoIdentificacion(paso);
+    const datos = this.datos.identificacion;
+    if (!datos) throw new ReglaViolada('PASO_IDENTIFICACION_INVALIDO', { esperado: 'DESTINATARIO' });
+    return datos;
+  }
+
+  asignarPaciente(pacienteId: PacienteId, contexto: ContextoOperacion, paciente?: DatosElegibilidad,
+    identidad?: Extract<EventoNuevo, { tipo: 'PacienteRegistrado' | 'IdentidadComprobada' }>): void {
     this.exigirEditable('asignarPaciente');
     const elegibilidad = this.evaluar(this.datos.perfil, pacienteId, paciente, contexto.ts);
     this.datos.pacienteId = pacienteId;
+    if (this.datos.identificacion) {
+      this.datos.identificacion = { relacion: this.datos.identificacion.relacion };
+    }
     this.fijarElegibilidad(elegibilidad);
-    this.anotar(contexto, { tipo: 'PacienteAsignado', payload: { pacienteId } });
+    const asignacion = { tipo: 'PacienteAsignado', payload: { pacienteId } } as const;
+    if (identidad) this.anotar(contexto, identidad, asignacion);
+    else this.anotar(contexto, asignacion);
   }
 
   cumplirRequisito(requisitoId: PerfilServicio['requisitos'][number]['tipo'], contexto: ContextoOperacion): void {

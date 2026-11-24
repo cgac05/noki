@@ -81,12 +81,13 @@ it('confirma la saga con Postgres y sd-mock y libera la reserva tras un conflict
     const contactos = new ContactosMemoria();
     const pacientes = new PacientesMemoria();
     const tokens = new VerificadorTokensMemoria();
+    const intentos = new RegistroIntentosMemoria();
     const resolvedor = new ResolvedorContinuidad(tramites, contactos, tokens, pacientes,
-      new RegistroIntentosMemoria(), new EventosSinTramiteMemoria());
+      intentos, new EventosSinTramiteMemoria());
     const reloj = new RelojFalso(new Date('2026-11-24T12:00:00Z'));
     const casos = new CasosTramite({
       tramites, hilos: new HiloRepoMemoria(), contactos, tokens, pacientes, catalogo: new CatalogoMemoria(),
-      agenda, agendaExterna, reloj, ids: generador, politica: new PoliticaIdentidad(), registro, resolvedor,
+      agenda, agendaExterna, reloj, ids: generador, politica: new PoliticaIdentidad(), registro, resolvedor, intentos,
     });
     const comando = (): ContextoComando => ({
       actor: 'asesor:demo', canal: 'callcenter', nivel: 1, vinculado: false, factores: new Set(),

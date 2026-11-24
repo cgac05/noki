@@ -5,8 +5,10 @@ import { migrar } from '../../packages/adapters/out-postgres/src/index.ts';
 import { sembrar } from '../../apps/api/src/semilla/sembrar.ts';
 import { reiniciarDemo } from '../../apps/api/src/semilla/reiniciarDemo.ts';
 
+import { curpBase, validarCurp } from '../../packages/domain/src/index.ts';
+
 const url = process.env['TEST_DATABASE_URL'] ?? '';
-if (new URL(url).pathname !== '/noki_test') throw new Error('La semilla se verifica solo en noki_test.');
+if (!['/noki_test', '/noki_identidad_test'].includes(new URL(url).pathname)) throw new Error('La semilla requiere una base de pruebas.');
 const pool = new Pool({ connectionString: url, connectionTimeoutMillis: 1000 });
 beforeAll(async () => { await migrar(url); await sembrar(url); });
 afterAll(async () => { await pool.end(); });
@@ -36,8 +38,19 @@ describe('semilla y reinicio de demo sobre Postgres', () => {
     expect(contactos.rows.map(c => c.valor_externo)).toEqual(['5210000000001','5210000000002']);
     const usuarios = await pool.query<{ usuario: string }>('SELECT usuario FROM usuario_interno ORDER BY usuario');
     expect(usuarios.rows.map(u => u.usuario)).toEqual(['admin','asesor1','recepcion.tepic']);
-    const pacientes = await pool.query<{ ap_paterno: string; ap_materno: string; curp: string | null }>('SELECT ap_paterno, ap_materno, curp FROM paciente');
-    for (const p of pacientes.rows) expect(p).toMatchObject({ ap_paterno: 'Paciente', ap_materno: 'Demo', curp: null });
+    const pacientes = await pool.query<{
+      nombre: string; apellidoPaterno: string; apellidoMaterno: string;
+      fechaNac: string; sexo: 'F' | 'M'; curp: string; base: string; entidadNacimiento: 'NT';
+    }>(`SELECT nombre, ap_paterno AS "apellidoPaterno", ap_materno AS "apellidoMaterno",
+      fecha_nac::text AS "fechaNac", sexo, curp, curp_base AS base, entidad_nac AS "entidadNacimiento"
+      FROM paciente ORDER BY nombre`);
+    expect(pacientes.rows.map(({ nombre }) => nombre)).toEqual(['Ana', 'Beto']);
+    for (const p of pacientes.rows) {
+      expect(p).toMatchObject({ apellidoPaterno: 'Paciente', apellidoMaterno: 'Demo', entidadNacimiento: 'NT' });
+      expect(validarCurp(p.curp)).toEqual({ fechaNac: p.fechaNac, sexo: p.sexo, entidadNacimiento: 'NT' });
+      expect(p.base).toBe(curpBase(p));
+      expect(p.curp.slice(0, 16)).toBe(p.base);
+    }
   });
   it('es idempotente y guarda solo hashes argon2id verificables', async () => {
     const antes = await contar();

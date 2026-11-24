@@ -17,6 +17,8 @@ Campos obligatorios: `tipo`, `tramiteId` (puede ser nulo), `hiloId`, `canal`, `a
 | `PreparacionAceptada` | `{ servicioId: ServicioId }` |
 | `RequisitoCumplido` | `{ requisitoId: string }` |
 | `PacienteAsignado` | `{ pacienteId: PacienteId }` |
+| `DestinatarioDeclarado` | `{ relacion: 'TITULAR' \| 'FAMILIAR' }` |
+| `PacienteRegistrado` | `{ pacienteId: PacienteId }` |
 | `ItinerarioPropuesto` | `{ itinerarioId: string }` |
 | `ItinerarioAceptado` | `{ itinerarioId: string }` |
 | `HorarioReservado` | `{ reservaId: ReservaId; expiraEn: string }` |
@@ -37,6 +39,8 @@ Campos obligatorios: `tipo`, `tramiteId` (puede ser nulo), `hiloId`, `canal`, `a
 | `ConsentimientoOtorgado` | `{ version: string }` |
 | `ConsentimientoContactoWA` | `{ consentimientoId: string }` |
 | `IntentoVerificacionFallido` | `{ metodo: MetodoVinculo; intentos: number }` |
+
+`TELEFONO_FECHA_NAC` identifica la comprobación de la fecha de nacimiento de un candidato vinculado al teléfono. Se usa en `IdentidadComprobada` y `IntentoVerificacionFallido`.
 
 Los payloads referencian personas por ID y no declaran fecha de nacimiento, correo, teléfono, RFC, PIN ni CURP. Los tokens de continuidad, QR y aprobaciones se implementarán en su cambio; nunca se deben sustituir por un folio en texto plano.
 

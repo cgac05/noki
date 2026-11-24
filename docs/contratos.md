@@ -16,11 +16,25 @@ Canales: `web | whatsapp | app | callcenter | clinica`. Estados, casillas y tipo
 | SolicitarContinuacion | `{ destino: 'whatsapp' }`. Requiere `tramiteId` y solicita el consentimiento de contacto y el código de continuación. |
 | SeleccionarServicio | `{ servicioId }` |
 | SeleccionarSede | `{ sedeId }` |
-| AsignarPaciente | `{ pacienteId }` |
+| AsignarPaciente | `{ pacienteId }`. Solo personal interno y `sistema`. |
+| IdentificarPaciente | Payload discriminado por `paso`. Requiere `tramiteId`. |
 | ReservarHorario | `{ recursoId, inicio }` |
 | ConfirmarCita | `{ reservaId }` |
 | CancelarCita | `{ motivo? }`, hasta 200 caracteres |
 | RegistrarLlegada | `{ token }`, nunca el folio del QR en claro |
+
+`IdentificarPacienteSchema` acepta estos pasos:
+
+| Paso | Campos del payload |
+|---|---|
+| `DESTINATARIO` | `para: MI \| OTRA_PERSONA` |
+| `CONFIRMAR` | `candidato` con la referencia opaca elegida o `null` para «No soy ninguno» |
+| `FECHA_NAC` | `fechaNac` como fecha ISO |
+| `CURP` | `curp` en mayúsculas o `null` para «No la tengo» |
+| `DATOS` | `nombre`, `apellidoPaterno`, `apellidoMaterno?`, `fechaNac?`, `sexo?`, `entidadNacimiento?` |
+| `REINICIAR` | Solo `paso` |
+
+`ENTIDADES_NACIMIENTO` exporta las 32 claves de entidades y `NE`. El dominio verifica el dígito de la CURP y resuelve qué campos de `DATOS` faltan.
 
 `RespuestaComandoSchema` valida `{ tramite, siguientePregunta, eventos }`. `TramiteVistaSchema` contiene `id, hiloId, tipo, estado, version, servicioId?, sedeId?, horario?`. Cuando hay reserva, `horario` contiene `{ reservaId, inicio, expiraEn? }`. `expiraEn` solo se envía mientras el hold está vigente en `HORARIO_RESERVADO`; `EventoVistaSchema` contiene `id, tipo, canal, ts`. No exponen datos personales ni payloads internos; los campos desconocidos se descartan.
 
@@ -66,7 +80,7 @@ Este contrato no implementa endpoints GET ni autenticación. Las consultas expon
 
 ## siguientePregunta.ts
 
-`{ tipo: 'COMPLETO' }` o `{ tipo: 'PREGUNTA', casilla, pista }`. La pista declara `entrada: TEXTO | BOTONES | LISTA | FLOW | NINGUNA`, opciones y campos cuando apliquen. Solo se define la forma: no se calcula la siguiente pregunta.
+`{ tipo: 'COMPLETO' }` o `{ tipo: 'PREGUNTA', casilla, pista }`. La pista declara `entrada: TEXTO | BOTONES | LISTA | FLOW | NINGUNA`, opciones y campos cuando apliquen. La casilla `paciente` admite `pista.paso` con `DESTINATARIO`, `CONFIRMAR`, `FECHA_NAC`, `CURP` o `DATOS`. Los campos de identificación se capturan como `sensitive` y las opciones de `CONFIRMAR` incluyen solo el nombre enmascarado y la referencia opaca.
 
 ## mensajesBot.ts
 

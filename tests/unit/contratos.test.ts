@@ -98,3 +98,25 @@ describe('contratos de todos los canales', () => {
     expect(error.error).not.toHaveProperty('stack');
   });
 });
+
+it('valida la identificación por pasos', () => {
+  const base = { canal: 'whatsapp', actor: 'paciente', tipo: 'IdentificarPaciente',
+    tramiteId: '01937954-6c40-7000-8000-000000000001' };
+  for (const payload of [{ paso: 'CURP', curp: null }, { paso: 'CONFIRMAR', candidato: null }]) {
+    expect(ComandoRequestSchema.safeParse({ ...base, payload }).success).toBe(true);
+  }
+  for (const payload of [
+    { paso: 'FECHA_NAC', fechaNac: '1990-02-30' },
+    { paso: 'DATOS', nombre: 'Ana', apellidoPaterno: 'Demo', entidadNacimiento: 'XX' },
+    { paso: 'CONFIRMAR', candidato: '' },
+    { paso: 'REINICIAR', fechaNac: '1990-02-28' },
+  ]) {
+    expect(ComandoRequestSchema.safeParse({ ...base, payload }).success).toBe(false);
+  }
+});
+
+it('valida una pregunta con paso de identificación', () => {
+  const base = { tipo: 'PREGUNTA', casilla: 'paciente' };
+  expect(SiguientePreguntaSchema.safeParse({ ...base, pista: { entrada: 'FLOW', paso: 'CURP' } }).success).toBe(true);
+  expect(SiguientePreguntaSchema.safeParse({ ...base, pista: { entrada: 'FLOW', paso: 'OTRO' } }).success).toBe(false);
+});
