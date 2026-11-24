@@ -70,7 +70,13 @@ Ninguna vista SHALL mostrar fecha de nacimiento, correo, teléfono completo, RFC
 - **THEN** la vista muestra un estado de carga o un mensaje de error comprensible, sin detalles internos
 
 ### Requirement: Contenido mínimo por vista
-Cada ruta SHALL mostrar como mínimo: `/web` cotización por servicio y sede con un botón "Continuar en WhatsApp" que muestra el código de continuación; `/wa` el simulador de WhatsApp de la capacidad `simulador-whatsapp`; `/app` las citas del paciente con su estado y el QR de su token; `/callcenter` un botón "Llamada entrante", la ficha del hilo con su línea de tiempo y "Continuar por WhatsApp" con el enlace de continuación; `/clinica` las llegadas esperadas y una acción para registrar una llegada; `/admin` el conteo de trámites por estado, la línea de tiempo de un hilo con el canal de cada evento y los KPIs disponibles; `/bandeja` los mensajes SMS y correo simulados.
+Cada ruta SHALL mostrar como mínimo:
+
+- `/web`: cotización por servicio y sede con un botón "Continuar en WhatsApp" que muestra el código de continuación.
+- `/wa`: el simulador de WhatsApp de la capacidad `simulador-whatsapp`.
+- `/app`: las citas del paciente con su estado y el QR de su token.
+- `/callcenter`, `/clinica` y `/admin`: lo que define la capacidad `consolas-internas`.
+- `/bandeja`: los mensajes SMS y correo simulados.
 
 #### Scenario: QR con token, no con folio
 - **WHEN** `/app` muestra una cita confirmada
@@ -89,5 +95,5 @@ Cada ruta SHALL mostrar como mínimo: `/web` cotización por servicio y sede con
 - **THEN** se ofrece abrir un modal con sus campos, nunca se piden esos datos como texto libre en el chat
 
 #### Scenario: Enlace de continuación en el call center
-- **WHEN** `/callcenter` tiene un código de continuación
-- **THEN** "Continuar por WhatsApp" muestra el enlace `/wa?continuar=<código>` y su QR, sin avanzar el trámite por sí mismo
+- **WHEN** `/callcenter` recibe el código de continuación después de enviar `SolicitarContinuacion`
+- **THEN** "Continuar por WhatsApp" muestra el enlace `/wa?continuar=<código>` y su QR, y la vista no cambia el estado del trámite por su cuenta
