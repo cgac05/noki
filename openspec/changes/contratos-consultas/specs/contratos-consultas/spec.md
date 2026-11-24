@@ -7,7 +7,11 @@ Fija en el paquete de contratos la forma de los datos de lectura que consultan l
 ## ADDED Requirements
 
 ### Requirement: Modelos de lectura compartidos
-El paquete de contratos SHALL definir esquemas, con sus tipos derivados, para: oferta de catálogo (servicio y sede con nombres y precio en centavos), cita (trámite, servicio, sede, inicio ISO en UTC, zona horaria IANA de la sede y token para el QR), ficha del hilo, llegada esperada, mensaje de bandeja de demo y métricas (conteo por estado e indicadores).
+El paquete de contratos SHALL definir esquemas, con sus tipos derivados, para: oferta de catálogo (servicio y sede con nombres y precio en centavos), cita (trámite, servicio, sede, inicio ISO en UTC, zona horaria IANA de la sede y token para el QR), ficha del hilo, llegada esperada, mensaje de bandeja de demo y métricas (conteo por estado e indicadores). El `tokenQr` de la cita SHALL ser el token firmado de un solo uso de `PLAN.md` §8, que genera el núcleo, y MUST NOT ser el folio.
+
+#### Scenario: Token del QR no es el folio
+- **WHEN** se valida una cita cuyo `tokenQr` es un folio de 8 o 9 dígitos
+- **THEN** la validación falla, porque el QR lleva el token firmado de un solo uso y nunca el folio
 
 #### Scenario: Cita válida
 - **WHEN** se valida una cita con trámite confirmado, inicio ISO, zona `America/Mazatlan` y token

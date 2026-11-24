@@ -21,7 +21,7 @@
 ### D1. Módulo `consultas.ts` en `@noki/contracts`
 Esquemas con `z.object(...).strict()` solo donde descartar campos desconocidos importa para la privacidad. En los demás, el objeto por defecto de Zod ya descarta las claves desconocidas al parsear (así se cumple "Ficha sin acciones"):
 - `OfertaCatalogoSchema { servicioId, servicio, sedeId, sede, precioCentavos }`. Reemplaza a `CatalogoVista`.
-- `CitaVistaSchema { tramite: TramiteVista, servicio, sede, inicio (ISO), zonaHoraria (IANA, validada con Intl), tokenQr }`.
+- `CitaVistaSchema { tramite: TramiteVista, servicio, sede, inicio (ISO), zonaHoraria (IANA, validada con Intl), tokenQr }`. `tokenQr` es el token firmado de un solo uso de `PLAN.md` §8, nunca el folio: el esquema rechaza cadenas de 8 o 9 dígitos. Generarlo y firmarlo le toca al núcleo en `api-comandos`; el contrato solo fija su forma.
 - `FichaHiloSchema { hiloId, nombrePila, telefonoEnmascarado (/^•••• \d{4}$/), tramites: TramiteVista[], lineaTiempo: EventoVista[], soloLectura, oferta: OfertaCatalogo | null, codigoContinuacion: string | null }`. Se agrega `hiloId` y se quita `acciones`; `catalogo` pasa a llamarse `oferta`.
 - `LlegadaVistaSchema { cita: CitaVista, registrada }`. Se quita `accion`.
 - `MensajeBandejaSchema` y `MetricasVistaSchema` sin cambios de forma.
@@ -52,10 +52,10 @@ RUTAS_CONSULTAS = {
 - Las acciones prearmadas pasan a armarse en la vista. En `CallCenter`: "Llamada entrante" → `IniciarTramite`; elegir la oferta → `SeleccionarServicio` y luego `SeleccionarSede` con los IDs de la oferta; "Continuar por WhatsApp" sigue siendo un mensaje de demo del guion. En `Clinica`: `RegistrarLlegada` con `cita.tokenQr`. En `Web`: los comandos de cotización a partir de la oferta. El mock compara el comando recibido con el que espera el paso, igual que ahora.
 
 ### D4. Documentación y registro
-`docs/contratos.md` con la sección `consultas.ts` y la tabla de rutas; `AGENTS.md` §7 "Consultas" reemplazado por una referencia a `RUTAS_CONSULTAS` con la lista de rutas; `docs/trabajo-paralelo.md` con `cgac05` para Christian Avila.
+`docs/contratos.md` con la sección `consultas.ts` y la tabla de rutas; `AGENTS.md` §7 "Consultas" con una referencia a `RUTAS_CONSULTAS`, la lista de sus rutas y, sin borrarlas, `GET /api/admin/embudo` y `GET /api/admin/huecos` marcadas como pendientes de sus cambios; `docs/trabajo-paralelo.md` con `cgac05` para Christian Avila.
 
 ### D5. Pruebas
-- `tests/unit/consultas.test.ts`: escenarios de `contratos-consultas` (cita válida, zona inválida, centavos, ficha sin acciones, teléfono completo rechazado, claves sensibles, rutas construidas, parámetro inválido, rutas conservadas de §7, bandeja solo demo).
+- `tests/unit/consultas.test.ts`: escenarios de `contratos-consultas` (token del QR no es el folio, cita válida, zona inválida, centavos, ficha sin acciones, teléfono completo rechazado, claves sensibles, rutas construidas, parámetro inválido, rutas conservadas de §7, bandeja solo demo).
 - Pruebas existentes de la web actualizadas: datos simulados contra el contrato, lectura real mal formada, ruta de la tabla en el cliente real, bandeja fuera de demo y comandos armados en `Clinica` y `CallCenter`. El recorrido del Flujo A de `vistas.test.tsx` debe seguir pasando sin cambios en lo que verifica.
 
 ## Risks / Trade-offs

@@ -24,6 +24,6 @@ Cada grupo es un punto de control: sus verificaciones deben quedar en verde y re
 
 ## 4. Punto de control 4: documentación compartida y cierre
 
-- [ ] 4.1 Actualizar `docs/contratos.md` (sección `consultas.ts` y tabla de rutas), `AGENTS.md` §7 "Consultas" y el usuario `cgac05` de Christian Avila en `docs/trabajo-paralelo.md` (design D4); verificar que las rutas documentadas coinciden con `RUTAS_CONSULTAS`.
+- [ ] 4.1 Actualizar `docs/contratos.md` (sección `consultas.ts` y tabla de rutas), `AGENTS.md` §7 "Consultas" y el usuario `cgac05` de Christian Avila en `docs/trabajo-paralelo.md` (design D4); verificar que las rutas documentadas coinciden con `RUTAS_CONSULTAS` y que `/api/admin/embudo` y `/api/admin/huecos` siguen en §7 marcadas como pendientes.
 - [ ] 4.2 Actualizar `apps/web/README.md`: ya no hay tipos provisionales; listar los tipos de demo que quedan.
 - [ ] 4.3 Punto de control final: `pnpm install --frozen-lockfile && pnpm lint && pnpm lint:deps && pnpm test && pnpm test:integracion && pnpm --filter @noki/web build` en verde; registrar comandos y resultados en `implementacion.md`.
