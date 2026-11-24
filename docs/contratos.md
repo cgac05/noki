@@ -4,7 +4,7 @@
 
 ## vocabulario.ts
 
-Canales: `web | whatsapp | app | callcenter | clinica`. Estados, casillas y tipos de trámite coinciden exactamente con el dominio y `PLAN.md` §6. Actores: `paciente | sistema | asesor:<id> | recepcion:<id>`; niveles de autenticación 0–3. Los códigos de error incluyen los cinco del dominio y `VALIDACION`.
+Canales: `web | whatsapp | app | callcenter | clinica`. Estados, casillas y tipos de trámite coinciden exactamente con el dominio y `PLAN.md` §6. Actores: `paciente | sistema | asesor:<id> | recepcion:<id>`; niveles de autenticación 0–3. Los códigos de error incluyen los cinco del dominio, `VALIDACION` e `INTERNO`.
 
 ## comandos.ts
 
@@ -12,7 +12,8 @@ Canales: `web | whatsapp | app | callcenter | clinica`. Estados, casillas y tipo
 
 | tipo | payload |
 |---|---|
-| IniciarTramite | `{ tipoTramite }` |
+| IniciarTramite | `{ tipoTramite, contacto? }`. El ANI o número del canal debe tener entre 10 y 15 dígitos y solo se acepta como entrada. |
+| SolicitarContinuacion | `{ destino: 'whatsapp' }`. Requiere `tramiteId` y solicita el consentimiento de contacto y el código de continuación. |
 | SeleccionarServicio | `{ servicioId }` |
 | SeleccionarSede | `{ sedeId }` |
 | AsignarPaciente | `{ pacienteId }` |
@@ -21,7 +22,7 @@ Canales: `web | whatsapp | app | callcenter | clinica`. Estados, casillas y tipo
 | CancelarCita | `{ motivo? }`, hasta 200 caracteres |
 | RegistrarLlegada | `{ token }`, nunca el folio del QR en claro |
 
-`RespuestaComandoSchema` valida `{ tramite, siguientePregunta, eventos }`. `TramiteVistaSchema` contiene `id, hiloId, tipo, estado, version, servicioId?, sedeId?`; `EventoVistaSchema` contiene `id, tipo, canal, ts`. No exponen datos personales ni payloads internos; los campos desconocidos se descartan.
+`RespuestaComandoSchema` valida `{ tramite, siguientePregunta, eventos }`. `TramiteVistaSchema` contiene `id, hiloId, tipo, estado, version, servicioId?, sedeId?, horario?`. Cuando hay reserva, `horario` contiene `{ reservaId, inicio, expiraEn? }`. `expiraEn` solo se envía mientras el hold está vigente en `HORARIO_RESERVADO`; `EventoVistaSchema` contiene `id, tipo, canal, ts`. No exponen datos personales ni payloads internos; los campos desconocidos se descartan.
 
 ## consultas.ts
 
@@ -31,12 +32,12 @@ Modelos de lectura compartidos, con tipos derivados de sus esquemas Zod:
 |---|---|
 | `OfertaCatalogo` | `servicioId`, `servicio`, `sedeId`, `sede`, `precioCentavos` entero no negativo. |
 | `CitaVista` | `tramite`, `servicio`, `sede`, `inicio` ISO UTC, `zonaHoraria` IANA válida y `tokenQr`. |
-| `FichaHilo` | `hiloId`, `nombrePila`, `telefonoEnmascarado` (`•••• 0001`), `tramites`, `lineaTiempo`, `soloLectura`, `oferta` y `codigoContinuacion` (los últimos dos admiten `null`). |
+| `FichaHilo` | `hiloId`, `nombrePila`, `telefonoEnmascarado` (`•••• 0001`), `tramites`, `lineaTiempo`, `soloLectura`, `oferta` y `codigoContinuacion` (`nombrePila`, `telefonoEnmascarado`, `oferta` y `codigoContinuacion` admiten `null`). |
 | `LlegadaVista` | `cita` y `registrada`. |
 | `MensajeBandeja` | `id`, `canal` (`sms` o `email`), `asunto`, `cuerpo`; solo demo. |
 | `MetricasVista` | `porEstado` con `estado`/`cantidad`, y `kpis` numéricos. |
 
-No declaran fecha de nacimiento, correo del paciente, RFC, PIN ni CURP. El teléfono solo admite el formato enmascarado. Zod descarta las claves adicionales, incluidas `acciones` o `accion`: las respuestas contienen únicamente datos. El canal arma el comando con `ComandoRequestSchema` a partir de los IDs o del token elegidos, y el cliente lo valida antes de enviar. No decide precios, disponibilidad ni transiciones.
+No declaran fecha de nacimiento, correo del paciente, RFC, PIN ni CURP. El teléfono solo admite el formato enmascarado cuando está presente. La ficha conserva `null` si no hay paciente vinculado o falta el dato. Zod descarta las claves adicionales, incluidas `acciones` o `accion`: las respuestas contienen únicamente datos. El canal arma el comando con `ComandoRequestSchema` a partir de los IDs o del token elegidos, y el cliente lo valida antes de enviar. No decide precios, disponibilidad ni transiciones.
 
 El QR contiene el token firmado de un solo uso que debe generar y consumir el núcleo (`PLAN.md` §8), nunca el folio. El esquema rechaza un `tokenQr` vacío o de 8–9 dígitos; no comprueba firmas ni sustituye al cambio de seguridad. Los tokens del mock son ficticios.
 
@@ -53,10 +54,15 @@ El QR contiene el token firmado de un solo uso que debe generar y consumir el n�
 | `llegadasSede` | `/api/sedes/:sedeId/llegadas` | `sedeId` | `LlegadaVista[]` |
 | `metricas` | `/api/admin/kpis` | ninguno | `MetricasVista` |
 | `bandeja` | `/api/demo/bandeja` | ninguno | `MensajeBandeja[]`, `soloDemo: true` |
+| `contextoDemo` | `/api/demo/contexto` | ninguno | `ContextoDemo`, `soloDemo: true` |
+
+`contextoDemo` devuelve `{ hiloId, pacienteId, sedeId }` del último hilo con cita confirmada. Cada campo es UUID v7 o `null`. El servidor del cambio `api-comandos` debe responder 404 cuando `DEMO_MODE` es distinto de `true`.
+
+Según el spec `consultas-api` de `api-comandos`, `metricas.kpis` contiene `cambiosCanal`, `cambiosCanalPorHilo`, `tramitesRecuperados`, `citasConfirmadas`, `llegadasRegistradas`, `datosRepetidos` e `intentosVerificacionFallidos`. Se calculan sobre todo el histórico y se emiten con los mismos valores en `admin:metricas`.
 
 Todos los IDs de ruta son UUID v7. Se conservan las rutas anteriores, con nombres explícitos de parámetros en sus plantillas. `GET /api/admin/embudo` y `GET /api/admin/huecos` siguen pendientes de sus cambios y no pertenecen aún a la tabla.
 
-Este contrato no implementa endpoints GET ni autenticación. Las consultas exponen datos personales (nombre de pila, contacto enmascarado, citas con token, llegadas y bandeja) y **solo pueden usarse en la demo** hasta cerrar el cambio de seguridad. La web valida las respuestas en ambos modos con esta tabla; en real, `bandeja` requiere `VITE_DEMO=true`. Historial de WhatsApp y cotización web independiente siguen siendo lecturas exclusivas de demo.
+Este contrato no implementa endpoints GET ni autenticación. Las consultas exponen datos personales (nombre de pila, contacto enmascarado, citas con token, llegadas y bandeja) y **solo pueden usarse en la demo** hasta cerrar el cambio de seguridad. La web valida las respuestas en ambos modos con esta tabla; en real, las consultas marcadas `soloDemo` requieren `VITE_DEMO=true`. Historial de WhatsApp y cotización web independiente siguen siendo lecturas exclusivas de demo.
 
 ## siguientePregunta.ts
 
@@ -84,7 +90,7 @@ Este contrato no implementa endpoints GET ni autenticación. Las consultas expon
 | sede:fila | `{ tramiteId, posicion }` |
 | bandeja:mensaje | `{ mensajeId, canal: sms | email }` |
 
-`SalaSchema` admite únicamente `admin` o los prefijos `tramite:`, `hilo:`, `paciente:`, `sede:` seguidos de UUID v7. El tipo `Sala` se deriva del esquema. No hay servidor Socket.IO en esta entrega.
+`SalaSchema` admite únicamente `admin` o los prefijos `tramite:`, `hilo:`, `paciente:`, `sede:` seguidos de UUID v7. El tipo `Sala` se deriva del esquema. `EVENTOS_CLIENTE_SOCKET` publica `sala:unirse` y `sala:salir`. `ESQUEMAS_EVENTOS_CLIENTE_SOCKET` valida en ambos casos una `Sala`. No hay servidor Socket.IO en esta entrega.
 
 ## errores.ts
 
@@ -100,3 +106,6 @@ El dominio distingue la familia por `codigo`; en `ReglaViolada`, `regla` conserv
 | NoEncontrado / NO_ENCONTRADO | 404 |
 | TransicionInvalida / TRANSICION_INVALIDA | 409 |
 | Validación Zod / VALIDACION | 400 |
+| Error inesperado / INTERNO | 500 |
+
+`INTERNO` usa un mensaje genérico.

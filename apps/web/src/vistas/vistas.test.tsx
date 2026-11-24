@@ -62,6 +62,21 @@ describe('Mensajes y siguiente pregunta', () => {
 });
 
 describe('Vistas del guion', () => {
+  it('muestra los campos ausentes de la ficha del Call Center sin inventar datos', async () => {
+    const cliente = new ClienteMock({ latenciaMs: 0 });
+    const consultar = cliente.consultar.bind(cliente);
+    vi.spyOn(cliente, 'consultar').mockImplementation(async (nombre, parametros) => {
+      const dato = await consultar(nombre, parametros);
+      return nombre === 'fichaHilo' ? { ...dato, nombrePila: null, telefonoEnmascarado: null } : dato;
+    });
+
+    abrir('/callcenter', cliente);
+
+    const ficha = await screen.findByRole('region', { name: 'Ficha del hilo' });
+    expect(within(ficha).getAllByText('—')).toHaveLength(2);
+    expect(within(ficha).queryByText('Ana')).toBeNull();
+    expect(within(ficha).queryByText('•••• 0001')).toBeNull();
+  });
   it('Registrar llegada desde la cita: copia el token elegido y el canal clinica, sin un comando en la lectura', async () => {
     const cliente = new ClienteMock({ latenciaMs: 0 });
     await confirmarGuion(cliente);

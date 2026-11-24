@@ -178,6 +178,7 @@ Body:    { canal, actor, tipo, tramiteId?, hiloId?, payload }
 ```
 - `canal`: `web | whatsapp | app | callcenter | clinica`
 - `actor`: `paciente | asesor:<id> | recepcion:<id> | sistema`
+- `SolicitarContinuacion` requiere `tramiteId` y `payload: { destino: 'whatsapp' }` para solicitar la continuación por WhatsApp.
 - El **token de contexto** (JWS con jose) lleva `pacienteId`, `nivel`, `canal` y `exp`.
 
 ### Consultas
@@ -192,6 +193,7 @@ Body:    { canal, actor, tipo, tramiteId?, hiloId?, payload }
 - `GET /api/sedes/:sedeId/llegadas`
 - `GET /api/admin/kpis`
 - `GET /api/demo/bandeja` — solo demo.
+- `GET /api/demo/contexto` — solo demo. Devuelve `hiloId`, `pacienteId` y `sedeId` nullables. La API debe responder 404 fuera de `DEMO_MODE=true`.
 
 Pendientes de sus cambios, fuera de esta tabla por ahora: `GET /api/admin/embudo` y `GET /api/admin/huecos`.
 
@@ -207,7 +209,7 @@ Las lecturas contienen solo datos; el canal arma los comandos copiando los IDs d
 - Tras N fallos → `eventos:fallidos` (visible en `/admin`).
 
 ### Tiempo real (Socket.IO)
-Salas: `tramite:<id>`, `hilo:<id>`, `paciente:<id>`, `sede:<id>`, `admin`. Al tablero se emiten métricas agregadas; el detalle solo cuando se abre un hilo.
+Salas: `tramite:<id>`, `hilo:<id>`, `paciente:<id>`, `sede:<id>`, `admin`. El cliente usa `sala:unirse` y `sala:salir` de `EVENTOS_CLIENTE_SOCKET` con un dato validado por `SalaSchema`. Al tablero se emiten métricas agregadas; el detalle solo cuando se abre un hilo.
 
 ### Trabajos diferidos (BullMQ)
 `job_id` determinista: `${tipo}:${tramiteId}` (ej. `PREPARACION:0193…`). Así se pueden cancelar o reprogramar al cambiar la cita.

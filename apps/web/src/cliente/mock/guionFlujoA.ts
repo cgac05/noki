@@ -144,6 +144,9 @@ export const GUION_FLUJO_A: PasoFixture[] = definiciones.map((dato, indice) => {
     lecturas: {
       tramite: dato.respuesta.tramite, tramitesAbiertos: indice === 0 ? [] : [dato.respuesta.tramite], catalogo: [CATALOGO_DEMO],
       fichaHilo: { hiloId: IDS.hilo, nombrePila: 'Ana', telefonoEnmascarado: '•••• 0001', tramites: indice === 0 ? [] : [dato.respuesta.tramite], lineaTiempo, soloLectura: dato.soloLectura, oferta: indice >= 2 ? CATALOGO_DEMO : null, codigoContinuacion: indice >= 3 ? `CONTINUAR ${IDS.tokenContinuacion}` : null },
+      contextoDemo: dato.citas
+        ? { hiloId: IDS.hilo, pacienteId: IDS.paciente, sedeId: IDS.sede }
+        : { hiloId: null, pacienteId: null, sedeId: null },
       conversacion: { mensajes: dato.mensajes, siguientePregunta: dato.respuesta.siguientePregunta },
       citasPaciente: dato.citas ? [cita] : [], llegadasSede: dato.citas ? [{ cita, registrada: dato.registrada }] : [],
       bandeja: dato.id === 'VERIFICACION' || dato.citas ? [

@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import {
   CitaVistaSchema, FichaHiloSchema, LlegadaVistaSchema, MensajeBandejaSchema,
-  MetricasVistaSchema, OfertaCatalogoSchema, RUTAS_CONSULTAS, rutaConsulta,
+  MetricasVistaSchema, OfertaCatalogoSchema, ContextoDemoSchema, RUTAS_CONSULTAS, rutaConsulta,
 } from '../../packages/contracts/src/index.ts';
 import type { CitaVista, NombreConsulta, ParametrosConsulta, RespuestaConsulta } from '../../packages/contracts/src/index.ts';
 
@@ -58,13 +58,18 @@ describe('Modelos compartidos de consultas', () => {
     expect(LlegadaVistaSchema.parse({ cita, registrada: false, accion: { tipo: 'RegistrarLlegada' } })).toEqual({ cita, registrada: false });
   });
 
+  it('Ficha de un hilo anónimo: conserva los campos nulos', () => {
+    const anonima = { ...ficha, nombrePila: null, telefonoEnmascarado: null };
+    expect(FichaHiloSchema.parse(anonima)).toEqual(anonima);
+  });
+
   it('Teléfono completo rechazado: exige la máscara de cuatro dígitos', () => {
     expect(FichaHiloSchema.safeParse({ ...ficha, telefonoEnmascarado: '5210000000001' }).success).toBe(false);
     expect(FichaHiloSchema.safeParse({ ...ficha, hiloId: 'no-es-uuid' }).success).toBe(false);
   });
 
   it('Campos sensibles ausentes: recorre todos los modelos y sus objetos anidados', () => {
-    const objetos = [OfertaCatalogoSchema, CitaVistaSchema, FichaHiloSchema, LlegadaVistaSchema, MensajeBandejaSchema, MetricasVistaSchema,
+    const objetos = [OfertaCatalogoSchema, CitaVistaSchema, FichaHiloSchema, LlegadaVistaSchema, MensajeBandejaSchema, MetricasVistaSchema, ContextoDemoSchema,
       CitaVistaSchema.shape.tramite, FichaHiloSchema.shape.tramites.element, FichaHiloSchema.shape.lineaTiempo.element,
       MetricasVistaSchema.shape.porEstado.element];
     for (const esquema of objetos) {
@@ -96,8 +101,8 @@ describe('Tabla compartida de rutas GET', () => {
     expect(rutaConsulta('metricas', {})).toBe('/api/admin/kpis');
   });
 
-  it('publica las nueve rutas y sus esquemas de respuesta sin acciones', () => {
-    expect(Object.keys(RUTAS_CONSULTAS)).toHaveLength(9);
+  it('publica las diez rutas y sus esquemas de respuesta sin acciones', () => {
+    expect(Object.keys(RUTAS_CONSULTAS)).toHaveLength(10);
     expect(rutaConsulta('catalogo', {})).toBe('/api/catalogo');
     expect(rutaConsulta('fichaHilo', { hiloId: ids.hilo })).toBe(`/api/hilos/${ids.hilo}/ficha`);
     expect(rutaConsulta('citasPaciente', { pacienteId: ids.paciente })).toBe(`/api/pacientes/${ids.paciente}/citas`);
@@ -105,6 +110,16 @@ describe('Tabla compartida de rutas GET', () => {
     expect(RUTAS_CONSULTAS.catalogo.respuesta.parse([oferta])).toEqual([oferta]);
     expect(RUTAS_CONSULTAS.fichaHilo.respuesta.parse(ficha)).toEqual(ficha);
     expect(RUTAS_CONSULTAS.tramite.respuesta.parse(tramite)).toEqual(tramite);
+  });
+
+  it('Contexto de demo: expone solo los identificadores nullables', () => {
+    const ruta = RUTAS_CONSULTAS.contextoDemo;
+    const contexto = { hiloId: ids.hilo, pacienteId: null, sedeId: ids.sede };
+    expect(ruta.soloDemo).toBe(true);
+    expect(rutaConsulta('contextoDemo', {})).toBe('/api/demo/contexto');
+    expect(ruta.respuesta.parse({ ...contexto, telefono: 'dato no autorizado' })).toEqual(contexto);
+    expect(ruta.respuesta.parse({ hiloId: null, pacienteId: null, sedeId: null })).toEqual({ hiloId: null, pacienteId: null, sedeId: null });
+    expect(ruta.respuesta.safeParse({ ...contexto, pacienteId: 'no-es-uuid' }).success).toBe(false);
   });
 
   it('Bandeja marcada como demo: su ruta y respuestas quedan identificadas', () => {

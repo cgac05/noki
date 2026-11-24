@@ -24,7 +24,7 @@ export function CallCenter() {
     {ficha.isError && <EstadoError error={ficha.error} onReintentar={() => { void ficha.refetch(); }} />}
     {ficha.data && <>
       <section className="seccion" aria-labelledby="titulo-ficha"><h2 id="titulo-ficha">Ficha del hilo</h2>
-        <dl className="datos"><div><dt>Paciente de demo</dt><dd>{ficha.data.nombrePila}</dd></div><div><dt>Contacto</dt><dd>{ficha.data.telefonoEnmascarado}</dd></div></dl>
+        <dl className="datos"><div><dt>Paciente de demo</dt><dd>{ficha.data.nombrePila ?? '—'}</dd></div><div><dt>Contacto</dt><dd>{ficha.data.telefonoEnmascarado ?? '—'}</dd></div></dl>
         {ficha.data.tramites.map(tramite => <p key={tramite.id}>Estado del trámite: <strong>{tramite.estado}</strong></p>)}
         {ficha.data.oferta && <dl className="datos"><div><dt>Servicio</dt><dd>{ficha.data.oferta.servicio}</dd></div><div><dt>Sede</dt><dd>{ficha.data.oferta.sede}</dd></div><div><dt>Cotización</dt><dd>{dinero(ficha.data.oferta.precioCentavos)}</dd></div></dl>}
         {ficha.data.codigoContinuacion && <p className="continuacion">Código de continuación: <code>{ficha.data.codigoContinuacion}</code></p>}

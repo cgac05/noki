@@ -2,7 +2,7 @@ import { describe, expect, expectTypeOf, it } from 'vitest';
 import {
   ComandoRequestSchema, SiguientePreguntaSchema, MensajeBotSchema, CampoFlowSchema,
   SolicitudMensajeWaSchema, RespuestaMensajeWaSchema, SalaSchema, CuerpoErrorSchema,
-  RespuestaComandoSchema, ESQUEMAS_EVENTOS_SOCKET, type ComandoRequest, type NombreEventoSocket,
+  RespuestaComandoSchema, TramiteVistaSchema, ESQUEMAS_EVENTOS_SOCKET, EVENTOS_CLIENTE_SOCKET, ESQUEMAS_EVENTOS_CLIENTE_SOCKET, type ComandoRequest, type NombreEventoSocket,
 } from '../../packages/contracts/src/index.ts';
 
 const id = '019b0000-0000-7000-8000-000000000001';
@@ -22,6 +22,32 @@ describe('contratos de todos los canales', () => {
     const salida = ComandoRequestSchema.parse({ ...base, tipo: 'SeleccionarServicio', payload: { servicioId: id } });
     expect(salida.tipo).toBe('SeleccionarServicio');
     if (salida.tipo === 'SeleccionarServicio') expect(salida.payload.servicioId).toBe(id);
+  });
+
+  it('acepta contacto de 10 a 15 dígitos y rechaza un contacto mal formado', () => {
+    const comando = { canal: 'callcenter', actor: 'asesor:demo', tipo: 'IniciarTramite' };
+    const payload = { tipoTramite: 'AGENDAR' };
+    expect(ComandoRequestSchema.parse({ ...comando, payload })).toMatchObject({ payload });
+    expect(ComandoRequestSchema.parse({ ...comando, payload: { ...payload, contacto: '5210000000001' } })).toMatchObject({ payload: { contacto: '5210000000001' } });
+    expect(ComandoRequestSchema.safeParse({ ...comando, payload: { ...payload, contacto: '55-1234' } }).success).toBe(false);
+  });
+
+  it('exige el trámite y el destino WhatsApp para solicitar continuación', () => {
+    const comando = { canal: 'callcenter', actor: 'asesor:demo', tipo: 'SolicitarContinuacion', payload: { destino: 'whatsapp' } };
+    expect(ComandoRequestSchema.safeParse(comando).success).toBe(false);
+    expect(ComandoRequestSchema.parse({ ...comando, tramiteId: id })).toEqual({ ...comando, tramiteId: id });
+    expect(ComandoRequestSchema.safeParse({ ...comando, tramiteId: id, payload: { destino: 'web' } }).success).toBe(false);
+  });
+
+  it('acepta una vista con reserva y una cita confirmada sin vencimiento', () => {
+    const tramite = { id, hiloId: id, tipo: 'AGENDAR', estado: 'HORARIO_RESERVADO', version: 1 };
+    const horario = { reservaId: id, inicio: '2026-11-25T16:00:00Z' };
+    const apartado = { ...horario, expiraEn: '2026-11-24T16:15:00Z' };
+    expect(TramiteVistaSchema.parse(tramite)).toEqual(tramite);
+    expect(TramiteVistaSchema.parse({ ...tramite, horario: apartado }).horario).toEqual(apartado);
+    const confirmada = { ...tramite, estado: 'CONFIRMADA' };
+    expect(TramiteVistaSchema.parse({ ...confirmada, horario }).horario).toEqual(horario);
+    expect(TramiteVistaSchema.safeParse({ ...confirmada, horario: apartado }).success).toBe(false);
   });
 
   it('acepta captura sensible y la variante explícita de completo', () => {
@@ -53,6 +79,13 @@ describe('contratos de todos los canales', () => {
     expect(ESQUEMAS_EVENTOS_SOCKET['admin:metricas'].safeParse({ confirmadas: 'secreto' }).success).toBe(false);
     expect(ESQUEMAS_EVENTOS_SOCKET['sede:fila'].safeParse({ tramiteId: id, posicion: -1 }).success).toBe(false);
     expect(ESQUEMAS_EVENTOS_SOCKET['bandeja:mensaje'].safeParse({ mensajeId: id, canal: 'fax' }).success).toBe(false);
+  });
+
+  it('valida la sala al unirse y salir por Socket.IO', () => {
+    expect(EVENTOS_CLIENTE_SOCKET).toEqual({ SALA_UNIRSE: 'sala:unirse', SALA_SALIR: 'sala:salir' });
+    expect(ESQUEMAS_EVENTOS_CLIENTE_SOCKET['sala:unirse'].safeParse('tramite:123').success).toBe(false);
+    expect(ESQUEMAS_EVENTOS_CLIENTE_SOCKET['sala:unirse'].parse('tramite:' + id)).toBe('tramite:' + id);
+    expect(ESQUEMAS_EVENTOS_CLIENTE_SOCKET['sala:salir'].parse('admin')).toBe('admin');
   });
 
   it('exige tipo en vistas de trámite y descarta datos personales y detalles internos', () => {

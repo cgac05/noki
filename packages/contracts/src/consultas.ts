@@ -19,7 +19,7 @@ export const CitaVistaSchema = z.object({
 export type CitaVista = z.infer<typeof CitaVistaSchema>;
 
 export const FichaHiloSchema = z.object({
-  hiloId: z.uuidv7(), nombrePila: z.string().min(1), telefonoEnmascarado: z.string().regex(/^•••• \d{4}$/),
+  hiloId: z.uuidv7(), nombrePila: z.string().min(1).nullable(), telefonoEnmascarado: z.string().regex(/^•••• \d{4}$/).nullable(),
   tramites: z.array(TramiteVistaSchema), lineaTiempo: z.array(EventoVistaSchema), soloLectura: z.boolean(),
   oferta: OfertaCatalogoSchema.nullable(), codigoContinuacion: z.string().nullable(),
 });
@@ -39,6 +39,11 @@ export const MetricasVistaSchema = z.object({
 });
 export type MetricasVista = z.infer<typeof MetricasVistaSchema>;
 
+export const ContextoDemoSchema = z.object({
+  hiloId: z.uuidv7().nullable(), pacienteId: z.uuidv7().nullable(), sedeId: z.uuidv7().nullable(),
+});
+export type ContextoDemo = z.infer<typeof ContextoDemoSchema>;
+
 interface DefinicionConsulta {
   ruta: string;
   parametros: z.ZodType;
@@ -57,6 +62,7 @@ export const RUTAS_CONSULTAS = {
   llegadasSede: { ruta: '/api/sedes/:sedeId/llegadas', parametros: z.object({ sedeId: z.uuidv7() }), respuesta: z.array(LlegadaVistaSchema) },
   metricas: { ruta: '/api/admin/kpis', parametros: z.object({}), respuesta: MetricasVistaSchema },
   bandeja: { ruta: '/api/demo/bandeja', parametros: z.object({}), respuesta: z.array(MensajeBandejaSchema), soloDemo: true },
+  contextoDemo: { ruta: '/api/demo/contexto', parametros: z.object({}), respuesta: ContextoDemoSchema, soloDemo: true },
 } as const satisfies Record<string, DefinicionConsulta>;
 
 export type NombreConsulta = keyof typeof RUTAS_CONSULTAS;

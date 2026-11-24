@@ -19,3 +19,12 @@ export const SalaSchema = z.union([
   z.templateLiteral(['paciente:', z.uuidv7()]), z.templateLiteral(['sede:', z.uuidv7()]),
 ]);
 export type Sala = z.infer<typeof SalaSchema>;
+
+export const EVENTOS_CLIENTE_SOCKET = {
+  SALA_UNIRSE: 'sala:unirse',
+  SALA_SALIR: 'sala:salir',
+} as const;
+export const ESQUEMAS_EVENTOS_CLIENTE_SOCKET = {
+  [EVENTOS_CLIENTE_SOCKET.SALA_UNIRSE]: SalaSchema,
+  [EVENTOS_CLIENTE_SOCKET.SALA_SALIR]: SalaSchema,
+};
