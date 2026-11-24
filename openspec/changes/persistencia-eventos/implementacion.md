@@ -43,8 +43,21 @@
 | `pnpm test:integracion` | PASS, 30 pruebas. |
 | `pnpm exec vitest run --project unitarios tests/unit/nucleo tests/unit/persistencia --pool=threads --no-isolate --maxWorkers=1` | PASS, 53 pruebas, duración total de 1.77 s. |
 | `openspec validate persistencia-eventos --type change --strict --no-interactive` | PASS. |
-| 5.6 desde un checkout limpio | BLOQUEADO: el cambio no tiene un commit autorizado para validar. |
+| 5.6 desde un checkout limpio | PASS en `b59cdaed83d759cf15ab13ed9e2e7ba3731db755`. Detalle en la evidencia de 5.6. |
 
-La entrega local parte de la rama feat/persistencia-eventos y de los artefactos de la revisión 4. Los cambios de producto abarcan la migración 002, el agregado y los puertos de dominio y aplicación, los adaptadores de memoria, Postgres, Redis, agenda externa y consumidor, el arranque del relay en API y la agenda de sd-mock. Las dependencias añadidas son Zod 4.1.13 para sd-mock e ioredis 5.8.2 para in-events. El cierre requiere la revisión independiente y la validación 5.6.
+La entrega local parte de la rama feat/persistencia-eventos y de los artefactos de la revisión 4. Los cambios de producto abarcan la migración 002, el agregado y los puertos de dominio y aplicación, los adaptadores de memoria, Postgres, Redis, agenda externa y consumidor, el arranque del relay en API y la agenda de sd-mock. Las dependencias añadidas son Zod 4.1.13 para sd-mock e ioredis 5.8.2 para in-events. La evidencia de 5.6 queda disponible para la revisión independiente.
 
 Contratos para api-comandos: `SolicitudReserva.recursoId` es opcional, `AgendaPort.confirmar` recibe el folio externo, `AgendaExternaPort` registra y cancela citas, y `RegistroIntentos` solo cuenta y bloquea. Conectar los casos de uso a los repositorios Postgres y el cliente con `SD_MOCK_URL`, y traducir `HORARIO_NO_DISPONIBLE` y `AGENDA_NO_DISPONIBLE` a HTTP 422. Los consumidores de negocio usarán `ConsumidorStreams` y `RegistroProcesadosPostgres`.
+
+## Evidencia de la tarea 5.6 y del hallazgo H-01
+
+Se validó el commit `b59cdaed83d759cf15ab13ed9e2e7ba3731db755` en un worktree separado, creado fuera del repositorio con `git worktree add --detach`. `git status --porcelain` quedó vacío antes y después de los controles. La integración usó Postgres aislado en `55432` con `noki_test` y Redis local.
+
+| Comando | Salida registrada |
+|---|---|
+| `pnpm install` | 14 proyectos, 371 paquetes instalados, lockfile vigente, `Done in 4.1s using pnpm v11.25.0`. |
+| `pnpm lint` | `eslint . && pnpm typecheck` y `pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json` terminaron con código 0. |
+| `pnpm lint:deps` | `no dependency violations found (138 modules, 327 dependencies cruised)`. |
+| `pnpm test` | Vitest 4.0.14, 24 archivos y 114 pruebas aprobados, duración 6.97 s. |
+| `pnpm test:integracion` | 11 archivos y 30 pruebas aprobados en 19.07 s. La prueba de 50 solicitudes concurrentes obtuvo un solo ganador. |
+| `pnpm exec vitest run --project unitarios tests/unit/nucleo tests/unit/persistencia --pool=threads --no-isolate --maxWorkers=1` | 14 archivos y 53 pruebas aprobados en 1.15 s. |
