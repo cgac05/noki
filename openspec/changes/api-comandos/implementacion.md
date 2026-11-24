@@ -78,3 +78,19 @@ Las suites se ejecutaron en secuencia. El stash y las migraciones 001–003 se c
 - La fecha inexistente repite el Flow de `FECHA_NAC`. No se agrega un evento y la siguiente fecha errónea cuenta como el primer intento. La prueba de logs captura la salida del logger de Fastify en memoria y comprueba que registra la ruta y el cierre de la petición sin exponer el `waId` ni la fecha enviada.
 - Validación de la corrección en secuencia: `pnpm lint` PASS, `pnpm lint:deps` PASS (186 módulos y 517 dependencias), `pnpm test` PASS (239 pruebas en 45 archivos), `pnpm test:integracion` PASS (38 pruebas en 14 archivos, Postgres 55432 y Redis), `git diff --check` PASS.
 - La sugerencia opcional H-03 queda fuera de esta corrección. 6.4 sigue pendiente por requerir un checkout limpio de un commit. El HEAD y `stash@{0}` se conservaron.
+
+### Verificación 6.4 y H-02 en el commit limpio
+
+El commit probado fue `d65cf576fe0d56ddd585bc985cb665bb56ad1bb1`. Se creó un worktree temporal en HEAD separado fuera del repositorio principal. `git status --porcelain` estaba vacío antes y después de las pruebas. Postgres de prueba usó el puerto 55432 y Redis local. El runner leyó un `.env` temporal vacío y recibió las URLs por el entorno.
+
+| Comando ejecutado en orden | Salida verificada |
+| --- | --- |
+| `pnpm install` | 14 proyectos del workspace. Lockfile vigente, 396 paquetes enlazados, 0 descargas, pnpm 11.25.0. Código 0. |
+| `pnpm lint` | `eslint .`, typecheck de los paquetes y `tsc --project tests/tsconfig.json` en verde. Código 0. |
+| `pnpm lint:deps` | `no dependency violations found (186 modules, 517 dependencies cruised)`. Código 0. |
+| `pnpm test` | 45 archivos y 239 pruebas aprobados. Duración de Vitest 19,33 s. Código 0. |
+| `pnpm test:integracion` | 14 archivos y 38 pruebas aprobados, incluido el Flujo A HTTP. Duración de Vitest 38,83 s. Código 0. |
+
+La suite focalizada de dominio y aplicación aprobó los 11 archivos y las 76 pruebas. La primera ejecución con el pool predeterminado reportó 2,27 s totales y 176 ms de ejecución de pruebas. La medición `node node_modules/vitest/vitest.mjs run --project unitarios --pool threads --maxWorkers 6 --no-isolate tests/unit/nucleo tests/unit/dominio.test.ts` reportó 1,98 s totales y 164 ms de ejecución de pruebas, sin cambios al checkout. Los cinco controles principales se ejecutaron con los comandos estándar.
+
+Las versiones fijadas y los contratos internos de la revisión 5 son los registrados arriba. Se marcó 6.4 y el avance queda en 29/29. El resultado está listo para la revisión independiente.
