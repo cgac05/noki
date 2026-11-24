@@ -8,7 +8,7 @@ export const valor = 1 as any;
 Comando: pnpm lint
 Código: 1
 
-C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\apps\api\src\pruebaTemporal.ts
+<repo>\apps\api\src\pruebaTemporal.ts
   1:27  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
 
 ✖ 1 problem (1 error, 0 warnings)
@@ -25,7 +25,7 @@ export const valor: string = 1;
 Comando: pnpm lint
 Código: 1
 
-C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\apps\api\src\pruebaTemporal.ts
+<repo>\apps\api\src\pruebaTemporal.ts
   1:1  error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
 
 ✖ 1 problem (1 error, 0 warnings)
@@ -42,7 +42,7 @@ export const valor: string = 1;
 Comando: pnpm lint
 Código: 1
 
-C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\apps\api\src\pruebaTemporal.ts
+<repo>\apps\api\src\pruebaTemporal.ts
   1:1  error  Do not use "@ts-nocheck" because it alters compilation errors  @typescript-eslint/ban-ts-comment
 
 ✖ 1 problem (1 error, 0 warnings)
@@ -59,7 +59,7 @@ export const valor: string = 1;
 Comando: pnpm lint
 Código: 1
 
-C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\apps\api\src\pruebaTemporal.ts
+<repo>\apps\api\src\pruebaTemporal.ts
   1:1  error  Include a description after the "@ts-expect-error" directive to explain why the @ts-expect-error is necessary. The description must be 10 characters or longer  @typescript-eslint/ban-ts-comment
 
 ✖ 1 problem (1 error, 0 warnings)
@@ -75,7 +75,7 @@ export const valor = new Date();
 Comando: pnpm lint
 Código: 1
 
-C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\packages\domain\src\pruebaTemporal.ts
+<repo>\packages\domain\src\pruebaTemporal.ts
   1:22  error  Obtén el tiempo del puerto Reloj  no-restricted-syntax
 
 ✖ 1 problem (1 error, 0 warnings)
@@ -91,7 +91,7 @@ export const valor = Date.now();
 Comando: pnpm lint
 Código: 1
 
-C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\packages\domain\src\pruebaTemporal.ts
+<repo>\packages\domain\src\pruebaTemporal.ts
   1:22  error  'Date.now' is restricted from being used. Obtén el tiempo del puerto Reloj  no-restricted-properties
 
 ✖ 1 problem (1 error, 0 warnings)
@@ -107,7 +107,7 @@ export const valor = Math.random();
 Comando: pnpm lint
 Código: 1
 
-C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\packages\domain\src\pruebaTemporal.ts
+<repo>\packages\domain\src\pruebaTemporal.ts
   1:22  error  'Math.random' is restricted from being used. Obtén los IDs del puerto GeneradorId  no-restricted-properties
 
 ✖ 1 problem (1 error, 0 warnings)
@@ -123,7 +123,7 @@ export const valor = crypto.randomUUID();
 Comando: pnpm lint
 Código: 1
 
-C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\packages\domain\src\pruebaTemporal.ts
+<repo>\packages\domain\src\pruebaTemporal.ts
   1:22  error  'crypto.randomUUID' is restricted from being used. Obtén los IDs del puerto GeneradorId  no-restricted-properties
 
 ✖ 1 problem (1 error, 0 warnings)
@@ -139,7 +139,7 @@ export const valor = globalThis.crypto.randomUUID();
 Comando: pnpm lint
 Código: 1
 
-C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\packages\domain\src\pruebaTemporal.ts
+<repo>\packages\domain\src\pruebaTemporal.ts
   1:22  error  Obtén los IDs del puerto GeneradorId  no-restricted-syntax
 
 ✖ 1 problem (1 error, 0 warnings)
@@ -155,7 +155,7 @@ export const valor = performance.now();
 Comando: pnpm lint
 Código: 1
 
-C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\packages\domain\src\pruebaTemporal.ts
+<repo>\packages\domain\src\pruebaTemporal.ts
   1:22  error  'performance.now' is restricted from being used. Obtén el tiempo del puerto Reloj  no-restricted-properties
 
 ✖ 1 problem (1 error, 0 warnings)
@@ -171,7 +171,7 @@ export const valor = Date.now();
 Comando: pnpm lint
 Código: 1
 
-C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\packages\application\src\pruebaTemporal.ts
+<repo>\packages\application\src\pruebaTemporal.ts
   1:22  error  'Date.now' is restricted from being used. Obtén el tiempo del puerto Reloj  no-restricted-properties
 
 ✖ 1 problem (1 error, 0 warnings)

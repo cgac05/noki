@@ -11,7 +11,7 @@ Antes de implementar:
 
 1. Identifica el cambio por su ID explícito; si falta, consulta `openspec list --json`. No elijas entre varios cambios por suposición.
 2. Lee `openspec/config.yaml`, el protocolo compartido y los artefactos actuales del cambio: `handoff.md`, propuesta, especificaciones, diseño cuando corresponda y tareas. Usa `openspec status --change <id> --json` y `openspec instructions apply --change <id> --json` para resolver las rutas y los archivos de contexto.
-3. Comprueba la autorización del usuario para ese alcance y revisión, registrada en `handoff.md`. Si ya existe autorización explícita en la sesión, registra su referencia sin volver a pedirla. Un archivo completo, una casilla marcada o el estado `ready` de OpenSpec no son una autorización.
+3. Comprueba la autorización del usuario para ese alcance y revisión, registrada en `handoff.md`. "El usuario" es el **responsable** del frente dueño del cambio (campo `Responsable` del handoff y [docs/trabajo-paralelo.md](docs/trabajo-paralelo.md)); los cambios a archivos compartidos requieren la autorización de ambos responsables. No modifiques archivos de otro frente. Si ya existe autorización explícita en la sesión, registra su referencia sin volver a pedirla. Un archivo completo, una casilla marcada o el estado `ready` de OpenSpec no son una autorización.
 4. Consulta las secciones pertinentes de `PLAN.md`, el código y las dependencias afectadas. Antes de escribir código, lee `PLAN.md` completo como exige su encabezado; después recupera contexto adicional solo cuando haga falta.
 
 Responsabilidades de Codex:
@@ -131,7 +131,7 @@ tests/load/              k6
 11. **`contracts` solo importa módulos propios y `zod`.** Ni dominio ni aplicación lo importan; la coherencia del vocabulario se prueba en `in-http`.
 12. **`apps/web` consume `contracts`**, nunca dominio, aplicación ni adaptadores.
 
-`pnpm lint:deps` falla si se rompen las reglas 1–3.
+`pnpm lint:deps` falla si se rompen las reglas 1–3, 11 o 12.
 
 ---
 

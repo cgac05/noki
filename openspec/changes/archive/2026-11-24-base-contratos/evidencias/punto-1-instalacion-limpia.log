@@ -9,7 +9,7 @@ Progress: resolved 1, reused 0, downloaded 0, added 0
 Packages: +190
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Packages are hard linked from the content-addressable store to the virtual store.
-  Content-addressable store is at: C:\Users\Luis Rodriguez\AppData\Local\pnpm\store\v11
+  Content-addressable store is at: <home>\AppData\Local\pnpm\store\v11
   Virtual store is at:             node_modules/.pnpm
 Progress: resolved 190, reused 190, downloaded 0, added 64
 Progress: resolved 190, reused 190, downloaded 0, added 190, done
@@ -45,7 +45,7 @@ $ depcruise --config .dependency-cruiser.cjs packages apps
 Comando: pnpm test
 Código: 0
 
- RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki/.tools/punto-1-limpio
+ RUN  v4.0.14 <repo>/.tools/punto-1-limpio
 
  ✓ |unitarios| tests/unit/workspace.test.ts (3 tests) 9ms
 

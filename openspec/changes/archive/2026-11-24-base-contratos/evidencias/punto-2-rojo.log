@@ -1,6 +1,6 @@
 $ vitest run --project unitarios
 
- RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+ RUN  v4.0.14 <repo>
 
  ✓ |unitarios| tests/unit/workspace.test.ts (3 tests) 10ms
  ❯ |unitarios| tests/unit/dominio.test.ts (4 tests | 2 failed) 22ms
@@ -15,7 +15,7 @@ $ vitest run --project unitarios
 ⎯⎯⎯⎯⎯⎯ Failed Suites 2 ⎯⎯⎯⎯⎯⎯⎯
 
  FAIL  |unitarios| tests/unit/contratos.test.ts [ tests/unit/contratos.test.ts ]
-Error: Cannot find package 'zod' imported from 'C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki/tests/unit/contratos.test.ts'
+Error: Cannot find package 'zod' imported from '<repo>/tests/unit/contratos.test.ts'
  ❯ tests/unit/contratos.test.ts:2:1
       1| import { describe, expect, expectTypeOf, it } from 'vitest';
       2| import { z } from 'zod';
@@ -26,7 +26,7 @@ Error: Cannot find package 'zod' imported from 'C:/Users/Luis Rodriguez/Document
 ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
 
  FAIL  |unitarios| tests/unit/puertos.test.ts [ tests/unit/puertos.test.ts ]
-Error: Cannot find module '../../apps/api/src/sistema/RelojSistema.ts' imported from 'C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki/tests/unit/puertos.test.ts'
+Error: Cannot find module '../../apps/api/src/sistema/RelojSistema.ts' imported from '<repo>/tests/unit/puertos.test.ts'
  ❯ tests/unit/puertos.test.ts:3:1
       1| import { describe, expect, it } from 'vitest';
       2| import { RelojFalso, GeneradorIdSecuencial } from '../../packages/adap…

@@ -6,7 +6,7 @@ $ depcruise --config .dependency-cruiser.cjs packages apps
 
 $ vitest run --project unitarios
 
- RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+ RUN  v4.0.14 <repo>
 
  ✓ |unitarios| tests/unit/workspace.test.ts (3 tests) 10ms
  ✓ |unitarios| tests/unit/dominio.test.ts (4 tests) 10ms

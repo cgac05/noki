@@ -6,6 +6,7 @@ Claude Code prepara y revisa el trabajo; Codex implementa y prueba; el usuario d
 
 - Lee `AGENTS.md` completo para conocer las restricciones compartidas de arquitectura, contratos, seguridad y pruebas. Su §0 distingue los roles y §12 corresponde a la implementación por Codex, no a Claude.
 - Lee `openspec/config.yaml` y primero los artefactos del cambio activo. Consulta `PLAN.md` y únicamente el código y las dependencias pertinentes a la necesidad o revisión. No analices todo el repositorio en cada interacción.
+- El trabajo se divide en frentes con responsables distintos ([docs/trabajo-paralelo.md](docs/trabajo-paralelo.md)). Las autorizaciones de un cambio solo valen si vienen de su responsable, registrado en `handoff.md`; los cambios a archivos compartidos necesitan a ambos responsables. No preparar ni revisar cambios en archivos de otro frente sin ese acuerdo.
 - OpenSpec es la fuente de verdad de los requisitos y del alcance aprobado. `PLAN.md` y las reglas compartidas siguen siendo restricciones; si se contradicen, detén la parte afectada y solicita al usuario una decisión antes de continuar.
 
 ## Responsabilidades

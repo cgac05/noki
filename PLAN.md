@@ -380,7 +380,7 @@ Repeticiones de datos por paciente (meta: 0) · trámites recuperados · cambios
 | 24–27 | Resiliencia y entregables | Demos de caos y contención, datos semilla (incluir intereses de adelanto e historial para el embudo), README, diagramas |
 | 27–30 | Congelar | Despliegue público, 3 ensayos, video de respaldo |
 
-**Reparto sugerido (equipo de 4):** Núcleo (dominio, continuidad, saga de huecos) · Canales del paciente (`/wa`, `/web`, `/app`) · Canales internos (`/callcenter`, `/clinica`, `/admin`, embudo) · Integración (infraestructura, seguridad, BullMQ y recordatorios, README, diagramas, pitch).
+**Reparto vigente:** dos frentes, núcleo (dominio, continuidad, persistencia, API, infraestructura, seguridad) y canales (`apps/web`: `/web`, `/wa`, `/app`, `/callcenter`, `/clinica`, `/admin`, `/bandeja`). Responsables, propiedad de archivos, secuencia de cambios y reglas de integración en [docs/trabajo-paralelo.md](docs/trabajo-paralelo.md).
 
 ---
 

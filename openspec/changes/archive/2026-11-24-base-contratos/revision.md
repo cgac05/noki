@@ -19,8 +19,8 @@
 
 | Hallazgo | Gravedad | Requisito / tarea | Evidencia | Corrección necesaria / estado |
 |---|---|---|---|---|
-| H-01 | SUGGESTION | arquitectura-hexagonal; tarea 2.8 | `AGENTS.md:134` dice que `pnpm lint:deps` falla si se rompen "las reglas 1–3", pero también hace cumplir las nuevas 11–12 | Cambiar a "las reglas 1–3, 11 y 12". Abierto, opcional |
-| H-02 | SUGGESTION | `AGENTS.md` §8 (privacidad); entrega | 9 de los logs de `evidencias/` contienen rutas absolutas locales con el nombre del usuario y la ruta del store de pnpm | Reemplazar el prefijo de ruta por `<repo>`/`<home>` antes del commit o del archivado si el repositorio será público. Abierto, opcional |
+| H-01 | SUGGESTION | arquitectura-hexagonal; tarea 2.8 | `AGENTS.md:134` dice que `pnpm lint:deps` falla si se rompen "las reglas 1–3", pero también hace cumplir las nuevas 11–12 | Cambiar a "las reglas 1–3, 11 y 12". Resuelto después del archivado (commit de documentación del trabajo en paralelo) |
+| H-02 | SUGGESTION | `AGENTS.md` §8 (privacidad); entrega | 9 de los logs de `evidencias/` contienen rutas absolutas locales con el nombre del usuario y la ruta del store de pnpm | Reemplazar el prefijo de ruta por `<repo>`/`<home>` antes del commit o del archivado si el repositorio será público. Resuelto después del archivado: rutas sustituidas por `<repo>` y `<home>` en los logs |
 | H-03 | SUGGESTION | `infra/migraciones/001_nucleo.sql` (`token_usado.jti uuid`) | El `jti` queda restringido a UUID | Al diseñar el cambio de seguridad, generar el `jti` con `GeneradorId` (UUID v7) o agregar una migración nueva; `001_nucleo` no se edita. Nota para el siguiente cambio |
 
 - Condiciones para recomendar el cierre: cumplidas. Ningún hallazgo CRITICAL ni WARNING; las tres sugerencias no afectan la aceptación. Riesgos residuales: la entrega no tiene commit; `001_nucleo` queda congelada una vez integrada en `main`; los enumerados repetidos en `contracts` dependen de que la prueba de coherencia siga en `pnpm test`.

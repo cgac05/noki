@@ -4,6 +4,15 @@ Claude Code analiza, diseña, planifica y revisa de forma independiente. Codex i
 
 La colaboración ocurre mediante archivos compartidos en este repositorio. El usuario abre cada agente y le transfiere el ID del cambio. No hay orquestación automática, mensajería entre agentes ni ejecución del otro agente al guardar un archivo. Si usan checkouts distintos, el usuario debe transferir también los archivos actuales por su mecanismo habitual; el ID por sí solo no transfiere cambios.
 
+## Varios responsables
+
+El proyecto se divide en frentes con un responsable cada uno; la tabla vigente está en [trabajo-paralelo.md](trabajo-paralelo.md). En este protocolo, **"el usuario" de un cambio es el responsable del frente dueño de ese cambio**, registrado en el campo `Responsable` de su `handoff.md`:
+
+- Solo el responsable del cambio autoriza su implementación y su cierre. La autorización de otro integrante no cuenta, aunque venga del mismo repositorio o del mismo agente.
+- Un cambio que modifique archivos compartidos (según [trabajo-paralelo.md](trabajo-paralelo.md)) requiere la autorización de ambos responsables, registrada por separado en el handoff.
+- Si cambia el responsable de un frente, se actualiza la tabla de [trabajo-paralelo.md](trabajo-paralelo.md) y el campo `Responsable` de los cambios abiertos; las autorizaciones ya registradas conservan su alcance.
+- Los agentes identifican a quién preguntar por el campo `Responsable`; si falta, o si quien escribe en el chat indica que no es ese responsable, se detienen y preguntan.
+
 ## Configuración y comandos
 
 Configuración comprobada con **OpenSpec 1.14.0**, esquema `spec-driven`, perfil global `custom` y entrega `both`. El perfil de esta máquina selecciona los doce workflows compatibles. Claude recibe habilidades en `.claude/skills/` y comandos en `.claude/commands/opsx/`; Codex recibe habilidades en `.agents/skills/`. Codex es una integración de habilidades: no requiere comandos ni prompts bajo `.codex/`.
@@ -60,7 +69,7 @@ Los cinco workflows adicionales (`new`, `continue`, `ff`, `bulk-archive`, `onboa
 6. Con hallazgos, Claude documenta correcciones; Codex las aplica dentro del alcance autorizado y actualiza el informe y su evidencia. Claude vuelve a verificar. Repetir hasta resolver los hallazgos de aceptación.
 7. Con revisión suficiente, Claude recomienda el cierre. El usuario autoriza explícitamente cerrar el ID y la revisión verificada. Claude registra la decisión en `handoff.md`, sincroniza y archiva según corresponda, y verifica el resultado.
 
-Una autorización explícita ya dada no se solicita de nuevo: se referencia y se respeta su alcance. Ningún agente puede emitirla por el usuario. Registrar fecha, alcance, revisión de archivos autorizada y referencia al mensaje o decisión real; no inventar enlaces ni IDs de mensajes. Una referencia puede ser una cita breve de la instrucción del usuario. Con cambios sin commit, identificar la revisión por archivos y hashes de los artefactos autorizados; con commits, puede usarse una referencia Git más el diff pendiente. No se exige crear commits para transferir trabajo.
+Una autorización explícita ya dada no se solicita de nuevo: se referencia y se respeta su alcance. Ningún agente puede emitirla por el usuario. Con varios frentes, "el usuario" es el responsable del cambio según la sección "Varios responsables", y la referencia registrada indica quién autorizó. Registrar fecha, alcance, revisión de archivos autorizada y referencia al mensaje o decisión real; no inventar enlaces ni IDs de mensajes. Una referencia puede ser una cita breve de la instrucción del usuario. Con cambios sin commit, identificar la revisión por archivos y hashes de los artefactos autorizados; con commits, puede usarse una referencia Git más el diff pendiente. No se exige crear commits para transferir trabajo.
 
 Cambios posteriores de requisitos, criterios de aceptación, alcance o decisiones arquitectónicas aprobadas invalidan la autorización de la parte afectada hasta una nueva decisión del usuario. Actualizar casillas o añadir resultados de pruebas no invalida por sí mismo la aprobación. Las decisiones menores compatibles se documentan en el informe de Codex. Nunca modificar requisitos para convertir un hallazgo en cumplimiento.
 
@@ -75,6 +84,7 @@ Usar los formatos siguientes como secciones breves. Referenciar los requisitos p
 ```markdown
 # Transferencia: <id>
 
+- Responsable: <frente y usuario de GitHub según trabajo-paralelo.md; segundo responsable si toca archivos compartidos>
 - Objetivo: <una frase; referencia a proposal.md>
 - Alcance autorizado: <referencias a secciones y exclusiones>
 - Autorización de implementación: PENDIENTE | <decisión real del usuario, fecha y referencia>

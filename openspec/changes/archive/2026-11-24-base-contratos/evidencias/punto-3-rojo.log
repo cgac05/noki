@@ -1,6 +1,6 @@
 $ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
 
- RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+ RUN  v4.0.14 <repo>
 
  ❯ |integracion| tests/integracion/nucleo.test.ts (8 tests | 8 skipped) 6ms
      ↓ crea todas las tablas del núcleo y ninguna tabla excluida; tipo es obligatorio

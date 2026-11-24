@@ -9,7 +9,7 @@ Progress: resolved 1, reused 0, downloaded 0, added 0
 Packages: +284
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Packages are hard linked from the content-addressable store to the virtual store.
-  Content-addressable store is at: C:\Users\Luis Rodriguez\AppData\Local\pnpm\store\v11
+  Content-addressable store is at: <home>\AppData\Local\pnpm\store\v11
   Virtual store is at:             node_modules/.pnpm
 Progress: resolved 284, reused 284, downloaded 0, added 9
 Progress: resolved 284, reused 284, downloaded 0, added 107
@@ -46,7 +46,7 @@ $ depcruise --config .dependency-cruiser.cjs packages apps
 Comando: pnpm test
 Código: 0
 
- RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki/.tools/punto-4-limpio
+ RUN  v4.0.14 <repo>/.tools/punto-4-limpio
 
  ✓ |unitarios| tests/unit/workspace.test.ts (3 tests) 16ms
  ✓ |unitarios| tests/unit/dominio.test.ts (4 tests) 12ms
@@ -70,7 +70,7 @@ $ node --env-file=.env --import tsx apps/api/src/semilla/reset.ts
 Comando: pnpm test:integracion
 Código: 0
 
- RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki/.tools/punto-4-limpio
+ RUN  v4.0.14 <repo>/.tools/punto-4-limpio
 
  ✓ |integracion| tests/integracion/nucleo.test.ts (8 tests) 1007ms
 Reinicio de la base de demo en el host localhost.
