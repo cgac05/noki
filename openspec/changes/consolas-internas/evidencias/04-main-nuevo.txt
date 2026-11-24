@@ -1,0 +1,128 @@
+91de578 chore(openspec): archiva identidad-paciente y sincroniza sus specs
+bf5e6a2 feat(identidad): identificación del paciente por pasos con CURP y teléfono no único
+AGENTS.md
+PLAN.md
+apps/api/src/semilla/datosDemo.ts
+apps/api/src/semilla/sembrar.ts
+docs/contratos.md
+docs/eventos.md
+infra/migraciones/003_identidad.sql
+openspec/changes/archive/2026-11-24-identidad-paciente/.openspec.yaml
+openspec/changes/archive/2026-11-24-identidad-paciente/design.md
+openspec/changes/archive/2026-11-24-identidad-paciente/handoff.md
+openspec/changes/archive/2026-11-24-identidad-paciente/implementacion.md
+openspec/changes/archive/2026-11-24-identidad-paciente/proposal.md
+openspec/changes/archive/2026-11-24-identidad-paciente/revision.md
+openspec/changes/archive/2026-11-24-identidad-paciente/specs/continuidad-canales/spec.md
+openspec/changes/archive/2026-11-24-identidad-paciente/specs/contratos-canales/spec.md
+openspec/changes/archive/2026-11-24-identidad-paciente/specs/identificacion-paciente/spec.md
+openspec/changes/archive/2026-11-24-identidad-paciente/specs/persistencia-tramites/spec.md
+openspec/changes/archive/2026-11-24-identidad-paciente/specs/politica-identidad/spec.md
+openspec/changes/archive/2026-11-24-identidad-paciente/specs/siguiente-pregunta/spec.md
+openspec/changes/archive/2026-11-24-identidad-paciente/tasks.md
+openspec/specs/continuidad-canales/spec.md
+openspec/specs/contratos-canales/spec.md
+openspec/specs/identificacion-paciente/spec.md
+openspec/specs/persistencia-tramites/spec.md
+openspec/specs/politica-identidad/spec.md
+openspec/specs/siguiente-pregunta/spec.md
+packages/adapters/in-http/test/coherencia.test.ts
+packages/adapters/memory/src/ContactosMemoria.ts
+packages/adapters/memory/src/PacientesMemoria.ts
+packages/adapters/out-postgres/src/ContactosPostgres.ts
+packages/adapters/out-postgres/src/PacientesPostgres.ts
+packages/application/src/CasosTramite.ts
+packages/application/src/ResolvedorContinuidad.ts
+packages/application/src/ports/nucleo.ts
+packages/contracts/src/comandos.ts
+packages/contracts/src/siguientePregunta.ts
+packages/domain/src/RegistroTiposTramite.ts
+packages/domain/src/Tramite.ts
+packages/domain/src/TramiteRegistro.ts
+packages/domain/src/eventos.ts
+packages/domain/src/identidad/curp.ts
+packages/domain/src/identidad/identificacion.ts
+packages/domain/src/identidad/nombre.ts
+packages/domain/src/identidad/telefono.ts
+packages/domain/src/index.ts
+packages/domain/src/siguientePregunta.ts
+packages/domain/src/tipos/agendar.ts
+packages/domain/src/vocabulario.ts
+tests/integracion/agendaPostgres.test.ts
+tests/integracion/identidadPostgres.test.ts
+tests/integracion/migracionPersistencia.test.ts
+tests/integracion/semilla.test.ts
+tests/unit/contratos.test.ts
+tests/unit/dominio.test.ts
+tests/unit/nucleo/casosTramite.test.ts
+tests/unit/nucleo/curp.test.ts
+tests/unit/nucleo/identidadPaciente.test.ts
+tests/unit/nucleo/siguientePregunta.test.ts
+tests/unit/persistencia/bateriaPuertos.ts
+tests/unit/persistencia/puertos.test.ts
+diff --git a/packages/contracts/src/comandos.ts b/packages/contracts/src/comandos.ts
+index f48c8d6..c23569a 100644
+--- a/packages/contracts/src/comandos.ts
++++ b/packages/contracts/src/comandos.ts
+@@ -3,6 +3,33 @@ import { CanalSchema, ActorSchema, TipoTramiteSchema, EstadoTramiteSchema } from
+ import { SiguientePreguntaSchema } from './siguientePregunta.ts';
+ 
+ const comun = { canal: CanalSchema, actor: ActorSchema, tramiteId: z.uuidv7().optional(), hiloId: z.uuidv7().optional() };
++export const ENTIDADES_NACIMIENTO = [
++  'AS', 'BC', 'BS', 'CC', 'CL', 'CM', 'CS', 'CH', 'DF', 'DG', 'GT', 'GR',
++  'HG', 'JC', 'MC', 'MN', 'MS', 'NT', 'NL', 'OC', 'PL', 'QT', 'QR', 'SP',
++  'SL', 'SR', 'TC', 'TS', 'TL', 'VZ', 'YN', 'ZS', 'NE',
++] as const;
++
++const formatoCurp = new RegExp(
++  '^[A-Z][AEIOUX][A-Z]{2}[0-9]{6}[HMX](' + ENTIDADES_NACIMIENTO.join('|') +
++  ')[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9][0-9]$',
++);
++
++const datosNombre = z.string().trim().min(1);
++export const IdentificarPacienteSchema = z.object({
++  ...comun, tipo: z.literal('IdentificarPaciente'), tramiteId: z.uuidv7(),
++  payload: z.discriminatedUnion('paso', [
++    z.strictObject({ paso: z.literal('DESTINATARIO'), para: z.enum(['MI', 'OTRA_PERSONA']) }),
++    z.strictObject({ paso: z.literal('CONFIRMAR'), candidato: z.string().min(1).nullable() }),
++    z.strictObject({ paso: z.literal('FECHA_NAC'), fechaNac: z.iso.date() }),
++    z.strictObject({ paso: z.literal('CURP'), curp: z.string().regex(formatoCurp).nullable() }),
++    z.strictObject({
++      paso: z.literal('DATOS'), nombre: datosNombre, apellidoPaterno: datosNombre,
++      apellidoMaterno: datosNombre.optional(), fechaNac: z.iso.date().optional(),
++      sexo: z.enum(['F', 'M', 'X']).optional(), entidadNacimiento: z.enum(ENTIDADES_NACIMIENTO).optional(),
++    }),
++    z.strictObject({ paso: z.literal('REINICIAR') }),
++  ]),
++});
+ export const ComandoRequestSchema = z.discriminatedUnion('tipo', [
+   z.object({ ...comun, tipo: z.literal('IniciarTramite'), payload: z.object({ tipoTramite: TipoTramiteSchema, contacto: z.string().regex(/^\d{10,15}$/).optional() }) }),
+   z.object({
+@@ -12,6 +39,7 @@ export const ComandoRequestSchema = z.discriminatedUnion('tipo', [
+   z.object({ ...comun, tipo: z.literal('SeleccionarServicio'), payload: z.object({ servicioId: z.uuidv7() }) }),
+   z.object({ ...comun, tipo: z.literal('SeleccionarSede'), payload: z.object({ sedeId: z.uuidv7() }) }),
+   z.object({ ...comun, tipo: z.literal('AsignarPaciente'), payload: z.object({ pacienteId: z.uuidv7() }) }),
++  IdentificarPacienteSchema,
+   z.object({ ...comun, tipo: z.literal('ReservarHorario'), payload: z.object({ recursoId: z.uuidv7(), inicio: z.string().datetime() }) }),
+   z.object({ ...comun, tipo: z.literal('ConfirmarCita'), payload: z.object({ reservaId: z.uuidv7() }) }),
+   z.object({ ...comun, tipo: z.literal('CancelarCita'), payload: z.object({ motivo: z.string().min(1).max(200).optional() }) }),
+diff --git a/packages/contracts/src/siguientePregunta.ts b/packages/contracts/src/siguientePregunta.ts
+index 1aa3a75..3c98d27 100644
+--- a/packages/contracts/src/siguientePregunta.ts
++++ b/packages/contracts/src/siguientePregunta.ts
+@@ -2,12 +2,15 @@ import { z } from 'zod';
+ import { CasillaSchema } from './vocabulario.ts';
+ import { CampoFlowSchema, OpcionSchema } from './mensajesBot.ts';
+ 
++export const PASOS_IDENTIFICACION = ['DESTINATARIO', 'CONFIRMAR', 'FECHA_NAC', 'CURP', 'DATOS'] as const;
++
+ export const SiguientePreguntaSchema = z.discriminatedUnion('tipo', [
+   z.object({ tipo: z.literal('COMPLETO') }),
+   z.object({
+     tipo: z.literal('PREGUNTA'), casilla: CasillaSchema,
+     pista: z.object({
+       entrada: z.enum(['TEXTO', 'BOTONES', 'LISTA', 'FLOW', 'NINGUNA']),
++      paso: z.enum(PASOS_IDENTIFICACION).optional(),
+       opciones: z.array(OpcionSchema).optional(),
+       campos: z.array(CampoFlowSchema).optional(),
+     }),

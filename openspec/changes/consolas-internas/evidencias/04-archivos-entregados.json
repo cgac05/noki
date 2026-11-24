@@ -1,0 +1,425 @@
+{
+  "fecha": "2026-11-24",
+  "cambio": "consolas-internas",
+  "rama": "feat/consolas-internas",
+  "revisionAutorizada": 1,
+  "baseOriginal": "42d6a78215dbdd8ef43941040c0346a6066accbe",
+  "baseRebasada": "91de57836c92e9106cc13dd85ebca0d5f181d659",
+  "mainObservado": "91de57836c92e9106cc13dd85ebca0d5f181d659",
+  "mainRemotoObservado": "91de57836c92e9106cc13dd85ebca0d5f181d659",
+  "estado": "17/17 tareas completadas; entrega para revisión independiente",
+  "controlesSobreBaseRebasada": {
+    "rebase": "PASS, sin conflictos",
+    "instalacionCongelada": "PASS",
+    "lint": "PASS",
+    "dependencias": "PASS: 166 módulos, 453 dependencias",
+    "pruebas": "PASS: pnpm test, 240 pruebas / 39 archivos, sin limitar trabajadores",
+    "integracion": "PASS: 32 pruebas / 12 archivos",
+    "buildReal": "PASS",
+    "buildMock": "PASS",
+    "recorridoManual": "PASS: 375 y 1280 px, 26 comprobaciones, 8 capturas",
+    "openspec": "PASS, validación estricta",
+    "diff": "PASS, git diff --check"
+  },
+  "alcance": "PASS: apps/web/**, pnpm-lock.yaml y carpeta del cambio",
+  "commitsPropiosSobreMain": 0,
+  "identidadEnVistas": "Sin IdentificarPaciente ni pista.paso",
+  "pendientesExternos": [
+    "Revisión independiente de Claude y autorización de cierre",
+    "Recorrido real de punta a punta bloqueado hasta api-comandos en main; confirmar servidor Socket.IO 4.x con frente A"
+  ],
+  "evidenciaHistorica": "Los archivos 01-03 y 04-integracion-base-autorizada.txt conservan resultados previos al rebase; 04-manual-bloqueado.json está superado por 04-recorrido-manual.json",
+  "archivoExcluidoDeAutohash": "openspec/changes/consolas-internas/evidencias/04-archivos-entregados.json",
+  "archivos": [
+    {
+      "ruta": "apps/web/package.json",
+      "bytes": 785,
+      "sha256": "3d5ed1161cfb1146d83c89b6b99879d7cfba06f24de662d05e11fd03e8844ffc"
+    },
+    {
+      "ruta": "apps/web/README.md",
+      "bytes": 14661,
+      "sha256": "f36f7db21c0ba08ce790ce4131ff42dc258deaf4b0ae79f1187846dc0e55c40f"
+    },
+    {
+      "ruta": "apps/web/src/cliente/cliente.test.ts",
+      "bytes": 18172,
+      "sha256": "7b67742abd14fd59781fd024211733de4e4b65ed1a36204067f7eeed8ee02aa3"
+    },
+    {
+      "ruta": "apps/web/src/cliente/ClienteApi.ts",
+      "bytes": 1154,
+      "sha256": "a13ee390f44ab8bc33674398fd599df60ec094046c314c58ce3007fb1bb73c06"
+    },
+    {
+      "ruta": "apps/web/src/cliente/contexto.test.tsx",
+      "bytes": 4496,
+      "sha256": "7bb369fea17771488a0425c50dec84b9c720df1a5c0e4487983619f56eb00c56"
+    },
+    {
+      "ruta": "apps/web/src/cliente/demo.ts",
+      "bytes": 1103,
+      "sha256": "b599a52ad9ed35659546d2bcb7fffcd7b59b57b96146327441f4caa162983399"
+    },
+    {
+      "ruta": "apps/web/src/cliente/guionWa.test.ts",
+      "bytes": 3078,
+      "sha256": "88ff26938d4c90a8ea64a64373952f166773aef0f8b1cc2bae6ed017110e244f"
+    },
+    {
+      "ruta": "apps/web/src/cliente/mock/ClienteMock.ts",
+      "bytes": 6430,
+      "sha256": "bc4c98cf44b676d7963347aad75dffd4f50212641288fd87ceafa8b88200b40a"
+    },
+    {
+      "ruta": "apps/web/src/cliente/mock/guionFlujoA.ts",
+      "bytes": 15088,
+      "sha256": "85a685994577f886727dfcefd27d9da0f3f41441baf41c6f64d71377e66a3237"
+    },
+    {
+      "ruta": "apps/web/src/cliente/ProveedorCliente.tsx",
+      "bytes": 4165,
+      "sha256": "78c0f48442cb7fccbc4c25505378e580bc5658843cab61f8c5e9d2c34c39ef92"
+    },
+    {
+      "ruta": "apps/web/src/cliente/real/ClienteReal.ts",
+      "bytes": 6609,
+      "sha256": "62c937553cdfcb93372e44f0a79d147053809432d0080e2a6d5427df05986abc"
+    },
+    {
+      "ruta": "apps/web/src/cliente/tiempoReal.test.ts",
+      "bytes": 4100,
+      "sha256": "8855ebeca581be77bdf7935c81ed26ba9d92f1648ccf822c02588bda6f8f3b07"
+    },
+    {
+      "ruta": "apps/web/src/cliente/useAccion.ts",
+      "bytes": 1884,
+      "sha256": "354136d6e2a10a208af68aa9577441498ef7f2cb21aa6cbeb2ec8e275674829a"
+    },
+    {
+      "ruta": "apps/web/src/cliente/useSala.ts",
+      "bytes": 266,
+      "sha256": "49e86063113f905da30633723b8981f97669840f9401fc4365bbe418e1dd791c"
+    },
+    {
+      "ruta": "apps/web/src/componentes/EstadoContexto.tsx",
+      "bytes": 578,
+      "sha256": "41cddadbe2032c4a76c30c7508ea5f059739b6feae1301dd9dd868f9fdb10f8b"
+    },
+    {
+      "ruta": "apps/web/src/pruebas/socketFalso.ts",
+      "bytes": 773,
+      "sha256": "537a0f2e196b88c46049a570e2e63ad57919967fb84d6f6a5061479142199d36"
+    },
+    {
+      "ruta": "apps/web/src/styles.css",
+      "bytes": 11584,
+      "sha256": "750850ef212c83dfeb9dae8c72abace5feaa3d07d836f2bdd84bbe6702a66f00"
+    },
+    {
+      "ruta": "apps/web/src/vistas/Admin.tsx",
+      "bytes": 2409,
+      "sha256": "b109aaca66ced77f1cbbaa9b6992b4f78485c7467b5b2b8e490ab9b02b3f46d6"
+    },
+    {
+      "ruta": "apps/web/src/vistas/App.tsx",
+      "bytes": 1936,
+      "sha256": "ac3bea5d6c82c8b68a67fc513cf4cf7a6fce52b48b03c2ee771bfa145174ccc1"
+    },
+    {
+      "ruta": "apps/web/src/vistas/CallCenter.tsx",
+      "bytes": 6223,
+      "sha256": "c4543c0a188bd42de6573b9aadad20ab0401f621407ba85d6f10e5bc27dd43d8"
+    },
+    {
+      "ruta": "apps/web/src/vistas/Clinica.tsx",
+      "bytes": 2253,
+      "sha256": "47a8e8be5c0e163bcbcc112e2aa19c82fba4ef6716b30b03236ba69abe8c46e7"
+    },
+    {
+      "ruta": "apps/web/src/vistas/consolas.test.tsx",
+      "bytes": 16829,
+      "sha256": "8c0a2e43379ec2fc732a81028bbc67cb77c4ab956fa5bf33e3151922ca925035"
+    },
+    {
+      "ruta": "apps/web/src/vistas/vistas.test.tsx",
+      "bytes": 17390,
+      "sha256": "8425b72e53163290ed2095040f8fe5e132575a339c474bb2e000f1be2940558f"
+    },
+    {
+      "ruta": "apps/web/src/vistas/wa.test.tsx",
+      "bytes": 10203,
+      "sha256": "47a769661eb860426d60cf41641aaba30db1caf5986a3394339b99821d605b33"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/.openspec.yaml",
+      "bytes": 40,
+      "sha256": "0b89965c6919ee9f0b3679bc8491b3c9efd623f2ceac7e5bd3929eff87f22215"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/design.md",
+      "bytes": 7791,
+      "sha256": "acce7926df67b7aebf0fb26539a9fa7ca28fe8bd22d271925391de429102178f"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/01-contexto-rojo.txt",
+      "bytes": 7927,
+      "sha256": "320cde6d9c605fecf6363152f79ca79229e7ade1fe1c5038797400ec7c23e0c4"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/01-deps.txt",
+      "bytes": 173,
+      "sha256": "34a55c9b66f38d397e6a505ac35bc6dfc8c8711c171a0b36710c7873d3919b52"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/01-install.txt",
+      "bytes": 609,
+      "sha256": "8b321486152badfd15e3790b2d2e427e7711c071fd5524ef04b0fce7c07d2e84"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/01-lint.txt",
+      "bytes": 126,
+      "sha256": "aa82e7b0c763e692e012b7e6ea8ee3065ef5069ea68fd6af17d9d0be65f6cd4b"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/01-rojo.txt",
+      "bytes": 3523,
+      "sha256": "ae62c1844ebac632626067ee62415a43424b518afbfab836eb3a20656fbbb529"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/01-test.txt",
+      "bytes": 4906,
+      "sha256": "4e27acb89317839cf05fa9e0af18dc575235138d73df8fa554a1c8639f278c24"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/02-deps.txt",
+      "bytes": 179,
+      "sha256": "3582f4653a47be27fafae891a3a34071c35b36facde5d52c7b8412771b2b08e1"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/02-lint.txt",
+      "bytes": 130,
+      "sha256": "b7fe240eace6935bc1a8f69eb419a3e4a5ccbb7d2a2b8453e0f9535568334ffc"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/02-rojo.txt",
+      "bytes": 44341,
+      "sha256": "e9dafdfefecc78cc4f236d6cd9864ba2820b4c1a089f8af68fc4c079c2a9a5ce"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/02-test-dos-trabajadores.txt",
+      "bytes": 7845,
+      "sha256": "cc18bee865fd50bf783fa43dda6ac92211b28cc9a063969b94c0e7918534700e"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/02-test-intento-inicial.txt",
+      "bytes": 853,
+      "sha256": "defc3a05f2f6cdffe677348ee412dfddaddcdf2a311b95b1240f47a0862909cc"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/02-test-un-trabajador-previo.txt",
+      "bytes": 7190,
+      "sha256": "a9bdad54ef6db970caebc4315f830cfa99745b2e87ac500934611f5ea47e506e"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/02-test.txt",
+      "bytes": 4685,
+      "sha256": "3d51d98791960aa1f0415ade34a3e2e1ff9f3c5a62d7617889daa2298a718496"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/03-deps.txt",
+      "bytes": 179,
+      "sha256": "6a0c2da249487e8f886729e05f1c58c44a23b730b72c2baf8d83d1a1d9ae18a6"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/03-fronteras.txt",
+      "bytes": 403,
+      "sha256": "1a9a2e86dd4d57940a3ea4f11166aac0ad5b1487aba783aeca8162bc2bb2e02d"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/03-kpi-rojo.txt",
+      "bytes": 30957,
+      "sha256": "8e42be9fd4253f957722b4dc6acc757bcfbfb67a2ace5242536abb41d1360476"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/03-lint.txt",
+      "bytes": 130,
+      "sha256": "b7fe240eace6935bc1a8f69eb419a3e4a5ccbb7d2a2b8453e0f9535568334ffc"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/03-rojo.txt",
+      "bytes": 91139,
+      "sha256": "42ac43f8a3a051f744f8de4b918192876e0b59b9c90adf2cdcd6d52a7549ac64"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/03-test.txt",
+      "bytes": 4201,
+      "sha256": "95eaf5ad46fba4b8a8577bc71f8581b428027dcf62c48c32353a5aa4c8a5c586"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-1280-admin.jpg",
+      "bytes": 127574,
+      "sha256": "f4c1022574a3e778bb56ac3239cf7227235b436ac74ec47bcc7ab5c8653d3296"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-1280-app.jpg",
+      "bytes": 58884,
+      "sha256": "fe396bad4adf2061d21423e40199c687bfba890a0a06c616b22da57ac518d1b5"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-1280-clinica-registrada.jpg",
+      "bytes": 42008,
+      "sha256": "f44437ffcab207ef89613d0caed514f78b3b524d922f10560e0244796421c642"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-1280-continuacion.jpg",
+      "bytes": 108679,
+      "sha256": "5222ee8b5e60018f89036f631789dd6cb05fab3c86ceb63782b138700aada5b7"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-1280-cotizacion.jpg",
+      "bytes": 79661,
+      "sha256": "95bb0a35b86500c2a1d97396752702930f51cd9a045f0008b75656a6476a5e36"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-375-admin.jpg",
+      "bytes": 91435,
+      "sha256": "b28e3b5ae96137df6bc0be3906938a3cbc96d09c3e1eee213a16256f55803078"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-375-app.jpg",
+      "bytes": 45310,
+      "sha256": "ae34c412eaf8cc5f1c73dad2b1063f4dab37c93fe5feaa7021ce494a61dd15ea"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-375-clinica-registrada.jpg",
+      "bytes": 29501,
+      "sha256": "47902490a9bcc7de4ead44e1762e81704fec43eb42ea46bbe7f7214d0447c193"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-base.txt",
+      "bytes": 688,
+      "sha256": "9d26cb8d0911adc0633158a78250a37b6e793eb14a13401004595fdbaf6d8690"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-build-mock.txt",
+      "bytes": 6280,
+      "sha256": "70b94cebf7e693418e83527a388d5e5a3fcc36484382f27a143c85fbec4957c4"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-build-real.txt",
+      "bytes": 6280,
+      "sha256": "ac03d971242bb3c939a94c6bd5798334fd3b6881ef806b94a704e47ae1fc51be"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-deps.txt",
+      "bytes": 236,
+      "sha256": "dcf7130c8d1c7ac66af2806ce1a2130aecb8a259194f598a07d61c01f1b4010d"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-install.txt",
+      "bytes": 191,
+      "sha256": "8f8e0ab829f0c6d41873c69bf646ac18df77065785ca0a4ff5fd3c59a7faf7a9"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-integracion-base-autorizada.txt",
+      "bytes": 2150,
+      "sha256": "15458bc1ea16cc021b81bdda8cc171d1be8c814e709f63c263378e901633c070"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-integracion.txt",
+      "bytes": 2186,
+      "sha256": "0b2fcaabaf8809f8eb9aa9b03f70c62cbb85b8353bd437f5e04426fc647bd9e2"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-lint.txt",
+      "bytes": 187,
+      "sha256": "e47a41162ae44af8de7fb58a8b52bd5705d248c16e417df30685f38e9288dc60"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-main-nuevo.txt",
+      "bytes": 7010,
+      "sha256": "08a5065a02ef26748a39b1bf69c89aaf7ed6fa6bd5964e54e08172caade639b8"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-manual-bloqueado.json",
+      "bytes": 1122,
+      "sha256": "889ac8ebd1dbe8fdc562a4cdbbf66683acbaf96ee577cedea42025e690f83811"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-rebase.txt",
+      "bytes": 315,
+      "sha256": "5b1b6ffc3d354e624dac28e0c42a2fe96286a9b3ae7c38e650c9509da83b7896"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-recorrido-automatizado.json",
+      "bytes": 3405,
+      "sha256": "66781e711c28c91dc908f9bf3a2835b99fe326d2560d0f651c53c01482443fa4"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-recorrido-manual.json",
+      "bytes": 9926,
+      "sha256": "591271cc37ce8bc733625527d07d033154e396245d85d06fc3e3bb291cf47c6a"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-test.txt",
+      "bytes": 5793,
+      "sha256": "22256b68b61e5a1aeecfcad73db5d45d64f1d4138b566d82ac1721aae89e5dcd"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/04-validacion-entrega.txt",
+      "bytes": 366,
+      "sha256": "462df212b8aa173f1ccc5d65f946e3f06219b8cab9541d924dcf8568b2ee2ebb"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/recorrido.ts",
+      "bytes": 1534,
+      "sha256": "183d7bebb4d33bd01dee88f1b7134ecb5c104637e29148de7e26b42c3cf48760"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/evidencias/validar.ps1",
+      "bytes": 782,
+      "sha256": "4981fb5b3e84cc3941ea0021a3790099897b2422321d31f722725d5122a658a8"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/handoff.md",
+      "bytes": 4649,
+      "sha256": "86b1180bb28005caef988978a516ea5b8b580cc7f7816c9d427e905ddb774644"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/implementacion.md",
+      "bytes": 15156,
+      "sha256": "2fbf60bb8f12ba816895cdac0696c3c19fc7dc6d47552148b65ab1ee61d95d5a"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/proposal.md",
+      "bytes": 4977,
+      "sha256": "47acb9cd98289f5d4cd425b20e1ca766aeecd83f57b8ec93a73494606af001ce"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/specs/cliente-api-canales/spec.md",
+      "bytes": 4656,
+      "sha256": "260044e9353d5f6a30e7172fc4e73216f64d72a58244527542ffdd7364012e67"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/specs/consolas-internas/spec.md",
+      "bytes": 6363,
+      "sha256": "67befadb6d2360528bc9d61ce21a6767adafb77745a8917b5d74fe87daad0303"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/specs/navegacion-canales/spec.md",
+      "bytes": 1608,
+      "sha256": "eccc2a11e322baed9d0fd3b74b2ff12b7ffb688ff85b57e291ada9d971539e82"
+    },
+    {
+      "ruta": "openspec/changes/consolas-internas/tasks.md",
+      "bytes": 5833,
+      "sha256": "77823b2ececc8cfbfe2e571fde24af30f73cdf95c9739dfba362c0d862a751ab"
+    },
+    {
+      "ruta": "pnpm-lock.yaml",
+      "bytes": 143208,
+      "sha256": "a1d683c844870a347845e982749425deb5617e7d7fae7c611d635106c49891aa"
+    }
+  ]
+}

@@ -29,7 +29,7 @@ Si no cambiaron dependencias, basta `pnpm --filter @noki/web dev`. Recarga despu
 |---|---|
 | `VITE_API` | `mock` por defecto solo en desarrollo y pruebas; `real` selecciona HTTP. Producción exige definir explícitamente `mock` o `real`; sin VITE_API la build falla. Un valor diferente impide iniciar. |
 | `VITE_API_URL` | URL base del cliente real; por defecto `http://localhost:4000`. Sin barra final obligatoria. |
-| `VITE_DEMO` | Solo el valor `true` habilita la consulta de bandeja en el cliente real; por defecto está deshabilitada. |
+| `VITE_DEMO` | Solo el valor `true` habilita `bandeja` y `contextoDemo` en el cliente real; por defecto están deshabilitadas. Es necesario para obtener el contexto de las consolas y `/app` en una pestaña nueva de la demo real. |
 
 Vite incorpora estas variables al compilar. Reinicia el servidor después de cambiarlas y vuelve a compilar para cambiar un bundle de producción. Se pueden configurar también en `apps/web/.env.local` (ignorado por Git); no incluyas secretos en variables `VITE_*`, que son públicas.
 
@@ -37,9 +37,9 @@ Vite incorpora estas variables al compilar. Reinicia el servidor después de cam
 
 Usa **una misma pestaña**, con la barra de canales. El guion vive en memoria: cambiar de ruta conserva su estado; recargar la página lo reinicia. **Reiniciar guion** restablece todas las vistas, la cotización web y el historial del número activo. El historial redactado sobrevive a la recarga, pero el índice del guion mock vuelve al inicio: antes de repetir el ensayo, reinícialo. La latencia simulada por defecto es 150 ms.
 
-1. Abre `/callcenter` y pulsa **Llamada entrante**. La ficha muestra a Ana y el contacto enmascarado.
+1. Abre `/callcenter`. **Número de la llamada (ANI)** comienza con `5210000000001`, de la paciente ficticia. Acepta de 10 a 15 dígitos, sin espacios ni signos; un formato inválido deshabilita **Llamada entrante** y explica cómo corregirlo. Al llamar se envía como `payload.contacto`; la captura desaparece y la ficha solo muestra el contacto enmascarado (o «—» si es nulo).
 2. Pulsa **Cotizar paquete en Tepic**. El guion muestra Paquete US mamario + Papanicolaou, sede Tepic y $250.00 MXN (25000 centavos, igual que la semilla).
-3. Pulsa **Continuar por WhatsApp**. Aparecen **Abrir WhatsApp** y el QR de `/wa?continuar=<código>`, sin avanzar el trámite. Abre ese enlace en la misma pestaña durante el ensayo mock. El QR para otro dispositivo requiere la API real y una dirección pública accesible.
+3. Marca **El paciente aceptó continuar por WhatsApp** y pulsa **Continuar por WhatsApp**. Se envía `SolicitarContinuacion` una sola vez, incluso con doble clic. El guion pasa a **Continuación solicitada** (`CONTINUACION_SOLICITADA`), conserva `COTIZADO` y registra `ConsentimientoContactoWA`. Solo entonces la ficha entrega el código y aparecen **Abrir WhatsApp** y el QR de `/wa?continuar=<código>`. El guion tiene once pasos visibles. Abre ese enlace en la misma pestaña durante el ensayo mock. El QR para otro dispositivo requiere la API real y una dirección pública accesible. Si falla, **Reintentar** conserva la clave de idempotencia.
 4. Al abrir el enlace, `/wa` envía una vez `CONTINUAR <código>`, retira el parámetro de la URL y guarda solo `CONTINUAR ••••` en el historial. El bot retoma en el horario, sin volver a pedir servicio ni sede. Pulsa **Ver horarios**.
 5. Pulsa **Ver opciones** y elige **Jueves 26 · 09:15** en la hoja de la lista. La otra sección demuestra la lista y responde con ayuda; el guion fijo continúa con 09:15. Las fechas de ejemplo son del 26 de noviembre de 2026 y se muestran en `America/Mazatlan`.
 6. Pulsa **Revisar cita** y **Abrir formulario**. Completa el Flow con una fecha ficticia y pulsa **Enviar formulario**. La entrada está enmascarada y el historial muestra solo `Fecha de nacimiento ••••`. Puedes cancelar o usar Escape; Tab y Shift+Tab permanecen en el modal. El mock solo comprueba que llegue el requerido, sin verificar identidad.
@@ -55,6 +55,8 @@ En móvil, la barra conserva los siete enlaces en una sola fila: desplázala hor
 ## Conversación y privacidad
 
 El campo **Número de WhatsApp** comienza con Ana: `5210000000001`. Acepta de 10 a 15 dígitos, sin signos ni espacios. Al cambiarlo se muestra el historial de ese número. El número seleccionado no se guarda como preferencia.
+
+El ANI del call center y el código de continuación no se guardan en almacenamiento del navegador ni se escriben en consola. La ficha usa únicamente el nombre y el teléfono enmascarado de la lectura.
 
 Las burbujas se acumulan por número en `sessionStorage` (llave `noki:wa:<número>`) y se recuperan al cambiar de vista o recargar. Solo se guardan texto, títulos elegidos, mensajes del bot y resúmenes redactados; no solicitudes, códigos de continuación, valores del Flow ni claves de reintento. No se usa localStorage ni IndexedDB. **Nueva conversación** borra el historial activo de la pantalla y de la sesión; no reinicia el trámite. **Reiniciar guion** permite repetir el ensayo. Cerrar la pestaña termina su sesión.
 
@@ -75,15 +77,29 @@ Abre `/web`, pulsa **Cotizar en Tepic** y después **Continuar en WhatsApp** par
 ```powershell
 $env:VITE_API = 'real'
 $env:VITE_API_URL = 'http://localhost:4000'
+$env:VITE_DEMO = 'true'
 pnpm --filter @noki/web build
 pnpm --filter @noki/web exec vite preview --host 127.0.0.1 --port 4173
 ```
 
-Abre `/wa` en la vista previa y envía un mensaje. Si la API no está disponible, la burbuja muestra el error de red con **Reintentar**. También puedes abrir `/admin` para consultar `GET /api/admin/kpis`. Si no hay API escuchando, aparece un mensaje de conexión con **Reintentar**. El cliente resuelve las nueve consultas compartidas con `RUTAS_CONSULTAS` y valida sus respuestas. Los endpoints GET corresponden al frente A; definir el contrato no significa que ya estén implementados. La cotización `web` sigue siendo una consulta exclusiva de demo. WhatsApp usa únicamente el contrato POST de mensajes, sin una consulta de conversación. El modo real no utiliza fixtures como respaldo silencioso. El servidor real deberá permitir el origen de la web para las peticiones entre puertos.
+Abre `/wa` en la vista previa y envía un mensaje. Si la API no está disponible, la burbuja muestra el error de red con **Reintentar**. También puedes abrir `/admin` para consultar `GET /api/admin/kpis`. Si no hay API escuchando, aparece un mensaje de conexión con **Reintentar**. El cliente resuelve las diez consultas compartidas con `RUTAS_CONSULTAS` y valida sus respuestas. Los endpoints GET corresponden al frente A; definir el contrato no significa que ya estén implementados. La cotización `web` sigue siendo una consulta exclusiva de demo. WhatsApp usa únicamente el contrato POST de mensajes, sin una consulta de conversación. El modo real no utiliza fixtures como respaldo silencioso. El servidor real deberá permitir el origen de la web para las peticiones entre puertos.
 
 El cliente está preparado para `POST /api/comandos` y `POST /api/canales/wa/mensajes`, con validación antes de enviar y después de recibir. Genera una clave de idempotencia por intento lógico y la conserva durante un único reintento automático de red. Los comandos y los mensajes de WhatsApp conservan su clave al pulsar **Reintentar**. El endpoint real debe respetar Idempotency-Key por mensaje. Un error HTTP válido conserva su código y mensaje públicos; los errores de contrato no muestran los detalles Zod.
 
-Las lecturas compartidas usan los esquemas de `@noki/contracts` y las rutas de [contratos](../../docs/contratos.md). Las vistas toman los IDs de la última respuesta de comando o, en mock, de `cliente.demo.ids`. Sin contexto real muestran un aviso y no inventan IDs; la sesión de paciente real está pendiente del cambio de seguridad. La bandeja real requiere `VITE_DEMO=true`. La conexión Socket.IO real está pendiente de `api-comandos`; `suscribir` devuelve por ahora una función de cancelación sin abrir conexiones. Las lecturas y la experiencia completa contra API no se declaran integradas en este cambio.
+Las lecturas compartidas usan los esquemas de `@noki/contracts` y las rutas de [contratos](../../docs/contratos.md). El proveedor resuelve cada ID con prioridad: guion simulado, última respuesta de comando de la pestaña y `contextoDemo` (solo real). La respuesta de comando no expone `pacienteId`: `/app` lo recibe de `contextoDemo`. Se comparte una sola consulta entre consumidores; **Actualizar** vuelve a pedirla y los eventos la invalidan. Si no está habilitada la demo o devuelve nulos, clínica, app y el hilo de administración explican que falta contexto y ofrecen **Actualizar**; los fallos de red o contrato se muestran con **Reintentar**. El call center real nuevo espera una llamada propia y no abre el hilo de otra atención indicado por `contextoDemo`. La sesión de paciente real está pendiente del cambio de seguridad; el servidor necesita `DEMO_MODE=true` para `GET /api/demo/contexto`.
+
+El cliente real usa `socket.io-client` **4.8.1 exacta**, con conexión perezosa a `VITE_API_URL` y transporte WebSocket. Valida salas y eventos con el contrato, cuenta referencias para no repetir uniones/salidas y vuelve a unirse a las salas activas tras reconectar. Al llegar un evento válido el proveedor actualiza las lecturas sin recargar; los inválidos se descartan. Las vistas usan `useSala`, sin acceso directo al socket.
+
+| Vista | Salas durante su uso |
+|---|---|
+| Call center | `hilo:<hiloId>` de la llamada activa |
+| Clínica | `sede:<sedeId>` |
+| Administración | `admin` y `hilo:<hiloId>` cuando hay hilo |
+| App | `paciente:<pacienteId>` |
+
+Cambiar el identificador o salir de la vista libera la sala anterior; en modo simulado la unión no tiene efectos y los eventos siguen saliendo del guion. Antes de integrar con `api-comandos`, confirmar con el frente A que `socket.io` sea **4.x**; una major distinta bloquea la integración. El servidor y el recorrido real de punta a punta siguen pendientes de ese cambio.
+
+Clínica registra desde la lista de llegadas con el token recibido, muestra la fecha en la zona de la sede y retira la acción cuando la lectura indica que ya está registrada. Administración muestra los conteos y KPI recibidos, con etiquetas españolas para las siete claves documentadas y la clave original para cualquier otra; no calcula métricas. Una ficha de solo lectura deshabilita las operaciones del asesor.
 
 Para regresar al modo simulado:
 
@@ -121,4 +137,4 @@ pnpm --filter @noki/web build
 
 `pnpm test` conserva las comprobaciones TypeScript y ejecuta los proyectos `unitarios` y `web`. Para correr solo las pruebas de la web: `pnpm exec vitest run --project web`. También está disponible la configuración local con `pnpm exec vitest run --root apps/web`.
 
-La revisión visual debe recorrer el guion a 375 × 812 y 1280 × 900, comprobar navegación con Tab, recarga directa en `/wa`, errores de consola y ausencia de desplazamiento horizontal. El estado real de estas comprobaciones y la revisión probada quedan en `openspec/changes/simulador-wa/implementacion.md` y su carpeta `evidencias/`.
+La revisión visual debe recorrer el guion a 375 × 812 y 1280 × 900, comprobar navegación con Tab, recarga directa en `/wa`, errores de consola y ausencia de desplazamiento horizontal. El estado real de estas comprobaciones y la revisión probada quedan en `openspec/changes/consolas-internas/implementacion.md` y su carpeta `evidencias/`.

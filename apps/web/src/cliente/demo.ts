@@ -3,7 +3,7 @@ import { OfertaCatalogoSchema, RespuestaComandoSchema } from '@noki/contracts';
 
 // Solo las lecturas exclusivas del guion; los modelos compartidos vienen del contrato.
 export const PasoGuionSchema = z.object({
-  id: z.enum(['INICIO', 'LLAMADA_ENTRANTE', 'COTIZADO', 'CONTINUAR_WA', 'ELEGIR_HORARIO', 'HORARIO_RESERVADO', 'VERIFICACION', 'VERIFICADA', 'CONFIRMADA', 'EN_CLINICA']),
+  id: z.enum(['INICIO', 'LLAMADA_ENTRANTE', 'COTIZADO', 'CONTINUACION_SOLICITADA', 'CONTINUAR_WA', 'ELEGIR_HORARIO', 'HORARIO_RESERVADO', 'VERIFICACION', 'VERIFICADA', 'CONFIRMADA', 'EN_CLINICA']),
   titulo: z.string().min(1), numero: z.number().int().positive(), total: z.number().int().positive(),
 }).strict();
 export type PasoGuion = z.infer<typeof PasoGuionSchema>;

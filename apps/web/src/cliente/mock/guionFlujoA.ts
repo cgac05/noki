@@ -23,7 +23,7 @@ const llegada = {
   payload: { token: IDS.tokenQr },
 } as const;
 const llamar: EntradaGuion = {
-  tipo: 'comando', titulo: 'Llamada entrante', comando: { canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR' } },
+  tipo: 'comando', titulo: 'Llamada entrante', comando: { canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR', contacto: CONTACTO_DEMO } },
 };
 const cotizar: EntradaGuion = {
   tipo: 'comandos', titulo: 'Cotizar paquete en Tepic', comandos: [
@@ -83,48 +83,55 @@ const definiciones: Array<{
     id: 'COTIZADO', titulo: 'Paquete cotizado en Tepic', espera: cotizar,
     respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'COTIZADO', version: 3, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: preguntarHorario, eventos: [evento(2, 'ServicioSeleccionado', 'callcenter'), evento(3, 'SedeSeleccionada', 'callcenter'), evento(4, 'CotizacionGenerada', 'callcenter')] },
     mensajes: [{ tipo: 'texto', texto: 'Tu cotización está lista. El asesor puede continuar por WhatsApp.' }],
-    ayuda: 'Pulsa Continuar por WhatsApp en Call Center.', soloLectura: false, citas: false, registrada: false, cambiosCanal: 0,
+    ayuda: 'Confirma el consentimiento y pulsa Continuar por WhatsApp en Call Center.', soloLectura: false, citas: false, registrada: false, cambiosCanal: 0,
+  },
+  {
+    id: 'CONTINUACION_SOLICITADA', titulo: 'Continuación solicitada',
+    espera: { tipo: 'comando', titulo: 'Continuar por WhatsApp', comando: { canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SolicitarContinuacion', tramiteId: IDS.tramite, payload: { destino: 'whatsapp' } } },
+    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'COTIZADO', version: 4, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: preguntarHorario, eventos: [evento(5, 'ConsentimientoContactoWA', 'callcenter')] },
+    mensajes: [{ tipo: 'texto', texto: 'Continuación solicitada. Abre el enlace de WhatsApp para retomar en el horario.' }],
+    ayuda: 'Abre WhatsApp con el enlace de continuación del Call Center.', soloLectura: false, citas: false, registrada: false, cambiosCanal: 0,
   },
   {
     id: 'CONTINUAR_WA', titulo: 'Continuación en WhatsApp', espera: continuar, entradasWa: ['CONTINUAR ' + IDS.tokenContinuacion],
-    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'COTIZADO', version: 4, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: preguntarHorario, eventos: [evento(5, 'CanalCambiado', 'whatsapp')] },
+    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'COTIZADO', version: 5, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: preguntarHorario, eventos: [evento(6, 'CanalCambiado', 'whatsapp')] },
     mensajes: [{ tipo: 'texto', texto: 'Retomamos en el horario. Tu paquete y la sede Tepic ya están elegidos.' }, { tipo: 'botones', texto: '¿Qué horario prefieres?', botones: [verHorarios] }],
     ayuda: 'Elige Ver horarios para continuar sin repetir servicio ni sede.', soloLectura: false, citas: false, registrada: false, cambiosCanal: 1,
   },
   {
     id: 'ELEGIR_HORARIO', titulo: 'Elegir horario', espera: { tipo: 'wa', titulo: 'Ver horarios', mensaje: { waId: CONTACTO_DEMO, payloadBoton: verHorarios.payload } },
-    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'LISTO_PARA_RESERVAR', version: 5, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: { tipo: 'PREGUNTA', casilla: 'horario', pista: { entrada: 'LISTA', opciones: [opcionHorario, opcionAlternativa] } }, eventos: [evento(6, 'RequisitoCumplido', 'whatsapp')] },
+    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'LISTO_PARA_RESERVAR', version: 6, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: { tipo: 'PREGUNTA', casilla: 'horario', pista: { entrada: 'LISTA', opciones: [opcionHorario, opcionAlternativa] } }, eventos: [evento(7, 'RequisitoCumplido', 'whatsapp')] },
     mensajes: [{ tipo: 'lista', texto: 'Horarios de demostración en Tepic', secciones: [{ titulo: 'Mañana', filas: [opcionHorario] }, { titulo: 'Mediodía', filas: [opcionAlternativa] }] }],
     ayuda: 'El guion usa Jueves 26 · 09:15. La otra fila permite explorar la lista sin reservar.', soloLectura: true, citas: false, registrada: false, cambiosCanal: 1,
     entradasWa: [`CONTINUAR ${IDS.tokenContinuacion}`, 'Hola'],
   },
   {
     id: 'HORARIO_RESERVADO', titulo: 'Horario reservado', espera: { tipo: 'wa', titulo: opcionHorario.titulo, mensaje: { waId: CONTACTO_DEMO, payloadBoton: opcionHorario.payload } },
-    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'HORARIO_RESERVADO', version: 6, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: { tipo: 'PREGUNTA', casilla: 'paciente', pista: { entrada: 'BOTONES', opciones: [revisar] } }, eventos: [evento(7, 'HorarioReservado', 'whatsapp')] },
+    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'HORARIO_RESERVADO', version: 7, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: { tipo: 'PREGUNTA', casilla: 'paciente', pista: { entrada: 'BOTONES', opciones: [revisar] } }, eventos: [evento(8, 'HorarioReservado', 'whatsapp')] },
     mensajes: [{ tipo: 'botones', texto: 'Jueves 26 a las 09:15, hora de Tepic. Revisa la cita para confirmar.', botones: [revisar] }],
     ayuda: 'Pulsa Revisar cita para ver el aviso de verificación simulada.', soloLectura: true, citas: false, registrada: false, cambiosCanal: 1,
   },
   {
     id: 'VERIFICACION', titulo: 'Verificación simulada', espera: { tipo: 'wa', titulo: revisar.titulo, mensaje: { waId: CONTACTO_DEMO, payloadBoton: revisar.payload } },
-    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'HORARIO_RESERVADO', version: 7, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: { tipo: 'PREGUNTA', casilla: 'paciente', pista: { entrada: 'FLOW', campos: [{ id: 'fechaNac', etiqueta: 'Fecha de nacimiento', captura: 'sensitive', requerido: true }] } }, eventos: [evento(8, 'PacienteReconocido', 'whatsapp')] },
+    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'HORARIO_RESERVADO', version: 8, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: { tipo: 'PREGUNTA', casilla: 'paciente', pista: { entrada: 'FLOW', campos: [{ id: 'fechaNac', etiqueta: 'Fecha de nacimiento', captura: 'sensitive', requerido: true }] } }, eventos: [evento(9, 'PacienteReconocido', 'whatsapp')] },
     mensajes: [{ tipo: 'flow', titulo: 'Verificación de identidad', campos: [{ id: 'fechaNac', etiqueta: 'Fecha de nacimiento', captura: 'sensitive', requerido: true }] }, { tipo: 'texto', texto: 'Abre el formulario protegido para continuar. No escribas estos datos en el chat.' }],
     ayuda: 'Abre el formulario y completa los campos requeridos para continuar.', soloLectura: true, citas: false, registrada: false, cambiosCanal: 1,
   },
   {
     id: 'VERIFICADA', titulo: 'Verificación completada', espera: { tipo: 'wa', titulo: 'Enviar formulario', mensaje: { waId: CONTACTO_DEMO, flowResponse: { fechaNac: '2000-01-02' } } },
-    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'HORARIO_RESERVADO', version: 8, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: { tipo: 'PREGUNTA', casilla: 'paciente', pista: { entrada: 'BOTONES', opciones: [confirmar] } }, eventos: [] },
+    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'HORARIO_RESERVADO', version: 9, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: { tipo: 'PREGUNTA', casilla: 'paciente', pista: { entrada: 'BOTONES', opciones: [confirmar] } }, eventos: [] },
     mensajes: [{ tipo: 'botones', texto: 'Formulario recibido en esta demostración. Puedes confirmar tu cita.', botones: [confirmar] }],
     ayuda: 'Pulsa Confirmar cita para continuar.', soloLectura: true, citas: false, registrada: false, cambiosCanal: 1,
   },
   {
     id: 'CONFIRMADA', titulo: 'Cita confirmada · App', espera: { tipo: 'wa', titulo: confirmar.titulo, mensaje: { waId: CONTACTO_DEMO, payloadBoton: confirmar.payload } },
-    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'CONFIRMADA', version: 9, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: sinPregunta, eventos: [evento(9, 'CitaConfirmada', 'whatsapp'), evento(10, 'CanalCambiado', 'app')] },
+    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'CONFIRMADA', version: 10, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: sinPregunta, eventos: [evento(10, 'CitaConfirmada', 'whatsapp'), evento(11, 'CanalCambiado', 'app')] },
     mensajes: [{ tipo: 'texto', texto: 'Cita confirmada. Abre App para ver tu QR y Clínica para registrar tu llegada.' }],
     ayuda: 'Abre App para ver el QR y luego Clínica para registrar la llegada.', soloLectura: true, citas: true, registrada: false, cambiosCanal: 2,
   },
   {
     id: 'EN_CLINICA', titulo: 'Llegada registrada · Clínica', espera: { tipo: 'comando', titulo: 'Registrar llegada', comando: llegada },
-    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'EN_CLINICA', version: 10, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: sinPregunta, eventos: [evento(11, 'CanalCambiado', 'clinica'), evento(12, 'PacienteLlego', 'clinica')] },
+    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'EN_CLINICA', version: 11, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: sinPregunta, eventos: [evento(12, 'CanalCambiado', 'clinica'), evento(13, 'PacienteLlego', 'clinica')] },
     mensajes: [{ tipo: 'texto', texto: 'Llegada registrada en Tepic. La atención continúa en clínica.' }],
     ayuda: 'El Flujo A terminó. Consulta Administración o reinicia el guion.', soloLectura: true, citas: true, registrada: true, cambiosCanal: 3,
   },
@@ -150,7 +157,7 @@ export const GUION_FLUJO_A: PasoFixture[] = definiciones.map((dato, indice) => {
     ...(dato.entradasWa ? { entradasWa: dato.entradasWa } : {}),
     lecturas: {
       tramite: dato.respuesta.tramite, tramitesAbiertos: indice === 0 ? [] : [dato.respuesta.tramite], catalogo: [CATALOGO_DEMO],
-      fichaHilo: { hiloId: IDS.hilo, nombrePila: 'Ana', telefonoEnmascarado: '•••• 0001', tramites: indice === 0 ? [] : [dato.respuesta.tramite], lineaTiempo, soloLectura: dato.soloLectura, oferta: indice >= 2 ? CATALOGO_DEMO : null, codigoContinuacion: indice >= 2 ? `CONTINUAR ${IDS.tokenContinuacion}` : null },
+      fichaHilo: { hiloId: IDS.hilo, nombrePila: 'Ana', telefonoEnmascarado: '•••• 0001', tramites: indice === 0 ? [] : [dato.respuesta.tramite], lineaTiempo, soloLectura: dato.soloLectura, oferta: indice >= 2 ? CATALOGO_DEMO : null, codigoContinuacion: indice >= 3 ? `CONTINUAR ${IDS.tokenContinuacion}` : null },
       contextoDemo: dato.citas
         ? { hiloId: IDS.hilo, pacienteId: IDS.paciente, sedeId: IDS.sede }
         : { hiloId: null, pacienteId: null, sedeId: null },

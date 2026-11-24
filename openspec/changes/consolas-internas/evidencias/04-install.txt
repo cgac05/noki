@@ -1,0 +1,5 @@
+Base: 91de578. Comando: pnpm install --frozen-lockfile --store-dir <almacen-existente>
+Scope: all 14 workspace projects
+Already up to date
+Done in 846ms using pnpm v11.25.0
+Exit code: 0

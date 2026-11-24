@@ -1,0 +1,202 @@
+
+ RUN  v4.0.14 <repo>
+
+ ❯ |web| src/cliente/contexto.test.tsx (5 tests | 3 failed) 3336ms
+   × comparte contextoDemo entre consumidores reales y da prioridad a la última respuesta por valor 1042ms
+   × trata null como sin contexto y Actualizar vuelve a consultar 1023ms
+   ✓ trata no disponible como sin contexto y Actualizar vuelve a consultar 12ms
+   ✓ en simulado manda el guion sobre una respuesta recordada y no consulta contextoDemo 237ms
+   × app nueva consulta las citas del paciente de contextoDemo y un evento refresca el contexto 1020ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/cliente/contexto.test.tsx > comparte contextoDemo entre consumidores reales y da prioridad a la última respuesta por valor
+TestingLibraryElementError: Unable to find an element with the text: 019aff00-0000-7000-8000-000000000002 / 019aff00-0000-7000-8000-000000000011 / 019aff00-0000-7000-8000-000000000004. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mSin hilo[0m
+      [0m / [0m
+      [0mSin paciente[0m
+      [0m / [0m
+      [0mSin sede[0m
+    [36m</p>[39m
+    [36m<button>[39m
+      [0mRecordar[0m
+    [36m</button>[39m
+    [36m<button>[39m
+      [0mActualizar[0m
+    [36m</button>[39m
+    [36m<p>[39m
+      [0mSin hilo[0m
+      [0m / [0m
+      [0mSin paciente[0m
+      [0m / [0m
+      [0mSin sede[0m
+    [36m</p>[39m
+    [36m<button>[39m
+      [0mRecordar[0m
+    [36m</button>[39m
+    [36m<button>[39m
+      [0mActualizar[0m
+    [36m</button>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<p>[39m
+      [0mSin hilo[0m
+      [0m / [0m
+      [0mSin paciente[0m
+      [0m / [0m
+      [0mSin sede[0m
+    [36m</p>[39m
+    [36m<button>[39m
+      [0mRecordar[0m
+    [36m</button>[39m
+    [36m<button>[39m
+      [0mActualizar[0m
+    [36m</button>[39m
+    [36m<p>[39m
+      [0mSin hilo[0m
+      [0m / [0m
+      [0mSin paciente[0m
+      [0m / [0m
+      [0mSin sede[0m
+    [36m</p>[39m
+    [36m<button>[39m
+      [0mRecordar[0m
+    [36m</button>[39m
+    [36m<button>[39m
+      [0mActualizar[0m
+    [36m</button>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/cliente/contexto.test.tsx:30:23
+     28|   const { cliente, peticion } = preparar();
+     29|   render(<ProveedorCliente cliente={cliente}><Contexto /><Contexto /><…
+     30|   expect(await screen.findAllByText(`${IDS.hilo} / ${IDS.paciente} / $…
+       |                       ^
+     31|   expect(peticion).toHaveBeenCalledTimes(1);
+     32|   await userEvent.click(screen.getAllByRole('button', { name: 'Recorda…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  |web| src/cliente/contexto.test.tsx > trata null como sin contexto y Actualizar vuelve a consultar
+AssertionError: expected "vi.fn()" to be called 1 times, but got 0 times
+
+Ignored nodes: comments, script, style
+[36m<html>[39m
+  [36m<head />[39m
+  [36m<body>[39m
+    [36m<div>[39m
+      [36m<p>[39m
+        [0mSin hilo[0m
+        [0m / [0m
+        [0mSin paciente[0m
+        [0m / [0m
+        [0mSin sede[0m
+      [36m</p>[39m
+      [36m<button>[39m
+        [0mRecordar[0m
+      [36m</button>[39m
+      [36m<button>[39m
+        [0mActualizar[0m
+      [36m</button>[39m
+    [36m</div>[39m
+  [36m</body>[39m
+[36m</html>[39m
+ ❯ src/cliente/contexto.test.tsx:41:42
+     39|   if (caso === 'no disponible') expect(peticion).not.toHaveBeenCalled(…
+     40|   else {
+     41|     await waitFor(() => expect(peticion).toHaveBeenCalledTimes(1));
+       |                                          ^
+     42|     peticion.mockResolvedValue(Response.json({ hiloId: IDS.hilo, pacie…
+     43|     await userEvent.click(screen.getByRole('button', { name: 'Actualiz…
+ ❯ runWithExpensiveErrorDiagnosticsDisabled ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:47:12
+ ❯ checkCallback ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:124:77
+ ❯ Timeout.checkRealTimersCallback ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:118:16
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  |web| src/cliente/contexto.test.tsx > app nueva consulta las citas del paciente de contextoDemo y un evento refresca el contexto
+TestingLibraryElementError: Unable to find an element with the text: CONFIRMADA. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<h1>[39m
+      [0mApp[0m
+    [36m</h1>[39m
+    [36m<p[39m
+      [33mclass[39m=[32m"introduccion"[39m
+    [36m>[39m
+      [0mTus citas y el QR para continuar en clínica.[0m
+    [36m</p>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"estado-error"[39m
+      [33mrole[39m=[32m"alert"[39m
+    [36m>[39m
+      [36m<p>[39m
+        [0mTodavía no hay contexto para esta consulta. Inicia la atención o usa la demo.[0m
+      [36m</p>[39m
+      [36m<button[39m
+        [33mtype[39m=[32m"button"[39m
+      [36m>[39m
+        [0mReintentar[0m
+      [36m</button>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<h1>[39m
+      [0mApp[0m
+    [36m</h1>[39m
+    [36m<p[39m
+      [33mclass[39m=[32m"introduccion"[39m
+    [36m>[39m
+      [0mTus citas y el QR para continuar en clínica.[0m
+    [36m</p>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"estado-error"[39m
+      [33mrole[39m=[32m"alert"[39m
+    [36m>[39m
+      [36m<p>[39m
+        [0mTodavía no hay contexto para esta consulta. Inicia la atención o usa la demo.[0m
+      [36m</p>[39m
+      [36m<button[39m
+        [33mtype[39m=[32m"button"[39m
+      [36m>[39m
+        [0mReintentar[0m
+      [36m</button>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/cliente/contexto.test.tsx:58:23
+     56|   const { cliente, peticion, socket } = preparar();
+     57|   render(<ProveedorCliente cliente={cliente}><MemoryRouter><App /></Me…
+     58|   expect(await screen.findByText('CONFIRMADA')).toBeDefined();
+       |                       ^
+     59|   expect(peticion.mock.calls.map(([url]) => url)).toContain(`http://lo…
+     60|   const antes = peticion.mock.calls.filter(([url]) => String(url).ends…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 2 passed (5)
+   Start at  13:46:47
+   Duration  8.62s (transform 478ms, setup 0ms, import 2.38s, tests 3.34s, environment 2.45s)
+
+Exit code: 1

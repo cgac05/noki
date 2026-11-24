@@ -1,0 +1,167 @@
+{
+  "tipo": "Recorrido automático del cliente simulado, sin navegador",
+  "resultado": "PASS",
+  "pasos": [
+    {
+      "paso": "INICIO",
+      "numero": 1,
+      "total": 11,
+      "estado": "BORRADOR",
+      "version": 0,
+      "codigoDisponible": false,
+      "eventos": []
+    },
+    {
+      "paso": "LLAMADA_ENTRANTE",
+      "numero": 2,
+      "total": 11,
+      "estado": "BORRADOR",
+      "version": 1,
+      "codigoDisponible": false,
+      "eventos": [
+        {
+          "tipo": "TramiteIniciado",
+          "canal": "callcenter"
+        }
+      ]
+    },
+    {
+      "paso": "COTIZADO",
+      "numero": 3,
+      "total": 11,
+      "estado": "COTIZADO",
+      "version": 3,
+      "codigoDisponible": false,
+      "eventos": [
+        {
+          "tipo": "ServicioSeleccionado",
+          "canal": "callcenter"
+        },
+        {
+          "tipo": "SedeSeleccionada",
+          "canal": "callcenter"
+        },
+        {
+          "tipo": "CotizacionGenerada",
+          "canal": "callcenter"
+        }
+      ]
+    },
+    {
+      "paso": "CONTINUACION_SOLICITADA",
+      "numero": 4,
+      "total": 11,
+      "estado": "COTIZADO",
+      "version": 4,
+      "codigoDisponible": true,
+      "eventos": [
+        {
+          "tipo": "ConsentimientoContactoWA",
+          "canal": "callcenter"
+        }
+      ]
+    },
+    {
+      "paso": "CONTINUAR_WA",
+      "numero": 5,
+      "total": 11,
+      "estado": "COTIZADO",
+      "version": 5,
+      "codigoDisponible": true,
+      "eventos": [
+        {
+          "tipo": "CanalCambiado",
+          "canal": "whatsapp"
+        }
+      ]
+    },
+    {
+      "paso": "ELEGIR_HORARIO",
+      "numero": 6,
+      "total": 11,
+      "estado": "LISTO_PARA_RESERVAR",
+      "version": 6,
+      "codigoDisponible": true,
+      "eventos": [
+        {
+          "tipo": "RequisitoCumplido",
+          "canal": "whatsapp"
+        }
+      ]
+    },
+    {
+      "paso": "HORARIO_RESERVADO",
+      "numero": 7,
+      "total": 11,
+      "estado": "HORARIO_RESERVADO",
+      "version": 7,
+      "codigoDisponible": true,
+      "eventos": [
+        {
+          "tipo": "HorarioReservado",
+          "canal": "whatsapp"
+        }
+      ]
+    },
+    {
+      "paso": "VERIFICACION",
+      "numero": 8,
+      "total": 11,
+      "estado": "HORARIO_RESERVADO",
+      "version": 8,
+      "codigoDisponible": true,
+      "eventos": [
+        {
+          "tipo": "PacienteReconocido",
+          "canal": "whatsapp"
+        }
+      ]
+    },
+    {
+      "paso": "VERIFICADA",
+      "numero": 9,
+      "total": 11,
+      "estado": "HORARIO_RESERVADO",
+      "version": 9,
+      "codigoDisponible": true,
+      "eventos": []
+    },
+    {
+      "paso": "CONFIRMADA",
+      "numero": 10,
+      "total": 11,
+      "estado": "CONFIRMADA",
+      "version": 10,
+      "codigoDisponible": true,
+      "eventos": [
+        {
+          "tipo": "CitaConfirmada",
+          "canal": "whatsapp"
+        },
+        {
+          "tipo": "CanalCambiado",
+          "canal": "app"
+        }
+      ]
+    },
+    {
+      "paso": "EN_CLINICA",
+      "numero": 11,
+      "total": 11,
+      "estado": "EN_CLINICA",
+      "version": 11,
+      "codigoDisponible": true,
+      "eventos": [
+        {
+          "tipo": "CanalCambiado",
+          "canal": "clinica"
+        },
+        {
+          "tipo": "PacienteLlego",
+          "canal": "clinica"
+        }
+      ]
+    }
+  ],
+  "llegadaRegistrada": true
+}

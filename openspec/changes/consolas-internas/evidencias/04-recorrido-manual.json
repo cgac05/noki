@@ -1,0 +1,348 @@
+{
+  "fecha": "2026-11-24",
+  "base": "91de57836c92e9106cc13dd85ebca0d5f181d659",
+  "modo": "mock",
+  "tipo": "Recorrido manual asistido mediante controles de navegador",
+  "resultado": "PASS",
+  "anchos": [
+    375,
+    1280
+  ],
+  "pasos": [
+    {
+      "paso": "llamada",
+      "ruta": "/callcenter",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "Call Center"
+    },
+    {
+      "paso": "cotizacion",
+      "ruta": "/callcenter",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "Call Center"
+    },
+    {
+      "paso": "continuacion",
+      "ruta": "/callcenter",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "Call Center"
+    },
+    {
+      "paso": "whatsapp-retoma",
+      "ruta": "/wa",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "WhatsApp"
+    },
+    {
+      "paso": "horario-elegido",
+      "ruta": "/wa",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "WhatsApp"
+    },
+    {
+      "paso": "flow-foco",
+      "ancho": 375,
+      "focoAtras": true,
+      "focoAdelante": true
+    },
+    {
+      "paso": "flow-enviado",
+      "ruta": "/wa",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "WhatsApp"
+    },
+    {
+      "paso": "confirmada-wa",
+      "ruta": "/wa",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "WhatsApp"
+    },
+    {
+      "paso": "app",
+      "ruta": "/app",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "App"
+    },
+    {
+      "paso": "clinica-esperada",
+      "ruta": "/clinica",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "Clínica"
+    },
+    {
+      "paso": "clinica-registrada",
+      "ruta": "/clinica",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "Clínica"
+    },
+    {
+      "paso": "admin",
+      "ruta": "/admin",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "Administración"
+    },
+    {
+      "paso": "admin-linea-tiempo",
+      "ancho": 375,
+      "contieneCambioCanal": true,
+      "contieneConsentimiento": true,
+      "contieneLlegada": true,
+      "erroresConsola": 0
+    },
+    {
+      "paso": "llamada",
+      "ruta": "/callcenter",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "Call Center"
+    },
+    {
+      "paso": "cotizacion",
+      "ruta": "/callcenter",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "Call Center"
+    },
+    {
+      "paso": "continuacion",
+      "ruta": "/callcenter",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "Call Center"
+    },
+    {
+      "paso": "whatsapp-retoma",
+      "ruta": "/wa",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "WhatsApp"
+    },
+    {
+      "paso": "horario-elegido",
+      "ruta": "/wa",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "WhatsApp"
+    },
+    {
+      "paso": "flow-foco",
+      "ancho": 1280,
+      "focoAtras": true,
+      "focoAdelante": true
+    },
+    {
+      "paso": "flow-enviado",
+      "ruta": "/wa",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "WhatsApp"
+    },
+    {
+      "paso": "confirmada-wa",
+      "ruta": "/wa",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "WhatsApp"
+    },
+    {
+      "paso": "app",
+      "ruta": "/app",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "App"
+    },
+    {
+      "paso": "clinica-esperada",
+      "ruta": "/clinica",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1280,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "Clínica"
+    },
+    {
+      "paso": "clinica-registrada",
+      "ruta": "/clinica",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1280,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "Clínica"
+    },
+    {
+      "paso": "admin",
+      "ruta": "/admin",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "muestraFechaCapturada": false,
+      "muestraNumeroCompleto": false,
+      "titulo": "Administración"
+    },
+    {
+      "paso": "admin-linea-tiempo",
+      "ancho": 1280,
+      "contieneCambioCanal": true,
+      "contieneConsentimiento": true,
+      "contieneLlegada": true,
+      "erroresConsola": 0
+    }
+  ],
+  "capturas": [
+    "04-1280-admin.jpg",
+    "04-1280-app.jpg",
+    "04-1280-clinica-registrada.jpg",
+    "04-1280-continuacion.jpg",
+    "04-1280-cotizacion.jpg",
+    "04-375-admin.jpg",
+    "04-375-app.jpg",
+    "04-375-clinica-registrada.jpg"
+  ],
+  "privacidad": "Solo datos ficticios; fecha capturada enmascarada; capturas sin los campos de ANI ni número de WhatsApp completos. Las comprobaciones de texto público excluyen los valores de los controles de entrada.",
+  "observacionCapturas": "Las capturas completas pueden situar la navegación fija sobre el contenido por el desplazamiento actual; se conservaron también vistas al inicio de la página.",
+  "erroresConsola": [],
+  "dimensionesCapturas": [
+    {
+      "archivo": "04-1280-admin.jpg",
+      "anchoImagen": 1264,
+      "altoImagen": 2147
+    },
+    {
+      "archivo": "04-1280-app.jpg",
+      "anchoImagen": 1264,
+      "altoImagen": 915
+    },
+    {
+      "archivo": "04-1280-clinica-registrada.jpg",
+      "anchoImagen": 1280,
+      "altoImagen": 900
+    },
+    {
+      "archivo": "04-1280-continuacion.jpg",
+      "anchoImagen": 1264,
+      "altoImagen": 1916
+    },
+    {
+      "archivo": "04-1280-cotizacion.jpg",
+      "anchoImagen": 1264,
+      "altoImagen": 1541
+    },
+    {
+      "archivo": "04-375-admin.jpg",
+      "anchoImagen": 360,
+      "altoImagen": 2212
+    },
+    {
+      "archivo": "04-375-app.jpg",
+      "anchoImagen": 360,
+      "altoImagen": 1315
+    },
+    {
+      "archivo": "04-375-clinica-registrada.jpg",
+      "anchoImagen": 360,
+      "altoImagen": 880
+    }
+  ],
+  "verificaciones": [
+    "Ambos anchos: llamada con ANI de demo y ficha con contacto enmascarado.",
+    "Ambos anchos: COTIZADO y consentimiento obligatorio antes de solicitar continuación.",
+    "Ambos anchos: el enlace abre WhatsApp y retoma en horario sin pedir servicio ni sede.",
+    "Ambos anchos: Flow con fecha enmascarada; Tab y Shift+Tab permanecen en el diálogo.",
+    "Ambos anchos: cita CONFIRMADA en app, QR visible y hora 09:15 en America/Mazatlan.",
+    "Ambos anchos: llegada registrada y estado EN_CLINICA, sin acción para registrar de nuevo.",
+    "Ambos anchos: admin muestra EN_CLINICA = 1, cambios de canal = 3, datos repetidos = 0 y PacienteLlego en la línea de tiempo."
+  ],
+  "notaCapturasMoviles": "Las capturas móviles conservadas de app, clínica y admin se tomaron al finalizar el recorrido; la app ya muestra EN_CLINICA. La cita CONFIRMADA también fue observada antes de registrar la llegada, como consta en el recorrido."
+}

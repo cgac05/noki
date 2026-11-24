@@ -1,0 +1,6 @@
+Comando: pnpm lint:deps
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+✔ no dependency violations found (160 modules, 417 dependencies cruised)
+
+Exit code: 0

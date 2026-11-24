@@ -11,7 +11,7 @@ import { CATALOGO_DEMO, COMANDOS_WEB_ESPERADOS, DATOS_WEB } from './mock/datosWe
 import { ESQUEMAS_DEMO } from './demo.ts';
 import { ClienteReal } from './real/ClienteReal.ts';
 
-const iniciar = { canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR' } } as const;
+const iniciar = { canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR', contacto: '5210000000001' } } as const;
 
 describe('Configuración y contrato de lecturas', () => {
   it('Valor inválido: explica los modos válidos', () => {
@@ -92,8 +92,11 @@ describe('Cliente simulado', () => {
     const [oferta] = await cliente.consultar('catalogo', {});
     await cliente.enviarComando({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SeleccionarServicio', tramiteId: IDS.tramite, payload: { servicioId: oferta!.servicioId } });
     await cliente.enviarComando({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SeleccionarSede', tramiteId: IDS.tramite, payload: { sedeId: oferta!.sedeId } });
+    expect((await cliente.consultar('fichaHilo', { hiloId: IDS.hilo })).codigoContinuacion).toBeNull();
+    await cliente.enviarComando({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SolicitarContinuacion', tramiteId: IDS.tramite, payload: { destino: 'whatsapp' } });
+    expect((await cliente.consultar('fichaHilo', { hiloId: IDS.hilo })).codigoContinuacion).toBe('CONTINUAR ' + IDS.tokenContinuacion);
     const conversacion = await cliente.enviarMensajeWa({ waId: '5210000000001', texto: 'CONTINUAR ' + IDS.tokenContinuacion });
-    expect(GUION_FLUJO_A[3]!.respuesta.siguientePregunta).toMatchObject({ tipo: 'PREGUNTA', casilla: 'horario' });
+    expect(GUION_FLUJO_A.find(paso => paso.paso.id === 'CONTINUAR_WA')!.respuesta.siguientePregunta).toMatchObject({ tipo: 'PREGUNTA', casilla: 'horario' });
     expect(conversacion.mensajes[0]).toMatchObject({ tipo: 'texto', texto: expect.stringContaining('horario') });
     expect(cliente.demo.paso().id).toBe('CONTINUAR_WA');
     expect((await cliente.consultar('fichaHilo', { hiloId: IDS.hilo })).telefonoEnmascarado).toBe('•••• 0001');

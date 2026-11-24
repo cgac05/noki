@@ -13,6 +13,22 @@ async function verificar() {
   }
   return cliente;
 }
+it('rechaza la llamada sin ANI o con otro número y conserva el paso', async () => {
+  const cliente = new ClienteMock({ latenciaMs: 0 });
+  for (const payload of [{ tipoTramite: 'AGENDAR' as const }, { tipoTramite: 'AGENDAR' as const, contacto: '5210000000002' }]) {
+    await expect(cliente.enviarComando({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'IniciarTramite', payload })).rejects.toMatchObject({ tipo: 'NO_DISPONIBLE', mensaje: GUION_FLUJO_A[0]!.ayuda });
+    expect(cliente.demo.paso().id).toBe('INICIO');
+  }
+});
+it('mantiene versiones, números y consentimiento coherentes al insertar la continuación', () => {
+  const solicitud = GUION_FLUJO_A.find(p => p.paso.id === 'CONTINUACION_SOLICITADA')!;
+  expect(solicitud.respuesta.tramite.estado).toBe('COTIZADO');
+  expect(solicitud.respuesta.eventos).toContainEqual(expect.objectContaining({ tipo: 'ConsentimientoContactoWA', canal: 'callcenter' }));
+  for (const [indice, paso] of GUION_FLUJO_A.entries()) {
+    expect(paso.paso.numero).toBe(indice + 1); expect(paso.paso.total).toBe(GUION_FLUJO_A.length);
+    if (indice > 0) expect(paso.respuesta.tramite.version).toBeGreaterThan(GUION_FLUJO_A[indice - 1]!.respuesta.tramite.version);
+  }
+});
 it('Verificación con Flow: pide fecha protegida y habilita confirmar sin repetir los valores', async () => {
   const cliente = await verificar(); const paso = GUION_FLUJO_A.find(p => p.paso.id === 'VERIFICACION')!;
   expect(paso.mensajes).toContainEqual(expect.objectContaining({ tipo: 'flow', campos: [{ id: 'fechaNac', etiqueta: 'Fecha de nacimiento', captura: 'sensitive', requerido: true }] }));

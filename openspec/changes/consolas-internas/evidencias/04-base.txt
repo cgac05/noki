@@ -1,0 +1,8 @@
+Fecha: 2026-11-24
+Revisión de planificación: 1, autorización vigente según las últimas entradas del handoff y la instrucción de continuación del usuario.
+La identidad del asesor y los pasos de identidad del guion quedan fuera de alcance, en cambio aparte.
+Base original: 42d6a78215dbdd8ef43941040c0346a6066accbe
+HEAD, main y origin/main rebasados: 91de57836c92e9106cc13dd85ebca0d5f181d659
+Rebase: PASS. Sin conflictos ni commits nuevos; diff local conservado con hashes idénticos.
+Control 4.3 sobre la rama rebasada: lint, deps, test e integración con código 0.
+Lecturas de las consolas sin cambios de forma; no se añadieron IdentificarPaciente ni pista.paso a vistas.

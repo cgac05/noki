@@ -1,0 +1,70 @@
+
+ RUN  v4.0.14 <repo>
+
+ ❯ |web| src/cliente/tiempoReal.test.ts (5 tests | 4 failed) 15ms
+   ✓ rechaza una sala inválida sin crear conexión ni emitir 3ms
+   × conecta de forma perezosa y cuenta referencias con una sola unión y salida 4ms
+   × reúne solo las salas activas tras reconectar, sin encolar salas abandonadas 1ms
+   × valida todos los eventos y descarta datos mal formados sin lanzar ni registrar 5ms
+   × en modo simulado unirse y salir no altera el guion ni sus eventos 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/cliente/tiempoReal.test.ts > conecta de forma perezosa y cuenta referencias con una sola unión y salida
+TypeError: cliente.unirse is not a function
+ ❯ src/cliente/tiempoReal.test.ts:26:25
+     24|   const { cliente, socket, fabricaSocket } = preparar();
+     25|   expect(fabricaSocket).not.toHaveBeenCalled();
+     26|   const dejar = cliente.unirse(hilo); const dejarOtra = cliente.unirse…
+       |                         ^
+     27|   expect(fabricaSocket).toHaveBeenCalledExactlyOnceWith('http://api.te…
+     28|   expect(socket.connect).toHaveBeenCalledTimes(1); expect(socket.emit)…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  |web| src/cliente/tiempoReal.test.ts > reúne solo las salas activas tras reconectar, sin encolar salas abandonadas
+TypeError: cliente.unirse is not a function
+ ❯ src/cliente/tiempoReal.test.ts:38:29
+     36| it('reúne solo las salas activas tras reconectar, sin encolar salas ab…
+     37|   const { cliente, socket } = preparar();
+     38|   const dejarHilo = cliente.unirse(hilo); const dejarSede = cliente.un…
+       |                             ^
+     39|   socket.recibir('connect'); socket.emit.mockClear();
+     40|   socket.connected = false; socket.recibir('connect');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  |web| src/cliente/tiempoReal.test.ts > valida todos los eventos y descarta datos mal formados sin lanzar ni registrar
+AssertionError: expected "vi.fn()" to be called once with arguments: [ { …(7) } ]
+
+Number of calls: 0
+
+ ❯ src/cliente/tiempoReal.test.ts:53:21
+     51|     expect(recibir).not.toHaveBeenCalled();
+     52|     socket.recibir(evento.nombre, evento.datos);
+     53|     expect(recibir).toHaveBeenCalledExactlyOnceWith(ESQUEMAS_EVENTOS_S…
+       |                     ^
+     54|     dejar(); socket.recibir(evento.nombre, evento.datos); expect(recib…
+     55|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  |web| src/cliente/tiempoReal.test.ts > en modo simulado unirse y salir no altera el guion ni sus eventos
+TypeError: cliente.unirse is not a function
+ ❯ src/cliente/tiempoReal.test.ts:61:25
+     59|   const cliente = new ClienteMock({ latenciaMs: 0 }); const recibir = …
+     60|   cliente.suscribir('tramite:actualizado', recibir);
+     61|   const dejar = cliente.unirse(hilo); dejar(); dejar();
+       |                         ^
+     62|   expect(cliente.demo.paso().id).toBe('INICIO'); expect(recibir).not.t…
+     63|   const paso = GUION_FLUJO_A[1]!;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 1 passed (5)
+   Start at  13:36:53
+   Duration  3.78s (transform 324ms, setup 0ms, import 597ms, tests 15ms, environment 2.58s)
+
+Exit code: 1

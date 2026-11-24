@@ -1,0 +1,20 @@
+{
+  "tarea": "4.1",
+  "resultado": "BLOQUEADO",
+  "fecha": "2026-11-24",
+  "anchosRequeridos": [
+    375,
+    1280
+  ],
+  "recorridoManualCompletado": false,
+  "capturasObtenidas": [],
+  "intentos": [
+    "El navegador integrado informó net::ERR_CONNECTION_TIMED_OUT al abrir el servidor local.",
+    "Se intentó el navegador de Windows y se inició Vite con los permisos necesarios.",
+    "La herramienta detuvo Computer Use para este turno: no pudo determinar la URL actual del navegador en Windows con suficiente confianza para aplicar su política. No se continuó con acciones de navegador."
+  ],
+  "pendiente": "Repetir el recorrido manual completo a ambos anchos en una sesión de navegador operativa, guardar las capturas y comprobar ausencia de desplazamiento horizontal, foco y datos sensibles.",
+  "coberturaAutomatizadaSeparada": "El recorrido React en vistas.test.tsx y el recorrido del cliente en 04-recorrido-automatizado.json no sustituyen la comprobación visual.",
+  "historico": true,
+  "superadoPor": "04-recorrido-manual.json: PASS sobre 91de578 en la continuación autorizada."
+}

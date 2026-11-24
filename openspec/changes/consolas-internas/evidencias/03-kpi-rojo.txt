@@ -1,0 +1,850 @@
+Comando: pnpm exec vitest run --project web src/vistas/consolas.test.tsx -t KPI --maxWorkers=1
+
+ RUN  v4.0.14 <repo>
+
+stderr | src/vistas/consolas.test.tsx > Clínica, administración y app en modo real > muestra los siete KPI documentados y conserva una clave desconocida y su valor
+Functions are not valid as a React child. This may happen if you return Object instead of <Object /> from render. Or maybe you meant to call this function rather than return it.
+  <dt>{Object}</dt>
+
+ ❯ |web| src/vistas/consolas.test.tsx (16 tests | 1 failed | 15 skipped) 1267ms
+     ↓ inicia con ANI de demo, valida el formato y descarta la captura al mostrar la ficha
+     ↓ tolera nulos y deshabilita todas las operaciones en solo lectura
+     ↓ exige consentimiento, envía una sola solicitud con doble clic y muestra el código de la lectura
+     ↓ permite reintentar la continuación fallida con la misma clave
+     ↓ en pestaña real nueva espera una llamada y cambia de sala solo con el hilo activo
+     ↓ registra con el token elegido, muestra la hora de Tepic y elimina la acción registrada
+     ↓ muestra la lista vacía como estado, sin error
+     ↓ /clinica sin contexto ofrece Actualizar y vuelve a pedir el contexto
+     ↓ /app sin contexto ofrece Actualizar y vuelve a pedir el contexto
+     ↓ sin VITE_DEMO muestra sin contexto en app sin peticiones ni error
+     × muestra los siete KPI documentados y conserva una clave desconocida y su valor 1264ms
+     ↓ admin sin hilo conserva las métricas y ofrece actualizar el contexto
+     ↓ /clinica se une a sus salas y las deja al desmontarse
+     ↓ /app se une a sus salas y las deja al desmontarse
+     ↓ /admin se une a sus salas y las deja al desmontarse
+     ↓ un evento válido actualiza admin sin recargar, cambia su sala de hilo y descarta un evento inválido
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/vistas/consolas.test.tsx > Clínica, administración y app en modo real > muestra los siete KPI documentados y conserva una clave desconocida y su valor
+TestingLibraryElementError: Unable to find an element with the text: constructor. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mAdministración[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"introduccion"[39m
+        [36m>[39m
+          [0mEl mismo hilo, con la trazabilidad de cada canal.[0m
+        [36m</p>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"seccion"[39m
+        [36m>[39m
+          [36m<h2>[39m
+            [0mTrámites por estado[0m
+          [36m</h2>[39m
+          [36m<dl[39m
+            [33mclass[39m=[32m"datos"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mCONFIRMADA[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m1[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+          [36m</dl>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"seccion"[39m
+        [36m>[39m
+          [36m<h2>[39m
+            [0mIndicadores disponibles[0m
+          [36m</h2>[39m
+          [36m<dl[39m
+            [33mclass[39m=[32m"datos"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mCambios de canal[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m3[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mCambios de canal por hilo[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m1.5[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mTrámites recuperados[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m2[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mCitas confirmadas[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m5[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mLlegadas registradas[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m4[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mDatos repetidos[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m0[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mIntentos de verificación fallidos[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m1[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mindicadorNuevo[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m1,234.56789[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt />[39m
+              [36m<dd>[39m
+                [0m7[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt />[39m
+              [36m<dd>[39m
+                [0m8[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+          [36m</dl>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33maria-labelledby[39m=[32m"titulo-linea-tiempo"[39m
+          [33mclass[39m=[32m"seccion"[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mid[39m=[32m"titulo-linea-tiempo"[39m
+          [36m>[39m
+            [0mLínea de tiempo[0m
+          [36m</h2>[39m
+          [36m<ol[39m
+            [33maria-label[39m=[32m"Eventos del hilo"[39m
+            [33mclass[39m=[32m"linea-tiempo"[39m
+          [36m>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mTramiteIniciado[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mCall Center[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:01:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:01[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mServicioSeleccionado[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mCall Center[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:02:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:02[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mSedeSeleccionada[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mCall Center[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:03:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:03[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mCotizacionGenerada[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mCall Center[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:04:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:04[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mConsentimientoContactoWA[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mCall Center[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:05:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:05[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mCanalCambiado[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mWhatsApp[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:06:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:06[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mRequisitoCumplido[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mWhatsApp[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:07:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:07[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mHorarioReservado[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mWhatsApp[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:08:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:08[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mPacienteReconocido[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mWhatsApp[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:09:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:09[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mCitaConfirmada[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mWhatsApp[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:10:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:10[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mCanalCambiado[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mApp[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:11:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:11[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+          [36m</ol>[39m
+        [36m</section>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mAdministración[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"introduccion"[39m
+        [36m>[39m
+          [0mEl mismo hilo, con la trazabilidad de cada canal.[0m
+        [36m</p>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"seccion"[39m
+        [36m>[39m
+          [36m<h2>[39m
+            [0mTrámites por estado[0m
+          [36m</h2>[39m
+          [36m<dl[39m
+            [33mclass[39m=[32m"datos"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mCONFIRMADA[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m1[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+          [36m</dl>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"seccion"[39m
+        [36m>[39m
+          [36m<h2>[39m
+            [0mIndicadores disponibles[0m
+          [36m</h2>[39m
+          [36m<dl[39m
+            [33mclass[39m=[32m"datos"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mCambios de canal[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m3[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mCambios de canal por hilo[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m1.5[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mTrámites recuperados[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m2[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mCitas confirmadas[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m5[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mLlegadas registradas[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m4[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mDatos repetidos[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m0[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mIntentos de verificación fallidos[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m1[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mindicadorNuevo[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0m1,234.56789[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt />[39m
+              [36m<dd>[39m
+                [0m7[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt />[39m
+              [36m<dd>[39m
+                [0m8[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+          [36m</dl>[39m
+        [36m</section>[39m
+        [36m<section[39m
+          [33maria-labelledby[39m=[32m"titulo-linea-tiempo"[39m
+          [33mclass[39m=[32m"seccion"[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mid[39m=[32m"titulo-linea-tiempo"[39m
+          [36m>[39m
+            [0mLínea de tiempo[0m
+          [36m</h2>[39m
+          [36m<ol[39m
+            [33maria-label[39m=[32m"Eventos del hilo"[39m
+            [33mclass[39m=[32m"linea-tiempo"[39m
+          [36m>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mTramiteIniciado[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mCall Center[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:01:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:01[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mServicioSeleccionado[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mCall Center[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:02:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:02[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mSedeSeleccionada[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mCall Center[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:03:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:03[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mCotizacionGenerada[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mCall Center[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:04:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:04[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mConsentimientoContactoWA[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mCall Center[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:05:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:05[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mCanalCambiado[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mWhatsApp[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:06:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:06[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mRequisitoCumplido[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mWhatsApp[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:07:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:07[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mHorarioReservado[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mWhatsApp[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:08:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:08[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mPacienteReconocido[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mWhatsApp[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:09:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:09[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mCitaConfirmada[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mWhatsApp[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:10:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:10[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<strong>[39m
+                [0mCanalCambiado[0m
+              [36m</strong>[39m
+              [36m<span>[39m
+                [0mApp[0m
+              [36m</span>[39m
+              [36m<time[39m
+                [33mdatetime[39m=[32m"2026-11-24T15:11:00.000Z"[39m
+              [36m>[39m
+                [0m24 de noviembre de 2026 a las 15:11[0m
+                [0m UTC[0m
+              [36m</time>[39m
+            [36m</li>[39m
+          [36m</ol>[39m
+        [36m</section>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/consolas.test.tsx:188:27
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 15 skipped (16)
+   Start at  14:17:24
+   Duration  8.43s (transform 752ms, setup 0ms, import 2.56s, tests 1.27s, environment 3.67s)
+
+Exit code: 1

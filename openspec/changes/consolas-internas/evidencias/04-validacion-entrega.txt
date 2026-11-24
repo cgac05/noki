@@ -1,0 +1,8 @@
+Base: 91de57836c92e9106cc13dd85ebca0d5f181d659
+Comando: openspec validate consolas-internas --type change --strict --no-interactive
+Change 'consolas-internas' is valid
+Exit code: 0
+git diff --check: 0
+Vistas de producción sin IdentificarPaciente ni pista.paso: PASS
+Alcance: PASS; solo apps/web/**, pnpm-lock.yaml y carpeta del cambio
+Commits propios sobre main: 0

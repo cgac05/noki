@@ -1,0 +1,6 @@
+Comprobación: vistas de producción sin fetch ni socket.io
+rg exit code: 1 (1 = sin coincidencias)
+Comprobación: sin operaciones aritméticas sobre valor o kpis en Admin.tsx
+rg exit code: 1 (1 = sin coincidencias)
+Inspección de Admin.tsx: el valor solo pasa a Intl.NumberFormat.format; no se calculan métricas.
+Detector Impeccable sobre las cuatro vistas y EstadoContexto.tsx: [] (código 0).

@@ -4,14 +4,19 @@ import { useAccion } from '../cliente/useAccion.ts';
 import { EstadoCarga } from '../componentes/EstadoCarga.tsx';
 import { EstadoError } from '../componentes/EstadoError.tsx';
 import { fechaEnSede } from '../componentes/formato.ts';
+import { EstadoContexto } from '../componentes/EstadoContexto.tsx';
+import { useSala } from '../cliente/useSala.ts';
 
 export function Clinica() {
-  const { sedeId } = useContextoConsulta();
+  const contexto = useContextoConsulta();
+  const { sedeId } = contexto;
+  useSala(sedeId ? `sede:${sedeId}` : undefined);
   const llegadas = useConsulta('llegadasSede', sedeId ? { sedeId } : undefined);
   const accion = useAccion();
   return <>
     <h1>Clínica</h1><p className="introduccion">Recepción · Llegadas esperadas</p>
-    {llegadas.isPending && <EstadoCarga />}
+    {!sedeId && <EstadoContexto contexto={contexto} texto="Aún no hay llegadas que mostrar: falta la sede de atención. Confirma una cita y vuelve a actualizar." />}
+    {sedeId && llegadas.isPending && <EstadoCarga />}
     {llegadas.isError && <EstadoError error={llegadas.error} onReintentar={() => { void llegadas.refetch(); }} />}
     {llegadas.data?.length === 0 && <p className="seccion">Aún no hay llegadas esperadas. Confirma una cita en WhatsApp.</p>}
     {llegadas.data?.map(llegada => <section className="seccion" key={llegada.cita.tramite.id}>

@@ -10,6 +10,7 @@ export interface ClienteApi {
   enviarMensajeWa(mensaje: SolicitudMensajeWa, opciones?: { idempotencyKey?: string }): Promise<RespuestaMensajeWa>;
   consultar<N extends NombreConsultaCliente>(nombre: N, parametros: ParametrosConsultaCliente<N>): Promise<RespuestaConsultaCliente<N>>;
   suscribir<N extends NombreEventoSocket>(nombre: N, recibir: (dato: DatosEventoSocket[N]) => void): () => void;
+  unirse(sala: string): () => void;
   demo?: {
     readonly ids: { hiloId: string; pacienteId: string; sedeId: string; tramiteWebId: string };
     revision(): number; paso(): PasoGuion; reiniciar(): void; alCambiar(recibir: () => void): () => void;

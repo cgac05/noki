@@ -1,0 +1,14 @@
+Comando: pnpm test
+Resumen real del intento del 2026-11-24, inicio 14:01:49 (hora local).
+Test Files 3 failed | 34 passed (37)
+Tests 4 failed | 197 passed (201)
+Duration 84.33s
+Exit code: 1
+
+Los cuatro fallos notificaron literalmente: Error: Test timed out in 5000ms.
+- consolas.test.tsx: inicia con ANI de demo, valida el formato y descarta la captura al mostrar la ficha
+- flow.test.tsx: Envío del Flow: controles según captura y resumen enmascarado sin valores en mutaciones ni almacenamiento
+- flow.test.tsx: reintenta el Flow con la misma solicitud y clave; cerrar descarta el pendiente protegido
+- vistas.test.tsx: recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales
+
+Se conserva el límite de 5000 ms. Se repite la misma suite con --maxWorkers=2 para reducir contención de la máquina, sin skips ni filtros.

@@ -52,16 +52,29 @@ export function useRespuestaComando() {
 export function useContextoConsulta() {
   const cliente = useCliente();
   const { respuesta } = useRespuestaComando();
+  const consultas = useQuery({
+    queryKey: ['consulta', 'contextoDemo', {}], enabled: cliente.modo === 'real', staleTime: Infinity,
+    queryFn: async () => {
+      try { return await cliente.consultar('contextoDemo', {}); }
+      catch (error) {
+        if (error instanceof ErrorCliente && error.tipo === 'NO_DISPONIBLE') return null;
+        throw error;
+      }
+    },
+  });
   return {
-    hiloId: cliente.demo?.ids.hiloId ?? respuesta?.tramite.hiloId,
-    pacienteId: cliente.demo?.ids.pacienteId,
-    sedeId: cliente.demo?.ids.sedeId ?? respuesta?.tramite.sedeId,
+    hiloId: cliente.demo?.ids.hiloId ?? respuesta?.tramite.hiloId ?? consultas.data?.hiloId ?? undefined,
+    pacienteId: cliente.demo?.ids.pacienteId ?? consultas.data?.pacienteId ?? undefined,
+    sedeId: cliente.demo?.ids.sedeId ?? respuesta?.tramite.sedeId ?? consultas.data?.sedeId ?? undefined,
+    cargando: cliente.modo === 'real' && consultas.isPending,
+    error: consultas.error,
+    actualizar: () => { void consultas.refetch(); },
   };
 }
 
 export function useConsulta<N extends NombreConsultaCliente>(nombre: N, parametros: ParametrosConsultaCliente<N> | undefined) {
   const cliente = useCliente();
-  return useQuery({ queryKey: ['consulta', nombre, parametros], queryFn: () => {
+  return useQuery({ queryKey: ['consulta', nombre, parametros], enabled: parametros !== undefined, queryFn: () => {
     if (parametros === undefined) throw new ErrorCliente('NO_DISPONIBLE', 'Todavía no hay contexto para esta consulta. Inicia la atención o usa la demo.');
     return cliente.consultar(nombre, parametros);
   } });

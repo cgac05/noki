@@ -1,0 +1,5 @@
+Base rebasada: 91de57836c92e9106cc13dd85ebca0d5f181d659
+Comando: pnpm lint
+$ eslint . && pnpm typecheck
+$ pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json
+Exit code: 0

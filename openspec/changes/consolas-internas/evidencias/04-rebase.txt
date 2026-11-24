@@ -1,0 +1,5 @@
+Rebase sin commits nuevos: PASS
+HEAD y main: 91de57836c92e9106cc13dd85ebca0d5f181d659
+Archivos locales restaurados con SHA-256 idéntico: 19
+No hubo archivos coincidentes entre el diff local y los cambios entrantes de main.
+La carpeta del cambio y los archivos nuevos se conservaron sin retirarlos del árbol.

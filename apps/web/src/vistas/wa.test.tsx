@@ -120,17 +120,18 @@ it('Código inválido: un parámetro vacío no envía nada', async () => {
   expect(screen.getByLabelText('Mensaje')).toBeDefined(); expect(enviar).not.toHaveBeenCalled();
 });
 
-it('Call center muestra enlace y QR de continuación sin enviar ni avanzar el guion', async () => {
+it('Call center solicita continuación con consentimiento y muestra enlace y QR de la lectura', async () => {
   const cliente = new ClienteMock({ latenciaMs: 0 });
   for (const paso of GUION_FLUJO_A.slice(1, 3)) {
     if (paso.espera?.tipo === 'comando') await cliente.enviarComando(paso.espera.comando);
     else if (paso.espera?.tipo === 'comandos') for (const comando of paso.espera.comandos) await cliente.enviarComando(comando);
   }
   const enviar = vi.spyOn(cliente, 'enviarMensajeWa'); const { usuario } = abrir(cliente, '/callcenter');
+  await usuario.click(await screen.findByRole('checkbox', { name: 'El paciente aceptó continuar por WhatsApp' }));
   await usuario.click(await screen.findByRole('button', { name: 'Continuar por WhatsApp' }));
   expect((await screen.findByRole('link', { name: 'Abrir WhatsApp' })).getAttribute('href')).toBe(`/wa?continuar=${IDS.tokenContinuacion}`);
   expect(await screen.findByRole('img', { name: 'Código QR de continuación' })).toBeDefined();
-  expect(enviar).not.toHaveBeenCalled(); expect(cliente.demo.paso().id).toBe('COTIZADO');
+  expect(enviar).not.toHaveBeenCalled(); expect(cliente.demo.paso().id).toBe('CONTINUACION_SOLICITADA');
 });
 
 it('Modo simulado: la insignia es visible en cualquier ruta', async () => {

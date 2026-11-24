@@ -102,6 +102,8 @@ export class ClienteMock implements ClienteApi {
     return () => { oyentes.delete(validarYRecibir); };
   }
 
+  unirse(sala: string): () => void { void sala; return () => {}; }
+
   private actual() { return GUION_FLUJO_A[this.indice]!; }
   private comprobarRevision(revision: number) {
     if (revision !== this.revision) throw new ErrorCliente('NO_DISPONIBLE', 'El guion se reinició. Vuelve a elegir una acción.');

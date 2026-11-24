@@ -51,9 +51,16 @@ button:disabled { background: #e4ece3; color: #465e52; border-color: var(--linea
 .seccion h2 { font-size: 1.25rem; line-height: 1.4; }
 h3 { margin: 0.75rem 0 0.5rem; font-size: 1rem; font-weight: 600; }
 .acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-block: 1rem; }
+.llamada-entrante { max-width: 30rem; }
+.llamada-entrante label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+.llamada-entrante input { box-sizing: border-box; width: 100%; min-height: 44px; padding: 0.625rem 0.75rem; border: 1px solid var(--linea); border-radius: 0.5rem; color: inherit; background: #fff; caret-color: #21734f; }
+.llamada-entrante input[aria-invalid="true"] { border-color: #763a23; }
+.ayuda-ani { color: var(--tinta-secundaria); }
+.consentimiento { display: flex; align-items: center; gap: 0.75rem; min-height: 44px; max-width: 46ch; margin-block: 1.5rem 0.75rem; line-height: 1.5; cursor: pointer; }
+.consentimiento input { flex-shrink: 0; width: 24px; height: 24px; margin: 10px; accent-color: #21734f; }
 .datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1.5rem; margin-block: 1.5rem; }
 .datos div { min-width: 0; }
-.datos dt { margin-bottom: 0.375rem; color: var(--tinta-secundaria); font-size: 0.875rem; }
+.datos dt { margin-bottom: 0.375rem; color: var(--tinta-secundaria); font-size: 0.875rem; overflow-wrap: anywhere; }
 .datos dd { margin: 0; font-size: 1.125rem; line-height: 1.5; overflow-wrap: anywhere; }
 small { display: block; margin-top: 0.25rem; font-size: 0.8125rem; color: var(--tinta-secundaria); }
 .aviso, .estado-error, .estado-carga { margin-block: 1rem; padding: 1rem; background: #e4ece3; line-height: 1.6; }

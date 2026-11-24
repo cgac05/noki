@@ -102,7 +102,7 @@ describe('Vistas del guion', () => {
 
   it('Selección de catálogo en call center: copia los IDs de otra oferta y envía servicio antes de sede', async () => {
     const cliente = new ClienteMock({ latenciaMs: 0 });
-    await cliente.enviarComando({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR' } });
+    await cliente.enviarComando({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR', contacto: '5210000000001' } });
     const oferta = { servicioId: '019aff00-0000-7000-8000-000000000013', servicio: 'Otra oferta ficticia', sedeId: '019aff00-0000-7000-8000-000000000014', sede: 'Compostela', precioCentavos: 30000 };
     const consultar = cliente.consultar.bind(cliente);
     vi.spyOn(cliente, 'consultar').mockImplementation(async (nombre, parametros) => {
@@ -122,7 +122,7 @@ describe('Vistas del guion', () => {
 
   it('reintenta solo la sede pendiente y conserva su clave después de seleccionar el servicio', async () => {
     const cliente = new ClienteMock({ latenciaMs: 0 });
-    await cliente.enviarComando({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR' } });
+    await cliente.enviarComando({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR', contacto: '5210000000001' } });
     const original = cliente.enviarComando.bind(cliente);
     let falloPendiente = true;
     const enviar = vi.spyOn(cliente, 'enviarComando').mockImplementation(async (comando, opciones) => {
@@ -149,9 +149,14 @@ describe('Vistas del guion', () => {
   });
 
   it('recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales', async () => {
-    const { usuario, cliente } = abrir();
+    const { cliente } = abrir();
+    // Este recorrido verifica respuestas y navegación, sin pausas artificiales entre teclas.
+    const usuario = userEvent.setup({ delay: null });
     await usuario.click(await screen.findByRole('button', { name: 'Llamada entrante' }));
     await usuario.click(await screen.findByRole('button', { name: 'Cotizar paquete en Tepic' }));
+    const consentimiento = await screen.findByRole('checkbox', { name: 'El paciente aceptó continuar por WhatsApp' });
+    await waitFor(() => expect((consentimiento as HTMLInputElement).disabled).toBe(false));
+    await usuario.click(consentimiento);
     await usuario.click(await screen.findByRole('button', { name: 'Continuar por WhatsApp' }));
     await usuario.click(await screen.findByRole('link', { name: 'Abrir WhatsApp' }));
     expect(await screen.findByText(/Retomamos en el horario/)).toBeDefined();
