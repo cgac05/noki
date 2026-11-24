@@ -1,0 +1,5 @@
+b82d0392a3b0fae12a93c5f0d0d677cba27d41cb2af31866c8f819b8602045ab  apps/web/README.md
+fb7bbf5aa0418a334bd8cf8d9e1de7bf97c4e59650db7ffc92c1c58c55d786c2  apps/web/src/cliente/mock/datosWeb.ts
+b4372c4dd93293a2e7f4dfb227c09181049e86d82d4845370231af584ba74265  apps/web/src/cliente/cliente.test.ts
+3539bd2cb42c199eb06b1c415b4b2b262bfd0a8376ad52930b743a80560ba4aa  apps/web/src/vistas/vistas.test.tsx
+3841ff9051846b34d285545fd3bee401640342bc04173e5cd1c5e9bfa2c48d61  apps/web/src/styles.css

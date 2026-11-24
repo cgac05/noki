@@ -1,0 +1,984 @@
+{
+  "medidas": [
+    {
+      "alto": 812,
+      "ancho": 375,
+      "barra": {
+        "alto": 123.20000457763672,
+        "arriba": 688.7999877929688
+      },
+      "client": 360,
+      "enlaces": [
+        {
+          "alto": 44,
+          "ancho": 52.087501525878906,
+          "texto": "Web",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 88.30000305175781,
+          "texto": "WhatsApp",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 49.5,
+          "texto": "App",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 93.07500457763672,
+          "texto": "Call Center",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 64.36250305175781,
+          "texto": "Clínica",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 64.6500015258789,
+          "texto": "Admin",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 73.1624984741211,
+          "texto": "Bandeja",
+          "y": 697.6000366210938
+        }
+      ],
+      "fila": {
+        "client": 344,
+        "izquierda": 0,
+        "scroll": 509
+      },
+      "paso": "Paso 3 de 9 · Paquete cotizado en Tepic",
+      "qr": null,
+      "ruta": "/callcenter",
+      "scroll": 360,
+      "scrollY": 218.3999938964844
+    },
+    {
+      "alto": 812,
+      "ancho": 375,
+      "barra": {
+        "alto": 123.20000457763672,
+        "arriba": 688.7999877929688
+      },
+      "client": 360,
+      "enlaces": [
+        {
+          "alto": 44,
+          "ancho": 52.087501525878906,
+          "texto": "Web",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 88.30000305175781,
+          "texto": "WhatsApp",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 50.275001525878906,
+          "texto": "App",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 91.26250457763672,
+          "texto": "Call Center",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 64.36250305175781,
+          "texto": "Clínica",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 64.6500015258789,
+          "texto": "Admin",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 73.1624984741211,
+          "texto": "Bandeja",
+          "y": 697.6000366210938
+        }
+      ],
+      "fila": {
+        "client": 344,
+        "izquierda": 0,
+        "scroll": 508
+      },
+      "paso": "Paso 8 de 9 · Cita confirmada · App",
+      "qr": {
+        "abajo": 576.2000122070312,
+        "alto": 224,
+        "ancho": 224,
+        "completo": true,
+        "x": 16,
+        "y": 352.20001220703125
+      },
+      "ruta": "/app",
+      "scroll": 360,
+      "scrollY": 0
+    },
+    {
+      "alto": 812,
+      "ancho": 375,
+      "barra": {
+        "alto": 123.20000457763672,
+        "arriba": 688.7999877929688
+      },
+      "client": 360,
+      "enlaces": [
+        {
+          "alto": 44,
+          "ancho": 52.087501525878906,
+          "texto": "Web",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 88.30000305175781,
+          "texto": "WhatsApp",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 49.5,
+          "texto": "App",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 91.26250457763672,
+          "texto": "Call Center",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 65.73750305175781,
+          "texto": "Clínica",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 64.6500015258789,
+          "texto": "Admin",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 73.1624984741211,
+          "texto": "Bandeja",
+          "y": 697.6000366210938
+        }
+      ],
+      "fila": {
+        "client": 344,
+        "izquierda": 149.60000610351562,
+        "scroll": 509
+      },
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "qr": null,
+      "ruta": "/clinica",
+      "scroll": 360,
+      "scrollY": 0
+    },
+    {
+      "alto": 812,
+      "ancho": 375,
+      "barra": {
+        "alto": 123.20000457763672,
+        "arriba": 688.7999877929688
+      },
+      "client": 360,
+      "enlaces": [
+        {
+          "alto": 44,
+          "ancho": 52.087501525878906,
+          "texto": "Web",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 88.30000305175781,
+          "texto": "WhatsApp",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 49.5,
+          "texto": "App",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 91.26250457763672,
+          "texto": "Call Center",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 64.36250305175781,
+          "texto": "Clínica",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 66.0625,
+          "texto": "Admin",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 73.1624984741211,
+          "texto": "Bandeja",
+          "y": 697.6000366210938
+        }
+      ],
+      "fila": {
+        "client": 344,
+        "izquierda": 149.60000610351562,
+        "scroll": 509
+      },
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "qr": null,
+      "ruta": "/admin",
+      "scroll": 360,
+      "scrollY": 96.8000030517578
+    },
+    {
+      "alto": 812,
+      "ancho": 375,
+      "barra": {
+        "alto": 123.20000457763672,
+        "arriba": 688.7999877929688
+      },
+      "client": 360,
+      "enlaces": [
+        {
+          "alto": 44,
+          "ancho": 52.087501525878906,
+          "texto": "Web",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 88.30000305175781,
+          "texto": "WhatsApp",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 49.5,
+          "texto": "App",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 91.26250457763672,
+          "texto": "Call Center",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 64.36250305175781,
+          "texto": "Clínica",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 64.6500015258789,
+          "texto": "Admin",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 74.7750015258789,
+          "texto": "Bandeja",
+          "y": 697.6000366210938
+        }
+      ],
+      "fila": {
+        "client": 344,
+        "izquierda": 149.60000610351562,
+        "scroll": 509
+      },
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "qr": null,
+      "ruta": "/bandeja",
+      "scroll": 360,
+      "scrollY": 0
+    },
+    {
+      "alto": 812,
+      "ancho": 375,
+      "barra": {
+        "alto": 123.20000457763672,
+        "arriba": 688.7999877929688
+      },
+      "client": 360,
+      "enlaces": [
+        {
+          "alto": 44,
+          "ancho": 53.04999923706055,
+          "texto": "Web",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 88.30000305175781,
+          "texto": "WhatsApp",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 49.5,
+          "texto": "App",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 91.26250457763672,
+          "texto": "Call Center",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 64.36250305175781,
+          "texto": "Clínica",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 64.6500015258789,
+          "texto": "Admin",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 73.1624984741211,
+          "texto": "Bandeja",
+          "y": 697.6000366210938
+        }
+      ],
+      "fila": {
+        "client": 344,
+        "izquierda": 0,
+        "scroll": 508
+      },
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "qr": null,
+      "ruta": "/web",
+      "scroll": 360,
+      "scrollY": 92
+    },
+    {
+      "alto": 812,
+      "ancho": 375,
+      "barra": {
+        "alto": 123.20000457763672,
+        "arriba": 688.7999877929688
+      },
+      "client": 375,
+      "enlaces": [
+        {
+          "alto": 44,
+          "ancho": 52.087501525878906,
+          "texto": "Web",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 90.3499984741211,
+          "texto": "WhatsApp",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 49.5,
+          "texto": "App",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 91.26250457763672,
+          "texto": "Call Center",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 64.36250305175781,
+          "texto": "Clínica",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 64.6500015258789,
+          "texto": "Admin",
+          "y": 697.6000366210938
+        },
+        {
+          "alto": 44,
+          "ancho": 73.1624984741211,
+          "texto": "Bandeja",
+          "y": 697.6000366210938
+        }
+      ],
+      "fila": {
+        "client": 359,
+        "izquierda": 0,
+        "scroll": 509
+      },
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "qr": null,
+      "ruta": "/wa",
+      "scroll": 375,
+      "scrollY": 0
+    },
+    {
+      "alto": 900,
+      "ancho": 1280,
+      "barra": {
+        "alto": 112.8000030517578,
+        "arriba": 0
+      },
+      "client": 1265,
+      "enlaces": [
+        {
+          "alto": 44,
+          "ancho": 52.087501525878906,
+          "texto": "Web",
+          "y": 8
+        },
+        {
+          "alto": 44,
+          "ancho": 88.30000305175781,
+          "texto": "WhatsApp",
+          "y": 8
+        },
+        {
+          "alto": 44,
+          "ancho": 49.5,
+          "texto": "App",
+          "y": 8
+        },
+        {
+          "alto": 44,
+          "ancho": 93.07500457763672,
+          "texto": "Call Center",
+          "y": 8
+        },
+        {
+          "alto": 44,
+          "ancho": 64.36250305175781,
+          "texto": "Clínica",
+          "y": 8
+        },
+        {
+          "alto": 44,
+          "ancho": 64.6500015258789,
+          "texto": "Admin",
+          "y": 8
+        },
+        {
+          "alto": 44,
+          "ancho": 73.1624984741211,
+          "texto": "Bandeja",
+          "y": 8
+        }
+      ],
+      "fila": {
+        "client": 1152,
+        "izquierda": 0,
+        "scroll": 1152
+      },
+      "paso": "Paso 3 de 9 · Paquete cotizado en Tepic",
+      "qr": null,
+      "ruta": "/callcenter",
+      "scroll": 1265,
+      "scrollY": 284
+    },
+    {
+      "alto": 900,
+      "ancho": 1280,
+      "barra": {
+        "alto": 112.8000030517578,
+        "arriba": 96.8000030517578
+      },
+      "client": 1265,
+      "enlaces": [
+        {
+          "alto": 44,
+          "ancho": 52.087501525878906,
+          "texto": "Web",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 88.30000305175781,
+          "texto": "WhatsApp",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 50.275001525878906,
+          "texto": "App",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 91.26250457763672,
+          "texto": "Call Center",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 64.36250305175781,
+          "texto": "Clínica",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 64.6500015258789,
+          "texto": "Admin",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 73.1624984741211,
+          "texto": "Bandeja",
+          "y": 104.8000030517578
+        }
+      ],
+      "fila": {
+        "client": 1152,
+        "izquierda": 0,
+        "scroll": 1152
+      },
+      "paso": "Paso 8 de 9 · Cita confirmada · App",
+      "qr": {
+        "abajo": 740.25,
+        "alto": 224,
+        "ancho": 224,
+        "completo": true,
+        "x": 984.4000244140624,
+        "y": 516.25
+      },
+      "ruta": "/app",
+      "scroll": 1265,
+      "scrollY": 0
+    },
+    {
+      "alto": 900,
+      "ancho": 1280,
+      "barra": {
+        "alto": 112.8000030517578,
+        "arriba": 96.8000030517578
+      },
+      "client": 1280,
+      "enlaces": [
+        {
+          "alto": 44,
+          "ancho": 52.087501525878906,
+          "texto": "Web",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 88.30000305175781,
+          "texto": "WhatsApp",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 49.5,
+          "texto": "App",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 91.26250457763672,
+          "texto": "Call Center",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 65.73750305175781,
+          "texto": "Clínica",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 64.6500015258789,
+          "texto": "Admin",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 73.1624984741211,
+          "texto": "Bandeja",
+          "y": 104.8000030517578
+        }
+      ],
+      "fila": {
+        "client": 1152,
+        "izquierda": 0,
+        "scroll": 1152
+      },
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "qr": null,
+      "ruta": "/clinica",
+      "scroll": 1280,
+      "scrollY": 0
+    },
+    {
+      "alto": 900,
+      "ancho": 1280,
+      "barra": {
+        "alto": 112.8000030517578,
+        "arriba": 0
+      },
+      "client": 1265,
+      "enlaces": [
+        {
+          "alto": 44,
+          "ancho": 52.087501525878906,
+          "texto": "Web",
+          "y": 8
+        },
+        {
+          "alto": 44,
+          "ancho": 88.30000305175781,
+          "texto": "WhatsApp",
+          "y": 8
+        },
+        {
+          "alto": 44,
+          "ancho": 49.5,
+          "texto": "App",
+          "y": 8
+        },
+        {
+          "alto": 44,
+          "ancho": 91.26250457763672,
+          "texto": "Call Center",
+          "y": 8
+        },
+        {
+          "alto": 44,
+          "ancho": 64.36250305175781,
+          "texto": "Clínica",
+          "y": 8
+        },
+        {
+          "alto": 44,
+          "ancho": 66.0625,
+          "texto": "Admin",
+          "y": 8
+        },
+        {
+          "alto": 44,
+          "ancho": 73.1624984741211,
+          "texto": "Bandeja",
+          "y": 8
+        }
+      ],
+      "fila": {
+        "client": 1152,
+        "izquierda": 0,
+        "scroll": 1152
+      },
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "qr": null,
+      "ruta": "/admin",
+      "scroll": 1265,
+      "scrollY": 209.6000061035156
+    },
+    {
+      "alto": 900,
+      "ancho": 1280,
+      "barra": {
+        "alto": 112.8000030517578,
+        "arriba": 42.400001525878906
+      },
+      "client": 1265,
+      "enlaces": [
+        {
+          "alto": 44,
+          "ancho": 52.087501525878906,
+          "texto": "Web",
+          "y": 50.400001525878906
+        },
+        {
+          "alto": 44,
+          "ancho": 88.30000305175781,
+          "texto": "WhatsApp",
+          "y": 50.400001525878906
+        },
+        {
+          "alto": 44,
+          "ancho": 49.5,
+          "texto": "App",
+          "y": 50.400001525878906
+        },
+        {
+          "alto": 44,
+          "ancho": 91.26250457763672,
+          "texto": "Call Center",
+          "y": 50.400001525878906
+        },
+        {
+          "alto": 44,
+          "ancho": 64.36250305175781,
+          "texto": "Clínica",
+          "y": 50.400001525878906
+        },
+        {
+          "alto": 44,
+          "ancho": 64.6500015258789,
+          "texto": "Admin",
+          "y": 50.400001525878906
+        },
+        {
+          "alto": 44,
+          "ancho": 74.7750015258789,
+          "texto": "Bandeja",
+          "y": 50.400001525878906
+        }
+      ],
+      "fila": {
+        "client": 1152,
+        "izquierda": 0,
+        "scroll": 1152
+      },
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "qr": null,
+      "ruta": "/bandeja",
+      "scroll": 1265,
+      "scrollY": 54.400001525878906
+    },
+    {
+      "alto": 900,
+      "ancho": 1280,
+      "barra": {
+        "alto": 112.8000030517578,
+        "arriba": 96.8000030517578
+      },
+      "client": 1265,
+      "enlaces": [
+        {
+          "alto": 44,
+          "ancho": 53.04999923706055,
+          "texto": "Web",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 88.30000305175781,
+          "texto": "WhatsApp",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 49.5,
+          "texto": "App",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 91.26250457763672,
+          "texto": "Call Center",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 64.36250305175781,
+          "texto": "Clínica",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 64.6500015258789,
+          "texto": "Admin",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 73.1624984741211,
+          "texto": "Bandeja",
+          "y": 104.8000030517578
+        }
+      ],
+      "fila": {
+        "client": 1152,
+        "izquierda": 0,
+        "scroll": 1152
+      },
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "qr": null,
+      "ruta": "/web",
+      "scroll": 1265,
+      "scrollY": 0
+    },
+    {
+      "alto": 900,
+      "ancho": 1280,
+      "barra": {
+        "alto": 112.8000030517578,
+        "arriba": 96.8000030517578
+      },
+      "client": 1280,
+      "enlaces": [
+        {
+          "alto": 44,
+          "ancho": 52.087501525878906,
+          "texto": "Web",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 90.3499984741211,
+          "texto": "WhatsApp",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 49.5,
+          "texto": "App",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 91.26250457763672,
+          "texto": "Call Center",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 64.36250305175781,
+          "texto": "Clínica",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 64.6500015258789,
+          "texto": "Admin",
+          "y": 104.8000030517578
+        },
+        {
+          "alto": 44,
+          "ancho": 73.1624984741211,
+          "texto": "Bandeja",
+          "y": 104.8000030517578
+        }
+      ],
+      "fila": {
+        "client": 1152,
+        "izquierda": 0,
+        "scroll": 1152
+      },
+      "paso": "Paso 9 de 9 · Llegada registrada · Clínica",
+      "qr": null,
+      "ruta": "/wa",
+      "scroll": 1280,
+      "scrollY": 0
+    }
+  ],
+  "focos": [
+    {
+      "alto": 44,
+      "ancho": 52.087501525878906,
+      "contorno": "2.4px",
+      "derecha": 60.087501525878906,
+      "filaScroll": 0,
+      "focoVisible": true,
+      "texto": "Web",
+      "x": 8
+    },
+    {
+      "alto": 44,
+      "ancho": 88.30000305175781,
+      "contorno": "2.4px",
+      "derecha": 152.38750457763672,
+      "filaScroll": 0,
+      "focoVisible": true,
+      "texto": "WhatsApp",
+      "x": 64.0875015258789
+    },
+    {
+      "alto": 44,
+      "ancho": 50.275001525878906,
+      "contorno": "2.4px",
+      "derecha": 206.6624984741211,
+      "filaScroll": 0,
+      "focoVisible": true,
+      "texto": "App",
+      "x": 156.3874969482422
+    },
+    {
+      "alto": 44,
+      "ancho": 91.26250457763672,
+      "contorno": "2.4px",
+      "derecha": 301.92501068115234,
+      "filaScroll": 0,
+      "focoVisible": true,
+      "texto": "Call Center",
+      "x": 210.6625061035156
+    },
+    {
+      "alto": 44,
+      "ancho": 64.36250305175781,
+      "contorno": "2.4px",
+      "derecha": 370.2875213623047,
+      "filaScroll": 0,
+      "focoVisible": true,
+      "texto": "Clínica",
+      "x": 305.9250183105469
+    },
+    {
+      "alto": 44,
+      "ancho": 64.6500015258789,
+      "contorno": "2.4px",
+      "derecha": 274.93750762939453,
+      "filaScroll": 164,
+      "focoVisible": true,
+      "texto": "Admin",
+      "x": 210.2875061035156
+    },
+    {
+      "alto": 44,
+      "ancho": 73.1624984741211,
+      "contorno": "2.4px",
+      "derecha": 352.0999984741211,
+      "filaScroll": 164,
+      "focoVisible": true,
+      "texto": "Bandeja",
+      "x": 278.9375
+    },
+    {
+      "alto": 44,
+      "ancho": 118.4375,
+      "contorno": "2.4px",
+      "derecha": 344,
+      "filaScroll": 164,
+      "focoVisible": true,
+      "texto": "Reiniciar guion",
+      "x": 225.5625
+    }
+  ],
+  "precioWeb": "$250.00",
+  "errores": []
+}

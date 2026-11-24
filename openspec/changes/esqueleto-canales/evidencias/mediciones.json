@@ -1,0 +1,164 @@
+{
+  "medidas": [
+    {
+      "alto": 812,
+      "ancho": 375,
+      "client": 360,
+      "controlesPequenos": [],
+      "ruta": "/app",
+      "scroll": 360
+    },
+    {
+      "alto": 812,
+      "ancho": 375,
+      "client": 360,
+      "controlesPequenos": [],
+      "ruta": "/clinica",
+      "scroll": 360
+    },
+    {
+      "alto": 812,
+      "ancho": 375,
+      "client": 360,
+      "controlesPequenos": [],
+      "ruta": "/admin",
+      "scroll": 360
+    },
+    {
+      "alto": 812,
+      "ancho": 375,
+      "client": 360,
+      "controlesPequenos": [],
+      "ruta": "/bandeja",
+      "scroll": 360
+    },
+    {
+      "alto": 812,
+      "ancho": 375,
+      "client": 360,
+      "controlesPequenos": [],
+      "ruta": "/web",
+      "scroll": 360
+    },
+    {
+      "alto": 900,
+      "ancho": 1280,
+      "client": 1265,
+      "controlesPequenos": [],
+      "ruta": "/wa",
+      "scroll": 1265
+    },
+    {
+      "alto": 900,
+      "ancho": 1280,
+      "client": 1265,
+      "controlesPequenos": [],
+      "ruta": "/app",
+      "scroll": 1265
+    },
+    {
+      "alto": 900,
+      "ancho": 1280,
+      "client": 1280,
+      "controlesPequenos": [],
+      "ruta": "/clinica",
+      "scroll": 1280
+    },
+    {
+      "alto": 900,
+      "ancho": 1280,
+      "client": 1265,
+      "controlesPequenos": [],
+      "ruta": "/callcenter",
+      "scroll": 1265
+    },
+    {
+      "alto": 900,
+      "ancho": 1280,
+      "client": 1265,
+      "controlesPequenos": [],
+      "ruta": "/admin",
+      "scroll": 1265
+    },
+    {
+      "alto": 900,
+      "ancho": 1280,
+      "client": 1265,
+      "controlesPequenos": [],
+      "ruta": "/bandeja",
+      "scroll": 1265
+    },
+    {
+      "alto": 900,
+      "ancho": 1280,
+      "client": 1265,
+      "controlesPequenos": [],
+      "ruta": "/web",
+      "scroll": 1265
+    },
+    {
+      "alto": 812,
+      "ancho": 375,
+      "client": 360,
+      "controlesPequenos": [],
+      "ruta": "/callcenter",
+      "scroll": 360
+    },
+    {
+      "alto": 812,
+      "ancho": 375,
+      "client": 360,
+      "controlesPequenos": [],
+      "ruta": "/wa",
+      "scroll": 360
+    }
+  ],
+  "focos": [
+    {
+      "contorno": "2.4px",
+      "texto": "Web",
+      "visible": true
+    },
+    {
+      "contorno": "2.4px",
+      "texto": "WhatsApp",
+      "visible": true
+    },
+    {
+      "contorno": "2.4px",
+      "texto": "App",
+      "visible": true
+    },
+    {
+      "contorno": "2.4px",
+      "texto": "Call Center",
+      "visible": true
+    },
+    {
+      "contorno": "2.4px",
+      "texto": "Clínica",
+      "visible": true
+    },
+    {
+      "contorno": "2.4px",
+      "texto": "Admin",
+      "visible": true
+    },
+    {
+      "contorno": "2.4px",
+      "texto": "Bandeja",
+      "visible": true
+    },
+    {
+      "contorno": "2.4px",
+      "texto": "Reiniciar guion",
+      "visible": true
+    },
+    {
+      "contorno": "2.4px",
+      "texto": "Abrir WhatsApp",
+      "visible": true
+    }
+  ],
+  "erroresMock": []
+}

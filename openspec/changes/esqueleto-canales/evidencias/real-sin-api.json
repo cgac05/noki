@@ -1,0 +1,6 @@
+{
+  "url": "http://127.0.0.1:5176/admin",
+  "api": "http://127.0.0.1:45999",
+  "mensaje": "No pudimos conectar con la API. Comprueba que esté encendida e intenta de nuevo.",
+  "erroresEsperados": []
+}

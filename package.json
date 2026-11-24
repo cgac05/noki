@@ -10,7 +10,7 @@
     "typecheck": "pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json",
     "lint": "eslint . && pnpm typecheck",
     "lint:deps": "depcruise --config .dependency-cruiser.cjs packages apps",
-    "test": "tsc --project tests/tsconfig.json && vitest run --project unitarios",
+    "test": "tsc --project tests/tsconfig.json && vitest run --project unitarios --project web",
     "test:integracion": "node --env-file=.env --import tsx tests/integracion/ejecutar.ts",
     "db:migrate": "node --env-file=.env --import tsx packages/adapters/out-postgres/src/cli.ts",
     "seed": "node --env-file=.env --import tsx apps/api/src/semilla/cli.ts",
