@@ -13,4 +13,4 @@
 - Criterios de aceptación: todos los requisitos y escenarios de `navegacion-canales` y `cliente-api-canales`.
 - Validaciones requeridas: puntos de control 1.4, 2.5, 3.7 y 4.4; comprobaciones manuales 4.1 y 4.2.
 - Detener la parte afectada si: hace falta modificar `@noki/contracts`, código de otro frente o un archivo compartido distinto de los de la tarea 1.2; una vista necesita calcular estado de negocio; el guion exige datos sensibles.
-- Autorización de cierre: PENDIENTE
+- Autorización de cierre: otorgada por `LuisMaster119`, responsable del frente B, en el chat de Claude Code el 2026-11-24, en respuesta a "¿Autorizas sincronizar specs y archivar esqueleto-canales?". Cita: "Sí, sincroniza y archiva". Cubre sincronizar `navegacion-canales` y `cliente-api-canales` y archivar la revisión integrada en `main` (`88abe48`, dictamen PASS en tercera vuelta). No autoriza commits.
