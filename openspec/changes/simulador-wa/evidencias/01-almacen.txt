@@ -1,0 +1,11 @@
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |web| src/cliente/idempotenciaWa.test.ts (2 tests) 24ms
+ ✓ |web| src/cliente/historialWa.test.tsx (9 tests) 55ms
+
+ Test Files  2 passed (2)
+      Tests  11 passed (11)
+   Start at  08:49:42
+   Duration  4.40s (transform 463ms, setup 0ms, import 1.71s, tests 80ms, environment 5.16s)
+

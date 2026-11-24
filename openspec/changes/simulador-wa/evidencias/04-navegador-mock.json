@@ -1,0 +1,212 @@
+{
+  "medidas": [
+    {
+      "ancho": 360,
+      "compositorSobreBarra": true,
+      "enlaces": [
+        {
+          "alto": 44,
+          "ancho": 52.087501525878906
+        },
+        {
+          "alto": 44,
+          "ancho": 90.3499984741211
+        },
+        {
+          "alto": 44,
+          "ancho": 49.5
+        },
+        {
+          "alto": 44,
+          "ancho": 91.26250457763672
+        },
+        {
+          "alto": 44,
+          "ancho": 64.36250305175781
+        },
+        {
+          "alto": 44,
+          "ancho": 64.6500015258789
+        },
+        {
+          "alto": 44,
+          "ancho": 73.1624984741211
+        }
+      ],
+      "ruta": "/wa",
+      "viewport": [
+        375,
+        812
+      ],
+      "visible": 360
+    },
+    {
+      "ancho": 360,
+      "codigoFueraUrl": true,
+      "historialTrasRecarga": true,
+      "ruta": "/wa",
+      "sinFechaVisible": true,
+      "viewport": [
+        375,
+        812
+      ],
+      "visible": 360
+    },
+    {
+      "ancho": 375,
+      "ruta": "/web",
+      "viewport": [
+        375,
+        812
+      ],
+      "visible": 375
+    },
+    {
+      "ancho": 360,
+      "ruta": "/wa",
+      "viewport": [
+        375,
+        812
+      ],
+      "visible": 360
+    },
+    {
+      "ancho": 360,
+      "ruta": "/app",
+      "viewport": [
+        375,
+        812
+      ],
+      "visible": 360
+    },
+    {
+      "ancho": 360,
+      "ruta": "/callcenter",
+      "viewport": [
+        375,
+        812
+      ],
+      "visible": 360
+    },
+    {
+      "ancho": 360,
+      "ruta": "/clinica",
+      "viewport": [
+        375,
+        812
+      ],
+      "visible": 360
+    },
+    {
+      "ancho": 360,
+      "ruta": "/admin",
+      "viewport": [
+        375,
+        812
+      ],
+      "visible": 360
+    },
+    {
+      "ancho": 375,
+      "ruta": "/bandeja",
+      "viewport": [
+        375,
+        812
+      ],
+      "visible": 375
+    },
+    {
+      "ancho": 1280,
+      "ruta": "/web",
+      "viewport": [
+        1280,
+        900
+      ],
+      "visible": 1280
+    },
+    {
+      "ancho": 1265,
+      "ruta": "/wa",
+      "viewport": [
+        1280,
+        900
+      ],
+      "visible": 1265
+    },
+    {
+      "ancho": 1265,
+      "ruta": "/app",
+      "viewport": [
+        1280,
+        900
+      ],
+      "visible": 1265
+    },
+    {
+      "ancho": 1265,
+      "ruta": "/callcenter",
+      "viewport": [
+        1280,
+        900
+      ],
+      "visible": 1265
+    },
+    {
+      "ancho": 1280,
+      "ruta": "/clinica",
+      "viewport": [
+        1280,
+        900
+      ],
+      "visible": 1280
+    },
+    {
+      "ancho": 1265,
+      "ruta": "/admin",
+      "viewport": [
+        1280,
+        900
+      ],
+      "visible": 1265
+    },
+    {
+      "ancho": 1265,
+      "ruta": "/bandeja",
+      "viewport": [
+        1280,
+        900
+      ],
+      "visible": 1265
+    }
+  ],
+  "focoEscritorio": [
+    {
+      "dentro": true,
+      "ultimo": true
+    },
+    {
+      "dentro": true,
+      "primero": true
+    }
+  ],
+  "focoMovil": [
+    {
+      "dentro": true,
+      "ultimo": true
+    },
+    {
+      "dentro": true,
+      "primero": true
+    }
+  ],
+  "escape": true,
+  "camposVaciosAlReabrir": true,
+  "privacidadVisible": {
+    "codigoFueraUrl": true,
+    "referrer": "no-referrer",
+    "resumenRedactado": true,
+    "sinCodigoVisible": true,
+    "sinFechaVisible": true
+  },
+  "errores": []
+}

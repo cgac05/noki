@@ -1,0 +1,43 @@
+
+ RUN  v4.0.14 <repo>
+
+ ❯ |web| src/vistas/flow.test.tsx (6 tests | 1 failed | 5 skipped) 661ms
+   ↓ Envío del Flow: controles según captura y resumen enmascarado sin valores en mutaciones ni almacenamiento
+   ↓ Campo requerido vacío: no envía y señala el campo
+   × atrapa el foco con Tab y Shift+Tab entre el primer campo y Cancelar 660ms
+   ↓ Escape y valores descartados: cancela sin enviar y abre campos vacíos
+   ↓ reintenta el Flow con la misma solicitud y clave; cerrar descarta el pendiente protegido
+   ↓ cerrar después de un error borra los valores y elimina el reintento del historial
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/vistas/flow.test.tsx > atrapa el foco con Tab y Shift+Tab entre el primer campo y Cancelar
+AssertionError: expected <button type="button"></button> to be <button type="button" …(1)></button> // Object.is equality
+
+- Expected
++ Received
+
+  <button
+-   class="boton-secundario"
+    type="button"
+  >
+-   Cancelar
++   Abrir formulario
+  </button>
+
+ ❯ src/vistas/flow.test.tsx:78:87
+     76|   const { usuario } = await abrir();
+     77|   const primero = screen.getByLabelText('Nombre de prueba'); const ult…
+     78|   primero.focus(); await usuario.tab({ shift: true }); expect(document…
+       |                                                                                       ^
+     79|   await usuario.tab(); expect(document.activeElement).toBe(primero);
+     80| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 skipped (6)
+   Start at  09:19:53
+   Duration  6.03s (transform 717ms, setup 0ms, import 2.23s, tests 661ms, environment 2.64s)
+

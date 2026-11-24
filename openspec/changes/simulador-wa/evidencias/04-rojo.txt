@@ -1,0 +1,169 @@
+
+ RUN  v4.0.14 <repo>
+
+ ❯ |web| src/usoDemo.test.ts (2 tests | 2 failed) 19ms
+   × el README documenta el enlace, la captura protegida y el borrado de la sesión 14ms
+   × cada ejemplo de build del README elige un modo explícito y reproducible 4ms
+ ✓ |web| src/vistas/realWa.test.tsx (1 test) 471ms
+   ✓ sin API real muestra el error en la burbuja y Reintentar conserva mensaje y clave  470ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/usoDemo.test.ts > el README documenta el enlace, la captura protegida y el borrado de la sesión
+AssertionError: expected '# Canales de noki\n\nLas siete rutas …' to contain '?continuar='
+
+- Expected
++ Received
+
+- ?continuar=
++ # Canales de noki
++
++ Las siete rutas comparten un cliente de API. El modo simulado permite recorrer el Flujo A sin PostgreSQL, Redis ni la API del núcleo. Todos los datos son ficticios. El cambio conserva los estilos existentes.
++
++ ## Iniciar
++
++ Desde la raíz del repositorio, con Node 20+ y pnpm:
++
++ ```powershell
++ pnpm install --frozen-lockfile
++ $env:VITE_API = 'mock'
++ pnpm --filter @noki/web dev
++ ```
++
++ Abre `http://localhost:5173/`. `pnpm dev` inicia también API y sd-mock y necesita la configuración de la raíz. Si 5173 está ocupado, usa `pnpm --filter @noki/web dev --port 5175` y abre ese puerto. No es necesario detener otros procesos para probar la web.
++
++ ### Antes de cada ensayo
++
++ Detén el servidor de la web con **Ctrl+C** en la terminal donde lo iniciaste y vuelve a arrancarlo. Si cambiaron las dependencias, usa `--force` para regenerar la caché de Vite:
++
++ ```powershell
++ $env:VITE_API = 'mock'
++ pnpm --filter @noki/web dev --force
++ ```
++
++ Si no cambiaron dependencias, basta `pnpm --filter @noki/web dev`. Recarga después la pestaña del navegador y comienza el guion desde el inicio. Un servidor que seguía abierto durante la instalación puede mezclar versiones de `.vite/deps` y producir **Invalid hook call**; el reinicio con `--force` evita reutilizar esa caché vieja. Para un puerto alternativo, combina `--force --port 5175`.
++
++ | Variable | Valores y comportamiento |
++ |---|---|
++ | `VITE_API` | `mock` por defecto; `real` selecciona HTTP. Un valor diferente impide iniciar y muestra los valores válidos. |
++ | `VITE_API_URL` | URL base del cliente real; por defecto `http://localhost:4000`. Sin barra final obligatoria. |
++ | `VITE_DEMO` | Solo el valor `true` habilita la consulta de bandeja en el cliente real; por defecto está deshabilitada. |
++
++ Vite incorpora estas variables al compilar. Reinicia el servidor después de cambiarlas y vuelve a compilar para cambiar un bundle de producción. Se pueden configurar también en `apps/web/.env.local` (ignorado por Git); no incluyas secretos en variables `VITE_*`, que son públicas.
++
++ ## Guion del Flujo A
++
++ Usa **una misma pestaña**, con la barra de canales. El guion vive en memoria: cambiar de ruta conserva su estado; recargar la página lo reinicia. **Reiniciar guion** restablece todas las vistas y la cotización web. La latencia simulada por defecto es 150 ms.
++
++ 1. Abre `/callcenter` y pulsa **Llamada entrante**. La ficha muestra a Ana y el contacto enmascarado.
++ 2. Pulsa **Cotizar paquete en Tepic**. El guion muestra Paquete US mamario + Papanicolaou, sede Tepic y $250.00 MXN (25000 centavos, igual que la semilla).
++ 3. Pulsa **Continuar por WhatsApp**. Se presenta un código opaco ficticio. Cambia a **WhatsApp** con la barra.
++ 4. En `/wa`, el bot retoma en el horario. Pulsa **Ver horarios**. También se acepta `Hola` o el código mostrado en Call Center, sin volver a pedir servicio ni sede.
++ 5. Elige **Jueves 26 · 09:15** en la lista. La otra sección demuestra la lista y responde con ayuda; el guion fijo continúa con 09:15. Las fechas de ejemplo son del 26 de noviembre de 2026 y se muestran en `America/Mazatlan`.
++ 6. Pulsa **Revisar cita**. El Flow es un aviso: la captura protegida pertenece al siguiente cambio y aquí no pide datos como texto libre.
++ 7. Pulsa **Confirmar cita**. Cambia a **App**: se muestra `CONFIRMADA` y un QR generado a partir del token recibido, sin folio. Los tokens del modo mock son ficticios y no sirven como credenciales reales.
++ 8. Cambia a **Clínica** y pulsa **Registrar llegada**. El estado pasa a `EN_CLINICA`, según la respuesta prefabricada del cliente.
++ 9. Abre **Admin**: aparecen el conteo por estado, los KPIs y la línea de tiempo, incluidos los cambios por Call Center, WhatsApp, App y Clínica. Los eventos se etiquetan en UTC.
++ 10. En **Bandeja** se ven SMS/correo simulados. El código OTP ficticio se muestra solo ahí. Puedes reiniciar el guion desde cualquier ruta.
++
++ El simulador no calcula estados, identidad, disponibilidad ni reglas del núcleo. Es una lista fija de respuestas; no constituye una integración funcional con el backend.
++
++ En móvil, la barra conserva los siete enlaces en una sola fila: desplázala horizontalmente o recórrela con Tab para llegar a todos los canales. El paso actual permanece visible debajo. La página no necesita desplazamiento horizontal y la cita presenta primero el QR para que quede visible al abrir `/app`.
++
++ ## Cotización web independiente
++
++ Abre `/web`, pulsa **Cotizar en Tepic** y después **Continuar en WhatsApp** para mostrar el código `CONTINUAR …` entregado por el cliente. Este mini guion no avanza ni reinicia el Flujo A. El enlace abre `/wa`; la resolución de continuidad del Flujo B completo corresponde a cambios posteriores.
++
++ ## Modo real
++
++ ```powershell
++ $env:VITE_API = 'real'
++ $env:VITE_API_URL = 'http://localhost:4000'
++ pnpm --filter @noki/web build
++ pnpm --filter @noki/web exec vite preview --host 127.0.0.1 --port 4173
++ ```
++
++ Abre `/admin` en la vista previa para intentar `GET /api/admin/kpis`. Si no hay API escuchando, aparece un mensaje de conexión con **Reintentar**. El cliente resuelve las nueve consultas compartidas con `RUTAS_CONSULTAS` y valida sus respuestas. Los endpoints GET corresponden al frente A; definir el contrato no significa que ya estén implementados. Las consultas exclusivas de demo (`web`, `conversacion`) muestran un aviso de consulta aún no disponible. El modo real no utiliza fixtures como respaldo silencioso. El servidor real deberá permitir el origen de la web para las peticiones entre puertos.
++
++ El cliente está preparado para `POST /api/comandos` y `POST /api/canales/wa/mensajes`, con validación antes de enviar y después de recibir. Genera una clave de idempotencia por intento lógico y la conserva durante un único reintento automático de red. Las acciones de comando también conservan la clave al pulsar **Reintentar**. Un error HTTP válido conserva su código y mensaje públicos; los errores de contrato no muestran los detalles Zod.
++
++ Las lecturas compartidas usan los esquemas de `@noki/contracts` y las rutas de [contratos](../../docs/contratos.md). Las vistas toman los IDs de la última respuesta de comando o, en mock, de `cliente.demo.ids`. Sin contexto real muestran un aviso y no inventan IDs; la sesión de paciente real está pendiente del cambio de seguridad. La bandeja real requiere `VITE_DEMO=true`. La conexión Socket.IO real está pendiente de `api-comandos`; `suscribir` devuelve por ahora una función de cancelación sin abrir conexiones. Las lecturas y la experiencia completa contra API no se declaran integradas en este cambio.
++
++ Para regresar al modo simulado:
++
++ ```powershell
++ $env:VITE_API = 'mock'
++ Remove-Item Env:VITE_API_URL -ErrorAction SilentlyContinue
++ pnpm --filter @noki/web build
++ ```
++
++ ## Lecturas compartidas y tipos de demo
++
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  2 failed | 1 passed (3)
+   Start at  09:14:07
+   Duration  5.17s (transform 591ms, setup 0ms, import 1.92s, tests 490ms, environment 2.31s)
++ Oferta de catálogo, cita, ficha del hilo, llegada, bandeja y métricas se importan de `@noki/contracts`. Sus lecturas contienen solo datos: Call Center y Web copian los IDs de la oferta a los comandos de servicio y sede; Clínica copia el token de la cita a `RegistrarLlegada`. El cliente valida cada comando. El reintento conserva la clave del comando pendiente y no repite los comandos ya completados de la secuencia.
+
++
++ `src/cliente/demo.ts` conserva únicamente los tipos exclusivos de demo:
++
++ | Tipo | Contenido |
++ |---|---|
++ | `PasoGuion` | Posición y título del paso visible del guion. |
++ | `ConversacionVista` | Mensajes y siguiente pregunta del contrato. |
++ | `WebVista` | Oferta del contrato y cotización/código de continuación, sin acciones. |
++ | `PasoWeb` | Vista y respuesta prefabricada de la cotización web. |
++
++ `src/cliente/consultas.ts` deriva los nombres, parámetros y respuestas de la tabla compartida y agrega solo las consultas de demo `conversacion` y `web`. No duplica los modelos compartidos. Los comandos esperados del guion son internos al mock y nunca se devuelven como lecturas.
++
++ No se declaran fecha de nacimiento, correo del paciente, RFC, PIN ni CURP en estas lecturas. Las consultas todavía no tienen autenticación y exponen nombre de pila, teléfono enmascarado, citas con token y llegadas; se limitan a la demo hasta el cambio de seguridad.
++
++ ## Validar
++
++ ```powershell
++ pnpm lint
++ pnpm lint:deps
++ pnpm test
++ pnpm --filter @noki/web build
++ ```
++
++ `pnpm test` conserva las comprobaciones TypeScript y ejecuta los proyectos `unitarios` y `web`. Para correr solo las pruebas de la web: `pnpm exec vitest run --project web`. También está disponible la configuración local con `pnpm exec vitest run --root apps/web`.
++
++ La revisión visual debe recorrer el guion a 375 × 812 y 1280 × 900, comprobar navegación con Tab, recarga directa en `/wa`, errores de consola y ausencia de desplazamiento horizontal. El estado real de estas comprobaciones y la revisión probada quedan en `openspec/changes/contratos-consultas/implementacion.md` y su carpeta `evidencias/`.
++
+
+ ❯ src/usoDemo.test.ts:7:170
+      5| it('el README documenta el enlace, la captura protegida y el borrado d…
+      6|   const readme = readFileSync(new URL('../README.md', import.meta.url)…
+      7|   for (const texto of ['?continuar=', 'Nueva conversación', 'sessionSt…
+       |                                                                                                                                                                          ^
+      8|   expect(readme).not.toContain('ConversacionVista');
+      9| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  |web| src/usoDemo.test.ts > cada ejemplo de build del README elige un modo explícito y reproducible
+AssertionError: expected 'pnpm lint\npnpm lint:deps\npnpm test\…' to match /\$env:VITE_API\s*=\s*'(mock|real)'/
+
+- Expected: 
+/\$env:VITE_API\s*=\s*'(mock|real)'/
+
++ Received: 
+"pnpm lint
+pnpm lint:deps
+pnpm test
+pnpm --filter @noki/web build
+"
+
+ ❯ src/usoDemo.test.ts:16:49
+     14|   const builds = ejemplos.filter(ejemplo => ejemplo.includes('pnpm --f…
+     15|   expect(builds.length).toBeGreaterThan(0);
+     16|   for (const ejemplo of builds) expect(ejemplo).toMatch(/\$env:VITE_AP…
+       |                                                 ^
+     17| });
+     18| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+

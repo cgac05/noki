@@ -1,0 +1,1930 @@
+
+ RUN  v4.0.14 <repo>
+
+ ❯ |web| src/configuracion.test.ts (2 tests | 2 failed) 14ms
+   × Producción sin modo explícito: exige VITE_API y conserva el valor por defecto en desarrollo 9ms
+   × Sin referer: la política no-referrer está en el documento de toda la aplicación 2ms
+ ❯ |web| src/vistas/wa.test.tsx (11 tests | 7 failed) 4357ms
+   × Historial acumulado: muestra cuatro burbujas en orden en un log accesible 782ms
+   × Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo 221ms
+   ✓ Modo real: conversa solo con POST y no muestra la insignia simulada 199ms
+   × Número inválido: explica el patrón de 10 a 15 dígitos e impide el envío 12ms
+   ✓ Doble toque e indicador de espera: la misma opción se envía una sola vez 230ms
+   × Elegir una fila: abre las dos secciones, envía su payload y guarda el título 1187ms
+   ✓ Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot  479ms
+   × Enlace del call center: envía una vez, retira el código de la URL y lo redacta 1024ms
+   ✓ Código inválido: un parámetro vacío no envía nada 9ms
+   × Call center muestra enlace y QR de continuación sin enviar ni avanzar el guion 194ms
+   × Modo simulado: la insignia es visible en cualquier ruta 17ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 9 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/configuracion.test.ts > Producción sin modo explícito: exige VITE_API y conserva el valor por defecto en desarrollo
+AssertionError: expected 'object' to be 'function' // Object.is equality
+
+Expected: "function"
+Received: "object"
+
+ ❯ src/configuracion.test.ts:11:27
+      9|   vi.stubEnv('VITE_API', undefined);
+     10|   try {
+     11|     expect(typeof config).toBe('function');
+       |                           ^
+     12|     if (typeof config !== 'function') throw new Error('La configuració…
+     13|     const configurar = config;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/9]⎯
+
+ FAIL  |web| src/configuracion.test.ts > Sin referer: la política no-referrer está en el documento de toda la aplicación
+AssertionError: expected '<!doctype html>\n<html lang="es">\n  …' to match /<meta\s+name="referrer"\s+content="n…/>
+
+- Expected: 
+/<meta\s+name="referrer"\s+content="no-referrer"\s*\/>/
+
++ Received: 
+"<!doctype html>
+<html lang=\"es\">
+  <head>
+    <meta charset=\"UTF-8\" />
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />
+    <meta name=\"theme-color\" content=\"#174c3c\" />
+    <meta name=\"description\" content=\"Base de demostración de noki: continuidad de atención entre canales.\" />
+    <title>noki · Atención conectada</title>
+  </head>
+  <body>
+    <div id=\"root\"></div>
+    <script type=\"module\" src=\"/src/main.tsx\"></script>
+  </body>
+</html>
+"
+
+ ❯ src/configuracion.test.ts:23:75
+     21| 
+     22| it('Sin referer: la política no-referrer está en el documento de toda …
+     23|   expect(readFileSync(new URL('../index.html', import.meta.url), 'utf8…
+       |                                                                           ^
+     24| });
+     25| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/9]⎯
+
+ FAIL  |web| src/vistas/wa.test.tsx > Historial acumulado: muestra cuatro burbujas en orden en un log accesible
+TestingLibraryElementError: Unable to find an accessible element with the role "log"
+
+Here are the accessible roles:
+
+  link:
+
+  Name "Saltar al contenido":
+  [36m<a[39m
+    [33mclass[39m=[32m"saltar-contenido"[39m
+    [33mhref[39m=[32m"#contenido"[39m
+  [36m/>[39m
+
+  Name "noki · Portada":
+  [36m<a[39m
+    [33maria-label[39m=[32m"noki · Portada"[39m
+    [33mclass[39m=[32m"marca"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/"[39m
+  [36m/>[39m
+
+  Name "Web":
+  [36m<a[39m
+    [33mclass[39m=[32m""[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/web"[39m
+  [36m/>[39m
+
+  Name "WhatsApp":
+  [36m<a[39m
+    [33maria-current[39m=[32m"page"[39m
+    [33mclass[39m=[32m"active"[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/wa"[39m
+  [36m/>[39m
+
+  Name "App":
+  [36m<a[39m
+    [33mclass[39m=[32m""[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/app"[39m
+  [36m/>[39m
+
+  Name "Call Center":
+  [36m<a[39m
+    [33mclass[39m=[32m""[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/callcenter"[39m
+  [36m/>[39m
+
+  Name "Clínica":
+  [36m<a[39m
+    [33mclass[39m=[32m""[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/clinica"[39m
+  [36m/>[39m
+
+  Name "Admin":
+  [36m<a[39m
+    [33mclass[39m=[32m""[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/admin"[39m
+  [36m/>[39m
+
+  Name "Bandeja":
+  [36m<a[39m
+    [33mclass[39m=[32m""[39m
+    [33mdata-discover[39m=[32m"true"[39m
+    [33mhref[39m=[32m"/bandeja"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  [36m<header[39m
+    [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Canales de la demo":
+  [36m<nav[39m
+    [33maria-label[39m=[32m"Canales de la demo"[39m
+    [33mclass[39m=[32m"barra-demo"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  [36m<ul />[39m
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  [36m<li />[39m
+
+  Name "":
+  [36m<li />[39m
+
+  Name "":
+  [36m<li />[39m
+
+  Name "":
+  [36m<li />[39m
+
+  Name "":
+  [36m<li />[39m
+
+  Name "":
+  [36m<li />[39m
+
+  Name "":
+  [36m<li />[39m
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  [36m<p[39m
+    [33mrole[39m=[32m"status"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  button:
+
+  Name "Reiniciar guion":
+  [36m<button[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Enviar":
+  [36m<button[39m
+    [33mdisabled[39m=[32m""[39m
+    [33mtype[39m=[32m"submit"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  [36m<main[39m
+    [33mclass[39m=[32m"contenido flex-1"[39m
+    [33mid[39m=[32m"contenido"[39m
+    [33mtabindex[39m=[32m"-1"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  heading:
+
+  Name "WhatsApp":
+  [36m<h1 />[39m
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"introduccion"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  Name "":
+  [36m<p />[39m
+
+  --------------------------------------------------
+  region:
+
+  Name "Conversación simulada":
+  [36m<section[39m
+    [33maria-label[39m=[32m"Conversación simulada"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  article:
+
+  Name "":
+  [36m<article[39m
+    [33mclass[39m=[32m"mensaje-bot"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<article[39m
+    [33mclass[39m=[32m"mensaje-bot"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  textbox:
+
+  Name "Mensaje":
+  [36m<input[39m
+    [33mautocomplete[39m=[32m"off"[39m
+    [33mid[39m=[32m"mensaje-wa"[39m
+    [33mplaceholder[39m=[32m"Escribe un mensaje de demo"[39m
+    [33mvalue[39m=[32m""[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name "":
+  [36m<footer[39m
+    [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+        [36m</span>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mWhatsApp[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"introduccion"[39m
+        [36m>[39m
+          [0mTu atención continúa donde la dejaste.[0m
+        [36m</p>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"conversacion"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación simulada"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<p>[39m
+                [0mUno[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mRespuesta del bot[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<p>[39m
+                [0mDos[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mRespuesta del bot[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje de demo"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/vistas/wa.test.tsx:34:22
+     32|   const { cliente } = respuestas([{ tipo: 'texto', texto: 'Respuesta d…
+     33|   await texto(usuario, 'Uno'); await texto(usuario, 'Dos');
+     34|   const log = screen.getByRole('log');
+       |                      ^
+     35|   await waitFor(() => expect(within(log).getAllByText('Respuesta del b…
+     36|   expect(log.textContent).toMatch(/Uno.*Respuesta del bot.*Dos.*Respue…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/9]⎯
+
+ FAIL  |web| src/vistas/wa.test.tsx > Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo
+TestingLibraryElementError: Unable to find a label with the text of: Número de WhatsApp
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div />[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+        [36m</span>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mWhatsApp[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"introduccion"[39m
+        [36m>[39m
+          [0mTu atención continúa donde la dejaste.[0m
+        [36m</p>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"conversacion"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación simulada"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<p>[39m
+                [0mHola[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mRespuesta conservada[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje de demo"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ getAllByLabelText ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/queries/label-text.js:111:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/vistas/wa.test.tsx:47:36
+     45|   expect(screen.getByText('Respuesta conservada')).toBeDefined(); vist…
+     46|   const nueva = abrir(cliente); expect(await screen.findByText('Respue…
+     47|   await nueva.usuario.clear(screen.getByLabelText('Número de WhatsApp'…
+       |                                    ^
+     48|   await nueva.usuario.type(screen.getByLabelText('Número de WhatsApp')…
+     49|   expect(screen.queryByText('Respuesta conservada')).toBeNull();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/9]⎯
+
+ FAIL  |web| src/vistas/wa.test.tsx > Número inválido: explica el patrón de 10 a 15 dígitos e impide el envío
+TestingLibraryElementError: Unable to find a label with the text of: Número de WhatsApp
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+        [36m</span>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mWhatsApp[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"introduccion"[39m
+        [36m>[39m
+          [0mTu atención continúa donde la dejaste.[0m
+        [36m</p>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"conversacion"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación simulada"[39m
+          [36m/>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje de demo"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ getAllByLabelText ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/queries/label-text.js:111:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/vistas/wa.test.tsx:66:25
+     64| it('Número inválido: explica el patrón de 10 a 15 dígitos e impide el …
+     65|   const { cliente, enviar } = respuestas([]); const { usuario } = abri…
+     66|   const numero = screen.getByLabelText('Número de WhatsApp'); expect(n…
+       |                         ^
+     67|   await usuario.clear(numero); await usuario.type(numero, '12345'); aw…
+     68|   expect(screen.getByText(/10 a 15 dígitos/)).toBeDefined(); expect((s…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/9]⎯
+
+ FAIL  |web| src/vistas/wa.test.tsx > Elegir una fila: abre las dos secciones, envía su payload y guarda el título
+TestingLibraryElementError: Unable to find role="button" and name `/Ver opciones/`
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+        [36m</span>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mWhatsApp[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"introduccion"[39m
+        [36m>[39m
+          [0mTu atención continúa donde la dejaste.[0m
+        [36m</p>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"conversacion"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación simulada"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<p>[39m
+                [0mHola[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mHorarios disponibles[0m
+                [36m</p>[39m
+                [36m<section[39m
+                  [33mclass[39m=[32m"seccion-lista"[39m
+                [36m>[39m
+                  [36m<h3>[39m
+                    [0mMañana[0m
+                  [36m</h3>[39m
+                  [36m<ul>[39m
+                    [36m<li>[39m
+                      [36m<button[39m
+                        [33mtype[39m=[32m"button"[39m
+                      [36m>[39m
+                        [0m09:15[0m
+                      [36m</button>[39m
+                    [36m</li>[39m
+                  [36m</ul>[39m
+                [36m</section>[39m
+                [36m<section[39m
+                  [33mclass[39m=[32m"seccion-lista"[39m
+                [36m>[39m
+                  [36m<h3>[39m
+                    [0mTarde[0m
+                  [36m</h3>[39m
+                  [36m<ul>[39m
+                    [36m<li>[39m
+                      [36m<button[39m
+                        [33mtype[39m=[32m"button"[39m
+                      [36m>[39m
+                        [0m12:15[0m
+                      [36m</button>[39m
+                    [36m</li>[39m
+                  [36m</ul>[39m
+                [36m</section>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje de demo"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+        [36m</span>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mWhatsApp[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"introduccion"[39m
+        [36m>[39m
+          [0mTu atención continúa donde la dejaste.[0m
+        [36m</p>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"conversacion"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación simulada"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<p>[39m
+                [0mHola[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mHorarios disponibles[0m
+                [36m</p>[39m
+                [36m<section[39m
+                  [33mclass[39m=[32m"seccion-lista"[39m
+                [36m>[39m
+                  [36m<h3>[39m
+                    [0mMañana[0m
+                  [36m</h3>[39m
+                  [36m<ul>[39m
+                    [36m<li>[39m
+                      [36m<button[39m
+                        [33mtype[39m=[32m"button"[39m
+                      [36m>[39m
+                        [0m09:15[0m
+                      [36m</button>[39m
+                    [36m</li>[39m
+                  [36m</ul>[39m
+                [36m</section>[39m
+                [36m<section[39m
+                  [33mclass[39m=[32m"seccion-lista"[39m
+                [36m>[39m
+                  [36m<h3>[39m
+                    [0mTarde[0m
+                  [36m</h3>[39m
+                  [36m<ul>[39m
+                    [36m<li>[39m
+                      [36m<button[39m
+                        [33mtype[39m=[32m"button"[39m
+                      [36m>[39m
+                        [0m12:15[0m
+                      [36m</button>[39m
+                    [36m</li>[39m
+                  [36m</ul>[39m
+                [36m</section>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje de demo"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/wa.test.tsx:91:36
+     89|   ] }]);
+     90|   const { usuario } = abrir(cliente); await texto(usuario); enviar.moc…
+     91|   await usuario.click(await screen.findByRole('button', { name: /Ver o…
+       |                                    ^
+     92|   const hoja = screen.getByRole('dialog', { name: 'Horarios disponible…
+     93|   expect(within(hoja).getByRole('heading', { name: 'Mañana' })).toBeDe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/9]⎯
+
+ FAIL  |web| src/vistas/wa.test.tsx > Enlace del call center: envía una vez, retira el código de la URL y lo redacta
+TestingLibraryElementError: Unable to find an element with the text: Continuación recibida. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+        [36m</span>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mWhatsApp[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"introduccion"[39m
+        [36m>[39m
+          [0mTu atención continúa donde la dejaste.[0m
+        [36m</p>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"conversacion"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación simulada"[39m
+          [36m/>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje de demo"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+        [36m</span>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mWhatsApp[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"introduccion"[39m
+        [36m>[39m
+          [0mTu atención continúa donde la dejaste.[0m
+        [36m</p>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"conversacion"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación simulada"[39m
+          [36m/>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje de demo"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/wa.test.tsx:110:23
+    108|   const { cliente, enviar } = respuestas([{ tipo: 'texto', texto: 'Con…
+    109|   const { router } = abrir(cliente, '/wa?continuar=codigo-ficticio-pro…
+    110|   expect(await screen.findByText('Continuación recibida')).toBeDefined…
+       |                       ^
+    111|   expect(enviar).toHaveBeenCalledExactlyOnceWith({ waId: CONTACTO_DEMO…
+    112|   expect(router.state.location.search).toBe(''); expect(screen.getByTe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/9]⎯
+
+ FAIL  |web| src/vistas/wa.test.tsx > Call center muestra enlace y QR de continuación sin enviar ni avanzar el guion
+AssertionError: expected '/wa' to be '/wa?continuar=demo.cc.continuacion-op…' // Object.is equality
+
+Expected: "/wa?continuar=demo.cc.continuacion-opaca"
+Received: "/wa"
+
+ ❯ src/vistas/wa.test.tsx:131:94
+    129|   const enviar = vi.spyOn(cliente, 'enviarMensajeWa'); const { usuario…
+    130|   await usuario.click(await screen.findByRole('button', { name: 'Conti…
+    131|   expect((await screen.findByRole('link', { name: 'Abrir WhatsApp' }))…
+       |                                                                                              ^
+    132|   expect(await screen.findByRole('img', { name: 'Código QR de continua…
+    133|   expect(enviar).not.toHaveBeenCalled(); expect(cliente.demo.paso().id…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/9]⎯
+
+ FAIL  |web| src/vistas/wa.test.tsx > Modo simulado: la insignia es visible en cualquier ruta
+TestingLibraryElementError: Unable to find an element with the text: Modo simulado. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+        [36m</span>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mWeb[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"introduccion"[39m
+        [36m>[39m
+          [0mCotiza tu estudio y continúa la atención por WhatsApp.[0m
+        [36m</p>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"estado-carga"[39m
+          [33mrole[39m=[32m"status"[39m
+        [36m>[39m
+          [0mCargando información…[0m
+        [36m</p>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/vistas/wa.test.tsx:139:76
+    137|   const { router } = abrir();
+    138|   for (const ruta of ['/web', '/wa', '/app', '/callcenter', '/clinica'…
+    139|     await act(async () => { await router.navigate(ruta); }); expect(sc…
+       |                                                                            ^
+    140|   }
+    141| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/9]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  9 failed | 4 passed (13)
+   Start at  08:58:19
+   Duration  8.99s (transform 637ms, setup 0ms, import 3.04s, tests 4.37s, environment 2.27s)
+

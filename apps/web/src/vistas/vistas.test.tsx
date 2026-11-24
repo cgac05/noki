@@ -9,10 +9,11 @@ import { ClienteMock } from '../cliente/mock/ClienteMock.ts';
 import { GUION_FLUJO_A, IDS } from '../cliente/mock/guionFlujoA.ts';
 import { ProveedorCliente } from '../cliente/ProveedorCliente.tsx';
 import { MensajeBot, EntradaPregunta } from '../componentes/MensajeBot.tsx';
+import '../pruebas/dialogo.ts';
 import { rutas } from '../rutas.tsx';
 
 vi.mock('qrcode', () => ({ default: { toString: vi.fn().mockResolvedValue('<svg viewBox="0 0 10 10"><path d="M0 0h10v10H0z"/></svg>') } }));
-afterEach(() => { cleanup(); vi.clearAllMocks(); });
+afterEach(() => { cleanup(); sessionStorage.clear(); vi.clearAllMocks(); });
 
 function abrir(ruta = '/callcenter', cliente: ClienteApi = new ClienteMock({ latenciaMs: 0 })) {
   const router = createMemoryRouter(rutas, { initialEntries: [ruta] });
@@ -21,10 +22,11 @@ function abrir(ruta = '/callcenter', cliente: ClienteApi = new ClienteMock({ lat
 }
 
 async function confirmarGuion(cliente: ClienteApi) {
-  for (const paso of GUION_FLUJO_A.slice(1, 8)) {
+  for (const paso of GUION_FLUJO_A.slice(1)) {
     if (paso.espera!.tipo === 'comando') await cliente.enviarComando(paso.espera!.comando);
     else if (paso.espera!.tipo === 'comandos') { for (const comando of paso.espera!.comandos) await cliente.enviarComando(comando); }
     else await cliente.enviarMensajeWa(paso.espera!.mensaje);
+    if (paso.paso.id === 'CONFIRMADA') break;
   }
 }
 
@@ -42,9 +44,9 @@ describe('Mensajes y siguiente pregunta', () => {
     expect(elegir).toHaveBeenCalledWith('opaco:b');
   });
 
-  it('Flow fuera de alcance: no captura ni repite valores de los campos', () => {
+  it('Flow protegido: ofrece abrir el formulario sin repetir valores iniciales', () => {
     render(<MensajeBot mensaje={{ tipo: 'flow', titulo: 'Verificación', campos: [{ id: 'secreto', etiqueta: 'Dato protegido', captura: 'sensitive', valorInicial: 'no revelar' }] }} onElegir={vi.fn()} />);
-    expect(screen.getByText(/simulador de WhatsApp/)).toBeDefined();
+    expect(screen.getByRole('button', { name: 'Abrir formulario' })).toBeDefined();
     expect(screen.queryByRole('textbox')).toBeNull();
     expect(screen.queryByText('no revelar')).toBeNull();
   });
@@ -80,7 +82,7 @@ describe('Vistas del guion', () => {
   it('Registrar llegada desde la cita: copia el token elegido y el canal clinica, sin un comando en la lectura', async () => {
     const cliente = new ClienteMock({ latenciaMs: 0 });
     await confirmarGuion(cliente);
-    const llegada = structuredClone(GUION_FLUJO_A[7]!.lecturas.llegadasSede[0]!);
+    const llegada = structuredClone(GUION_FLUJO_A.find(paso => paso.paso.id === 'CONFIRMADA')!.lecturas.llegadasSede[0]!);
     llegada.cita.tokenQr = 'demo.qr.cita-elegida.token-distinto';
     llegada.cita.tramite.id = '019aff00-0000-7000-8000-000000000012';
     expect(llegada).not.toHaveProperty('accion');
@@ -89,7 +91,7 @@ describe('Vistas del guion', () => {
       const dato = await consultar(nombre, parametros);
       return nombre === 'llegadasSede' ? [llegada] as typeof dato : dato;
     });
-    const enviar = vi.spyOn(cliente, 'enviarComando').mockResolvedValue(GUION_FLUJO_A[8]!.respuesta);
+    const enviar = vi.spyOn(cliente, 'enviarComando').mockResolvedValue(GUION_FLUJO_A.find(paso => paso.paso.id === 'EN_CLINICA')!.respuesta);
     const { usuario } = abrir('/clinica', cliente);
     await usuario.click(await screen.findByRole('button', { name: 'Registrar llegada' }));
     await waitFor(() => expect(enviar).toHaveBeenCalledExactlyOnceWith({
@@ -151,12 +153,18 @@ describe('Vistas del guion', () => {
     await usuario.click(await screen.findByRole('button', { name: 'Llamada entrante' }));
     await usuario.click(await screen.findByRole('button', { name: 'Cotizar paquete en Tepic' }));
     await usuario.click(await screen.findByRole('button', { name: 'Continuar por WhatsApp' }));
-    await usuario.click(screen.getByRole('link', { name: 'WhatsApp' }));
+    await usuario.click(await screen.findByRole('link', { name: 'Abrir WhatsApp' }));
     expect(await screen.findByText(/Retomamos en el horario/)).toBeDefined();
+    expect(screen.getByText('CONTINUAR ••••', { exact: true })).toBeDefined();
     await usuario.click(await screen.findByRole('button', { name: 'Ver horarios' }));
+    await usuario.click(await screen.findByRole('button', { name: 'Ver opciones' }));
     await usuario.click(await screen.findByRole('button', { name: 'Jueves 26 · 09:15' }));
     await usuario.click(await screen.findByRole('button', { name: 'Revisar cita' }));
-    expect(await screen.findByText(/simulador de WhatsApp/)).toBeDefined();
+    await usuario.click(await screen.findByRole('button', { name: 'Abrir formulario' }));
+    await usuario.type(screen.getByLabelText('Fecha de nacimiento', { exact: true }), '2000-01-02');
+    await usuario.click(screen.getByRole('button', { name: 'Enviar formulario' }));
+    await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
+    expect(document.body.textContent).not.toContain('2000-01-02');
     await usuario.click(await screen.findByRole('button', { name: 'Confirmar cita' }));
     await usuario.click(screen.getByRole('link', { name: 'App' }));
     expect(await screen.findByText('CONFIRMADA')).toBeDefined();
@@ -167,7 +175,7 @@ describe('Vistas del guion', () => {
     await usuario.click(await screen.findByRole('button', { name: 'Registrar llegada' }));
     expect(await screen.findByText('Llegada registrada')).toBeDefined();
     expect(cliente.demo?.paso().id).toBe('EN_CLINICA');
-    expect(screen.getByText(/Paso 9 de 9/).textContent).toContain('Llegada registrada · Clínica');
+    expect(screen.getByText(new RegExp('Paso ' + GUION_FLUJO_A.length + ' de ' + GUION_FLUJO_A.length)).textContent).toContain('Llegada registrada · Clínica');
     await usuario.click(screen.getByRole('link', { name: 'Admin' }));
     expect(await screen.findByRole('heading', { name: 'Línea de tiempo' })).toBeDefined();
     const linea = screen.getByRole('list', { name: 'Eventos del hilo' });
@@ -189,7 +197,7 @@ describe('Vistas del guion', () => {
     vi.spyOn(cliente, 'consultar').mockImplementation(async (nombre, parametros) => {
       const dato = await consultar(nombre, parametros);
       if (nombre === 'citasPaciente' && Array.isArray(dato)) {
-        return [{ ...GUION_FLUJO_A[7]!.lecturas.citasPaciente[0]!, tramite: { ...GUION_FLUJO_A[7]!.respuesta.tramite, estado: 'EN_CLINICA' } }] as typeof dato;
+        return [{ ...GUION_FLUJO_A.find(paso => paso.paso.id === 'CONFIRMADA')!.lecturas.citasPaciente[0]!, tramite: { ...GUION_FLUJO_A.find(paso => paso.paso.id === 'CONFIRMADA')!.respuesta.tramite, estado: 'EN_CLINICA' } }] as typeof dato;
       }
       return dato;
     });

@@ -1,7 +1,8 @@
 import { Link } from 'react-router';
 import { ComandoRequestSchema } from '@noki/contracts';
-import { CONTACTO_DEMO } from '../cliente/ClienteApi.ts';
-import { useCliente, useConsulta, useContextoConsulta, useRespuestaComando } from '../cliente/ProveedorCliente.tsx';
+import { useState } from 'react';
+import { QrCita } from '../componentes/QrCita.tsx';
+import { useConsulta, useContextoConsulta, useRespuestaComando } from '../cliente/ProveedorCliente.tsx';
 import { useAccion } from '../cliente/useAccion.ts';
 import { EstadoCarga } from '../componentes/EstadoCarga.tsx';
 import { EstadoError } from '../componentes/EstadoError.tsx';
@@ -9,12 +10,14 @@ import { LineaTiempo } from '../componentes/LineaTiempo.tsx';
 import { dinero } from '../componentes/formato.ts';
 
 export function CallCenter() {
-  const cliente = useCliente();
+  const [mostrarContinuacion, setMostrarContinuacion] = useState(false);
   const { hiloId } = useContextoConsulta();
   const { respuesta } = useRespuestaComando();
   const ficha = useConsulta('fichaHilo', hiloId ? { hiloId } : undefined);
   const catalogo = useConsulta('catalogo', {});
   const accion = useAccion();
+  const codigo = ficha.data?.codigoContinuacion?.replace(/^CONTINUAR\s+/, '');
+  const rutaContinuacion = codigo ? '/wa?continuar=' + encodeURIComponent(codigo) : '/wa';
   const tramite = ficha.data?.tramites[0] ?? respuesta?.tramite;
   return <>
     <h1>Call Center</h1>
@@ -34,9 +37,9 @@ export function CallCenter() {
             ComandoRequestSchema.parse({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SeleccionarServicio', tramiteId: tramite.id, payload: { servicioId: oferta.servicioId } }),
             ComandoRequestSchema.parse({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SeleccionarSede', tramiteId: tramite.id, payload: { sedeId: oferta.sedeId } }),
           ] })}>Cotizar paquete en {oferta.sede}</button>)}
-          {cliente.demo && ficha.data.oferta && !ficha.data.codigoContinuacion && <button type="button" disabled={accion.isPending || ficha.data.soloLectura} onClick={() => accion.ejecutar({ tipo: 'wa', titulo: 'Continuar por WhatsApp', mensaje: { waId: CONTACTO_DEMO, payloadBoton: 'enviar-continuacion' } })}>Continuar por WhatsApp</button>}
+          {codigo && <button type="button" disabled={accion.isPending || ficha.data.soloLectura} onClick={() => setMostrarContinuacion(true)}>Continuar por WhatsApp</button>}
         </div>
-        <Link className="enlace-principal" to="/wa">Abrir WhatsApp</Link>
+        {mostrarContinuacion && codigo && <div className="continuacion"><Link className="enlace-principal" to={rutaContinuacion}>Abrir WhatsApp</Link><QrCita token={new URL(rutaContinuacion, location.origin).toString()} etiqueta="Código QR de continuación" /></div>}
       </section>
       <LineaTiempo eventos={ficha.data.lineaTiempo} />
     </>}

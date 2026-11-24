@@ -1,0 +1,1759 @@
+
+ RUN  v4.0.14 <repo>
+
+ ❯ |web| src/cliente/idempotenciaWa.test.ts (2 tests | 2 failed) 24ms
+   × Clave por mensaje: conserva la elegida y genera otra para un mensaje nuevo 19ms
+   × Clave en el reintento: conserva el UUID en red y en el reenvío del usuario 3ms
+ ❯ |web| src/cliente/conversacion.test.tsx (2 tests | 2 failed) 1528ms
+   × Sin conversación de demo: solo existe el historial de mensajes enviados y recibidos 22ms
+   × la vista envía por el almacén y acumula la respuesta sin consultar lecturas de conversación 1505ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/cliente/historialWa.test.tsx [ apps/web/src/cliente/historialWa.test.tsx ]
+Error: Failed to resolve import "./historialWa.ts" from "apps/web/src/cliente/historialWa.test.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: <repo>/apps/web/src/cliente/historialWa.test.tsx:4:28
+  2  |  import { act, cleanup, render, screen } from "@testing-library/react";
+  3  |  import { afterEach, expect, it, vi } from "vitest";
+  4  |  import { HistorialWa } from "./historialWa.ts";
+     |                               ^
+  5  |  import { ClienteMock } from "./mock/ClienteMock.ts";
+  6  |  import { CONTACTO_DEMO } from "./ClienteApi.ts";
+ ❯ TransformPluginContext._formatLog ../../../../../../../Luis%20Rodriguez/Documents/TEC/HackaTec/noki/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:29250:43
+ ❯ TransformPluginContext.error ../../../../../../../Luis%20Rodriguez/Documents/TEC/HackaTec/noki/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:29247:14
+ ❯ normalizeUrl ../../../../../../../Luis%20Rodriguez/Documents/TEC/HackaTec/noki/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:27370:18
+ ❯ ../../../../../../../Luis%20Rodriguez/Documents/TEC/HackaTec/noki/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:27428:32
+ ❯ TransformPluginContext.transform ../../../../../../../Luis%20Rodriguez/Documents/TEC/HackaTec/noki/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:27396:4
+ ❯ EnvironmentPluginContainer.transform ../../../../../../../Luis%20Rodriguez/Documents/TEC/HackaTec/noki/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:29048:14
+ ❯ loadAndTransform ../../../../../../../Luis%20Rodriguez/Documents/TEC/HackaTec/noki/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:22914:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/cliente/conversacion.test.tsx > Sin conversación de demo: solo existe el historial de mensajes enviados y recibidos
+AssertionError: expected { …(2) } to not have property "conversacion"
+
+- Expected: 
+undefined
+
++ Received: 
+ZodObject {
+  "and": [Function anonymous],
+  "array": [Function anonymous],
+  "brand": [Function anonymous],
+  "catch": [Function anonymous],
+  "catchall": [Function anonymous],
+  "check": [Function anonymous],
+  "clone": [Function anonymous],
+  "decode": [Function anonymous],
+  "decodeAsync": [Function anonymous],
+  "def": {
+    "catchall": ZodNever {
+      "and": [Function anonymous],
+      "array": [Function anonymous],
+      "brand": [Function anonymous],
+      "catch": [Function anonymous],
+      "check": [Function anonymous],
+      "clone": [Function anonymous],
+      "decode": [Function anonymous],
+      "decodeAsync": [Function anonymous],
+      "def": {
+        "type": "never",
+      },
+      "default": [Function anonymous],
+      "describe": [Function anonymous],
+      "encode": [Function anonymous],
+      "encodeAsync": [Function anonymous],
+      "isNullable": [Function anonymous],
+      "isOptional": [Function anonymous],
+      "meta": [Function anonymous],
+      "nonoptional": [Function anonymous],
+      "nullable": [Function anonymous],
+      "nullish": [Function anonymous],
+      "optional": [Function anonymous],
+      "or": [Function anonymous],
+      "overwrite": [Function anonymous],
+      "parse": [Function anonymous],
+      "parseAsync": [Function anonymous],
+      "pipe": [Function anonymous],
+      "prefault": [Function anonymous],
+      "readonly": [Function anonymous],
+      "refine": [Function anonymous],
+      "register": [Function anonymous],
+      "safeDecode": [Function anonymous],
+      "safeDecodeAsync": [Function anonymous],
+      "safeEncode": [Function anonymous],
+      "safeEncodeAsync": [Function anonymous],
+      "safeParse": [Function anonymous],
+      "safeParseAsync": [Function anonymous],
+      "spa": [Function anonymous],
+      "superRefine": [Function anonymous],
+      "transform": [Function anonymous],
+      "type": "never",
+      "~standard": {
+        "validate": [Function validate],
+        "vendor": "zod",
+        "version": 1,
+      },
+    },
+    "shape": {
+      "mensajes": ZodArray {
+        "and": [Function anonymous],
+        "array": [Function anonymous],
+        "brand": [Function anonymous],
+        "catch": [Function anonymous],
+        "check": [Function anonymous],
+        "clone": [Function anonymous],
+        "decode": [Function anonymous],
+        "decodeAsync": [Function anonymous],
+        "def": {
+          "element": ZodDiscriminatedUnion {
+            "and": [Function anonymous],
+            "array": [Function anonymous],
+            "brand": [Function anonymous],
+            "catch": [Function anonymous],
+            "check": [Function anonymous],
+            "clone": [Function anonymous],
+            "decode": [Function anonymous],
+            "decodeAsync": [Function anonymous],
+            "def": {
+              "discriminator": "tipo",
+              "options": [
+                [ZodObject],
+                [ZodObject],
+                [ZodObject],
+                [ZodObject],
+              ],
+              "type": "union",
+            },
+            "default": [Function anonymous],
+            "describe": [Function anonymous],
+            "encode": [Function anonymous],
+            "encodeAsync": [Function anonymous],
+            "isNullable": [Function anonymous],
+            "isOptional": [Function anonymous],
+            "meta": [Function anonymous],
+            "nonoptional": [Function anonymous],
+            "nullable": [Function anonymous],
+            "nullish": [Function anonymous],
+            "optional": [Function anonymous],
+            "options": [
+              ZodObject {
+                "and": [Function anonymous],
+                "array": [Function anonymous],
+                "brand": [Function anonymous],
+                "catch": [Function anonymous],
+                "catchall": [Function anonymous],
+                "check": [Function anonymous],
+                "clone": [Function anonymous],
+                "decode": [Function anonymous],
+                "decodeAsync": [Function anonymous],
+                "def": [Object],
+                "default": [Function anonymous],
+                "describe": [Function anonymous],
+                "encode": [Function anonymous],
+                "encodeAsync": [Function anonymous],
+                "extend": [Function anonymous],
+                "isNullable": [Function anonymous],
+                "isOptional": [Function anonymous],
+                "keyof": [Function anonymous],
+                "loose": [Function anonymous],
+                "merge": [Function anonymous],
+                "meta": [Function anonymous],
+                "nonoptional": [Function anonymous],
+                "nullable": [Function anonymous],
+                "nullish": [Function anonymous],
+                "omit": [Function anonymous],
+                "optional": [Function anonymous],
+                "or": [Function anonymous],
+                "overwrite": [Function anonymous],
+                "parse": [Function anonymous],
+                "parseAsync": [Function anonymous],
+                "partial": [Function anonymous],
+                "passthrough": [Function anonymous],
+                "pick": [Function anonymous],
+                "pipe": [Function anonymous],
+                "prefault": [Function anonymous],
+                "readonly": [Function anonymous],
+                "refine": [Function anonymous],
+                "register": [Function anonymous],
+                "required": [Function anonymous],
+                "safeDecode": [Function anonymous],
+                "safeDecodeAsync": [Function anonymous],
+                "safeEncode": [Function anonymous],
+                "safeEncodeAsync": [Function anonymous],
+                "safeExtend": [Function anonymous],
+                "safeParse": [Function anonymous],
+                "safeParseAsync": [Function anonymous],
+                "spa": [Function anonymous],
+                "strict": [Function anonymous],
+                "strip": [Function anonymous],
+                "superRefine": [Function anonymous],
+                "transform": [Function anonymous],
+                "type": "object",
+                "~standard": [Object],
+              },
+              ZodObject {
+                "and": [Function anonymous],
+                "array": [Function anonymous],
+                "brand": [Function anonymous],
+                "catch": [Function anonymous],
+                "catchall": [Function anonymous],
+                "check": [Function anonymous],
+                "clone": [Function anonymous],
+                "decode": [Function anonymous],
+                "decodeAsync": [Function anonymous],
+                "def": [Object],
+                "default": [Function anonymous],
+                "describe": [Function anonymous],
+                "encode": [Function anonymous],
+                "encodeAsync": [Function anonymous],
+                "extend": [Function anonymous],
+                "isNullable": [Function anonymous],
+                "isOptional": [Function anonymous],
+                "keyof": [Function anonymous],
+                "loose": [Function anonymous],
+                "merge": [Function anonymous],
+                "meta": [Function anonymous],
+                "nonoptional": [Function anonymous],
+                "nullable": [Function anonymous],
+                "nullish": [Function anonymous],
+                "omit": [Function anonymous],
+                "optional": [Function anonymous],
+                "or": [Function anonymous],
+                "overwrite": [Function anonymous],
+                "parse": [Function anonymous],
+                "parseAsync": [Function anonymous],
+                "partial": [Function anonymous],
+                "passthrough": [Function anonymous],
+                "pick": [Function anonymous],
+                "pipe": [Function anonymous],
+                "prefault": [Function anonymous],
+                "readonly": [Function anonymous],
+                "refine": [Function anonymous],
+                "register": [Function anonymous],
+                "required": [Function anonymous],
+                "safeDecode": [Function anonymous],
+                "safeDecodeAsync": [Function anonymous],
+                "safeEncode": [Function anonymous],
+                "safeEncodeAsync": [Function anonymous],
+                "safeExtend": [Function anonymous],
+                "safeParse": [Function anonymous],
+                "safeParseAsync": [Function anonymous],
+                "spa": [Function anonymous],
+                "strict": [Function anonymous],
+                "strip": [Function anonymous],
+                "superRefine": [Function anonymous],
+                "transform": [Function anonymous],
+                "type": "object",
+                "~standard": [Object],
+              },
+              ZodObject {
+                "and": [Function anonymous],
+                "array": [Function anonymous],
+                "brand": [Function anonymous],
+                "catch": [Function anonymous],
+                "catchall": [Function anonymous],
+                "check": [Function anonymous],
+                "clone": [Function anonymous],
+                "decode": [Function anonymous],
+                "decodeAsync": [Function anonymous],
+                "def": [Object],
+                "default": [Function anonymous],
+                "describe": [Function anonymous],
+                "encode": [Function anonymous],
+                "encodeAsync": [Function anonymous],
+                "extend": [Function anonymous],
+                "isNullable": [Function anonymous],
+                "isOptional": [Function anonymous],
+                "keyof": [Function anonymous],
+                "loose": [Function anonymous],
+                "merge": [Function anonymous],
+                "meta": [Function anonymous],
+                "nonoptional": [Function anonymous],
+                "nullable": [Function anonymous],
+                "nullish": [Function anonymous],
+                "omit": [Function anonymous],
+                "optional": [Function anonymous],
+                "or": [Function anonymous],
+                "overwrite": [Function anonymous],
+                "parse": [Function anonymous],
+                "parseAsync": [Function anonymous],
+                "partial": [Function anonymous],
+                "passthrough": [Function anonymous],
+                "pick": [Function anonymous],
+                "pipe": [Function anonymous],
+                "prefault": [Function anonymous],
+                "readonly": [Function anonymous],
+                "refine": [Function anonymous],
+                "register": [Function anonymous],
+                "required": [Function anonymous],
+                "safeDecode": [Function anonymous],
+                "safeDecodeAsync": [Function anonymous],
+                "safeEncode": [Function anonymous],
+                "safeEncodeAsync": [Function anonymous],
+                "safeExtend": [Function anonymous],
+                "safeParse": [Function anonymous],
+                "safeParseAsync": [Function anonymous],
+                "spa": [Function anonymous],
+                "strict": [Function anonymous],
+                "strip": [Function anonymous],
+                "superRefine": [Function anonymous],
+                "transform": [Function anonymous],
+                "type": "object",
+                "~standard": [Object],
+              },
+              ZodObject {
+                "and": [Function anonymous],
+                "array": [Function anonymous],
+                "brand": [Function anonymous],
+                "catch": [Function anonymous],
+                "catchall": [Function anonymous],
+                "check": [Function anonymous],
+                "clone": [Function anonymous],
+                "decode": [Function anonymous],
+                "decodeAsync": [Function anonymous],
+                "def": [Object],
+                "default": [Function anonymous],
+                "describe": [Function anonymous],
+                "encode": [Function anonymous],
+                "encodeAsync": [Function anonymous],
+                "extend": [Function anonymous],
+                "isNullable": [Function anonymous],
+                "isOptional": [Function anonymous],
+                "keyof": [Function anonymous],
+                "loose": [Function anonymous],
+                "merge": [Function anonymous],
+                "meta": [Function anonymous],
+                "nonoptional": [Function anonymous],
+                "nullable": [Function anonymous],
+                "nullish": [Function anonymous],
+                "omit": [Function anonymous],
+                "optional": [Function anonymous],
+                "or": [Function anonymous],
+                "overwrite": [Function anonymous],
+                "parse": [Function anonymous],
+                "parseAsync": [Function anonymous],
+                "partial": [Function anonymous],
+                "passthrough": [Function anonymous],
+                "pick": [Function anonymous],
+                "pipe": [Function anonymous],
+                "prefault": [Function anonymous],
+                "readonly": [Function anonymous],
+                "refine": [Function anonymous],
+                "register": [Function anonymous],
+                "required": [Function anonymous],
+                "safeDecode": [Function anonymous],
+                "safeDecodeAsync": [Function anonymous],
+                "safeEncode": [Function anonymous],
+                "safeEncodeAsync": [Function anonymous],
+                "safeExtend": [Function anonymous],
+                "safeParse": [Function anonymous],
+                "safeParseAsync": [Function anonymous],
+                "spa": [Function anonymous],
+                "strict": [Function anonymous],
+                "strip": [Function anonymous],
+                "superRefine": [Function anonymous],
+                "transform": [Function anonymous],
+                "type": "object",
+                "~standard": [Object],
+              },
+            ],
+            "or": [Function anonymous],
+            "overwrite": [Function anonymous],
+            "parse": [Function anonymous],
+            "parseAsync": [Function anonymous],
+            "pipe": [Function anonymous],
+            "prefault": [Function anonymous],
+            "readonly": [Function anonymous],
+            "refine": [Function anonymous],
+            "register": [Function anonymous],
+            "safeDecode": [Function anonymous],
+            "safeDecodeAsync": [Function anonymous],
+            "safeEncode": [Function anonymous],
+            "safeEncodeAsync": [Function anonymous],
+            "safeParse": [Function anonymous],
+            "safeParseAsync": [Function anonymous],
+            "spa": [Function anonymous],
+            "superRefine": [Function anonymous],
+            "transform": [Function anonymous],
+            "type": "union",
+            "~standard": {
+              "validate": [Function validate],
+              "vendor": "zod",
+              "version": 1,
+            },
+          },
+          "type": "array",
+        },
+        "default": [Function anonymous],
+        "describe": [Function anonymous],
+        "element": ZodDiscriminatedUnion {
+          "and": [Function anonymous],
+          "array": [Function anonymous],
+          "brand": [Function anonymous],
+          "catch": [Function anonymous],
+          "check": [Function anonymous],
+          "clone": [Function anonymous],
+          "decode": [Function anonymous],
+          "decodeAsync": [Function anonymous],
+          "def": {
+            "discriminator": "tipo",
+            "options": [
+              ZodObject {
+                "and": [Function anonymous],
+                "array": [Function anonymous],
+                "brand": [Function anonymous],
+                "catch": [Function anonymous],
+                "catchall": [Function anonymous],
+                "check": [Function anonymous],
+                "clone": [Function anonymous],
+                "decode": [Function anonymous],
+                "decodeAsync": [Function anonymous],
+                "def": [Object],
+                "default": [Function anonymous],
+                "describe": [Function anonymous],
+                "encode": [Function anonymous],
+                "encodeAsync": [Function anonymous],
+                "extend": [Function anonymous],
+                "isNullable": [Function anonymous],
+                "isOptional": [Function anonymous],
+                "keyof": [Function anonymous],
+                "loose": [Function anonymous],
+                "merge": [Function anonymous],
+                "meta": [Function anonymous],
+                "nonoptional": [Function anonymous],
+                "nullable": [Function anonymous],
+                "nullish": [Function anonymous],
+                "omit": [Function anonymous],
+                "optional": [Function anonymous],
+                "or": [Function anonymous],
+                "overwrite": [Function anonymous],
+                "parse": [Function anonymous],
+                "parseAsync": [Function anonymous],
+                "partial": [Function anonymous],
+                "passthrough": [Function anonymous],
+                "pick": [Function anonymous],
+                "pipe": [Function anonymous],
+                "prefault": [Function anonymous],
+                "readonly": [Function anonymous],
+                "refine": [Function anonymous],
+                "register": [Function anonymous],
+                "required": [Function anonymous],
+                "safeDecode": [Function anonymous],
+                "safeDecodeAsync": [Function anonymous],
+                "safeEncode": [Function anonymous],
+                "safeEncodeAsync": [Function anonymous],
+                "safeExtend": [Function anonymous],
+                "safeParse": [Function anonymous],
+                "safeParseAsync": [Function anonymous],
+                "spa": [Function anonymous],
+                "strict": [Function anonymous],
+                "strip": [Function anonymous],
+                "superRefine": [Function anonymous],
+                "transform": [Function anonymous],
+                "type": "object",
+                "~standard": [Object],
+              },
+              ZodObject {
+                "and": [Function anonymous],
+                "array": [Function anonymous],
+                "brand": [Function anonymous],
+                "catch": [Function anonymous],
+                "catchall": [Function anonymous],
+                "check": [Function anonymous],
+                "clone": [Function anonymous],
+                "decode": [Function anonymous],
+                "decodeAsync": [Function anonymous],
+                "def": [Object],
+                "default": [Function anonymous],
+                "describe": [Function anonymous],
+                "encode": [Function anonymous],
+                "encodeAsync": [Function anonymous],
+                "extend": [Function anonymous],
+                "isNullable": [Function anonymous],
+                "isOptional": [Function anonymous],
+                "keyof": [Function anonymous],
+                "loose": [Function anonymous],
+                "merge": [Function anonymous],
+                "meta": [Function anonymous],
+                "nonoptional": [Function anonymous],
+                "nullable": [Function anonymous],
+                "nullish": [Function anonymous],
+                "omit": [Function anonymous],
+                "optional": [Function anonymous],
+                "or": [Function anonymous],
+                "overwrite": [Function anonymous],
+                "parse": [Function anonymous],
+                "parseAsync": [Function anonymous],
+                "partial": [Function anonymous],
+                "passthrough": [Function anonymous],
+                "pick": [Function anonymous],
+                "pipe": [Function anonymous],
+                "prefault": [Function anonymous],
+                "readonly": [Function anonymous],
+                "refine": [Function anonymous],
+                "register": [Function anonymous],
+                "required": [Function anonymous],
+                "safeDecode": [Function anonymous],
+                "safeDecodeAsync": [Function anonymous],
+                "safeEncode": [Function anonymous],
+                "safeEncodeAsync": [Function anonymous],
+                "safeExtend": [Function anonymous],
+                "safeParse": [Function anonymous],
+                "safeParseAsync": [Function anonymous],
+                "spa": [Function anonymous],
+                "strict": [Function anonymous],
+                "strip": [Function anonymous],
+                "superRefine": [Function anonymous],
+                "transform": [Function anonymous],
+                "type": "object",
+                "~standard": [Object],
+              },
+              ZodObject {
+                "and": [Function anonymous],
+                "array": [Function anonymous],
+                "brand": [Function anonymous],
+                "catch": [Function anonymous],
+                "catchall": [Function anonymous],
+                "check": [Function anonymous],
+                "clone": [Function anonymous],
+                "decode": [Function anonymous],
+                "decodeAsync": [Function anonymous],
+                "def": [Object],
+                "default": [Function anonymous],
+                "describe": [Function anonymous],
+                "encode": [Function anonymous],
+                "encodeAsync": [Function anonymous],
+                "extend": [Function anonymous],
+                "isNullable": [Function anonymous],
+                "isOptional": [Function anonymous],
+                "keyof": [Function anonymous],
+                "loose": [Function anonymous],
+                "merge": [Function anonymous],
+                "meta": [Function anonymous],
+                "nonoptional": [Function anonymous],
+                "nullable": [Function anonymous],
+                "nullish": [Function anonymous],
+                "omit": [Function anonymous],
+                "optional": [Function anonymous],
+                "or": [Function anonymous],
+                "overwrite": [Function anonymous],
+                "parse": [Function anonymous],
+                "parseAsync": [Function anonymous],
+                "partial": [Function anonymous],
+                "passthrough": [Function anonymous],
+                "pick": [Function anonymous],
+                "pipe": [Function anonymous],
+                "prefault": [Function anonymous],
+                "readonly": [Function anonymous],
+                "refine": [Function anonymous],
+                "register": [Function anonymous],
+                "required": [Function anonymous],
+                "safeDecode": [Function anonymous],
+                "safeDecodeAsync": [Function anonymous],
+                "safeEncode": [Function anonymous],
+                "safeEncodeAsync": [Function anonymous],
+                "safeExtend": [Function anonymous],
+                "safeParse": [Function anonymous],
+                "safeParseAsync": [Function anonymous],
+                "spa": [Function anonymous],
+                "strict": [Function anonymous],
+                "strip": [Function anonymous],
+                "superRefine": [Function anonymous],
+                "transform": [Function anonymous],
+                "type": "object",
+                "~standard": [Object],
+              },
+              ZodObject {
+                "and": [Function anonymous],
+                "array": [Function anonymous],
+                "brand": [Function anonymous],
+                "catch": [Function anonymous],
+                "catchall": [Function anonymous],
+                "check": [Function anonymous],
+                "clone": [Function anonymous],
+                "decode": [Function anonymous],
+                "decodeAsync": [Function anonymous],
+                "def": [Object],
+                "default": [Function anonymous],
+                "describe": [Function anonymous],
+                "encode": [Function anonymous],
+                "encodeAsync": [Function anonymous],
+                "extend": [Function anonymous],
+                "isNullable": [Function anonymous],
+                "isOptional": [Function anonymous],
+                "keyof": [Function anonymous],
+                "loose": [Function anonymous],
+                "merge": [Function anonymous],
+                "meta": [Function anonymous],
+                "nonoptional": [Function anonymous],
+                "nullable": [Function anonymous],
+                "nullish": [Function anonymous],
+                "omit": [Function anonymous],
+                "optional": [Function anonymous],
+                "or": [Function anonymous],
+                "overwrite": [Function anonymous],
+                "parse": [Function anonymous],
+                "parseAsync": [Function anonymous],
+                "partial": [Function anonymous],
+                "passthrough": [Function anonymous],
+                "pick": [Function anonymous],
+                "pipe": [Function anonymous],
+                "prefault": [Function anonymous],
+                "readonly": [Function anonymous],
+                "refine": [Function anonymous],
+                "register": [Function anonymous],
+                "required": [Function anonymous],
+                "safeDecode": [Function anonymous],
+                "safeDecodeAsync": [Function anonymous],
+                "safeEncode": [Function anonymous],
+                "safeEncodeAsync": [Function anonymous],
+                "safeExtend": [Function anonymous],
+                "safeParse": [Function anonymous],
+                "safeParseAsync": [Function anonymous],
+                "spa": [Function anonymous],
+                "strict": [Function anonymous],
+                "strip": [Function anonymous],
+                "superRefine": [Function anonymous],
+                "transform": [Function anonymous],
+                "type": "object",
+                "~standard": [Object],
+              },
+            ],
+            "type": "union",
+          },
+          "default": [Function anonymous],
+          "describe": [Function anonymous],
+          "encode": [Function anonymous],
+          "encodeAsync": [Function anonymous],
+          "isNullable": [Function anonymous],
+          "isOptional": [Function anonymous],
+          "meta": [Function anonymous],
+          "nonoptional": [Function anonymous],
+          "nullable": [Function anonymous],
+          "nullish": [Function anonymous],
+          "optional": [Function anonymous],
+          "options": [
+            ZodObject {
+              "and": [Function anonymous],
+              "array": [Function anonymous],
+              "brand": [Function anonymous],
+              "catch": [Function anonymous],
+              "catchall": [Function anonymous],
+              "check": [Function anonymous],
+              "clone": [Function anonymous],
+              "decode": [Function anonymous],
+              "decodeAsync": [Function anonymous],
+              "def": {
+                "shape": [Object],
+                "type": "object",
+              },
+              "default": [Function anonymous],
+              "describe": [Function anonymous],
+              "encode": [Function anonymous],
+              "encodeAsync": [Function anonymous],
+              "extend": [Function anonymous],
+              "isNullable": [Function anonymous],
+              "isOptional": [Function anonymous],
+              "keyof": [Function anonymous],
+              "loose": [Function anonymous],
+              "merge": [Function anonymous],
+              "meta": [Function anonymous],
+              "nonoptional": [Function anonymous],
+              "nullable": [Function anonymous],
+              "nullish": [Function anonymous],
+              "omit": [Function anonymous],
+              "optional": [Function anonymous],
+              "or": [Function anonymous],
+              "overwrite": [Function anonymous],
+              "parse": [Function anonymous],
+              "parseAsync": [Function anonymous],
+              "partial": [Function anonymous],
+              "passthrough": [Function anonymous],
+              "pick": [Function anonymous],
+              "pipe": [Function anonymous],
+              "prefault": [Function anonymous],
+              "readonly": [Function anonymous],
+              "refine": [Function anonymous],
+              "register": [Function anonymous],
+              "required": [Function anonymous],
+              "safeDecode": [Function anonymous],
+              "safeDecodeAsync": [Function anonymous],
+              "safeEncode": [Function anonymous],
+              "safeEncodeAsync": [Function anonymous],
+              "safeExtend": [Function anonymous],
+              "safeParse": [Function anonymous],
+              "safeParseAsync": [Function anonymous],
+              "spa": [Function anonymous],
+              "strict": [Function anonymous],
+              "strip": [Function anonymous],
+              "superRefine": [Function anonymous],
+              "transform": [Function anonymous],
+              "type": "object",
+              "~standard": {
+                "validate": [Function validate],
+                "vendor": "zod",
+                "version": 1,
+              },
+            },
+            ZodObject {
+              "and": [Function anonymous],
+              "array": [Function anonymous],
+              "brand": [Function anonymous],
+              "catch": [Function anonymous],
+              "catchall": [Function anonymous],
+              "check": [Function anonymous],
+              "clone": [Function anonymous],
+              "decode": [Function anonymous],
+              "decodeAsync": [Function anonymous],
+              "def": {
+                "shape": [Object],
+                "type": "object",
+              },
+              "default": [Function anonymous],
+              "describe": [Function anonymous],
+              "encode": [Function anonymous],
+              "encodeAsync": [Function anonymous],
+              "extend": [Function anonymous],
+              "isNullable": [Function anonymous],
+              "isOptional": [Function anonymous],
+              "keyof": [Function anonymous],
+              "loose": [Function anonymous],
+              "merge": [Function anonymous],
+              "meta": [Function anonymous],
+              "nonoptional": [Function anonymous],
+              "nullable": [Function anonymous],
+              "nullish": [Function anonymous],
+              "omit": [Function anonymous],
+              "optional": [Function anonymous],
+              "or": [Function anonymous],
+              "overwrite": [Function anonymous],
+              "parse": [Function anonymous],
+              "parseAsync": [Function anonymous],
+              "partial": [Function anonymous],
+              "passthrough": [Function anonymous],
+              "pick": [Function anonymous],
+              "pipe": [Function anonymous],
+              "prefault": [Function anonymous],
+              "readonly": [Function anonymous],
+              "refine": [Function anonymous],
+              "register": [Function anonymous],
+              "required": [Function anonymous],
+              "safeDecode": [Function anonymous],
+              "safeDecodeAsync": [Function anonymous],
+              "safeEncode": [Function anonymous],
+              "safeEncodeAsync": [Function anonymous],
+              "safeExtend": [Function anonymous],
+              "safeParse": [Function anonymous],
+              "safeParseAsync": [Function anonymous],
+              "spa": [Function anonymous],
+              "strict": [Function anonymous],
+              "strip": [Function anonymous],
+              "superRefine": [Function anonymous],
+              "transform": [Function anonymous],
+              "type": "object",
+              "~standard": {
+                "validate": [Function validate],
+                "vendor": "zod",
+                "version": 1,
+              },
+            },
+            ZodObject {
+              "and": [Function anonymous],
+              "array": [Function anonymous],
+              "brand": [Function anonymous],
+              "catch": [Function anonymous],
+              "catchall": [Function anonymous],
+              "check": [Function anonymous],
+              "clone": [Function anonymous],
+              "decode": [Function anonymous],
+              "decodeAsync": [Function anonymous],
+              "def": {
+                "checks": [Array],
+                "shape": [Object],
+                "type": "object",
+              },
+              "default": [Function anonymous],
+              "describe": [Function anonymous],
+              "encode": [Function anonymous],
+              "encodeAsync": [Function anonymous],
+              "extend": [Function anonymous],
+              "isNullable": [Function anonymous],
+              "isOptional": [Function anonymous],
+              "keyof": [Function anonymous],
+              "loose": [Function anonymous],
+              "merge": [Function anonymous],
+              "meta": [Function anonymous],
+              "nonoptional": [Function anonymous],
+              "nullable": [Function anonymous],
+              "nullish": [Function anonymous],
+              "omit": [Function anonymous],
+              "optional": [Function anonymous],
+              "or": [Function anonymous],
+              "overwrite": [Function anonymous],
+              "parse": [Function anonymous],
+              "parseAsync": [Function anonymous],
+              "partial": [Function anonymous],
+              "passthrough": [Function anonymous],
+              "pick": [Function anonymous],
+              "pipe": [Function anonymous],
+              "prefault": [Function anonymous],
+              "readonly": [Function anonymous],
+              "refine": [Function anonymous],
+              "register": [Function anonymous],
+              "required": [Function anonymous],
+              "safeDecode": [Function anonymous],
+              "safeDecodeAsync": [Function anonymous],
+              "safeEncode": [Function anonymous],
+              "safeEncodeAsync": [Function anonymous],
+              "safeExtend": [Function anonymous],
+              "safeParse": [Function anonymous],
+              "safeParseAsync": [Function anonymous],
+              "spa": [Function anonymous],
+              "strict": [Function anonymous],
+              "strip": [Function anonymous],
+              "superRefine": [Function anonymous],
+              "transform": [Function anonymous],
+              "type": "object",
+              "~standard": {
+                "validate": [Function validate],
+                "vendor": "zod",
+                "version": 1,
+              },
+            },
+            ZodObject {
+              "and": [Function anonymous],
+              "array": [Function anonymous],
+              "brand": [Function anonymous],
+              "catch": [Function anonymous],
+              "catchall": [Function anonymous],
+              "check": [Function anonymous],
+              "clone": [Function anonymous],
+              "decode": [Function anonymous],
+              "decodeAsync": [Function anonymous],
+              "def": {
+                "shape": [Object],
+                "type": "object",
+              },
+              "default": [Function anonymous],
+              "describe": [Function anonymous],
+              "encode": [Function anonymous],
+              "encodeAsync": [Function anonymous],
+              "extend": [Function anonymous],
+              "isNullable": [Function anonymous],
+              "isOptional": [Function anonymous],
+              "keyof": [Function anonymous],
+              "loose": [Function anonymous],
+              "merge": [Function anonymous],
+              "meta": [Function anonymous],
+              "nonoptional": [Function anonymous],
+              "nullable": [Function anonymous],
+              "nullish": [Function anonymous],
+              "omit": [Function anonymous],
+              "optional": [Function anonymous],
+              "or": [Function anonymous],
+              "overwrite": [Function anonymous],
+              "parse": [Function anonymous],
+              "parseAsync": [Function anonymous],
+              "partial": [Function anonymous],
+              "passthrough": [Function anonymous],
+              "pick": [Function anonymous],
+              "pipe": [Function anonymous],
+              "prefault": [Function anonymous],
+              "readonly": [Function anonymous],
+              "refine": [Function anonymous],
+              "register": [Function anonymous],
+              "required": [Function anonymous],
+              "safeDecode": [Function anonymous],
+              "safeDecodeAsync": [Function anonymous],
+              "safeEncode": [Function anonymous],
+              "safeEncodeAsync": [Function anonymous],
+              "safeExtend": [Function anonymous],
+              "safeParse": [Function anonymous],
+              "safeParseAsync": [Function anonymous],
+              "spa": [Function anonymous],
+              "strict": [Function anonymous],
+              "strip": [Function anonymous],
+              "superRefine": [Function anonymous],
+              "transform": [Function anonymous],
+              "type": "object",
+              "~standard": {
+                "validate": [Function validate],
+                "vendor": "zod",
+                "version": 1,
+              },
+            },
+          ],
+          "or": [Function anonymous],
+          "overwrite": [Function anonymous],
+          "parse": [Function anonymous],
+          "parseAsync": [Function anonymous],
+          "pipe": [Function anonymous],
+          "prefault": [Function anonymous],
+          "readonly": [Function anonymous],
+          "refine": [Function anonymous],
+          "register": [Function anonymous],
+          "safeDecode": [Function anonymous],
+          "safeDecodeAsync": [Function anonymous],
+          "safeEncode": [Function anonymous],
+          "safeEncodeAsync": [Function anonymous],
+          "safeParse": [Function anonymous],
+          "safeParseAsync": [Function anonymous],
+          "spa": [Function anonymous],
+          "superRefine": [Function anonymous],
+          "transform": [Function anonymous],
+          "type": "union",
+          "~standard": {
+            "validate": [Function validate],
+            "vendor": "zod",
+            "version": 1,
+          },
+        },
+        "encode": [Function anonymous],
+        "encodeAsync": [Function anonymous],
+        "isNullable": [Function anonymous],
+        "isOptional": [Function anonymous],
+        "length": [Function anonymous],
+        "max": [Function anonymous],
+        "meta": [Function anonymous],
+        "min": [Function anonymous],
+        "nonempty": [Function anonymous],
+        "nonoptional": [Function anonymous],
+        "nullable": [Function anonymous],
+        "nullish": [Function anonymous],
+        "optional": [Function anonymous],
+        "or": [Function anonymous],
+        "overwrite": [Function anonymous],
+        "parse": [Function anonymous],
+        "parseAsync": [Function anonymous],
+        "pipe": [Function anonymous],
+        "prefault": [Function anonymous],
+        "readonly": [Function anonymous],
+        "refine": [Function anonymous],
+        "register": [Function anonymous],
+        "safeDecode": [Function anonymous],
+        "safeDecodeAsync": [Function anonymous],
+        "safeEncode": [Function anonymous],
+        "safeEncodeAsync": [Function anonymous],
+        "safeParse": [Function anonymous],
+        "safeParseAsync": [Function anonymous],
+        "spa": [Function anonymous],
+        "superRefine": [Function anonymous],
+        "transform": [Function anonymous],
+        "type": "array",
+        "unwrap": [Function anonymous],
+        "~standard": {
+          "validate": [Function validate],
+          "vendor": "zod",
+          "version": 1,
+        },
+      },
+      "siguientePregunta": ZodDiscriminatedUnion {
+        "and": [Function anonymous],
+        "array": [Function anonymous],
+        "brand": [Function anonymous],
+        "catch": [Function anonymous],
+        "check": [Function anonymous],
+        "clone": [Function anonymous],
+        "decode": [Function anonymous],
+        "decodeAsync": [Function anonymous],
+        "def": {
+          "discriminator": "tipo",
+          "options": [
+            ZodObject {
+              "and": [Function anonymous],
+              "array": [Function anonymous],
+              "brand": [Function anonymous],
+              "catch": [Function anonymous],
+              "catchall": [Function anonymous],
+              "check": [Function anonymous],
+              "clone": [Function anonymous],
+              "decode": [Function anonymous],
+              "decodeAsync": [Function anonymous],
+              "def": {
+                "shape": [Object],
+                "type": "object",
+              },
+              "default": [Function anonymous],
+              "describe": [Function anonymous],
+              "encode": [Function anonymous],
+              "encodeAsync": [Function anonymous],
+              "extend": [Function anonymous],
+              "isNullable": [Function anonymous],
+              "isOptional": [Function anonymous],
+              "keyof": [Function anonymous],
+              "loose": [Function anonymous],
+              "merge": [Function anonymous],
+              "meta": [Function anonymous],
+              "nonoptional": [Function anonymous],
+              "nullable": [Function anonymous],
+              "nullish": [Function anonymous],
+              "omit": [Function anonymous],
+              "optional": [Function anonymous],
+              "or": [Function anonymous],
+              "overwrite": [Function anonymous],
+              "parse": [Function anonymous],
+              "parseAsync": [Function anonymous],
+              "partial": [Function anonymous],
+              "passthrough": [Function anonymous],
+              "pick": [Function anonymous],
+              "pipe": [Function anonymous],
+              "prefault": [Function anonymous],
+              "readonly": [Function anonymous],
+              "refine": [Function anonymous],
+              "register": [Function anonymous],
+              "required": [Function anonymous],
+              "safeDecode": [Function anonymous],
+              "safeDecodeAsync": [Function anonymous],
+              "safeEncode": [Function anonymous],
+              "safeEncodeAsync": [Function anonymous],
+              "safeExtend": [Function anonymous],
+              "safeParse": [Function anonymous],
+              "safeParseAsync": [Function anonymous],
+              "spa": [Function anonymous],
+              "strict": [Function anonymous],
+              "strip": [Function anonymous],
+              "superRefine": [Function anonymous],
+              "transform": [Function anonymous],
+              "type": "object",
+              "~standard": {
+                "validate": [Function validate],
+                "vendor": "zod",
+                "version": 1,
+              },
+            },
+            ZodObject {
+              "and": [Function anonymous],
+              "array": [Function anonymous],
+              "brand": [Function anonymous],
+              "catch": [Function anonymous],
+              "catchall": [Function anonymous],
+              "check": [Function anonymous],
+              "clone": [Function anonymous],
+              "decode": [Function anonymous],
+              "decodeAsync": [Function anonymous],
+              "def": {
+                "shape": [Object],
+                "type": "object",
+              },
+              "default": [Function anonymous],
+              "describe": [Function anonymous],
+              "encode": [Function anonymous],
+              "encodeAsync": [Function anonymous],
+              "extend": [Function anonymous],
+              "isNullable": [Function anonymous],
+              "isOptional": [Function anonymous],
+              "keyof": [Function anonymous],
+              "loose": [Function anonymous],
+              "merge": [Function anonymous],
+              "meta": [Function anonymous],
+              "nonoptional": [Function anonymous],
+              "nullable": [Function anonymous],
+              "nullish": [Function anonymous],
+              "omit": [Function anonymous],
+              "optional": [Function anonymous],
+              "or": [Function anonymous],
+              "overwrite": [Function anonymous],
+              "parse": [Function anonymous],
+              "parseAsync": [Function anonymous],
+              "partial": [Function anonymous],
+              "passthrough": [Function anonymous],
+              "pick": [Function anonymous],
+              "pipe": [Function anonymous],
+              "prefault": [Function anonymous],
+              "readonly": [Function anonymous],
+              "refine": [Function anonymous],
+              "register": [Function anonymous],
+              "required": [Function anonymous],
+              "safeDecode": [Function anonymous],
+              "safeDecodeAsync": [Function anonymous],
+              "safeEncode": [Function anonymous],
+              "safeEncodeAsync": [Function anonymous],
+              "safeExtend": [Function anonymous],
+              "safeParse": [Function anonymous],
+              "safeParseAsync": [Function anonymous],
+              "spa": [Function anonymous],
+              "strict": [Function anonymous],
+              "strip": [Function anonymous],
+              "superRefine": [Function anonymous],
+              "transform": [Function anonymous],
+              "type": "object",
+              "~standard": {
+                "validate": [Function validate],
+                "vendor": "zod",
+                "version": 1,
+              },
+            },
+          ],
+          "type": "union",
+        },
+        "default": [Function anonymous],
+        "describe": [Function anonymous],
+        "encode": [Function anonymous],
+        "encodeAsync": [Function anonymous],
+        "isNullable": [Function anonymous],
+        "isOptional": [Function anonymous],
+        "meta": [Function anonymous],
+        "nonoptional": [Function anonymous],
+        "nullable": [Function anonymous],
+        "nullish": [Function anonymous],
+        "optional": [Function anonymous],
+        "options": [
+          ZodObject {
+            "and": [Function anonymous],
+            "array": [Function anonymous],
+            "brand": [Function anonymous],
+            "catch": [Function anonymous],
+            "catchall": [Function anonymous],
+            "check": [Function anonymous],
+            "clone": [Function anonymous],
+            "decode": [Function anonymous],
+            "decodeAsync": [Function anonymous],
+            "def": {
+              "shape": {
+                "tipo": [ZodLiteral],
+              },
+              "type": "object",
+            },
+            "default": [Function anonymous],
+            "describe": [Function anonymous],
+            "encode": [Function anonymous],
+            "encodeAsync": [Function anonymous],
+            "extend": [Function anonymous],
+            "isNullable": [Function anonymous],
+            "isOptional": [Function anonymous],
+            "keyof": [Function anonymous],
+            "loose": [Function anonymous],
+            "merge": [Function anonymous],
+            "meta": [Function anonymous],
+            "nonoptional": [Function anonymous],
+            "nullable": [Function anonymous],
+            "nullish": [Function anonymous],
+            "omit": [Function anonymous],
+            "optional": [Function anonymous],
+            "or": [Function anonymous],
+            "overwrite": [Function anonymous],
+            "parse": [Function anonymous],
+            "parseAsync": [Function anonymous],
+            "partial": [Function anonymous],
+            "passthrough": [Function anonymous],
+            "pick": [Function anonymous],
+            "pipe": [Function anonymous],
+            "prefault": [Function anonymous],
+            "readonly": [Function anonymous],
+            "refine": [Function anonymous],
+            "register": [Function anonymous],
+            "required": [Function anonymous],
+            "safeDecode": [Function anonymous],
+            "safeDecodeAsync": [Function anonymous],
+            "safeEncode": [Function anonymous],
+            "safeEncodeAsync": [Function anonymous],
+            "safeExtend": [Function anonymous],
+            "safeParse": [Function anonymous],
+            "safeParseAsync": [Function anonymous],
+            "spa": [Function anonymous],
+            "strict": [Function anonymous],
+            "strip": [Function anonymous],
+            "superRefine": [Function anonymous],
+            "transform": [Function anonymous],
+            "type": "object",
+            "~standard": {
+              "validate": [Function validate],
+              "vendor": "zod",
+              "version": 1,
+            },
+          },
+          ZodObject {
+            "and": [Function anonymous],
+            "array": [Function anonymous],
+            "brand": [Function anonymous],
+            "catch": [Function anonymous],
+            "catchall": [Function anonymous],
+            "check": [Function anonymous],
+            "clone": [Function anonymous],
+            "decode": [Function anonymous],
+            "decodeAsync": [Function anonymous],
+            "def": {
+              "shape": {
+                "casilla": [ZodEnum],
+                "pista": [ZodObject],
+                "tipo": [ZodLiteral],
+              },
+              "type": "object",
+            },
+            "default": [Function anonymous],
+            "describe": [Function anonymous],
+            "encode": [Function anonymous],
+            "encodeAsync": [Function anonymous],
+            "extend": [Function anonymous],
+            "isNullable": [Function anonymous],
+            "isOptional": [Function anonymous],
+            "keyof": [Function anonymous],
+            "loose": [Function anonymous],
+            "merge": [Function anonymous],
+            "meta": [Function anonymous],
+            "nonoptional": [Function anonymous],
+            "nullable": [Function anonymous],
+            "nullish": [Function anonymous],
+            "omit": [Function anonymous],
+            "optional": [Function anonymous],
+            "or": [Function anonymous],
+            "overwrite": [Function anonymous],
+            "parse": [Function anonymous],
+            "parseAsync": [Function anonymous],
+            "partial": [Function anonymous],
+            "passthrough": [Function anonymous],
+            "pick": [Function anonymous],
+            "pipe": [Function anonymous],
+            "prefault": [Function anonymous],
+            "readonly": [Function anonymous],
+            "refine": [Function anonymous],
+            "register": [Function anonymous],
+            "required": [Function anonymous],
+            "safeDecode": [Function anonymous],
+            "safeDecodeAsync": [Function anonymous],
+            "safeEncode": [Function anonymous],
+            "safeEncodeAsync": [Function anonymous],
+            "safeExtend": [Function anonymous],
+            "safeParse": [Function anonymous],
+            "safeParseAsync": [Function anonymous],
+            "spa": [Function anonymous],
+            "strict": [Function anonymous],
+            "strip": [Function anonymous],
+            "superRefine": [Function anonymous],
+            "transform": [Function anonymous],
+            "type": "object",
+            "~standard": {
+              "validate": [Function validate],
+              "vendor": "zod",
+              "version": 1,
+            },
+          },
+        ],
+        "or": [Function anonymous],
+        "overwrite": [Function anonymous],
+        "parse": [Function anonymous],
+        "parseAsync": [Function anonymous],
+        "pipe": [Function anonymous],
+        "prefault": [Function anonymous],
+        "readonly": [Function anonymous],
+        "refine": [Function anonymous],
+        "register": [Function anonymous],
+        "safeDecode": [Function anonymous],
+        "safeDecodeAsync": [Function anonymous],
+        "safeEncode": [Function anonymous],
+        "safeEncodeAsync": [Function anonymous],
+        "safeParse": [Function anonymous],
+        "safeParseAsync": [Function anonymous],
+        "spa": [Function anonymous],
+        "superRefine": [Function anonymous],
+        "transform": [Function anonymous],
+        "type": "union",
+        "~standard": {
+          "validate": [Function validate],
+          "vendor": "zod",
+          "version": 1,
+        },
+      },
+    },
+    "type": "object",
+  },
+  "default": [Function anonymous],
+  "describe": [Function anonymous],
+  "encode": [Function anonymous],
+  "encodeAsync": [Function anonymous],
+  "extend": [Function anonymous],
+  "isNullable": [Function anonymous],
+  "isOptional": [Function anonymous],
+  "keyof": [Function anonymous],
+  "loose": [Function anonymous],
+  "merge": [Function anonymous],
+  "meta": [Function anonymous],
+  "nonoptional": [Function anonymous],
+  "nullable": [Function anonymous],
+  "nullish": [Function anonymous],
+  "omit": [Function anonymous],
+  "optional": [Function anonymous],
+  "or": [Function anonymous],
+  "overwrite": [Function anonymous],
+  "parse": [Function anonymous],
+  "parseAsync": [Function anonymous],
+  "partial": [Function anonymous],
+  "passthrough": [Function anonymous],
+  "pick": [Function anonymous],
+  "pipe": [Function anonymous],
+  "prefault": [Function anonymous],
+  "readonly": [Function anonymous],
+  "refine": [Function anonymous],
+  "register": [Function anonymous],
+  "required": [Function anonymous],
+  "safeDecode": [Function anonymous],
+  "safeDecodeAsync": [Function anonymous],
+  "safeEncode": [Function anonymous],
+  "safeEncodeAsync": [Function anonymous],
+  "safeExtend": [Function anonymous],
+  "safeParse": [Function anonymous],
+  "safeParseAsync": [Function anonymous],
+  "spa": [Function anonymous],
+  "strict": [Function anonymous],
+  "strip": [Function anonymous],
+  "superRefine": [Function anonymous],
+  "transform": [Function anonymous],
+  "type": "object",
+  "~standard": {
+    "validate": [Function validate],
+    "vendor": "zod",
+    "version": 1,
+  },
+}
+
+ ❯ src/cliente/conversacion.test.tsx:13:29
+     11| afterEach(() => { cleanup(); sessionStorage.clear(); });
+     12| it('Sin conversación de demo: solo existe el historial de mensajes env…
+     13|   expect(ESQUEMAS_DEMO).not.toHaveProperty('conversacion');
+       |                             ^
+     14|   for (const paso of GUION_FLUJO_A) expect(paso.lecturas).not.toHavePr…
+     15| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  |web| src/cliente/conversacion.test.tsx > la vista envía por el almacén y acumula la respuesta sin consultar lecturas de conversación
+TestingLibraryElementError: Unable to find an element with the text: otra cosa. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+        [36m</span>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mWhatsApp[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"introduccion"[39m
+        [36m>[39m
+          [0mTu atención continúa donde la dejaste.[0m
+        [36m</p>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"conversacion"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación simulada"[39m
+          [36m>[39m
+            [36m<article[39m
+              [33mclass[39m=[32m"mensaje-bot"[39m
+            [36m>[39m
+              [36m<p>[39m
+                [0mComienza la demo en Call Center con una llamada entrante.[0m
+              [36m</p>[39m
+            [36m</article>[39m
+            [36m<article[39m
+              [33mclass[39m=[32m"mensaje-bot"[39m
+            [36m>[39m
+              [36m<p>[39m
+                [0mAbre Call Center y pulsa Llamada entrante para comenzar.[0m
+              [36m</p>[39m
+            [36m</article>[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje de demo"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+        [36m</span>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mWhatsApp[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"introduccion"[39m
+        [36m>[39m
+          [0mTu atención continúa donde la dejaste.[0m
+        [36m</p>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"conversacion"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación simulada"[39m
+          [36m>[39m
+            [36m<article[39m
+              [33mclass[39m=[32m"mensaje-bot"[39m
+            [36m>[39m
+              [36m<p>[39m
+                [0mComienza la demo en Call Center con una llamada entrante.[0m
+              [36m</p>[39m
+            [36m</article>[39m
+            [36m<article[39m
+              [33mclass[39m=[32m"mensaje-bot"[39m
+            [36m>[39m
+              [36m<p>[39m
+                [0mAbre Call Center y pulsa Llamada entrante para comenzar.[0m
+              [36m</p>[39m
+            [36m</article>[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje de demo"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/cliente/conversacion.test.tsx:25:23
+     23|   await usuario.type(await screen.findByRole('textbox', { name: 'Mensa…
+     24|   await usuario.click(screen.getByRole('button', { name: 'Enviar', exa…
+     25|   expect(await screen.findByText('otra cosa', { exact: true })).toBeDe…
+       |                       ^
+     26|   expect(await screen.findByText('Abre Call Center y pulsa Llamada ent…
+     27|   expect(consultar).not.toHaveBeenCalled();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  |web| src/cliente/idempotenciaWa.test.ts > Clave por mensaje: conserva la elegida y genera otra para un mensaje nuevo
+AssertionError: expected 'aac7dd1d-a39e-4646-9798-9151bd6ed42d' to be 'eb72ac07-387f-4b88-b452-1238e792d3a1' // Object.is equality
+
+Expected: "eb72ac07-387f-4b88-b452-1238e792d3a1"
+Received: "aac7dd1d-a39e-4646-9798-9151bd6ed42d"
+
+ ❯ src/cliente/idempotenciaWa.test.ts:11:21
+      9|   await cliente.enviarMensajeWa({ waId: '5210000000001', texto: 'Otro'…
+     10|   const claves = peticion.mock.calls.map(([, opciones]) => new Headers…
+     11|   expect(claves[0]).toBe(idempotencyKey); expect(claves[1]).not.toBe(i…
+       |                     ^
+     12| });
+     13| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  |web| src/cliente/idempotenciaWa.test.ts > Clave en el reintento: conserva el UUID en red y en el reenvío del usuario
+AssertionError: expected 'ca4dda36-f298-4bed-9b72-e4d6359bd424' to be '9d73978b-786e-421d-9858-6218f9598682' // Object.is equality
+
+Expected: "9d73978b-786e-421d-9858-6218f9598682"
+Received: "ca4dda36-f298-4bed-9b72-e4d6359bd424"
+
+ ❯ src/cliente/idempotenciaWa.test.ts:21:113
+     19|   await cliente.enviarMensajeWa(solicitud, { idempotencyKey });
+     20|   expect(peticion).toHaveBeenCalledTimes(3);
+     21|   for (const [, opciones] of peticion.mock.calls) expect(new Headers(o…
+       |                                                                                                                 ^
+     22| });
+     23| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  3 failed (3)
+      Tests  4 failed (4)
+   Start at  08:47:44
+   Duration  6.65s (transform 613ms, setup 0ms, import 2.35s, tests 1.55s, environment 8.22s)
+

@@ -1,0 +1,12 @@
+$ vite build
+failed to load config from <repo>\apps\web\vite.config.ts
+error during build:
+Error: Define VITE_API=mock o VITE_API=real antes de compilar producción.
+    at file:///<repo>/apps/web/node_modules/.vite-temp/vite.config.ts.timestamp-1795532544069-8be93940ca94a8.mjs:9:11
+    at loadConfigFromFile (file:///<repo>/node_modules/.pnpm/vite@7.2.2_@types+node@24.1_ca54395a587055de75febe3912659a25/node_modules/vite/dist/node/chunks/config.js:36384:64)
+    at async resolveConfig (file:///<repo>/node_modules/.pnpm/vite@7.2.2_@types+node@24.1_ca54395a587055de75febe3912659a25/node_modules/vite/dist/node/chunks/config.js:36031:22)
+    at async createBuilder (file:///<repo>/node_modules/.pnpm/vite@7.2.2_@types+node@24.1_ca54395a587055de75febe3912659a25/node_modules/vite/dist/node/chunks/config.js:34494:19)
+    at async CAC.<anonymous> (file:///<repo>/node_modules/.pnpm/vite@7.2.2_@types+node@24.1_ca54395a587055de75febe3912659a25/node_modules/vite/dist/node/cli.js:629:10)
+<repo>\apps\web:
+[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] @noki/web@0.0.0 build: `vite build`
+Exit status 1

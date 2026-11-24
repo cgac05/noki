@@ -22,6 +22,7 @@ export class ClienteMock implements ClienteApi {
 
   readonly demo = {
     ids: { hiloId: IDS.hilo, pacienteId: IDS.paciente, sedeId: IDS.sede, tramiteWebId: TRAMITE_WEB_ID },
+    revision: () => this.revision,
     paso: () => this.actual().paso,
     reiniciar: () => { this.revision++; this.indice = 0; this.indiceWeb = 0; this.indiceComando = 0; this.ayuda = []; this.avisar(); },
     alCambiar: (recibir: () => void) => { this.cambios.add(recibir); return () => { this.cambios.delete(recibir); }; },
@@ -61,16 +62,19 @@ export class ClienteMock implements ClienteApi {
     return validar(RespuestaComandoSchema, this.actual().respuesta);
   }
 
-  async enviarMensajeWa(mensaje: SolicitudMensajeWa) {
+  async enviarMensajeWa(mensaje: SolicitudMensajeWa, opciones?: { idempotencyKey?: string }) {
+    void opciones;
     const entrada = validar(SolicitudMensajeWaSchema, mensaje);
     const revision = this.revision;
     await this.esperar();
     this.comprobarRevision(revision);
     const siguiente = GUION_FLUJO_A[this.indice + 1];
     const esperado = siguiente?.espera?.tipo === 'wa' ? siguiente.espera.mensaje : undefined;
-    const coincide = esperado && entrada.waId === esperado.waId && (
+    const flow = this.actual().mensajes.find(mensaje => mensaje.tipo === 'flow');
+    const flowCompleto = esperado?.flowResponse && flow?.tipo === 'flow' && entrada.flowResponse !== undefined && flow.campos.filter(campo => campo.requerido).every(campo => Boolean(entrada.flowResponse?.[campo.id]?.trim()));
+    const coincide = esperado && entrada.waId === esperado.waId && (flowCompleto ||
       (entrada.payloadBoton !== undefined && entrada.payloadBoton === esperado.payloadBoton) ||
-      (entrada.texto !== undefined && siguiente!.entradasWa?.includes(entrada.texto.trim()))
+      (entrada.texto !== undefined && (entrada.texto === esperado.texto || siguiente!.entradasWa?.includes(entrada.texto.trim())))
     );
     if (!coincide) {
       this.ayuda = [{ tipo: 'texto', texto: this.actual().ayuda }];
@@ -78,13 +82,12 @@ export class ClienteMock implements ClienteApi {
       return validar(RespuestaMensajeWaSchema, { mensajes: this.ayuda });
     }
     this.avanzar();
-    return validar(RespuestaMensajeWaSchema, { mensajes: this.actual().lecturas.conversacion.mensajes });
+    return validar(RespuestaMensajeWaSchema, { mensajes: this.actual().mensajes });
   }
 
   async consultar<N extends NombreConsultaCliente>(nombre: N, parametros: ParametrosConsultaCliente<N>): Promise<RespuestaConsultaCliente<N>> {
     if (esConsultaCompartida(nombre)) validar(RUTAS_CONSULTAS[nombre].parametros, parametros);
     await this.esperar();
-    if (nombre === 'conversacion') return validarConsulta(nombre, { ...this.actual().lecturas.conversacion, mensajes: [...this.actual().lecturas.conversacion.mensajes, ...this.ayuda] });
     return validarConsulta(nombre, nombre === 'web' ? DATOS_WEB[this.indiceWeb]!.vista : this.actual().lecturas[nombre]);
   }
 

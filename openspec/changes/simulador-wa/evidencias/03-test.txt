@@ -1,0 +1,64 @@
+$ tsc --project tests/tsconfig.json && vitest run --project unitarios --project web
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |unitarios| tests/unit/nucleo/siguientePregunta.test.ts (3 tests) 16ms
+ ✓ |unitarios| tests/unit/nucleo/politica.test.ts (15 tests) 19ms
+ ✓ |unitarios| tests/unit/nucleo/tramite.test.ts (6 tests) 22ms
+ ✓ |unitarios| tests/unit/contratos.test.ts (7 tests) 36ms
+ ✓ |unitarios| tests/unit/nucleo/casosTramite.test.ts (12 tests) 68ms
+ ✓ |unitarios| packages/adapters/in-http/test/siguientePregunta.test.ts (1 test) 15ms
+ ✓ |unitarios| tests/unit/consultas.test.ts (17 tests) 123ms
+ ✓ |unitarios| tests/unit/nucleo/adaptadores.test.ts (5 tests) 26ms
+ ✓ |unitarios| tests/unit/workspace.test.ts (3 tests) 16ms
+ ✓ |unitarios| tests/unit/dominio.test.ts (4 tests) 16ms
+ ✓ |unitarios| tests/unit/persistencia/relay.test.ts (1 test) 15ms
+ ✓ |unitarios| tests/unit/persistencia/agenda.test.ts (1 test) 14ms
+ ✓ |unitarios| tests/unit/persistencia/folios.test.ts (1 test) 16ms
+ ✓ |unitarios| tests/unit/puertos.test.ts (3 tests) 13ms
+ ✓ |unitarios| tests/unit/persistencia/instantanea.test.ts (1 test) 12ms
+ ✓ |unitarios| tests/unit/nucleo/registroTipos.test.ts (4 tests) 12ms
+ ✓ |unitarios| tests/unit/persistencia/puertos.test.ts (1 test) 12ms
+ ✓ |unitarios| tests/unit/nucleo/hilo.test.ts (1 test) 7ms
+ ✓ |unitarios| tests/unit/nucleo/agendar.test.ts (1 test) 8ms
+ ✓ |unitarios| packages/adapters/in-http/test/coherencia.test.ts (2 tests) 9ms
+ ✓ |unitarios| tests/unit/persistencia/particion.test.ts (1 test) 6ms
+ ✓ |web| src/cliente/cliente.test.ts (25 tests) 395ms
+ ✓ |web| src/cliente/conversacion.test.tsx (2 tests) 1356ms
+   ✓ la vista envía por el almacén y acumula la respuesta sin consultar lecturas de conversación  1348ms
+ ✓ |web| src/vistas/red.test.ts (1 test) 443ms
+   ✓ Vistas sin acceso directo a la red: no usan fetch ni Socket.IO  440ms
+ ✓ |web| src/rutas.test.tsx (10 tests) 1983ms
+     ✓ Cada ruta renderiza: /web  761ms
+     ✓ Ruta desconocida: permite volver a la portada  362ms
+ ✓ |web| src/configuracion.test.ts (2 tests) 23ms
+ ✓ |web| src/vistas/wa.test.tsx (11 tests) 6711ms
+   ✓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible  1771ms
+   ✓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo  1473ms
+   ✓ Modo real: conversa solo con POST y no muestra la insignia simulada  397ms
+   ✓ Número inválido: explica el patrón de 10 a 15 dígitos e impide el envío  313ms
+   ✓ Doble toque e indicador de espera: la misma opción se envía una sola vez  400ms
+   ✓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título  773ms
+   ✓ Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot  794ms
+   ✓ Call center muestra enlace y QR de continuación sin enviar ni avanzar el guion  459ms
+ ✓ |web| src/vistas/vistas.test.tsx (14 tests) 6950ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo  899ms
+     ✓ Registrar llegada desde la cita: copia el token elegido y el canal clinica, sin un comando en la lectura  403ms
+     ✓ reintenta solo la sede pendiente y conserva su clave después de seleccionar el servicio  505ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  3433ms
+     ✓ permite escribir texto fuera del guion y muestra ayuda sin avanzar  372ms
+ ✓ |web| src/cliente/historialWa.test.tsx (9 tests) 102ms
+ ✓ |web| src/cliente/guionWa.test.ts (2 tests) 28ms
+ ✓ |web| src/cliente/idempotenciaWa.test.ts (2 tests) 16ms
+ ✓ |web| src/vistas/flow.test.tsx (5 tests) 8148ms
+   ✓ Envío del Flow: controles según captura y resumen enmascarado sin valores en mutaciones ni almacenamiento  2841ms
+   ✓ Campo requerido vacío: no envía y señala el campo  790ms
+   ✓ Escape y valores descartados: cancela sin enviar y abre campos vacíos  1505ms
+   ✓ reintenta el Flow con la misma solicitud y clave; cerrar descarta el pendiente protegido  1518ms
+   ✓ cerrar después de un error borra los valores y elimina el reintento del historial  1493ms
+
+ Test Files  32 passed (32)
+      Tests  173 passed (173)
+   Start at  09:11:56
+   Duration  20.60s (transform 5.47s, setup 0ms, import 33.08s, tests 26.64s, environment 46.19s)
+

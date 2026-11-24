@@ -71,9 +71,9 @@ describe('Cliente simulado', () => {
   it('Datos simulados válidos: todas las respuestas, lecturas y eventos cumplen sus esquemas', () => {
     for (const paso of GUION_FLUJO_A) {
       expect(RespuestaComandoSchema.safeParse(paso.respuesta).success).toBe(true);
-      expect(RespuestaMensajeWaSchema.safeParse({ mensajes: paso.lecturas.conversacion.mensajes }).success).toBe(true);
+      expect(RespuestaMensajeWaSchema.safeParse({ mensajes: paso.mensajes }).success).toBe(true);
       for (const [nombre, datos] of Object.entries(paso.lecturas)) {
-        const esquema = nombre === 'web' || nombre === 'conversacion' ? ESQUEMAS_DEMO[nombre] : RUTAS_CONSULTAS[nombre as keyof typeof RUTAS_CONSULTAS].respuesta;
+        const esquema = nombre === 'web' ? ESQUEMAS_DEMO[nombre] : RUTAS_CONSULTAS[nombre as keyof typeof RUTAS_CONSULTAS].respuesta;
         expect(esquema.safeParse(datos).success, `${paso.paso.id}: ${nombre}`).toBe(true);
       }
       for (const evento of paso.eventosSocket) {
@@ -92,9 +92,8 @@ describe('Cliente simulado', () => {
     const [oferta] = await cliente.consultar('catalogo', {});
     await cliente.enviarComando({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SeleccionarServicio', tramiteId: IDS.tramite, payload: { servicioId: oferta!.servicioId } });
     await cliente.enviarComando({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SeleccionarSede', tramiteId: IDS.tramite, payload: { sedeId: oferta!.sedeId } });
-    await cliente.enviarMensajeWa({ waId: '5210000000001', payloadBoton: 'enviar-continuacion' });
-    const conversacion = await cliente.consultar('conversacion', {});
-    expect(conversacion.siguientePregunta).toMatchObject({ tipo: 'PREGUNTA', casilla: 'horario' });
+    const conversacion = await cliente.enviarMensajeWa({ waId: '5210000000001', texto: 'CONTINUAR ' + IDS.tokenContinuacion });
+    expect(GUION_FLUJO_A[3]!.respuesta.siguientePregunta).toMatchObject({ tipo: 'PREGUNTA', casilla: 'horario' });
     expect(conversacion.mensajes[0]).toMatchObject({ tipo: 'texto', texto: expect.stringContaining('horario') });
     expect(cliente.demo.paso().id).toBe('CONTINUAR_WA');
     expect((await cliente.consultar('fichaHilo', { hiloId: IDS.hilo })).telefonoEnmascarado).toBe('•••• 0001');
@@ -106,10 +105,11 @@ describe('Cliente simulado', () => {
     const lineaTiempo = vi.fn();
     const dejar = cliente.suscribir('tramite:actualizado', actualizado);
     cliente.suscribir('hilo:linea-tiempo', lineaTiempo);
-    for (const paso of GUION_FLUJO_A.slice(1, 8)) {
+    for (const paso of GUION_FLUJO_A.slice(1)) {
       if (paso.espera!.tipo === 'comando') await cliente.enviarComando(paso.espera!.comando);
       else if (paso.espera!.tipo === 'comandos') { for (const comando of paso.espera!.comandos) await cliente.enviarComando(comando); }
       else await cliente.enviarMensajeWa(paso.espera!.mensaje);
+      if (paso.paso.id === 'CONFIRMADA') break;
     }
     expect(actualizado).toHaveBeenLastCalledWith(expect.objectContaining({ estado: 'CONFIRMADA' }));
     expect(lineaTiempo).toHaveBeenLastCalledWith(expect.objectContaining({ eventos: expect.arrayContaining([expect.objectContaining({ tipo: 'CitaConfirmada' })]) }));
@@ -166,7 +166,7 @@ describe('Cliente real', () => {
     } finally { vi.unstubAllGlobals(); vi.unstubAllEnvs(); }
   });
   it('Ruta de la tabla: resuelve todas las consultas compartidas como GET', async () => {
-    const lecturas = GUION_FLUJO_A[7]!.lecturas;
+    const lecturas = GUION_FLUJO_A.find(paso => paso.paso.id === 'CONFIRMADA')!.lecturas;
     const parametros = { tramiteId: IDS.tramite, hiloId: IDS.hilo, pacienteId: IDS.paciente, sedeId: IDS.sede };
     for (const nombre of Object.keys(RUTAS_CONSULTAS) as Array<keyof typeof RUTAS_CONSULTAS>) {
       const peticion = vi.fn<typeof fetch>().mockResolvedValue(Response.json(lecturas[nombre]));
@@ -185,7 +185,7 @@ describe('Cliente real', () => {
   });
 
   it('Lectura real mal formada: no entrega una cita sin zona horaria', async () => {
-    const cita = { ...GUION_FLUJO_A[7]!.lecturas.citasPaciente[0] } as Record<string, unknown>;
+    const cita = { ...GUION_FLUJO_A.find(paso => paso.paso.id === 'CONFIRMADA')!.lecturas.citasPaciente[0] } as Record<string, unknown>;
     delete cita.zonaHoraria;
     const peticion = vi.fn<typeof fetch>().mockResolvedValue(Response.json([cita]));
     await expect(new ClienteReal({ fetch: peticion }).consultar('citasPaciente', { pacienteId: IDS.paciente })).rejects.toMatchObject({ tipo: 'CONTRATO' });
@@ -196,7 +196,7 @@ describe('Cliente real', () => {
     const peticion = vi.fn<typeof fetch>();
     const cliente = new ClienteReal({ fetch: peticion, demo: true });
     await expect(cliente.consultar('llegadasSede', { sedeId: 'incorrecto' })).rejects.toMatchObject({ tipo: 'CONTRATO' });
-    for (const nombre of ['web', 'conversacion'] as const) await expect(cliente.consultar(nombre, {})).rejects.toMatchObject({ tipo: 'NO_DISPONIBLE' });
+    for (const nombre of ['web'] as const) await expect(cliente.consultar(nombre, {})).rejects.toMatchObject({ tipo: 'NO_DISPONIBLE' });
     expect(peticion).not.toHaveBeenCalled();
   });
   it('Encabezado de idempotencia: envía cuerpo validado y URL configurable', async () => {
@@ -261,9 +261,9 @@ describe('Cliente real', () => {
   });
 
   it('consultas reales: solo intenta las rutas previstas y valida sus datos', async () => {
-    const peticion = vi.fn<typeof fetch>().mockResolvedValue(Response.json(GUION_FLUJO_A[7]!.lecturas.lineaTiempo));
+    const peticion = vi.fn<typeof fetch>().mockResolvedValue(Response.json(GUION_FLUJO_A.find(paso => paso.paso.id === 'CONFIRMADA')!.lecturas.lineaTiempo));
     const cliente = new ClienteReal({ fetch: peticion });
-    expect(await cliente.consultar('lineaTiempo', { hiloId: IDS.hilo })).toEqual(GUION_FLUJO_A[7]!.lecturas.lineaTiempo);
+    expect(await cliente.consultar('lineaTiempo', { hiloId: IDS.hilo })).toEqual(GUION_FLUJO_A.find(paso => paso.paso.id === 'CONFIRMADA')!.lecturas.lineaTiempo);
     expect(peticion.mock.calls[0]![0]).toBe(`http://localhost:4000/api/hilos/${IDS.hilo}/linea-tiempo`);
     await expect(cliente.consultar('web', {})).rejects.toMatchObject({ tipo: 'NO_DISPONIBLE' });
     expect(peticion).toHaveBeenCalledTimes(1);

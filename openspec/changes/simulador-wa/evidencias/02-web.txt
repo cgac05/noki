@@ -1,0 +1,29 @@
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |web| src/configuracion.test.ts (2 tests) 24ms
+ ✓ |web| src/vistas/red.test.ts (1 test) 308ms
+   ✓ Vistas sin acceso directo a la red: no usan fetch ni Socket.IO  304ms
+ ✓ |web| src/cliente/cliente.test.ts (25 tests) 388ms
+ ✓ |web| src/cliente/conversacion.test.tsx (2 tests) 895ms
+   ✓ la vista envía por el almacén y acumula la respuesta sin consultar lecturas de conversación  888ms
+ ✓ |web| src/rutas.test.tsx (10 tests) 1397ms
+     ✓ Cada ruta renderiza: /web  479ms
+ ✓ |web| src/cliente/historialWa.test.tsx (9 tests) 113ms
+ ✓ |web| src/cliente/idempotenciaWa.test.ts (2 tests) 12ms
+ ✓ |web| src/vistas/vistas.test.tsx (14 tests) 4101ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo  582ms
+     ✓ Registrar llegada desde la cita: copia el token elegido y el canal clinica, sin un comando en la lectura  315ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  1705ms
+     ✓ permite escribir texto fuera del guion y muestra ayuda sin avanzar  311ms
+ ✓ |web| src/vistas/wa.test.tsx (11 tests) 4421ms
+   ✓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible  1217ms
+   ✓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo  1107ms
+   ✓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título  441ms
+   ✓ Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot  534ms
+
+ Test Files  9 passed (9)
+      Tests  76 passed (76)
+   Start at  09:01:27
+   Duration  12.49s (transform 2.60s, setup 0ms, import 18.28s, tests 11.66s, environment 32.59s)
+

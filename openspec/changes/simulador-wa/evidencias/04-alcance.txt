@@ -1,0 +1,1 @@
+PASS: 331 archivos protegidos intactos, solo producto en apps/web y seguimiento del cambio; evidencia textual sin rutas absolutas del equipo.

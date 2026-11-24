@@ -11,7 +11,7 @@ export type RespuestaConsultaCliente<N extends NombreConsultaCliente> = N extend
 export type LecturasCliente = { [N in NombreConsultaCliente]: RespuestaConsultaCliente<N> };
 
 export function esConsultaCompartida(nombre: NombreConsultaCliente): nombre is NombreConsulta {
-  return nombre !== 'conversacion' && nombre !== 'web';
+  return nombre !== 'web';
 }
 
 function esquemaConsulta(nombre: NombreConsultaCliente) {

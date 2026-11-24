@@ -1,12 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import type { ComandoRequest, RespuestaComando, SolicitudMensajeWa } from '@noki/contracts';
+import type { ComandoRequest, RespuestaComando } from '@noki/contracts';
 import { useCliente, useRespuestaComando } from './ProveedorCliente.tsx';
 
 // Operación de UI creada al pulsar un botón; nunca forma parte de una lectura.
 type Accion =
   | { tipo: 'comando'; titulo: string; comando: ComandoRequest }
-  | { tipo: 'comandos'; titulo: string; comandos: ComandoRequest[] }
-  | { tipo: 'wa'; titulo: string; mensaje: SolicitudMensajeWa };
+  | { tipo: 'comandos'; titulo: string; comandos: ComandoRequest[] };
 
 export function useAccion() {
   const cliente = useCliente();
@@ -14,7 +13,6 @@ export function useAccion() {
   const { recordar } = useRespuestaComando();
   const operacion = useMutation({
     mutationFn: async ({ accion, claves, progreso }: { accion: Accion; claves: string[]; progreso: { siguiente: number } }) => {
-      if (accion.tipo === 'wa') return await cliente.enviarMensajeWa(accion.mensaje);
       const comandos = accion.tipo === 'comando' ? [accion.comando] : accion.comandos;
       let respuesta: RespuestaComando | undefined;
       for (const [indice, comando] of comandos.entries()) {

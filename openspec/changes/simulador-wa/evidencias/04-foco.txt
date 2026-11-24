@@ -1,0 +1,16 @@
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |web| src/vistas/flow.test.tsx (6 tests) 5837ms
+   ✓ Envío del Flow: controles según captura y resumen enmascarado sin valores en mutaciones ni almacenamiento  1483ms
+   ✓ Campo requerido vacío: no envía y señala el campo  420ms
+   ✓ atrapa el foco con Tab y Shift+Tab entre el primer campo y Cancelar  481ms
+   ✓ Escape y valores descartados: cancela sin enviar y abre campos vacíos  1127ms
+   ✓ reintenta el Flow con la misma solicitud y clave; cerrar descarta el pendiente protegido  1145ms
+   ✓ cerrar después de un error borra los valores y elimina el reintento del historial  1179ms
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  09:20:22
+   Duration  10.66s (transform 607ms, setup 0ms, import 2.08s, tests 5.84s, environment 2.27s)
+

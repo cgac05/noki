@@ -1,0 +1,50 @@
+$ tsc --project tests/tsconfig.json && vitest run --project unitarios --project web
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |unitarios| tests/unit/persistencia/instantanea.test.ts (1 test) 13ms
+ ✓ |unitarios| tests/unit/dominio.test.ts (4 tests) 14ms
+ ✓ |unitarios| tests/unit/nucleo/adaptadores.test.ts (5 tests) 19ms
+ ✓ |unitarios| tests/unit/nucleo/tramite.test.ts (6 tests) 22ms
+ ✓ |unitarios| tests/unit/contratos.test.ts (7 tests) 35ms
+ ✓ |unitarios| tests/unit/nucleo/casosTramite.test.ts (12 tests) 89ms
+ ✓ |unitarios| tests/unit/consultas.test.ts (17 tests) 119ms
+ ✓ |unitarios| tests/unit/workspace.test.ts (3 tests) 20ms
+ ✓ |unitarios| tests/unit/nucleo/politica.test.ts (15 tests) 23ms
+ ✓ |unitarios| tests/unit/nucleo/siguientePregunta.test.ts (3 tests) 25ms
+ ✓ |unitarios| tests/unit/persistencia/relay.test.ts (1 test) 15ms
+ ✓ |unitarios| tests/unit/nucleo/registroTipos.test.ts (4 tests) 12ms
+ ✓ |unitarios| tests/unit/persistencia/folios.test.ts (1 test) 14ms
+ ✓ |unitarios| packages/adapters/in-http/test/siguientePregunta.test.ts (1 test) 20ms
+ ✓ |unitarios| tests/unit/persistencia/agenda.test.ts (1 test) 13ms
+ ✓ |unitarios| tests/unit/puertos.test.ts (3 tests) 14ms
+ ✓ |unitarios| tests/unit/persistencia/puertos.test.ts (1 test) 11ms
+ ✓ |unitarios| tests/unit/nucleo/hilo.test.ts (1 test) 8ms
+ ✓ |unitarios| tests/unit/nucleo/agendar.test.ts (1 test) 9ms
+ ✓ |unitarios| packages/adapters/in-http/test/coherencia.test.ts (2 tests) 9ms
+ ✓ |unitarios| tests/unit/persistencia/particion.test.ts (1 test) 5ms
+ ✓ |web| src/cliente/cliente.test.ts (25 tests) 395ms
+ ✓ |web| src/vistas/red.test.ts (1 test) 286ms
+ ✓ |web| src/configuracion.test.ts (2 tests) 19ms
+ ✓ |web| src/cliente/conversacion.test.tsx (2 tests) 1141ms
+   ✓ la vista envía por el almacén y acumula la respuesta sin consultar lecturas de conversación  1133ms
+ ✓ |web| src/cliente/historialWa.test.tsx (9 tests) 98ms
+ ✓ |web| src/rutas.test.tsx (10 tests) 1564ms
+     ✓ Cada ruta renderiza: /web  681ms
+ ✓ |web| src/cliente/idempotenciaWa.test.ts (2 tests) 14ms
+ ✓ |web| src/vistas/vistas.test.tsx (14 tests) 4087ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo  774ms
+     ✓ Registrar llegada desde la cita: copia el token elegido y el canal clinica, sin un comando en la lectura  362ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  1543ms
+     ✓ permite escribir texto fuera del guion y muestra ayuda sin avanzar  311ms
+ ✓ |web| src/vistas/wa.test.tsx (11 tests) 4362ms
+   ✓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible  1344ms
+   ✓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo  995ms
+   ✓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título  478ms
+   ✓ Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot  545ms
+
+ Test Files  30 passed (30)
+      Tests  166 passed (166)
+   Start at  09:04:35
+   Duration  16.76s (transform 5.74s, setup 0ms, import 30.24s, tests 12.48s, environment 32.38s)
+

@@ -1,0 +1,2618 @@
+
+ RUN  v4.0.14 <repo>
+
+ ❯ |web| src/cliente/guionWa.test.ts (2 tests | 1 failed) 39ms
+   × Verificación con Flow: pide fecha protegida y habilita confirmar sin repetir los valores 33ms
+   ✓ Flow incompleto: responde con ayuda y no avanza con el requerido vacío 4ms
+ ❯ |web| src/vistas/flow.test.tsx (5 tests | 5 failed) 6191ms
+   × Envío del Flow: controles según captura y resumen enmascarado sin valores en mutaciones ni almacenamiento 1417ms
+   × Campo requerido vacío: no envía y señala el campo 1183ms
+   × Escape y valores descartados: cancela sin enviar y abre campos vacíos 1211ms
+   × reintenta el Flow con la misma solicitud y clave; cerrar descarta el pendiente protegido 1195ms
+   × cerrar después de un error borra los valores y elimina el reintento del historial 1183ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/cliente/guionWa.test.ts > Verificación con Flow: pide fecha protegida y habilita confirmar sin repetir los valores
+AssertionError: expected [ { tipo: 'flow', …(2) }, …(1) ] to deep equally contain ObjectContaining{…}
+
+- Expected: 
+ObjectContaining {
+  "campos": [
+    {
+      "captura": "sensitive",
+      "etiqueta": "Fecha de nacimiento",
+      "id": "fechaNac",
+      "requerido": true,
+    },
+  ],
+  "tipo": "flow",
+}
+
++ Received: 
+[
+  {
+    "campos": [
+      {
+        "captura": "sensitive",
+        "etiqueta": "Verificación protegida",
+        "id": "verificacion",
+      },
+    ],
+    "tipo": "flow",
+    "titulo": "Verificación de identidad",
+  },
+  {
+    "botones": [
+      {
+        "id": "confirmar",
+        "payload": "confirmar-cita",
+        "titulo": "Confirmar cita",
+      },
+    ],
+    "texto": "En esta demo la captura está simulada. Puedes confirmar la cita.",
+    "tipo": "botones",
+  },
+]
+
+ ❯ src/cliente/guionWa.test.ts:18:25
+     16| it('Verificación con Flow: pide fecha protegida y habilita confirmar s…
+     17|   const cliente = await verificar(); const paso = GUION_FLUJO_A.find(p…
+     18|   expect(paso.mensajes).toContainEqual(expect.objectContaining({ tipo:…
+       |                         ^
+     19|   const respuesta = await cliente.enviarMensajeWa({ waId: CONTACTO_DEM…
+     20|   expect(respuesta.mensajes).toContainEqual(expect.objectContaining({ …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  |web| src/vistas/flow.test.tsx > Envío del Flow: controles según captura y resumen enmascarado sin valores en mutaciones ni almacenamiento
+TestingLibraryElementError: Unable to find role="button" and name "Abrir formulario"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+          [36m<span[39m
+            [33mclass[39m=[32m"insignia-mock"[39m
+          [36m>[39m
+            [0mModo simulado[0m
+          [36m</span>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"wa-simulador"[39m
+        [36m>[39m
+          [36m<h1>[39m
+            [0mWhatsApp[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"introduccion"[39m
+          [36m>[39m
+            [0mTu atención continúa donde la dejaste.[0m
+          [36m</p>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"wa-herramientas"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"numero-wa"[39m
+              [36m>[39m
+                [0mNúmero de WhatsApp[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"numero-wa"[39m
+                [33minputmode[39m=[32m"numeric"[39m
+                [33mtype[39m=[32m"tel"[39m
+                [33mvalue[39m=[32m"5210000000001"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"boton-secundario"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [0mNueva conversación[0m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación de WhatsApp"[39m
+            [33maria-live[39m=[32m"polite"[39m
+            [33maria-relevant[39m=[32m"additions text"[39m
+            [33mclass[39m=[32m"wa-historial"[39m
+            [33mrole[39m=[32m"log"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-usuario"[39m
+            [36m>[39m
+              [36m<p>[39m
+                [0mHola[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<h3>[39m
+                  [0mVerificación protegida[0m
+                [36m</h3>[39m
+                [36m<p[39m
+                  [33mrole[39m=[32m"note"[39m
+                [36m>[39m
+                  [0mEsta captura llegará con el simulador de WhatsApp. No escribas datos sensibles en el chat.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mAbre el formulario protegido para continuar.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div />[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje wa-compositor"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+          [36m<span[39m
+            [33mclass[39m=[32m"insignia-mock"[39m
+          [36m>[39m
+            [0mModo simulado[0m
+          [36m</span>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"wa-simulador"[39m
+        [36m>[39m
+          [36m<h1>[39m
+            [0mWhatsApp[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"introduccion"[39m
+          [36m>[39m
+            [0mTu atención continúa donde la dejaste.[0m
+          [36m</p>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"wa-herramientas"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"numero-wa"[39m
+              [36m>[39m
+                [0mNúmero de WhatsApp[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"numero-wa"[39m
+                [33minputmode[39m=[32m"numeric"[39m
+                [33mtype[39m=[32m"tel"[39m
+                [33mvalue[39m=[32m"5210000000001"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"boton-secundario"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [0mNueva conversación[0m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación de WhatsApp"[39m
+            [33maria-live[39m=[32m"polite"[39m
+            [33maria-relevant[39m=[32m"additions text"[39m
+            [33mclass[39m=[32m"wa-historial"[39m
+            [33mrole[39m=[32m"log"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-usuario"[39m
+            [36m>[39m
+              [36m<p>[39m
+                [0mHola[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<h3>[39m
+                  [0mVerificación protegida[0m
+                [36m</h3>[39m
+                [36m<p[39m
+                  [33mrole[39m=[32m"note"[39m
+                [36m>[39m
+                  [0mEsta captura llegará con el simulador de WhatsApp. No escribas datos sensibles en el chat.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mAbre el formulario protegido para continuar.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div />[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje wa-compositor"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ abrir src/vistas/flow.test.tsx:32:36
+     30|   const usuario = userEvent.setup();
+     31|   await usuario.type(screen.getByLabelText('Mensaje'), 'Hola'); await …
+     32|   await usuario.click(await screen.findByRole('button', { name: 'Abrir…
+       |                                    ^
+     33|   return { usuario, cliente, enviar, cache };
+     34| }
+ ❯ src/vistas/flow.test.tsx:45:38
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  |web| src/vistas/flow.test.tsx > Campo requerido vacío: no envía y señala el campo
+TestingLibraryElementError: Unable to find role="button" and name "Abrir formulario"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+          [36m<span[39m
+            [33mclass[39m=[32m"insignia-mock"[39m
+          [36m>[39m
+            [0mModo simulado[0m
+          [36m</span>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"wa-simulador"[39m
+        [36m>[39m
+          [36m<h1>[39m
+            [0mWhatsApp[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"introduccion"[39m
+          [36m>[39m
+            [0mTu atención continúa donde la dejaste.[0m
+          [36m</p>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"wa-herramientas"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"numero-wa"[39m
+              [36m>[39m
+                [0mNúmero de WhatsApp[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"numero-wa"[39m
+                [33minputmode[39m=[32m"numeric"[39m
+                [33mtype[39m=[32m"tel"[39m
+                [33mvalue[39m=[32m"5210000000001"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"boton-secundario"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [0mNueva conversación[0m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación de WhatsApp"[39m
+            [33maria-live[39m=[32m"polite"[39m
+            [33maria-relevant[39m=[32m"additions text"[39m
+            [33mclass[39m=[32m"wa-historial"[39m
+            [33mrole[39m=[32m"log"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-usuario"[39m
+            [36m>[39m
+              [36m<p>[39m
+                [0mHola[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<h3>[39m
+                  [0mVerificación protegida[0m
+                [36m</h3>[39m
+                [36m<p[39m
+                  [33mrole[39m=[32m"note"[39m
+                [36m>[39m
+                  [0mEsta captura llegará con el simulador de WhatsApp. No escribas datos sensibles en el chat.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mAbre el formulario protegido para continuar.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div />[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje wa-compositor"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+          [36m<span[39m
+            [33mclass[39m=[32m"insignia-mock"[39m
+          [36m>[39m
+            [0mModo simulado[0m
+          [36m</span>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"wa-simulador"[39m
+        [36m>[39m
+          [36m<h1>[39m
+            [0mWhatsApp[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"introduccion"[39m
+          [36m>[39m
+            [0mTu atención continúa donde la dejaste.[0m
+          [36m</p>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"wa-herramientas"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"numero-wa"[39m
+              [36m>[39m
+                [0mNúmero de WhatsApp[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"numero-wa"[39m
+                [33minputmode[39m=[32m"numeric"[39m
+                [33mtype[39m=[32m"tel"[39m
+                [33mvalue[39m=[32m"5210000000001"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"boton-secundario"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [0mNueva conversación[0m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación de WhatsApp"[39m
+            [33maria-live[39m=[32m"polite"[39m
+            [33maria-relevant[39m=[32m"additions text"[39m
+            [33mclass[39m=[32m"wa-historial"[39m
+            [33mrole[39m=[32m"log"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-usuario"[39m
+            [36m>[39m
+              [36m<p>[39m
+                [0mHola[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<h3>[39m
+                  [0mVerificación protegida[0m
+                [36m</h3>[39m
+                [36m<p[39m
+                  [33mrole[39m=[32m"note"[39m
+                [36m>[39m
+                  [0mEsta captura llegará con el simulador de WhatsApp. No escribas datos sensibles en el chat.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mAbre el formulario protegido para continuar.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div />[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje wa-compositor"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ abrir src/vistas/flow.test.tsx:32:36
+     30|   const usuario = userEvent.setup();
+     31|   await usuario.type(screen.getByLabelText('Mensaje'), 'Hola'); await …
+     32|   await usuario.click(await screen.findByRole('button', { name: 'Abrir…
+       |                                    ^
+     33|   return { usuario, cliente, enviar, cache };
+     34| }
+ ❯ src/vistas/flow.test.tsx:68:31
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  |web| src/vistas/flow.test.tsx > Escape y valores descartados: cancela sin enviar y abre campos vacíos
+TestingLibraryElementError: Unable to find role="button" and name "Abrir formulario"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+          [36m<span[39m
+            [33mclass[39m=[32m"insignia-mock"[39m
+          [36m>[39m
+            [0mModo simulado[0m
+          [36m</span>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"wa-simulador"[39m
+        [36m>[39m
+          [36m<h1>[39m
+            [0mWhatsApp[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"introduccion"[39m
+          [36m>[39m
+            [0mTu atención continúa donde la dejaste.[0m
+          [36m</p>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"wa-herramientas"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"numero-wa"[39m
+              [36m>[39m
+                [0mNúmero de WhatsApp[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"numero-wa"[39m
+                [33minputmode[39m=[32m"numeric"[39m
+                [33mtype[39m=[32m"tel"[39m
+                [33mvalue[39m=[32m"5210000000001"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"boton-secundario"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [0mNueva conversación[0m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación de WhatsApp"[39m
+            [33maria-live[39m=[32m"polite"[39m
+            [33maria-relevant[39m=[32m"additions text"[39m
+            [33mclass[39m=[32m"wa-historial"[39m
+            [33mrole[39m=[32m"log"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-usuario"[39m
+            [36m>[39m
+              [36m<p>[39m
+                [0mHola[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<h3>[39m
+                  [0mVerificación protegida[0m
+                [36m</h3>[39m
+                [36m<p[39m
+                  [33mrole[39m=[32m"note"[39m
+                [36m>[39m
+                  [0mEsta captura llegará con el simulador de WhatsApp. No escribas datos sensibles en el chat.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mAbre el formulario protegido para continuar.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div />[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje wa-compositor"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+          [36m<span[39m
+            [33mclass[39m=[32m"insignia-mock"[39m
+          [36m>[39m
+            [0mModo simulado[0m
+          [36m</span>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"wa-simulador"[39m
+        [36m>[39m
+          [36m<h1>[39m
+            [0mWhatsApp[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"introduccion"[39m
+          [36m>[39m
+            [0mTu atención continúa donde la dejaste.[0m
+          [36m</p>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"wa-herramientas"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"numero-wa"[39m
+              [36m>[39m
+                [0mNúmero de WhatsApp[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"numero-wa"[39m
+                [33minputmode[39m=[32m"numeric"[39m
+                [33mtype[39m=[32m"tel"[39m
+                [33mvalue[39m=[32m"5210000000001"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"boton-secundario"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [0mNueva conversación[0m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación de WhatsApp"[39m
+            [33maria-live[39m=[32m"polite"[39m
+            [33maria-relevant[39m=[32m"additions text"[39m
+            [33mclass[39m=[32m"wa-historial"[39m
+            [33mrole[39m=[32m"log"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-usuario"[39m
+            [36m>[39m
+              [36m<p>[39m
+                [0mHola[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<h3>[39m
+                  [0mVerificación protegida[0m
+                [36m</h3>[39m
+                [36m<p[39m
+                  [33mrole[39m=[32m"note"[39m
+                [36m>[39m
+                  [0mEsta captura llegará con el simulador de WhatsApp. No escribas datos sensibles en el chat.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mAbre el formulario protegido para continuar.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div />[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje wa-compositor"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ abrir src/vistas/flow.test.tsx:32:36
+     30|   const usuario = userEvent.setup();
+     31|   await usuario.type(screen.getByLabelText('Mensaje'), 'Hola'); await …
+     32|   await usuario.click(await screen.findByRole('button', { name: 'Abrir…
+       |                                    ^
+     33|   return { usuario, cliente, enviar, cache };
+     34| }
+ ❯ src/vistas/flow.test.tsx:76:31
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  |web| src/vistas/flow.test.tsx > reintenta el Flow con la misma solicitud y clave; cerrar descarta el pendiente protegido
+TestingLibraryElementError: Unable to find role="button" and name "Abrir formulario"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+          [36m<span[39m
+            [33mclass[39m=[32m"insignia-mock"[39m
+          [36m>[39m
+            [0mModo simulado[0m
+          [36m</span>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"wa-simulador"[39m
+        [36m>[39m
+          [36m<h1>[39m
+            [0mWhatsApp[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"introduccion"[39m
+          [36m>[39m
+            [0mTu atención continúa donde la dejaste.[0m
+          [36m</p>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"wa-herramientas"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"numero-wa"[39m
+              [36m>[39m
+                [0mNúmero de WhatsApp[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"numero-wa"[39m
+                [33minputmode[39m=[32m"numeric"[39m
+                [33mtype[39m=[32m"tel"[39m
+                [33mvalue[39m=[32m"5210000000001"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"boton-secundario"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [0mNueva conversación[0m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación de WhatsApp"[39m
+            [33maria-live[39m=[32m"polite"[39m
+            [33maria-relevant[39m=[32m"additions text"[39m
+            [33mclass[39m=[32m"wa-historial"[39m
+            [33mrole[39m=[32m"log"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-usuario"[39m
+            [36m>[39m
+              [36m<p>[39m
+                [0mHola[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<h3>[39m
+                  [0mVerificación protegida[0m
+                [36m</h3>[39m
+                [36m<p[39m
+                  [33mrole[39m=[32m"note"[39m
+                [36m>[39m
+                  [0mEsta captura llegará con el simulador de WhatsApp. No escribas datos sensibles en el chat.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mAbre el formulario protegido para continuar.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div />[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje wa-compositor"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+          [36m<span[39m
+            [33mclass[39m=[32m"insignia-mock"[39m
+          [36m>[39m
+            [0mModo simulado[0m
+          [36m</span>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"wa-simulador"[39m
+        [36m>[39m
+          [36m<h1>[39m
+            [0mWhatsApp[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"introduccion"[39m
+          [36m>[39m
+            [0mTu atención continúa donde la dejaste.[0m
+          [36m</p>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"wa-herramientas"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"numero-wa"[39m
+              [36m>[39m
+                [0mNúmero de WhatsApp[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"numero-wa"[39m
+                [33minputmode[39m=[32m"numeric"[39m
+                [33mtype[39m=[32m"tel"[39m
+                [33mvalue[39m=[32m"5210000000001"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"boton-secundario"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [0mNueva conversación[0m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación de WhatsApp"[39m
+            [33maria-live[39m=[32m"polite"[39m
+            [33maria-relevant[39m=[32m"additions text"[39m
+            [33mclass[39m=[32m"wa-historial"[39m
+            [33mrole[39m=[32m"log"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-usuario"[39m
+            [36m>[39m
+              [36m<p>[39m
+                [0mHola[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<h3>[39m
+                  [0mVerificación protegida[0m
+                [36m</h3>[39m
+                [36m<p[39m
+                  [33mrole[39m=[32m"note"[39m
+                [36m>[39m
+                  [0mEsta captura llegará con el simulador de WhatsApp. No escribas datos sensibles en el chat.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mAbre el formulario protegido para continuar.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div />[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje wa-compositor"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ abrir src/vistas/flow.test.tsx:32:36
+     30|   const usuario = userEvent.setup();
+     31|   await usuario.type(screen.getByLabelText('Mensaje'), 'Hola'); await …
+     32|   await usuario.click(await screen.findByRole('button', { name: 'Abrir…
+       |                                    ^
+     33|   return { usuario, cliente, enviar, cache };
+     34| }
+ ❯ src/vistas/flow.test.tsx:83:31
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  |web| src/vistas/flow.test.tsx > cerrar después de un error borra los valores y elimina el reintento del historial
+TestingLibraryElementError: Unable to find role="button" and name "Abrir formulario"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+          [36m<span[39m
+            [33mclass[39m=[32m"insignia-mock"[39m
+          [36m>[39m
+            [0mModo simulado[0m
+          [36m</span>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"wa-simulador"[39m
+        [36m>[39m
+          [36m<h1>[39m
+            [0mWhatsApp[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"introduccion"[39m
+          [36m>[39m
+            [0mTu atención continúa donde la dejaste.[0m
+          [36m</p>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"wa-herramientas"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"numero-wa"[39m
+              [36m>[39m
+                [0mNúmero de WhatsApp[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"numero-wa"[39m
+                [33minputmode[39m=[32m"numeric"[39m
+                [33mtype[39m=[32m"tel"[39m
+                [33mvalue[39m=[32m"5210000000001"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"boton-secundario"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [0mNueva conversación[0m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación de WhatsApp"[39m
+            [33maria-live[39m=[32m"polite"[39m
+            [33maria-relevant[39m=[32m"additions text"[39m
+            [33mclass[39m=[32m"wa-historial"[39m
+            [33mrole[39m=[32m"log"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-usuario"[39m
+            [36m>[39m
+              [36m<p>[39m
+                [0mHola[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<h3>[39m
+                  [0mVerificación protegida[0m
+                [36m</h3>[39m
+                [36m<p[39m
+                  [33mrole[39m=[32m"note"[39m
+                [36m>[39m
+                  [0mEsta captura llegará con el simulador de WhatsApp. No escribas datos sensibles en el chat.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mAbre el formulario protegido para continuar.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div />[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje wa-compositor"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+          [36m<span[39m
+            [33mclass[39m=[32m"insignia-mock"[39m
+          [36m>[39m
+            [0mModo simulado[0m
+          [36m</span>[39m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m1[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mEsperando llamada[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"wa-simulador"[39m
+        [36m>[39m
+          [36m<h1>[39m
+            [0mWhatsApp[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"introduccion"[39m
+          [36m>[39m
+            [0mTu atención continúa donde la dejaste.[0m
+          [36m</p>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"wa-herramientas"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"numero-wa"[39m
+              [36m>[39m
+                [0mNúmero de WhatsApp[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"numero-wa"[39m
+                [33minputmode[39m=[32m"numeric"[39m
+                [33mtype[39m=[32m"tel"[39m
+                [33mvalue[39m=[32m"5210000000001"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33mclass[39m=[32m"boton-secundario"[39m
+              [33mtype[39m=[32m"button"[39m
+            [36m>[39m
+              [0mNueva conversación[0m
+            [36m</button>[39m
+          [36m</div>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación de WhatsApp"[39m
+            [33maria-live[39m=[32m"polite"[39m
+            [33maria-relevant[39m=[32m"additions text"[39m
+            [33mclass[39m=[32m"wa-historial"[39m
+            [33mrole[39m=[32m"log"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-usuario"[39m
+            [36m>[39m
+              [36m<p>[39m
+                [0mHola[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<h3>[39m
+                  [0mVerificación protegida[0m
+                [36m</h3>[39m
+                [36m<p[39m
+                  [33mrole[39m=[32m"note"[39m
+                [36m>[39m
+                  [0mEsta captura llegará con el simulador de WhatsApp. No escribas datos sensibles en el chat.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"wa-burbuja wa-bot"[39m
+            [36m>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mAbre el formulario protegido para continuar.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div />[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje wa-compositor"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ abrir src/vistas/flow.test.tsx:32:36
+     30|   const usuario = userEvent.setup();
+     31|   await usuario.type(screen.getByLabelText('Mensaje'), 'Hola'); await …
+     32|   await usuario.click(await screen.findByRole('button', { name: 'Abrir…
+       |                                    ^
+     33|   return { usuario, cliente, enviar, cache };
+     34| }
+ ❯ src/vistas/flow.test.tsx:92:31
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  6 failed | 1 passed (7)
+   Start at  09:07:08
+   Duration  10.90s (transform 696ms, setup 0ms, import 2.35s, tests 6.23s, environment 4.76s)
+

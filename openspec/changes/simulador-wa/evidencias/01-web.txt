@@ -1,0 +1,309 @@
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |web| src/cliente/idempotenciaWa.test.ts (2 tests) 25ms
+ ✓ |web| src/vistas/red.test.ts (1 test) 305ms
+   ✓ Vistas sin acceso directo a la red: no usan fetch ni Socket.IO  302ms
+ ❯ |web| src/cliente/cliente.test.ts (25 tests | 1 failed) 489ms
+     ✓ Valor inválido: explica los modos válidos 4ms
+     ✓ usa mock por defecto y permite seleccionar real 1ms
+     ✓ Sin duplicados del contrato: la web no declara modelos compartidos 135ms
+     ✓ Sin datos sensibles: descarta campos extra y rechaza el teléfono completo 15ms
+     ✓ Datos simulados con el contrato compartido: valida todas las consultas en cada paso, sin acciones 194ms
+     ✓ mantiene el precio del paquete en 25000 centavos en catálogo, cotización y ficha 1ms
+     ✓ Datos simulados válidos: todas las respuestas, lecturas y eventos cumplen sus esquemas 21ms
+     × Continuidad simulada: cambia a WhatsApp y retoma en horario 20ms
+     ✓ Eventos de tiempo real: confirma, valida los eventos y permite cancelar la suscripción 8ms
+     ✓ Reinicio del guion: restablece también la cotización web y avisa a las vistas 3ms
+     ✓ Fuera del guion: devuelve ayuda válida sin avanzar 1ms
+     ✓ un reinicio cancela el avance de una acción simulada que aún estaba esperando 12ms
+     ✓ VITE_DEMO=true habilita la bandeja en el cliente creado por configuración 9ms
+     ✓ Ruta de la tabla: resuelve todas las consultas compartidas como GET 14ms
+     ✓ Bandeja fuera de demo: no consulta la red; con demo valida la respuesta 1ms
+     ✓ Lectura real mal formada: no entrega una cita sin zona horaria 2ms
+     ✓ rechaza parámetros inválidos sin acceder a la red y mantiene las consultas de demo aisladas 1ms
+     ✓ Encabezado de idempotencia: envía cuerpo validado y URL configurable 7ms
+     ✓ Reintento conserva la clave y se limita a un reintento automático de red 12ms
+     ✓ Conflicto de versión: conserva código y mensaje sin stack ni datos internos 6ms
+     ✓ Respuesta real mal formada: rechaza un trámite sin tipo 3ms
+     ✓ Comandos validados antes de enviarse: no invoca la red con un canal inválido 1ms
+     ✓ valida mensajes de WhatsApp y sus respuestas y envía la clave 3ms
+     ✓ consultas reales: solo intenta las rutas previstas y valida sus datos 2ms
+     ✓ JSON inválido y errores fuera de contrato producen errores públicos de contrato 3ms
+ ✓ |web| src/cliente/historialWa.test.tsx (9 tests) 120ms
+ ✓ |web| src/cliente/conversacion.test.tsx (2 tests) 759ms
+   ✓ la vista envía por el almacén y acumula la respuesta sin consultar lecturas de conversación  751ms
+ ✓ |web| src/rutas.test.tsx (10 tests) 918ms
+     ✓ Cada ruta renderiza: /web  407ms
+ ❯ |web| src/vistas/vistas.test.tsx (14 tests | 1 failed) 2272ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo  473ms
+     ✓ Flow fuera de alcance: no captura ni repite valores de los campos 8ms
+     ✓ Interfaz guiada por la siguiente pregunta: exactamente tres opciones y su payload 81ms
+     ✓ Registrar llegada desde la cita: copia el token elegido y el canal clinica, sin un comando en la lectura 188ms
+     ✓ Selección de catálogo en call center: copia los IDs de otra oferta y envía servicio antes de sede 106ms
+     ✓ reintenta solo la sede pendiente y conserva su clave después de seleccionar el servicio 234ms
+     ✓ Ficha del call center: muestra teléfono enmascarado y datos públicos 94ms
+     × recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales 332ms
+     ✓ Estado desde el cliente y QR con token, no con folio 42ms
+     ✓ la web muestra cotización y código de continuación sin cambiar el Flujo A 174ms
+     ✓ solo la bandeja de demo muestra el OTP simulado 45ms
+     ✓ permite escribir texto fuera del guion y muestra ayuda sin avanzar 295ms
+     ✓ el reintento de una acción desde la vista conserva la clave de idempotencia 146ms
+     ✓ Estados de carga y error: explica el fallo sin mostrar detalles internos 50ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/cliente/cliente.test.ts > Cliente simulado > Continuidad simulada: cambia a WhatsApp y retoma en horario
+AssertionError: expected undefined to match object { Object (tipo, casilla) }
+
+- Expected: 
+{
+  "casilla": "horario",
+  "tipo": "PREGUNTA",
+}
+
++ Received: 
+undefined
+
+ ❯ src/cliente/cliente.test.ts:97:44
+     95|     await cliente.enviarMensajeWa({ waId: '5210000000001', payloadBoto…
+     96|     const conversacion = GUION_FLUJO_A[3]!;
+     97|     expect(conversacion.siguientePregunta).toMatchObject({ tipo: 'PREG…
+       |                                            ^
+     98|     expect(conversacion.mensajes[0]).toMatchObject({ tipo: 'texto', te…
+     99|     expect(cliente.demo.paso().id).toBe('CONTINUAR_WA');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  |web| src/vistas/vistas.test.tsx > Vistas del guion > recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales
+TestingLibraryElementError: Unable to find an element with the text: Continuar por WhatsApp. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"noki · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mnoki[0m
+        [36m</a>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mSalud Digna · HackaTec[0m
+        [36m</span>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<ul>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mWeb[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33maria-current[39m=[32m"page"[39m
+              [33mclass[39m=[32m"active"[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mWhatsApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/app"[39m
+            [36m>[39m
+              [0mApp[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/callcenter"[39m
+            [36m>[39m
+              [0mCall Center[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/clinica"[39m
+            [36m>[39m
+              [0mClínica[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/admin"[39m
+            [36m>[39m
+              [0mAdmin[0m
+            [36m</a>[39m
+          [36m</li>[39m
+          [36m<li>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m""[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/bandeja"[39m
+            [36m>[39m
+              [0mBandeja[0m
+            [36m</a>[39m
+          [36m</li>[39m
+        [36m</ul>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"control-demo"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mrole[39m=[32m"status"[39m
+          [36m>[39m
+            [0mPaso [0m
+            [0m4[0m
+            [0m de [0m
+            [0m9[0m
+            [0m · [0m
+            [0mContinuación en WhatsApp[0m
+          [36m</p>[39m
+          [36m<button[39m
+            [33mtype[39m=[32m"button"[39m
+          [36m>[39m
+            [0mReiniciar guion[0m
+          [36m</button>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mWhatsApp[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"introduccion"[39m
+        [36m>[39m
+          [0mTu atención continúa donde la dejaste.[0m
+        [36m</p>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"conversacion"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Conversación simulada"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<p>[39m
+                [0mCONTINUAR •••• WhatsApp[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0mRetomamos en el horario. Tu paquete y la sede Tepic ya están elegidos.[0m
+                [36m</p>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<article[39m
+                [33mclass[39m=[32m"mensaje-bot"[39m
+              [36m>[39m
+                [36m<p>[39m
+                  [0m¿Qué horario prefieres?[0m
+                [36m</p>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"acciones"[39m
+                [36m>[39m
+                  [36m<button[39m
+                    [33mtype[39m=[32m"button"[39m
+                  [36m>[39m
+                    [0mVer horarios[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</article>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"enviar-mensaje"[39m
+          [36m>[39m
+            [36m<label[39m
+              [33mfor[39m=[32m"mensaje-wa"[39m
+            [36m>[39m
+              [0mMensaje[0m
+            [36m</label>[39m
+            [36m<div>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"off"[39m
+                [33mid[39m=[32m"mensaje-wa"[39m
+                [33mplaceholder[39m=[32m"Escribe un mensaje de demo"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<button[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mEnviar[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/vistas/vistas.test.tsx:141:19
+    139|     await usuario.click(screen.getByRole('link', { name: 'WhatsApp' })…
+    140|     expect(await screen.findByText(/Retomamos en el horario/)).toBeDef…
+    141|     expect(screen.getByText('Continuar por WhatsApp', { exact: true })…
+       |                   ^
+    142|     await usuario.click(await screen.findByRole('button', { name: 'Ver…
+    143|     await usuario.click(await screen.findByRole('button', { name: 'Jue…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 5 passed (7)
+      Tests  2 failed | 61 passed (63)
+   Start at  08:51:58
+   Duration  10.70s (transform 2.54s, setup 0ms, import 14.57s, tests 4.89s, environment 30.71s)
+

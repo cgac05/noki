@@ -1,0 +1,68 @@
+$ tsc --project tests/tsconfig.json && vitest run --project unitarios --project web
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |unitarios| tests/unit/workspace.test.ts (3 tests) 14ms
+ ✓ |unitarios| tests/unit/nucleo/politica.test.ts (15 tests) 18ms
+ ✓ |unitarios| tests/unit/contratos.test.ts (7 tests) 33ms
+ ✓ |unitarios| tests/unit/nucleo/adaptadores.test.ts (5 tests) 18ms
+ ✓ |unitarios| tests/unit/nucleo/tramite.test.ts (6 tests) 20ms
+ ✓ |unitarios| tests/unit/nucleo/casosTramite.test.ts (12 tests) 83ms
+ ✓ |unitarios| tests/unit/consultas.test.ts (17 tests) 130ms
+ ✓ |unitarios| tests/unit/nucleo/siguientePregunta.test.ts (3 tests) 16ms
+ ✓ |unitarios| tests/unit/persistencia/folios.test.ts (1 test) 12ms
+ ✓ |unitarios| tests/unit/dominio.test.ts (4 tests) 20ms
+ ✓ |unitarios| tests/unit/persistencia/agenda.test.ts (1 test) 14ms
+ ✓ |unitarios| tests/unit/persistencia/relay.test.ts (1 test) 16ms
+ ✓ |unitarios| tests/unit/puertos.test.ts (3 tests) 13ms
+ ✓ |unitarios| packages/adapters/in-http/test/siguientePregunta.test.ts (1 test) 15ms
+ ✓ |unitarios| tests/unit/persistencia/instantanea.test.ts (1 test) 13ms
+ ✓ |unitarios| tests/unit/nucleo/registroTipos.test.ts (4 tests) 12ms
+ ✓ |unitarios| tests/unit/persistencia/puertos.test.ts (1 test) 11ms
+ ✓ |unitarios| tests/unit/nucleo/agendar.test.ts (1 test) 9ms
+ ✓ |unitarios| tests/unit/nucleo/hilo.test.ts (1 test) 7ms
+ ✓ |unitarios| packages/adapters/in-http/test/coherencia.test.ts (2 tests) 9ms
+ ✓ |unitarios| tests/unit/persistencia/particion.test.ts (1 test) 6ms
+ ✓ |web| src/vistas/red.test.ts (1 test) 525ms
+   ✓ Vistas sin acceso directo a la red: no usan fetch ni Socket.IO  522ms
+ ✓ |web| src/cliente/conversacion.test.tsx (2 tests) 1170ms
+   ✓ la vista envía por el almacén y acumula la respuesta sin consultar lecturas de conversación  1162ms
+ ✓ |web| src/vistas/realWa.test.tsx (1 test) 1293ms
+   ✓ sin API real muestra el error en la burbuja y Reintentar conserva mensaje y clave  1291ms
+ ✓ |web| src/rutas.test.tsx (10 tests) 1782ms
+     ✓ Cada ruta renderiza: /web  598ms
+     ✓ Ruta desconocida: permite volver a la portada  320ms
+ ✓ |web| src/configuracion.test.ts (2 tests) 21ms
+ ✓ |web| src/vistas/wa.test.tsx (11 tests) 5822ms
+   ✓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible  1581ms
+   ✓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo  1201ms
+   ✓ Modo real: conversa solo con POST y no muestra la insignia simulada  344ms
+   ✓ Número inválido: explica el patrón de 10 a 15 dígitos e impide el envío  311ms
+   ✓ Doble toque e indicador de espera: la misma opción se envía una sola vez  331ms
+   ✓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título  621ms
+   ✓ Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot  661ms
+   ✓ Call center muestra enlace y QR de continuación sin enviar ni avanzar el guion  500ms
+ ✓ |web| src/vistas/vistas.test.tsx (14 tests) 6262ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo  673ms
+     ✓ Registrar llegada desde la cita: copia el token elegido y el canal clinica, sin un comando en la lectura  434ms
+     ✓ reintenta solo la sede pendiente y conserva su clave después de seleccionar el servicio  385ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  3083ms
+     ✓ permite escribir texto fuera del guion y muestra ayuda sin avanzar  387ms
+ ✓ |web| src/cliente/cliente.test.ts (25 tests) 291ms
+ ✓ |web| src/cliente/guionWa.test.ts (2 tests) 31ms
+ ✓ |web| src/usoDemo.test.ts (2 tests) 11ms
+ ✓ |web| src/cliente/historialWa.test.tsx (9 tests) 61ms
+ ✓ |web| src/vistas/flow.test.tsx (6 tests) 7949ms
+   ✓ Envío del Flow: controles según captura y resumen enmascarado sin valores en mutaciones ni almacenamiento  2558ms
+   ✓ Campo requerido vacío: no envía y señala el campo  665ms
+   ✓ atrapa el foco con Tab y Shift+Tab entre el primer campo y Cancelar  680ms
+   ✓ Escape y valores descartados: cancela sin enviar y abre campos vacíos  1323ms
+   ✓ reintenta el Flow con la misma solicitud y clave; cerrar descarta el pendiente protegido  1454ms
+   ✓ cerrar después de un error borra los valores y elimina el reintento del historial  1266ms
+ ✓ |web| src/cliente/idempotenciaWa.test.ts (2 tests) 12ms
+
+ Test Files  34 passed (34)
+      Tests  177 passed (177)
+   Start at  09:27:58
+   Duration  20.52s (transform 5.33s, setup 0ms, import 32.67s, tests 25.72s, environment 43.23s)
+

@@ -26,9 +26,10 @@ export class ClienteReal implements ClienteApi {
     return validar(RespuestaComandoSchema, await this.solicitar('/api/comandos', cuerpo, clave));
   }
 
-  async enviarMensajeWa(mensaje: SolicitudMensajeWa): Promise<RespuestaMensajeWa> {
+  async enviarMensajeWa(mensaje: SolicitudMensajeWa, opciones: { idempotencyKey?: string } = {}): Promise<RespuestaMensajeWa> {
     const cuerpo = validar(SolicitudMensajeWaSchema, mensaje);
-    return validar(RespuestaMensajeWaSchema, await this.solicitar('/api/canales/wa/mensajes', cuerpo, crypto.randomUUID()));
+    const clave = validar(z.uuid(), opciones.idempotencyKey ?? crypto.randomUUID());
+    return validar(RespuestaMensajeWaSchema, await this.solicitar('/api/canales/wa/mensajes', cuerpo, clave));
   }
 
   async consultar<N extends NombreConsultaCliente>(nombre: N, parametros: ParametrosConsultaCliente<N>): Promise<RespuestaConsultaCliente<N>> {

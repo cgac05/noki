@@ -1,0 +1,12 @@
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |web| src/usoDemo.test.ts (2 tests) 10ms
+ ✓ |web| src/vistas/realWa.test.tsx (1 test) 445ms
+   ✓ sin API real muestra el error en la burbuja y Reintentar conserva mensaje y clave  443ms
+
+ Test Files  2 passed (2)
+      Tests  3 passed (3)
+   Start at  09:25:26
+   Duration  5.86s (transform 632ms, setup 0ms, import 2.09s, tests 455ms, environment 2.82s)
+
