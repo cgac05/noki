@@ -9,7 +9,15 @@
 
   Si alguna cambia, Claude actualiza los artefactos y se vuelve a pedir la autorización a ambos frentes.
 - Autorización de implementación del frente B: otorgada por `LuisMaster119` en el chat de Claude Code el 2026-11-24, en respuesta a "¿Autorizas, por el frente B, contratos-clinica-alertas con la revisión 1?". Cita: "Autorizo por B". Cubre la revisión 1 (hashes de abajo, comprobados sin cambios al registrarla), incluida la lectura vacía en `apps/web/src/cliente/mock/guionFlujoA.ts` (D5), y que lo implemente el frente A. No autoriza commits. No basta para implementar: falta la autorización del frente A.
-- Autorización de implementación del frente A: PENDIENTE. Debe cubrir expresamente la adaptación de `packages/adapters/in-http/src/rutasComandos.ts` (D5) y confirmar quién implementa.
+- Autorización de implementación del frente A: otorgada por `cgac05` (Christian Avila), co-responsable del frente A, el 2026-11-24. El mensaje lo transmitió `LuisMaster119` en el chat de Claude Code. Cita: "De acuerdo con D2 y D4 y con la rama «no disponible»; el frente A lo implementa." Cubre:
+  - la revisión 1 (hashes de abajo, comprobados sin cambios al registrarla);
+  - las decisiones D2 y D4 tal como están, sin cambios en los artefactos;
+  - la adaptación de `packages/adapters/in-http/src/rutasComandos.ts` (D5);
+  - la implementación a cargo del frente A.
+
+  No autoriza commits.
+- Estado: con ambas autorizaciones, el frente A puede implementar. Las decisiones pendientes D2 y D4 quedan confirmadas.
+- Orden de integración acordado (2026-11-24, `cgac05`): primero se integra `contratos-clinica-alertas` en `main`; después, el cambio compartido de documentación del reloj (botón «adelantar reloj» de `/admin`) hace rebase sobre él.
 - Revisión presentada: revisión 1 en la rama `feat/contratos-clinica-alertas`, sobre `main` `465f944`. SHA-256 (12 primeros caracteres): `proposal.md` d1f032430287 · `design.md` 10a58add5ab2 · `tasks.md` 5ee446f6bbb8 · `specs/contratos-canales/spec.md` 2b40e262295f · `specs/contratos-consultas/spec.md` d8d5fcff60ed. `openspec validate contratos-clinica-alertas --type change --strict --no-interactive` → válido.
 - Artefactos a leer:
   - `proposal.md`, los dos specs, `design.md` y `tasks.md`.
