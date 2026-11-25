@@ -1,0 +1,27 @@
+
+ RUN  v4.0.14 .
+
+ ✓ |web| src/cliente/guionWa.test.ts (8 tests) 179ms
+ ✓ |web| src/cliente/cliente.test.ts (25 tests) 417ms
+ ✓ |web| src/vistas/clinicaAlertas.test.tsx (9 tests) 3018ms
+     ✓ muestra dos turnos y respeta el orden recibido aunque las posiciones estén invertidas o ausentes  476ms
+     ✓ confirma la INE una sola vez sin capturar datos y conserva la marca tras otra acción fallida  447ms
+     ✓ cancela con botón o Escape sin enviar y mantiene Tab dentro del diálogo  557ms
+     ✓ reintenta una operación no disponible con la misma clave sin bloquear otra tarjeta  519ms
+     ✓ muestra vacío junto con el resto del tablero  324ms
+ ✓ |web| src/vistas/consolas.test.tsx (16 tests) 3741ms
+     ✓ inicia con ANI de demo, valida el formato y descarta la captura al mostrar la ficha  1131ms
+     ✓ exige consentimiento, envía una sola solicitud con doble clic y muestra el código de la lectura  504ms
+     ✓ permite reintentar la continuación fallida con la misma clave  461ms
+     ✓ en pestaña real nueva espera una llamada y cambia de sala solo con el hilo activo  506ms
+ ✓ |web| src/vistas/vistas.test.tsx (15 tests) 4886ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo  397ms
+     ✓ reintenta solo la sede pendiente y conserva su clave después de seleccionar el servicio  323ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  2579ms
+
+ Test Files  5 passed (5)
+      Tests  73 passed (73)
+   Start at  22:36:45
+   Duration  13.45s (transform 3.23s, setup 0ms, import 12.41s, tests 12.24s, environment 22.15s)
+
+Exit code: 0

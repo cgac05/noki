@@ -1,8 +1,31 @@
-import { expect, it } from 'vitest';
+import { expect, it, vi } from 'vitest';
 import { ClienteMock } from './mock/ClienteMock.ts';
-import { GUION_FLUJO_A } from './mock/guionFlujoA.ts';
+import { GUION_FLUJO_A, IDS } from './mock/guionFlujoA.ts';
 import { CONTACTO_DEMO } from './ClienteApi.ts';
 import { RespuestaComandoSchema } from '@noki/contracts';
+
+it('Turno y cierre en clínica completan los 14 pasos con respuestas del contrato', async () => {
+  expect(GUION_FLUJO_A).toHaveLength(14);
+  const cliente = new ClienteMock({ latenciaMs: 0 });
+  const fila = vi.fn();
+  cliente.suscribir('sede:fila', fila);
+  for (const paso of GUION_FLUJO_A.slice(1)) {
+    if (paso.espera?.tipo === 'comando') expect(RespuestaComandoSchema.safeParse(await cliente.enviarComando(paso.espera.comando)).success).toBe(true);
+    else if (paso.espera?.tipo === 'comandos') for (const comando of paso.espera.comandos) await cliente.enviarComando(comando);
+    else if (paso.espera?.tipo === 'wa') await cliente.enviarMensajeWa(paso.espera.mensaje);
+    expect(await cliente.consultar('alertasSeguridad', {})).toEqual([]);
+    if (paso.paso.id === 'EN_CLINICA') expect(await cliente.consultar('llegadasSede', { sedeId: IDS.sede })).toMatchObject([{ registrada: true, posicion: 1 }]);
+    if (paso.paso.id === 'EN_CLINICA') expect(fila).toHaveBeenLastCalledWith({ tramiteId: IDS.tramite, posicion: 1 });
+  }
+  expect(cliente.demo.paso().id).toBe('ATENDIDA');
+  expect(await cliente.consultar('llegadasSede', { sedeId: IDS.sede })).toEqual([]);
+  expect(await cliente.consultar('citasPaciente', { pacienteId: IDS.paciente })).toMatchObject([{ tramite: { estado: 'ATENDIDA' } }]);
+  const linea = await cliente.consultar('lineaTiempo', { hiloId: IDS.hilo });
+  expect(linea.at(-1)).toMatchObject({ tipo: 'AtencionCerrada', canal: 'clinica' });
+  expect(linea.filter(evento => evento.canal === 'clinica').map(evento => evento.tipo)).toEqual(['CanalCambiado', 'PacienteLlego', 'AtencionCerrada']);
+  const llegada = GUION_FLUJO_A.findIndex(paso => paso.paso.id === 'EN_CLINICA');
+  expect(GUION_FLUJO_A[llegada + 1]?.espera).toMatchObject({ tipo: 'comando', comando: { tipo: 'CerrarAtencion' } });
+});
 
 async function verificar() {
   const cliente = new ClienteMock({ latenciaMs: 0 });
@@ -46,7 +69,7 @@ it('Flow incompleto: responde con ayuda y no avanza con el requerido vacío', as
   expect(respuesta.mensajes[0]?.tipo).toBe('texto'); expect(cliente.demo.paso().id).toBe('IDENTIFICACION_FECHA');
 });
 it('identifica en WhatsApp por destinatario, candidato y fecha con pistas válidas; el asesor no pide paciente', async () => {
-  expect(GUION_FLUJO_A).toHaveLength(13);
+  expect(GUION_FLUJO_A).toHaveLength(14);
   for (const [id, paso] of [['IDENTIFICACION_DESTINATARIO', 'DESTINATARIO'], ['IDENTIFICACION_CONFIRMAR', 'CONFIRMAR'], ['IDENTIFICACION_FECHA', 'FECHA_NAC']]) {
     const fixture = GUION_FLUJO_A.find(dato => String(dato.paso.id) === id)!;
     expect(RespuestaComandoSchema.parse(fixture.respuesta).siguientePregunta).toMatchObject({ tipo: 'PREGUNTA', casilla: 'paciente', pista: { paso } });

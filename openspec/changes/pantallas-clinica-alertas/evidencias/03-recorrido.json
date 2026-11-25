@@ -1,0 +1,104 @@
+{
+  "modo": "mock",
+  "navegador": "ChatGPT in-app browser",
+  "recorridos": [
+    {
+      "viewportSolicitado": {
+        "ancho": 375,
+        "alto": 812
+      },
+      "accionesObservadas": [
+        "Llamada entrante",
+        "Cotizar paquete en Tepic",
+        "Consentimiento y continuación por WhatsApp",
+        "Retomar en horario",
+        "Elegir Jueves 26 · 09:15",
+        "Revisar cita",
+        "Para mí",
+        "Soy Ana P.",
+        "Flow protegido con fecha ficticia",
+        "Confirmar cita",
+        "App con QR",
+        "Registrar llegada y Turno 1",
+        "INE verificada y Confirmar",
+        "Identidad comprobada",
+        "Cerrar atención",
+        "Paso 15 de 15 · Atención cerrada",
+        "Admin: Sin alertas de seguridad y AtencionCerrada"
+      ],
+      "capturas": [
+        "03-clinica-375.jpg",
+        "03-dialogo-375.jpg",
+        "03-identidad-375.jpg",
+        "03-cerrada-375.jpg",
+        "03-admin-375.jpg"
+      ]
+    },
+    {
+      "viewportSolicitado": {
+        "ancho": 1280,
+        "alto": 900
+      },
+      "accionesObservadas": [
+        "Llamada entrante",
+        "Cotizar paquete en Tepic",
+        "Consentimiento y continuación por WhatsApp",
+        "Retomar en horario",
+        "Elegir Jueves 26 · 09:15",
+        "Revisar cita",
+        "Para mí",
+        "Soy Ana P.",
+        "Flow protegido con fecha ficticia",
+        "Confirmar cita",
+        "App con QR",
+        "Registrar llegada y Turno 1",
+        "INE verificada y Confirmar",
+        "Identidad comprobada",
+        "Cerrar atención",
+        "Paso 15 de 15 · Atención cerrada",
+        "Admin: Sin alertas de seguridad y AtencionCerrada"
+      ],
+      "capturas": [
+        "03-clinica-1280.jpg",
+        "03-dialogo-1280.jpg",
+        "03-identidad-1280.jpg",
+        "03-cerrada-1280.jpg",
+        "03-admin-1280.jpg"
+      ]
+    }
+  ],
+  "medicionesFinales": [
+    {
+      "alertas": "Alertas de seguridadSin alertas de seguridad",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "paso": "Paso 15 de 15 · Atención cerrada",
+      "ruta": "/admin",
+      "sinDesplazamientoHorizontal": true,
+      "ultimoEvento": "AtencionCerrada"
+    },
+    {
+      "alertas": "Alertas de seguridadSin alertas de seguridad",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "paso": "Paso 15 de 15 · Atención cerrada",
+      "ruta": "/admin",
+      "sinDesplazamientoHorizontal": true,
+      "ultimoEvento": "AtencionCerrada"
+    }
+  ],
+  "foco": {
+    "ancho": 375,
+    "inicial": "Confirmar",
+    "shiftTab": "Cancelar",
+    "tab": "Confirmar",
+    "trasEscape": {
+      "dialogosAbiertos": 0,
+      "foco": "INE verificada",
+      "paso": "Paso 13 de 15 · Llegada registrada · Clínica"
+    }
+  },
+  "erroresConsola": []
+}

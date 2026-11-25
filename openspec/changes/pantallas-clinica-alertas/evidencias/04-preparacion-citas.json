@@ -1,0 +1,109 @@
+{
+  "modo": "real",
+  "apiBase": "main 71f01f5 sin modificaciones",
+  "baseDatos": "demo local",
+  "metodo": "Comandos de call center y opciones reales de WhatsApp; sin SQL directo ni tokens guardados",
+  "preparacionSdMock": "Contador avanzado tres veces: el máximo folio existente era 10000002; se evitó reiniciar la base de demo",
+  "citas": [
+    {
+      "tramiteId": "01a2112d-aceb-753e-b615-b5a1a4e7287e",
+      "hiloId": "01a2106b-6b9c-7581-a6fe-f9f4534f2387",
+      "pacienteId": "019b0000-0000-7000-8000-000000000014",
+      "inicio": "2026-11-25T20:00:00.000Z",
+      "estado": "CONFIRMADA",
+      "pasos": [
+        {
+          "tipo": "IniciarTramite",
+          "estado": "BORRADOR"
+        },
+        {
+          "tipo": "AsignarPaciente",
+          "estado": "BORRADOR"
+        },
+        {
+          "tipo": "SeleccionarServicio",
+          "estado": "BORRADOR"
+        },
+        {
+          "tipo": "SeleccionarSede",
+          "estado": "COTIZADO"
+        },
+        {
+          "tipo": "SolicitarContinuacion",
+          "estado": "COTIZADO"
+        },
+        {
+          "opcion": "mié 25 nov · 09:00"
+        },
+        {
+          "opcion": "Acepto la preparación"
+        },
+        {
+          "tipo": "ReservarHorario",
+          "estado": "HORARIO_RESERVADO"
+        },
+        {
+          "tipo": "ConfirmarCita",
+          "estado": "CONFIRMADA"
+        }
+      ]
+    },
+    {
+      "tramiteId": "01a2112d-afc6-7241-b800-1152ed5ab584",
+      "hiloId": "01a2112c-eafd-734d-8d5e-fe108fde40a2",
+      "pacienteId": "019b0000-0000-7000-8000-000000000015",
+      "inicio": "2026-11-25T20:30:00.000Z",
+      "estado": "CONFIRMADA",
+      "pasos": [
+        {
+          "tipo": "IniciarTramite",
+          "estado": "BORRADOR"
+        },
+        {
+          "tipo": "AsignarPaciente",
+          "estado": "BORRADOR"
+        },
+        {
+          "tipo": "SeleccionarServicio",
+          "estado": "BORRADOR"
+        },
+        {
+          "tipo": "SeleccionarSede",
+          "estado": "COTIZADO"
+        },
+        {
+          "tipo": "SolicitarContinuacion",
+          "estado": "COTIZADO"
+        },
+        {
+          "opcion": "mié 25 nov · 09:00"
+        },
+        {
+          "opcion": "Acepto la preparación"
+        },
+        {
+          "tipo": "ReservarHorario",
+          "estado": "HORARIO_RESERVADO"
+        },
+        {
+          "tipo": "ConfirmarCita",
+          "estado": "CONFIRMADA"
+        }
+      ]
+    }
+  ],
+  "incidencias": [
+    {
+      "tramiteId": "01a2112d-aceb-753e-b615-b5a1a4e7287e",
+      "operacion": "Acepto la preparación",
+      "error": "{\"error\":{\"codigo\":\"INTERNO\",\"mensaje\":\"No se pudo completar la solicitud.\"}}",
+      "recuperacion": "ReservarHorario y ConfirmarCita en peticiones separadas del call center"
+    },
+    {
+      "tramiteId": "01a2112d-afc6-7241-b800-1152ed5ab584",
+      "operacion": "Acepto la preparación",
+      "error": "{\"error\":{\"codigo\":\"INTERNO\",\"mensaje\":\"No se pudo completar la solicitud.\"}}",
+      "recuperacion": "ReservarHorario y ConfirmarCita en peticiones separadas del call center"
+    }
+  ]
+}

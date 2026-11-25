@@ -1,0 +1,43 @@
+$ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
+
+ RUN  v4.0.14 .
+
+Reinicio de la base de demo en el host localhost.
+ ✓ |integracion| tests/integracion/semilla.test.ts (5 tests) 3848ms
+     ✓ es idempotente y guarda solo hashes argon2id verificables  1033ms
+     ✓ reinicia la base de demo, migra y deja exactamente los datos semilla  1428ms
+ ✓ |integracion| tests/integracion/comandosHttp.test.ts (3 tests) 4430ms
+   ✓ Cotizar desde el call center y reintentar por HTTP con eventos persistidos  307ms
+   ✓ Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez  1971ms
+   ✓ publica, programa y expira el hold desde la ruta del reloj con la API compuesta  801ms
+ ✓ |integracion| tests/integracion/migracionPersistencia.test.ts (3 tests) 2275ms
+   ✓ migra una base con semilla y conserva las claves anteriores y las claves con sufijo  1793ms
+ ✓ |integracion| tests/integracion/sdAgenda.test.ts (4 tests) 1207ms
+   ✓ registra de forma idempotente, rechaza entradas inválidas y simula fallos y latencia  357ms
+   ✓ se recupera tras dos fallos y señala cuando se agotan los tres intentos  801ms
+ ✓ |integracion| tests/integracion/aplicaciones.test.ts (4 tests) 1054ms
+     ✓ señala Postgres caído dentro del límite  913ms
+ ✓ |integracion| tests/integracion/identidadPostgres.test.ts (1 test) 1023ms
+   ✓ Registro concurrente y CURP con sexo X  848ms
+ ✓ |integracion| tests/integracion/temporizadoresBullMQ.test.ts (4 tests) 3616ms
+   ✓ registra el fallo persistente tras tres intentos con los campos autorizados  3225ms
+ ✓ |integracion| tests/integracion/puertosApiPostgres.test.ts (1 test) 935ms
+   ✓ Concurrencia con la misma clave, dos usos simultáneos y almacenamiento de API en Postgres  749ms
+ ✓ |integracion| tests/integracion/agendaPostgres.test.ts (3 tests) 843ms
+   ✓ acepta uno de 50 intentos concurrentes por el mismo horario y recupera el hold vencido  342ms
+ ✓ |integracion| tests/integracion/nucleo.test.ts (8 tests) 781ms
+     ✓ permite exactamente un éxito en 50 reservas concurrentes  373ms
+ ✓ |integracion| tests/integracion/consumidorStreams.test.ts (2 tests) 788ms
+   ✓ reinicia sin pérdidas ni duplicados, y procesa los grupos por separado  580ms
+ ✓ |integracion| tests/integracion/puertosPostgres.test.ts (1 test) 291ms
+ ✓ |integracion| tests/integracion/relayPostgres.test.ts (1 test) 482ms
+   ✓ no publica dos veces con dos relays y reintenta si publicó sin marcar  457ms
+ ✓ |integracion| tests/integracion/tramitePostgres.test.ts (4 tests) 356ms
+ ✓ |integracion| tests/integracion/intentosPostgres.test.ts (1 test) 247ms
+
+ Test Files  15 passed (15)
+      Tests  45 passed (45)
+   Start at  22:55:01
+   Duration  71.00s (transform 1.39s, setup 0ms, import 43.44s, tests 22.18s, environment 3ms)
+
+Exit code: 0

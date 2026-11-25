@@ -1,0 +1,4 @@
+Detector Impeccable sobre Clinica.tsx, Admin.tsx, ConfirmarIne.tsx y LlegadaClinica.tsx: [] (código 0).
+Revisión visual: 375 x 812 y 1280 x 900; se conservaron tipografía, colores, espaciado y controles existentes.
+Guía ui-ux-pro-max: búsqueda Python no disponible; se usó references/quick-reference.md (accesibilidad e interacción).
+Foco de confirmación: ver 03-foco.json.

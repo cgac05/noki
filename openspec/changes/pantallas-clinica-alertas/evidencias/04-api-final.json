@@ -1,0 +1,61 @@
+{
+  "ready": {
+    "estado": "ok",
+    "postgres": "ok",
+    "redis": "ok"
+  },
+  "contextoDemoDisponible": true,
+  "objetivos": [
+    {
+      "tramiteId": "01a2112d-aceb-753e-b615-b5a1a4e7287e",
+      "estado": "ATENDIDA",
+      "version": 11
+    },
+    {
+      "tramiteId": "01a2112d-afc6-7241-b800-1152ed5ab584",
+      "estado": "EN_CLINICA",
+      "version": 11
+    }
+  ],
+  "llegadas": [
+    {
+      "tramiteId": "01a2106b-6bb1-764c-8cfa-1695b366f222",
+      "estado": "CONFIRMADA",
+      "registrada": false
+    },
+    {
+      "tramiteId": "01a2112c-e859-77db-bc78-4fc3652089de",
+      "estado": "CONFIRMADA",
+      "registrada": false
+    },
+    {
+      "tramiteId": "01a2112d-afc6-7241-b800-1152ed5ab584",
+      "estado": "EN_CLINICA",
+      "registrada": true,
+      "posicion": 1
+    }
+  ],
+  "alertas": [
+    {
+      "tipo": "INTENTO_VERIFICACION_FALLIDO",
+      "canal": "whatsapp",
+      "ts": "2026-11-25T05:34:21.794Z",
+      "intentos": 3,
+      "bloqueado": true
+    },
+    {
+      "tipo": "INTENTO_VERIFICACION_FALLIDO",
+      "canal": "whatsapp",
+      "ts": "2026-11-25T05:34:06.274Z",
+      "intentos": 2,
+      "bloqueado": false
+    },
+    {
+      "tipo": "INTENTO_VERIFICACION_FALLIDO",
+      "canal": "whatsapp",
+      "ts": "2026-11-25T05:33:28.135Z",
+      "intentos": 1,
+      "bloqueado": false
+    }
+  ]
+}

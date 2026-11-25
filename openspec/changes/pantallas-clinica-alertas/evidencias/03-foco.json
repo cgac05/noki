@@ -1,0 +1,11 @@
+{
+  "ancho": 375,
+  "inicial": "Confirmar",
+  "shiftTab": "Cancelar",
+  "tab": "Confirmar",
+  "trasEscape": {
+    "dialogosAbiertos": 0,
+    "foco": "INE verificada",
+    "paso": "Paso 13 de 15 · Llegada registrada · Clínica"
+  }
+}

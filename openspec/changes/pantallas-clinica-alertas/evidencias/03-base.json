@@ -1,0 +1,12 @@
+{
+  "rama": "feat/pantallas-clinica-alertas",
+  "head": "e3d49ea234667c8107f0ef328a68b0ab0b6f59fc",
+  "originMain": "e3d49ea234667c8107f0ef328a68b0ab0b6f59fc",
+  "mainRemotoVerificado": "e3d49ea234667c8107f0ef328a68b0ab0b6f59fc",
+  "comandoConsulta": "git ls-remote origin refs/heads/main",
+  "condicionInicio": "HEAD coincide con main remoto y contiene contratos-clinica-alertas",
+  "preexistentesNoModificados": [
+    ".claude/launch.json"
+  ],
+  "commitsCreados": 0
+}

@@ -1,0 +1,11 @@
+{
+  "tramiteId": "01a21130-8f17-7568-b2d2-8b0e98a97d09",
+  "hiloId": "01a2106b-6b9c-7581-a6fe-f9f4534f2387",
+  "pasos": [
+    "IniciarTramite",
+    "SeleccionarServicio",
+    "SeleccionarSede",
+    "SolicitarContinuacion"
+  ],
+  "preparacion": "Retomar por WhatsApp con token de la API; no se guardó el token; continuar en UI con Hola hasta FECHA_NAC"
+}

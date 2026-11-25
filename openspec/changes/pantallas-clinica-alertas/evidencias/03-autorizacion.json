@@ -1,0 +1,32 @@
+{
+  "responsable": "LuisMaster119",
+  "revision": 1,
+  "autorizacion": "handoff.md e instrucción de implementación en esta sesión",
+  "artefactos": [
+    {
+      "ruta": "proposal.md",
+      "sha256": "8f7ba79aef6422af6fd51251d3ccf005aa0565dda9a5ce27d93697e775ab2c08",
+      "prefijoAutorizado": "8f7ba79aef64",
+      "coincide": true
+    },
+    {
+      "ruta": "design.md",
+      "sha256": "b68b07ccb8fb345dff6e34ae6009538ea92698cdf06bda8081bf754812a8a8e4",
+      "prefijoAutorizado": "b68b07ccb8fb",
+      "coincide": true
+    },
+    {
+      "ruta": "specs/consolas-internas/spec.md",
+      "sha256": "a974b21c6188aeb85079e714b27a0e83b54b777bcc6feb4a9e280e4934360f3d",
+      "prefijoAutorizado": "a974b21c6188",
+      "coincide": true
+    },
+    {
+      "ruta": "specs/cliente-api-canales/spec.md",
+      "sha256": "6c7c2d146fd6cea91b50d0196aae478cf95e230dd93614fa32c470cfab1e0d0d",
+      "prefijoAutorizado": "6c7c2d146fd6",
+      "coincide": true
+    }
+  ],
+  "tareas": "Hash inicial 7fdbe2f58166 verificado antes de escribir; posteriormente solo se actualizaron casillas."
+}

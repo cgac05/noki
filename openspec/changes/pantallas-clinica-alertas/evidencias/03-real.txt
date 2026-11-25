@@ -1,0 +1,10 @@
+Tarea 3.3: BLOQUEADO; recorrido real no ejecutado.
+Base inspeccionada: e3d49ea234667c8107f0ef328a68b0ab0b6f59fc
+packages/adapters/in-http/src/rutasComandos.ts:75-77:
+case 'ComprobarIdentidad':
+    case 'CerrarAtencion':
+      throw new NoEncontrado('operacion', id);
+
+La consulta alertasSeguridad o /api/admin/alertas aparece en rutasConsultas.ts: false
+El cambio del núcleo del frente A aún no está en esta base. No se modifican núcleo, API ni contratos.
+No integrar estas pantallas antes del núcleo o de aprobar el recorrido real, conforme al handoff.

@@ -1,0 +1,19 @@
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |web| src/vistas/clinicaAlertas.test.tsx (8 tests) 1362ms
+     ✓ muestra dos turnos y respeta el orden recibido aunque las posiciones estén invertidas o ausentes  366ms
+ ✓ |web| src/cliente/guionWa.test.ts (8 tests) 66ms
+ ✓ |web| src/vistas/vistas.test.tsx (15 tests) 3296ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  1513ms
+ ✓ |web| src/vistas/consolas.test.tsx (16 tests) 2658ms
+     ✓ inicia con ANI de demo, valida el formato y descarta la captura al mostrar la ficha  846ms
+     ✓ exige consentimiento, envía una sola solicitud con doble clic y muestra el código de la lectura  333ms
+ ✓ |web| src/cliente/cliente.test.ts (25 tests) 204ms
+
+ Test Files  5 passed (5)
+      Tests  72 passed (72)
+   Start at  23:20:26
+   Duration  23.95s (transform 915ms, setup 0ms, import 5.20s, tests 7.58s, environment 9.22s)
+
+

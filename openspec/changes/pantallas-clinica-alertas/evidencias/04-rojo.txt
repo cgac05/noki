@@ -1,0 +1,92 @@
+
+ RUN  v4.0.14 <repo>
+
+ ❯ |web| src/vistas/clinicaAlertas.test.tsx (8 tests | 1 failed) 1411ms
+     ✓ muestra dos turnos y respeta el orden recibido aunque las posiciones estén invertidas o ausentes  329ms
+     × ofrece solo cerrar la atención sin verificación adicional 108ms
+     ✓ reintenta un error al cerrar con la misma clave sin bloquear otra tarjeta  348ms
+     ✓ cierra una sola vez con doble clic y espera la nueva lectura para avanzar la fila 119ms
+     ✓ muestra canal, hora local, intentos y bloqueo en el orden recibido sin IDs ni datos extra 76ms
+     ✓ muestra vacío junto con el resto del tablero 99ms
+     ✓ un 404 ofrece reintento sin ocultar métricas ni línea de tiempo 247ms
+     ✓ refresca las alertas con un evento de admin sin recargar 82ms
+ ❯ |web| src/cliente/guionWa.test.ts (8 tests | 2 failed) 56ms
+   × Turno y cierre en clínica completan los 14 pasos con respuestas del contrato 12ms
+   ✓ rechaza la llamada sin ANI o con otro número y conserva el paso 6ms
+   ✓ mantiene versiones, números y consentimiento coherentes al insertar la continuación 3ms
+   ✓ Verificación con Flow: pide fecha protegida y habilita confirmar sin repetir los valores 21ms
+   ✓ Flow incompleto: responde con ayuda y no avanza con el requerido vacío 5ms
+   × identifica en WhatsApp por destinatario, candidato y fecha con pistas válidas; el asesor no pide paciente 3ms
+   ✓ la opción IDENTIFICACION_DESTINATARIO / OTRA_PERSONA responde ayuda sin avanzar 3ms
+   ✓ la opción IDENTIFICACION_CONFIRMAR / NINGUNO responde ayuda sin avanzar 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/cliente/guionWa.test.ts > Turno y cierre en clínica completan los 14 pasos con respuestas del contrato
+AssertionError: expected [ { …(7) }, …(14) ] to have a length of 14 but got 15
+
+- Expected
++ Received
+
+- 14
++ 15
+
+ ❯ src/cliente/guionWa.test.ts:8:25
+      6| 
+      7| it('Turno y cierre en clínica completan los 14 pasos con respuestas de…
+      8|   expect(GUION_FLUJO_A).toHaveLength(14);
+       |                         ^
+      9|   const cliente = new ClienteMock({ latenciaMs: 0 });
+     10|   const fila = vi.fn();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  |web| src/cliente/guionWa.test.ts > identifica en WhatsApp por destinatario, candidato y fecha con pistas válidas; el asesor no pide paciente
+AssertionError: expected [ { …(7) }, …(14) ] to have a length of 14 but got 15
+
+- Expected
++ Received
+
+- 14
++ 15
+
+ ❯ src/cliente/guionWa.test.ts:72:25
+     70| });
+     71| it('identifica en WhatsApp por destinatario, candidato y fecha con pis…
+     72|   expect(GUION_FLUJO_A).toHaveLength(14);
+       |                         ^
+     73|   for (const [id, paso] of [['IDENTIFICACION_DESTINATARIO', 'DESTINATA…
+     74|     const fixture = GUION_FLUJO_A.find(dato => String(dato.paso.id) ==…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  |web| src/vistas/clinicaAlertas.test.tsx > Fila y acciones de recepción con ClienteReal > ofrece solo cerrar la atención sin verificación adicional
+AssertionError: expected [ 'INE verificada', …(3) ] to deeply equal [ Array(2) ]
+
+- Expected
++ Received
+
+  [
++   "INE verificada",
+    "Cerrar atención",
++   "INE verificada",
+    "Cerrar atención",
+  ]
+
+ ❯ src/vistas/clinicaAlertas.test.tsx:60:75
+     58|     const { usuario, post } = preparar();
+     59|     await screen.findByText('Turno 1');
+     60|     expect(screen.getAllByRole('button').map(boton => boton.textConten…
+       |                                                                           ^
+     61|     expect(screen.queryByText('Identidad comprobada')).toBeNull();
+     62|     await usuario.click(screen.getAllByRole('button', { name: 'Cerrar …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  3 failed | 13 passed (16)
+   Start at  23:18:37
+   Duration  8.41s (transform 694ms, setup 0ms, import 2.26s, tests 1.47s, environment 3.81s)
+
+

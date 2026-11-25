@@ -1,0 +1,131 @@
+{
+  "changeName": "pantallas-clinica-alertas",
+  "changeDir": "<repo>\\openspec\\changes\\pantallas-clinica-alertas",
+  "schemaName": "spec-driven",
+  "contextFiles": {
+    "proposal": [
+      "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\proposal.md"
+    ],
+    "specs": [
+      "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\specs\\cliente-api-canales\\spec.md",
+      "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\specs\\consolas-internas\\spec.md"
+    ],
+    "design": [
+      "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\design.md"
+    ],
+    "tasks": [
+      "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\tasks.md"
+    ]
+  },
+  "progress": {
+    "total": 13,
+    "complete": 13,
+    "remaining": 0
+  },
+  "tasks": [
+    {
+      "id": "1",
+      "description": "1.1 Escribir en rojo, con `ClienteReal` y `fetch` falso, las pruebas de CI:",
+      "done": true,
+      "sourcePath": "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\tasks.md",
+      "line": 9
+    },
+    {
+      "id": "2",
+      "description": "1.2 Implementar D1–D3 en `Clinica.tsx` y los componentes necesarios. Verificar: las pruebas de 1.1 pasan; ningún envío lleva datos de la INE; el diálogo atrapa el foco y se cierra con Escape sin enviar.",
+      "done": true,
+      "sourcePath": "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\tasks.md",
+      "line": 15
+    },
+    {
+      "id": "3",
+      "description": "1.3 Punto de control: `pnpm lint`, `pnpm lint:deps` y `pnpm test` con código 0; `evidencias/01-{lint,deps,test}.txt`.",
+      "done": true,
+      "sourcePath": "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\tasks.md",
+      "line": 16
+    },
+    {
+      "id": "4",
+      "description": "2.1 Escribir en rojo las pruebas de CI «Alertas de seguridad en el tablero» (alerta con bloqueo, sin alertas, consulta no disponible sin ocultar el resto, refresco con eventos de `admin`) y de CA «Guion simulado del Flujo A» («Turno en la clínica», «INE y cierre en la clínica»). Verificar: fallan; `evidencias/02-rojo.txt`.",
+      "done": true,
+      "sourcePath": "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\tasks.md",
+      "line": 20
+    },
+    {
+      "id": "5",
+      "description": "2.2 Implementar D4 en `Admin.tsx` y D5 en `cliente/mock/guionFlujoA.ts`. Actualizar el recorrido de `vistas.test.tsx` y `guionWa.test.ts` hasta los 15 pasos. Verificar: pruebas en verde; cada respuesta y evento del guion cumple su esquema.",
+      "done": true,
+      "sourcePath": "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\tasks.md",
+      "line": 21
+    },
+    {
+      "id": "6",
+      "description": "2.3 Actualizar `apps/web/README.md`: fila, «INE verificada», «Cerrar atención», alertas, pasos nuevos del guion, y que en real dependen del núcleo del frente A. Verificar: revisión del texto frente a D1–D5.",
+      "done": true,
+      "sourcePath": "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\tasks.md",
+      "line": 22
+    },
+    {
+      "id": "7",
+      "description": "2.4 Punto de control: `pnpm lint`, `pnpm lint:deps` y `pnpm test` con código 0; `evidencias/02-{lint,deps,test}.txt`.",
+      "done": true,
+      "sourcePath": "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\tasks.md",
+      "line": 23
+    },
+    {
+      "id": "8",
+      "description": "3.1 Recorrido en navegador del Flujo A simulado completo, a 375 px y 1280 px, hasta «Atención cerrada», con `/admin` mostrando «Sin alertas de seguridad». Verificar: capturas `evidencias/03-*.jpg` y JSON del recorrido, sin desplazamiento horizontal.",
+      "done": true,
+      "sourcePath": "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\tasks.md",
+      "line": 27
+    },
+    {
+      "id": "9",
+      "description": "3.2 Control final sobre la rama rebasada en `main` vigente: `pnpm lint`, `pnpm lint:deps`, `pnpm test`, `pnpm test:integracion` y `VITE_API=real VITE_DEMO=true pnpm --filter @noki/web build` con código 0. Verificar: `evidencias/03-*.txt` y el manifiesto `evidencias/03-archivos-entregados.json`, sin cambios fuera de `apps/web/**` y la carpeta del cambio.",
+      "done": true,
+      "sourcePath": "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\tasks.md",
+      "line": 28
+    },
+    {
+      "id": "10",
+      "description": "4.1 Escribir en rojo las pruebas de CI «Cierre de atención en clínica» (escenarios «Error al cerrar» y «Sin INE verificada») y de CA «Guion simulado del Flujo A» («Cierre en la clínica», con 14 pasos y sin `ComprobarIdentidad`). Verificar: fallan con la implementación de la revisión 1; `evidencias/04-rojo.txt`.",
+      "done": true,
+      "sourcePath": "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\tasks.md",
+      "line": 33
+    },
+    {
+      "id": "11",
+      "description": "4.2 Retirar «INE verificada» según D2, D3 y D5:",
+      "done": true,
+      "sourcePath": "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\tasks.md",
+      "line": 34
+    },
+    {
+      "id": "12",
+      "description": "4.3 Punto de control sobre `main` `71f01f5` o posterior: `pnpm lint`, `pnpm lint:deps`, `pnpm test`, `pnpm test:integracion` y `VITE_API=real VITE_DEMO=true pnpm --filter @noki/web build` con código 0; `evidencias/04-{lint,deps,test,integracion,build}.txt`.",
+      "done": true,
+      "sourcePath": "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\tasks.md",
+      "line": 40
+    },
+    {
+      "id": "13",
+      "description": "4.4 Recorrido real a 375 px y 1280 px, con la API de `main` (`DEMO_MODE=true`, Postgres y Redis locales) y la web con `VITE_API=real` y `VITE_DEMO=true`:",
+      "done": true,
+      "sourcePath": "<repo>\\openspec\\changes\\pantallas-clinica-alertas\\tasks.md",
+      "line": 41
+    }
+  ],
+  "taskTrackingConfigured": true,
+  "state": "all_done",
+  "instruction": "All tasks are complete! This change is ready to be archived.\nConsider running tests and reviewing the changes before archiving.",
+  "context": "Escribe los artefactos en español y conserva los encabezados y palabras\nnormativas que el esquema exige para validación.\nClaude Code analiza, planifica y revisa; Codex implementa y prueba;\nel usuario autoriza el alcance y el cierre.\nLee docs/colaboracion-openspec.md para el protocolo y los formatos persistentes,\nCLAUDE.md o AGENTS.md para el rol y PLAN.md para las restricciones del proyecto.\nPrioriza el Flujo A estable. Los artefactos aprobados son la fuente de verdad\ndel alcance; ante contradicciones con las reglas del proyecto, consulta al usuario.\n",
+  "operationGuidance": [
+    "Sigue AGENTS.md y el handoff del cambio; comprueba la autorización existente del usuario sin pedirla otra vez cuando ya cubra ese alcance y revisión.",
+    "Actualiza las tareas solo con evidencia y entrega implementacion.md según la guía compartida; devuelve a Claude los cambios de planificación que requieran autorización."
+  ],
+  "root": {
+    "path": "<repo>",
+    "source": "nearest"
+  }
+}
+

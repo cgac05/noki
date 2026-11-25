@@ -1,0 +1,3187 @@
+
+ RUN  v4.0.14 .
+
+ ❯ |web| src/cliente/guionWa.test.ts (8 tests | 1 failed) 52ms
+   × Turno e INE y cierre en clínica completan los 15 pasos con respuestas del contrato 15ms
+   ✓ rechaza la llamada sin ANI o con otro número y conserva el paso 9ms
+   ✓ mantiene versiones, números y consentimiento coherentes al insertar la continuación 2ms
+   ✓ Verificación con Flow: pide fecha protegida y habilita confirmar sin repetir los valores 15ms
+   ✓ Flow incompleto: responde con ayuda y no avanza con el requerido vacío 3ms
+   ✓ identifica en WhatsApp por destinatario, candidato y fecha con pistas válidas; el asesor no pide paciente 2ms
+   ✓ la opción IDENTIFICACION_DESTINATARIO / OTRA_PERSONA responde ayuda sin avanzar 2ms
+   ✓ la opción IDENTIFICACION_CONFIRMAR / NINGUNO responde ayuda sin avanzar 2ms
+ ❯ |web| src/vistas/clinicaAlertas.test.tsx (9 tests | 4 failed) 5623ms
+     ✓ muestra dos turnos y respeta el orden recibido aunque las posiciones estén invertidas o ausentes  390ms
+     ✓ confirma la INE una sola vez sin capturar datos y conserva la marca tras otra acción fallida 293ms
+     ✓ cancela con botón o Escape sin enviar y mantiene Tab dentro del diálogo  419ms
+     ✓ reintenta una operación no disponible con la misma clave sin bloquear otra tarjeta  327ms
+     ✓ cierra una sola vez con doble clic y espera la nueva lectura para avanzar la fila 102ms
+     × muestra canal, hora local, intentos y bloqueo en el orden recibido sin IDs ni datos extra 1032ms
+     × muestra vacío junto con el resto del tablero 1022ms
+     × un 404 ofrece reintento sin ocultar métricas ni línea de tiempo 1021ms
+     × refresca las alertas con un evento de admin sin recargar 1015ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/cliente/guionWa.test.ts > Turno e INE y cierre en clínica completan los 15 pasos con respuestas del contrato
+AssertionError: expected [ { …(7) }, …(12) ] to have a length of 15 but got 13
+
+- Expected
++ Received
+
+- 15
++ 13
+
+ ❯ src/cliente/guionWa.test.ts:8:25
+      6| 
+      7| it('Turno e INE y cierre en clínica completan los 15 pasos con respues…
+      8|   expect(GUION_FLUJO_A).toHaveLength(15);
+       |                         ^
+      9|   const cliente = new ClienteMock({ latenciaMs: 0 });
+     10|   const fila = vi.fn();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  |web| src/vistas/clinicaAlertas.test.tsx > Alertas de seguridad con ClienteReal > muestra canal, hora local, intentos y bloqueo en el orden recibido sin IDs ni datos extra
+TestingLibraryElementError: Unable to find role="list" and name "Alertas de seguridad"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                EN_CLINICA
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Cambios de canal
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Datos repetidos
+              </dt>
+              <dd>
+                0
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ServicioSeleccionado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:02:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:02
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                SedeSeleccionada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:03:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:03
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CotizacionGenerada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:04:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:04
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ConsentimientoContactoWA
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:05:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:05
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:06:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:06
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                RequisitoCumplido
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:07:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:07
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                HorarioReservado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:08:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:08
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                DestinatarioDeclarado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:09:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:09
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                IdentidadComprobada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:10:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:10
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CitaConfirmada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:11:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:11
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                App
+              </span>
+              <time
+                datetime="2026-11-24T15:12:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:12
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:13:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:13
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                PacienteLlego
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:14:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:14
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                EN_CLINICA
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Cambios de canal
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Datos repetidos
+              </dt>
+              <dd>
+                0
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ServicioSeleccionado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:02:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:02
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                SedeSeleccionada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:03:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:03
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CotizacionGenerada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:04:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:04
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ConsentimientoContactoWA
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:05:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:05
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:06:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:06
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                RequisitoCumplido
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:07:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:07
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                HorarioReservado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:08:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:08
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                DestinatarioDeclarado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:09:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:09
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                IdentidadComprobada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:10:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:10
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CitaConfirmada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:11:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:11
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                App
+              </span>
+              <time
+                datetime="2026-11-24T15:12:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:12
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:13:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:13
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                PacienteLlego
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:14:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:14
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/clinicaAlertas.test.tsx:127:32
+    125|     ];
+    126|     Object.assign(lecturas.alertasSeguridad[0]!, { telefono: 'dato aje…
+    127|     const lista = await screen.findByRole('list', { name: 'Alertas de …
+       |                                ^
+    128|     const filas = within(lista).getAllByRole('listitem');
+    129|     expect(filas[0]!.textContent).toContain('WhatsApp'); expect(filas[…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  |web| src/vistas/clinicaAlertas.test.tsx > Alertas de seguridad con ClienteReal > muestra vacío junto con el resto del tablero
+TestingLibraryElementError: Unable to find an element with the text: Sin alertas de seguridad. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                EN_CLINICA
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Cambios de canal
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Datos repetidos
+              </dt>
+              <dd>
+                0
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ServicioSeleccionado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:02:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:02
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                SedeSeleccionada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:03:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:03
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CotizacionGenerada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:04:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:04
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ConsentimientoContactoWA
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:05:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:05
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:06:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:06
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                RequisitoCumplido
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:07:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:07
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                HorarioReservado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:08:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:08
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                DestinatarioDeclarado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:09:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:09
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                IdentidadComprobada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:10:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:10
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CitaConfirmada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:11:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:11
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                App
+              </span>
+              <time
+                datetime="2026-11-24T15:12:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:12
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:13:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:13
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                PacienteLlego
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:14:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:14
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                EN_CLINICA
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Cambios de canal
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Datos repetidos
+              </dt>
+              <dd>
+                0
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ServicioSeleccionado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:02:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:02
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                SedeSeleccionada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:03:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:03
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CotizacionGenerada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:04:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:04
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ConsentimientoContactoWA
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:05:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:05
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:06:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:06
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                RequisitoCumplido
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:07:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:07
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                HorarioReservado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:08:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:08
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                DestinatarioDeclarado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:09:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:09
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                IdentidadComprobada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:10:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:10
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CitaConfirmada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:11:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:11
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                App
+              </span>
+              <time
+                datetime="2026-11-24T15:12:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:12
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:13:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:13
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                PacienteLlego
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:14:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:14
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/clinicaAlertas.test.tsx:137:25
+    135|   it('muestra vacío junto con el resto del tablero', async () => {
+    136|     preparar('/admin');
+    137|     expect(await screen.findByText('Sin alertas de seguridad')).toBeDe…
+       |                         ^
+    138|     expect(screen.getByRole('heading', { name: 'Trámites por estado' }…
+    139|     expect(screen.getByRole('heading', { name: 'Indicadores disponible…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  |web| src/vistas/clinicaAlertas.test.tsx > Alertas de seguridad con ClienteReal > un 404 ofrece reintento sin ocultar métricas ni línea de tiempo
+TestingLibraryElementError: Unable to find role="alert"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                EN_CLINICA
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Cambios de canal
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Datos repetidos
+              </dt>
+              <dd>
+                0
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ServicioSeleccionado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:02:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:02
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                SedeSeleccionada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:03:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:03
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CotizacionGenerada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:04:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:04
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ConsentimientoContactoWA
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:05:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:05
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:06:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:06
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                RequisitoCumplido
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:07:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:07
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                HorarioReservado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:08:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:08
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                DestinatarioDeclarado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:09:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:09
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                IdentidadComprobada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:10:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:10
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CitaConfirmada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:11:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:11
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                App
+              </span>
+              <time
+                datetime="2026-11-24T15:12:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:12
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:13:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:13
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                PacienteLlego
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:14:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:14
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                EN_CLINICA
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Cambios de canal
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Datos repetidos
+              </dt>
+              <dd>
+                0
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ServicioSeleccionado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:02:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:02
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                SedeSeleccionada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:03:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:03
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CotizacionGenerada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:04:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:04
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ConsentimientoContactoWA
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:05:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:05
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:06:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:06
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                RequisitoCumplido
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:07:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:07
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                HorarioReservado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:08:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:08
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                DestinatarioDeclarado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:09:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:09
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                IdentidadComprobada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:10:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:10
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CitaConfirmada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:11:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:11
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                App
+              </span>
+              <time
+                datetime="2026-11-24T15:12:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:12
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:13:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:13
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                PacienteLlego
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:14:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:14
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/clinicaAlertas.test.tsx:144:25
+    142|   it('un 404 ofrece reintento sin ocultar métricas ni línea de tiempo'…
+    143|     const { fallarAlertas, usuario } = preparar('/admin'); fallarAlert…
+    144|     expect(await screen.findByRole('alert')).toHaveProperty('textConte…
+       |                         ^
+    145|     expect(screen.getByRole('heading', { name: 'Trámites por estado' }…
+    146|     expect(screen.getByRole('heading', { name: 'Indicadores disponible…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  |web| src/vistas/clinicaAlertas.test.tsx > Alertas de seguridad con ClienteReal > refresca las alertas con un evento de admin sin recargar
+TestingLibraryElementError: Unable to find an element with the text: Sin alertas de seguridad. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                EN_CLINICA
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Cambios de canal
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Datos repetidos
+              </dt>
+              <dd>
+                0
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ServicioSeleccionado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:02:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:02
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                SedeSeleccionada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:03:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:03
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CotizacionGenerada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:04:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:04
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ConsentimientoContactoWA
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:05:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:05
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:06:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:06
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                RequisitoCumplido
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:07:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:07
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                HorarioReservado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:08:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:08
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                DestinatarioDeclarado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:09:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:09
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                IdentidadComprobada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:10:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:10
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CitaConfirmada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:11:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:11
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                App
+              </span>
+              <time
+                datetime="2026-11-24T15:12:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:12
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:13:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:13
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                PacienteLlego
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:14:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:14
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                EN_CLINICA
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Cambios de canal
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Datos repetidos
+              </dt>
+              <dd>
+                0
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ServicioSeleccionado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:02:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:02
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                SedeSeleccionada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:03:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:03
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CotizacionGenerada
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:04:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:04
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                ConsentimientoContactoWA
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:05:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:05
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:06:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:06
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                RequisitoCumplido
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:07:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:07
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                HorarioReservado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:08:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:08
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                DestinatarioDeclarado
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:09:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:09
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                IdentidadComprobada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:10:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:10
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CitaConfirmada
+              </strong>
+              <span>
+                WhatsApp
+              </span>
+              <time
+                datetime="2026-11-24T15:11:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:11
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                App
+              </span>
+              <time
+                datetime="2026-11-24T15:12:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:12
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                CanalCambiado
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:13:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:13
+                 UTC
+              </time>
+            </li>
+            <li>
+              <strong>
+                PacienteLlego
+              </strong>
+              <span>
+                Clínica
+              </span>
+              <time
+                datetime="2026-11-24T15:14:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:14
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/clinicaAlertas.test.tsx:153:18
+    151|   it('refresca las alertas con un evento de admin sin recargar', async…
+    152|     const { lecturas, socket, peticion } = preparar('/admin');
+    153|     await screen.findByText('Sin alertas de seguridad');
+       |                  ^
+    154|     const antes = peticion.mock.calls.filter(([url]) => String(url).en…
+    155|     lecturas.alertasSeguridad = [{ id: IDS.mensaje, tipo: 'INTENTO_VER…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  5 failed | 12 passed (17)
+   Start at  22:33:35
+   Duration  11.63s (transform 1.06s, setup 0ms, import 3.38s, tests 5.67s, environment 5.50s)
+
+Exit code: 1

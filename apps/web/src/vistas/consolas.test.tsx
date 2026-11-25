@@ -130,6 +130,7 @@ function prepararLecturas(contextoInicial?: ContextoDemo, demo = true) {
     }
     if (ruta.endsWith('/contexto')) return Response.json(contexto);
     if (ruta.endsWith('/kpis')) return Response.json(lecturas.metricas);
+    if (ruta.endsWith('/alertas')) return Response.json(lecturas.alertasSeguridad);
     if (ruta.endsWith('/llegadas')) return Response.json(lecturas.llegadasSede);
     if (ruta.endsWith('/citas')) return Response.json(lecturas.citasPaciente);
     if (ruta.endsWith('/ficha')) return Response.json({ ...lecturas.fichaHilo, hiloId: contexto.hiloId });

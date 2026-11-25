@@ -1,0 +1,57 @@
+{
+  "base": "e3d49ea234667c8107f0ef328a68b0ab0b6f59fc",
+  "archivos": [
+    {
+      "ruta": "apps/web/README.md",
+      "sha256": "de32894baa9b678dadefe87e507d3de269db3b071b6cbca19a4cbb43af55be57"
+    },
+    {
+      "ruta": "apps/web/src/cliente/cliente.test.ts",
+      "sha256": "240b731d7941c4f4dc68f838b97cc70cdf8a262cb50bb4a0b21193acfda6b94e"
+    },
+    {
+      "ruta": "apps/web/src/cliente/demo.ts",
+      "sha256": "73206c4ed1e3685e01a8258670bccc00e3f05cdb3d4d6965fa768a3602baa760"
+    },
+    {
+      "ruta": "apps/web/src/cliente/guionWa.test.ts",
+      "sha256": "c84a37f9f9ac55b5f0ceb950a96fac59441db7b3a2999336f125bf7aa1766e12"
+    },
+    {
+      "ruta": "apps/web/src/cliente/mock/guionFlujoA.ts",
+      "sha256": "bd8ecfbaedf7b923b352c921414cb82886dada1f25d77e859dd7d7df9516d97c"
+    },
+    {
+      "ruta": "apps/web/src/componentes/ConfirmarIne.tsx",
+      "sha256": "7641e079f81b200ed8ccb0418172c7b2278433892327933d6baed5d9424bb891"
+    },
+    {
+      "ruta": "apps/web/src/componentes/LineaTiempo.tsx",
+      "sha256": "16bf2e2f2b2ee955a78a9cf60cb6555cb1e2c28780a8aa211f2da50d0b035153"
+    },
+    {
+      "ruta": "apps/web/src/componentes/LlegadaClinica.tsx",
+      "sha256": "55a439d35ccba967f79d2a471b125878d61fd1d691367d4cf13fca025d9bb8f8"
+    },
+    {
+      "ruta": "apps/web/src/vistas/Admin.tsx",
+      "sha256": "b36cfe9e7d516e43d1ec84e90ebeb9a4639a8af916cd707139177dba0d9e9588"
+    },
+    {
+      "ruta": "apps/web/src/vistas/Clinica.tsx",
+      "sha256": "11719e1ac60959b202907af5cf42d0109d40d5d8c43e1523a26516606f232984"
+    },
+    {
+      "ruta": "apps/web/src/vistas/clinicaAlertas.test.tsx",
+      "sha256": "f1a0b2e70b3c33ef162cb4a3d3b25d308e5162c98eab373dfbeb976167f4c551"
+    },
+    {
+      "ruta": "apps/web/src/vistas/consolas.test.tsx",
+      "sha256": "9b1dcfc33d113c1bfa551d324ad076ae4d2ca7287a2e87fee5379f4c9037ef0c"
+    },
+    {
+      "ruta": "apps/web/src/vistas/vistas.test.tsx",
+      "sha256": "3beade383c785ce08f8d084ee6ff27036b333e6bb5aa8d3e381aa99d2598b3be"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+
+ RUN  v4.0.14 .
+
+ ✓ |web| src/vistas/clinicaAlertas.test.tsx (9 tests) 4673ms
+     ✓ muestra dos turnos y respeta el orden recibido aunque las posiciones estén invertidas o ausentes  1227ms
+     ✓ confirma la INE una sola vez sin capturar datos y conserva la marca tras otra acción fallida  1129ms
+     ✓ cancela con botón o Escape sin enviar y mantiene Tab dentro del diálogo  720ms
+     ✓ reintenta una operación no disponible con la misma clave sin bloquear otra tarjeta  573ms
+     ✓ un 404 ofrece reintento sin ocultar métricas ni línea de tiempo  332ms
+
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+   Start at  22:39:53
+   Duration  25.27s (transform 3.33s, setup 0ms, import 10.64s, tests 4.67s, environment 8.70s)
+
+Exit code: 0

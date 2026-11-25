@@ -1,0 +1,2 @@
+Change 'pantallas-clinica-alertas' is valid
+Exit code: 0

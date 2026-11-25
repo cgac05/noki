@@ -1,0 +1,71 @@
+{
+  "modo": "real",
+  "url": "http://localhost:5173",
+  "base": "71f01f5",
+  "mediciones": [
+    {
+      "vista": "fila-375",
+      "ancho": 375,
+      "documento": 360,
+      "turnos": [
+        "Turno 1",
+        "Turno 2"
+      ]
+    },
+    {
+      "vista": "fila-1280",
+      "ancho": 1280,
+      "documento": 1265,
+      "turnos": [
+        "Turno 1",
+        "Turno 2"
+      ]
+    },
+    {
+      "vista": "avance-1280",
+      "ancho": 1280,
+      "documento": 1265
+    },
+    {
+      "vista": "avance-375",
+      "ancho": 375,
+      "documento": 360
+    },
+    {
+      "vista": "alertas-375",
+      "ancho": 375,
+      "documento": 360
+    },
+    {
+      "vista": "alertas-1280",
+      "ancho": 1280,
+      "documento": 1265
+    }
+  ],
+  "clinica": {
+    "accion": "Cerrar atención desde otra pestaña",
+    "observadorSinRecarga": true,
+    "primeraRetirada": true,
+    "turnoSegundo": true
+  },
+  "alertas": {
+    "inicioVacio": true,
+    "sinRecarga": true,
+    "intento1": "WhatsApp\n1 intento\n24/11/26, 11:33 p.m.",
+    "intento2": "WhatsApp\n2 intentos\n24/11/26, 11:34 p.m.\nWhatsApp\n1 intento\n24/11/26, 11:33 p.m.",
+    "intento3": "WhatsApp\n3 intentos · Bloqueado\n24/11/26, 11:34 p.m.\nWhatsApp\n2 intentos\n24/11/26, 11:34 p.m.\nWhatsApp\n1 intento\n24/11/26, 11:33 p.m.",
+    "bloqueado": true,
+    "sinDatosPersonales": true,
+    "guionUI": [
+      "Hola",
+      "Ver opciones: horario",
+      "Acepto la preparación",
+      "Para mí",
+      "Soy Ana P.",
+      "Fecha incorrecta en modal protegido; repetir selección de candidato y captura tres veces"
+    ]
+  },
+  "preparacionCitas": "04-preparacion-citas.json",
+  "preparacionAlertas": "04-preparacion-alertas.json",
+  "resultado": "PASS"
+}

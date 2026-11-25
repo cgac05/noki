@@ -149,6 +149,13 @@ const definiciones: Array<{
     id: 'EN_CLINICA', titulo: 'Llegada registrada · Clínica', espera: { tipo: 'comando', titulo: 'Registrar llegada', comando: llegada },
     respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'EN_CLINICA', version: 13, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: sinPregunta, eventos: [evento(13, 'CanalCambiado', 'clinica'), evento(14, 'PacienteLlego', 'clinica')] },
     mensajes: [{ tipo: 'texto', texto: 'Llegada registrada en Tepic. La atención continúa en clínica.' }],
+    ayuda: 'Recepción puede pulsar Cerrar atención para terminar el Flujo A.', soloLectura: true, citas: true, registrada: true, cambiosCanal: 3,
+  },
+  {
+    id: 'ATENDIDA', titulo: 'Atención cerrada',
+    espera: { tipo: 'comando', titulo: 'Cerrar atención', comando: { canal: 'clinica', actor: 'recepcion:tepic', tipo: 'CerrarAtencion', tramiteId: IDS.tramite, payload: {} } },
+    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'ATENDIDA', version: 14, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: sinPregunta, eventos: [evento(15, 'AtencionCerrada', 'clinica')] },
+    mensajes: [{ tipo: 'texto', texto: 'Atención cerrada. Gracias por completar el Flujo A.' }],
     ayuda: 'El Flujo A terminó. Consulta Administración o reinicia el guion.', soloLectura: true, citas: true, registrada: true, cambiosCanal: 3,
   },
 ];
@@ -177,7 +184,7 @@ export const GUION_FLUJO_A: PasoFixture[] = definiciones.map((dato, indice) => {
       contextoDemo: dato.citas
         ? { hiloId: IDS.hilo, pacienteId: IDS.paciente, sedeId: IDS.sede }
         : { hiloId: null, pacienteId: null, sedeId: null },
-      citasPaciente: dato.citas ? [cita] : [], llegadasSede: dato.citas ? [{ cita, registrada: dato.registrada }] : [],
+      citasPaciente: dato.citas ? [cita] : [], llegadasSede: dato.citas && dato.id !== 'ATENDIDA' ? [{ cita, registrada: dato.registrada, ...(dato.registrada ? { posicion: 1 } : {}) }] : [],
       bandeja: dato.id === 'IDENTIFICACION_FECHA' || dato.citas ? [
         { id: IDS.mensaje, canal: 'sms', asunto: 'Código de demostración', cuerpo: 'Código ficticio: 246810. Solo para esta bandeja simulada.' },
         { id: '019aff00-0000-7000-8000-000000000008', canal: 'email', asunto: 'Aviso de demostración', cuerpo: 'Tu trámite puede continuar en los canales de atención.' },

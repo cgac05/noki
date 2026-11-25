@@ -1,0 +1,65 @@
+{
+  "base": "71f01f50185ec3403ef0ffd486d217a91805b39c",
+  "rama": "feat/pantallas-clinica-alertas",
+  "autorizacion": [
+    {
+      "archivo": "proposal.md",
+      "esperado": "e6ccbe1d0c51",
+      "real": "e6ccbe1d0c51",
+      "coincide": true
+    },
+    {
+      "archivo": "design.md",
+      "esperado": "a44e60c9c1d0",
+      "real": "a44e60c9c1d0",
+      "coincide": true
+    },
+    {
+      "archivo": "specs/consolas-internas/spec.md",
+      "esperado": "23f1274ade99",
+      "real": "23f1274ade99",
+      "coincide": true
+    },
+    {
+      "archivo": "specs/cliente-api-canales/spec.md",
+      "esperado": "21f3f40be347",
+      "real": "21f3f40be347",
+      "coincide": true
+    }
+  ],
+  "retiroReferencias": {
+    "codigo": 1,
+    "salida": ""
+  },
+  "sinRutasLocales": {
+    "codigo": 1,
+    "salida": ""
+  },
+  "gitDiffCheck": 0,
+  "validaciones": [
+    {
+      "comando": "corepack pnpm lint",
+      "codigo": 0
+    },
+    {
+      "comando": "corepack pnpm lint:deps",
+      "codigo": 0
+    },
+    {
+      "comando": "corepack pnpm test --maxWorkers=1",
+      "codigo": 0,
+      "archivos": 60,
+      "pruebas": 348
+    },
+    {
+      "comando": "corepack pnpm test:integracion",
+      "codigo": 0,
+      "archivos": 16,
+      "pruebas": 46
+    },
+    {
+      "comando": "VITE_API=real VITE_DEMO=true corepack pnpm --filter @noki/web build",
+      "codigo": 0
+    }
+  ]
+}

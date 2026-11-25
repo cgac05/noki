@@ -1,0 +1,433 @@
+{
+  "rama": "feat/pantallas-clinica-alertas",
+  "base": "71f01f50185ec3403ef0ffd486d217a91805b39c",
+  "revision": 2,
+  "nota": "Manifiesto excluye su propio hash; incluye producto de revisiones 1 y 2 y evidencia histórica. .claude/launch.json preexistente fuera de entrega.",
+  "archivos": [
+    {
+      "ruta": "apps/web/README.md",
+      "bytes": 18017,
+      "sha256": "e68bd734e70ae25f3183bb61354ed4a56d528cd27372da6815c11a06ad5b6ec5"
+    },
+    {
+      "ruta": "apps/web/src/cliente/cliente.test.ts",
+      "bytes": 18216,
+      "sha256": "57000e3d222f62823b9e9eb9b1c813c7e4318689b034ea6ffa8ba3d440cbe3db"
+    },
+    {
+      "ruta": "apps/web/src/cliente/demo.ts",
+      "bytes": 1182,
+      "sha256": "b8c28bd02949c3e8a02444d5664a7f2499627512ea381ca251afaa6e99a8e6ab"
+    },
+    {
+      "ruta": "apps/web/src/cliente/guionWa.test.ts",
+      "bytes": 7311,
+      "sha256": "c0fea8ce293e010698d1ef34b1107143d8e37df19ba18a01a60d680c0602eaf3"
+    },
+    {
+      "ruta": "apps/web/src/cliente/mock/guionFlujoA.ts",
+      "bytes": 18004,
+      "sha256": "7133bb60a3acbfbcbbb6aae9ba65256ede023aa24c558aa23f5b6864fda54c41"
+    },
+    {
+      "ruta": "apps/web/src/componentes/LineaTiempo.tsx",
+      "bytes": 901,
+      "sha256": "16bf2e2f2b2ee955a78a9cf60cb6555cb1e2c28780a8aa211f2da50d0b035153"
+    },
+    {
+      "ruta": "apps/web/src/componentes/LlegadaClinica.tsx",
+      "bytes": 1732,
+      "sha256": "c7a01c1594cd3ccddf3046d0aea42ba12febf59cfa8cd4111d157f612b6bcbdb"
+    },
+    {
+      "ruta": "apps/web/src/vistas/Admin.tsx",
+      "bytes": 3475,
+      "sha256": "b36cfe9e7d516e43d1ec84e90ebeb9a4639a8af916cd707139177dba0d9e9588"
+    },
+    {
+      "ruta": "apps/web/src/vistas/Clinica.tsx",
+      "bytes": 1300,
+      "sha256": "11719e1ac60959b202907af5cf42d0109d40d5d8c43e1523a26516606f232984"
+    },
+    {
+      "ruta": "apps/web/src/vistas/clinicaAlertas.test.tsx",
+      "bytes": 10423,
+      "sha256": "cadab10faa4ae9e15b855b1e9752a8ff61e0e168ec5a0ea61bb01301e0705687"
+    },
+    {
+      "ruta": "apps/web/src/vistas/consolas.test.tsx",
+      "bytes": 16950,
+      "sha256": "9b1dcfc33d113c1bfa551d324ad076ae4d2ca7287a2e87fee5379f4c9037ef0c"
+    },
+    {
+      "ruta": "apps/web/src/vistas/vistas.test.tsx",
+      "bytes": 18468,
+      "sha256": "c568db6b46e192d3075d25054eedb2e98d5210dee1b29e5bfe7ea57e13d58677"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/.openspec.yaml",
+      "bytes": 40,
+      "sha256": "0b89965c6919ee9f0b3679bc8491b3c9efd623f2ceac7e5bd3929eff87f22215"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/design.md",
+      "bytes": 3464,
+      "sha256": "a44e60c9c1d0145a71b224c8c25d9d991520d7c40a6587b4c768c26169f9f250"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/01-deps.txt",
+      "bytes": 154,
+      "sha256": "de1d7851dc22c31f1a60db7581d2dd450efd142d7513924c6140646a181e1ce8"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/01-lint.txt",
+      "bytes": 110,
+      "sha256": "76af60ba249fc647ea7120755e42aee81059f00f23ddab49a31726ab071be0c0"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/01-rojo.txt",
+      "bytes": 42955,
+      "sha256": "5fc28ee6a827b2010337e69e85558ebc91eef1139cebdeedcc59d1236a806d3f"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/01-test.txt",
+      "bytes": 9124,
+      "sha256": "24779455d3db5f9aa4e1353e8050dce2d6d9bc95385f9f8220c2c0e89e014e6a"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/01-verde.txt",
+      "bytes": 780,
+      "sha256": "568fde0835d6a141dfe010d831e397598c2c068f55b44b30bf1a6b11ba3623fc"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/02-deps.txt",
+      "bytes": 154,
+      "sha256": "de1d7851dc22c31f1a60db7581d2dd450efd142d7513924c6140646a181e1ce8"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/02-intento-lint.txt",
+      "bytes": 850,
+      "sha256": "23f5ff259d1e1952f62a08558412093d537de7651dc86c99c20daba94fa702be"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/02-intento-test-sin-vite.txt",
+      "bytes": 12551,
+      "sha256": "699fe7f3367c21e9795fa613317395bbd4f7b4c8ca601f3aba87dc6031cace5f"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/02-intento-test.txt",
+      "bytes": 13634,
+      "sha256": "c2344c3e79627f8c8e8e8579d899ef2f4578dcbb68c59d315c47889a3af4e611"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/02-lint.txt",
+      "bytes": 110,
+      "sha256": "76af60ba249fc647ea7120755e42aee81059f00f23ddab49a31726ab071be0c0"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/02-rojo.txt",
+      "bytes": 82259,
+      "sha256": "a5f5595df3311611907a4821d5f4b54dbfac9790712ed812a5b6f1e90f539447"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/02-test.txt",
+      "bytes": 7566,
+      "sha256": "6ab462ffb792d9540cdb03986979a519901d8b0fc44a24a68d3fc1989dbb5c5c"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/02-verde.txt",
+      "bytes": 1691,
+      "sha256": "c0bde451688cc5e16e58dc302f2091aa62212aa5acf435d3135d0ee1d3c3552c"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-admin-1280.jpg",
+      "bytes": 94483,
+      "sha256": "46eee5316e6089fd15a2c93c2704aec9b398757f82a7d4b712805a79198b0dc1"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-admin-375.jpg",
+      "bytes": 109682,
+      "sha256": "3753149a4bdda86172d2b88892f0eda2ba4ad7e598c26dc958af78eadff8c904"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-alcance.json",
+      "bytes": 4151,
+      "sha256": "0694af928b232066880838d34438383abb94bfd452ee552039fee14ae5b99c8b"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-archivos-entregados.json",
+      "bytes": 11912,
+      "sha256": "0776afeae741fff125681a521e3937dfaf03344001c2891d53cd3ec8966d6b17"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-autorizacion.json",
+      "bytes": 1082,
+      "sha256": "2da7c916ca78f17afea1537669c499087519ed0699b267230a97bc661e5f0815"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-base.json",
+      "bytes": 470,
+      "sha256": "bf2b07060c76594949045a632c737d7f8f2a959c201dadbd5077338f733b0d0b"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-build-real.txt",
+      "bytes": 6524,
+      "sha256": "6daf3bc00c9e2b9086481a9966a047a0e0fbab04bb3dce2a2812f59d17dd2b49"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-cerrada-1280.jpg",
+      "bytes": 35718,
+      "sha256": "502b9a6653ca90e5e3582b8e7647f6115a7a89dc402290eb69b5db8801ff3f77"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-cerrada-375.jpg",
+      "bytes": 23309,
+      "sha256": "07096f808be752195f11056500a88d0b02790a97624d400c2300cbf03c822137"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-clinica-1280.jpg",
+      "bytes": 47057,
+      "sha256": "27a4a9af88766e4dd1c895970949eb62ab4f472f7c22abbb9a07a4256c69abdb"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-clinica-375.jpg",
+      "bytes": 30699,
+      "sha256": "4f3d41668eecc35d65fc7bc20463e73583df4a89488f1b271596117bff3d51d9"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-deps.txt",
+      "bytes": 154,
+      "sha256": "de1d7851dc22c31f1a60db7581d2dd450efd142d7513924c6140646a181e1ce8"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-dialogo-1280.jpg",
+      "bytes": 38955,
+      "sha256": "e9b323a813f6c35f877757b93141318a767b832964de48de3d4d4a7a6668d94e"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-dialogo-375.jpg",
+      "bytes": 24582,
+      "sha256": "cf511d7e56932c3745fca8ea9533df708109f7bdf391b7afd20e7477d7178c46"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-diff.txt",
+      "bytes": 14,
+      "sha256": "78e1eefdd5b61c51d0683723752d200301095922e4bb612ea6dd3ea448d410bf"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-foco.json",
+      "bytes": 234,
+      "sha256": "40bfccb3038820a1ea286f3822d290439aab7e985d9bc65ed5236603c6278208"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-identidad-1280.jpg",
+      "bytes": 49376,
+      "sha256": "7ba749328af736fef58b305b95c21c4c9410b29bd851a9244a608c0424881431"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-identidad-375.jpg",
+      "bytes": 36469,
+      "sha256": "d909d2b773892d377bd212f1d729bb647acc9659429bbbe20b81274584773919"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-integracion.txt",
+      "bytes": 2876,
+      "sha256": "bea3fd6b45676860e016f605edc0803f877d9de0224fc9f5c8c6ce858b6c1b6e"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-lint.txt",
+      "bytes": 110,
+      "sha256": "76af60ba249fc647ea7120755e42aee81059f00f23ddab49a31726ab071be0c0"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-openspec.txt",
+      "bytes": 59,
+      "sha256": "2354ed775c608cd3092d1d23769cde77443b6c697fd63fac33f2819b721b3018"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-real.txt",
+      "bytes": 558,
+      "sha256": "38b3929100a940c41b8c42a98169e230b8e8e22ecf10a309f3ae6a6dfd040b5f"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-recorrido.json",
+      "bytes": 2816,
+      "sha256": "b549ab470333691928fe5e1eb024bf94587d00c15664e6135a179554505a1008"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-revision-probada.json",
+      "bytes": 2015,
+      "sha256": "655027ef294ea75a58ce9397a7617d792a7bc617afee9ec20363d5160eb93c4d"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-test.txt",
+      "bytes": 7685,
+      "sha256": "e87ac35cca5f75aec4315378bce21b5a55df5e83fbf2899eb9f409ce74d77d4e"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/03-ui.txt",
+      "bytes": 382,
+      "sha256": "9faddfbf33b17e92abe984ab6fcc23fd45c73aa589884b2c31f05fabd15a9b73"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-admin-vacio-1280.jpg",
+      "bytes": 211283,
+      "sha256": "8b5074a56ebd290b76db44dd10cd38c9090d9bb66fa1e4acd8610a1f464405e4"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-alertas-1280.jpg",
+      "bytes": 225539,
+      "sha256": "f7a4f7d87b777cec241324349ead9217623fa2ceb147a859e9761a01b52edbdb"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-alertas-375.jpg",
+      "bytes": 374784,
+      "sha256": "870aab3184ca8222ff699e576597e02b06d5b970818e3ea7f99299e9c3c17ce8"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-alertas-detalle.jpg",
+      "bytes": 18726,
+      "sha256": "f90543431b02286bf0c02e898306b3fd2379841f9ab725a4a68dca1c45af0480"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-api-final.json",
+      "bytes": 1335,
+      "sha256": "ab9ec90476e6e47c0544c19f82f76e2dfc62d87c727bfc048098b75bdea6d3cd"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-avance-1280.jpg",
+      "bytes": 62566,
+      "sha256": "5e0f868bd471d555359cf7533ce7d2d412492376df197f5c078295e3184ca2ca"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-avance-375.jpg",
+      "bytes": 47145,
+      "sha256": "6e52a340a251ba780fbfa7d5440d70750e44eea4810d93e3825b4ff074bb1601"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-build.txt",
+      "bytes": 6512,
+      "sha256": "914143e953bd9ef0325522e0c63ed8730004a169d6d972620b880845f6c26999"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-controles.json",
+      "bytes": 1381,
+      "sha256": "f3b3cbf6f0fe7370f39a2fa963205a6e553aecf33e977c9d9970fc1450c4a708"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-deps.txt",
+      "bytes": 142,
+      "sha256": "b069a9419b0158b4eb9377349ce509de11559acd5cf4d4351437f2b69b722aa4"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-entorno-corepack.txt",
+      "bytes": 1342,
+      "sha256": "8e2670685720ca47d44c63caa3dfa74fa7bbb14589db406c3dae361b59404423"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-estado-openspec.json",
+      "bytes": 7146,
+      "sha256": "2bc54140b6b31087a1d584a07221ba08f0faef1d8aae7e16d232f67b67938178"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-fila-1280.jpg",
+      "bytes": 80228,
+      "sha256": "1951ce1b6f0b51288e017232e62db2023602a6ac6a669050c88f9d5122907658"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-fila-375.jpg",
+      "bytes": 59956,
+      "sha256": "0a8f88c373b6de2c834fd17daf1b54cf9a573ef54bce0fcdc9c6eca0cc295f9c"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-integracion.txt",
+      "bytes": 3116,
+      "sha256": "ddaee75543ce455d9331f7a0d67cb285029f61a8ea6592dd897dba375aecfd4f"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-lint.txt",
+      "bytes": 98,
+      "sha256": "0924ec4ba15b4b9bb94eda2009b28e66f77222075d46960cc5c2abf802bb7e9d"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-openspec.txt",
+      "bytes": 45,
+      "sha256": "76e8c85e9f2a76ccd48a4ef5ee9c46677f88dd9f2c2a5295455b1e08cbd967f5"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-preparacion-alertas.json",
+      "bytes": 354,
+      "sha256": "7d127f5452fb1ac1b26d5bbdd978e5e0f1d903f5e94d8613c9700dee6c2ef825"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-preparacion-citas.json",
+      "bytes": 3128,
+      "sha256": "e4e55cbb298eeba29dcf4d872a1858301fd6f2d0590610a7e12e28e6c8879c5d"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-preparar-citas.mjs",
+      "bytes": 4538,
+      "sha256": "9a6fd18f5ffa650c507ab6c7ecfaadc155485bd1f27dc84c4548aa5324f11c1e"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-recorrido-real.json",
+      "bytes": 1721,
+      "sha256": "fd328b19099c1b8f1d5affa71b69ea28ba492dc001b18fe0aca961a968556ea0"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-rojo.txt",
+      "bytes": 4226,
+      "sha256": "11cf12b93d97efd5ad3b28c8d1ea6f101140c321a69727deabcfd43c4ce3f426"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-test.txt",
+      "bytes": 6838,
+      "sha256": "6e34bb882008d4b156161dbda0c24f738b8ad649a8b54a8828ee042033e50d5a"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-ui.txt",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/evidencias/04-verde.txt",
+      "bytes": 935,
+      "sha256": "6819d2d955266259bfa4a881215313170e8db0cf0c157793be769b7c88748951"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/handoff.md",
+      "bytes": 3691,
+      "sha256": "4f5adcd7aea690b7a561ce88ffa6ca13ae802a290f0374f90424300f05d31e28"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/implementacion.md",
+      "bytes": 10121,
+      "sha256": "1b641ade4b5588ff63cbab443ca5927413ad9247ba0007ec835308d769a47af4"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/proposal.md",
+      "bytes": 3420,
+      "sha256": "e6ccbe1d0c51bdae0deac52852a6b1b80e457c65c86583b169f0516cd3954fe2"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/revision.md",
+      "bytes": 5070,
+      "sha256": "32502cc5dad5b4b20b7836a549fffffdafcdd119b8e5ea232679b17d455cf0e4"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/specs/cliente-api-canales/spec.md",
+      "bytes": 3828,
+      "sha256": "21f3f40be347ce06da1bc43ccdeb7e8dd05f69c6218377308015ba81de67b598"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/specs/consolas-internas/spec.md",
+      "bytes": 3613,
+      "sha256": "23f1274ade995c856701b12116e964d360430a01c66feb7f2e307de010fad47d"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-clinica-alertas/tasks.md",
+      "bytes": 4744,
+      "sha256": "dd12497ead0d602594fc814db2c37d1842530d3d69baca14fbf6f867c6984262"
+    }
+  ]
+}

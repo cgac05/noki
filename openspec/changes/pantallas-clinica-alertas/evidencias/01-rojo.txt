@@ -1,0 +1,1824 @@
+
+ RUN  v4.0.14 .
+
+ ❯ |web| src/vistas/clinicaAlertas.test.tsx (5 tests | 5 failed) 5162ms
+     × muestra dos turnos y respeta el orden recibido aunque las posiciones estén invertidas o ausentes 1077ms
+     × confirma la INE una sola vez sin capturar datos y conserva la marca tras otra acción fallida 1013ms
+     × cancela con botón o Escape sin enviar y mantiene Tab dentro del diálogo 1028ms
+     × reintenta una operación no disponible con la misma clave sin bloquear otra tarjeta 1026ms
+     × cierra una sola vez con doble clic y espera la nueva lectura para avanzar la fila 1016ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/vistas/clinicaAlertas.test.tsx > Fila y acciones de recepción con ClienteReal > muestra dos turnos y respeta el orden recibido aunque las posiciones estén invertidas o ausentes
+TestingLibraryElementError: Unable to find an element with the text: Turno 1. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Clínica
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Recepción · Llegadas esperadas
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Paquete US mamario + Papanicolaou
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Consulta ficticia
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Clínica
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Recepción · Llegadas esperadas
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Paquete US mamario + Papanicolaou
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Consulta ficticia
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/clinicaAlertas.test.tsx:46:25
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  |web| src/vistas/clinicaAlertas.test.tsx > Fila y acciones de recepción con ClienteReal > confirma la INE una sola vez sin capturar datos y conserva la marca tras otra acción fallida
+TestingLibraryElementError: Unable to find role="button" and name "INE verificada"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Clínica
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Recepción · Llegadas esperadas
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Paquete US mamario + Papanicolaou
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Consulta ficticia
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Clínica
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Recepción · Llegadas esperadas
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Paquete US mamario + Papanicolaou
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Consulta ficticia
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/clinicaAlertas.test.tsx:55:39
+     53|   it('confirma la INE una sola vez sin capturar datos y conserva la ma…
+     54|     const { usuario, peticion, post } = preparar();
+     55|     await usuario.click((await screen.findAllByRole('button', { name: …
+       |                                       ^
+     56|     const dialogo = screen.getByRole('dialog', { name: '¿Revisaste la …
+     57|     expect(dialogo.querySelectorAll('input,textarea,select')).toHaveLe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  |web| src/vistas/clinicaAlertas.test.tsx > Fila y acciones de recepción con ClienteReal > cancela con botón o Escape sin enviar y mantiene Tab dentro del diálogo
+TestingLibraryElementError: Unable to find role="button" and name "INE verificada"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Clínica
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Recepción · Llegadas esperadas
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Paquete US mamario + Papanicolaou
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Consulta ficticia
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Clínica
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Recepción · Llegadas esperadas
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Paquete US mamario + Papanicolaou
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Consulta ficticia
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/clinicaAlertas.test.tsx:71:33
+     69|   it('cancela con botón o Escape sin enviar y mantiene Tab dentro del …
+     70|     const { usuario, post } = preparar();
+     71|     const boton = (await screen.findAllByRole('button', { name: 'INE v…
+       |                                 ^
+     72|     await usuario.click(boton);
+     73|     const dialogo = screen.getByRole('dialog');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  |web| src/vistas/clinicaAlertas.test.tsx > Fila y acciones de recepción con ClienteReal > reintenta una operación no disponible con la misma clave sin bloquear otra tarjeta
+TestingLibraryElementError: Unable to find role="button" and name "INE verificada"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Clínica
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Recepción · Llegadas esperadas
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Paquete US mamario + Papanicolaou
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Consulta ficticia
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Clínica
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Recepción · Llegadas esperadas
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Paquete US mamario + Papanicolaou
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Consulta ficticia
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/clinicaAlertas.test.tsx:86:39
+     84|     const { usuario, post, peticion } = preparar();
+     85|     post.mockResolvedValueOnce(Response.json({ codigo: 'NO_ENCONTRADO'…
+     86|     await usuario.click((await screen.findAllByRole('button', { name: …
+       |                                       ^
+     87|     await usuario.click(screen.getByRole('button', { name: 'Confirmar'…
+     88|     expect(await screen.findByRole('alert')).toHaveProperty('textConte…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  |web| src/vistas/clinicaAlertas.test.tsx > Fila y acciones de recepción con ClienteReal > cierra una sola vez con doble clic y espera la nueva lectura para avanzar la fila
+TestingLibraryElementError: Unable to find role="button" and name "Cerrar atención"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Clínica
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Recepción · Llegadas esperadas
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Paquete US mamario + Papanicolaou
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Consulta ficticia
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Clínica
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Recepción · Llegadas esperadas
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Paquete US mamario + Papanicolaou
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Consulta ficticia
+          </h2>
+          <p>
+            Tepic
+             · 
+            26 de noviembre de 2026 a las 09:15
+          </p>
+          <p>
+            Estado: 
+            <strong>
+              EN_CLINICA
+            </strong>
+          </p>
+          <p
+            class="aviso"
+          >
+            Llegada registrada
+          </p>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/clinicaAlertas.test.tsx:101:33
+     99|   it('cierra una sola vez con doble clic y espera la nueva lectura par…
+    100|     const { post, lecturas, segunda } = preparar();
+    101|     const boton = (await screen.findAllByRole('button', { name: 'Cerra…
+       |                                 ^
+    102|     let resolver!: (respuesta: Response) => void;
+    103|     post.mockImplementationOnce(() => new Promise(respuesta => { resol…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed (5)
+   Start at  22:24:39
+   Duration  13.16s (transform 881ms, setup 0ms, import 3.32s, tests 5.16s, environment 3.74s)
+
+Exit code: 1
