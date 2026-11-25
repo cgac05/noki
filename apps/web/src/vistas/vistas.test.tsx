@@ -145,7 +145,7 @@ describe('Vistas del guion', () => {
     const { usuario } = abrir('/clinica', cliente);
     await usuario.click(await screen.findByRole('button', { name: 'Registrar llegada' }));
     await waitFor(() => expect(enviar).toHaveBeenCalledExactlyOnceWith({
-      canal: 'clinica', actor: 'recepcion:tepic', tipo: 'RegistrarLlegada', tramiteId: llegada.cita.tramite.id,
+      canal: 'clinica', actor: `recepcion:${IDS.sede}`, tipo: 'RegistrarLlegada', tramiteId: llegada.cita.tramite.id,
       payload: { token: llegada.cita.tokenQr },
     }, { idempotencyKey: expect.any(String) }));
   });

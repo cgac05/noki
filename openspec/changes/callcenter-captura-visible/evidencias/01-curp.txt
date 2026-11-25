@@ -1,0 +1,7 @@
+﻿POST /api/comandos contra la API local existente, canal callcenter, actor asesor.
+Cada comprobación inició un trámite nuevo con el contacto de demo y eligió OTRA_PERSONA.
+IniciarTramite: HTTP 200, siguiente DESTINATARIO.
+IdentificarPaciente / DESTINATARIO: HTTP 200, siguiente CURP, campo curp con captura sensitive.
+IdentificarPaciente / CURP (fixture de formato): HTTP 422, REGLA_VIOLADA / CURP_INVALIDA.
+IdentificarPaciente / CURP (semilla válida): HTTP 200, siguiente casilla servicio.
+El cliente recorta espacios exteriores y convierte a mayúsculas. El contrato comprueba la forma y el dominio comprueba también el dígito verificador. La fixture de formato tiene un dígito incorrecto. Se desconoce el valor del reporte original.

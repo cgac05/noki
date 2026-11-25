@@ -1,0 +1,3 @@
+corepack pnpm test
+Código 1. BLOQUEADO.
+Error: EPERM: operation not permitted, open typescript/bin/tsc

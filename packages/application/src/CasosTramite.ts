@@ -86,7 +86,9 @@ export class CasosTramite {
   }
 
   async solicitarContinuacion(id: TramiteId, comando: ContextoComando): Promise<ResultadoComando> {
-    if (comando.canal !== 'callcenter' || !comando.actor.startsWith('asesor:')) {
+    const esAsesor = comando.canal === 'callcenter' && comando.actor.startsWith('asesor:');
+    const esPacienteWeb = comando.canal === 'web' && comando.actor === 'paciente';
+    if (!esAsesor && !esPacienteWeb) {
       throw new ReglaViolada('CONTINUACION_SOLO_ASESOR');
     }
     return this.modificar(id, comando, (tramite, contexto) =>

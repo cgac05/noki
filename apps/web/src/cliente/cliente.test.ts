@@ -162,7 +162,7 @@ describe('Cliente simulado', () => {
     expect(lineaTiempo).toHaveBeenLastCalledWith(expect.objectContaining({ eventos: expect.arrayContaining([expect.objectContaining({ tipo: 'CitaConfirmada' })]) }));
     dejar();
     const veces = actualizado.mock.calls.length;
-    await cliente.enviarComando({ canal: 'clinica', actor: 'recepcion:tepic', tipo: 'RegistrarLlegada', tramiteId: IDS.tramite, payload: { token: IDS.tokenQr } });
+    await cliente.enviarComando({ canal: 'clinica', actor: `recepcion:${IDS.sede}`, tipo: 'RegistrarLlegada', tramiteId: IDS.tramite, payload: { token: IDS.tokenQr } });
     expect(actualizado).toHaveBeenCalledTimes(veces);
     expect(cliente.demo.paso().id).toBe('EN_CLINICA');
   });

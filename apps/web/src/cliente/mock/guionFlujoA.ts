@@ -19,7 +19,7 @@ type EntradaGuion =
   | { tipo: 'wa'; titulo: string; mensaje: SolicitudMensajeWa };
 
 const llegada = {
-  canal: 'clinica', actor: 'recepcion:tepic', tipo: 'RegistrarLlegada', tramiteId: IDS.tramite,
+  canal: 'clinica', actor: `recepcion:${IDS.sede}`, tipo: 'RegistrarLlegada', tramiteId: IDS.tramite,
   payload: { token: IDS.tokenQr },
 } as const;
 const llamar: EntradaGuion = {
@@ -154,7 +154,7 @@ const definiciones: Array<{
   },
   {
     id: 'ATENDIDA', titulo: 'Atención cerrada',
-    espera: { tipo: 'comando', titulo: 'Cerrar atención', comando: { canal: 'clinica', actor: 'recepcion:tepic', tipo: 'CerrarAtencion', tramiteId: IDS.tramite, payload: {} } },
+    espera: { tipo: 'comando', titulo: 'Cerrar atención', comando: { canal: 'clinica', actor: `recepcion:${IDS.sede}`, tipo: 'CerrarAtencion', tramiteId: IDS.tramite, payload: {} } },
     respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'ATENDIDA', version: 14, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: sinPregunta, eventos: [evento(15, 'AtencionCerrada', 'clinica')] },
     mensajes: [{ tipo: 'texto', texto: 'Atención cerrada. Gracias por completar el Flujo A.' }],
     ayuda: 'El Flujo A terminó. Consulta Administración o reinicia el guion.', soloLectura: true, citas: true, registrada: true, cambiosCanal: 3,

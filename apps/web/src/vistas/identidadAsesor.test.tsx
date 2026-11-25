@@ -98,6 +98,35 @@ it('ofrece sin CURP junto al formulario y rechaza el formato antes de enviar', a
   await waitFor(() => expect(recibidos).toHaveLength(2));
   expect(recibidos[1]!.comando.payload).toEqual({ paso: 'CURP', curp: null });
 });
+it('muestra la CURP en claro y envía normalizada la CURP válida de demo', async () => {
+  const { usuario, recibidos } = await abrir('CURP');
+  await usuario.click(screen.getByRole('button', { name: 'Capturar datos' }));
+  const campo = screen.getByLabelText('CURP');
+  expect(campo.getAttribute('type')).toBe('text');
+  fireEvent.change(campo, { target: { value: ' pada900101mntcmn04 ' } });
+  await usuario.click(screen.getByRole('button', { name: 'Enviar formulario' }));
+  await screen.findByText('Paso: DATOS');
+  expect(recibidos.at(-1)?.comando.payload).toEqual({ paso: 'CURP', curp: 'PADA900101MNTCMN04' });
+});
+it('muestra nombres y apellidos en claro y envía las claves de los selectores', async () => {
+  const { usuario, recibidos } = await abrir('DATOS');
+  await usuario.click(screen.getByRole('button', { name: 'Capturar datos' }));
+  for (const etiqueta of ['Nombre', 'Apellido paterno', 'Apellido materno']) {
+    const campo = screen.getByLabelText(etiqueta);
+    expect(campo.getAttribute('type')).toBe('text');
+    await usuario.type(campo, 'Prueba');
+  }
+  expect(screen.queryByRole('button', { name: /Mostrar|Ocultar/ })).toBeNull();
+  fireEvent.change(screen.getByLabelText('Fecha de nacimiento'), { target: { value: '2000-01-02' } });
+  const sexo = screen.getByRole('combobox', { name: 'Sexo' });
+  const entidad = screen.getByRole('combobox', { name: 'Entidad de nacimiento' });
+  await usuario.selectOptions(sexo, screen.getByRole('option', { name: 'Hombre' }));
+  await usuario.selectOptions(entidad, screen.getByRole('option', { name: 'Nayarit' }));
+  await usuario.click(screen.getByRole('button', { name: 'Enviar formulario' }));
+  await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
+  expect(recibidos.at(-1)?.comando.payload).toMatchObject({ paso: 'DATOS', sexo: 'M', entidadNacimiento: 'NT' });
+  expect(screen.queryByText('Revisa el formato de este campo')).toBeNull();
+});
 it('muestra código y mensaje del núcleo, conserva reiniciar y descarta al cancelar', async () => {
   const { usuario, recibidos, bloquear } = await abrir('FECHA_NAC'); bloquear();
   await usuario.click(screen.getByRole('button', { name: 'Capturar datos' }));

@@ -12,6 +12,10 @@ it('marca formato sin enviar ni mostrar el valor fuera de su campo protegido', (
   fireEvent.click(screen.getByRole('button', { name: 'Enviar formulario' }));
   expect(campo.getAttribute('aria-invalid')).toBe('true');
   expect(campo.getAttribute('type')).toBe('password');
+  fireEvent.click(screen.getByRole('button', { name: 'Mostrar CURP' }));
+  expect(campo.getAttribute('type')).toBe('text');
+  fireEvent.click(screen.getByRole('button', { name: 'Ocultar CURP' }));
+  expect(campo.getAttribute('type')).toBe('password');
   expect(screen.getByText('Revisa el formato de este campo')).toBeDefined();
   expect(document.body.textContent).not.toContain('captura-invalida');
   expect(enviar).not.toHaveBeenCalled();

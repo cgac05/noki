@@ -1,0 +1,3 @@
+corepack pnpm lint
+Código 1. BLOQUEADO.
+Error: EPERM: operation not permitted, open eslint/bin/eslint.js

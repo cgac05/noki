@@ -2,6 +2,8 @@
 
 Cómo trabajan dos frentes a la vez sobre `main` sin pisarse. Complementa [colaboracion-openspec.md](colaboracion-openspec.md) (ciclo de cada cambio) y `PLAN.md` §11 (fases).
 
+Desde el 2026-11-25 y hasta la entrega, Christian (`cgac05`) decidió coordinar el cierre del proyecto como un frente único. La tabla siguiente conserva el reparto anterior.
+
 ## Frentes y responsables
 
 | Frente | Responsable | Puede apoyar o relevar |

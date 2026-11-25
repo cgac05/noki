@@ -177,8 +177,9 @@ export class LecturasComandosPostgres implements LecturasPort {
 
   async datosContinuacion(hiloId: HiloId, ts: string): Promise<DatosEmisionToken | null> {
     const { rows } = await sql<{
-      jti: string; id: TramiteId; paciente: PacienteId | null; expira: Date; nivel: DatosEmisionToken['nivel'];
-    }>`SELECT te.jti, t.id, t.paciente_id AS paciente, te.expira_en AS expira, e.nivel_auth AS nivel
+      jti: string; id: TramiteId; paciente: PacienteId | null; expira: Date; nivel: DatosEmisionToken['nivel']; canal: Canal;
+    }>`SELECT te.jti, t.id, t.paciente_id AS paciente, te.expira_en AS expira, e.nivel_auth AS nivel,
+        COALESCE(e.canal, t.canal_origen) AS canal
       FROM token_emitido te JOIN tramite t ON t.id = te.tramite_id
       JOIN evento e ON e.tramite_id = t.id AND e.tipo = 'ConsentimientoContactoWA'
         AND e.payload->>'consentimientoId' = te.jti::text
@@ -189,7 +190,7 @@ export class LecturasComandosPostgres implements LecturasPort {
     const fila = rows[0];
     return fila ? {
       jti: fila.jti, tramiteId: fila.id, hiloId, nivel: fila.nivel, uso: 'CONTINUIDAD',
-      canalOrigen: 'callcenter', metodo: 'TOKEN_CC',
+      canalOrigen: fila.canal, metodo: fila.canal === 'callcenter' ? 'TOKEN_CC' : 'TOKEN_WEB',
       ...(fila.paciente ? { pacienteId: fila.paciente } : {}),
       emitidoEn: new Date(fila.expira.getTime() - 86_400_000).toISOString(), expiraEn: fila.expira.toISOString(),
     } : null;

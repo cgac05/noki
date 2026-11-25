@@ -5,11 +5,12 @@ import { EstadoCarga } from './EstadoCarga.tsx';
 import { EstadoError } from './EstadoError.tsx';
 import { fechaEnSede } from './formato.ts';
 
-export function LlegadaClinica({ llegada }: { llegada: LlegadaVista }) {
+export function LlegadaClinica({ llegada, sedeContextoId }: { llegada: LlegadaVista; sedeContextoId: string }) {
   const accion = useAccion();
+  const sedeId = llegada.cita.tramite.sedeId ?? sedeContextoId;
   const enviar = (tipo: 'RegistrarLlegada' | 'CerrarAtencion', titulo: string) => {
     accion.ejecutar({ tipo: 'comando', titulo, comando: ComandoRequestSchema.parse({
-      canal: 'clinica', actor: 'recepcion:tepic', tipo, tramiteId: llegada.cita.tramite.id,
+      canal: 'clinica', actor: `recepcion:${sedeId}`, tipo, tramiteId: llegada.cita.tramite.id,
       payload: tipo === 'RegistrarLlegada' ? { token: llegada.cita.tokenQr } : {},
     }) });
   };

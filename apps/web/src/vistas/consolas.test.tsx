@@ -154,7 +154,7 @@ describe('Clínica, administración y app en modo real', () => {
     expect(screen.queryByRole('button', { name: 'Registrar llegada' })).toBeNull();
     const post = peticion.mock.calls.filter(([, opciones]) => opciones?.method === 'POST');
     expect(post).toHaveLength(1);
-    expect(JSON.parse(String(post[0]![1]?.body))).toEqual({ canal: 'clinica', actor: 'recepcion:tepic', tipo: 'RegistrarLlegada', tramiteId: IDS.tramite, payload: { token: 'demo.qr.cita-elegida' } });
+    expect(JSON.parse(String(post[0]![1]?.body))).toEqual({ canal: 'clinica', actor: `recepcion:${IDS.sede}`, tipo: 'RegistrarLlegada', tramiteId: IDS.tramite, payload: { token: 'demo.qr.cita-elegida' } });
   });
   it('muestra la lista vacía como estado, sin error', async () => {
     const { cliente, lecturas } = prepararLecturas(); lecturas.llegadasSede = [];

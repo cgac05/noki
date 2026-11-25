@@ -91,6 +91,30 @@ async function listo(casos: CasosTramite) {
   return id;
 }
 
+it('registra el consentimiento de un paciente anónimo desde web con nivel 0', async () => {
+  const { casos } = escenario();
+  const web = { ...wa, canal: 'web' } as const;
+  const { tramite } = await casos.iniciar('AGENDAR', 'anonimo-web', web);
+  const resultado = await casos.solicitarContinuacion(tramite.id, { ...web, idempotencyKey: 'continuar-web' });
+  expect(resultado.eventos).toContainEqual(expect.objectContaining({
+    tipo: 'ConsentimientoContactoWA', canal: 'web', actor: 'paciente', nivelAuth: 0,
+  }));
+});
+
+it('conserva la continuación por asesor y rechaza otras combinaciones de actor y canal', async () => {
+  const { casos } = escenario();
+  const { tramite } = await casos.iniciar('AGENDAR', '5210000000001', cc);
+  for (const comando of [wa, { ...wa, canal: 'callcenter' }, { ...cc, canal: 'web' }] as const) {
+    await expect(casos.solicitarContinuacion(tramite.id, comando)).rejects.toMatchObject({
+      regla: 'CONTINUACION_SOLO_ASESOR',
+    });
+  }
+  const resultado = await casos.solicitarContinuacion(tramite.id, { ...cc, idempotencyKey: 'continuar-cc' });
+  expect(resultado.eventos).toContainEqual(expect.objectContaining({
+    tipo: 'ConsentimientoContactoWA', canal: 'callcenter', actor: cc.actor, nivelAuth: 1,
+  }));
+});
+
 it('mantiene un hold futuro y lo expira al adelantar el reloj más allá del plazo', async () => {
   const puertos = escenario();
   const { casos, reloj, tramites, agenda } = puertos;

@@ -1,0 +1,156 @@
+﻿corepack pnpm exec vitest run --project unitarios tests/unit/nucleo/casosTramite.test.ts
+Código: 1
+corepack : node:fs:559
+En línea: 10 Carácter: 114
++ ... .test.ts' { corepack pnpm exec vitest run --project unitarios tests/u ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (node:fs:559:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  return binding.open(
+                 ^
+
+Error: EPERM: operation not permitted, open '.\node_modules\.pnpm\vitest@4.0.14_@typ
+es+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
+    at Object.openSync (node:fs:559:18)
+    at readFileSync (node:fs:443:35)
+    at getSourceSync (node:internal/modules/esm/load:37:14)
+    at defaultLoadSync (node:internal/modules/esm/load:153:34)
+    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:795:12)
+    at #loadSync (node:internal/modules/esm/loader:815:49)
+    at ModuleLoader.load (node:internal/modules/esm/loader:780:26)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:526:31)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:571:36)
+    at afterResolve (node:internal/modules/esm/loader:624:52) {
+  errno: -4048,
+  code: 'EPERM',
+  syscall: 'open',
+  path: '.\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de6
+69f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
+}
+
+Node.js v24.13.0
+
+corepack pnpm exec vitest run --project integracion tests/integracion/puertosApiPostgres.test.ts (Postgres 55432)
+Código: 1
+corepack : node:fs:559
+En línea: 11 Carácter: 139
++ ... s 55432)' { corepack pnpm exec vitest run --project integracion tests ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (node:fs:559:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  return binding.open(
+                 ^
+
+Error: EPERM: operation not permitted, open '.\node_modules\.pnpm\vitest@4.0.14_@typ
+es+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
+    at Object.openSync (node:fs:559:18)
+    at readFileSync (node:fs:443:35)
+    at getSourceSync (node:internal/modules/esm/load:37:14)
+    at defaultLoadSync (node:internal/modules/esm/load:153:34)
+    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:795:12)
+    at #loadSync (node:internal/modules/esm/loader:815:49)
+    at ModuleLoader.load (node:internal/modules/esm/loader:780:26)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:526:31)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:571:36)
+    at afterResolve (node:internal/modules/esm/loader:624:52) {
+  errno: -4048,
+  code: 'EPERM',
+  syscall: 'open',
+  path: '.\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de6
+69f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
+}
+
+Node.js v24.13.0
+
+Comprobación directa con Node de CasosTramite y adaptadores en memoria
+Código: 1
+node : node:internal/modules/esm/resolve:204
+En línea: 33 Carácter: 106
++ ... { $prueba | node --experimental-transform-types --input-type=module } ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (node:internal/modules/esm/resolve:204:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  const resolvedOption = FSLegacyMainResolve(pkgPath, packageConfig.main, baseStringified);
+                         ^
+
+Error: Cannot find package 
+'.\packages\adapters\memory\node_modules\date-fns-tz\index.js' imported from 
+.\packages\adapters\memory\src\TramiteRepoMemoria.ts
+    at legacyMainResolve (node:internal/modules/esm/resolve:204:26)
+    at packageResolve (node:internal/modules/esm/resolve:778:12)
+    at moduleResolve (node:internal/modules/esm/resolve:858:18)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:718:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:735:38)
+    at nextStep (node:internal/modules/customization_hooks:189:26)
+    at resolve (fil[ruta omitida]:6:10)
+    at nextStep (node:internal/modules/customization_hooks:189:26)
+    at resolveWithHooks (node:internal/modules/customization_hooks:417:10) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+Node.js v24.13.0
+
+Comprobación directa con Node, fuentes TS y puertos locales de prueba
+Código: 1
+node : .\packages\application\src\CasosTramite.ts:90
+En línea: 37 Carácter: 105
++ ... { $prueba | node --experimental-transform-types --input-type=module } ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([ruta omitida]:90:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+      throw new ReglaViolada('CONTINUACION_SOLO_ASESOR');
+            ^
+
+ReglaViolada: No se cumple una regla del trámite.
+    at CasosTramite.solicitarContinuacion 
+(.\packages\application\src\CasosTramite.ts:90:13)
+    at fil[ruta omitida]:22:31
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  datos: { regla: 'CONTINUACION_SOLO_ASESOR' },
+  regla: 'CONTINUACION_SOLO_ASESOR',
+  codigo: 'REGLA_VIOLADA'
+}
+
+Node.js v24.13.0
+
+Comprobación directa de datosContinuacion con SQL del adaptador y psql en localhost:55432, transacción revertida
+Código: 1
+callcenter => TOKEN_CC (nivel 1)
+node : node:internal/modules/run_main:107
+En línea: 53 Carácter: 148
++ ... { $prueba | node --env-file=.env --experimental-transform-types --inp ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (node:internal/modules/run_main:107:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  [
++   'callcenter',
++   'TOKEN_CC',
+-   'web',
+-   'TOKEN_WEB',
+    0
+  ]
+
+    at fil[ruta omitida]:39:10
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [ 'callcenter', 'TOKEN_CC', 0 ],
+  expected: [ 'web', 'TOKEN_WEB', 0 ],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.13.0
+

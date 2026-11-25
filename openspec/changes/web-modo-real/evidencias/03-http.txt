@@ -1,0 +1,97 @@
+﻿GET de rutas y módulos transformados de Vite, y catálogo de la API existente
+Código: 0
+/web HTTP 200
+/clinica HTTP 200
+/src/vistas/Web.tsx HTTP 200
+/src/vistas/Clinica.tsx HTTP 200
+/src/componentes/LlegadaClinica.tsx HTTP 200
+/src/cliente/useAccion.ts HTTP 200
+/api/catalogo HTTP 200 con ofertas
+
+Recorrido HTTP con cotización anónima contra la API existente
+Código: 1
+IniciarTramite HTTP 200
+SeleccionarServicio HTTP 200
+SeleccionarSede HTTP 200
+SolicitarContinuacion HTTP 200
+fichaHilo HTTP 200
+node : node:internal/modules/run_main:107
+En línea: 42 Carácter: 97
++ ... ónima contra la API existente' { $prueba | node --input-type=module }
++                                                ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (node:internal/modules/run_main:107:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+undefined !== 'web'
+
+    at fil[ruta omitida]:27:8
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: undefined,
+  expected: 'web',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.13.0
+
+Recorrido HTTP anónimo; verificación de los campos can, met y niv del JWS sin imprimir el token
+Código: 0
+IniciarTramite HTTP 200
+SeleccionarServicio HTTP 200
+SeleccionarSede HTTP 200
+SolicitarContinuacion HTTP 200
+fichaHilo HTTP 200
+Ficha devuelve JWS de origen web, m?todo TOKEN_WEB y nivel 0
+
+Regresión HTTP del asesor con contacto sintético y verificación del JWS de Call Center
+Código: 1
+node : node:internal/deps/undici/undici:16416
+En línea: 42 Carácter: 122
++ ... cación del JWS de Call Center' { $prueba | node --input-type=module }
++                                                ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (node:internal/deps/undici/undici:16416:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+      Error.captureStackTrace(err);
+            ^
+
+TypeError: fetch failed
+    at node:internal/deps/undici/undici:16416:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fil[ruta omitida]:3:16 {
+  [cause]: AggregateError [ECONNREFUSED]: 
+      at internalConnectMultiple (node:net:1134:18)
+      at afterConnectMultiple (node:net:1715:7) {
+    code: 'ECONNREFUSED',
+    [errors]: [
+      Error: connect ECONNREFUSED ::1:4000
+          at createConnectionError (node:net:1678:14)
+          at afterConnectMultiple (node:net:1708:16) {
+        errno: -4078,
+        code: 'ECONNREFUSED',
+        syscall: 'connect',
+        address: '::1',
+        port: 4000
+      },
+      Error: connect ECONNREFUSED 127.0.0.1:4000
+          at createConnectionError (node:net:1678:14)
+          at afterConnectMultiple (node:net:1708:16) {
+        errno: -4078,
+        code: 'ECONNREFUSED',
+        syscall: 'connect',
+        address: '127.0.0.1',
+        port: 4000
+      }
+    ]
+  }
+}
+
+Node.js v24.13.0
+

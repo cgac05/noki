@@ -1,0 +1,3 @@
+corepack pnpm exec vitest run --project web identidadAsesor ModalFlow identificacion useIdentificacion flow wa
+Código 1. BLOQUEADO.
+Error: EPERM: operation not permitted, open vitest/vitest.mjs

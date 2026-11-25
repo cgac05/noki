@@ -1,0 +1,33 @@
+﻿corepack pnpm exec vitest run --project web clinicaAlertas.test.tsx
+Código: 1
+corepack : node:fs:559
+En línea: 10 Carácter: 93
++ ... test.tsx' { corepack pnpm exec vitest run --project web clinicaAlerta ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (node:fs:559:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  return binding.open(
+                 ^
+
+Error: EPERM: operation not permitted, open '.\node_modules\.pnpm\vitest@4.0.14_@typ
+es+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
+    at Object.openSync (node:fs:559:18)
+    at readFileSync (node:fs:443:35)
+    at getSourceSync (node:internal/modules/esm/load:37:14)
+    at defaultLoadSync (node:internal/modules/esm/load:153:34)
+    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:795:12)
+    at #loadSync (node:internal/modules/esm/loader:815:49)
+    at ModuleLoader.load (node:internal/modules/esm/loader:780:26)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:526:31)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:571:36)
+    at afterResolve (node:internal/modules/esm/loader:624:52) {
+  errno: -4048,
+  code: 'EPERM',
+  syscall: 'open',
+  path: '.\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de6
+69f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
+}
+
+Node.js v24.13.0
+

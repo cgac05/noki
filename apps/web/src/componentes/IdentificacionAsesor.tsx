@@ -31,7 +31,7 @@ export function IdentificacionAsesor({ tramiteId, pista }: { tramiteId: string; 
     </div>
     {accion.enviando && <p role="status">Enviando identificación…</p>}
     {error && <>{error.codigo && <p>{error.codigo}</p>}<EstadoError error={error} {...(!modal && accion.error ? { onReintentar: () => { void accion.reintentar(); } } : {})} /></>}
-    {modal && pista.campos && <ModalFlow mensaje={{ tipo: 'flow', titulo: 'Identificar paciente', campos: pista.campos }} validar={valores => {
+    {modal && pista.campos && <ModalFlow capturaAsesor mensaje={{ tipo: 'flow', titulo: 'Identificar paciente', campos: pista.campos }} validar={valores => {
       const resultado = armarIdentificacion(tramiteId, pista, { valores });
       return resultado.valido ? [] : resultado.campos;
     }} onEnviar={valores => enviar({ valores })} onCerrar={() => setModal(false)} onDescartar={accion.descartar} />}

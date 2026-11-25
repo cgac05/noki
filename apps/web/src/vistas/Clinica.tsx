@@ -16,6 +16,6 @@ export function Clinica() {
     {sedeId && llegadas.isPending && <EstadoCarga />}
     {llegadas.isError && <EstadoError error={llegadas.error} onReintentar={() => { void llegadas.refetch(); }} />}
     {llegadas.data?.length === 0 && <p className="seccion">Aún no hay llegadas esperadas. Confirma una cita en WhatsApp.</p>}
-    {llegadas.data?.map(llegada => <LlegadaClinica key={llegada.cita.tramite.id} llegada={llegada} />)}
+    {sedeId && llegadas.data?.map(llegada => <LlegadaClinica key={llegada.cita.tramite.id} llegada={llegada} sedeContextoId={sedeId} />)}
   </>;
 }

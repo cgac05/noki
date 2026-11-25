@@ -46,6 +46,20 @@ function preparar(ruta = '/clinica', configurar?: (lecturas: typeof GUION_FLUJO_
 }
 
 describe('Fila y acciones de recepción con ClienteReal', () => {
+  it('registra la llegada con la sede de la cita aunque sea distinta del contexto', async () => {
+    const sedeBahia = '019aff20-0000-7000-8000-000000000070';
+    const { usuario, post, primera } = preparar('/clinica', lecturas => {
+      const cita = lecturas.llegadasSede[0]!.cita;
+      cita.sede = 'Bahía de Banderas';
+      cita.tramite.sedeId = sedeBahia;
+      lecturas.llegadasSede = [{ cita, registrada: false }];
+    });
+    await usuario.click(await screen.findByRole('button', { name: 'Registrar llegada' }));
+    await waitFor(() => expect(post).toHaveBeenCalledExactlyOnceWith({
+      canal: 'clinica', actor: `recepcion:${sedeBahia}`, tipo: 'RegistrarLlegada',
+      tramiteId: primera.cita.tramite.id, payload: { token: primera.cita.tokenQr },
+    }));
+  });
   it('muestra dos turnos y respeta el orden recibido aunque las posiciones estén invertidas o ausentes', async () => {
     const { lecturas, primera, segunda, socket } = preparar();
     expect(await screen.findByText('Turno 1')).toBeDefined(); expect(screen.getByText('Turno 2')).toBeDefined();
@@ -56,12 +70,14 @@ describe('Fila y acciones de recepción con ClienteReal', () => {
     expect(screen.getAllByRole('heading', { level: 2 }).map(elemento => elemento.textContent)).toEqual([segunda.cita.servicio, primera.cita.servicio, 'Sin turno']);
   });
   it('ofrece solo cerrar la atención sin verificación adicional', async () => {
-    const { usuario, post } = preparar();
+    const { usuario, post } = preparar('/clinica', lecturas => {
+      delete lecturas.llegadasSede[0]!.cita.tramite.sedeId;
+    });
     await screen.findByText('Turno 1');
     expect(screen.getAllByRole('button').map(boton => boton.textContent)).toEqual(['Cerrar atención', 'Cerrar atención']);
     expect(screen.queryByText('Identidad comprobada')).toBeNull();
     await usuario.click(screen.getAllByRole('button', { name: 'Cerrar atención' })[0]!);
-    await waitFor(() => expect(post).toHaveBeenCalledExactlyOnceWith({ canal: 'clinica', actor: 'recepcion:tepic', tipo: 'CerrarAtencion', tramiteId: IDS.tramite, payload: {} }));
+    await waitFor(() => expect(post).toHaveBeenCalledExactlyOnceWith({ canal: 'clinica', actor: `recepcion:${IDS.sede}`, tipo: 'CerrarAtencion', tramiteId: IDS.tramite, payload: {} }));
   });
   it('reintenta un error al cerrar con la misma clave sin bloquear otra tarjeta', async () => {
     const { usuario, post, peticion } = preparar();
@@ -86,7 +102,7 @@ describe('Fila y acciones de recepción con ClienteReal', () => {
     act(() => { fireEvent.click(boton); fireEvent.click(boton); });
     await waitFor(() => expect(post).toHaveBeenCalledTimes(1));
     expect(screen.getByText('Turno 2')).toBeDefined();
-    expect(post).toHaveBeenCalledWith({ canal: 'clinica', actor: 'recepcion:tepic', tipo: 'CerrarAtencion', tramiteId: IDS.tramite, payload: {} });
+    expect(post).toHaveBeenCalledWith({ canal: 'clinica', actor: `recepcion:${IDS.sede}`, tipo: 'CerrarAtencion', tramiteId: IDS.tramite, payload: {} });
     lecturas.llegadasSede = [{ ...segunda, posicion: 1 }];
     await act(async () => resolver(Response.json({ ...GUION_FLUJO_A.find(p => p.paso.id === 'EN_CLINICA')!.respuesta, tramite: { ...segunda.cita.tramite, estado: 'ATENDIDA' } })));
     await waitFor(() => expect(screen.queryByText('Turno 2')).toBeNull());

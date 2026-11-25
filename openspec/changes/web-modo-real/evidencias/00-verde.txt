@@ -1,0 +1,84 @@
+﻿Comprobación directa con Node, fuentes TS y puertos locales de prueba
+Código: 0
+Consentimiento web con nivel 0
+Consentimiento callcenter con nivel 1
+node : (node:31380) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+En línea: 37 Carácter: 106
++ ... { $prueba | node --experimental-transform-types --input-type=module } ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((node:31380) Ex...nge at any time:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+Comprobación directa de datosContinuacion con SQL del adaptador y psql en localhost:55432, transacción revertida
+Código: 1
+node : fil[ruta omitida]:34
+En línea: 81 Carácter: 149
++ ... { $prueba | node --env-file=.env --experimental-transform-types --inp ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (fil[ruta omitida]:34:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    if(result.status!==0) throw new Error(result.error?.code??result.stderr);
+                                ^
+
+Error: ERROR:  relation "contacto_canal" does not exist
+
+LINE 1: INSERT INTO contacto_canal (id, canal, valor_externo) VALUES...
+
+                    ^
+
+
+    at Object.run (fil[ruta omitida]:34:33)
+    at Object.execute (data:text/javascript,export%20function%20sql(parts%2C...values)%7Breturn%20%7Bexecute%3Adb%3D%3E
+db.run(parts%2Cvalues)%7D%7D:1:61)
+    at LecturasComandosPostgres.datosContinuacion 
+(.\packages\adapters\out-postgres\src\LecturasComandosPostgres.ts:189:56)
+    at fil[ruta omitida]:38:61
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+
+Node.js v24.13.0
+
+Reintento SQL de datosContinuacion con transacción revertida
+Código: 1
+node : fil[ruta omitida]:34
+En línea: 53 Carácter: 97
++ ... { $prueba | node --env-file=.env --experimental-transform-types --inp ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (fil[ruta omitida]:34:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    if(result.status!==0) throw new Error(result.error?.code??result.stderr);
+                                ^
+
+Error: ERROR:  relation "contacto_canal" does not exist
+
+LINE 1: INSERT INTO contacto_canal (id, canal, valor_externo) VALUES...
+
+                    ^
+
+
+    at Object.run (fil[ruta omitida]:34:33)
+    at Object.execute (data:text/javascript,export%20function%20sql(parts%2C...values)%7Breturn%20%7Bexecute%3Adb%3D%3E
+db.run(parts%2Cvalues)%7D%7D:1:61)
+    at LecturasComandosPostgres.datosContinuacion 
+(.\packages\adapters\out-postgres\src\LecturasComandosPostgres.ts:189:56)
+    at fil[ruta omitida]:38:61
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+
+Node.js v24.13.0
+
+SQL del adaptador vía psql en localhost:55432, con tablas temporales y transacción revertida
+Código: 0
+callcenter => TOKEN_CC (nivel 1)
+web => TOKEN_WEB (nivel 0)
+node : (node:25712) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+En línea: 59 Carácter: 129
++ ... { $prueba | node --env-file=.env --experimental-transform-types --inp ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((node:25712) Ex...nge at any time:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(Use `node --trace-warnings ...` to show where the warning was created)
+

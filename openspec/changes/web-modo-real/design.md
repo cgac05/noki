@@ -1,0 +1,7 @@
+# Diseño: web-modo-real
+
+- **D1. Sin contrato nuevo.** La vista real compone lo ya publicado: consulta `catalogo` (servicio, sede, `precioCentavos`) y la ficha del hilo (`fichaHilo`) para leer `codigoContinuacion`, como `/callcenter`. Alternativa descartada: una consulta `web` en la API, porque toca contratos y API con una hora de margen.
+- **D2. Trámite propio de la pestaña.** Al pulsar «Cotizar», si la vista aún no tiene trámite, envía `IniciarTramite` y usa el `tramite.id` y `hiloId` de la respuesta para los comandos siguientes, en orden y uno a la vez. En modo simulado se conserva el camino actual (`demo.ids.tramiteWebId` y la consulta `web`).
+- **D3. Continuación.** «Continuar en WhatsApp» envía `SolicitarContinuacion` una sola vez y muestra el código, el enlace `/wa?continuar=<código>` y su QR. La vista no cambia el estado del trámite por sí misma.
+- **D4. Actor de recepción.** `LlegadaClinica` construye el actor con la sede de la cita (`recepcion:<sedeId>`); la API solo exige el prefijo `recepcion:`. Si `LlegadaVista` no trae el `sedeId`, usar el `sedeId` del contexto de `/clinica`.
+- **D5. Continuación del paciente desde web (revisión 2).** La guarda acepta `(callcenter, asesor:*)` y `(web, paciente)`. El token hereda el nivel del origen (0 para un paciente anónimo de web), como dice `politica-identidad`. `datosContinuacion` toma el canal del evento `ConsentimientoContactoWA` (o `tramite.canal_origen`) y deriva el método; no cambia `TokensJose` ni el contrato.

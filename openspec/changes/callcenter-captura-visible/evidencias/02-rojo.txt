@@ -1,0 +1,5 @@
+﻿BLOQUEADO antes de modificar el código de producción.
+corepack pnpm exec vitest run --project web apps/web/src/vistas/identidadAsesor.test.tsx apps/web/src/componentes/ModalFlow.test.tsx apps/web/src/vistas/flow.test.tsx
+Código 1. Node: EPERM: operation not permitted, open vitest.mjs.
+El reintento con --preserve-symlinks --preserve-symlinks-main devuelve EPERM.
+Vitest no llegó a las aserciones. No se observó el rojo funcional.
