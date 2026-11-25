@@ -3,7 +3,7 @@
 ## ADDED Requirements
 
 ### Requirement: Mensajes que inicia la empresa
-El simulador SHALL agregar al historial de cada número los mensajes recibidos por `wa:mensajes` para ese `waId`, como mensajes del bot y en el orden en que llegan, con las mismas reglas de botones, listas y redacción que los mensajes de respuesta. La aplicación SHALL escuchar la sala `wa:<waId>` de los números de la sesión (los números de demo `5210000000001` y `5210000000002`, más cualquier otro con el que se haya conversado en la pestaña), mientras la pestaña esté abierta y aunque la vista activa no sea `/wa`. Un mensaje para un número fuera de la sesión MUST NOT aparecer en ningún historial. Cuando un número de la sesión distinto del que se muestra recibe mensajes, `/wa` SHALL avisar qué número tiene mensajes nuevos y permitir cambiar a él.
+El simulador SHALL agregar al historial de cada número los mensajes recibidos por `wa:mensajes` para ese `waId`, como mensajes del bot y en el orden en que llegan, con las mismas reglas de botones, listas y redacción que los mensajes de respuesta. La aplicación SHALL escuchar la sala `wa:<waId>` de los números de la sesión (los números de demo `5210000000001`, `5210000000002` y `5210000000003`, más cualquier otro con el que se haya conversado en la pestaña), mientras la pestaña esté abierta y aunque la vista activa no sea `/wa`. Un mensaje para un número fuera de la sesión MUST NOT aparecer en ningún historial. Cuando un número de la sesión distinto del que se muestra recibe mensajes, `/wa` SHALL avisar qué número tiene mensajes nuevos y permitir cambiar a él.
 
 #### Scenario: Oferta recibida en el número activo
 - **WHEN** `/wa` muestra el número `5210000000002` y llega `wa:mensajes` para ese número con un mensaje de botones

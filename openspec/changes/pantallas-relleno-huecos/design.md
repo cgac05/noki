@@ -8,7 +8,7 @@ Ver `proposal.md` (Why). Estado actual de `apps/web` que condiciona el enfoque:
 - `HistorialWa` guarda por número, en `sessionStorage`, lo que el usuario envía y lo que el bot responde a `POST /api/canales/wa/mensajes`. No tiene forma de recibir mensajes que inicia la empresa.
 - `ProveedorCliente` invalida todas las lecturas al llegar cualquier evento de `EVENTOS_SOCKET` (modo real) o al cambiar el guion (modo simulado). Por eso `wa:mensajes` y los eventos de `admin` ya refrescan las lecturas sin trabajo extra.
 - `useAccion` envía comandos con clave de idempotencia y reintenta con la misma clave. `/app` aún no envía comandos.
-- Contrato disponible (sin cambios): `CancelarCita` (`payload.motivo` opcional), `payloadBoton`, `MensajeBot`, `wa:mensajes`, `wa:<waId>`, `HuecoVista`, `panelHuecos`. Beto es `5210000000002` en la semilla de `apps/api`.
+- Contrato disponible (sin cambios): `CancelarCita` (`payload.motivo` opcional), `payloadBoton`, `MensajeBot`, `wa:mensajes`, `wa:<waId>`, `HuecoVista`, `panelHuecos`. Beto es `5210000000002` y Carla `5210000000003` en la semilla del frente A (`relleno-huecos`, revisión 2), que también incluye la oleada: Carla puede recibir ofertas y `OfertaPerdida`.
 
 ## Goals / Non-Goals
 
@@ -24,7 +24,7 @@ Ver `proposal.md` (Why). Estado actual de `apps/web` que condiciona el enfoque:
 ## Decisions
 
 ### D1. Los mensajes que inicia la empresa entran a `HistorialWa`
-`HistorialWa` gana un método para agregar mensajes del bot a un número, con la misma redacción y proyección a `sessionStorage` que las respuestas, y un registro de los números de la sesión: los dos números de demo más cualquiera con el que se converse. Así los botones, las listas, la regla de «solo el último mensaje del bot tiene botones activos» y la persistencia funcionan sin cambios en `ChatWa`.
+`HistorialWa` gana un método para agregar mensajes del bot a un número, con la misma redacción y proyección a `sessionStorage` que las respuestas, y un registro de los números de la sesión: los tres números de demo (Ana, Beto y Carla) más cualquiera con el que se converse. Así los botones, las listas, la regla de «solo el último mensaje del bot tiene botones activos» y la persistencia funcionan sin cambios en `ChatWa`.
 - Alternativa descartada: un estado aparte en `/wa` para los mensajes empujados. Duplicaría la lógica de botones y se perdería al cambiar de vista.
 
 ### D2. Escucha a nivel de aplicación, no de vista

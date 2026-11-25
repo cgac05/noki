@@ -9,7 +9,7 @@ El contrato del relleno de huecos (`contratos-relleno-huecos`, archivado el 2026
 - `/app`: botón «Cancelar cita» en cada cita `CONFIRMADA`, con confirmación en la propia vista. Envía `CancelarCita` (canal `app`, actor `paciente`) con el trámite de la cita y muestra el resultado que devuelve el cliente: cancelada o pendiente de aprobar por WhatsApp.
 - `/wa`: muestra en el historial los mensajes que inicia la empresa (`wa:mensajes`) para los números de la sesión, aunque lleguen mientras se ve otra vista u otro número, y avisa cuando otro número de la sesión recibió mensajes nuevos. Los botones de esos mensajes se responden con `payloadBoton`, igual que los demás.
 - `/admin`: sección «Panel de huecos» con `panelHuecos` (servicio, sede, fecha en la zona de la sede, estado y sus ofertas en el orden recibido) y etiquetas en español para las cuatro claves de KPI del relleno de huecos documentadas en `docs/contratos.md`.
-- Cliente simulado: un segundo guion, el Flujo C, elegible desde la barra de demo junto al Flujo A, con Ana (`5210000000001`) que cancela y aprueba, Beto (`5210000000002`) que recibe y acepta la oferta, y el efecto dominó en el panel.
+- Cliente simulado: un segundo guion, el Flujo C, elegible desde la barra de demo junto al Flujo A, con Ana (`5210000000001`) que cancela y aprueba, Beto (`5210000000002`) que recibe y acepta la oferta, y el efecto dominó en el panel. Carla (`5210000000003`) es el tercer número de demo que escucha `/wa`, por la oleada del frente A.
 - Sin cambios en `packages/contracts` ni en archivos del frente A.
 
 ## Capabilities

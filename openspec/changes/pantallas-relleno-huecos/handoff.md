@@ -4,8 +4,10 @@
 - Objetivo: las pantallas del Flujo C (relleno de huecos) sobre el cliente simulado, listas para `VITE_API=real`; ver `proposal.md` (Why).
 - Alcance: `proposal.md` (What Changes) y design D1–D6, sin lo listado en «Non-Goals» de `design.md`.
 - Autorización de implementación del frente B: otorgada por `LuisMaster119` en el chat de Claude Code el 2026-11-25, en respuesta a "¿Autorizas, por el frente B, pantallas-relleno-huecos con la revisión 1?". Cita: "Autorizo por B". Identidad: la del último mensaje en que el usuario se identificó como frente B ("Soy LuisMaster119"), y en los mensajes previos pidió el prompt para el frente A y que Claude siguiera con la parte de B. Cubre la revisión 1 (hashes de abajo, comprobados sin cambios al registrarla) y que la implemente Codex del frente B. No autoriza commits.
-- Estado: autorizado; Codex (frente B) puede implementar 1.1–5.1.
-- Revisión presentada: revisión 1 en la rama `feat/pantallas-relleno-huecos`, sobre `feat/contratos-relleno-huecos` `d37b8c2` (los contratos aún no están en `main` `230d246`). SHA-256 (12 primeros caracteres): `proposal.md` c013084d6220 · `design.md` b6bbc2e115e1 · `tasks.md` 6e8921c31198 · `specs/cliente-api-canales/spec.md` a7eb18123fa8 · `specs/consolas-internas/spec.md` d2511d7efd09 · `specs/navegacion-canales/spec.md` 7e060a7f2864 · `specs/simulador-whatsapp/spec.md` f768c7fb4733. `openspec validate pantallas-relleno-huecos --type change --strict --no-interactive` → válido.
+- Revisión 2 (2026-11-25): agrega a Carla (`5210000000003`) como tercer número de demo que escucha `/wa`, por la oleada del frente A (`relleno-huecos`, revisión 2). Cambian `proposal.md`, `design.md`, `tasks.md` (1.2 y 1.3) y `specs/simulador-whatsapp/spec.md`; nada más.
+- Autorización de la revisión 2 del frente B: otorgada por `LuisMaster119` en el chat de Claude Code el 2026-11-25, en respuesta a "¿Autorizas, por el frente B, pantallas-relleno-huecos con la revisión 2 (con commit y push)?". Cita: "Autorizo, commit y push". Cubre la revisión 2 (hashes de abajo, comprobados sin cambios al registrarla) y su commit y push.
+- Estado: autorizado; Codex (frente B) puede implementar 1.1–5.1 con la revisión 2.
+- Revisión presentada: revisión 2 en la rama `feat/pantallas-relleno-huecos`, sobre `main` `d37b8c2` (ya incluye `contratos-relleno-huecos`; no hace falta rebase). SHA-256 (12 primeros caracteres): `proposal.md` 94726aca0f3c · `design.md` b01ac274dd42 · `tasks.md` 83ec2d6625fd · `specs/cliente-api-canales/spec.md` a7eb18123fa8 · `specs/consolas-internas/spec.md` d2511d7efd09 · `specs/navegacion-canales/spec.md` 7e060a7f2864 · `specs/simulador-whatsapp/spec.md` b08d956cc26a. `openspec validate pantallas-relleno-huecos --type change --strict --no-interactive` → válido.
 - Artefactos a leer:
   - `proposal.md`, los cuatro specs, `design.md` y `tasks.md`.
   - `PLAN.md` §10.1, §10.8 y §12 (Flujo C).
@@ -22,5 +24,4 @@
 - Detener la parte afectada si:
   - las respuestas del frente A (Open Questions de `design.md`) cambian algo más que los datos de `guionFlujoC.ts`;
   - el frente A integra en `main` un cambio de `packages/contracts` o de `apps/web`: rebase y avisar antes de seguir;
-  - `feat/contratos-relleno-huecos` se integra en `main`: rebase sobre `main` antes de continuar.
 - Autorización de cierre: PENDIENTE (frente B).
