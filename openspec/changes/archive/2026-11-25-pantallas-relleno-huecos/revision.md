@@ -1,6 +1,7 @@
 # Revisión: pantallas-relleno-huecos
 
-- Dictamen: PASS para las tareas 1.1–5.1 (revisión 3). La 5.2 está BLOQUEADA porque depende del núcleo del frente A; queda pendiente tal como prevé `tasks.md`.
+- Dictamen: PASS para las tareas 1.1–5.2 (revisión 3). La 5.2, bloqueada al archivar, se ejecutó después de que el núcleo del frente A llegara a `main` (ver «Segunda vuelta: 5.2»).
+- Dictamen inicial: PASS para las tareas 1.1–5.1, con la 5.2 BLOQUEADA por el núcleo del frente A.
 - Revisión inspeccionada: cambios locales sin commit en `feat/pantallas-relleno-huecos` sobre `026181c` (`origin/main` = `d37b8c2`, que es su ancestro; no hace falta rebase), según `implementacion.md` y `evidencias/05-archivos-entregados.json`. Revisado por Claude el 2026-11-25.
 - Cobertura:
   - Requisitos de los cuatro deltas: SW «Mensajes que inicia la empresa», NC «Cancelar una cita desde la app», CI «Panel de huecos en el tablero» y CA «Guion simulado del Flujo C».
@@ -66,3 +67,17 @@ No hay hallazgos CRITICAL ni WARNING.
 - La autorización de cierre del frente B sigue PENDIENTE en `handoff.md`. Este PASS no es una autorización.
 
 - Próximo responsable: el usuario (`LuisMaster119`, frente B), para decidir el cierre o la espera de 5.2 y, si quiere, pedir a Codex que atienda H-01 o H-02.
+
+## Segunda vuelta: 5.2 (2026-11-25)
+
+- Revisión probada: `feat/pantallas-relleno-huecos` en `a14a9fe`, rebasada sobre `origin/main` `0157047`, que ya incluye el núcleo de `relleno-huecos` (`8f48a71`). Sobre esa base pasan `eslint`, `tsc` (paquetes y pruebas), `lint:deps` y `pnpm test` (77 archivos, 462 pruebas).
+- Resultado de 5.2: PASS. El Flujo C se ejecutó con `VITE_API=real`, la API en `DEMO_MODE=true` y la base reiniciada con `pnpm demo:reset`, con autorización del frente B. Las latencias medidas estuvieron entre 0,13 y 1,04 s (criterio de `PLAN.md` §10.1: menos de 5 s). El panel y los KPI se actualizaron en vivo y el reenvío de ofertas no duplicó burbujas. Detalle en `evidencias/06-recorrido-real.md`.
+- Los textos reales coinciden con D6 de `relleno-huecos`. Solo difiere el formato de fecha: el servidor real escribe «jueves 3 de diciembre, 09:15» y el guion simulado «26 de noviembre de 2026, 09:15». No afecta al modo real.
+
+| Hallazgo | Gravedad | Requisito / tarea | Evidencia | Corrección necesaria / estado |
+|---|---|---|---|---|
+| H-04 | SUGGESTION | CA / 4.2 | `cliente/mock/guionFlujoC.ts` frente a `packages/adapters/in-http/src/textosWa.ts` (`fechaLarga`) | Alinear el formato de fecha del guion simulado con el real para que el ensayo simulado se vea igual. Opcional. |
+| O-01 | Observación externa (frente A) | `PLAN.md` §12, demo del Flujo C | `06-recorrido-real.md`; `GET /api/demo/contexto` cambia de `…014` (Ana) a `…015` (Beto) al aprobar | Al crearse la oferta, el contexto de demo pasa al hilo más reciente (el de Beto) y `/app` muestra la cita de Beto. Ana no llega a ver «La cita se canceló.». Las pantallas se comportan según su spec (muestran lo que llega). Decidir con el frente A si el contexto de demo debe quedarse con Ana durante el Flujo C; no se incorpora a este cambio. |
+
+- Condiciones residuales: H-01 a H-04 son opcionales. O-01 se remite al usuario y al frente A. Antes de cada ensayo hay que reiniciar la base (`pnpm demo:reset`) y, si la hora de Tepic está entre las 22:00 y las 07:00, adelantar el reloj.
+- Próximo responsable: el usuario, para abrir el PR (`gh` no está autenticado en esta máquina) y decidir sobre O-01 con el frente A.
