@@ -1,0 +1,26 @@
+# Transferencia: pantallas-relleno-huecos
+
+- Responsable: frente B (`LuisMaster119`). Solo toca `apps/web/src`; no hay archivos compartidos ni del frente A. Implementa Codex del frente B.
+- Objetivo: las pantallas del Flujo C (relleno de huecos) sobre el cliente simulado, listas para `VITE_API=real`; ver `proposal.md` (Why).
+- Alcance: `proposal.md` (What Changes) y design D1–D6, sin lo listado en «Non-Goals» de `design.md`.
+- Autorización de implementación del frente B: otorgada por `LuisMaster119` en el chat de Claude Code el 2026-11-25, en respuesta a "¿Autorizas, por el frente B, pantallas-relleno-huecos con la revisión 1?". Cita: "Autorizo por B". Identidad: la del último mensaje en que el usuario se identificó como frente B ("Soy LuisMaster119"), y en los mensajes previos pidió el prompt para el frente A y que Claude siguiera con la parte de B. Cubre la revisión 1 (hashes de abajo, comprobados sin cambios al registrarla) y que la implemente Codex del frente B. No autoriza commits.
+- Estado: autorizado; Codex (frente B) puede implementar 1.1–5.1.
+- Revisión presentada: revisión 1 en la rama `feat/pantallas-relleno-huecos`, sobre `feat/contratos-relleno-huecos` `d37b8c2` (los contratos aún no están en `main` `230d246`). SHA-256 (12 primeros caracteres): `proposal.md` c013084d6220 · `design.md` b6bbc2e115e1 · `tasks.md` 6e8921c31198 · `specs/cliente-api-canales/spec.md` a7eb18123fa8 · `specs/consolas-internas/spec.md` d2511d7efd09 · `specs/navegacion-canales/spec.md` 7e060a7f2864 · `specs/simulador-whatsapp/spec.md` f768c7fb4733. `openspec validate pantallas-relleno-huecos --type change --strict --no-interactive` → válido.
+- Artefactos a leer:
+  - `proposal.md`, los cuatro specs, `design.md` y `tasks.md`.
+  - `PLAN.md` §10.1, §10.8 y §12 (Flujo C).
+  - `openspec/specs/{simulador-whatsapp,consolas-internas,navegacion-canales,cliente-api-canales,contratos-canales,contratos-consultas}/spec.md`.
+  - `docs/contratos.md` (`wa:mensajes`, sala `wa:<waId>`, `HuecoVista`, `panelHuecos`, KPI) y `docs/trabajo-paralelo.md`.
+- Tareas pendientes: 1.1–5.1 de `tasks.md`. 5.2 queda bloqueada hasta que el frente A integre el núcleo del relleno de huecos.
+- Restricciones:
+  - Solo `apps/web/src` y la carpeta del cambio. Sin cambios en `packages/contracts`: si hace falta uno, detener y avisar para un cambio compartido.
+  - Las vistas muestran lo que llega y no deciden textos, estados ni orden (`navegacion-canales`, «Vistas sin lógica de negocio»).
+  - Datos ficticios en el guion; la oferta no menciona a quien canceló y los `payload` son referencias opacas.
+  - Evidencia en la carpeta del cambio. No crear commits sin autorización.
+- Criterios de aceptación: requisitos y escenarios de los cuatro deltas; el Flujo A simulado sigue igual; `main` sigue en verde.
+- Validaciones requeridas: rojo de 1.1, 2.1, 3.1 y 4.1, recorrido 4.3 y control final 5.1. `pnpm test:integracion` no aplica.
+- Detener la parte afectada si:
+  - las respuestas del frente A (Open Questions de `design.md`) cambian algo más que los datos de `guionFlujoC.ts`;
+  - el frente A integra en `main` un cambio de `packages/contracts` o de `apps/web`: rebase y avisar antes de seguir;
+  - `feat/contratos-relleno-huecos` se integra en `main`: rebase sobre `main` antes de continuar.
+- Autorización de cierre: PENDIENTE (frente B).
