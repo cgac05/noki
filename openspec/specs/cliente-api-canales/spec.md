@@ -55,11 +55,11 @@ El cliente real SHALL enviar comandos a `POST /api/comandos` y mensajes a `POST 
 El modo simulado SHALL reproducir el Flujo A de `PLAN.md` §12 como un guion fijo y compartido entre todas las vistas. El guion incluye:
 
 - en el call center, la llamada con el ANI de demo, la cotización del paquete en Tepic y la solicitud de continuación por WhatsApp, que es la que genera el código;
-- en WhatsApp, la continuación con el mensaje `CONTINUAR <código>` en el paso del horario y la verificación con un Flow;
+- en WhatsApp, la continuación con el mensaje `CONTINUAR <código>` en el paso del horario y la identificación de la paciente por pasos: para quién es la cita, «¿eres Ana P.?» y la fecha de nacimiento en un Flow;
 - la cita confirmada con QR en la app y la llegada registrada en la clínica;
 - la línea de tiempo y los eventos de tiempo real de cada paso.
 
-El guion MUST poder reiniciarse y MUST usar solo datos ficticios.
+En el guion, el call center no pide la casilla `paciente`. El guion MUST poder reiniciarse y MUST usar solo datos ficticios.
 
 #### Scenario: Continuidad simulada
 - **WHEN** tras cotizar y solicitar la continuación en `/callcenter` se envía desde `/wa` el mensaje `CONTINUAR <código>` del guion
@@ -73,9 +73,17 @@ El guion MUST poder reiniciarse y MUST usar solo datos ficticios.
 - **WHEN** el call center envía `IniciarTramite` sin `contacto` o con otro número distinto del de demo
 - **THEN** el guion responde con el error `NO_DISPONIBLE` y la ayuda del paso, y no avanza
 
+#### Scenario: Identificación por pasos en WhatsApp
+- **WHEN** tras reservar el horario y pulsar «Revisar cita» se elige «Para mí» y luego «Soy Ana P.»
+- **THEN** el bot pide la fecha de nacimiento con un Flow de captura protegida; la respuesta de cada paso lleva la casilla `paciente` con su `paso`, y la línea de tiempo registra `DestinatarioDeclarado`
+
+#### Scenario: Opciones fuera del guion
+- **WHEN** en la identificación se elige «Para otra persona» o «No soy ninguno»
+- **THEN** el guion responde con un mensaje de ayuda válido y no avanza
+
 #### Scenario: Verificación con Flow
-- **WHEN** el guion pide la verificación y recibe un `flowResponse` con todos los campos requeridos
-- **THEN** avanza al paso de confirmación sin repetir ningún valor recibido en sus mensajes
+- **WHEN** el guion pide la fecha de nacimiento y recibe un `flowResponse` con todos los campos requeridos
+- **THEN** registra `IdentidadComprobada` y avanza al paso de confirmación, sin repetir ningún valor recibido en sus mensajes
 
 #### Scenario: Flow incompleto
 - **WHEN** el guion recibe un `flowResponse` sin un campo requerido
