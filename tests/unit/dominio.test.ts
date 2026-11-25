@@ -1,9 +1,17 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import type { RiesgoEstimado } from '../../packages/domain/src/prediccion/nivel.ts';
 import {
   ESTADOS_TRAMITE, CASILLAS, TIPOS_TRAMITE, EVENTOS_DOMINIO,
   ReglaViolada, StepUpRequerido, ConflictoVersion, NoEncontrado, TransicionInvalida,
   type EventoDominio, type TramiteRegistro,
 } from '../../packages/domain/src/index.ts';
+
+const eventosHuecos = [
+  'HuecoLiberado', 'HuecoAsignado', 'HuecoDesierto', 'OfertaEnviada', 'OfertaAceptada',
+  'OfertaRechazada', 'OfertaExpirada', 'OfertaPerdida', 'CitaAdelantada',
+  'InteresAdelantoRegistrado', 'InteresAdelantoCancelado',
+] as const;
 
 describe('vocabulario y eventos de dominio', () => {
   it('declara exactamente los estados vigentes y ninguna fase obsoleta', () => {
@@ -11,13 +19,42 @@ describe('vocabulario y eventos de dominio', () => {
     for (const estado of ['SUSPENDIDO', 'SERVICIO_SELECCIONADO', 'REQUISITOS_PENDIENTES', 'UBICACION_SELECCIONADA']) expect(ESTADOS_TRAMITE).not.toContain(estado);
     expect(CASILLAS).toEqual(['servicio', 'sede', 'paciente', 'requisitos', 'elegibilidad', 'horario']);
     expect(TIPOS_TRAMITE).toEqual(['AGENDAR', 'ADELANTO', 'FACTURA']);
-    expect(EVENTOS_DOMINIO).toHaveLength(40);
-    expect(EVENTOS_DOMINIO).toEqual(expect.arrayContaining([
-      'HuecoLiberado', 'HuecoAsignado', 'HuecoDesierto', 'OfertaEnviada', 'OfertaAceptada',
-      'OfertaRechazada', 'OfertaExpirada', 'OfertaPerdida', 'CitaAdelantada',
-      'InteresAdelantoRegistrado', 'InteresAdelantoCancelado',
-    ]));
+    expect(EVENTOS_DOMINIO).toHaveLength(41);
+    expect(EVENTOS_DOMINIO).toEqual(expect.arrayContaining([...eventosHuecos, 'RiesgoEstimado']));
     expectTypeOf<(typeof EVENTOS_DOMINIO)[number]>().toEqualTypeOf<EventoDominio['tipo']>();
+  });
+
+  it('exige el nivel de riesgo y rechaza el payload de un hueco', () => {
+    type PayloadRiesgo = Extract<EventoDominio, { tipo: 'RiesgoEstimado' }>['payload'];
+    expectTypeOf<PayloadRiesgo>().toEqualTypeOf<Pick<RiesgoEstimado, 'nivel' | 'probabilidad' | 'origen' | 'versionModelo'>>();
+    // @ts-expect-error: RiesgoEstimado exige nivel
+    const sinNivel: PayloadRiesgo = { probabilidad: 0.4, origen: 'REGLAS', versionModelo: 'reglas@1' };
+    expect(sinNivel).not.toHaveProperty('nivel');
+    const hueco = {} as Extract<EventoDominio, { tipo: 'HuecoLiberado' }>['payload'];
+    // @ts-expect-error: RiesgoEstimado no recibe el payload de HuecoLiberado
+    const payloadHueco: PayloadRiesgo = hueco;
+    expect(payloadHueco).not.toHaveProperty('nivel');
+  });
+
+  it('no referencia a quien liberó el horario en eventos del candidato', () => {
+    type EventoCandidato = Extract<EventoDominio, { tipo: Exclude<(typeof eventosHuecos)[number], 'HuecoLiberado' | 'HuecoAsignado' | 'HuecoDesierto'> }>;
+    type Claves<T> = T extends unknown ? keyof T : never;
+    type ClavesOrigen = Extract<Claves<EventoCandidato['payload']>, 'pacienteId' | 'tramiteId' | 'origenReservaId'>;
+    expectTypeOf<ClavesOrigen>().toEqualTypeOf<never>();
+  });
+
+  it('mantiene las tablas de eventos tipados del documento iguales al catálogo', () => {
+    const documento = readFileSync(new URL('../../docs/eventos.md', import.meta.url), 'utf8');
+    const tablas = documento.split(/^## /m).filter(seccion => seccion.split(/\r?\n/)[0]?.endsWith(': eventos tipados'));
+    const nombres = tablas.flatMap(tabla => [...tabla.matchAll(/^\| `([A-Za-z]+)` \|/gm)].map(coincidencia => coincidencia[1]));
+    expect(nombres.sort()).toEqual([...EVENTOS_DOMINIO].sort());
+  });
+
+  it('no reserva los once eventos de huecos ni el de predicción', () => {
+    const documento = readFileSync(new URL('../../docs/eventos.md', import.meta.url), 'utf8');
+    const reservadas = documento.split('## Familias reservadas')[1];
+    expect(reservadas).toBeDefined();
+    for (const tipo of [...eventosHuecos, 'RiesgoEstimado']) expect(reservadas).not.toContain(`\`${tipo}\``);
   });
 
   it('exige el tipo de trámite y vincula el payload al evento', () => {

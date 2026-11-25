@@ -1,7 +1,8 @@
 import type { HiloId, TramiteId, PacienteId, ServicioId, SedeId, ReservaId, RecursoId } from './identificadores.ts';
 import type { Actor, Canal, NivelAuth, TipoTramite, MetodoVinculo } from './vocabulario.ts';
+import type { RiesgoEstimado } from './prediccion/nivel.ts';
 
-export const EVENTOS_DOMINIO = ["TramiteIniciado","ServicioSeleccionado","SedeSeleccionada","CotizacionGenerada","PreparacionAceptada","RequisitoCumplido","PacienteAsignado","DestinatarioDeclarado","PacienteRegistrado","ItinerarioPropuesto","ItinerarioAceptado","HorarioReservado","ReservaExpirada","CitaConfirmada","CitaReprogramada","CitaCancelada","PacienteLlego","TurnoActualizado","AtencionCerrada","Inasistencia","TramiteSuspendido","TramiteExpirado","CanalCambiado","PacienteReconocido","IdentidadVinculada","IdentidadComprobada","ConsentimientoOtorgado","ConsentimientoContactoWA","IntentoVerificacionFallido", "InteresAdelantoRegistrado", "InteresAdelantoCancelado", "HuecoLiberado", "OfertaEnviada", "OfertaAceptada", "OfertaRechazada", "OfertaExpirada", "OfertaPerdida", "CitaAdelantada", "HuecoAsignado", "HuecoDesierto"] as const;
+export const EVENTOS_DOMINIO = ["TramiteIniciado","ServicioSeleccionado","SedeSeleccionada","CotizacionGenerada","PreparacionAceptada","RequisitoCumplido","PacienteAsignado","DestinatarioDeclarado","PacienteRegistrado","ItinerarioPropuesto","ItinerarioAceptado","HorarioReservado","ReservaExpirada","CitaConfirmada","CitaReprogramada","CitaCancelada","PacienteLlego","TurnoActualizado","AtencionCerrada","Inasistencia","TramiteSuspendido","TramiteExpirado","CanalCambiado","PacienteReconocido","IdentidadVinculada","IdentidadComprobada","ConsentimientoOtorgado","ConsentimientoContactoWA","IntentoVerificacionFallido", "InteresAdelantoRegistrado", "InteresAdelantoCancelado", "HuecoLiberado", "OfertaEnviada", "OfertaAceptada", "OfertaRechazada", "OfertaExpirada", "OfertaPerdida", "CitaAdelantada", "HuecoAsignado", "HuecoDesierto", "RiesgoEstimado"] as const;
 
 export interface EnvolturaEvento<T extends string, P> {
   tipo: T;
@@ -18,6 +19,7 @@ export interface EnvolturaEvento<T extends string, P> {
 }
 
 export interface PayloadsEvento {
+  RiesgoEstimado: Pick<RiesgoEstimado, 'nivel' | 'probabilidad' | 'origen' | 'versionModelo'>;
   InteresAdelantoRegistrado: { interesId: string; servicioId: ServicioId };
   InteresAdelantoCancelado: { interesId: string };
   HuecoLiberado: { huecoId: string; sedeId: SedeId; recursoId: RecursoId; servicioId: ServicioId; inicio: string; estrategia: 'SECUENCIAL' | 'OLEADA' };
