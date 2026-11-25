@@ -263,3 +263,4 @@ Cada acción SHALL enviar una sola vez aunque se pulse dos veces, y los controle
 #### Scenario: KPI del relleno de huecos
 - **WHEN** las métricas traen `horasRecursoRecuperadas`
 - **THEN** el tablero lo muestra con un nombre legible y su valor
+

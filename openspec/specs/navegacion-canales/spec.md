@@ -120,3 +120,4 @@ Cada ruta SHALL mostrar como mínimo:
 #### Scenario: Error al cancelar
 - **WHEN** el envío de `CancelarCita` falla por red
 - **THEN** la vista muestra el error y reintentar envía el mismo comando con la misma clave de idempotencia
+
