@@ -1,0 +1,43 @@
+{
+  "raizCSSSinCambios": true,
+  "sinSombras": true,
+  "resultados": [
+    {
+      "ruta": "apps/web/src/componentes/BarraDemo.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/componentes/Layout.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/componentes/LineaTiempo.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/componentes/EstadoContexto.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/vistas/Portada.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/vistas/Admin.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/vistas/App.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/vistas/Clinica.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/vistas/Bandeja.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    }
+  ],
+  "metodo": "Comparación exacta de los TSX previos y actuales, quitando solo atributos className literales y la envoltura decorativa de los canales. Incluye textos, enlaces, controles, consultas, callbacks y orden del DOM."
+}

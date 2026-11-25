@@ -1,0 +1,4049 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ❯ |web| src/identidadVisual.test.ts (5 tests | 5 failed) 21ms
+   × mantiene contraste AA del texto en todas las superficies declaradas 8ms
+   × distingue el foco y los bordes de control de sus superficies 2ms
+   × centraliza los colores y reserva el verde para la marca grande 3ms
+   × sirve Open Sans latina local en los tres pesos sin fuentes de terceros 2ms
+   × declara la marca en los metadatos y no incluye archivos gráficos del logo 6ms
+ ❯ |web| src/rutas.test.tsx (19 tests | 9 failed) 2028ms
+     × presenta la identidad aprobada en / 532ms
+     × presenta la identidad aprobada en /web 181ms
+     × presenta la identidad aprobada en /wa 194ms
+     × presenta la identidad aprobada en /app 121ms
+     × presenta la identidad aprobada en /callcenter 148ms
+     × presenta la identidad aprobada en /clinica 114ms
+     × presenta la identidad aprobada en /admin 175ms
+     × presenta la identidad aprobada en /bandeja 112ms
+     × presenta la identidad aprobada en /inexistente 126ms
+     ✓ Cada ruta renderiza: /web 20ms
+     ✓ Cada ruta renderiza: /wa 21ms
+     ✓ Cada ruta renderiza: /app 17ms
+     ✓ Cada ruta renderiza: /callcenter 20ms
+     ✓ Cada ruta renderiza: /clinica 17ms
+     ✓ Cada ruta renderiza: /admin 18ms
+     ✓ Cada ruta renderiza: /bandeja 15ms
+     ✓ conserva el contenido de la portada 22ms
+     ✓ Ruta desconocida: permite volver a la portada 98ms
+     ✓ cambia de canal mediante la barra de demo 77ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 14 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/identidadVisual.test.ts > mantiene contraste AA del texto en todas las superficies declaradas
+AssertionError: --tinta: expected undefined to be defined
+ ❯ contraste src/identidadVisual.test.ts:20:37
+     18| 
+     19| function contraste(frente: string, fondo: string) {
+     20|   expect(variables[frente], frente).toBeDefined();
+       |                                     ^
+     21|   expect(variables[fondo], fondo).toBeDefined();
+     22|   const valores = [luminancia(variables[frente]!), luminancia(variable…
+ ❯ src/identidadVisual.test.ts:29:14
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/14]⎯
+
+ FAIL  |web| src/identidadVisual.test.ts > distingue el foco y los bordes de control de sus superficies
+AssertionError: --sd-accion: expected undefined to be defined
+ ❯ contraste src/identidadVisual.test.ts:20:37
+     18| 
+     19| function contraste(frente: string, fondo: string) {
+     20|   expect(variables[frente], frente).toBeDefined();
+       |                                     ^
+     21|   expect(variables[fondo], fondo).toBeDefined();
+     22|   const valores = [luminancia(variables[frente]!), luminancia(variable…
+ ❯ src/identidadVisual.test.ts:38:70
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/14]⎯
+
+ FAIL  |web| src/identidadVisual.test.ts > centraliza los colores y reserva el verde para la marca grande
+AssertionError: expected '@import "tailwindcss";\n\n\nbody { ma…' not to match /#[\da-f]{3,8}\b|\brgba?\s*\(|\bhsla?…/i
+
+- Expected: 
+/#[\da-f]{3,8}\b|\brgba?\s*\(|\bhsla?\s*\(/i
+
++ Received: 
+"@import \"tailwindcss\";
+
+
+body { margin: 0; min-width: 320px; }
+::selection { background: #c9e8c8; color: #163c31; }
+:focus-visible { outline: 3px solid #21734f; outline-offset: 4px; }
+.cabecera, .contenido, .pie { width: min(100% - 3rem, 72rem); margin-inline: auto; }
+.cabecera { padding-block: 1.5rem; border-bottom: 1px solid var(--linea); }
+.marca { font-size: 2rem; font-weight: 700; letter-spacing: -0.035em; }
+.marca { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; color: inherit; }
+.contexto { font-size: 0.875rem; color: var(--tinta-secundaria); text-align: right; }
+.contenido { padding-block: clamp(3.5rem, 8vw, 7rem); }
+h1 { max-width: 15ch; margin: 0; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; text-wrap: balance; }
+.introduccion { max-width: 46ch; margin-top: 2rem; font-size: 1.125rem; line-height: 1.65; color: var(--tinta-secundaria); }
+.canales { margin-top: 4rem; }
+h2 { margin: 0 0 1rem; font-size: 1rem; font-weight: 600; }
+.canales ul { margin: 0; padding: 0; list-style: none; gap: 1rem; }
+.canales li { padding-block: 1rem; border-top: 1px solid var(--linea); font-size: 1.125rem; }
+.alcance { margin-top: 2rem; max-width: 65ch; color: var(--tinta-secundaria); font-size: 0.9375rem; line-height: 1.6; }
+.pie { border-top: 1px solid var(--linea); padding-block: 1.5rem; color: var(--tinta-secundaria); font-size: 0.8125rem; line-height: 1.5; }
+.barra-demo { position: sticky; top: 0; z-index: 10; background: #f7faf6; border-bottom: 1px solid var(--linea); }
+.barra-demo ul { display: flex; flex-wrap: wrap; gap: 0.25rem; width: min(100% - 3rem, 72rem); margin: 0 auto; padding-block: 0.5rem; list-style: none; }
+.barra-demo a, .canales a, .enlace-principal { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding-inline: 0.75rem; color: inherit; text-underline-offset: 0.2em; }
+.barra-demo a { text-decoration: none; font-size: 0.875rem; }
+.barra-demo a[aria-current=\"page\"] { background: #c9e8c8; font-weight: 600; }
+.barra-demo a:hover, .canales a:hover, .enlace-principal:hover { background: #dfedde; }
+.canales li { padding-block: 0.5rem; }
+.canales a { justify-content: flex-start; width: 100%; padding-inline: 0; }
+.saltar-contenido { position: fixed; top: 0.5rem; left: 1rem; z-index: 20; padding: 0.75rem; background: #f7faf6; transform: translateY(-200%); }
+.saltar-contenido:focus { transform: translateY(0); }
+.contenido:focus { outline: none; }
+.control-demo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; width: min(100% - 3rem, 72rem); margin: 0 auto; padding-bottom: 0.5rem; }
+.control-demo p { margin: 0; font-size: 0.8125rem; color: var(--tinta-secundaria); }
+button, input { font: inherit; }
+button { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0.625rem 1rem; border: 1px solid #21734f; border-radius: 0.5rem; background: #21734f; color: #fff; line-height: 1.4; cursor: pointer; }
+button:hover:enabled { background: #18593d; }
+button:disabled { background: #e4ece3; color: #465e52; border-color: var(--linea); cursor: default; }
+.control-demo button { background: transparent; color: #163c31; border-color: var(--linea); font-size: 0.8125rem; }
+.control-demo button:hover:enabled { background: #dfedde; }
+.control-demo label { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.8125rem; }
+.control-demo select { min-height: 44px; max-width: 100%; padding: 0.5rem; border: 1px solid var(--linea); border-radius: 0.5rem; color: inherit; background: #fff; font: inherit; }
+.panel-huecos, .ofertas-hueco { margin: 0; padding: 0; list-style: none; }
+.panel-huecos > li { padding-block: 1.5rem; border-bottom: 1px solid var(--linea); }
+.panel-huecos h3 { margin-top: 0; }
+.ofertas-hueco > li { padding-block: 0.75rem; border-top: 1px solid var(--linea); }
+.ofertas-hueco .datos { margin-block: 0.75rem 0; }
+.panel-huecos time { font-variant-numeric: tabular-nums; }
+.seccion { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--linea); }
+.seccion p, .mensaje-bot p, .estado-error p { max-width: 65ch; line-height: 1.65; margin-block: 0.5rem 1rem; }
+.seccion h2 { font-size: 1.25rem; line-height: 1.4; }
+h3 { margin: 0.75rem 0 0.5rem; font-size: 1rem; font-weight: 600; }
+.acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-block: 1rem; }
+.reloj-demo-formulario label { display: block; font-weight: 600; }
+.reloj-demo-formulario input { box-sizing: border-box; width: min(100%, 12rem); min-height: 44px; padding: 0.625rem 0.75rem; border: 1px solid var(--linea); border-radius: 0.5rem; color: inherit; background: #fff; caret-color: #21734f; }
+.reloj-demo-formulario input[aria-invalid=\"true\"] { border-color: #763a23; }
+.reloj-demo time { overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.llamada-entrante { max-width: 30rem; }
+.llamada-entrante label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+.llamada-entrante input { box-sizing: border-box; width: 100%; min-height: 44px; padding: 0.625rem 0.75rem; border: 1px solid var(--linea); border-radius: 0.5rem; color: inherit; background: #fff; caret-color: #21734f; }
+.llamada-entrante input[aria-invalid=\"true\"] { border-color: #763a23; }
+.ayuda-ani { color: var(--tinta-secundaria); }
+.consentimiento { display: flex; align-items: center; gap: 0.75rem; min-height: 44px; max-width: 46ch; margin-block: 1.5rem 0.75rem; line-height: 1.5; cursor: pointer; }
+.consentimiento input { flex-shrink: 0; width: 24px; height: 24px; margin: 10px; accent-color: #21734f; }
+.datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1.5rem; margin-block: 1.5rem; }
+.datos div { min-width: 0; }
+.datos dt { margin-bottom: 0.375rem; color: var(--tinta-secundaria); font-size: 0.875rem; overflow-wrap: anywhere; }
+.datos dd { margin: 0; font-size: 1.125rem; line-height: 1.5; overflow-wrap: anywhere; }
+small { display: block; margin-top: 0.25rem; font-size: 0.8125rem; color: var(--tinta-secundaria); }
+.aviso, .estado-error, .estado-carga { margin-block: 1rem; padding: 1rem; background: #e4ece3; line-height: 1.6; }
+.estado-error { background: #f5e8df; color: #763a23; }
+.linea-tiempo { margin: 0; padding: 0; list-style: none; }
+.linea-tiempo li { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 1rem; padding-block: 1rem; border-bottom: 1px solid var(--linea); overflow-wrap: anywhere; }
+.linea-tiempo time { grid-column: 1 / -1; margin-top: 0.375rem; color: var(--tinta-secundaria); font-size: 0.8125rem; }
+.conversacion { max-width: 44rem; margin-top: 2rem; }
+.mensaje-bot { padding-block: 1rem; border-bottom: 1px solid var(--linea); }
+.seccion-lista ul { display: grid; gap: 0.5rem; padding: 0; margin: 0; list-style: none; }
+.seccion-lista button { width: 100%; justify-content: flex-start; background: transparent; color: #163c31; border-color: var(--linea); }
+.seccion-lista button:hover:enabled { background: #dfedde; }
+.enviar-mensaje { margin-top: 2rem; }
+.enviar-mensaje label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+.enviar-mensaje > div { display: flex; gap: 0.5rem; }
+.enviar-mensaje input { min-width: 0; width: 100%; min-height: 44px; padding-inline: 0.75rem; border: 1px solid var(--linea); border-radius: 0.5rem; background: #fff; color: #163c31; caret-color: #21734f; }
+.enviar-mensaje input::placeholder { color: var(--tinta-secundaria); }
+.cita { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+.cita > div:first-child { flex: 1 1 20rem; min-width: 0; }
+.qr-cita { max-width: 100%; }
+.qr-cita svg { display: block; width: min(224px, 100%); height: auto; }
+.precio { font-size: 1.5rem; font-weight: 600; }
+.continuacion { margin-top: 1.5rem; max-width: 100%; }
+.continuacion code { display: block; overflow-wrap: anywhere; padding-block: 0.5rem; }
+.canal-mensaje { font-weight: 600; color: var(--tinta-secundaria); }
+.insignia-mock { display: block; width: fit-content; margin: 0.35rem 0 0 auto; padding: 0.2rem 0.5rem; border: 1px solid var(--linea); border-radius: 0.25rem; color: #163c31; font-size: 0.75rem; font-weight: 600; background: #dfedde; }
+.wa-simulador { max-width: 44rem; margin-inline: auto; }
+.contenido:has(.wa-simulador) { padding-block: 2rem; }
+.wa-simulador h1 { font-size: 2rem; }
+.wa-simulador .introduccion { margin-top: 0.75rem; font-size: 1rem; }
+.wa-herramientas { display: flex; align-items: end; flex-wrap: wrap; gap: 0.75rem; margin-block: 1.5rem; }
+.wa-herramientas > div { flex: 1 1 12rem; min-width: 0; }
+.wa-herramientas label { display: block; margin-bottom: 0.375rem; font-size: 0.875rem; font-weight: 600; }
+.wa-herramientas input, .dialogo-wa input { box-sizing: border-box; width: 100%; min-height: 44px; border: 1px solid var(--linea); border-radius: 0.5rem; padding: 0.625rem 0.75rem; background: #fff; color: #163c31; font: inherit; }
+.boton-secundario { color: #163c31; background: transparent; border-color: var(--linea); }
+.boton-secundario:hover:enabled { color: #163c31; background: #dfedde; }
+.wa-historial { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; max-height: 52dvh; min-height: 16rem; overflow-y: auto; padding: 1rem; background: #edf2e9; border-radius: 0.75rem; scrollbar-color: #21734f #edf2e9; scroll-padding-block: 1rem; }
+.wa-vacio { align-self: center; max-width: 28rem; padding-block: 3rem; color: var(--tinta-secundaria); line-height: 1.65; }
+.wa-burbuja { max-width: 90%; padding: 0.75rem 1rem; border-radius: 0.75rem; overflow-wrap: anywhere; line-height: 1.6; }
+.wa-bot { background: #fff; }
+.wa-usuario { align-self: flex-end; background: #c9e8c8; }
+.wa-burbuja p { margin: 0 0 0.5rem; }
+.wa-burbuja p:last-child { margin-bottom: 0; }
+.wa-burbuja .mensaje-bot { padding: 0; border: 0; }
+.wa-burbuja .acciones { margin-bottom: 0; }
+.wa-error { color: #763a23; line-height: 1.6; }
+.wa-error button { margin-top: 0.5rem; }
+.wa-escribiendo { color: var(--tinta-secundaria); margin: 0; font-size: 0.875rem; }
+.wa-compositor { margin-top: 1rem; background: #f7faf6; }
+.dialogo-wa { width: min(32rem, calc(100% - 2rem)); max-height: calc(100dvh - 2rem); margin: auto; box-sizing: border-box; border: 0; border-radius: 0.75rem; padding: 1.5rem; background: #f7faf6; color: #163c31; overflow-y: auto; }
+.dialogo-wa::backdrop { background: rgb(10 35 26 / 55%); }
+.dialogo-wa header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+.dialogo-wa h2 { margin: 0; font-size: 1.25rem; line-height: 1.4; overflow-wrap: anywhere; }
+.dialogo-wa .seccion-lista { margin-bottom: 1rem; }
+.ayuda-flow { color: var(--tinta-secundaria); font-size: 0.9375rem; line-height: 1.6; margin-block: 1rem 1.5rem; }
+.campo-flow { margin-block: 1.25rem; }
+.campo-flow label { display: block; font-weight: 600; margin-bottom: 0.5rem; }
+.captura-flow { display: flex; align-items: center; gap: 0.5rem; }
+.captura-flow input { min-width: 0; }
+.campo-flow input[aria-invalid=\"true\"] { border-color: #763a23; }
+.campo-flow .wa-error { margin: 0.5rem 0 0; font-size: 0.875rem; }
+@media (max-width: 639px) {
+  .layout { padding-bottom: calc(8rem + env(safe-area-inset-bottom)); }
+  .barra-demo { position: fixed; inset: auto 0 0; padding-bottom: env(safe-area-inset-bottom); border-top: 1px solid var(--linea); border-bottom: 0; }
+  .barra-demo ul { flex-wrap: nowrap; width: calc(100% - 1rem); overflow-x: auto; overscroll-behavior-x: contain; scroll-padding-inline: 0.5rem; scrollbar-width: thin; scrollbar-color: #21734f #e4ece3; }
+  .barra-demo li { flex: 0 0 auto; }
+  .barra-demo a { white-space: nowrap; font-size: 0.875rem; }
+  .control-demo { width: calc(100% - 2rem); }
+  .control-demo p { flex: 1 1 0; min-width: 0; }
+  .control-demo button { flex: 0 0 auto; }
+  .cita > .qr-cita { order: -1; }
+  .wa-simulador { padding-bottom: 6rem; }
+  .wa-compositor { position: fixed; z-index: 9; inset: auto 1rem calc(var(--alto-barra-demo, 8rem) + env(safe-area-inset-bottom)) 1rem; max-width: 44rem; margin: 0 auto; padding-block: 0.75rem; }
+  .wa-compositor label { font-size: 0.875rem; margin-bottom: 0.25rem; }
+  .wa-historial { max-height: 48dvh; }
+}
+@media (max-width: 400px) {
+  .cabecera, .contenido, .pie { width: calc(100% - 2rem); }
+  .contexto { max-width: 12ch; }
+}
+"
+
+ ❯ src/identidadVisual.test.ts:49:56
+     47| 
+     48| it('centraliza los colores y reserva el verde para la marca grande', (…
+     49|   expect(estilos.replace(/:root\s*\{[^}]+\}/, '')).not.toMatch(/#[\da-…
+       |                                                        ^
+     50|   const usos = [...estilos.matchAll(/([^{}]+)\{([^{}]*var\(--sd-marca\…
+     51|   expect(usos).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/14]⎯
+
+ FAIL  |web| src/identidadVisual.test.ts > sirve Open Sans latina local en los tres pesos sin fuentes de terceros
+TypeError: .toMatch() expects to receive a string, but got undefined
+ ❯ src/identidadVisual.test.ts:60:60
+     58| it('sirve Open Sans latina local en los tres pesos sin fuentes de terc…
+     59|   const manifiesto: { dependencies: Record<string, string> } = JSON.pa…
+     60|   expect(manifiesto.dependencies['@fontsource/open-sans']).toMatch(/^\…
+       |                                                            ^
+     61|   const entrada = leer('./main.tsx');
+     62|   const resolver = createRequire(new URL('../package.json', import.met…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/14]⎯
+
+ FAIL  |web| src/identidadVisual.test.ts > declara la marca en los metadatos y no incluye archivos gráficos del logo
+AssertionError: expected '<!doctype html>\n<html lang="es">\n  …' to contain '<title>Salud Digna 360 · Atención con…'
+
+- Expected
++ Received
+
+- <title>Salud Digna 360 · Atención conectada</title>
++ <!doctype html>
++ <html lang="es">
++   <head>
++     <meta charset="UTF-8" />
++     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++     <meta name="referrer" content="no-referrer" />
++     <meta name="theme-color" content="#174c3c" />
++     <meta name="description" content="Base de demostración de noki: continuidad de atención entre canales." />
++     <title>noki · Atención conectada</title>
++   </head>
++   <body>
++     <div id="root"></div>
++     <script type="module" src="/src/main.tsx"></script>
++   </body>
++ </html>
++
+
+ ❯ src/identidadVisual.test.ts:77:21
+     75| it('declara la marca en los metadatos y no incluye archivos gráficos d…
+     76|   const documento = leer('../index.html');
+     77|   expect(documento).toContain('<title>Salud Digna 360 · Atención conec…
+       |                     ^
+     78|   expect(documento).toMatch(/name="description" content="[^"]*Salud Di…
+     79|   expect(documento).toContain('name="theme-color" content="#008959"');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/14]⎯
+
+ FAIL  |web| src/rutas.test.tsx > Navegación de canales > presenta la identidad aprobada en /
+TestingLibraryElementError: Unable to find an accessible element with the role "link" and name "Salud Digna 360 · Portada"
+
+Here are the accessible roles:
+
+  link:
+
+  Name "Saltar al contenido":
+  <a
+    class="saltar-contenido"
+    href="#contenido"
+  />
+
+  Name "noki · Portada":
+  <a
+    aria-label="noki · Portada"
+    class="marca"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Web":
+  <a
+    class=""
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    class=""
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    class=""
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    class=""
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    class=""
+    data-discover="true"
+    href="/clinica"
+  />
+
+  Name "Admin":
+  <a
+    class=""
+    data-discover="true"
+    href="/admin"
+  />
+
+  Name "Bandeja":
+  <a
+    class=""
+    data-discover="true"
+    href="/bandeja"
+  />
+
+  Name "Web":
+  <a
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    data-discover="true"
+    href="/clinica"
+  />
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  <header
+    class="cabecera flex items-center justify-between gap-6"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Canales de la demo":
+  <nav
+    aria-label="Canales de la demo"
+    class="barra-demo"
+  />
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  <ul />
+
+  Name "":
+  <ul
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5"
+  />
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Guion de demo":
+  <select />
+
+  --------------------------------------------------
+  option:
+
+  Name "Flujo A":
+  <option
+    value="flujoA"
+  />
+
+  Name "Flujo C":
+  <option
+    value="flujoC"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    role="status"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Reiniciar guion":
+  <button
+    type="button"
+  />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="contenido flex-1"
+    id="contenido"
+    tabindex="-1"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Un mismo hilo, en cada canal.":
+  <h1 />
+
+  Name "Canales de atención":
+  <h2
+    id="titulo-canales"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  Name "":
+  <p
+    class="alcance"
+  />
+
+  --------------------------------------------------
+  region:
+
+  Name "Canales de atención":
+  <section
+    aria-labelledby="titulo-canales"
+    class="canales"
+  />
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name "":
+  <footer
+    class="pie flex flex-wrap justify-between gap-3"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <label>
+            Guion de demo 
+            <select>
+              <option
+                value="flujoA"
+              >
+                Flujo A
+              </option>
+              <option
+                value="flujoC"
+              >
+                Flujo C
+              </option>
+            </select>
+          </label>
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Un mismo hilo,
+          <br />
+           en cada canal.
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Una base compartida para que la atención continúe de un canal a otro, sin volver a empezar.
+        </p>
+        <section
+          aria-labelledby="titulo-canales"
+          class="canales"
+        >
+          <h2
+            id="titulo-canales"
+          >
+            Canales de atención
+          </h2>
+          <ul
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5"
+          >
+            <li>
+              <a
+                data-discover="true"
+                href="/web"
+              >
+                Web
+              </a>
+            </li>
+            <li>
+              <a
+                data-discover="true"
+                href="/wa"
+              >
+                WhatsApp
+              </a>
+            </li>
+            <li>
+              <a
+                data-discover="true"
+                href="/app"
+              >
+                App
+              </a>
+            </li>
+            <li>
+              <a
+                data-discover="true"
+                href="/callcenter"
+              >
+                Call Center
+              </a>
+            </li>
+            <li>
+              <a
+                data-discover="true"
+                href="/clinica"
+              >
+                Clínica
+              </a>
+            </li>
+          </ul>
+        </section>
+        <p
+          class="alcance"
+        >
+          Los simuladores de atención estarán disponibles en próximas entregas.
+        </p>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/rutas.test.tsx:24:26
+     22|     const documento = new DOMParser().parseFromString(readFileSync(res…
+     23|     abrir(ruta);
+     24|     const marca = screen.getByRole('link', { name: 'Salud Digna 360 · …
+       |                          ^
+     25|     expect(marca.textContent).toBe('Salud Digna 360');
+     26|     expect(marca.getAttribute('href')).toBe('/');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/14]⎯
+
+ FAIL  |web| src/rutas.test.tsx > Navegación de canales > presenta la identidad aprobada en /web
+TestingLibraryElementError: Unable to find an accessible element with the role "link" and name "Salud Digna 360 · Portada"
+
+Here are the accessible roles:
+
+  link:
+
+  Name "Saltar al contenido":
+  <a
+    class="saltar-contenido"
+    href="#contenido"
+  />
+
+  Name "noki · Portada":
+  <a
+    aria-label="noki · Portada"
+    class="marca"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Web":
+  <a
+    aria-current="page"
+    class="active"
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    class=""
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    class=""
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    class=""
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    class=""
+    data-discover="true"
+    href="/clinica"
+  />
+
+  Name "Admin":
+  <a
+    class=""
+    data-discover="true"
+    href="/admin"
+  />
+
+  Name "Bandeja":
+  <a
+    class=""
+    data-discover="true"
+    href="/bandeja"
+  />
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  <header
+    class="cabecera flex items-center justify-between gap-6"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Canales de la demo":
+  <nav
+    aria-label="Canales de la demo"
+    class="barra-demo"
+  />
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Guion de demo":
+  <select />
+
+  --------------------------------------------------
+  option:
+
+  Name "Flujo A":
+  <option
+    value="flujoA"
+  />
+
+  Name "Flujo C":
+  <option
+    value="flujoC"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    role="status"
+  />
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Reiniciar guion":
+  <button
+    type="button"
+  />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="contenido flex-1"
+    id="contenido"
+    tabindex="-1"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Web":
+  <h1 />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name "":
+  <footer
+    class="pie flex flex-wrap justify-between gap-3"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <label>
+            Guion de demo 
+            <select>
+              <option
+                value="flujoA"
+              >
+                Flujo A
+              </option>
+              <option
+                value="flujoC"
+              >
+                Flujo C
+              </option>
+            </select>
+          </label>
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Web
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Cotiza tu estudio y continúa la atención por WhatsApp.
+        </p>
+        <p
+          class="estado-carga"
+          role="status"
+        >
+          Cargando información…
+        </p>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/rutas.test.tsx:24:26
+     22|     const documento = new DOMParser().parseFromString(readFileSync(res…
+     23|     abrir(ruta);
+     24|     const marca = screen.getByRole('link', { name: 'Salud Digna 360 · …
+       |                          ^
+     25|     expect(marca.textContent).toBe('Salud Digna 360');
+     26|     expect(marca.getAttribute('href')).toBe('/');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/14]⎯
+
+ FAIL  |web| src/rutas.test.tsx > Navegación de canales > presenta la identidad aprobada en /wa
+TestingLibraryElementError: Unable to find an accessible element with the role "link" and name "Salud Digna 360 · Portada"
+
+Here are the accessible roles:
+
+  link:
+
+  Name "Saltar al contenido":
+  <a
+    class="saltar-contenido"
+    href="#contenido"
+  />
+
+  Name "noki · Portada":
+  <a
+    aria-label="noki · Portada"
+    class="marca"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Web":
+  <a
+    class=""
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    aria-current="page"
+    class="active"
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    class=""
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    class=""
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    class=""
+    data-discover="true"
+    href="/clinica"
+  />
+
+  Name "Admin":
+  <a
+    class=""
+    data-discover="true"
+    href="/admin"
+  />
+
+  Name "Bandeja":
+  <a
+    class=""
+    data-discover="true"
+    href="/bandeja"
+  />
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  <header
+    class="cabecera flex items-center justify-between gap-6"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Canales de la demo":
+  <nav
+    aria-label="Canales de la demo"
+    class="barra-demo"
+  />
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Guion de demo":
+  <select />
+
+  --------------------------------------------------
+  option:
+
+  Name "Flujo A":
+  <option
+    value="flujoA"
+  />
+
+  Name "Flujo C":
+  <option
+    value="flujoC"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    role="status"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Reiniciar guion":
+  <button
+    type="button"
+  />
+
+  Name "Nueva conversación":
+  <button
+    class="boton-secundario"
+    type="button"
+  />
+
+  Name "Enviar":
+  <button
+    disabled=""
+    type="submit"
+  />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="contenido flex-1"
+    id="contenido"
+    tabindex="-1"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "WhatsApp":
+  <h1 />
+
+  Name "Tu conversación empieza aquí":
+  <h2 />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  Name "":
+  <p />
+
+  --------------------------------------------------
+  textbox:
+
+  Name "Número de WhatsApp":
+  <input
+    aria-invalid="false"
+    autocomplete="off"
+    id="numero-wa"
+    inputmode="numeric"
+    type="tel"
+    value="5210000000001"
+  />
+
+  Name "Mensaje":
+  <input
+    autocomplete="off"
+    id="mensaje-wa"
+    placeholder="Escribe un mensaje"
+    value=""
+  />
+
+  --------------------------------------------------
+  log:
+
+  Name "Conversación de WhatsApp":
+  <section
+    aria-label="Conversación de WhatsApp"
+    aria-live="polite"
+    aria-relevant="additions text"
+    class="wa-historial"
+    role="log"
+  />
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name "":
+  <footer
+    class="pie flex flex-wrap justify-between gap-3"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <label>
+            Guion de demo 
+            <select>
+              <option
+                value="flujoA"
+              >
+                Flujo A
+              </option>
+              <option
+                value="flujoC"
+              >
+                Flujo C
+              </option>
+            </select>
+          </label>
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <div
+          class="wa-simulador"
+        >
+          <h1>
+            WhatsApp
+          </h1>
+          <p
+            class="introduccion"
+          >
+            Tu atención continúa donde la dejaste.
+          </p>
+          <div
+            class="wa-herramientas"
+          >
+            <div>
+              <label
+                for="numero-wa"
+              >
+                Número de WhatsApp
+              </label>
+              <input
+                aria-invalid="false"
+                autocomplete="off"
+                id="numero-wa"
+                inputmode="numeric"
+                type="tel"
+                value="5210000000001"
+              />
+            </div>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              Nueva conversación
+            </button>
+          </div>
+          <section
+            aria-label="Conversación de WhatsApp"
+            aria-live="polite"
+            aria-relevant="additions text"
+            class="wa-historial"
+            role="log"
+          >
+            <div
+              class="wa-vacio"
+            >
+              <h2>
+                Tu conversación empieza aquí
+              </h2>
+              <p>
+                Abre el enlace del Call Center para retomar tu atención, o envía un mensaje.
+              </p>
+            </div>
+            <div />
+          </section>
+          <form
+            class="enviar-mensaje wa-compositor"
+          >
+            <label
+              for="mensaje-wa"
+            >
+              Mensaje
+            </label>
+            <div>
+              <input
+                autocomplete="off"
+                id="mensaje-wa"
+                placeholder="Escribe un mensaje"
+                value=""
+              />
+              <button
+                disabled=""
+                type="submit"
+              >
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/rutas.test.tsx:24:26
+     22|     const documento = new DOMParser().parseFromString(readFileSync(res…
+     23|     abrir(ruta);
+     24|     const marca = screen.getByRole('link', { name: 'Salud Digna 360 · …
+       |                          ^
+     25|     expect(marca.textContent).toBe('Salud Digna 360');
+     26|     expect(marca.getAttribute('href')).toBe('/');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/14]⎯
+
+ FAIL  |web| src/rutas.test.tsx > Navegación de canales > presenta la identidad aprobada en /app
+TestingLibraryElementError: Unable to find an accessible element with the role "link" and name "Salud Digna 360 · Portada"
+
+Here are the accessible roles:
+
+  link:
+
+  Name "Saltar al contenido":
+  <a
+    class="saltar-contenido"
+    href="#contenido"
+  />
+
+  Name "noki · Portada":
+  <a
+    aria-label="noki · Portada"
+    class="marca"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Web":
+  <a
+    class=""
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    class=""
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    aria-current="page"
+    class="active"
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    class=""
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    class=""
+    data-discover="true"
+    href="/clinica"
+  />
+
+  Name "Admin":
+  <a
+    class=""
+    data-discover="true"
+    href="/admin"
+  />
+
+  Name "Bandeja":
+  <a
+    class=""
+    data-discover="true"
+    href="/bandeja"
+  />
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  <header
+    class="cabecera flex items-center justify-between gap-6"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Canales de la demo":
+  <nav
+    aria-label="Canales de la demo"
+    class="barra-demo"
+  />
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Guion de demo":
+  <select />
+
+  --------------------------------------------------
+  option:
+
+  Name "Flujo A":
+  <option
+    value="flujoA"
+  />
+
+  Name "Flujo C":
+  <option
+    value="flujoC"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    role="status"
+  />
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Reiniciar guion":
+  <button
+    type="button"
+  />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="contenido flex-1"
+    id="contenido"
+    tabindex="-1"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "App":
+  <h1 />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name "":
+  <footer
+    class="pie flex flex-wrap justify-between gap-3"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <label>
+            Guion de demo 
+            <select>
+              <option
+                value="flujoA"
+              >
+                Flujo A
+              </option>
+              <option
+                value="flujoC"
+              >
+                Flujo C
+              </option>
+            </select>
+          </label>
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          App
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Tus citas y el QR para continuar en clínica.
+        </p>
+        <p
+          class="estado-carga"
+          role="status"
+        >
+          Cargando información…
+        </p>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/rutas.test.tsx:24:26
+     22|     const documento = new DOMParser().parseFromString(readFileSync(res…
+     23|     abrir(ruta);
+     24|     const marca = screen.getByRole('link', { name: 'Salud Digna 360 · …
+       |                          ^
+     25|     expect(marca.textContent).toBe('Salud Digna 360');
+     26|     expect(marca.getAttribute('href')).toBe('/');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/14]⎯
+
+ FAIL  |web| src/rutas.test.tsx > Navegación de canales > presenta la identidad aprobada en /callcenter
+TestingLibraryElementError: Unable to find an accessible element with the role "link" and name "Salud Digna 360 · Portada"
+
+Here are the accessible roles:
+
+  link:
+
+  Name "Saltar al contenido":
+  <a
+    class="saltar-contenido"
+    href="#contenido"
+  />
+
+  Name "noki · Portada":
+  <a
+    aria-label="noki · Portada"
+    class="marca"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Web":
+  <a
+    class=""
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    class=""
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    class=""
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    aria-current="page"
+    class="active"
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    class=""
+    data-discover="true"
+    href="/clinica"
+  />
+
+  Name "Admin":
+  <a
+    class=""
+    data-discover="true"
+    href="/admin"
+  />
+
+  Name "Bandeja":
+  <a
+    class=""
+    data-discover="true"
+    href="/bandeja"
+  />
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  <header
+    class="cabecera flex items-center justify-between gap-6"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Canales de la demo":
+  <nav
+    aria-label="Canales de la demo"
+    class="barra-demo"
+  />
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Guion de demo":
+  <select />
+
+  --------------------------------------------------
+  option:
+
+  Name "Flujo A":
+  <option
+    value="flujoA"
+  />
+
+  Name "Flujo C":
+  <option
+    value="flujoC"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    role="status"
+  />
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Reiniciar guion":
+  <button
+    type="button"
+  />
+
+  Name "Llamada entrante":
+  <button
+    type="submit"
+  />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="contenido flex-1"
+    id="contenido"
+    tabindex="-1"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Call Center":
+  <h1 />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  Name "":
+  <p
+    class="ayuda-ani"
+    id="formato-ani"
+  />
+
+  --------------------------------------------------
+  textbox:
+
+  Name "Número de la llamada (ANI)":
+  <input
+    aria-describedby="formato-ani"
+    aria-invalid="false"
+    autocomplete="off"
+    id="numero-llamada"
+    inputmode="numeric"
+    pattern="[0-9]{10,15}"
+    type="tel"
+    value="5210000000001"
+  />
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name "":
+  <footer
+    class="pie flex flex-wrap justify-between gap-3"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <label>
+            Guion de demo 
+            <select>
+              <option
+                value="flujoA"
+              >
+                Flujo A
+              </option>
+              <option
+                value="flujoC"
+              >
+                Flujo C
+              </option>
+            </select>
+          </label>
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Call Center
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Inicia la atención y continúa la misma conversación en WhatsApp.
+        </p>
+        <form
+          class="seccion llamada-entrante"
+        >
+          <label
+            for="numero-llamada"
+          >
+            Número de la llamada (ANI)
+          </label>
+          <input
+            aria-describedby="formato-ani"
+            aria-invalid="false"
+            autocomplete="off"
+            id="numero-llamada"
+            inputmode="numeric"
+            pattern="[0-9]{10,15}"
+            type="tel"
+            value="5210000000001"
+          />
+          <p
+            class="ayuda-ani"
+            id="formato-ani"
+          >
+            Escribe de 10 a 15 dígitos, sin espacios ni signos.
+          </p>
+          <button
+            type="submit"
+          >
+            Llamada entrante
+          </button>
+        </form>
+        <p
+          class="estado-carga"
+          role="status"
+        >
+          Cargando información…
+        </p>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/rutas.test.tsx:24:26
+     22|     const documento = new DOMParser().parseFromString(readFileSync(res…
+     23|     abrir(ruta);
+     24|     const marca = screen.getByRole('link', { name: 'Salud Digna 360 · …
+       |                          ^
+     25|     expect(marca.textContent).toBe('Salud Digna 360');
+     26|     expect(marca.getAttribute('href')).toBe('/');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/14]⎯
+
+ FAIL  |web| src/rutas.test.tsx > Navegación de canales > presenta la identidad aprobada en /clinica
+TestingLibraryElementError: Unable to find an accessible element with the role "link" and name "Salud Digna 360 · Portada"
+
+Here are the accessible roles:
+
+  link:
+
+  Name "Saltar al contenido":
+  <a
+    class="saltar-contenido"
+    href="#contenido"
+  />
+
+  Name "noki · Portada":
+  <a
+    aria-label="noki · Portada"
+    class="marca"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Web":
+  <a
+    class=""
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    class=""
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    class=""
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    class=""
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    aria-current="page"
+    class="active"
+    data-discover="true"
+    href="/clinica"
+  />
+
+  Name "Admin":
+  <a
+    class=""
+    data-discover="true"
+    href="/admin"
+  />
+
+  Name "Bandeja":
+  <a
+    class=""
+    data-discover="true"
+    href="/bandeja"
+  />
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  <header
+    class="cabecera flex items-center justify-between gap-6"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Canales de la demo":
+  <nav
+    aria-label="Canales de la demo"
+    class="barra-demo"
+  />
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Guion de demo":
+  <select />
+
+  --------------------------------------------------
+  option:
+
+  Name "Flujo A":
+  <option
+    value="flujoA"
+  />
+
+  Name "Flujo C":
+  <option
+    value="flujoC"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    role="status"
+  />
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Reiniciar guion":
+  <button
+    type="button"
+  />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="contenido flex-1"
+    id="contenido"
+    tabindex="-1"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Clínica":
+  <h1 />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name "":
+  <footer
+    class="pie flex flex-wrap justify-between gap-3"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <label>
+            Guion de demo 
+            <select>
+              <option
+                value="flujoA"
+              >
+                Flujo A
+              </option>
+              <option
+                value="flujoC"
+              >
+                Flujo C
+              </option>
+            </select>
+          </label>
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Clínica
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Recepción · Llegadas esperadas
+        </p>
+        <p
+          class="estado-carga"
+          role="status"
+        >
+          Cargando información…
+        </p>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/rutas.test.tsx:24:26
+     22|     const documento = new DOMParser().parseFromString(readFileSync(res…
+     23|     abrir(ruta);
+     24|     const marca = screen.getByRole('link', { name: 'Salud Digna 360 · …
+       |                          ^
+     25|     expect(marca.textContent).toBe('Salud Digna 360');
+     26|     expect(marca.getAttribute('href')).toBe('/');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/14]⎯
+
+ FAIL  |web| src/rutas.test.tsx > Navegación de canales > presenta la identidad aprobada en /admin
+TestingLibraryElementError: Unable to find an accessible element with the role "link" and name "Salud Digna 360 · Portada"
+
+Here are the accessible roles:
+
+  link:
+
+  Name "Saltar al contenido":
+  <a
+    class="saltar-contenido"
+    href="#contenido"
+  />
+
+  Name "noki · Portada":
+  <a
+    aria-label="noki · Portada"
+    class="marca"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Web":
+  <a
+    class=""
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    class=""
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    class=""
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    class=""
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    class=""
+    data-discover="true"
+    href="/clinica"
+  />
+
+  Name "Admin":
+  <a
+    aria-current="page"
+    class="active"
+    data-discover="true"
+    href="/admin"
+  />
+
+  Name "Bandeja":
+  <a
+    class=""
+    data-discover="true"
+    href="/bandeja"
+  />
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  <header
+    class="cabecera flex items-center justify-between gap-6"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Canales de la demo":
+  <nav
+    aria-label="Canales de la demo"
+    class="barra-demo"
+  />
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Guion de demo":
+  <select />
+
+  --------------------------------------------------
+  option:
+
+  Name "Flujo A":
+  <option
+    value="flujoA"
+  />
+
+  Name "Flujo C":
+  <option
+    value="flujoC"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    role="status"
+  />
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Reiniciar guion":
+  <button
+    type="button"
+  />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="contenido flex-1"
+    id="contenido"
+    tabindex="-1"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Administración":
+  <h1 />
+
+  Name "Panel de huecos":
+  <h2
+    id="titulo-huecos"
+  />
+
+  Name "Alertas de seguridad":
+  <h2
+    id="titulo-alertas"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  --------------------------------------------------
+  region:
+
+  Name "Panel de huecos":
+  <section
+    aria-labelledby="titulo-huecos"
+    class="seccion"
+  />
+
+  Name "Alertas de seguridad":
+  <section
+    aria-labelledby="titulo-alertas"
+    class="seccion"
+  />
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name "":
+  <footer
+    class="pie flex flex-wrap justify-between gap-3"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <label>
+            Guion de demo 
+            <select>
+              <option
+                value="flujoA"
+              >
+                Flujo A
+              </option>
+              <option
+                value="flujoC"
+              >
+                Flujo C
+              </option>
+            </select>
+          </label>
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <p
+          class="estado-carga"
+          role="status"
+        >
+          Cargando información…
+        </p>
+        <section
+          aria-labelledby="titulo-huecos"
+          class="seccion"
+        >
+          <h2
+            id="titulo-huecos"
+          >
+            Panel de huecos
+          </h2>
+          <p
+            class="estado-carga"
+            role="status"
+          >
+            Cargando huecos…
+          </p>
+        </section>
+        <section
+          aria-labelledby="titulo-alertas"
+          class="seccion"
+        >
+          <h2
+            id="titulo-alertas"
+          >
+            Alertas de seguridad
+          </h2>
+          <p
+            class="estado-carga"
+            role="status"
+          >
+            Cargando alertas de seguridad…
+          </p>
+        </section>
+        <p
+          class="estado-carga"
+          role="status"
+        >
+          Cargando el hilo…
+        </p>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/rutas.test.tsx:24:26
+     22|     const documento = new DOMParser().parseFromString(readFileSync(res…
+     23|     abrir(ruta);
+     24|     const marca = screen.getByRole('link', { name: 'Salud Digna 360 · …
+       |                          ^
+     25|     expect(marca.textContent).toBe('Salud Digna 360');
+     26|     expect(marca.getAttribute('href')).toBe('/');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/14]⎯
+
+ FAIL  |web| src/rutas.test.tsx > Navegación de canales > presenta la identidad aprobada en /bandeja
+TestingLibraryElementError: Unable to find an accessible element with the role "link" and name "Salud Digna 360 · Portada"
+
+Here are the accessible roles:
+
+  link:
+
+  Name "Saltar al contenido":
+  <a
+    class="saltar-contenido"
+    href="#contenido"
+  />
+
+  Name "noki · Portada":
+  <a
+    aria-label="noki · Portada"
+    class="marca"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Web":
+  <a
+    class=""
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    class=""
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    class=""
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    class=""
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    class=""
+    data-discover="true"
+    href="/clinica"
+  />
+
+  Name "Admin":
+  <a
+    class=""
+    data-discover="true"
+    href="/admin"
+  />
+
+  Name "Bandeja":
+  <a
+    aria-current="page"
+    class="active"
+    data-discover="true"
+    href="/bandeja"
+  />
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  <header
+    class="cabecera flex items-center justify-between gap-6"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Canales de la demo":
+  <nav
+    aria-label="Canales de la demo"
+    class="barra-demo"
+  />
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Guion de demo":
+  <select />
+
+  --------------------------------------------------
+  option:
+
+  Name "Flujo A":
+  <option
+    value="flujoA"
+  />
+
+  Name "Flujo C":
+  <option
+    value="flujoC"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    role="status"
+  />
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Reiniciar guion":
+  <button
+    type="button"
+  />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="contenido flex-1"
+    id="contenido"
+    tabindex="-1"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Bandeja simulada":
+  <h1 />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name "":
+  <footer
+    class="pie flex flex-wrap justify-between gap-3"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <label>
+            Guion de demo 
+            <select>
+              <option
+                value="flujoA"
+              >
+                Flujo A
+              </option>
+              <option
+                value="flujoC"
+              >
+                Flujo C
+              </option>
+            </select>
+          </label>
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Bandeja simulada
+        </h1>
+        <p
+          class="introduccion"
+        >
+          SMS y correos ficticios de la demo. Los códigos se muestran solo aquí.
+        </p>
+        <p
+          class="estado-carga"
+          role="status"
+        >
+          Cargando información…
+        </p>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/rutas.test.tsx:24:26
+     22|     const documento = new DOMParser().parseFromString(readFileSync(res…
+     23|     abrir(ruta);
+     24|     const marca = screen.getByRole('link', { name: 'Salud Digna 360 · …
+       |                          ^
+     25|     expect(marca.textContent).toBe('Salud Digna 360');
+     26|     expect(marca.getAttribute('href')).toBe('/');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/14]⎯
+
+ FAIL  |web| src/rutas.test.tsx > Navegación de canales > presenta la identidad aprobada en /inexistente
+TestingLibraryElementError: Unable to find an accessible element with the role "link" and name "Salud Digna 360 · Portada"
+
+Here are the accessible roles:
+
+  link:
+
+  Name "Saltar al contenido":
+  <a
+    class="saltar-contenido"
+    href="#contenido"
+  />
+
+  Name "noki · Portada":
+  <a
+    aria-label="noki · Portada"
+    class="marca"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Web":
+  <a
+    class=""
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    class=""
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    class=""
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    class=""
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    class=""
+    data-discover="true"
+    href="/clinica"
+  />
+
+  Name "Admin":
+  <a
+    class=""
+    data-discover="true"
+    href="/admin"
+  />
+
+  Name "Bandeja":
+  <a
+    class=""
+    data-discover="true"
+    href="/bandeja"
+  />
+
+  Name "Volver a la portada":
+  <a
+    class="enlace-principal"
+    data-discover="true"
+    href="/"
+  />
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  <header
+    class="cabecera flex items-center justify-between gap-6"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Canales de la demo":
+  <nav
+    aria-label="Canales de la demo"
+    class="barra-demo"
+  />
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Guion de demo":
+  <select />
+
+  --------------------------------------------------
+  option:
+
+  Name "Flujo A":
+  <option
+    value="flujoA"
+  />
+
+  Name "Flujo C":
+  <option
+    value="flujoC"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    role="status"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Reiniciar guion":
+  <button
+    type="button"
+  />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="contenido flex-1"
+    id="contenido"
+    tabindex="-1"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Página no encontrada":
+  <h1 />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name "":
+  <footer
+    class="pie flex flex-wrap justify-between gap-3"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <label>
+            Guion de demo 
+            <select>
+              <option
+                value="flujoA"
+              >
+                Flujo A
+              </option>
+              <option
+                value="flujoC"
+              >
+                Flujo C
+              </option>
+            </select>
+          </label>
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Página no encontrada
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Esta dirección no corresponde a un canal de la demo.
+        </p>
+        <a
+          class="enlace-principal"
+          data-discover="true"
+          href="/"
+        >
+          Volver a la portada
+        </a>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/rutas.test.tsx:24:26
+     22|     const documento = new DOMParser().parseFromString(readFileSync(res…
+     23|     abrir(ruta);
+     24|     const marca = screen.getByRole('link', { name: 'Salud Digna 360 · …
+       |                          ^
+     25|     expect(marca.textContent).toBe('Salud Digna 360');
+     26|     expect(marca.getAttribute('href')).toBe('/');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/14]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  14 failed | 10 passed (24)
+   Start at  05:21:09
+   Duration  5.95s (transform 653ms, setup 0ms, import 1.72s, tests 2.05s, environment 1.82s)
+

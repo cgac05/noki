@@ -1,0 +1,23 @@
+[
+  {
+    "entorno": "Acceso a sockets locales",
+    "revision": "Ajuste 4 D6",
+    "comando": "corepack pnpm lint",
+    "segundos": 53.6292843,
+    "codigo": 0
+  },
+  {
+    "entorno": "Acceso a sockets locales",
+    "revision": "Ajuste 4 D6",
+    "comando": "corepack pnpm lint:deps",
+    "segundos": 5.1466336,
+    "codigo": 0
+  },
+  {
+    "entorno": "Acceso a sockets locales",
+    "revision": "Ajuste 4 D6",
+    "comando": "corepack pnpm test --maxWorkers 2",
+    "segundos": 154.7156215,
+    "codigo": 0
+  }
+]

@@ -1,0 +1,83 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ✓ |web| src/presentacionEstilos.test.ts (4 tests) 15ms
+ ✓ |web| src/presentacion.test.tsx (11 tests) 1216ms
+   ✓ Indicadores en tarjetas: solo las dos series de Admin usan la variante y conservan dt antes de dd  472ms
+ ✓ |web| src/vistas/vistas.test.tsx (17 tests) 5919ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo  327ms
+     ✓ reiniciar el guion C descarta la confirmación y la aprobación pendiente de la cita  818ms
+     ✓ elige Flujo C, cancela, aprueba, acepta la oferta, muestra dominó y vuelve al inicio del Flujo A  1498ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  1674ms
+     ✓ permite escribir texto fuera del guion y muestra ayuda sin avanzar  311ms
+ ✓ |web| src/vistas/flow.test.tsx (7 tests) 7025ms
+   ✓ el Flow de identificación conserva el paso al cancelar y vuelve a abrir sin la fecha  1324ms
+   ✓ Envío del Flow: controles según captura y resumen enmascarado sin valores en mutaciones ni almacenamiento  1146ms
+   ✓ Campo requerido vacío: no envía y señala el campo  485ms
+   ✓ atrapa el foco con Tab y Shift+Tab entre el primer campo y Cancelar  443ms
+   ✓ Escape y valores descartados: cancela sin enviar y abre campos vacíos  1133ms
+   ✓ reintenta el Flow con la misma solicitud y clave; cerrar descarta el pendiente protegido  1148ms
+   ✓ cerrar después de un error borra los valores y elimina el reintento del historial  1344ms
+ ✓ |web| src/vistas/wa.test.tsx (16 tests) 5130ms
+   ✓ identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión  1422ms
+   ✓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible  414ms
+   ✓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo  885ms
+   ✓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título  373ms
+   ✓ Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot  529ms
+   ✓ Call center solicita continuación con consentimiento y muestra enlace y QR de la lectura  301ms
+ ✓ |web| src/vistas/identidadAsesor.test.tsx (11 tests) 3354ms
+   ✓ envía destinatario y candidato NINGUNO; captura la fecha protegida y avanza  629ms
+   ✓ envía destinatario y candidato referencia-opaca-demo; captura la fecha protegida y avanza  382ms
+   ✓ muestra nombres y apellidos en claro y envía las claves de los selectores  690ms
+   ✓ muestra código y mensaje del núcleo, conserva reiniciar y descarta al cancelar  338ms
+   ✓ reintenta sin recapturar y no filtra CURP, fecha ni datos básicos a cachés, consola, URL o almacenamiento  442ms
+ ✓ |web| src/vistas/consolas.test.tsx (16 tests) 2867ms
+     ✓ inicia con ANI de demo, valida el formato y descarta la captura al mostrar la ficha  850ms
+     ✓ exige consentimiento, envía una sola solicitud con doble clic y muestra el código de la lectura  388ms
+ ✓ |web| src/vistas/cancelarCita.test.tsx (5 tests) 1552ms
+   ✓ confirma una sola vez con el trámite elegido y muestra aprobación pendiente sin alterar la cita  562ms
+   ✓ pedir otra aprobación crea una clave distinta y no reutiliza el rechazo anterior  372ms
+   ✓ reintenta el mismo comando y clave tras error de red y presenta el resultado CANCELADA  357ms
+ ✓ |web| src/vistas/clinicaAlertas.test.tsx (9 tests) 1533ms
+     ✓ registra la llegada con la sede de la cita aunque sea distinta del contexto  414ms
+ ✓ |web| src/rutas.test.tsx (19 tests) 1432ms
+     ✓ presenta la identidad aprobada en /  334ms
+ ✓ |web| src/vistas/relojDemo.test.tsx (9 tests) 1495ms
+     ✓ adelanta una hora, presenta la hora local y UTC y refresca las lecturas  585ms
+ ✓ |web| src/cliente/refrescoReal.test.tsx (5 tests) 1292ms
+   ✓ vuelve a consultar contextoDemo al regresar a App aunque el valor anterior fuera vacío  538ms
+   ✓ tras confirmar en WhatsApp muestra la cita en App en la misma pestaña sin Actualizar  390ms
+ ✓ |web| src/componentes/BarraDemo.test.tsx (4 tests) 718ms
+     ✓ presenta la simulación y el progreso con el texto del paso como nombre accesible  332ms
+ ✓ |web| src/vistas/webReal.test.tsx (1 test) 623ms
+   ✓ cotiza con el catálogo real y genera una sola continuación aunque se pulse dos veces  621ms
+ ✓ |web| src/cliente/conversacion.test.tsx (2 tests) 647ms
+   ✓ la vista envía por el almacén y acumula la respuesta sin consultar lecturas de conversación  643ms
+ ✓ |web| src/vistas/panelHuecos.test.tsx (5 tests) 812ms
+   ✓ muestra hueco y ofertas en orden recibido, con fecha de Tepic y sin canal ni datos de pacientes  357ms
+ ✓ |web| src/vistas/realWa.test.tsx (1 test) 598ms
+   ✓ sin API real muestra el error en la burbuja y Reintentar conserva mensaje y clave  597ms
+ ✓ |web| src/cliente/contexto.test.tsx (5 tests) 588ms
+   ✓ comparte contextoDemo entre consumidores reales y da prioridad a la última respuesta por valor  342ms
+ ✓ |web| src/vistas/catalogoReal.test.tsx (1 test) 491ms
+   ✓ distingue las doce ofertas sin reordenarlas y cotiza los identificadores del paquete en Tepic  489ms
+ ✓ |web| src/componentes/ModalFlow.test.tsx (1 test) 365ms
+   ✓ marca formato sin enviar ni mostrar el valor fuera de su campo protegido  364ms
+ ✓ |web| src/cliente/cliente.test.ts (26 tests) 257ms
+ ✓ |web| src/identidadVisual.test.ts (6 tests) 72ms
+ ✓ |web| src/vistas/red.test.ts (1 test) 222ms
+ ✓ |web| src/cliente/guionWa.test.ts (8 tests) 57ms
+ ✓ |web| src/cliente/useIdentificacion.test.tsx (7 tests) 59ms
+ ✓ |web| src/cliente/historialWa.test.tsx (11 tests) 77ms
+ ✓ |web| src/cliente/relojDemo.test.ts (11 tests) 22ms
+ ✓ |web| src/cliente/tiempoReal.test.ts (5 tests) 27ms
+ ✓ |web| src/cliente/identificacion.test.ts (13 tests) 20ms
+ ✓ |web| src/usoDemo.test.ts (2 tests) 6ms
+ ✓ |web| src/cliente/idempotenciaWa.test.ts (2 tests) 13ms
+ ✓ |web| src/configuracion.test.ts (2 tests) 13ms
+
+ Test Files  32 passed (32)
+      Tests  243 passed (243)
+   Start at  06:54:03
+   Duration  85.78s (transform 2.27s, setup 0ms, import 44.69s, tests 38.52s, environment 71.14s)
+

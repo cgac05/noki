@@ -16,8 +16,8 @@ export function Layout() {
     <div className="layout min-h-dvh flex flex-col">
       <a className="saltar-contenido" href="#contenido">Saltar al contenido</a>
       <header className="cabecera flex items-center justify-between gap-6">
-        <Link className="marca" to="/" aria-label="noki · Portada">noki</Link>
-        <div className="contexto">Salud Digna · HackaTec{cliente.modo === 'mock' && <span className="insignia-mock">Modo simulado</span>}</div>
+        <Link className="marca" to="/" aria-label="Salud Digna 360 · Portada">Salud Digna 360</Link>
+        <div className="contexto">HackaTec{cliente.modo === 'mock' && <span className="insignia-mock">Modo simulado</span>}</div>
       </header>
       <BarraDemo />
       <main className="contenido flex-1" id="contenido" ref={contenido} tabIndex={-1}>

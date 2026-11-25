@@ -1,0 +1,1 @@
+PASS: despues, 46 capturas/mediciones, 8 rutas, 2 modos, llegada y cancelación; interfaz previa intacta.

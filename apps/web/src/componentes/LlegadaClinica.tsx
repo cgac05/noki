@@ -19,7 +19,7 @@ export function LlegadaClinica({ llegada, sedeContextoId }: { llegada: LlegadaVi
     <p>{llegada.cita.sede} · {fechaEnSede(llegada.cita.inicio, llegada.cita.zonaHoraria)}</p>
     <p>Estado: <strong>{llegada.cita.tramite.estado}</strong></p>
     {llegada.registrada ? <>
-      <p className="aviso">Llegada registrada</p>
+      <p className="aviso estado-exito">Llegada registrada</p>
       {llegada.posicion !== undefined && <p><strong>Turno {llegada.posicion}</strong></p>}
       <div className="acciones">
         <button type="button" className="boton-secundario" disabled={accion.isPending} onClick={() => enviar('CerrarAtencion', 'Cerrar atención')}>Cerrar atención</button>

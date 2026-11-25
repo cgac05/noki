@@ -25,7 +25,7 @@ function CancelacionCita({ cita }: { cita: CitaVista }) {
     </div>}
     {accion.isPending && <EstadoCarga texto="Solicitando cancelación…" />}
     {accion.isError && !pendiente && <EstadoError error={accion.error} onReintentar={accion.reintentar} />}
-    {cancelada && <p role="status">La cita se canceló.</p>}
+    {cancelada && <p className="estado-exito" role="status">La cita se canceló.</p>}
     {pendiente && !cancelada && <div><p role="status">La cancelación espera aprobación en WhatsApp.</p><Link className="enlace-principal" to="/wa">Abrir WhatsApp</Link></div>}
   </div>;
 }
@@ -46,7 +46,7 @@ export function App() {
 }
 
 function SinCitasParaNumero() {
-  return <section className="seccion">
+  return <section className="seccion estado-vacio">
     <h2>No encontramos citas para este número</h2>
     <p><Link to="/web">Agendar en Web</Link> o <Link to="/wa">Agendar por WhatsApp</Link>.</p>
   </section>;
@@ -59,7 +59,7 @@ function CitasPaciente({ pacienteId, nombreVisible }: { pacienteId: string; nomb
     <h1>{nombreVisible ? `Hola, ${nombreVisible}` : 'Tus citas'}</h1><p className="introduccion">Tus citas y el QR para continuar en clínica.</p>
     {citas.isPending && <EstadoCarga />}
     {citas.isError && <EstadoError error={citas.error} onReintentar={() => { void citas.refetch(); }} />}
-    {citas.data?.length === 0 && <div className="seccion"><p>Aún no hay citas para mostrar.</p><Link className="enlace-principal" to="/callcenter">Iniciar atención en Call Center</Link></div>}
+    {citas.data?.length === 0 && <div className="seccion estado-vacio"><p>Aún no hay citas para mostrar.</p><Link className="enlace-principal" to="/callcenter">Iniciar atención en Call Center</Link></div>}
     {citas.data?.map(cita => <section className="seccion cita" key={cita.tramite.id} aria-label="Cita del paciente">
       <div><h2>{cita.servicio}</h2><dl className="datos">
         <div><dt>Estado</dt><dd>{cita.tramite.estado}</dd></div><div><dt>Sede</dt><dd>{cita.sede}</dd></div>

@@ -14,7 +14,7 @@ const rutas = {
 export function Portada() {
   return (
     <>
-      <h1>Un mismo hilo,<br /> en cada canal.</h1>
+      <h1 className="titulo-portada">Un mismo hilo,<br /> en cada canal.</h1>
       <p className="introduccion">Una base compartida para que la atención continúe de un canal a otro, sin volver a empezar.</p>
       <section className="canales" aria-labelledby="titulo-canales">
         <h2 id="titulo-canales">Canales de atención</h2>

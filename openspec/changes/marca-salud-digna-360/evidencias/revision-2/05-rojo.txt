@@ -1,0 +1,681 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ❯ |web| src/identidadVisual.test.ts (6 tests | 1 failed) 57ms
+   ✓ mantiene contraste AA del texto en todas las superficies declaradas 3ms
+   ✓ distingue el foco y los bordes de control de sus superficies 2ms
+   ✓ centraliza los colores y reserva el verde para la marca grande 4ms
+   × separa los canales y la simulación con los colores y contrastes de D5 7ms
+   ✓ sirve Open Sans latina local en los tres pesos sin fuentes de terceros 16ms
+   ✓ declara la marca en los metadatos y no incluye archivos gráficos del logo 24ms
+ ❯ |web| src/componentes/BarraDemo.test.tsx (4 tests | 3 failed) 770ms
+     × presenta la simulación y el progreso con el texto del paso como nombre accesible 191ms
+     ✓ con el cliente real presenta solo los canales, sin controles ni progreso de simulación 97ms
+     × actualiza el progreso al avanzar y conserva el paso al navegar entre canales 268ms
+     × conserva el selector y el reinicio y ajusta el máximo al guion elegido 213ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/identidadVisual.test.ts > separa los canales y la simulación con los colores y contrastes de D5
+AssertionError: expected ' display: flex; flex-wrap: wrap; gap:…' to match /gap:\s*0\.5rem/
+
+- Expected: 
+/gap:\s*0\.5rem/
+
++ Received: 
+" display: flex; flex-wrap: wrap; gap: 0.25rem; width: min(100% - 3rem, 72rem); margin: 0 auto; padding-block: 0.5rem; list-style: none; 
+ flex-wrap: nowrap; width: calc(100% - 1rem); overflow-x: auto; overscroll-behavior-x: contain; scroll-padding-inline: 0.5rem; scrollbar-width: thin; scrollbar-color: var(--sd-accion) var(--fondo-deshabilitado); "
+
+ ❯ src/identidadVisual.test.ts:64:35
+     62|     .filter(([, selectores]) => selectores!.split(',').some(valor => v…
+     63|     .map(([, , cuerpo]) => cuerpo).join('\n');
+     64|   expect(regla('.barra-demo ul')).toMatch(/gap:\s*0\.5rem/);
+       |                                   ^
+     65|   expect(regla('.barra-demo a')).toMatch(/border:\s*1px solid var\(--b…
+     66|   expect(regla('.barra-demo a')).toMatch(/border-radius:\s*0\.5rem/);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  |web| src/componentes/BarraDemo.test.tsx > Barra de demo con grupos separados > presenta la simulación y el progreso con el texto del paso como nombre accesible
+TestingLibraryElementError: Unable to find an element with the text: Simulación. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<nav
+  aria-label="Canales de la demo"
+  class="barra-demo"
+>
+  <ul>
+    <li>
+      <a
+        class=""
+        data-discover="true"
+        href="/web"
+      >
+        Web
+      </a>
+    </li>
+    <li>
+      <a
+        class=""
+        data-discover="true"
+        href="/wa"
+      >
+        WhatsApp
+      </a>
+    </li>
+    <li>
+      <a
+        class=""
+        data-discover="true"
+        href="/app"
+      >
+        App
+      </a>
+    </li>
+    <li>
+      <a
+        aria-current="page"
+        class="active"
+        data-discover="true"
+        href="/callcenter"
+      >
+        Call Center
+      </a>
+    </li>
+    <li>
+      <a
+        class=""
+        data-discover="true"
+        href="/clinica"
+      >
+        Clínica
+      </a>
+    </li>
+    <li>
+      <a
+        class=""
+        data-discover="true"
+        href="/admin"
+      >
+        Admin
+      </a>
+    </li>
+    <li>
+      <a
+        class=""
+        data-discover="true"
+        href="/bandeja"
+      >
+        Bandeja
+      </a>
+    </li>
+  </ul>
+  <div
+    class="control-demo"
+  >
+    <label>
+      Guion de demo 
+      <select>
+        <option
+          value="flujoA"
+        >
+          Flujo A
+        </option>
+        <option
+          value="flujoC"
+        >
+          Flujo C
+        </option>
+      </select>
+    </label>
+    <p
+      role="status"
+    >
+      Paso 
+      1
+       de 
+      14
+       · 
+      Esperando llamada
+    </p>
+    <button
+      type="button"
+    >
+      Reiniciar guion
+    </button>
+  </div>
+</nav>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/componentes/BarraDemo.test.tsx:24:26
+     22|     abrir(new ClienteMock({ latenciaMs: 0 }));
+     23|     const barra = screen.getByRole('navigation', { name: 'Canales de l…
+     24|     expect(within(barra).getByText('Simulación')).toBeDefined();
+       |                          ^
+     25|     expect(within(barra).getByRole('status').textContent).toBe('Paso 1…
+     26|     const progreso = within(barra).getByRole<HTMLProgressElement>('pro…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  |web| src/componentes/BarraDemo.test.tsx > Barra de demo con grupos separados > actualiza el progreso al avanzar y conserva el paso al navegar entre canales
+TestingLibraryElementError: Unable to find an accessible element with the role "progressbar" and name "Paso 2 de 14 · Llamada en Call Center"
+
+Here are the accessible roles:
+
+  navigation:
+
+  Name "Canales de la demo":
+  <nav
+    aria-label="Canales de la demo"
+    class="barra-demo"
+  />
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  --------------------------------------------------
+  link:
+
+  Name "Web":
+  <a
+    class=""
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    aria-current="page"
+    class="active"
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    class=""
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    class=""
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    class=""
+    data-discover="true"
+    href="/clinica"
+  />
+
+  Name "Admin":
+  <a
+    class=""
+    data-discover="true"
+    href="/admin"
+  />
+
+  Name "Bandeja":
+  <a
+    class=""
+    data-discover="true"
+    href="/bandeja"
+  />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Guion de demo":
+  <select />
+
+  --------------------------------------------------
+  option:
+
+  Name "Flujo A":
+  <option
+    value="flujoA"
+  />
+
+  Name "Flujo C":
+  <option
+    value="flujoC"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    role="status"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Reiniciar guion":
+  <button
+    type="button"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <nav
+      aria-label="Canales de la demo"
+      class="barra-demo"
+    >
+      <ul>
+        <li>
+          <a
+            class=""
+            data-discover="true"
+            href="/web"
+          >
+            Web
+          </a>
+        </li>
+        <li>
+          <a
+            aria-current="page"
+            class="active"
+            data-discover="true"
+            href="/wa"
+          >
+            WhatsApp
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            data-discover="true"
+            href="/app"
+          >
+            App
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            data-discover="true"
+            href="/callcenter"
+          >
+            Call Center
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            data-discover="true"
+            href="/clinica"
+          >
+            Clínica
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            data-discover="true"
+            href="/admin"
+          >
+            Admin
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            data-discover="true"
+            href="/bandeja"
+          >
+            Bandeja
+          </a>
+        </li>
+      </ul>
+      <div
+        class="control-demo"
+      >
+        <label>
+          Guion de demo 
+          <select>
+            <option
+              value="flujoA"
+            >
+              Flujo A
+            </option>
+            <option
+              value="flujoC"
+            >
+              Flujo C
+            </option>
+          </select>
+        </label>
+        <p
+          role="status"
+        >
+          Paso 
+          2
+           de 
+          14
+           · 
+          Llamada en Call Center
+        </p>
+        <button
+          type="button"
+        >
+          Reiniciar guion
+        </button>
+      </div>
+    </nav>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/componentes/BarraDemo.test.tsx:54:19
+     52|     await usuario.click(screen.getByRole('link', { name: 'WhatsApp' })…
+     53|     expect(router.state.location.pathname).toBe('/wa');
+     54|     expect(screen.getByRole<HTMLProgressElement>('progressbar', { name…
+       |                   ^
+     55|     expect(screen.getByRole('status').textContent).toBe('Paso 2 de 14 …
+     56|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  |web| src/componentes/BarraDemo.test.tsx > Barra de demo con grupos separados > conserva el selector y el reinicio y ajusta el máximo al guion elegido
+TestingLibraryElementError: Unable to find an accessible element with the role "progressbar" and name "Paso 1 de 4 · Flujo C · Cita confirmada en App"
+
+Here are the accessible roles:
+
+  navigation:
+
+  Name "Canales de la demo":
+  <nav
+    aria-label="Canales de la demo"
+    class="barra-demo"
+  />
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  --------------------------------------------------
+  link:
+
+  Name "Web":
+  <a
+    class=""
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    class=""
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    class=""
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    aria-current="page"
+    class="active"
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    class=""
+    data-discover="true"
+    href="/clinica"
+  />
+
+  Name "Admin":
+  <a
+    class=""
+    data-discover="true"
+    href="/admin"
+  />
+
+  Name "Bandeja":
+  <a
+    class=""
+    data-discover="true"
+    href="/bandeja"
+  />
+
+  --------------------------------------------------
+  combobox:
+
+  Name "Guion de demo":
+  <select />
+
+  --------------------------------------------------
+  option:
+
+  Name "Flujo A":
+  <option
+    value="flujoA"
+  />
+
+  Name "Flujo C":
+  <option
+    value="flujoC"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    role="status"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Reiniciar guion":
+  <button
+    type="button"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <nav
+      aria-label="Canales de la demo"
+      class="barra-demo"
+    >
+      <ul>
+        <li>
+          <a
+            class=""
+            data-discover="true"
+            href="/web"
+          >
+            Web
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            data-discover="true"
+            href="/wa"
+          >
+            WhatsApp
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            data-discover="true"
+            href="/app"
+          >
+            App
+          </a>
+        </li>
+        <li>
+          <a
+            aria-current="page"
+            class="active"
+            data-discover="true"
+            href="/callcenter"
+          >
+            Call Center
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            data-discover="true"
+            href="/clinica"
+          >
+            Clínica
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            data-discover="true"
+            href="/admin"
+          >
+            Admin
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            data-discover="true"
+            href="/bandeja"
+          >
+            Bandeja
+          </a>
+        </li>
+      </ul>
+      <div
+        class="control-demo"
+      >
+        <label>
+          Guion de demo 
+          <select>
+            <option
+              value="flujoA"
+            >
+              Flujo A
+            </option>
+            <option
+              value="flujoC"
+            >
+              Flujo C
+            </option>
+          </select>
+        </label>
+        <p
+          role="status"
+        >
+          Paso 
+          1
+           de 
+          4
+           · 
+          Flujo C · Cita confirmada en App
+        </p>
+        <button
+          type="button"
+        >
+          Reiniciar guion
+        </button>
+      </div>
+    </nav>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/componentes/BarraDemo.test.tsx:62:29
+     60|     abrir(new ClienteMock({ latenciaMs: 0 }));
+     61|     await usuario.selectOptions(screen.getByRole('combobox', { name: '…
+     62|     const progreso = screen.getByRole<HTMLProgressElement>('progressba…
+       |                             ^
+     63|     expect(progreso.value).toBe(1);
+     64|     expect(progreso.max).toBe(4);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  4 failed | 6 passed (10)
+   Start at  05:43:37
+   Duration  6.04s (transform 451ms, setup 0ms, import 2.14s, tests 828ms, environment 2.66s)
+
