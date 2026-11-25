@@ -30,7 +30,7 @@
     }
   ],
   "root": {
-    "path": "C:\\Users\\guill\\Documents\\GitHub\\noki",
+    "path": "<repositorio>",
     "source": "nearest"
   }
 }

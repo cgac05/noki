@@ -9,7 +9,7 @@ En línea: 3 Carácter: 17
   return binding.open(
                  ^
 
-Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\vitest@4.0.14_@typ
+Error: EPERM: operation not permitted, open '<repositorio>\node_modules\.pnpm\vitest@4.0.14_@typ
 es+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
     at Object.openSync (node:fs:559:18)
     at readFileSync (node:fs:443:35)
@@ -24,7 +24,7 @@ es+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
   errno: -4048,
   code: 'EPERM',
   syscall: 'open',
-  path: 'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de6
+  path: '<repositorio>\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de6
 69f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
 }
 

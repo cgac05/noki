@@ -1,7 +1,7 @@
 ﻿Copia temporal de 1e692d7 con el diff de apps/web y dependencias del lockfile. La primera corrida detectó que faltaba el id de una opción en la respuesta simulada. Resultados tras corregir esa fixture:
 npx.cmd vitest run --project web --maxWorkers=2 --configLoader runner
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d
+ RUN  v4.0.14 <temporal>/noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d
 
  ✓ |web| src/vistas/vistas.test.tsx (17 tests) 7889ms
      ✓ reiniciar el guion C descarta la confirmación y la aprobación pendiente de la cita  2337ms

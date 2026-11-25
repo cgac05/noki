@@ -1,5 +1,5 @@
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-retoma-3793ae9760604b4c9846a4c17efcb33a
+ RUN  v4.0.14 <temporal>/noki-retoma-3793ae9760604b4c9846a4c17efcb33a
 
  ✓ |unitarios| tests/unit/nucleo/casosTramite.test.ts (44 tests) 90ms
  ✓ |unitarios| tests/unit/api/llamadaCortadaWa.test.ts (10 tests) 212ms

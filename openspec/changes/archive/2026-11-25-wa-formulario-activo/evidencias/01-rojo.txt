@@ -2,7 +2,7 @@
 wa.test.tsx SHA-256: C091805B53E155C7C0735DA5E11F45D509D6B43B9FE2E4E3B9D67890D4E795EE
 npx vitest run --project web apps/web/src/vistas/wa.test.tsx --configLoader runner
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-wa-formulario-2b1f9298fe2847ec9d2d0a6f7c6aadef
+ RUN  v4.0.14 <temporal>/noki-wa-formulario-2b1f9298fe2847ec9d2d0a6f7c6aadef
 
  ❯ |web| src/vistas/wa.test.tsx (20 tests | 3 failed) 5688ms
    ✓ identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión  1383ms

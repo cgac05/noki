@@ -1,5 +1,5 @@
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-wa-d52f822c9b5f4a10bb7bb22e17e17856
+ RUN  v4.0.14 <temporal>/noki-wa-d52f822c9b5f4a10bb7bb22e17e17856
 
  ✓ |web| src/vistas/consolas.test.tsx (19 tests) 3359ms
      ✓ incluye el número de la llamada en el enlace y el QR de continuación  845ms

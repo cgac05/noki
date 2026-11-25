@@ -1,6 +1,6 @@
 ﻿npx vitest run --project web apps/web/src/vistas/wa.test.tsx --configLoader runner
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-wa-formulario-2b1f9298fe2847ec9d2d0a6f7c6aadef
+ RUN  v4.0.14 <temporal>/noki-wa-formulario-2b1f9298fe2847ec9d2d0a6f7c6aadef
 
  ✓ |web| src/vistas/wa.test.tsx (20 tests) 6595ms
    ✓ identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión  1555ms

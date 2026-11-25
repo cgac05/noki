@@ -1,6 +1,6 @@
 ﻿npx.cmd vitest run --project web --maxWorkers=2 --configLoader native
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-app-sesion-validacion
+ RUN  v4.0.14 <temporal>/noki-app-sesion-validacion
 
  ✓ |web| src/vistas/consolas.test.tsx (20 tests) 4538ms
      ✓ completa la cita en la ficha usando el ANI de la llamada  1165ms

@@ -1,7 +1,7 @@
 npx vitest run --project web --configLoader runner --maxWorkers=2 apps/web/src/vistas/webReal.test.tsx apps/web/src/vistas/consolas.test.tsx
 Código de salida: 0
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-r3-264ab2e8
+ RUN  v4.0.14 <temporal>/noki-r3-264ab2e8
 
  ✓ |web| src/vistas/consolas.test.tsx (21 tests) 4299ms
      ✓ completa la cita en la ficha usando el ANI de la llamada  1235ms

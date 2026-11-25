@@ -3,39 +3,39 @@
   "schemaName": "spec-driven",
   "planningHome": {
     "kind": "repo",
-    "root": "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a",
-    "changesDir": "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes",
+    "root": "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a",
+    "changesDir": "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes",
     "defaultSchema": "spec-driven"
   },
-  "changeRoot": "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono",
+  "changeRoot": "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono",
   "artifactPaths": {
     "proposal": {
       "outputPath": "proposal.md",
-      "resolvedOutputPath": "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\proposal.md",
+      "resolvedOutputPath": "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\proposal.md",
       "existingOutputPaths": [
-        "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\proposal.md"
+        "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\proposal.md"
       ]
     },
     "specs": {
       "outputPath": "specs/**/*.md",
-      "resolvedOutputPath": "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\specs\\**\\*.md",
+      "resolvedOutputPath": "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\specs\\**\\*.md",
       "existingOutputPaths": [
-        "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\specs\\canal-whatsapp\\spec.md",
-        "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\specs\\continuidad-canales\\spec.md"
+        "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\specs\\canal-whatsapp\\spec.md",
+        "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\specs\\continuidad-canales\\spec.md"
       ]
     },
     "design": {
       "outputPath": "design.md",
-      "resolvedOutputPath": "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\design.md",
+      "resolvedOutputPath": "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\design.md",
       "existingOutputPaths": [
-        "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\design.md"
+        "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\design.md"
       ]
     },
     "tasks": {
       "outputPath": "tasks.md",
-      "resolvedOutputPath": "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\tasks.md",
+      "resolvedOutputPath": "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\tasks.md",
       "existingOutputPaths": [
-        "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\tasks.md"
+        "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\openspec\\changes\\retoma-por-telefono\\tasks.md"
       ]
     }
   },
@@ -58,7 +58,7 @@
     ],
     "linkedContext": [],
     "allowedEditRoots": [
-      "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a"
+      "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a"
     ],
     "requiresAffectedAreaSelection": false,
     "constraints": [
@@ -99,7 +99,7 @@
     }
   ],
   "root": {
-    "path": "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a",
+    "path": "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a",
     "source": "nearest"
   }
 }

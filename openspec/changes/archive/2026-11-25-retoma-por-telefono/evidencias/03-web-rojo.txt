@@ -1,5 +1,5 @@
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-retoma-3793ae9760604b4c9846a4c17efcb33a
+ RUN  v4.0.14 <temporal>/noki-retoma-3793ae9760604b4c9846a4c17efcb33a
 
  ❯ |unitarios| tests/unit/api/sesionWebMemoria.test.ts (5 tests | 1 failed) 193ms
    ✓ busca la sesión web por los últimos diez dígitos y el vínculo más reciente 138ms

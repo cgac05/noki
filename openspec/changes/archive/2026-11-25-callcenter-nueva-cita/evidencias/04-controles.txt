@@ -11,7 +11,7 @@ En línea: 9 Carácter: 77
   return binding.open(
                  ^
 
-Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\vitest@4.0.14_@typ
+Error: EPERM: operation not permitted, open '<repositorio>\node_modules\.pnpm\vitest@4.0.14_@typ
 es+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
     at Object.openSync (node:fs:559:18)
     at readFileSync (node:fs:443:35)
@@ -26,7 +26,7 @@ es+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
   errno: -4048,
   code: 'EPERM',
   syscall: 'open',
-  path: 'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de6
+  path: '<repositorio>\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de6
 69f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
 }
 
@@ -44,7 +44,7 @@ En línea: 12 Carácter: 112
   return binding.open(
                  ^
 
-Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\vitest@4.0.14_@typ
+Error: EPERM: operation not permitted, open '<repositorio>\node_modules\.pnpm\vitest@4.0.14_@typ
 es+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
     at Object.openSync (node:fs:559:18)
     at readFileSync (node:fs:443:35)
@@ -59,7 +59,7 @@ es+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
   errno: -4048,
   code: 'EPERM',
   syscall: 'open',
-  path: 'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de6
+  path: '<repositorio>\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de6
 69f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
 }
 
@@ -77,7 +77,7 @@ En línea: 13 Carácter: 26
     return binding.readFileUtf8(path, stringToFlags(options.flag));
                    ^
 
-Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\eslint@9.39.1_jiti
+Error: EPERM: operation not permitted, open '<repositorio>\node_modules\.pnpm\eslint@9.39.1_jiti
 @2.7.0_supports-color@7.2.0\node_modules\eslint\bin\eslint.js'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
@@ -92,7 +92,7 @@ Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\nok
   errno: -4048,
   code: 'EPERM',
   syscall: 'open',
-  path: 'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\eslint@9.39.1_jiti@2.7.0_supports-color@7.2.0\
+  path: '<repositorio>\\node_modules\\.pnpm\\eslint@9.39.1_jiti@2.7.0_supports-color@7.2.0\
 \node_modules\\eslint\\bin\\eslint.js'
 }
 
@@ -111,7 +111,7 @@ En línea: 15 Carácter: 79
                    ^
 
 Error: EPERM: operation not permitted, open 
-'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
+'<repositorio>\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
     at loadSource (node:internal/modules/cjs/loader:1788:20)
@@ -126,7 +126,7 @@ Error: EPERM: operation not permitted, open
   code: 'EPERM',
   syscall: 'open',
   path: 
-'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
+'<repositorio>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
 }
 
 Node.js v24.13.0
@@ -144,7 +144,7 @@ En línea: 15 Carácter: 79
                    ^
 
 Error: EPERM: operation not permitted, open 
-'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
+'<repositorio>\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
     at loadSource (node:internal/modules/cjs/loader:1788:20)
@@ -159,7 +159,7 @@ Error: EPERM: operation not permitted, open
   code: 'EPERM',
   syscall: 'open',
   path: 
-'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
+'<repositorio>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
 }
 
 Node.js v24.13.0
@@ -177,7 +177,7 @@ En línea: 15 Carácter: 79
                    ^
 
 Error: EPERM: operation not permitted, open 
-'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
+'<repositorio>\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
     at loadSource (node:internal/modules/cjs/loader:1788:20)
@@ -192,7 +192,7 @@ Error: EPERM: operation not permitted, open
   code: 'EPERM',
   syscall: 'open',
   path: 
-'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
+'<repositorio>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
 }
 
 Node.js v24.13.0
@@ -210,7 +210,7 @@ En línea: 15 Carácter: 79
                    ^
 
 Error: EPERM: operation not permitted, open 
-'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
+'<repositorio>\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
     at loadSource (node:internal/modules/cjs/loader:1788:20)
@@ -225,7 +225,7 @@ Error: EPERM: operation not permitted, open
   code: 'EPERM',
   syscall: 'open',
   path: 
-'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
+'<repositorio>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
 }
 
 Node.js v24.13.0
@@ -243,7 +243,7 @@ En línea: 15 Carácter: 79
                    ^
 
 Error: EPERM: operation not permitted, open 
-'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
+'<repositorio>\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
     at loadSource (node:internal/modules/cjs/loader:1788:20)
@@ -258,7 +258,7 @@ Error: EPERM: operation not permitted, open
   code: 'EPERM',
   syscall: 'open',
   path: 
-'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
+'<repositorio>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
 }
 
 Node.js v24.13.0
@@ -276,7 +276,7 @@ En línea: 15 Carácter: 79
                    ^
 
 Error: EPERM: operation not permitted, open 
-'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
+'<repositorio>\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
     at loadSource (node:internal/modules/cjs/loader:1788:20)
@@ -291,7 +291,7 @@ Error: EPERM: operation not permitted, open
   code: 'EPERM',
   syscall: 'open',
   path: 
-'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
+'<repositorio>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
 }
 
 Node.js v24.13.0
@@ -309,7 +309,7 @@ En línea: 15 Carácter: 79
                    ^
 
 Error: EPERM: operation not permitted, open 
-'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
+'<repositorio>\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
     at loadSource (node:internal/modules/cjs/loader:1788:20)
@@ -324,7 +324,7 @@ Error: EPERM: operation not permitted, open
   code: 'EPERM',
   syscall: 'open',
   path: 
-'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
+'<repositorio>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
 }
 
 Node.js v24.13.0
@@ -342,7 +342,7 @@ En línea: 15 Carácter: 79
                    ^
 
 Error: EPERM: operation not permitted, open 
-'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
+'<repositorio>\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
     at loadSource (node:internal/modules/cjs/loader:1788:20)
@@ -357,7 +357,7 @@ Error: EPERM: operation not permitted, open
   code: 'EPERM',
   syscall: 'open',
   path: 
-'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
+'<repositorio>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
 }
 
 Node.js v24.13.0
@@ -375,7 +375,7 @@ En línea: 15 Carácter: 79
                    ^
 
 Error: EPERM: operation not permitted, open 
-'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
+'<repositorio>\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
     at loadSource (node:internal/modules/cjs/loader:1788:20)
@@ -390,7 +390,7 @@ Error: EPERM: operation not permitted, open
   code: 'EPERM',
   syscall: 'open',
   path: 
-'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
+'<repositorio>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
 }
 
 Node.js v24.13.0
@@ -408,7 +408,7 @@ En línea: 15 Carácter: 79
                    ^
 
 Error: EPERM: operation not permitted, open 
-'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
+'<repositorio>\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
     at loadSource (node:internal/modules/cjs/loader:1788:20)
@@ -423,7 +423,7 @@ Error: EPERM: operation not permitted, open
   code: 'EPERM',
   syscall: 'open',
   path: 
-'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
+'<repositorio>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
 }
 
 Node.js v24.13.0
@@ -441,7 +441,7 @@ En línea: 15 Carácter: 79
                    ^
 
 Error: EPERM: operation not permitted, open 
-'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
+'<repositorio>\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
     at loadSource (node:internal/modules/cjs/loader:1788:20)
@@ -456,7 +456,7 @@ Error: EPERM: operation not permitted, open
   code: 'EPERM',
   syscall: 'open',
   path: 
-'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
+'<repositorio>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
 }
 
 Node.js v24.13.0
@@ -474,7 +474,7 @@ En línea: 15 Carácter: 79
                    ^
 
 Error: EPERM: operation not permitted, open 
-'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
+'<repositorio>\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
     at loadSource (node:internal/modules/cjs/loader:1788:20)
@@ -489,7 +489,7 @@ Error: EPERM: operation not permitted, open
   code: 'EPERM',
   syscall: 'open',
   path: 
-'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
+'<repositorio>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
 }
 
 Node.js v24.13.0
@@ -507,7 +507,7 @@ En línea: 15 Carácter: 79
                    ^
 
 Error: EPERM: operation not permitted, open 
-'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
+'<repositorio>\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
     at loadSource (node:internal/modules/cjs/loader:1788:20)
@@ -522,7 +522,7 @@ Error: EPERM: operation not permitted, open
   code: 'EPERM',
   syscall: 'open',
   path: 
-'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
+'<repositorio>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
 }
 
 Node.js v24.13.0
@@ -540,7 +540,7 @@ En línea: 15 Carácter: 79
                    ^
 
 Error: EPERM: operation not permitted, open 
-'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
+'<repositorio>\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
     at loadSource (node:internal/modules/cjs/loader:1788:20)
@@ -555,7 +555,7 @@ Error: EPERM: operation not permitted, open
   code: 'EPERM',
   syscall: 'open',
   path: 
-'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
+'<repositorio>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
 }
 
 Node.js v24.13.0
@@ -573,7 +573,7 @@ En línea: 15 Carácter: 79
                    ^
 
 Error: EPERM: operation not permitted, open 
-'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
+'<repositorio>\node_modules\.pnpm\typescript@5.9.3\node_modules\typescript\bin\tsc'
     at Object.readFileSync (node:fs:439:20)
     at defaultLoadImpl (node:internal/modules/cjs/loader:1139:17)
     at loadSource (node:internal/modules/cjs/loader:1788:20)
@@ -588,7 +588,7 @@ Error: EPERM: operation not permitted, open
   code: 'EPERM',
   syscall: 'open',
   path: 
-'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
+'<repositorio>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc'
 }
 
 Node.js v24.13.0
@@ -605,7 +605,7 @@ En línea: 16 Carácter: 70
   return binding.open(
                  ^
 
-Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\dependency-cruiser
+Error: EPERM: operation not permitted, open '<repositorio>\node_modules\.pnpm\dependency-cruiser
 @17.2.0\node_modules\dependency-cruiser\bin\dependency-cruise.mjs'
     at Object.openSync (node:fs:559:18)
     at readFileSync (node:fs:443:35)
@@ -620,7 +620,7 @@ Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\nok
   errno: -4048,
   code: 'EPERM',
   syscall: 'open',
-  path: 'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\dependency-cruiser@17.2.0\\node_modules\\depen
+  path: '<repositorio>\\node_modules\\.pnpm\\dependency-cruiser@17.2.0\\node_modules\\depen
 dency-cruiser\\bin\\dependency-cruise.mjs'
 }
 

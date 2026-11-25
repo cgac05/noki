@@ -2,22 +2,22 @@
 $ tsc --project tests/tsconfig.json && vitest run --project unitarios --project web
 X [ERROR] Cannot read directory "../../../..": Access is denied.
 System.Management.Automation.RemoteException
-X [ERROR] Could not resolve "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-app-sesion-validacion\\vitest.config.ts"
+X [ERROR] Could not resolve "<temporal>\\noki-app-sesion-validacion\\vitest.config.ts"
 System.Management.Automation.RemoteException
-failed to load config from C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\vitest.config.ts
+failed to load config from <temporal>\noki-app-sesion-validacion\vitest.config.ts
 System.Management.Automation.RemoteException
 ⎯⎯⎯⎯⎯⎯⎯ Startup Error ⎯⎯⎯⎯⎯⎯⎯⎯
 Error: Build failed with 2 errors:
 error: Cannot read directory "../../../..": Access is denied.
-error: Could not resolve "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-app-sesion-validacion\\vitest.config.ts"
-    at failureErrorWithLog (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1752:15)
-    at C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1211:25
-    at runOnEndCallbacks (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1592:45)
-    at buildResponseToResult (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1209:7)
-    at C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1236:16
-    at responseCallbacks.<computed> (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:886:9)
-    at handleIncomingPacket (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:941:12)
-    at Socket.readFromStdout (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:864:7)
+error: Could not resolve "<temporal>\\noki-app-sesion-validacion\\vitest.config.ts"
+    at failureErrorWithLog (<temporal>\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1752:15)
+    at <temporal>\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1211:25
+    at runOnEndCallbacks (<temporal>\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1592:45)
+    at buildResponseToResult (<temporal>\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1209:7)
+    at <temporal>\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1236:16
+    at responseCallbacks.<computed> (<temporal>\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:886:9)
+    at handleIncomingPacket (<temporal>\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:941:12)
+    at Socket.readFromStdout (<temporal>\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:864:7)
     at Socket.emit (node:events:508:28)
     at addChunk (node:internal/streams/readable:559:12) {
   errors: [Getter/Setter],
@@ -30,7 +30,7 @@ System.Management.Automation.RemoteException
 Salida: 1
 npx.cmd vitest run --project unitarios --maxWorkers=2 --configLoader native
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-app-sesion-validacion
+ RUN  v4.0.14 <temporal>/noki-app-sesion-validacion
 
  ✓ |unitarios| tests/unit/nucleo/casosTramite.test.ts (44 tests) 96ms
  ✓ |unitarios| tests/unit/consultas.test.ts (25 tests) 70ms

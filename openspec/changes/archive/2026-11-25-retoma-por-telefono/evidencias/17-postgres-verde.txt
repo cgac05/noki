@@ -1,5 +1,5 @@
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-retoma-3793ae9760604b4c9846a4c17efcb33a
+ RUN  v4.0.14 <temporal>/noki-retoma-3793ae9760604b4c9846a4c17efcb33a
 
  ✓ |integracion| tests/integracion/idempotenciaWa.test.ts (1 test) 2818ms
    ✓ reserva y reproduce la respuesta de WhatsApp con eventos únicos en Postgres  2817ms

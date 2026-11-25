@@ -4,7 +4,7 @@ node:fs:559
   return binding.open(
                  ^
 
-Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
+Error: EPERM: operation not permitted, open '<repositorio>\node_modules\.pnpm\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
     at Object.openSync (node:fs:559:18)
     at readFileSync (node:fs:443:35)
     at getSourceSync (node:internal/modules/esm/load:37:14)
@@ -18,7 +18,7 @@ Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\nok
   errno: -4048,
   code: 'EPERM',
   syscall: 'open',
-  path: 'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
+  path: '<repositorio>\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
 }
 
 Node.js v24.13.0
@@ -28,7 +28,7 @@ node:fs:559
   return binding.open(
                  ^
 
-Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
+Error: EPERM: operation not permitted, open '<repositorio>\node_modules\.pnpm\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
     at Object.openSync (node:fs:559:18)
     at readFileSync (node:fs:443:35)
     at getSourceSync (node:internal/modules/esm/load:37:14)
@@ -42,7 +42,7 @@ Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\nok
   errno: -4048,
   code: 'EPERM',
   syscall: 'open',
-  path: 'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
+  path: '<repositorio>\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
 }
 
 Node.js v24.13.0
@@ -50,22 +50,22 @@ Exit: 1
 Copia temporal de 1e692d7 con pnpm install --frozen-lockfile --ignore-scripts. npx.cmd vitest run --project web --maxWorkers=2 apps/web/src/vistas/appSesion.test.tsx
 X [ERROR] Cannot read directory "../../../..": Access is denied.
 
-X [ERROR] Could not resolve "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\\vitest.config.ts"
+X [ERROR] Could not resolve "<temporal>\\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\\vitest.config.ts"
 
-failed to load config from C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\vitest.config.ts
+failed to load config from <temporal>\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\vitest.config.ts
 
 ⎯⎯⎯⎯⎯⎯⎯ Startup Error ⎯⎯⎯⎯⎯⎯⎯⎯
 Error: Build failed with 2 errors:
 error: Cannot read directory "../../../..": Access is denied.
-error: Could not resolve "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\\vitest.config.ts"
-    at failureErrorWithLog (C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1752:15)
-    at C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1211:25
-    at runOnEndCallbacks (C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1592:45)
-    at buildResponseToResult (C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1209:7)
-    at C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1236:16
-    at responseCallbacks.<computed> (C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:886:9)
-    at handleIncomingPacket (C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:941:12)
-    at Socket.readFromStdout (C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:864:7)
+error: Could not resolve "<temporal>\\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\\vitest.config.ts"
+    at failureErrorWithLog (<temporal>\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1752:15)
+    at <temporal>\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1211:25
+    at runOnEndCallbacks (<temporal>\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1592:45)
+    at buildResponseToResult (<temporal>\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1209:7)
+    at <temporal>\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1236:16
+    at responseCallbacks.<computed> (<temporal>\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:886:9)
+    at handleIncomingPacket (<temporal>\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:941:12)
+    at Socket.readFromStdout (<temporal>\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:864:7)
     at Socket.emit (node:events:508:28)
     at addChunk (node:internal/streams/readable:559:12) {
   errors: [Getter/Setter],
@@ -82,7 +82,7 @@ npm notice
 Exit: 1
 npx.cmd vitest run --project web --maxWorkers=2 apps/web/src/vistas/appSesion.test.tsx --configLoader runner
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d
+ RUN  v4.0.14 <temporal>/noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d
 
  ❯ |web| src/vistas/appSesion.test.tsx (12 tests | 2 failed) 10262ms
    × une los trámites sin duplicarlos y permite retomar y confirmar dentro de la app 1694ms

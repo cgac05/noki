@@ -2,7 +2,7 @@ node:fs:559
   return binding.open(
                  ^
 
-Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\dependency-cruiser@17.2.0\node_modules\dependency-cruiser\bin\dependency-cruise.mjs'
+Error: EPERM: operation not permitted, open '<repositorio>\node_modules\.pnpm\dependency-cruiser@17.2.0\node_modules\dependency-cruiser\bin\dependency-cruise.mjs'
     at Object.openSync (node:fs:559:18)
     at readFileSync (node:fs:443:35)
     at getSourceSync (node:internal/modules/esm/load:37:14)
@@ -16,7 +16,7 @@ Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\nok
   errno: -4048,
   code: 'EPERM',
   syscall: 'open',
-  path: 'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\dependency-cruiser@17.2.0\\node_modules\\dependency-cruiser\\bin\\dependency-cruise.mjs'
+  path: '<repositorio>\\node_modules\\.pnpm\\dependency-cruiser@17.2.0\\node_modules\\dependency-cruiser\\bin\\dependency-cruise.mjs'
 }
 
 Node.js v24.13.0

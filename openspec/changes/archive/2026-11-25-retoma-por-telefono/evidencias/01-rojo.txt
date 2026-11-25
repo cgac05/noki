@@ -2,7 +2,7 @@ node:fs:559
   return binding.open(
                  ^
 
-Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
+Error: EPERM: operation not permitted, open '<repositorio>\node_modules\.pnpm\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
     at Object.openSync (node:fs:559:18)
     at readFileSync (node:fs:443:35)
     at getSourceSync (node:internal/modules/esm/load:37:14)
@@ -16,28 +16,28 @@ Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\nok
   errno: -4048,
   code: 'EPERM',
   syscall: 'open',
-  path: 'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
+  path: '<repositorio>\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
 }
 
 Node.js v24.13.0
 X [ERROR] Cannot read directory "../../../..": Access is denied.
 
-X [ERROR] Could not resolve "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\vitest.config.ts"
+X [ERROR] Could not resolve "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\vitest.config.ts"
 
-failed to load config from C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\vitest.config.ts
+failed to load config from <temporal>\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\vitest.config.ts
 
 ⎯⎯⎯⎯⎯⎯⎯ Startup Error ⎯⎯⎯⎯⎯⎯⎯⎯
 Error: Build failed with 2 errors:
 error: Cannot read directory "../../../..": Access is denied.
-error: Could not resolve "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\vitest.config.ts"
-    at failureErrorWithLog (C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1752:15)
-    at C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1211:25
-    at runOnEndCallbacks (C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1592:45)
-    at buildResponseToResult (C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1209:7)
-    at C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1236:16
-    at responseCallbacks.<computed> (C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:886:9)
-    at handleIncomingPacket (C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:941:12)
-    at Socket.readFromStdout (C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:864:7)
+error: Could not resolve "<temporal>\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\vitest.config.ts"
+    at failureErrorWithLog (<temporal>\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1752:15)
+    at <temporal>\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1211:25
+    at runOnEndCallbacks (<temporal>\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1592:45)
+    at buildResponseToResult (<temporal>\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1209:7)
+    at <temporal>\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1236:16
+    at responseCallbacks.<computed> (<temporal>\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:886:9)
+    at handleIncomingPacket (<temporal>\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:941:12)
+    at Socket.readFromStdout (<temporal>\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:864:7)
     at Socket.emit (node:events:508:28)
     at addChunk (node:internal/streams/readable:559:12) {
   errors: [Getter/Setter],
@@ -52,7 +52,7 @@ npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
 npm notice To update run: npm install -g npm@11.21.3
 npm notice
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-retoma-3793ae9760604b4c9846a4c17efcb33a
+ RUN  v4.0.14 <temporal>/noki-retoma-3793ae9760604b4c9846a4c17efcb33a
 
  ❯ |unitarios| tests/unit/api/llamadaCortadaWa.test.ts (10 tests | 6 failed) 197ms
    ✓ continúa la llamada solo con el mismo número y la solicitud vigente: 'mismo ANI con prefijo' 95ms
@@ -276,7 +276,7 @@ npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
 npm notice To update run: npm install -g npm@11.21.3
 npm notice
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-retoma-3793ae9760604b4c9846a4c17efcb33a
+ RUN  v4.0.14 <temporal>/noki-retoma-3793ae9760604b4c9846a4c17efcb33a
 
  ❯ |unitarios| tests/unit/api/llamadaCortadaWa.test.ts (10 tests | 5 failed) 216ms
    ✓ continúa la llamada solo con el mismo número y la solicitud vigente: 'mismo ANI con prefijo' 89ms

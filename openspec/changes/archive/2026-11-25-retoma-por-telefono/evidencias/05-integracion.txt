@@ -4,7 +4,7 @@ node:os:305
 
 SystemError [ERR_SYSTEM_ERROR]: A system error occurred: uv_os_get_passwd returned ENOMEM (not enough memory)
     at Object.userInfo (node:os:305:11)
-    at file:///C:/Users/guill/AppData/Local/Temp/noki-retoma-3793ae9760604b4c9846a4c17efcb33a/node_modules/.pnpm/tsx@4.20.6/node_modules/tsx/dist/temporary-directory-CwHp0_NW.mjs:1:84
+    at file:///<temporal>/noki-retoma-3793ae9760604b4c9846a4c17efcb33a/node_modules/.pnpm/tsx@4.20.6/node_modules/tsx/dist/temporary-directory-CwHp0_NW.mjs:1:84
     at ModuleJob.run (node:internal/modules/esm/module_job:413:25)
     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)
     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:96:9) {

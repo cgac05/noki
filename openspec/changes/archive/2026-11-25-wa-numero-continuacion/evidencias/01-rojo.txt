@@ -7,30 +7,30 @@ En línea: 5 Carácter: 1
  
 
 X [ERROR] Could not resolve 
-"C:\\Users\\guill\\AppData\\Local\\Temp\\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\\vitest.config.ts"
+"<temporal>\\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\\vitest.config.ts"
 
-failed to load config from C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\vitest.config.ts
+failed to load config from <temporal>\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\vitest.config.ts
 
 ⎯⎯⎯⎯⎯⎯⎯ Startup Error ⎯⎯⎯⎯⎯⎯⎯⎯
 Error: Build failed with 2 errors:
 error: Cannot read directory "../../../..": Access is denied.
 error: Could not resolve 
-"C:\\Users\\guill\\AppData\\Local\\Temp\\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\\vitest.config.ts"
-    at failureErrorWithLog (C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.pn
+"<temporal>\\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\\vitest.config.ts"
+    at failureErrorWithLog (<temporal>\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.pn
 pm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1752:15)
-    at C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.pnpm\esbuild@0.28.2\nod
+    at <temporal>\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.pnpm\esbuild@0.28.2\nod
 e_modules\esbuild\lib\main.js:1211:25
-    at runOnEndCallbacks (C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.pnpm
+    at runOnEndCallbacks (<temporal>\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.pnpm
 \esbuild@0.28.2\node_modules\esbuild\lib\main.js:1592:45)
-    at buildResponseToResult (C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.
+    at buildResponseToResult (<temporal>\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.
 pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1209:7)
-    at C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.pnpm\esbuild@0.28.2\nod
+    at <temporal>\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.pnpm\esbuild@0.28.2\nod
 e_modules\esbuild\lib\main.js:1236:16
-    at responseCallbacks.<computed> (C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_mo
+    at responseCallbacks.<computed> (<temporal>\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_mo
 dules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:886:9)
-    at handleIncomingPacket (C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.p
+    at handleIncomingPacket (<temporal>\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.p
 npm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:941:12)
-    at Socket.readFromStdout (C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.
+    at Socket.readFromStdout (<temporal>\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.
 pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:864:7)
     at Socket.emit (node:events:508:28)
     at addChunk (node:internal/streams/readable:559:12) {
@@ -41,7 +41,7 @@ pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:864:7)
 
 
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-wa-d52f822c9b5f4a10bb7bb22e17e17856
+ RUN  v4.0.14 <temporal>/noki-wa-d52f822c9b5f4a10bb7bb22e17e17856
 
  ❯ |web| src/vistas/wa.test.tsx (18 tests | 1 failed | 16 skipped) 188ms
    ↓ identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión

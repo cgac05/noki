@@ -1,7 +1,7 @@
 npx vitest run --project web --configLoader runner --maxWorkers=2
 Código de salida: 1
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-r3-264ab2e8
+ RUN  v4.0.14 <temporal>/noki-r3-264ab2e8
 
  ✓ |web| src/vistas/vistas.test.tsx (17 tests) 4644ms
      ✓ reiniciar el guion C descarta la confirmación y la aprobación pendiente de la cita  546ms
