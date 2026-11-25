@@ -1,0 +1,1 @@
+PASS: despues, 52 capturas y mediciones, ocho rutas, dos modos y dos tamaños.

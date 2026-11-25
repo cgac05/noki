@@ -1,0 +1,26 @@
+{
+  "base": "eedd179024f0b93458d9103700f50ad1d1a626c7",
+  "resultados": [
+    {
+      "ruta": "apps/web/src/componentes/Layout.tsx",
+      "soloPresentacion": true
+    },
+    {
+      "ruta": "apps/web/src/componentes/LlegadaClinica.tsx",
+      "soloPresentacion": true
+    },
+    {
+      "ruta": "apps/web/src/vistas/App.tsx",
+      "soloPresentacion": true
+    },
+    {
+      "ruta": "apps/web/src/vistas/Admin.tsx",
+      "soloPresentacion": true
+    }
+  ],
+  "cssAnteriorSinCambios": true,
+  "metodo": "Se retiran solo clases literales, la clase dinámica de tarjeta-logro y su conjunto local. En CSS se retiran exclusivamente las dos variables, las tres reglas D7 y la clase agregada al grupo de aviso; el resto coincide literalmente normalizando finales de línea.",
+  "contrasteExitoSobreFondoExito": 5.813549828536868,
+  "contrasteExitoSobreBlanco": 6.585111115174155,
+  "excepcionEnlace": "Solo .marca; decisión del usuario registrada en handoff.md"
+}

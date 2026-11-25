@@ -1,0 +1,9 @@
+{
+  "base": "f5260a8974a7f49ccc97a15a6b24938f3435bfe0",
+  "controles": [
+    { "comando": "corepack pnpm exec eslint apps/web openspec/changes/marca-salud-digna-360/evidencias/07-control-entrega.mjs", "codigo": 0, "salida": "07-lint-web.txt (vacía, sin diagnósticos)" },
+    { "comando": "corepack pnpm --filter @noki/web exec tsc --noEmit", "codigo": 0, "salida": "07-typecheck-web.txt (vacía, sin diagnósticos)" },
+    { "comando": "corepack pnpm exec vitest run --project web --maxWorkers 2", "codigo": 0, "archivos": 33, "pruebas": 265, "segundosVitest": 68.82, "salida": "07-web.txt" }
+  ],
+  "controlRaiz": "4.1 pendiente por TS2353 preexistente en origin/main; decisión explícita del usuario"
+}

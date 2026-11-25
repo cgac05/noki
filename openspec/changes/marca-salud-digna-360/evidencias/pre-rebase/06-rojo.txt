@@ -1,0 +1,225 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ❯ |web| src/presentacionEstilos.test.ts (4 tests | 4 failed) 18ms
+   × Celular compacto: marca e insignia sin saltos, paso truncado y progreso de 4px 12ms
+   × Título visible al navegar: escala moderada y margen de desplazamiento bajo la barra 1ms
+   × Indicadores en tarjetas: cuadrícula acotada, valor destacado y etiqueta sin reordenar el DOM 1ms
+   × Estado vacío: superficie común, enlaces de la paleta y ninguna sombra nueva 1ms
+ ✓ |web| src/identidadVisual.test.ts (6 tests) 65ms
+ ❯ |web| src/presentacion.test.tsx (11 tests | 11 failed) 825ms
+   × Indicadores en tarjetas: solo las dos series de Admin usan la variante y conservan dt antes de dd 343ms
+   × Estado vacío en /app conserva el texto y el elemento: Aún no hay citas para mostrar. 50ms
+   × Estado vacío en /clinica conserva el texto y el elemento: Aún no hay llegadas esperadas. Confirma una cita en WhatsApp. 48ms
+   × Estado vacío en /admin conserva el texto y el elemento: No hay huecos liberados. 46ms
+   × Estado vacío en /admin conserva el texto y el elemento: Sin alertas de seguridad 46ms
+   × Estado vacío en /admin conserva el texto y el elemento: Aún no hay eventos en este hilo. 56ms
+   × Estado vacío en /bandeja conserva el texto y el elemento: No hay mensajes simulados todavía. 37ms
+   × Estado vacío de contexto en /app conserva su mensaje y Actualizar 32ms
+   × Estado vacío de contexto en /clinica conserva su mensaje y Actualizar 33ms
+   × Estado vacío de contexto en /admin conserva su mensaje y Actualizar 49ms
+   × Celular compacto conserva el texto completo del estado y el nombre accesible del progreso 84ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 15 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/presentacion.test.tsx > Indicadores en tarjetas: solo las dos series de Admin usan la variante y conservan dt antes de dd
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/presentacion.test.tsx:32:56
+     30|     const seccion = screen.getByRole('heading', { name: titulo }).pare…
+     31|     const lista = seccion.querySelector('dl')!;
+     32|     expect(lista.classList.contains('datos-tarjetas')).toBe(true);
+       |                                                        ^
+     33|     expect([...lista.children].map(tarjeta => [...tarjeta.children].ma…
+     34|     expect(within(seccion).getByText('3')).toBeDefined();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/15]⎯
+
+ FAIL  |web| src/presentacion.test.tsx > Estado vacío en /app conserva el texto y el elemento: Aún no hay citas para mostrar.
+ FAIL  |web| src/presentacion.test.tsx > Estado vacío en /clinica conserva el texto y el elemento: Aún no hay llegadas esperadas. Confirma una cita en WhatsApp.
+ FAIL  |web| src/presentacion.test.tsx > Estado vacío en /admin conserva el texto y el elemento: Aún no hay eventos en este hilo.
+ FAIL  |web| src/presentacion.test.tsx > Estado vacío en /bandeja conserva el texto y el elemento: No hay mensajes simulados todavía.
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/presentacion.test.tsx:52:57
+     50|   expect(mensaje.tagName).toBe('P');
+     51|   expect(superficie.tagName).toBe(etiqueta);
+     52|   expect(superficie.classList.contains('estado-vacio')).toBe(true);
+       |                                                         ^
+     53|   if (ruta === '/app') {
+     54|     const enlace = within(superficie).getByRole('link', { name: 'Inici…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/15]⎯
+
+ FAIL  |web| src/presentacion.test.tsx > Estado vacío en /admin conserva el texto y el elemento: No hay huecos liberados.
+ FAIL  |web| src/presentacion.test.tsx > Estado vacío en /admin conserva el texto y el elemento: Sin alertas de seguridad
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/presentacion.test.tsx:52:57
+     50|   expect(mensaje.tagName).toBe('P');
+     51|   expect(superficie.tagName).toBe(etiqueta);
+     52|   expect(superficie.classList.contains('estado-vacio')).toBe(true);
+       |                                                         ^
+     53|   if (ruta === '/app') {
+     54|     const enlace = within(superficie).getByRole('link', { name: 'Inici…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/15]⎯
+
+ FAIL  |web| src/presentacion.test.tsx > Estado vacío de contexto en /app conserva su mensaje y Actualizar
+ FAIL  |web| src/presentacion.test.tsx > Estado vacío de contexto en /admin conserva su mensaje y Actualizar
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/presentacion.test.tsx:68:57
+     66|   const superficie = mensaje.parentElement!;
+     67|   expect(superficie.tagName).toBe('DIV');
+     68|   expect(superficie.classList.contains('estado-vacio')).toBe(true);
+       |                                                         ^
+     69|   expect(within(superficie).getByRole('button', { name: 'Actualizar' }…
+     70| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/15]⎯
+
+ FAIL  |web| src/presentacion.test.tsx > Estado vacío de contexto en /clinica conserva su mensaje y Actualizar
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/presentacion.test.tsx:68:57
+     66|   const superficie = mensaje.parentElement!;
+     67|   expect(superficie.tagName).toBe('DIV');
+     68|   expect(superficie.classList.contains('estado-vacio')).toBe(true);
+       |                                                         ^
+     69|   expect(within(superficie).getByRole('button', { name: 'Actualizar' }…
+     70| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/15]⎯
+
+ FAIL  |web| src/presentacion.test.tsx > Celular compacto conserva el texto completo del estado y el nombre accesible del progreso
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/presentacion.test.tsx:80:90
+     78|   expect(within(barra).getByRole('progressbar', { name: texto })).toBe…
+     79|   expect(within(barra).getByRole('combobox', { name: 'Guion de demo' }…
+     80|   expect(screen.getByRole('heading', { level: 1 }).classList.contains(…
+       |                                                                                          ^
+     81| });
+     82| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/15]⎯
+
+ FAIL  |web| src/presentacionEstilos.test.ts > Celular compacto: marca e insignia sin saltos, paso truncado y progreso de 4px
+AssertionError: expected '' to match /font-size:\s*1\.5rem/
+
+- Expected: 
+/font-size:\s*1\.5rem/
+
++ Received: 
+""
+
+ ❯ src/presentacionEstilos.test.ts:15:34
+     13| 
+     14| it('Celular compacto: marca e insignia sin saltos, paso truncado y pro…
+     15|   expect(regla(movil, '.marca')).toMatch(/font-size:\s*1\.5rem/);
+       |                                  ^
+     16|   expect(regla(movil, '.marca')).toMatch(/white-space:\s*nowrap/);
+     17|   expect(regla(estilos, '.insignia-mock')).toMatch(/white-space:\s*now…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/15]⎯
+
+ FAIL  |web| src/presentacionEstilos.test.ts > Título visible al navegar: escala moderada y margen de desplazamiento bajo la barra
+AssertionError: expected ' max-width: 15ch; margin: 0; font-siz…' to match /font-size:\s*clamp\(2rem,\s*4vw,\s*3r…/
+
+- Expected: 
+/font-size:\s*clamp\(2rem,\s*4vw,\s*3rem\)/
+
++ Received: 
+" max-width: 15ch; margin: 0; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; text-wrap: balance; "
+
+ ❯ src/presentacionEstilos.test.ts:24:32
+     22| 
+     23| it('Título visible al navegar: escala moderada y margen de desplazamie…
+     24|   expect(regla(estilos, 'h1')).toMatch(/font-size:\s*clamp\(2rem,\s*4v…
+       |                                ^
+     25|   expect(regla(estilos, '.titulo-portada')).toMatch(/font-size:\s*clam…
+     26|   expect(regla(estilos, '.contenido')).toMatch(/padding-block:\s*clamp…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/15]⎯
+
+ FAIL  |web| src/presentacionEstilos.test.ts > Indicadores en tarjetas: cuadrícula acotada, valor destacado y etiqueta sin reordenar el DOM
+AssertionError: expected '' to match /repeat\(auto-fill,\s*minmax\(10rem,\s…/
+
+- Expected: 
+/repeat\(auto-fill,\s*minmax\(10rem,\s*1fr\)\)/
+
++ Received: 
+""
+
+ ❯ src/presentacionEstilos.test.ts:34:45
+     32| 
+     33| it('Indicadores en tarjetas: cuadrícula acotada, valor destacado y eti…
+     34|   expect(regla(estilos, '.datos-tarjetas')).toMatch(/repeat\(auto-fill…
+       |                                             ^
+     35|   expect(regla(estilos, '.datos-tarjetas')).toMatch(/gap:\s*0\.75rem/);
+     36|   const tarjeta = regla(estilos, '.datos-tarjetas > div');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/15]⎯
+
+ FAIL  |web| src/presentacionEstilos.test.ts > Estado vacío: superficie común, enlaces de la paleta y ninguna sombra nueva
+AssertionError: expected '' to match /background:\s*var\(--sd-fondo-suave\)/
+
+- Expected: 
+/background:\s*var\(--sd-fondo-suave\)/
+
++ Received: 
+""
+
+ ❯ src/presentacionEstilos.test.ts:50:17
+     48| it('Estado vacío: superficie común, enlaces de la paleta y ninguna som…
+
+     49|   const vacio = regla(estilos, '.estado-vacio');
+     50|   expect(vacio).toMatch(/background:\s*var\(--sd-fondo-suave\)/);
+       |                 ^
+     51|   expect(vacio).toMatch(/border:\s*1px solid var\(--linea\)/);
+     52|   expect(vacio).toMatch(/border-radius:\s*0\.5rem/);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/15]⎯
+
+ Test Files  2 failed | 1 passed (3)
+      Tests  15 failed | 6 passed (21)
+   Start at  06:29:55
+   Duration  7.49s (transform 990ms, setup 0ms, import 3.17s, tests 907ms, environment 3.15s)
+

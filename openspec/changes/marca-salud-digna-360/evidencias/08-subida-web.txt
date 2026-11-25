@@ -1,0 +1,122 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ✓ |web| src/vistas/relojDemo.test.tsx (9 tests) 3992ms
+     ✓ adelanta una hora, presenta la hora local y UTC y refresca las lecturas  1427ms
+     ✓ bloquea sincrónicamente el doble clic y deshabilita todos los controles hasta terminar  506ms
+     ✓ reintenta los mismos minutos aunque el campo cambie y mantiene visible el tablero  718ms
+     ✓ refresca el conteo por un evento posterior de admin sin recargar  385ms
+ ✓ |web| src/vistas/consolas.test.tsx (17 tests) 7261ms
+     ✓ cierra la llamada sin marcar la casilla y solicita la continuación una sola vez  1671ms
+     ✓ inicia con ANI de demo, valida el formato y descarta la captura al mostrar la ficha  1331ms
+     ✓ tolera nulos y deshabilita todas las operaciones en solo lectura  302ms
+     ✓ exige consentimiento, envía una sola solicitud con doble clic y muestra el código de la lectura  894ms
+     ✓ permite reintentar la continuación fallida con la misma clave  507ms
+     ✓ en pestaña real nueva espera una llamada y cambia de sala solo con el hilo activo  404ms
+     ✓ muestra los siete KPI documentados y conserva una clave desconocida y su valor  436ms
+     ✓ un evento válido actualiza admin sin recargar, cambia su sala de hilo y descarta un evento inválido  370ms
+ ✓ |web| src/vistas/identidadAsesor.test.tsx (11 tests) 8935ms
+   ✓ envía destinatario y candidato NINGUNO; captura la fecha protegida y avanza  2438ms
+   ✓ envía destinatario y candidato referencia-opaca-demo; captura la fecha protegida y avanza  807ms
+   ✓ H-01: tras fallar Para mí envía Para otra persona con otro payload y clave  428ms
+   ✓ ofrece sin CURP junto al formulario y rechaza el formato antes de enviar  552ms
+   ✓ muestra la CURP en claro y envía normalizada la CURP válida de demo  467ms
+   ✓ muestra nombres y apellidos en claro y envía las claves de los selectores  2000ms
+   ✓ muestra código y mensaje del núcleo, conserva reiniciar y descarta al cancelar  827ms
+   ✓ reintenta sin recapturar y no filtra CURP, fecha ni datos básicos a cachés, consola, URL o almacenamiento  826ms
+ ✓ |web| src/vistas/webReal.test.tsx (16 tests) 9469ms
+   ✓ cotiza con el teléfono y genera una sola continuación aunque se pulse dos veces  2862ms
+   ✓ no cotiza con el teléfono inválido "123456789"  470ms
+   ✓ no cotiza con el teléfono inválido "1234567890123456"  390ms
+   ✓ no cotiza con el teléfono inválido "521 0000000001"  339ms
+   ✓ registra por clic un pago con CoDi que persiste al reabrir la web  1069ms
+   ✓ registra por Enter un pago con CoDi que persiste al reabrir la web  1217ms
+   ✓ registra por Espacio un pago con CoDi que persiste al reabrir la web  1161ms
+   ✓ ofrece otros canales cuando no hay contexto de demo {"conPaciente":false}  316ms
+   ✓ permite volver de la cotización a los servicios y al pago  413ms
+ ✓ |web| src/vistas/wa.test.tsx (16 tests) 11128ms
+   ✓ identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión  4355ms
+   ✓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible  735ms
+   ✓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo  1512ms
+   ✓ Modo real: conversa solo con POST y no muestra la insignia simulada  573ms
+   ✓ Número inválido: explica el patrón de 10 a 15 dígitos e impide el envío  318ms
+   ✓ Doble toque e indicador de espera: la misma opción se envía una sola vez  452ms
+   ✓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título  730ms
+   ✓ Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot  799ms
+   ✓ Call center solicita continuación con consentimiento y muestra enlace y QR de la lectura  559ms
+   ✓ avisa y cambia a Beto o Carla sin mezclar historiales, e ignora números ajenos  342ms
+ ✓ |web| src/vistas/vistas.test.tsx (17 tests) 12390ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo  953ms
+     ✓ reiniciar el guion C descarta la confirmación y la aprobación pendiente de la cita  1808ms
+     ✓ elige Flujo C, cancela, aprueba, acepta la oferta, muestra dominó y vuelve al inicio del Flujo A  2847ms
+     ✓ Selección de catálogo en call center: copia los IDs de otra oferta y envía servicio antes de sede  321ms
+     ✓ reintenta solo la sede pendiente y conserva su clave después de seleccionar el servicio  492ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  3799ms
+     ✓ permite escribir texto fuera del guion y muestra ayuda sin avanzar  389ms
+ ✓ |web| src/vistas/flow.test.tsx (7 tests) 13374ms
+   ✓ el Flow de identificación conserva el paso al cancelar y vuelve a abrir sin la fecha  4392ms
+   ✓ Envío del Flow: controles según captura y resumen enmascarado sin valores en mutaciones ni almacenamiento  1933ms
+   ✓ Campo requerido vacío: no envía y señala el campo  805ms
+   ✓ atrapa el foco con Tab y Shift+Tab entre el primer campo y Cancelar  883ms
+   ✓ Escape y valores descartados: cancela sin enviar y abre campos vacíos  1705ms
+   ✓ reintenta el Flow con la misma solicitud y clave; cerrar descarta el pendiente protegido  1808ms
+   ✓ cerrar después de un error borra los valores y elimina el reintento del historial  1842ms
+ ✓ |web| src/vistas/cancelarCita.test.tsx (5 tests) 2708ms
+   ✓ confirma una sola vez con el trámite elegido y muestra aprobación pendiente sin alterar la cita  1117ms
+   ✓ pedir otra aprobación crea una clave distinta y no reutiliza el rechazo anterior  632ms
+   ✓ desistir conserva la cita sin enviar comandos  342ms
+   ✓ reintenta el mismo comando y clave tras error de red y presenta el resultado CANCELADA  515ms
+ ✓ |web| src/vistas/clinicaAlertas.test.tsx (9 tests) 3179ms
+     ✓ registra la llegada con la sede de la cita aunque sea distinta del contexto  931ms
+     ✓ reintenta un error al cerrar con la misma clave sin bloquear otra tarjeta  454ms
+     ✓ muestra vacío junto con el resto del tablero  304ms
+     ✓ un 404 ofrece reintento sin ocultar métricas ni línea de tiempo  415ms
+ ✓ |web| src/cliente/refrescoReal.test.tsx (5 tests) 2898ms
+   ✓ vuelve a consultar contextoDemo al regresar a App aunque el valor anterior fuera vacío  1162ms
+   ✓ tras confirmar en WhatsApp muestra la cita en App en la misma pestaña sin Actualizar  1057ms
+   ✓ refresca las lecturas activas solo tras respuesta exitosa de WhatsApp (fallo=false)  316ms
+   ✓ refresca las lecturas activas solo tras respuesta exitosa de WhatsApp (fallo=true)  337ms
+ ✓ |web| src/rutas.test.tsx (19 tests) 3412ms
+     ✓ presenta la identidad aprobada en /  802ms
+     ✓ Ruta desconocida: permite volver a la portada  333ms
+ ✓ |web| src/presentacion.test.tsx (11 tests) 2025ms
+   ✓ Indicadores en tarjetas: solo las dos series de Admin usan la variante y conservan dt antes de dd  846ms
+ ✓ |web| src/componentes/BarraDemo.test.tsx (4 tests) 1748ms
+     ✓ presenta la simulación y el progreso con el texto del paso como nombre accesible  802ms
+     ✓ actualiza el progreso al avanzar y conserva el paso al navegar entre canales  354ms
+     ✓ conserva el selector y el reinicio y ajusta el máximo al guion elegido  388ms
+ ✓ |web| src/acentoIdentidad.test.tsx (3 tests) 1784ms
+   ✓ Acento verde de identidad: solo la cancelación completada es éxito y conserva role status  1465ms
+ ✓ |web| src/vistas/panelHuecos.test.tsx (5 tests) 1869ms
+   ✓ muestra hueco y ofertas en orden recibido, con fecha de Tepic y sin canal ni datos de pacientes  851ms
+   ✓ error independiente permite reintentar sin ocultar métricas ni alertas  472ms
+ ✓ |web| src/cliente/contexto.test.tsx (5 tests) 1115ms
+   ✓ comparte contextoDemo entre consumidores reales y da prioridad a la última respuesta por valor  717ms
+ ✓ |web| src/vistas/realWa.test.tsx (1 test) 1383ms
+   ✓ sin API real muestra el error en la burbuja y Reintentar conserva mensaje y clave  1380ms
+ ✓ |web| src/vistas/red.test.ts (1 test) 520ms
+   ✓ Vistas sin acceso directo a la red: no usan fetch ni Socket.IO  514ms
+ ✓ |web| src/cliente/conversacion.test.tsx (2 tests) 1263ms
+   ✓ la vista envía por el almacén y acumula la respuesta sin consultar lecturas de conversación  1253ms
+ ✓ |web| src/componentes/ModalFlow.test.tsx (1 test) 859ms
+   ✓ marca formato sin enviar ni mostrar el valor fuera de su campo protegido  857ms
+ ✓ |web| src/vistas/catalogoReal.test.tsx (1 test) 1235ms
+   ✓ distingue las doce ofertas sin reordenarlas y cotiza los identificadores del paquete en Tepic  1233ms
+ ✓ |web| src/identidadVisual.test.ts (9 tests) 78ms
+ ✓ |web| src/cliente/cliente.test.ts (26 tests) 536ms
+ ✓ |web| src/cliente/guionWa.test.ts (8 tests) 152ms
+ ✓ |web| src/cliente/tiempoReal.test.ts (5 tests) 42ms
+ ✓ |web| src/cliente/historialWa.test.tsx (11 tests) 174ms
+ ✓ |web| src/presentacionEstilos.test.ts (4 tests) 20ms
+ ✓ |web| src/cliente/relojDemo.test.ts (11 tests) 51ms
+ ✓ |web| src/cliente/useIdentificacion.test.tsx (7 tests) 130ms
+ ✓ |web| src/cliente/identificacion.test.ts (13 tests) 33ms
+ ✓ |web| src/usoDemo.test.ts (2 tests) 7ms
+ ✓ |web| src/cliente/idempotenciaWa.test.ts (2 tests) 19ms
+ ✓ |web| src/configuracion.test.ts (2 tests) 8ms
+
+ Test Files  33 passed (33)
+      Tests  265 passed (265)
+   Start at  08:45:58
+   Duration  45.39s (transform 4.35s, setup 0ms, import 72.95s, tests 93.80s, environment 119.28s)
+

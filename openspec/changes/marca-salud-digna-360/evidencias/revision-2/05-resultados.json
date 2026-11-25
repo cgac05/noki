@@ -1,0 +1,6212 @@
+[
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/",
+    "estado": "inicial",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 614,
+      "ancho": 375,
+      "alto": 198,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "198px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 623,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 623,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 623,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.28125,
+        "y": 623,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 337.4375,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 413.9375,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 490.4375,
+        "y": 623,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": null,
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/web",
+    "estado": "inicial",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 614,
+      "ancho": 375,
+      "alto": 198,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "198px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 623,
+        "ancho": 56.03125,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 72.03125,
+        "y": 623,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.96875,
+        "y": 623,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.953125,
+        "y": 623,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 338.109375,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 414.609375,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 491.109375,
+        "y": 623,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/web",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/wa",
+    "estado": "inicial",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 614,
+      "ancho": 375,
+      "alto": 198,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "198px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 623,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 623,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 174.65625,
+        "y": 623,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 234.640625,
+        "y": 623,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 339.796875,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416.296875,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 492.796875,
+        "y": 623,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": {
+      "x": 16,
+      "y": 520.609375,
+      "ancho": 343,
+      "alto": 93.390625,
+      "abajo": 614
+    }
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/app",
+    "estado": "inicial",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 614,
+      "ancho": 375,
+      "alto": 198,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "198px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 623,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 623,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 623,
+        "ancho": 52.6875,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.984375,
+        "y": 623,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 338.140625,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 414.640625,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 491.140625,
+        "y": 623,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/app",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/callcenter",
+    "estado": "inicial",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 614,
+      "ancho": 375,
+      "alto": 198,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "198px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 623,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 623,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 623,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.28125,
+        "y": 623,
+        "ancho": 99.921875,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 340.203125,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416.703125,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 493.203125,
+        "y": 623,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/callcenter",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/clinica",
+    "estado": "inicial",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 614,
+      "ancho": 375,
+      "alto": 198,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "198px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 623,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 623,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 623,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.28125,
+        "y": 623,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 337.4375,
+        "y": 623,
+        "ancho": 70.5625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 492.5,
+        "y": 623,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/clinica",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/admin",
+    "estado": "inicial",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 614,
+      "ancho": 375,
+      "alto": 198,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "198px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 623,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 623,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 623,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.28125,
+        "y": 623,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 337.4375,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 413.9375,
+        "y": 623,
+        "ancho": 70.140625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 492.078125,
+        "y": 623,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/admin",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/bandeja",
+    "estado": "inicial",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 614,
+      "ancho": 375,
+      "alto": 198,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "198px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 623,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 623,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 623,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.28125,
+        "y": 623,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 337.4375,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 413.9375,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 490.4375,
+        "y": 623,
+        "ancho": 81.0625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/bandeja",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/callcenter",
+    "estado": "flujoA-paso1",
+    "captura": "05-mock-375-flujoA-paso1-callcenter.png",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 614,
+      "ancho": 375,
+      "alto": 198,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "198px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 623,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 623,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 623,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.28125,
+        "y": 623,
+        "ancho": 99.921875,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 340.203125,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416.703125,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 493.203125,
+        "y": 623,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/callcenter",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/wa",
+    "estado": "flujoA-paso1",
+    "captura": "05-mock-375-flujoA-paso1-wa.png",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 614,
+      "ancho": 375,
+      "alto": 198,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "198px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 623,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 623,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 174.65625,
+        "y": 623,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 234.640625,
+        "y": 623,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 339.796875,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416.296875,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 492.796875,
+        "y": 623,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": {
+      "x": 16,
+      "y": 520.609375,
+      "ancho": 343,
+      "alto": 93.390625,
+      "abajo": 614
+    }
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/callcenter",
+    "estado": "flujoA-paso2",
+    "captura": "05-mock-375-flujoA-paso2-callcenter.png",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 614,
+      "ancho": 375,
+      "alto": 198,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "198px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 623,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 623,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 623,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.28125,
+        "y": 623,
+        "ancho": 99.921875,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 340.203125,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416.703125,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 493.203125,
+        "y": 623,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/callcenter",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 2 de 14 · Llamada en Call Center",
+    "progreso": {
+      "valor": 2,
+      "maximo": 14,
+      "nombre": "Paso 2 de 14 · Llamada en Call Center",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/wa",
+    "estado": "flujoA-paso2",
+    "captura": "05-mock-375-flujoA-paso2-wa.png",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 614,
+      "ancho": 375,
+      "alto": 198,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "198px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 623,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 623,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 174.65625,
+        "y": 623,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 234.640625,
+        "y": 623,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 339.796875,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416.296875,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 492.796875,
+        "y": 623,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 2 de 14 · Llamada en Call Center",
+    "progreso": {
+      "valor": 2,
+      "maximo": 14,
+      "nombre": "Paso 2 de 14 · Llamada en Call Center",
+      "borde": "1px"
+    },
+    "compositor": {
+      "x": 16,
+      "y": 520.609375,
+      "ancho": 343,
+      "alto": 93.390625,
+      "abajo": 614
+    }
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/app",
+    "estado": "flujoC-paso1",
+    "captura": "05-mock-375-flujoC-paso1-app.png",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 614,
+      "ancho": 375,
+      "alto": 198,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "198px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 623,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 623,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 623,
+        "ancho": 52.6875,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.984375,
+        "y": 623,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 338.140625,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 414.640625,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 491.140625,
+        "y": 623,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/app",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+    "progreso": {
+      "valor": 1,
+      "maximo": 4,
+      "nombre": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/wa",
+    "estado": "flujoC-paso1",
+    "captura": "05-mock-375-flujoC-paso1-wa.png",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 614,
+      "ancho": 375,
+      "alto": 198,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "198px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 623,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 623,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 174.65625,
+        "y": 623,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 234.640625,
+        "y": 623,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 339.796875,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416.296875,
+        "y": 623,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 492.796875,
+        "y": 623,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 667,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+    "progreso": {
+      "valor": 1,
+      "maximo": 4,
+      "nombre": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+      "borde": "1px"
+    },
+    "compositor": {
+      "x": 16,
+      "y": 520.609375,
+      "ancho": 343,
+      "alto": 93.390625,
+      "abajo": 614
+    }
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/app",
+    "estado": "flujoC-paso2",
+    "captura": "05-mock-375-flujoC-paso2-app.png",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 594.5,
+      "ancho": 375,
+      "alto": 217.5,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "217.5px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 603.5,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 647.5,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 603.5,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 647.5,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 603.5,
+        "ancho": 52.6875,
+        "alto": 44,
+        "abajo": 647.5,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.984375,
+        "y": 603.5,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 647.5,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 338.140625,
+        "y": 603.5,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 647.5,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 414.640625,
+        "y": 603.5,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 647.5,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 491.140625,
+        "y": 603.5,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 647.5,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/app",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 2 de 4 · Flujo C · Aprobación en WhatsApp",
+    "progreso": {
+      "valor": 2,
+      "maximo": 4,
+      "nombre": "Paso 2 de 4 · Flujo C · Aprobación en WhatsApp",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/wa",
+    "estado": "flujoC-paso2",
+    "captura": "05-mock-375-flujoC-paso2-wa.png",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 594.5,
+      "ancho": 375,
+      "alto": 217.5,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "217.5px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 603.5,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 647.5,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 603.5,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 647.5,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 174.65625,
+        "y": 603.5,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 647.5,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 234.640625,
+        "y": 603.5,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 647.5,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 339.796875,
+        "y": 603.5,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 647.5,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416.296875,
+        "y": 603.5,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 647.5,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 492.796875,
+        "y": 603.5,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 647.5,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 2 de 4 · Flujo C · Aprobación en WhatsApp",
+    "progreso": {
+      "valor": 2,
+      "maximo": 4,
+      "nombre": "Paso 2 de 4 · Flujo C · Aprobación en WhatsApp",
+      "borde": "1px"
+    },
+    "compositor": {
+      "x": 16,
+      "y": 501.109375,
+      "ancho": 343,
+      "alto": 93.390625,
+      "abajo": 594.5
+    }
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "foco": {
+      "texto": "WhatsApp",
+      "visible": true,
+      "anillo": "3px",
+      "color": "rgb(0, 116, 217)",
+      "dentro": true
+    }
+  },
+  {
+    "modo": "mock",
+    "ancho": 320,
+    "ruta": "/wa",
+    "estado": "limite",
+    "contenido": 320,
+    "barra": {
+      "x": 0,
+      "y": 575,
+      "ancho": 320,
+      "alto": 237,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "237px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 584,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 628,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 584,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 628,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 174.65625,
+        "y": 584,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 628,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 234.640625,
+        "y": 584,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 628,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 339.796875,
+        "y": 584,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 628,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416.296875,
+        "y": 584,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 628,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 492.796875,
+        "y": 584,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 628,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+    "progreso": {
+      "valor": 1,
+      "maximo": 4,
+      "nombre": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+      "borde": "1px"
+    },
+    "compositor": {
+      "x": 16,
+      "y": 481.609375,
+      "ancho": 288,
+      "alto": 93.390625,
+      "abajo": 575
+    }
+  },
+  {
+    "modo": "mock",
+    "ancho": 767,
+    "ruta": "/wa",
+    "estado": "limite",
+    "contenido": 767,
+    "barra": {
+      "x": 0,
+      "y": 625,
+      "ancho": 767,
+      "alto": 187,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "187px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 634,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 678,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(230, 242, 252)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 634,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 678,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 174.65625,
+        "y": 634,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 678,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 234.640625,
+        "y": 634,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 678,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 339.796875,
+        "y": 634,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 678,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416.296875,
+        "y": 634,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 678,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 492.796875,
+        "y": 634,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 678,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+    "progreso": {
+      "valor": 1,
+      "maximo": 4,
+      "nombre": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+      "borde": "1px"
+    },
+    "compositor": {
+      "x": 31.5,
+      "y": 531.609375,
+      "ancho": 704,
+      "alto": 93.390625,
+      "abajo": 625
+    }
+  },
+  {
+    "modo": "mock",
+    "ancho": 768,
+    "ruta": "/wa",
+    "estado": "limite",
+    "contenido": 768,
+    "barra": {
+      "x": 0,
+      "y": 5.96875,
+      "ancho": 768,
+      "alto": 131,
+      "abajo": 136.96875
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 24,
+        "y": 13.96875,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 57.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 87.359375,
+        "y": 13.96875,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 57.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 190.65625,
+        "y": 13.96875,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 57.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 250.640625,
+        "y": 13.96875,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 57.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 355.796875,
+        "y": 13.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 57.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 432.296875,
+        "y": 13.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 57.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 508.796875,
+        "y": 13.96875,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 57.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+    "progreso": {
+      "valor": 1,
+      "maximo": 4,
+      "nombre": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+      "borde": "1px"
+    },
+    "compositor": {
+      "x": 32,
+      "y": 634.90625,
+      "ancho": 704,
+      "alto": 76.390625,
+      "abajo": 711.296875
+    }
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "erroresJavascript": [],
+    "origenes": [
+      "http://localhost:5174",
+      "ws://localhost:5174"
+    ]
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/",
+    "estado": "inicial",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 95.96875,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 226.96875
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 103.96875,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 147.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 103.96875,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 147.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 103.96875,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 147.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.28125,
+        "y": 103.96875,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 147.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 393.4375,
+        "y": 103.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 147.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 469.9375,
+        "y": 103.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 147.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 546.4375,
+        "y": 103.96875,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 147.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": null,
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/web",
+    "estado": "inicial",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 101.96875,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 232.96875
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 109.96875,
+        "ancho": 56.03125,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 128.03125,
+        "y": 109.96875,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.96875,
+        "y": 109.96875,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.953125,
+        "y": 109.96875,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 394.109375,
+        "y": 109.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 470.609375,
+        "y": 109.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 547.109375,
+        "y": 109.96875,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/web",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/wa",
+    "estado": "inicial",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 101.96875,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 232.96875
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 109.96875,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 109.96875,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 230.65625,
+        "y": 109.96875,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 290.640625,
+        "y": 109.96875,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 395.796875,
+        "y": 109.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 472.296875,
+        "y": 109.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 548.796875,
+        "y": 109.96875,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": {
+      "x": 288,
+      "y": 730.90625,
+      "ancho": 704,
+      "alto": 76.390625,
+      "abajo": 807.296875
+    }
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/app",
+    "estado": "inicial",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 101.96875,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 232.96875
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 109.96875,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 109.96875,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 109.96875,
+        "ancho": 52.6875,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.984375,
+        "y": 109.96875,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 394.140625,
+        "y": 109.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 470.640625,
+        "y": 109.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 547.140625,
+        "y": 109.96875,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/app",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/callcenter",
+    "estado": "inicial",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 67.96875,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 198.96875
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 75.96875,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 119.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 75.96875,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 119.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 75.96875,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 119.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.28125,
+        "y": 75.96875,
+        "ancho": 99.921875,
+        "alto": 44,
+        "abajo": 119.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 396.203125,
+        "y": 75.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 119.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 472.703125,
+        "y": 75.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 119.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 549.203125,
+        "y": 75.96875,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 119.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/callcenter",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/clinica",
+    "estado": "inicial",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 101.96875,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 232.96875
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 109.96875,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 109.96875,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 109.96875,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.28125,
+        "y": 109.96875,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 393.4375,
+        "y": 109.96875,
+        "ancho": 70.5625,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 472,
+        "y": 109.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 548.5,
+        "y": 109.96875,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/clinica",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/admin",
+    "estado": "inicial",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 0,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 131
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 8,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 8,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 8,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.28125,
+        "y": 8,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 393.4375,
+        "y": 8,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 469.9375,
+        "y": 8,
+        "ancho": 70.140625,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 548.078125,
+        "y": 8,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/admin",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/bandeja",
+    "estado": "inicial",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 101.96875,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 232.96875
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 109.96875,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 109.96875,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 109.96875,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.28125,
+        "y": 109.96875,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 393.4375,
+        "y": 109.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 469.9375,
+        "y": 109.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 546.4375,
+        "y": 109.96875,
+        "ancho": 81.0625,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/bandeja",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/callcenter",
+    "estado": "flujoA-paso1",
+    "captura": "05-mock-1280-flujoA-paso1-callcenter.png",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 67.96875,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 198.96875
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 75.96875,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 119.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 75.96875,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 119.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 75.96875,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 119.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.28125,
+        "y": 75.96875,
+        "ancho": 99.921875,
+        "alto": 44,
+        "abajo": 119.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 396.203125,
+        "y": 75.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 119.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 472.703125,
+        "y": 75.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 119.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 549.203125,
+        "y": 75.96875,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 119.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/callcenter",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/wa",
+    "estado": "flujoA-paso1",
+    "captura": "05-mock-1280-flujoA-paso1-wa.png",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 93.96875,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 224.96875
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 101.96875,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 101.96875,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 230.65625,
+        "y": 101.96875,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 290.640625,
+        "y": 101.96875,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 395.796875,
+        "y": 101.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 472.296875,
+        "y": 101.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 548.796875,
+        "y": 101.96875,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 14 · Esperando llamada",
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "nombre": "Paso 1 de 14 · Esperando llamada",
+      "borde": "1px"
+    },
+    "compositor": {
+      "x": 288,
+      "y": 722.90625,
+      "ancho": 704,
+      "alto": 76.390625,
+      "abajo": 799.296875
+    }
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/callcenter",
+    "estado": "flujoA-paso2",
+    "captura": "05-mock-1280-flujoA-paso2-callcenter.png",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 0,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 131
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 8,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 8,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 8,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.28125,
+        "y": 8,
+        "ancho": 99.921875,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 396.203125,
+        "y": 8,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 472.703125,
+        "y": 8,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 549.203125,
+        "y": 8,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/callcenter",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 2 de 14 · Llamada en Call Center",
+    "progreso": {
+      "valor": 2,
+      "maximo": 14,
+      "nombre": "Paso 2 de 14 · Llamada en Call Center",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/wa",
+    "estado": "flujoA-paso2",
+    "captura": "05-mock-1280-flujoA-paso2-wa.png",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 93.96875,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 224.96875
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 101.96875,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 101.96875,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 230.65625,
+        "y": 101.96875,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 290.640625,
+        "y": 101.96875,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 395.796875,
+        "y": 101.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 472.296875,
+        "y": 101.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 548.796875,
+        "y": 101.96875,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 2 de 14 · Llamada en Call Center",
+    "progreso": {
+      "valor": 2,
+      "maximo": 14,
+      "nombre": "Paso 2 de 14 · Llamada en Call Center",
+      "borde": "1px"
+    },
+    "compositor": {
+      "x": 288,
+      "y": 722.90625,
+      "ancho": 704,
+      "alto": 76.390625,
+      "abajo": 799.296875
+    }
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/app",
+    "estado": "flujoC-paso1",
+    "captura": "05-mock-1280-flujoC-paso1-app.png",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 101.96875,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 232.96875
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 109.96875,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 109.96875,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 109.96875,
+        "ancho": 52.6875,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.984375,
+        "y": 109.96875,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 394.140625,
+        "y": 109.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 470.640625,
+        "y": 109.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 547.140625,
+        "y": 109.96875,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/app",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+    "progreso": {
+      "valor": 1,
+      "maximo": 4,
+      "nombre": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/wa",
+    "estado": "flujoC-paso1",
+    "captura": "05-mock-1280-flujoC-paso1-wa.png",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 101.96875,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 232.96875
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 109.96875,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 109.96875,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 230.65625,
+        "y": 109.96875,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 290.640625,
+        "y": 109.96875,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 395.796875,
+        "y": 109.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 472.296875,
+        "y": 109.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 548.796875,
+        "y": 109.96875,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 153.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+    "progreso": {
+      "valor": 1,
+      "maximo": 4,
+      "nombre": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+      "borde": "1px"
+    },
+    "compositor": {
+      "x": 288,
+      "y": 730.90625,
+      "ancho": 704,
+      "alto": 76.390625,
+      "abajo": 807.296875
+    }
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/app",
+    "estado": "flujoC-paso2",
+    "captura": "05-mock-1280-flujoC-paso2-app.png",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 92.96875,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 223.96875
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 100.96875,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 144.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 100.96875,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 144.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 100.96875,
+        "ancho": 52.6875,
+        "alto": 44,
+        "abajo": 144.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.984375,
+        "y": 100.96875,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 144.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 394.140625,
+        "y": 100.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 144.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 470.640625,
+        "y": 100.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 144.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 547.140625,
+        "y": 100.96875,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 144.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/app",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 2 de 4 · Flujo C · Aprobación en WhatsApp",
+    "progreso": {
+      "valor": 2,
+      "maximo": 4,
+      "nombre": "Paso 2 de 4 · Flujo C · Aprobación en WhatsApp",
+      "borde": "1px"
+    },
+    "compositor": null
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/wa",
+    "estado": "flujoC-paso2",
+    "captura": "05-mock-1280-flujoC-paso2-wa.png",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 93.96875,
+      "ancho": 1280,
+      "alto": 131,
+      "abajo": 224.96875
+    },
+    "posicion": "sticky",
+    "altoReservado": "131px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 101.96875,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 101.96875,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 230.65625,
+        "y": 101.96875,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 290.640625,
+        "y": 101.96875,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 395.796875,
+        "y": 101.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 472.296875,
+        "y": 101.96875,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 548.796875,
+        "y": 101.96875,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 145.96875,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": {
+      "fondo": "rgb(255, 255, 255)",
+      "borde": "2px",
+      "colorBorde": "rgb(0, 137, 89)"
+    },
+    "paso": "Paso 2 de 4 · Flujo C · Aprobación en WhatsApp",
+    "progreso": {
+      "valor": 2,
+      "maximo": 4,
+      "nombre": "Paso 2 de 4 · Flujo C · Aprobación en WhatsApp",
+      "borde": "1px"
+    },
+    "compositor": {
+      "x": 288,
+      "y": 722.90625,
+      "ancho": 704,
+      "alto": 76.390625,
+      "abajo": 799.296875
+    }
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "foco": {
+      "texto": "WhatsApp",
+      "visible": true,
+      "anillo": "3px",
+      "color": "rgb(0, 116, 217)",
+      "dentro": true
+    }
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "erroresJavascript": [],
+    "origenes": [
+      "http://localhost:5174",
+      "ws://localhost:5174"
+    ]
+  },
+  {
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/",
+    "estado": "inicial",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 760,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 760,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.28125,
+        "y": 760,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 337.4375,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 413.9375,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 490.4375,
+        "y": 760,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": null,
+    "simulacion": null,
+    "progreso": null,
+    "compositor": null
+  },
+  {
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/web",
+    "estado": "inicial",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 56.03125,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 72.03125,
+        "y": 760,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.96875,
+        "y": 760,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.953125,
+        "y": 760,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 338.109375,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 414.609375,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 491.109375,
+        "y": 760,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/web",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": null
+  },
+  {
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/wa",
+    "estado": "inicial",
+    "captura": "05-real-375-inicial-wa.png",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 760,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 174.65625,
+        "y": 760,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 234.640625,
+        "y": 760,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 339.796875,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416.296875,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 492.796875,
+        "y": 760,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": {
+      "x": 16,
+      "y": 657.609375,
+      "ancho": 343,
+      "alto": 93.390625,
+      "abajo": 751
+    }
+  },
+  {
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/app",
+    "estado": "inicial",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 760,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 760,
+        "ancho": 52.6875,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.984375,
+        "y": 760,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 338.140625,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 414.640625,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 491.140625,
+        "y": 760,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/app",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": null
+  },
+  {
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/callcenter",
+    "estado": "inicial",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 760,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 760,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.28125,
+        "y": 760,
+        "ancho": 99.921875,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 340.203125,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416.703125,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 493.203125,
+        "y": 760,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/callcenter",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": null
+  },
+  {
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/clinica",
+    "estado": "inicial",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 760,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 760,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.28125,
+        "y": 760,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 337.4375,
+        "y": 760,
+        "ancho": 70.5625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 492.5,
+        "y": 760,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/clinica",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": null
+  },
+  {
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/admin",
+    "estado": "inicial",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 760,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 760,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.28125,
+        "y": 760,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 337.4375,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 413.9375,
+        "y": 760,
+        "ancho": 70.140625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 492.078125,
+        "y": 760,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/admin",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": null
+  },
+  {
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/bandeja",
+    "estado": "inicial",
+    "contenido": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 760,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 172.296875,
+        "y": 760,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 232.28125,
+        "y": 760,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 337.4375,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 413.9375,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 490.4375,
+        "y": 760,
+        "ancho": 81.0625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/bandeja",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": null
+  },
+  {
+    "modo": "real",
+    "ancho": 375,
+    "foco": {
+      "texto": "WhatsApp",
+      "visible": true,
+      "anillo": "3px",
+      "color": "rgb(0, 116, 217)",
+      "dentro": true
+    }
+  },
+  {
+    "modo": "real",
+    "ancho": 320,
+    "ruta": "/wa",
+    "estado": "limite",
+    "contenido": 320,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 320,
+      "alto": 61,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(230, 242, 252)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 760,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 174.65625,
+        "y": 760,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 234.640625,
+        "y": 760,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 339.796875,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416.296875,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 492.796875,
+        "y": 760,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": {
+      "x": 16,
+      "y": 657.609375,
+      "ancho": 288,
+      "alto": 93.390625,
+      "abajo": 751
+    }
+  },
+  {
+    "modo": "real",
+    "ancho": 767,
+    "ruta": "/wa",
+    "estado": "limite",
+    "contenido": 767,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 767,
+      "alto": 61,
+      "abajo": 812
+    },
+    "posicion": "fixed",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(230, 242, 252)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 71.359375,
+        "y": 760,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 174.65625,
+        "y": 760,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 234.640625,
+        "y": 760,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 339.796875,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 416.296875,
+        "y": 760,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 492.796875,
+        "y": 760,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 804,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": {
+      "x": 31.5,
+      "y": 657.609375,
+      "ancho": 704,
+      "alto": 93.390625,
+      "abajo": 751
+    }
+  },
+  {
+    "modo": "real",
+    "ancho": 768,
+    "ruta": "/wa",
+    "estado": "limite",
+    "contenido": 768,
+    "barra": {
+      "x": 0,
+      "y": 97,
+      "ancho": 768,
+      "alto": 61,
+      "abajo": 158
+    },
+    "posicion": "sticky",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 24,
+        "y": 105,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 87.359375,
+        "y": 105,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 190.65625,
+        "y": 105,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 250.640625,
+        "y": 105,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 355.796875,
+        "y": 105,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 432.296875,
+        "y": 105,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 508.796875,
+        "y": 105,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": {
+      "x": 32,
+      "y": 655.9375,
+      "ancho": 704,
+      "alto": 76.390625,
+      "abajo": 732.328125
+    }
+  },
+  {
+    "modo": "real",
+    "ancho": 375,
+    "erroresJavascript": [],
+    "origenes": [
+      "http://localhost:5173",
+      "ws://localhost:5173",
+      "ws://localhost:4000",
+      "http://localhost:4000"
+    ]
+  },
+  {
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/",
+    "estado": "inicial",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 97,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 158
+    },
+    "posicion": "sticky",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 105,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 105,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 105,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.28125,
+        "y": 105,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 393.4375,
+        "y": 105,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 469.9375,
+        "y": 105,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 546.4375,
+        "y": 105,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": null,
+    "simulacion": null,
+    "progreso": null,
+    "compositor": null
+  },
+  {
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/web",
+    "estado": "inicial",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 97,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 158
+    },
+    "posicion": "sticky",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 105,
+        "ancho": 56.03125,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 128.03125,
+        "y": 105,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.96875,
+        "y": 105,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.953125,
+        "y": 105,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 394.109375,
+        "y": 105,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 470.609375,
+        "y": 105,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 547.109375,
+        "y": 105,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/web",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": null
+  },
+  {
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/wa",
+    "estado": "inicial",
+    "captura": "05-real-1280-inicial-wa.png",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 97,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 158
+    },
+    "posicion": "sticky",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 105,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 105,
+        "ancho": 95.296875,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "App",
+        "x": 230.65625,
+        "y": 105,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 290.640625,
+        "y": 105,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 395.796875,
+        "y": 105,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 472.296875,
+        "y": 105,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 548.796875,
+        "y": 105,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/wa",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": {
+      "x": 288,
+      "y": 655.9375,
+      "ancho": 704,
+      "alto": 76.390625,
+      "abajo": 732.328125
+    }
+  },
+  {
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/app",
+    "estado": "inicial",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 97,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 158
+    },
+    "posicion": "sticky",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 105,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 105,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 105,
+        "ancho": 52.6875,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.984375,
+        "y": 105,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 394.140625,
+        "y": 105,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 470.640625,
+        "y": 105,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 547.140625,
+        "y": 105,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/app",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": null
+  },
+  {
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/callcenter",
+    "estado": "inicial",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 97,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 158
+    },
+    "posicion": "sticky",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 105,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 105,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 105,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.28125,
+        "y": 105,
+        "ancho": 99.921875,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 396.203125,
+        "y": 105,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 472.703125,
+        "y": 105,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 549.203125,
+        "y": 105,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/callcenter",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": null
+  },
+  {
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/clinica",
+    "estado": "inicial",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 97,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 158
+    },
+    "posicion": "sticky",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 105,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 105,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 105,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.28125,
+        "y": 105,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 393.4375,
+        "y": 105,
+        "ancho": 70.5625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 472,
+        "y": 105,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 548.5,
+        "y": 105,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/clinica",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": null
+  },
+  {
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/admin",
+    "estado": "inicial",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 0,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 61
+    },
+    "posicion": "sticky",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 8,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 8,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 8,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.28125,
+        "y": 8,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 393.4375,
+        "y": 8,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 469.9375,
+        "y": 8,
+        "ancho": 70.140625,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 548.078125,
+        "y": 8,
+        "ancho": 79.15625,
+        "alto": 44,
+        "abajo": 52,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/admin",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": null
+  },
+  {
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/bandeja",
+    "estado": "inicial",
+    "contenido": 1280,
+    "barra": {
+      "x": 0,
+      "y": 97,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 158
+    },
+    "posicion": "sticky",
+    "altoReservado": "61px",
+    "canales": [
+      {
+        "nombre": "Web",
+        "x": 64,
+        "y": 105,
+        "ancho": 55.359375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "WhatsApp",
+        "x": 127.359375,
+        "y": 105,
+        "ancho": 92.9375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "App",
+        "x": 228.296875,
+        "y": 105,
+        "ancho": 51.984375,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Call Center",
+        "x": 288.28125,
+        "y": 105,
+        "ancho": 97.15625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Clínica",
+        "x": 393.4375,
+        "y": 105,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Admin",
+        "x": 469.9375,
+        "y": 105,
+        "ancho": 68.5,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(255, 255, 255)"
+      },
+      {
+        "nombre": "Bandeja",
+        "x": 546.4375,
+        "y": 105,
+        "ancho": 81.0625,
+        "alto": 44,
+        "abajo": 149,
+        "borde": "1px",
+        "radio": "8px",
+        "fondo": "rgb(0, 116, 217)"
+      }
+    ],
+    "separacion": "8px",
+    "actual": {
+      "ruta": "/bandeja",
+      "fondo": "rgb(0, 116, 217)",
+      "texto": "rgb(255, 255, 255)",
+      "peso": "600"
+    },
+    "simulacion": null,
+    "progreso": null,
+    "compositor": null
+  },
+  {
+    "modo": "real",
+    "ancho": 1280,
+    "foco": {
+      "texto": "WhatsApp",
+      "visible": true,
+      "anillo": "3px",
+      "color": "rgb(0, 116, 217)",
+      "dentro": true
+    }
+  },
+  {
+    "modo": "real",
+    "ancho": 1280,
+    "erroresJavascript": [],
+    "origenes": [
+      "http://localhost:5173",
+      "ws://localhost:5173",
+      "ws://localhost:4000",
+      "http://localhost:4000"
+    ]
+  }
+]

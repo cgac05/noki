@@ -1,0 +1,125 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ❯ |web| src/identidadVisual.test.ts (9 tests | 2 failed) 101ms
+   ✓ mantiene contraste AA del texto en todas las superficies declaradas 5ms
+   ✓ distingue el foco y los bordes de control de sus superficies 3ms
+   ✓ centraliza los colores y reserva el verde para la marca grande 7ms
+   ✓ separa los canales y la simulación con los colores y contrastes de D5 8ms
+   ✓ sirve Open Sans latina local en los tres pesos sin fuentes de terceros 32ms
+   ✓ declara la marca en los metadatos y no incluye archivos gráficos del logo 32ms
+   × Acento verde de identidad: solo agrega las dos variables de éxito autorizadas y mantiene contraste AA 9ms
+   × Acento verde de identidad: línea superior, éxito y logros usan las variables y no recolorean valores 3ms
+   ✓ reserva el verde a identidad y éxito, con la marca como única excepción de enlace autorizada 1ms
+ ❯ |web| src/acentoIdentidad.test.tsx (3 tests | 3 failed) 1657ms
+   × Acento verde de identidad: la llegada conserva su párrafo y texto sin añadir un role 109ms
+   × Acento verde de identidad: solo la cancelación completada es éxito y conserva role status 1382ms
+   × Acento verde de identidad: solo las tres tarjetas de logro llevan el acento, incluso si valen cero 164ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/acentoIdentidad.test.tsx > Acento verde de identidad: la llegada conserva su párrafo y texto sin añadir un role
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/acentoIdentidad.test.tsx:27:53
+     25|   expect(estado.tagName).toBe('P');
+     26|   expect(estado.getAttribute('role')).toBeNull();
+     27|   expect(estado.classList.contains('estado-exito')).toBe(true);
+       |                                                     ^
+     28|   expect(estado.children).toHaveLength(0);
+     29| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  |web| src/acentoIdentidad.test.tsx > Acento verde de identidad: solo la cancelación completada es éxito y conserva role status
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/acentoIdentidad.test.tsx:44:53
+     42|   expect(estado.tagName).toBe('P');
+     43|   expect(estado.getAttribute('role')).toBe('status');
+     44|   expect(estado.classList.contains('estado-exito')).toBe(true);
+       |                                                     ^
+     45|   expect(estado.children).toHaveLength(0);
+     46| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  |web| src/acentoIdentidad.test.tsx > Acento verde de identidad: solo las tres tarjetas de logro llevan el acento, incluso si valen cero
+AssertionError: expected [] to deeply equal [ 'Huecos recuperados', …(2) ]
+
+- Expected
++ Received
+
+- [
+-   "Huecos recuperados",
+-   "Horas de recurso recuperadas",
+-   "Días adelantados en promedio",
+- ]
++ []
+
+ ❯ src/acentoIdentidad.test.tsx:53:75
+     51|   const seccion = screen.getByRole('heading', { name: 'Indicadores dis…
+     52|   const logros = [...seccion.querySelectorAll('.tarjeta-logro')];
+     53|   expect(logros.map(tarjeta => tarjeta.querySelector('dt')?.textConten…
+       |                                                                           ^
+     54|     'Huecos recuperados', 'Horas de recurso recuperadas', 'Días adelan…
+     55|   ]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  |web| src/identidadVisual.test.ts > Acento verde de identidad: solo agrega las dos variables de éxito autorizadas y mantiene contraste AA
+AssertionError: expected undefined to be '#006B45' // Object.is equality
+
+- Expected: 
+"#006B45"
+
++ Received: 
+undefined
+
+ ❯ src/identidadVisual.test.ts:120:35
+    118| 
+    119| it('Acento verde de identidad: solo agrega las dos variables de éxito …
+    120|   expect(variables['--sd-exito']).toBe('#006B45');
+       |                                   ^
+    121|   expect(variables['--sd-fondo-exito']).toBe('#E6F4EE');
+    122|   expect(contraste('--sd-exito', '--sd-fondo-exito')).toBeGreaterThanO…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  |web| src/identidadVisual.test.ts > Acento verde de identidad: línea superior, éxito y logros usan las variables y no recolorean valores
+AssertionError: expected ' padding-bottom: var(--alto-barra-dem…' to match /border-top:\s*3px solid var\(--sd-mar…/
+
+- Expected: 
+/border-top:\s*3px solid var\(--sd-marca\)/
+
++ Received: 
+" padding-bottom: var(--alto-barra-demo, calc(12rem + env(safe-area-inset-bottom))); "
+
+ ❯ src/identidadVisual.test.ts:136:28
+    134|     .filter(([, lista]) => lista!.split(',').some(valor => valor.trim(…
+    135|     .map(([, , cuerpo]) => cuerpo).join('\n');
+    136|   expect(regla('.layout')).toMatch(/border-top:\s*3px solid var\(--sd-…
+       |                            ^
+    137|   const exito = regla('.estado-exito');
+    138|   expect(exito).toMatch(/background:\s*var\(--sd-fondo-exito\)/);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  5 failed | 7 passed (12)
+   Start at  08:05:58
+   Duration  10.34s (transform 1.70s, setup 0ms, import 5.05s, tests 1.76s, environment 3.19s)
+

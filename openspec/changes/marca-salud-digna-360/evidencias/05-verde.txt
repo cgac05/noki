@@ -1,0 +1,22 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ✓ |web| src/identidadVisual.test.ts (6 tests) 131ms
+ ✓ |web| src/cliente/guionWa.test.ts (8 tests) 122ms
+ ✓ |web| src/cliente/cliente.test.ts (26 tests) 320ms
+ ✓ |web| src/componentes/BarraDemo.test.tsx (4 tests) 882ms
+     ✓ presenta la simulación y el progreso con el texto del paso como nombre accesible  414ms
+ ✓ |web| src/rutas.test.tsx (19 tests) 1470ms
+     ✓ presenta la identidad aprobada en /  423ms
+ ✓ |web| src/vistas/vistas.test.tsx (17 tests) 5339ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo  342ms
+     ✓ reiniciar el guion C descarta la confirmación y la aprobación pendiente de la cita  788ms
+     ✓ elige Flujo C, cancela, aprueba, acepta la oferta, muestra dominó y vuelve al inicio del Flujo A  1368ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  1420ms
+     ✓ permite escribir texto fuera del guion y muestra ayuda sin avanzar  320ms
+
+ Test Files  6 passed (6)
+      Tests  80 passed (80)
+   Start at  05:57:26
+   Duration  12.32s (transform 1.80s, setup 0ms, import 9.51s, tests 8.26s, environment 17.83s)
+

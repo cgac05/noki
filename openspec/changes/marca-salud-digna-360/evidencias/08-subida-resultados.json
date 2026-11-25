@@ -1,0 +1,23 @@
+[
+  {
+    "comando": "corepack pnpm exec vitest run --project web",
+    "codigo": 0,
+    "segundos": 47.5179304,
+    "base": "f5260a8974a7f49ccc97a15a6b24938f3435bfe0",
+    "fecha": "2026-11-25"
+  },
+  {
+    "comando": "corepack pnpm exec eslint .",
+    "codigo": 0,
+    "segundos": 8.1902844,
+    "base": "f5260a8974a7f49ccc97a15a6b24938f3435bfe0",
+    "fecha": "2026-11-25"
+  },
+  {
+    "comando": "corepack pnpm lint:deps",
+    "codigo": 0,
+    "segundos": 4.0278899,
+    "base": "f5260a8974a7f49ccc97a15a6b24938f3435bfe0",
+    "fecha": "2026-11-25"
+  }
+]

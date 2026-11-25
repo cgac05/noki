@@ -1,0 +1,13 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ✓ |web| src/presentacionEstilos.test.ts (4 tests) 14ms
+ ✓ |web| src/identidadVisual.test.ts (6 tests) 79ms
+ ✓ |web| src/presentacion.test.tsx (11 tests) 1431ms
+   ✓ Indicadores en tarjetas: solo las dos series de Admin usan la variante y conservan dt antes de dd  487ms
+
+ Test Files  3 passed (3)
+      Tests  21 passed (21)
+   Start at  06:41:39
+   Duration  11.77s (transform 1.72s, setup 0ms, import 5.46s, tests 1.52s, environment 3.88s)
+

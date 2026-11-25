@@ -1,0 +1,6614 @@
+[
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/",
+    "estado": "inicial",
+    "captura": "06-antes-mock-375-inicial-portada.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 616,
+      "ancho": 375,
+      "alto": 196,
+      "abajo": 812
+    },
+    "altoReservado": "196px",
+    "marca": {
+      "x": 16,
+      "y": -121,
+      "ancho": 222.953125,
+      "alto": 96,
+      "abajo": -25,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 262.953125,
+      "y": -81.890625,
+      "ancho": 96.046875,
+      "alto": 44.375,
+      "abajo": -37.515625,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 16,
+      "y": 56,
+      "ancho": 343,
+      "alto": 86.375,
+      "abajo": 142.375,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 625,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 625,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "App",
+        "x": 168.296875,
+        "y": 625,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Call Center",
+        "x": 226.28125,
+        "y": 625,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Clínica",
+        "x": 329.4375,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Admin",
+        "x": 403.9375,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Bandeja",
+        "x": 478.4375,
+        "y": 625,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 280,
+        "y": 689,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 733
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 235.609375,
+        "y": 750.5,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 794.5
+      }
+    ],
+    "simulacion": {
+      "x": 16,
+      "y": 702,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 720
+    },
+    "selector": {
+      "x": 280,
+      "y": 689,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 733
+    },
+    "reiniciar": {
+      "x": 235.609375,
+      "y": 750.5,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 794.5
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 16,
+      "y": 745,
+      "ancho": 150.375,
+      "alto": 39,
+      "abajo": 784,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 564,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/web",
+    "estado": "inicial",
+    "captura": "06-antes-mock-375-inicial-web.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 616,
+      "ancho": 375,
+      "alto": 196,
+      "abajo": 812
+    },
+    "altoReservado": "196px",
+    "marca": {
+      "x": 16,
+      "y": 24,
+      "ancho": 222.953125,
+      "alto": 96,
+      "abajo": 120,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 262.953125,
+      "y": 63.109375,
+      "ancho": 96.046875,
+      "alto": 44.375,
+      "abajo": 107.484375,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 16,
+      "y": 201,
+      "ancho": 343,
+      "alto": 43.1875,
+      "abajo": 244.1875,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 625,
+        "ancho": 54.03125,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 70.03125,
+        "y": 625,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "App",
+        "x": 168.96875,
+        "y": 625,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Call Center",
+        "x": 226.953125,
+        "y": 625,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Clínica",
+        "x": 330.109375,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Admin",
+        "x": 404.609375,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Bandeja",
+        "x": 479.109375,
+        "y": 625,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 280,
+        "y": 689,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 733
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 235.609375,
+        "y": 750.5,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 794.5
+      }
+    ],
+    "simulacion": {
+      "x": 16,
+      "y": 702,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 720
+    },
+    "selector": {
+      "x": 280,
+      "y": 689,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 733
+    },
+    "reiniciar": {
+      "x": 235.609375,
+      "y": 750.5,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 794.5
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 16,
+      "y": 745,
+      "ancho": 150.375,
+      "alto": 39,
+      "abajo": 784,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 564,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/wa",
+    "estado": "inicial",
+    "captura": "06-antes-mock-375-inicial-wa.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 616,
+      "ancho": 375,
+      "alto": 196,
+      "abajo": 812
+    },
+    "altoReservado": "196px",
+    "marca": {
+      "x": 16,
+      "y": 24,
+      "ancho": 222.953125,
+      "alto": 96,
+      "abajo": 120,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 262.953125,
+      "y": 63.109375,
+      "ancho": 96.046875,
+      "alto": 44.375,
+      "abajo": 107.484375,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 16,
+      "y": 177,
+      "ancho": 274.453125,
+      "alto": 34.546875,
+      "abajo": 211.546875,
+      "fuente": "32px",
+      "lineHeight": "34.56px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 625,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 625,
+        "ancho": 93.296875,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "App",
+        "x": 170.65625,
+        "y": 625,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Call Center",
+        "x": 228.640625,
+        "y": 625,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Clínica",
+        "x": 331.796875,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Admin",
+        "x": 406.296875,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Bandeja",
+        "x": 480.796875,
+        "y": 625,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 280,
+        "y": 689,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 733
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 235.609375,
+        "y": 750.5,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 794.5
+      }
+    ],
+    "simulacion": {
+      "x": 16,
+      "y": 702,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 720
+    },
+    "selector": {
+      "x": 280,
+      "y": 689,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 733
+    },
+    "reiniciar": {
+      "x": 235.609375,
+      "y": 750.5,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 794.5
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 16,
+      "y": 745,
+      "ancho": 150.375,
+      "alto": 39,
+      "abajo": 784,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": {
+      "x": 16,
+      "y": 522.609375,
+      "ancho": 343,
+      "alto": 93.390625,
+      "abajo": 616
+    },
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 566,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/app",
+    "estado": "inicial",
+    "captura": "06-antes-mock-375-inicial-app.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 616,
+      "ancho": 375,
+      "alto": 196,
+      "abajo": 812
+    },
+    "altoReservado": "196px",
+    "marca": {
+      "x": 16,
+      "y": 24,
+      "ancho": 222.953125,
+      "alto": 96,
+      "abajo": 120,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 262.953125,
+      "y": 63.109375,
+      "ancho": 96.046875,
+      "alto": 44.375,
+      "abajo": 107.484375,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 16,
+      "y": 201,
+      "ancho": 343,
+      "alto": 43.1875,
+      "abajo": 244.1875,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 625,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 625,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "App",
+        "x": 168.296875,
+        "y": 625,
+        "ancho": 50.6875,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Call Center",
+        "x": 226.984375,
+        "y": 625,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Clínica",
+        "x": 330.140625,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Admin",
+        "x": 404.640625,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Bandeja",
+        "x": 479.140625,
+        "y": 625,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 280,
+        "y": 689,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 733
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 235.609375,
+        "y": 750.5,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 794.5
+      }
+    ],
+    "simulacion": {
+      "x": 16,
+      "y": 702,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 720
+    },
+    "selector": {
+      "x": 280,
+      "y": 689,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 733
+    },
+    "reiniciar": {
+      "x": 235.609375,
+      "y": 750.5,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 794.5
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 16,
+      "y": 745,
+      "ancho": 150.375,
+      "alto": 39,
+      "abajo": 784,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 564,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/callcenter",
+    "estado": "inicial",
+    "captura": "06-antes-mock-375-inicial-callcenter.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 616,
+      "ancho": 375,
+      "alto": 196,
+      "abajo": 812
+    },
+    "altoReservado": "196px",
+    "marca": {
+      "x": 16,
+      "y": 24,
+      "ancho": 222.953125,
+      "alto": 96,
+      "abajo": 120,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 262.953125,
+      "y": 63.109375,
+      "ancho": 96.046875,
+      "alto": 44.375,
+      "abajo": 107.484375,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 16,
+      "y": 201,
+      "ancho": 343,
+      "alto": 43.1875,
+      "abajo": 244.1875,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 625,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 625,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "App",
+        "x": 168.296875,
+        "y": 625,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Call Center",
+        "x": 226.28125,
+        "y": 625,
+        "ancho": 97.921875,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Clínica",
+        "x": 332.203125,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Admin",
+        "x": 406.703125,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Bandeja",
+        "x": 481.203125,
+        "y": 625,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 280,
+        "y": 689,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 733
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 235.609375,
+        "y": 750.5,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 794.5
+      }
+    ],
+    "simulacion": {
+      "x": 16,
+      "y": 702,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 720
+    },
+    "selector": {
+      "x": 280,
+      "y": 689,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 733
+    },
+    "reiniciar": {
+      "x": 235.609375,
+      "y": 750.5,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 794.5
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 16,
+      "y": 745,
+      "ancho": 150.375,
+      "alto": 39,
+      "abajo": 784,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 566,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/clinica",
+    "estado": "inicial",
+    "captura": "06-antes-mock-375-inicial-clinica.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 616,
+      "ancho": 375,
+      "alto": 196,
+      "abajo": 812
+    },
+    "altoReservado": "196px",
+    "marca": {
+      "x": 16,
+      "y": 24,
+      "ancho": 222.953125,
+      "alto": 96,
+      "abajo": 120,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 262.953125,
+      "y": 63.109375,
+      "ancho": 96.046875,
+      "alto": 44.375,
+      "abajo": 107.484375,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 16,
+      "y": 201,
+      "ancho": 343,
+      "alto": 43.1875,
+      "abajo": 244.1875,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 625,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 625,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "App",
+        "x": 168.296875,
+        "y": 625,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Call Center",
+        "x": 226.28125,
+        "y": 625,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Clínica",
+        "x": 329.4375,
+        "y": 625,
+        "ancho": 68.5625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Admin",
+        "x": 406,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Bandeja",
+        "x": 480.5,
+        "y": 625,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 280,
+        "y": 689,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 733
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 235.609375,
+        "y": 750.5,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 794.5
+      }
+    ],
+    "simulacion": {
+      "x": 16,
+      "y": 702,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 720
+    },
+    "selector": {
+      "x": 280,
+      "y": 689,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 733
+    },
+    "reiniciar": {
+      "x": 235.609375,
+      "y": 750.5,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 794.5
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 16,
+      "y": 745,
+      "ancho": 150.375,
+      "alto": 39,
+      "abajo": 784,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 566,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/admin",
+    "estado": "inicial",
+    "captura": "06-antes-mock-375-inicial-admin.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 616,
+      "ancho": 375,
+      "alto": 196,
+      "abajo": 812
+    },
+    "altoReservado": "196px",
+    "marca": {
+      "x": 16,
+      "y": -54,
+      "ancho": 222.953125,
+      "alto": 96,
+      "abajo": 42,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 262.953125,
+      "y": -14.890625,
+      "ancho": 96.046875,
+      "alto": 44.375,
+      "abajo": 29.484375,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 16,
+      "y": 123,
+      "ancho": 343,
+      "alto": 43.1875,
+      "abajo": 166.1875,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 625,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 625,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "App",
+        "x": 168.296875,
+        "y": 625,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Call Center",
+        "x": 226.28125,
+        "y": 625,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Clínica",
+        "x": 329.4375,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Admin",
+        "x": 403.9375,
+        "y": 625,
+        "ancho": 68.140625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Bandeja",
+        "x": 480.078125,
+        "y": 625,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 280,
+        "y": 689,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 733
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 235.609375,
+        "y": 750.5,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 794.5
+      }
+    ],
+    "simulacion": {
+      "x": 16,
+      "y": 702,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 720
+    },
+    "selector": {
+      "x": 280,
+      "y": 689,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 733
+    },
+    "reiniciar": {
+      "x": 235.609375,
+      "y": 750.5,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 794.5
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 16,
+      "y": 745,
+      "ancho": 150.375,
+      "alto": 39,
+      "abajo": 784,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 565,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/bandeja",
+    "estado": "inicial",
+    "captura": "06-antes-mock-375-inicial-bandeja.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 616,
+      "ancho": 375,
+      "alto": 196,
+      "abajo": 812
+    },
+    "altoReservado": "196px",
+    "marca": {
+      "x": 16,
+      "y": 24,
+      "ancho": 222.953125,
+      "alto": 96,
+      "abajo": 120,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 262.953125,
+      "y": 63.109375,
+      "ancho": 96.046875,
+      "alto": 44.375,
+      "abajo": 107.484375,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 16,
+      "y": 201,
+      "ancho": 343,
+      "alto": 43.1875,
+      "abajo": 244.1875,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 625,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 625,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "App",
+        "x": 168.296875,
+        "y": 625,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Call Center",
+        "x": 226.28125,
+        "y": 625,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Clínica",
+        "x": 329.4375,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Admin",
+        "x": 403.9375,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Bandeja",
+        "x": 478.4375,
+        "y": 625,
+        "ancho": 79.0625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 280,
+        "y": 689,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 733
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 235.609375,
+        "y": 750.5,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 794.5
+      }
+    ],
+    "simulacion": {
+      "x": 16,
+      "y": 702,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 720
+    },
+    "selector": {
+      "x": 280,
+      "y": 689,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 733
+    },
+    "reiniciar": {
+      "x": 235.609375,
+      "y": 750.5,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 794.5
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 16,
+      "y": 745,
+      "ancho": 150.375,
+      "alto": 39,
+      "abajo": 784,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 566,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/admin",
+    "estado": "navegacion",
+    "captura": "06-antes-mock-375-navegacion-admin.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 616,
+      "ancho": 375,
+      "alto": 196,
+      "abajo": 812
+    },
+    "altoReservado": "196px",
+    "marca": {
+      "x": 16,
+      "y": -121,
+      "ancho": 222.953125,
+      "alto": 96,
+      "abajo": -25,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 262.953125,
+      "y": -81.890625,
+      "ancho": 96.046875,
+      "alto": 44.375,
+      "abajo": -37.515625,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 16,
+      "y": 56,
+      "ancho": 343,
+      "alto": 43.1875,
+      "abajo": 99.1875,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": -182,
+        "y": 625,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "WhatsApp",
+        "x": -120.640625,
+        "y": 625,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "App",
+        "x": -21.703125,
+        "y": 625,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Call Center",
+        "x": 36.28125,
+        "y": 625,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Clínica",
+        "x": 139.4375,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Admin",
+        "x": 213.9375,
+        "y": 625,
+        "ancho": 68.140625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Bandeja",
+        "x": 290.078125,
+        "y": 625,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 280,
+        "y": 689,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 733
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 235.609375,
+        "y": 750.5,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 794.5
+      }
+    ],
+    "simulacion": {
+      "x": 16,
+      "y": 702,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 720
+    },
+    "selector": {
+      "x": 280,
+      "y": 689,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 733
+    },
+    "reiniciar": {
+      "x": 235.609375,
+      "y": 750.5,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 794.5
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 16,
+      "y": 745,
+      "ancho": 150.375,
+      "alto": 39,
+      "abajo": 784,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 565,
+      "ancho": 375,
+      "scroll": 190,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/wa",
+    "estado": "flujoA-paso1",
+    "captura": "06-antes-mock-375-flujoA-paso1-wa.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 616,
+      "ancho": 375,
+      "alto": 196,
+      "abajo": 812
+    },
+    "altoReservado": "196px",
+    "marca": {
+      "x": 16,
+      "y": 24,
+      "ancho": 222.953125,
+      "alto": 96,
+      "abajo": 120,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 262.953125,
+      "y": 63.109375,
+      "ancho": 96.046875,
+      "alto": 44.375,
+      "abajo": 107.484375,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 16,
+      "y": 177,
+      "ancho": 274.453125,
+      "alto": 34.546875,
+      "abajo": 211.546875,
+      "fuente": "32px",
+      "lineHeight": "34.56px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 625,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 625,
+        "ancho": 93.296875,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "App",
+        "x": 170.65625,
+        "y": 625,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Call Center",
+        "x": 228.640625,
+        "y": 625,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Clínica",
+        "x": 331.796875,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Admin",
+        "x": 406.296875,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Bandeja",
+        "x": 480.796875,
+        "y": 625,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 280,
+        "y": 689,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 733
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 235.609375,
+        "y": 750.5,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 794.5
+      }
+    ],
+    "simulacion": {
+      "x": 16,
+      "y": 702,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 720
+    },
+    "selector": {
+      "x": 280,
+      "y": 689,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 733
+    },
+    "reiniciar": {
+      "x": 235.609375,
+      "y": 750.5,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 794.5
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 16,
+      "y": 745,
+      "ancho": 150.375,
+      "alto": 39,
+      "abajo": 784,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": {
+      "x": 16,
+      "y": 522.609375,
+      "ancho": 343,
+      "alto": 93.390625,
+      "abajo": 616
+    },
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 566,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/wa",
+    "estado": "flujoA-paso2",
+    "captura": "06-antes-mock-375-flujoA-paso2-wa.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 616,
+      "ancho": 375,
+      "alto": 196,
+      "abajo": 812
+    },
+    "altoReservado": "196px",
+    "marca": {
+      "x": 16,
+      "y": -121,
+      "ancho": 222.953125,
+      "alto": 96,
+      "abajo": -25,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 262.953125,
+      "y": -81.890625,
+      "ancho": 96.046875,
+      "alto": 44.375,
+      "abajo": -37.515625,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 16,
+      "y": 32,
+      "ancho": 274.453125,
+      "alto": 34.546875,
+      "abajo": 66.546875,
+      "fuente": "32px",
+      "lineHeight": "34.56px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 625,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 625,
+        "ancho": 93.296875,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "App",
+        "x": 170.65625,
+        "y": 625,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Call Center",
+        "x": 228.640625,
+        "y": 625,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Clínica",
+        "x": 331.796875,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Admin",
+        "x": 406.296875,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Bandeja",
+        "x": 480.796875,
+        "y": 625,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 280,
+        "y": 689,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 733
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 235.609375,
+        "y": 750.5,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 794.5
+      }
+    ],
+    "simulacion": {
+      "x": 16,
+      "y": 702,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 720
+    },
+    "selector": {
+      "x": 280,
+      "y": 689,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 733
+    },
+    "reiniciar": {
+      "x": 235.609375,
+      "y": 750.5,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 794.5
+    },
+    "paso": {
+      "texto": "Paso 2 de 14 · Llamada en Call Center",
+      "x": 16,
+      "y": 745,
+      "ancho": 150.375,
+      "alto": 39,
+      "abajo": 784,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 2,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 2 de 14 · Llamada en Call Center"
+    },
+    "compositor": {
+      "x": 16,
+      "y": 522.609375,
+      "ancho": 343,
+      "alto": 93.390625,
+      "abajo": 616
+    },
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 566,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/wa",
+    "estado": "flujoC-paso1",
+    "captura": "06-antes-mock-375-flujoC-paso1-wa.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 616,
+      "ancho": 375,
+      "alto": 196,
+      "abajo": 812
+    },
+    "altoReservado": "196px",
+    "marca": {
+      "x": 16,
+      "y": 24,
+      "ancho": 222.953125,
+      "alto": 96,
+      "abajo": 120,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 262.953125,
+      "y": 63.109375,
+      "ancho": 96.046875,
+      "alto": 44.375,
+      "abajo": 107.484375,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 16,
+      "y": 177,
+      "ancho": 274.453125,
+      "alto": 34.546875,
+      "abajo": 211.546875,
+      "fuente": "32px",
+      "lineHeight": "34.56px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 625,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 625,
+        "ancho": 93.296875,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "App",
+        "x": 170.65625,
+        "y": 625,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Call Center",
+        "x": 228.640625,
+        "y": 625,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Clínica",
+        "x": 331.796875,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Admin",
+        "x": 406.296875,
+        "y": 625,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Bandeja",
+        "x": 480.796875,
+        "y": 625,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 669
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 280,
+        "y": 689,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 733
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 235.609375,
+        "y": 750.5,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 794.5
+      }
+    ],
+    "simulacion": {
+      "x": 16,
+      "y": 702,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 720
+    },
+    "selector": {
+      "x": 280,
+      "y": 689,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 733
+    },
+    "reiniciar": {
+      "x": 235.609375,
+      "y": 750.5,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 794.5
+    },
+    "paso": {
+      "texto": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+      "x": 16,
+      "y": 745,
+      "ancho": 150.375,
+      "alto": 39,
+      "abajo": 784,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 4,
+      "alto": 10,
+      "nombre": "Paso 1 de 4 · Flujo C · Cita confirmada en App"
+    },
+    "compositor": {
+      "x": 16,
+      "y": 522.609375,
+      "ancho": 343,
+      "alto": 93.390625,
+      "abajo": 616
+    },
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 566,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 375,
+    "ruta": "/wa",
+    "estado": "flujoC-paso2",
+    "captura": "06-antes-mock-375-flujoC-paso2-wa.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 596.5,
+      "ancho": 375,
+      "alto": 215.5,
+      "abajo": 812
+    },
+    "altoReservado": "215.5px",
+    "marca": {
+      "x": 16,
+      "y": -145,
+      "ancho": 222.953125,
+      "alto": 96,
+      "abajo": -49,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 262.953125,
+      "y": -105.890625,
+      "ancho": 96.046875,
+      "alto": 44.375,
+      "abajo": -61.515625,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 16,
+      "y": 8,
+      "ancho": 274.453125,
+      "alto": 34.546875,
+      "abajo": 42.546875,
+      "fuente": "32px",
+      "lineHeight": "34.56px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 605.5,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 649.5
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 605.5,
+        "ancho": 93.296875,
+        "alto": 44,
+        "abajo": 649.5
+      },
+      {
+        "texto": "App",
+        "x": 170.65625,
+        "y": 605.5,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 649.5
+      },
+      {
+        "texto": "Call Center",
+        "x": 228.640625,
+        "y": 605.5,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 649.5
+      },
+      {
+        "texto": "Clínica",
+        "x": 331.796875,
+        "y": 605.5,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 649.5
+      },
+      {
+        "texto": "Admin",
+        "x": 406.296875,
+        "y": 605.5,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 649.5
+      },
+      {
+        "texto": "Bandeja",
+        "x": 480.796875,
+        "y": 605.5,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 649.5
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 280,
+        "y": 669.5,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 713.5
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 235.609375,
+        "y": 740.75,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 784.75
+      }
+    ],
+    "simulacion": {
+      "x": 16,
+      "y": 682.5,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 700.5
+    },
+    "selector": {
+      "x": 280,
+      "y": 669.5,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 713.5
+    },
+    "reiniciar": {
+      "x": 235.609375,
+      "y": 740.75,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 784.75
+    },
+    "paso": {
+      "texto": "Paso 2 de 4 · Flujo C · Aprobación en WhatsApp",
+      "x": 16,
+      "y": 725.5,
+      "ancho": 150.375,
+      "alto": 58.5,
+      "abajo": 784,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 2,
+      "maximo": 4,
+      "alto": 10,
+      "nombre": "Paso 2 de 4 · Flujo C · Aprobación en WhatsApp"
+    },
+    "compositor": {
+      "x": 16,
+      "y": 503.109375,
+      "ancho": 343,
+      "alto": 93.390625,
+      "abajo": 596.5
+    },
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 566,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "modo": "mock",
+    "ancho": 375,
+    "errores": [],
+    "origenes": [
+      "http://localhost:5174"
+    ]
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/",
+    "estado": "inicial",
+    "captura": "06-antes-mock-1280-inicial-portada.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 0,
+      "ancho": 1280,
+      "alto": 129,
+      "abajo": 129
+    },
+    "altoReservado": "129px",
+    "marca": {
+      "x": 64,
+      "y": -77.515625,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": -29.515625,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 1108.34375,
+      "y": -53.40625,
+      "ancho": 107.65625,
+      "alto": 26.375,
+      "abajo": -27.03125,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 64,
+      "y": 229.359375,
+      "ancho": 617.515625,
+      "alto": 155.5,
+      "abajo": 384.859375,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 8,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 8,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "App",
+        "x": 224.296875,
+        "y": 8,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.28125,
+        "y": 8,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Clínica",
+        "x": 385.4375,
+        "y": 8,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Admin",
+        "x": 459.9375,
+        "y": 8,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Bandeja",
+        "x": 534.4375,
+        "y": 8,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 258.578125,
+        "y": 72,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 116
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 1092.609375,
+        "y": 72,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 116
+      }
+    ],
+    "simulacion": {
+      "x": 64,
+      "y": 85,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 103
+    },
+    "selector": {
+      "x": 258.578125,
+      "y": 72,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 116
+    },
+    "reiniciar": {
+      "x": 1092.609375,
+      "y": 72,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 116
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 353.578125,
+      "y": 76.25,
+      "ancho": 723.03125,
+      "alto": 19.5,
+      "abajo": 95.75,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/web",
+    "estado": "inicial",
+    "captura": "06-antes-mock-1280-inicial-web.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 101.96875,
+      "ancho": 1280,
+      "alto": 129,
+      "abajo": 230.96875
+    },
+    "altoReservado": "129px",
+    "marca": {
+      "x": 64,
+      "y": 26.484375,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 74.484375,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 1108.34375,
+      "y": 50.59375,
+      "ancho": 107.65625,
+      "alto": 26.375,
+      "abajo": 76.96875,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 64,
+      "y": 333.359375,
+      "ancho": 617.515625,
+      "alto": 77.75,
+      "abajo": 411.109375,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 109.96875,
+        "ancho": 54.03125,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 126.03125,
+        "y": 109.96875,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "App",
+        "x": 224.96875,
+        "y": 109.96875,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.953125,
+        "y": 109.96875,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Clínica",
+        "x": 386.109375,
+        "y": 109.96875,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Admin",
+        "x": 460.609375,
+        "y": 109.96875,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Bandeja",
+        "x": 535.109375,
+        "y": 109.96875,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 258.578125,
+        "y": 173.96875,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 217.96875
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 1092.609375,
+        "y": 173.96875,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 217.96875
+      }
+    ],
+    "simulacion": {
+      "x": 64,
+      "y": 186.96875,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 204.96875
+    },
+    "selector": {
+      "x": 258.578125,
+      "y": 173.96875,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 217.96875
+    },
+    "reiniciar": {
+      "x": 1092.609375,
+      "y": 173.96875,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 217.96875
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 353.578125,
+      "y": 178.21875,
+      "ancho": 723.03125,
+      "alto": 19.5,
+      "abajo": 197.71875,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/wa",
+    "estado": "inicial",
+    "captura": "06-antes-mock-1280-inicial-wa.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 64.96875,
+      "ancho": 1280,
+      "alto": 129,
+      "abajo": 193.96875
+    },
+    "altoReservado": "129px",
+    "marca": {
+      "x": 64,
+      "y": -10.515625,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 37.484375,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 1108.34375,
+      "y": 13.59375,
+      "ancho": 107.65625,
+      "alto": 26.375,
+      "abajo": 39.96875,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 288,
+      "y": 225.96875,
+      "ancho": 274.453125,
+      "alto": 34.546875,
+      "abajo": 260.515625,
+      "fuente": "32px",
+      "lineHeight": "34.56px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 72.96875,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 116.96875
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 72.96875,
+        "ancho": 93.296875,
+        "alto": 44,
+        "abajo": 116.96875
+      },
+      {
+        "texto": "App",
+        "x": 226.65625,
+        "y": 72.96875,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 116.96875
+      },
+      {
+        "texto": "Call Center",
+        "x": 284.640625,
+        "y": 72.96875,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 116.96875
+      },
+      {
+        "texto": "Clínica",
+        "x": 387.796875,
+        "y": 72.96875,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 116.96875
+      },
+      {
+        "texto": "Admin",
+        "x": 462.296875,
+        "y": 72.96875,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 116.96875
+      },
+      {
+        "texto": "Bandeja",
+        "x": 536.796875,
+        "y": 72.96875,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 116.96875
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 258.578125,
+        "y": 136.96875,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 180.96875
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 1092.609375,
+        "y": 136.96875,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 180.96875
+      }
+    ],
+    "simulacion": {
+      "x": 64,
+      "y": 149.96875,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 167.96875
+    },
+    "selector": {
+      "x": 258.578125,
+      "y": 136.96875,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 180.96875
+    },
+    "reiniciar": {
+      "x": 1092.609375,
+      "y": 136.96875,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 180.96875
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 353.578125,
+      "y": 141.21875,
+      "ancho": 723.03125,
+      "alto": 19.5,
+      "abajo": 160.71875,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": {
+      "x": 288,
+      "y": 691.90625,
+      "ancho": 704,
+      "alto": 76.390625,
+      "abajo": 768.296875
+    },
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/app",
+    "estado": "inicial",
+    "captura": "06-antes-mock-1280-inicial-app.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 101.96875,
+      "ancho": 1280,
+      "alto": 129,
+      "abajo": 230.96875
+    },
+    "altoReservado": "129px",
+    "marca": {
+      "x": 64,
+      "y": 26.484375,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 74.484375,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 1108.34375,
+      "y": 50.59375,
+      "ancho": 107.65625,
+      "alto": 26.375,
+      "abajo": 76.96875,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 64,
+      "y": 333.359375,
+      "ancho": 617.515625,
+      "alto": 77.75,
+      "abajo": 411.109375,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 109.96875,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 109.96875,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "App",
+        "x": 224.296875,
+        "y": 109.96875,
+        "ancho": 50.6875,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.984375,
+        "y": 109.96875,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Clínica",
+        "x": 386.140625,
+        "y": 109.96875,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Admin",
+        "x": 460.640625,
+        "y": 109.96875,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Bandeja",
+        "x": 535.140625,
+        "y": 109.96875,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 258.578125,
+        "y": 173.96875,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 217.96875
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 1092.609375,
+        "y": 173.96875,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 217.96875
+      }
+    ],
+    "simulacion": {
+      "x": 64,
+      "y": 186.96875,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 204.96875
+    },
+    "selector": {
+      "x": 258.578125,
+      "y": 173.96875,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 217.96875
+    },
+    "reiniciar": {
+      "x": 1092.609375,
+      "y": 173.96875,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 217.96875
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 353.578125,
+      "y": 178.21875,
+      "ancho": 723.03125,
+      "alto": 19.5,
+      "abajo": 197.71875,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/callcenter",
+    "estado": "inicial",
+    "captura": "06-antes-mock-1280-inicial-callcenter.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 0,
+      "ancho": 1280,
+      "alto": 129,
+      "abajo": 129
+    },
+    "altoReservado": "129px",
+    "marca": {
+      "x": 64,
+      "y": -105.515625,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": -57.515625,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 1108.34375,
+      "y": -81.40625,
+      "ancho": 107.65625,
+      "alto": 26.375,
+      "abajo": -55.03125,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 64,
+      "y": 201.359375,
+      "ancho": 617.515625,
+      "alto": 77.75,
+      "abajo": 279.109375,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 8,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 8,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "App",
+        "x": 224.296875,
+        "y": 8,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.28125,
+        "y": 8,
+        "ancho": 97.921875,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Clínica",
+        "x": 388.203125,
+        "y": 8,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Admin",
+        "x": 462.703125,
+        "y": 8,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Bandeja",
+        "x": 537.203125,
+        "y": 8,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 258.578125,
+        "y": 72,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 116
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 1092.609375,
+        "y": 72,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 116
+      }
+    ],
+    "simulacion": {
+      "x": 64,
+      "y": 85,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 103
+    },
+    "selector": {
+      "x": 258.578125,
+      "y": 72,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 116
+    },
+    "reiniciar": {
+      "x": 1092.609375,
+      "y": 72,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 116
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 353.578125,
+      "y": 76.25,
+      "ancho": 723.03125,
+      "alto": 19.5,
+      "abajo": 95.75,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/clinica",
+    "estado": "inicial",
+    "captura": "06-antes-mock-1280-inicial-clinica.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 101.96875,
+      "ancho": 1280,
+      "alto": 129,
+      "abajo": 230.96875
+    },
+    "altoReservado": "129px",
+    "marca": {
+      "x": 64,
+      "y": 26.484375,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 74.484375,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 1108.34375,
+      "y": 50.59375,
+      "ancho": 107.65625,
+      "alto": 26.375,
+      "abajo": 76.96875,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 64,
+      "y": 333.359375,
+      "ancho": 617.515625,
+      "alto": 77.75,
+      "abajo": 411.109375,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 109.96875,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 109.96875,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "App",
+        "x": 224.296875,
+        "y": 109.96875,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.28125,
+        "y": 109.96875,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Clínica",
+        "x": 385.4375,
+        "y": 109.96875,
+        "ancho": 68.5625,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Admin",
+        "x": 462,
+        "y": 109.96875,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Bandeja",
+        "x": 536.5,
+        "y": 109.96875,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 258.578125,
+        "y": 173.96875,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 217.96875
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 1092.609375,
+        "y": 173.96875,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 217.96875
+      }
+    ],
+    "simulacion": {
+      "x": 64,
+      "y": 186.96875,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 204.96875
+    },
+    "selector": {
+      "x": 258.578125,
+      "y": 173.96875,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 217.96875
+    },
+    "reiniciar": {
+      "x": 1092.609375,
+      "y": 173.96875,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 217.96875
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 353.578125,
+      "y": 178.21875,
+      "ancho": 723.03125,
+      "alto": 19.5,
+      "abajo": 197.71875,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/admin",
+    "estado": "inicial",
+    "captura": "06-antes-mock-1280-inicial-admin.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 0,
+      "ancho": 1280,
+      "alto": 129,
+      "abajo": 129
+    },
+    "altoReservado": "129px",
+    "marca": {
+      "x": 64,
+      "y": -204.515625,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": -156.515625,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 1108.34375,
+      "y": -180.40625,
+      "ancho": 107.65625,
+      "alto": 26.375,
+      "abajo": -154.03125,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 64,
+      "y": 102.359375,
+      "ancho": 617.515625,
+      "alto": 77.75,
+      "abajo": 180.109375,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 8,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 8,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "App",
+        "x": 224.296875,
+        "y": 8,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.28125,
+        "y": 8,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Clínica",
+        "x": 385.4375,
+        "y": 8,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Admin",
+        "x": 459.9375,
+        "y": 8,
+        "ancho": 68.140625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Bandeja",
+        "x": 536.078125,
+        "y": 8,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 258.578125,
+        "y": 72,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 116
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 1092.609375,
+        "y": 72,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 116
+      }
+    ],
+    "simulacion": {
+      "x": 64,
+      "y": 85,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 103
+    },
+    "selector": {
+      "x": 258.578125,
+      "y": 72,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 116
+    },
+    "reiniciar": {
+      "x": 1092.609375,
+      "y": 72,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 116
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 353.578125,
+      "y": 76.25,
+      "ancho": 723.03125,
+      "alto": 19.5,
+      "abajo": 95.75,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/bandeja",
+    "estado": "inicial",
+    "captura": "06-antes-mock-1280-inicial-bandeja.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 101.96875,
+      "ancho": 1280,
+      "alto": 129,
+      "abajo": 230.96875
+    },
+    "altoReservado": "129px",
+    "marca": {
+      "x": 64,
+      "y": 26.484375,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 74.484375,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 1108.34375,
+      "y": 50.59375,
+      "ancho": 107.65625,
+      "alto": 26.375,
+      "abajo": 76.96875,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 64,
+      "y": 333.359375,
+      "ancho": 617.515625,
+      "alto": 77.75,
+      "abajo": 411.109375,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 109.96875,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 109.96875,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "App",
+        "x": 224.296875,
+        "y": 109.96875,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.28125,
+        "y": 109.96875,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Clínica",
+        "x": 385.4375,
+        "y": 109.96875,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Admin",
+        "x": 459.9375,
+        "y": 109.96875,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Bandeja",
+        "x": 534.4375,
+        "y": 109.96875,
+        "ancho": 79.0625,
+        "alto": 44,
+        "abajo": 153.96875
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 258.578125,
+        "y": 173.96875,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 217.96875
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 1092.609375,
+        "y": 173.96875,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 217.96875
+      }
+    ],
+    "simulacion": {
+      "x": 64,
+      "y": 186.96875,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 204.96875
+    },
+    "selector": {
+      "x": 258.578125,
+      "y": 173.96875,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 217.96875
+    },
+    "reiniciar": {
+      "x": 1092.609375,
+      "y": 173.96875,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 217.96875
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 353.578125,
+      "y": 178.21875,
+      "ancho": 723.03125,
+      "alto": 19.5,
+      "abajo": 197.71875,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/admin",
+    "estado": "navegacion",
+    "captura": "06-antes-mock-1280-navegacion-admin.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 0,
+      "ancho": 1280,
+      "alto": 129,
+      "abajo": 129
+    },
+    "altoReservado": "129px",
+    "marca": {
+      "x": 64,
+      "y": -204.515625,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": -156.515625,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 1108.34375,
+      "y": -180.40625,
+      "ancho": 107.65625,
+      "alto": 26.375,
+      "abajo": -154.03125,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 64,
+      "y": 102.359375,
+      "ancho": 617.515625,
+      "alto": 77.75,
+      "abajo": 180.109375,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 8,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 8,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "App",
+        "x": 224.296875,
+        "y": 8,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.28125,
+        "y": 8,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Clínica",
+        "x": 385.4375,
+        "y": 8,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Admin",
+        "x": 459.9375,
+        "y": 8,
+        "ancho": 68.140625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Bandeja",
+        "x": 536.078125,
+        "y": 8,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 258.578125,
+        "y": 72,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 116
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 1092.609375,
+        "y": 72,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 116
+      }
+    ],
+    "simulacion": {
+      "x": 64,
+      "y": 85,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 103
+    },
+    "selector": {
+      "x": 258.578125,
+      "y": 72,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 116
+    },
+    "reiniciar": {
+      "x": 1092.609375,
+      "y": 72,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 116
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 353.578125,
+      "y": 76.25,
+      "ancho": 723.03125,
+      "alto": 19.5,
+      "abajo": 95.75,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/wa",
+    "estado": "flujoA-paso1",
+    "captura": "06-antes-mock-1280-flujoA-paso1-wa.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 0,
+      "ancho": 1280,
+      "alto": 129,
+      "abajo": 129
+    },
+    "altoReservado": "129px",
+    "marca": {
+      "x": 64,
+      "y": -79.515625,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": -31.515625,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 1108.34375,
+      "y": -55.40625,
+      "ancho": 107.65625,
+      "alto": 26.375,
+      "abajo": -29.03125,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 288,
+      "y": 156.96875,
+      "ancho": 274.453125,
+      "alto": 34.546875,
+      "abajo": 191.515625,
+      "fuente": "32px",
+      "lineHeight": "34.56px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 8,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 8,
+        "ancho": 93.296875,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "App",
+        "x": 226.65625,
+        "y": 8,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Call Center",
+        "x": 284.640625,
+        "y": 8,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Clínica",
+        "x": 387.796875,
+        "y": 8,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Admin",
+        "x": 462.296875,
+        "y": 8,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Bandeja",
+        "x": 536.796875,
+        "y": 8,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 258.578125,
+        "y": 72,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 116
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 1092.609375,
+        "y": 72,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 116
+      }
+    ],
+    "simulacion": {
+      "x": 64,
+      "y": 85,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 103
+    },
+    "selector": {
+      "x": 258.578125,
+      "y": 72,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 116
+    },
+    "reiniciar": {
+      "x": 1092.609375,
+      "y": 72,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 116
+    },
+    "paso": {
+      "texto": "Paso 1 de 14 · Esperando llamada",
+      "x": 353.578125,
+      "y": 76.25,
+      "ancho": 723.03125,
+      "alto": 19.5,
+      "abajo": 95.75,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 1 de 14 · Esperando llamada"
+    },
+    "compositor": {
+      "x": 288,
+      "y": 622.90625,
+      "ancho": 704,
+      "alto": 76.390625,
+      "abajo": 699.296875
+    },
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/wa",
+    "estado": "flujoA-paso2",
+    "captura": "06-antes-mock-1280-flujoA-paso2-wa.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 0,
+      "ancho": 1280,
+      "alto": 129,
+      "abajo": 129
+    },
+    "altoReservado": "129px",
+    "marca": {
+      "x": 64,
+      "y": -79.515625,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": -31.515625,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 1108.34375,
+      "y": -55.40625,
+      "ancho": 107.65625,
+      "alto": 26.375,
+      "abajo": -29.03125,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 288,
+      "y": 156.96875,
+      "ancho": 274.453125,
+      "alto": 34.546875,
+      "abajo": 191.515625,
+      "fuente": "32px",
+      "lineHeight": "34.56px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 8,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 8,
+        "ancho": 93.296875,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "App",
+        "x": 226.65625,
+        "y": 8,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Call Center",
+        "x": 284.640625,
+        "y": 8,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Clínica",
+        "x": 387.796875,
+        "y": 8,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Admin",
+        "x": 462.296875,
+        "y": 8,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Bandeja",
+        "x": 536.796875,
+        "y": 8,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 258.578125,
+        "y": 72,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 116
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 1092.609375,
+        "y": 72,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 116
+      }
+    ],
+    "simulacion": {
+      "x": 64,
+      "y": 85,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 103
+    },
+    "selector": {
+      "x": 258.578125,
+      "y": 72,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 116
+    },
+    "reiniciar": {
+      "x": 1092.609375,
+      "y": 72,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 116
+    },
+    "paso": {
+      "texto": "Paso 2 de 14 · Llamada en Call Center",
+      "x": 353.578125,
+      "y": 76.25,
+      "ancho": 723.03125,
+      "alto": 19.5,
+      "abajo": 95.75,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 2,
+      "maximo": 14,
+      "alto": 10,
+      "nombre": "Paso 2 de 14 · Llamada en Call Center"
+    },
+    "compositor": {
+      "x": 288,
+      "y": 622.90625,
+      "ancho": 704,
+      "alto": 76.390625,
+      "abajo": 699.296875
+    },
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/wa",
+    "estado": "flujoC-paso1",
+    "captura": "06-antes-mock-1280-flujoC-paso1-wa.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 64.96875,
+      "ancho": 1280,
+      "alto": 129,
+      "abajo": 193.96875
+    },
+    "altoReservado": "129px",
+    "marca": {
+      "x": 64,
+      "y": -10.515625,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 37.484375,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 1108.34375,
+      "y": 13.59375,
+      "ancho": 107.65625,
+      "alto": 26.375,
+      "abajo": 39.96875,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 288,
+      "y": 225.96875,
+      "ancho": 274.453125,
+      "alto": 34.546875,
+      "abajo": 260.515625,
+      "fuente": "32px",
+      "lineHeight": "34.56px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 72.96875,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 116.96875
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 72.96875,
+        "ancho": 93.296875,
+        "alto": 44,
+        "abajo": 116.96875
+      },
+      {
+        "texto": "App",
+        "x": 226.65625,
+        "y": 72.96875,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 116.96875
+      },
+      {
+        "texto": "Call Center",
+        "x": 284.640625,
+        "y": 72.96875,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 116.96875
+      },
+      {
+        "texto": "Clínica",
+        "x": 387.796875,
+        "y": 72.96875,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 116.96875
+      },
+      {
+        "texto": "Admin",
+        "x": 462.296875,
+        "y": 72.96875,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 116.96875
+      },
+      {
+        "texto": "Bandeja",
+        "x": 536.796875,
+        "y": 72.96875,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 116.96875
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 258.578125,
+        "y": 136.96875,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 180.96875
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 1092.609375,
+        "y": 136.96875,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 180.96875
+      }
+    ],
+    "simulacion": {
+      "x": 64,
+      "y": 149.96875,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 167.96875
+    },
+    "selector": {
+      "x": 258.578125,
+      "y": 136.96875,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 180.96875
+    },
+    "reiniciar": {
+      "x": 1092.609375,
+      "y": 136.96875,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 180.96875
+    },
+    "paso": {
+      "texto": "Paso 1 de 4 · Flujo C · Cita confirmada en App",
+      "x": 353.578125,
+      "y": 141.21875,
+      "ancho": 723.03125,
+      "alto": 19.5,
+      "abajo": 160.71875,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 1,
+      "maximo": 4,
+      "alto": 10,
+      "nombre": "Paso 1 de 4 · Flujo C · Cita confirmada en App"
+    },
+    "compositor": {
+      "x": 288,
+      "y": 691.90625,
+      "ancho": 704,
+      "alto": 76.390625,
+      "abajo": 768.296875
+    },
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "mock",
+    "ancho": 1280,
+    "ruta": "/wa",
+    "estado": "flujoC-paso2",
+    "captura": "06-antes-mock-1280-flujoC-paso2-wa.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 0,
+      "ancho": 1280,
+      "alto": 129,
+      "abajo": 129
+    },
+    "altoReservado": "129px",
+    "marca": {
+      "x": 64,
+      "y": -79.515625,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": -31.515625,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": {
+      "x": 1108.34375,
+      "y": -55.40625,
+      "ancho": 107.65625,
+      "alto": 26.375,
+      "abajo": -29.03125,
+      "fuente": "12px",
+      "lineHeight": "18px",
+      "nowrap": "normal"
+    },
+    "titulo": {
+      "x": 288,
+      "y": 156.96875,
+      "ancho": 274.453125,
+      "alto": 34.546875,
+      "abajo": 191.515625,
+      "fuente": "32px",
+      "lineHeight": "34.56px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 8,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 8,
+        "ancho": 93.296875,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "App",
+        "x": 226.65625,
+        "y": 8,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Call Center",
+        "x": 284.640625,
+        "y": 8,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Clínica",
+        "x": 387.796875,
+        "y": 8,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Admin",
+        "x": 462.296875,
+        "y": 8,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Bandeja",
+        "x": 536.796875,
+        "y": 8,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Flujo AFlujo C",
+        "x": 258.578125,
+        "y": 72,
+        "ancho": 79,
+        "alto": 44,
+        "abajo": 116
+      },
+      {
+        "texto": "Reiniciar guion",
+        "x": 1092.609375,
+        "y": 72,
+        "ancho": 123.390625,
+        "alto": 44,
+        "abajo": 116
+      }
+    ],
+    "simulacion": {
+      "x": 64,
+      "y": 85,
+      "ancho": 76.953125,
+      "alto": 18,
+      "abajo": 103
+    },
+    "selector": {
+      "x": 258.578125,
+      "y": 72,
+      "ancho": 79,
+      "alto": 44,
+      "abajo": 116
+    },
+    "reiniciar": {
+      "x": 1092.609375,
+      "y": 72,
+      "ancho": 123.390625,
+      "alto": 44,
+      "abajo": 116
+    },
+    "paso": {
+      "texto": "Paso 2 de 4 · Flujo C · Aprobación en WhatsApp",
+      "x": 353.578125,
+      "y": 76.25,
+      "ancho": 723.03125,
+      "alto": 19.5,
+      "abajo": 95.75,
+      "fuente": "13px",
+      "lineHeight": "19.5px",
+      "nowrap": "normal",
+      "elipsis": "clip"
+    },
+    "progreso": {
+      "valor": 2,
+      "maximo": 4,
+      "alto": 10,
+      "nombre": "Paso 2 de 4 · Flujo C · Aprobación en WhatsApp"
+    },
+    "compositor": {
+      "x": 288,
+      "y": 622.90625,
+      "ancho": 704,
+      "alto": 76.390625,
+      "abajo": 699.296875
+    },
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "modo": "mock",
+    "ancho": 1280,
+    "errores": [],
+    "origenes": [
+      "http://localhost:5174"
+    ]
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/",
+    "estado": "inicial",
+    "captura": "06-antes-real-375-inicial-portada.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 16,
+      "y": -73,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": -25,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 16,
+      "y": 56,
+      "ancho": 343,
+      "alto": 86.375,
+      "abajo": 142.375,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 760,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "App",
+        "x": 168.296875,
+        "y": 760,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Call Center",
+        "x": 226.28125,
+        "y": 760,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Clínica",
+        "x": 329.4375,
+        "y": 760,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Admin",
+        "x": 403.9375,
+        "y": 760,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Bandeja",
+        "x": 478.4375,
+        "y": 760,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 804
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 564,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/web",
+    "estado": "inicial",
+    "captura": "06-antes-real-375-inicial-web.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 16,
+      "y": 24,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 72,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 16,
+      "y": 153,
+      "ancho": 343,
+      "alto": 43.1875,
+      "abajo": 196.1875,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 54.03125,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 70.03125,
+        "y": 760,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "App",
+        "x": 168.96875,
+        "y": 760,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Call Center",
+        "x": 226.953125,
+        "y": 760,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Clínica",
+        "x": 330.109375,
+        "y": 760,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Admin",
+        "x": 404.609375,
+        "y": 760,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Bandeja",
+        "x": 479.109375,
+        "y": 760,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 804
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 564,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/wa",
+    "estado": "inicial",
+    "captura": "06-antes-real-375-inicial-wa.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 16,
+      "y": 24,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 72,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 16,
+      "y": 129,
+      "ancho": 274.453125,
+      "alto": 34.546875,
+      "abajo": 163.546875,
+      "fuente": "32px",
+      "lineHeight": "34.56px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 760,
+        "ancho": 93.296875,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "App",
+        "x": 170.65625,
+        "y": 760,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Call Center",
+        "x": 228.640625,
+        "y": 760,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Clínica",
+        "x": 331.796875,
+        "y": 760,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Admin",
+        "x": 406.296875,
+        "y": 760,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Bandeja",
+        "x": 480.796875,
+        "y": 760,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 804
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": {
+      "x": 16,
+      "y": 657.609375,
+      "ancho": 343,
+      "alto": 93.390625,
+      "abajo": 751
+    },
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 566,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/app",
+    "estado": "inicial",
+    "captura": "06-antes-real-375-inicial-app.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 16,
+      "y": 24,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 72,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 16,
+      "y": 153,
+      "ancho": 343,
+      "alto": 43.1875,
+      "abajo": 196.1875,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 760,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "App",
+        "x": 168.296875,
+        "y": 760,
+        "ancho": 50.6875,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Call Center",
+        "x": 226.984375,
+        "y": 760,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Clínica",
+        "x": 330.140625,
+        "y": 760,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Admin",
+        "x": 404.640625,
+        "y": 760,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Bandeja",
+        "x": 479.140625,
+        "y": 760,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 804
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 564,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/callcenter",
+    "estado": "inicial",
+    "captura": "06-antes-real-375-inicial-callcenter.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 16,
+      "y": 24,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 72,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 16,
+      "y": 153,
+      "ancho": 343,
+      "alto": 43.1875,
+      "abajo": 196.1875,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 760,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "App",
+        "x": 168.296875,
+        "y": 760,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Call Center",
+        "x": 226.28125,
+        "y": 760,
+        "ancho": 97.921875,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Clínica",
+        "x": 332.203125,
+        "y": 760,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Admin",
+        "x": 406.703125,
+        "y": 760,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Bandeja",
+        "x": 481.203125,
+        "y": 760,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 804
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 566,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/clinica",
+    "estado": "inicial",
+    "captura": "06-antes-real-375-inicial-clinica.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 16,
+      "y": 24,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 72,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 16,
+      "y": 153,
+      "ancho": 343,
+      "alto": 43.1875,
+      "abajo": 196.1875,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 760,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "App",
+        "x": 168.296875,
+        "y": 760,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Call Center",
+        "x": 226.28125,
+        "y": 760,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Clínica",
+        "x": 329.4375,
+        "y": 760,
+        "ancho": 68.5625,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Admin",
+        "x": 406,
+        "y": 760,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Bandeja",
+        "x": 480.5,
+        "y": 760,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 804
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 566,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/admin",
+    "estado": "inicial",
+    "captura": "06-antes-real-375-inicial-admin.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 16,
+      "y": -73,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": -25,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 16,
+      "y": 56,
+      "ancho": 343,
+      "alto": 43.1875,
+      "abajo": 99.1875,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 760,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "App",
+        "x": 168.296875,
+        "y": 760,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Call Center",
+        "x": 226.28125,
+        "y": 760,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Clínica",
+        "x": 329.4375,
+        "y": 760,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Admin",
+        "x": 403.9375,
+        "y": 760,
+        "ancho": 68.140625,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Bandeja",
+        "x": 480.078125,
+        "y": 760,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 804
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 565,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/bandeja",
+    "estado": "inicial",
+    "captura": "06-antes-real-375-inicial-bandeja.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 16,
+      "y": 24,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 72,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 16,
+      "y": 153,
+      "ancho": 343,
+      "alto": 43.1875,
+      "abajo": 196.1875,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 8,
+        "y": 760,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 69.359375,
+        "y": 760,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "App",
+        "x": 168.296875,
+        "y": 760,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Call Center",
+        "x": 226.28125,
+        "y": 760,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Clínica",
+        "x": 329.4375,
+        "y": 760,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Admin",
+        "x": 403.9375,
+        "y": 760,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Bandeja",
+        "x": 478.4375,
+        "y": 760,
+        "ancho": 79.0625,
+        "alto": 44,
+        "abajo": 804
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 566,
+      "ancho": 375,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 375,
+    "ruta": "/admin",
+    "estado": "navegacion",
+    "captura": "06-antes-real-375-navegacion-admin.png",
+    "anchoPagina": 375,
+    "barra": {
+      "x": 0,
+      "y": 751,
+      "ancho": 375,
+      "alto": 61,
+      "abajo": 812
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 16,
+      "y": -73,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": -25,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 16,
+      "y": 56,
+      "ancho": 343,
+      "alto": 43.1875,
+      "abajo": 99.1875,
+      "fuente": "40px",
+      "lineHeight": "43.2px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": -182,
+        "y": 760,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "WhatsApp",
+        "x": -120.640625,
+        "y": 760,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "App",
+        "x": -21.703125,
+        "y": 760,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Call Center",
+        "x": 36.28125,
+        "y": 760,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Clínica",
+        "x": 139.4375,
+        "y": 760,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Admin",
+        "x": 213.9375,
+        "y": 760,
+        "ancho": 68.140625,
+        "alto": 44,
+        "abajo": 804
+      },
+      {
+        "texto": "Bandeja",
+        "x": 290.078125,
+        "y": 760,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 804
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 565,
+      "ancho": 375,
+      "scroll": 190,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "modo": "real",
+    "ancho": 375,
+    "errores": [],
+    "origenes": [
+      "http://localhost:5173",
+      "http://localhost:4000"
+    ]
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/",
+    "estado": "inicial",
+    "captura": "06-antes-real-1280-inicial-portada.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 66,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 127
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 64,
+      "y": -7,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 41,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 64,
+      "y": 229.390625,
+      "ancho": 617.515625,
+      "alto": 155.5,
+      "abajo": 384.890625,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 74,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 118
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 74,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 118
+      },
+      {
+        "texto": "App",
+        "x": 224.296875,
+        "y": 74,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 118
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.28125,
+        "y": 74,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 118
+      },
+      {
+        "texto": "Clínica",
+        "x": 385.4375,
+        "y": 74,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 118
+      },
+      {
+        "texto": "Admin",
+        "x": 459.9375,
+        "y": 74,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 118
+      },
+      {
+        "texto": "Bandeja",
+        "x": 534.4375,
+        "y": 74,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 118
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/web",
+    "estado": "inicial",
+    "captura": "06-antes-real-1280-inicial-web.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 97,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 158
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 64,
+      "y": 24,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 72,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 64,
+      "y": 260.390625,
+      "ancho": 617.515625,
+      "alto": 77.75,
+      "abajo": 338.140625,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 105,
+        "ancho": 54.03125,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 126.03125,
+        "y": 105,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "App",
+        "x": 224.96875,
+        "y": 105,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.953125,
+        "y": 105,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Clínica",
+        "x": 386.109375,
+        "y": 105,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Admin",
+        "x": 460.609375,
+        "y": 105,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Bandeja",
+        "x": 535.109375,
+        "y": 105,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 149
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/wa",
+    "estado": "inicial",
+    "captura": "06-antes-real-1280-inicial-wa.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 97,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 158
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 64,
+      "y": 24,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 72,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 288,
+      "y": 190,
+      "ancho": 274.453125,
+      "alto": 34.546875,
+      "abajo": 224.546875,
+      "fuente": "32px",
+      "lineHeight": "34.56px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 105,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 105,
+        "ancho": 93.296875,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "App",
+        "x": 226.65625,
+        "y": 105,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Call Center",
+        "x": 284.640625,
+        "y": 105,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Clínica",
+        "x": 387.796875,
+        "y": 105,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Admin",
+        "x": 462.296875,
+        "y": 105,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Bandeja",
+        "x": 536.796875,
+        "y": 105,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 149
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": {
+      "x": 288,
+      "y": 655.9375,
+      "ancho": 704,
+      "alto": 76.390625,
+      "abajo": 732.328125
+    },
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/app",
+    "estado": "inicial",
+    "captura": "06-antes-real-1280-inicial-app.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 97,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 158
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 64,
+      "y": 24,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 72,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 64,
+      "y": 260.390625,
+      "ancho": 617.515625,
+      "alto": 77.75,
+      "abajo": 338.140625,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 105,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 105,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "App",
+        "x": 224.296875,
+        "y": 105,
+        "ancho": 50.6875,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.984375,
+        "y": 105,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Clínica",
+        "x": 386.140625,
+        "y": 105,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Admin",
+        "x": 460.640625,
+        "y": 105,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Bandeja",
+        "x": 535.140625,
+        "y": 105,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 149
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/callcenter",
+    "estado": "inicial",
+    "captura": "06-antes-real-1280-inicial-callcenter.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 97,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 158
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 64,
+      "y": 24,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 72,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 64,
+      "y": 260.390625,
+      "ancho": 617.515625,
+      "alto": 77.75,
+      "abajo": 338.140625,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 105,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 105,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "App",
+        "x": 224.296875,
+        "y": 105,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.28125,
+        "y": 105,
+        "ancho": 97.921875,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Clínica",
+        "x": 388.203125,
+        "y": 105,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Admin",
+        "x": 462.703125,
+        "y": 105,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Bandeja",
+        "x": 537.203125,
+        "y": 105,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 149
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/clinica",
+    "estado": "inicial",
+    "captura": "06-antes-real-1280-inicial-clinica.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 97,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 158
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 64,
+      "y": 24,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 72,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 64,
+      "y": 260.390625,
+      "ancho": 617.515625,
+      "alto": 77.75,
+      "abajo": 338.140625,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 105,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 105,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "App",
+        "x": 224.296875,
+        "y": 105,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.28125,
+        "y": 105,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Clínica",
+        "x": 385.4375,
+        "y": 105,
+        "ancho": 68.5625,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Admin",
+        "x": 462,
+        "y": 105,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Bandeja",
+        "x": 536.5,
+        "y": 105,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 149
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/admin",
+    "estado": "inicial",
+    "captura": "06-antes-real-1280-inicial-admin.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 0,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 61
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 64,
+      "y": -134,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": -86,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 64,
+      "y": 102.390625,
+      "ancho": 617.515625,
+      "alto": 77.75,
+      "abajo": 180.140625,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 8,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 8,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "App",
+        "x": 224.296875,
+        "y": 8,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.28125,
+        "y": 8,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Clínica",
+        "x": 385.4375,
+        "y": 8,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Admin",
+        "x": 459.9375,
+        "y": 8,
+        "ancho": 68.140625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Bandeja",
+        "x": 536.078125,
+        "y": 8,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 52
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/bandeja",
+    "estado": "inicial",
+    "captura": "06-antes-real-1280-inicial-bandeja.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 97,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 158
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 64,
+      "y": 24,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": 72,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 64,
+      "y": 260.390625,
+      "ancho": 617.515625,
+      "alto": 77.75,
+      "abajo": 338.140625,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 105,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 105,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "App",
+        "x": 224.296875,
+        "y": 105,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.28125,
+        "y": 105,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Clínica",
+        "x": 385.4375,
+        "y": 105,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Admin",
+        "x": 459.9375,
+        "y": 105,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 149
+      },
+      {
+        "texto": "Bandeja",
+        "x": 534.4375,
+        "y": 105,
+        "ancho": 79.0625,
+        "alto": 44,
+        "abajo": 149
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "fase": "antes",
+    "modo": "real",
+    "ancho": 1280,
+    "ruta": "/admin",
+    "estado": "navegacion",
+    "captura": "06-antes-real-1280-navegacion-admin.png",
+    "anchoPagina": 1280,
+    "barra": {
+      "x": 0,
+      "y": 0,
+      "ancho": 1280,
+      "alto": 61,
+      "abajo": 61
+    },
+    "altoReservado": "61px",
+    "marca": {
+      "x": 64,
+      "y": -134,
+      "ancho": 234.609375,
+      "alto": 48,
+      "abajo": -86,
+      "fuente": "32px",
+      "lineHeight": "48px",
+      "nowrap": "normal"
+    },
+    "insignia": null,
+    "titulo": {
+      "x": 64,
+      "y": 102.390625,
+      "ancho": 617.515625,
+      "alto": 77.75,
+      "abajo": 180.140625,
+      "fuente": "72px",
+      "lineHeight": "77.76px",
+      "nowrap": "normal"
+    },
+    "margenTitulo": "0px",
+    "controles": [
+      {
+        "texto": "Web",
+        "x": 64,
+        "y": 8,
+        "ancho": 53.359375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "WhatsApp",
+        "x": 125.359375,
+        "y": 8,
+        "ancho": 90.9375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "App",
+        "x": 224.296875,
+        "y": 8,
+        "ancho": 49.984375,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Call Center",
+        "x": 282.28125,
+        "y": 8,
+        "ancho": 95.15625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Clínica",
+        "x": 385.4375,
+        "y": 8,
+        "ancho": 66.5,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Admin",
+        "x": 459.9375,
+        "y": 8,
+        "ancho": 68.140625,
+        "alto": 44,
+        "abajo": 52
+      },
+      {
+        "texto": "Bandeja",
+        "x": 536.078125,
+        "y": 8,
+        "ancho": 77.15625,
+        "alto": 44,
+        "abajo": 52
+      }
+    ],
+    "simulacion": null,
+    "selector": null,
+    "reiniciar": null,
+    "paso": null,
+    "progreso": null,
+    "compositor": null,
+    "tarjetas": [],
+    "vacios": [],
+    "canales": {
+      "contenido": 1152,
+      "ancho": 1152,
+      "scroll": 0,
+      "izquierda": null,
+      "derecha": null
+    },
+    "soporteTimeline": true
+  },
+  {
+    "modo": "real",
+    "ancho": 1280,
+    "errores": [],
+    "origenes": [
+      "http://localhost:5173",
+      "http://localhost:4000"
+    ]
+  }
+]

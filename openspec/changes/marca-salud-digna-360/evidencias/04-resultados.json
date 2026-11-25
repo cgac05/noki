@@ -1,0 +1,23 @@
+[
+  {
+    "comando": "corepack pnpm lint",
+    "codigo": 2,
+    "segundos": 52.2095141,
+    "revision": "Ajuste 5 D7 sobre origin/main f5260a8",
+    "entorno": "Acceso a sockets locales"
+  },
+  {
+    "comando": "corepack pnpm lint:deps",
+    "codigo": 0,
+    "segundos": 3.9437425,
+    "revision": "Ajuste 5 D7 sobre origin/main f5260a8",
+    "entorno": "Acceso a sockets locales"
+  },
+  {
+    "comando": "corepack pnpm test --maxWorkers 2",
+    "codigo": 2,
+    "segundos": 9.2348973,
+    "revision": "Ajuste 5 D7 sobre origin/main f5260a8",
+    "entorno": "Acceso a sockets locales"
+  }
+]
