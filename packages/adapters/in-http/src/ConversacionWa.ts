@@ -8,10 +8,10 @@ import type {
   AprobacionCancelacion, AgendaExternaPort, CasosTramite, ContactosPort, ContextoComando, ConversacionesWa, GeneradorId, LecturasPort, Reloj,
 } from '@noki/application';
 import {
-  ErrorDominio, siguientePregunta, type PistaDominio, type RegistroTiposTramite, type SedeId,
+  ErrorDominio, normalizarTelefono, siguientePregunta, type HiloId, type PistaDominio, type RegistroTiposTramite, type SedeId,
   type ServicioId, type Tramite, type TramiteId,
 } from '@noki/domain';
-import { canalOrigen, diaCorto, fechaLarga, preguntaCasilla, preguntaDia, preguntaHora, requisito } from './textosWa.ts';
+import { avisoLlamadaCortada, canalOrigen, diaCorto, fechaLarga, preguntaCasilla, preguntaDia, preguntaHora, requisito } from './textosWa.ts';
 import { campoPendiente, completarDatos, mensajeDato, mensajesIdentificacion, respuestaFlowIdentificacion, validarDato } from './identificacionWa.ts';
 
 const accion = z.discriminatedUnion('tipo', [
@@ -45,6 +45,7 @@ export interface DependenciasWa {
   contactos: ContactosPort;
   conversaciones: ConversacionesWa;
   lecturas: LecturasPort;
+  codigoContinuacionAsesor: (hiloId: HiloId) => Promise<string | null>;
   agendaExterna: AgendaExternaPort;
   reloj: Reloj;
   ids: GeneradorId;
@@ -93,10 +94,13 @@ export class ConversacionWa {
     const estado: Estado = guardado && guardado.success ? guardado.data : { opciones: {} };
     let tramite = estado.tramiteId ? await lecturas.tramite(estado.tramiteId as TramiteId) : null;
     const mensajes: MensajeBot[] = [];
-    const token = /^CONTINUAR\s+(\S+)$/iu.exec(mensaje.texto?.trim() ?? '')?.[1];
+    const tokenExplicito = /^CONTINUAR\s+(\S+)$/iu.exec(mensaje.texto?.trim() ?? '')?.[1];
 
     const opcionPrevia = payloadBoton?.startsWith('op:') ? estado.opciones[payloadBoton] : undefined;
     const tramiteElegidoId = opcionPrevia?.tipo === 'retomar' ? opcionPrevia.id as TramiteId : undefined;
+    const tokenLlamada = !tokenExplicito && !tramiteElegidoId && !tramite && mensaje.texto && !flowResponse
+      ? await this.continuacionPorAni(waId) : null;
+    const token = tokenExplicito ?? tokenLlamada;
     if (token || tramiteElegidoId || (!tramite && (mensaje.texto || (estado.verificacion && flowResponse)))) {
       const verificacion = estado.verificacion && flowResponse ? z.object({
         folio: z.string().regex(/^[0-9]{8,9}$/u), fechaNac: z.iso.date(),
@@ -113,11 +117,16 @@ export class ConversacionWa {
         delete estado.verificacion;
         delete estado.horario;
         borrarDia(estado);
-        const oferta = (await lecturas.catalogo()).find(o => o.servicioId === tramite?.servicioId && o.sedeId === tramite?.sedeId);
+        const catalogo = await lecturas.catalogo();
+        const oferta = catalogo.find(o => o.servicioId === tramite?.servicioId && o.sedeId === tramite?.sedeId);
         const momento = tramite.horario && tramite.sedeId ? await this.formatear(tramite.horario.inicio, tramite.sedeId) : undefined;
-        const detalle = [oferta?.servicio, oferta?.sede].filter(Boolean).join(' en ');
+        const detalle = tokenLlamada
+          ? [oferta?.servicio ?? catalogo.find(o => o.servicioId === tramite?.servicioId)?.servicio,
+            oferta?.sede ?? catalogo.find(o => o.sedeId === tramite?.sedeId)?.sede].filter(Boolean).join(' en ')
+          : [oferta?.servicio, oferta?.sede].filter(Boolean).join(' en ');
         const resumen = detalle ? 'Retomamos tu trámite: ' + detalle : 'Retomamos tu trámite';
-        mensajes.push(texto(resumen + (momento ? ', ' + momento : '') + '. Lo iniciaste ' + canalOrigen[tramite.canalOrigen] + '.'));
+        const descripcion = resumen + (momento ? ', ' + momento : '') + '. Lo iniciaste ' + canalOrigen[tramite.canalOrigen] + '.';
+        mensajes.push(texto(tokenLlamada ? avisoLlamadaCortada(descripcion, Boolean(tramite.pacienteId)) : descripcion));
       } else if (token || verificacion || tramiteElegidoId) {
         return [texto(resumenInvalido)];
       } else if (retomado.tipo === 'REQUIERE_VERIFICACION') {
@@ -269,6 +278,19 @@ export class ConversacionWa {
   private async formatear(inicio: string, sedeId: SedeId): Promise<string> {
     const zona = await this.deps.lecturas.zonaSede(sedeId) ?? 'UTC';
     return fechaLarga(inicio, zona);
+  }
+
+  private async continuacionPorAni(waId: string): Promise<string | null> {
+    const { contactos, lecturas, codigoContinuacionAsesor } = this.deps;
+    const telefonoWa = normalizarTelefono(waId);
+    if (!telefonoWa) return null;
+    const hilos = await contactos.buscarTelefonoCapturado(waId);
+    const codigos = await Promise.all(hilos.map(async hiloId => {
+      const ani = await lecturas.contactoPorHilo(hiloId);
+      return ani !== null && normalizarTelefono(ani) === telefonoWa ? codigoContinuacionAsesor(hiloId) : null;
+    }));
+    const vigentes = codigos.filter(codigo => codigo !== null);
+    return vigentes.length === 1 ? vigentes[0]! : null;
   }
 
   private async mensajes(tramite: Tramite, estado: Estado, ts: string, correlationId: string): Promise<MensajeBot[]> {

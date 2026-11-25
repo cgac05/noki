@@ -53,14 +53,14 @@ export function componerComandos(opciones: { databaseUrl: string; sdMockUrl: str
     reloj, registro: new RegistroComandosPostgres(db),
     tieneEventos: async (clave: string) => (await lecturas.eventosPorClave(clave)).length > 0,
   };
-  const consultas = { lecturas, reloj, emisor: tokens, bandeja: new BandejaPostgres(db), demo: opciones.demo,
-    codigoContinuacion: async (id: Parameters<typeof lecturas.datosContinuacion>[0]) => {
-      const datos = await lecturas.datosContinuacion(id, reloj.ahora().toISOString());
-      return datos ? tokens.emitir(datos) : null;
-    },
+  const codigoContinuacion = async (id: Parameters<typeof lecturas.datosContinuacion>[0], soloAsesor = false) => {
+    const datos = await lecturas.datosContinuacion(id, reloj.ahora().toISOString(), soloAsesor);
+    return datos ? tokens.emitir(datos) : null;
   };
+  const consultas = { lecturas, reloj, emisor: tokens, bandeja: new BandejaPostgres(db), demo: opciones.demo, codigoContinuacion };
   const whatsapp = { idempotencia, motor: new ConversacionWa({
     casos, aprobacion, responderOferta: huecos.responderOferta, contactos, lecturas, reloj, ids, registro, agendaExterna, conversaciones: new ConversacionesWaPostgres(db),
+    codigoContinuacionAsesor: id => codigoContinuacion(id, true),
   }) };
   return { casos, huecos, tokens, lecturas, ids, consultas, whatsapp, reloj, agenda, tramites, registro, procesados: new RegistroProcesadosPostgres(db), solicitarContinuacion: casos.solicitarContinuacion.bind(casos), demo: opciones.demo, idempotencia, cerrar: () => db.destroy() };
 }

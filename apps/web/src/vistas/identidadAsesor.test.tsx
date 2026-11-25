@@ -62,6 +62,9 @@ it.each(['NINGUNO', 'referencia-opaca-demo'])('envía destinatario y candidato %
   await usuario.click(screen.getByRole('button', { name: 'Enviar formulario' }));
   await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
   expect(recibidos.slice(1).map(dato => dato.comando.payload)).toEqual([{ paso: 'DESTINATARIO', para: 'MI' }, { paso: 'CONFIRMAR', candidato: candidato === 'NINGUNO' ? null : candidato }, { paso: 'FECHA_NAC', fechaNac: '2000-01-02' }]);
+  for (const { comando } of recibidos.slice(1)) {
+    expect(comando).toMatchObject({ tipo: 'IdentificarPaciente', canal: 'callcenter', actor: 'asesor:asesor1' });
+  }
   expect(screen.queryByText('Identificar paciente (opcional)')).toBeNull();
   expect(document.body.textContent).not.toContain('2000-01-02');
 });

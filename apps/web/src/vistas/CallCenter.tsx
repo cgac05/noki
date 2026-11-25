@@ -46,6 +46,13 @@ export function CallCenter() {
   const rutaContinuacion = codigo ? '/wa?continuar=' + encodeURIComponent(codigo) : '/wa';
   const tramite = ficha.data?.tramites[0] ?? respuesta?.tramite;
   const pregunta = respuesta?.siguientePregunta;
+  const llamadaCerrada = accion.isSuccess && accion.variables?.accion.titulo === 'Cerrar atención (llamada cortada)';
+  const continuacionDeshabilitada = accion.isPending || accion.isError || ficha.data?.soloLectura || Boolean(codigo) || llamadaCerrada;
+  const solicitarContinuacion = (tramiteId: string, titulo: string) => accion.ejecutar({
+    tipo: 'comando', titulo, comando: ComandoRequestSchema.parse({
+      canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SolicitarContinuacion', tramiteId, payload: { destino: 'whatsapp' },
+    }),
+  });
   return <>
     <h1>Call Center</h1>
     <p className="introduccion">Inicia la atención y continúa la misma conversación en WhatsApp.</p>
@@ -67,8 +74,11 @@ export function CallCenter() {
         </div>
         {tramite && <>
           <label className="consentimiento"><input type="checkbox" checked={consentimientoHilo === hiloId} disabled={accion.isPending || ficha.data.soloLectura || Boolean(codigo)} onChange={evento => setConsentimientoHilo(evento.target.checked ? hiloId : undefined)} />El paciente aceptó continuar por WhatsApp</label>
-          <button type="button" disabled={consentimientoHilo !== hiloId || accion.isPending || accion.isError || ficha.data.soloLectura || Boolean(codigo)} onClick={() => accion.ejecutar({ tipo: 'comando', titulo: 'Continuar por WhatsApp', comando: ComandoRequestSchema.parse({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SolicitarContinuacion', tramiteId: tramite.id, payload: { destino: 'whatsapp' } }) })}>Continuar por WhatsApp</button>
+          <button type="button" disabled={consentimientoHilo !== hiloId || continuacionDeshabilitada} onClick={() => solicitarContinuacion(tramite.id, 'Continuar por WhatsApp')}>Continuar por WhatsApp</button>
+          {!['ATENDIDA', 'CANCELADA', 'NO_ASISTIO', 'EXPIRADO'].includes(tramite.estado) &&
+            <button type="button" disabled={continuacionDeshabilitada} onClick={() => solicitarContinuacion(tramite.id, 'Cerrar atención (llamada cortada)')}>Cerrar atención (llamada cortada)</button>}
         </>}
+        {llamadaCerrada && <p role="status">Llamada cerrada</p>}
         {codigo && <div className="continuacion"><Link className="enlace-principal" to={rutaContinuacion}>Abrir WhatsApp</Link><QrCita token={new URL(rutaContinuacion, location.origin).toString()} etiqueta="Código QR de continuación" /></div>}
       </section>
       <LineaTiempo eventos={ficha.data.lineaTiempo} />

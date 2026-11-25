@@ -56,3 +56,6 @@ export function textoOferta(cita: { servicio: string; sede: string; inicio: stri
 
 export const ofertaPerdida = 'Ese espacio ya fue tomado. Te avisaremos si se libera otro.';
 export const citaAdelantada = (inicio: string, zona: string): string => 'Listo, tu cita quedó el ' + fechaLarga(inicio, zona) + '.';
+
+export const avisoLlamadaCortada = (resumen: string, pacienteGuardado: boolean): string =>
+  'Parece que la llamada se cortó. ' + resumen + (pacienteGuardado ? ' Paciente: ••••.' : '');

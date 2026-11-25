@@ -1,5 +1,5 @@
 import { formatInTimeZone } from 'date-fns-tz';
-import type { AlertaSeguridadLeida, CitaLeida, LlegadaLeida, EventoLeido, GeneradorId, HuecoLeido, LecturasPort, OfertaLeida } from '@noki/application';
+import type { AlertaSeguridadLeida, CitaLeida, DatosEmisionToken, LlegadaLeida, EventoLeido, GeneradorId, HuecoLeido, LecturasPort, OfertaLeida, RegistroTokensUsados } from '@noki/application';
 import { ESTADOS_TRAMITE, normalizarTelefono, type HiloId, type PacienteId, type SedeId, type Tramite, type TramiteId } from '@noki/domain';
 import type { AgendaMemoria } from './AgendaMemoria.ts';
 import type { ContactosMemoria } from './ContactosMemoria.ts';
@@ -27,6 +27,26 @@ export class LecturasMemoria implements LecturasPort {
   tramite(id: TramiteId) { return this.tramites.obtener(id); }
 
   async contactoPorHilo(id: HiloId) { return this.contactos.valorPorHilo(id); }
+
+  async datosContinuacion(hiloId: HiloId, ts: string, usados: RegistroTokensUsados, soloAsesor = false): Promise<DatosEmisionToken | null> {
+    const abiertos = await this.tramites.abiertosPorHilo(hiloId);
+    const eventos = this.eventos().reverse();
+    for (const e of eventos) {
+      if (e.hiloId !== hiloId || e.tipo !== 'ConsentimientoContactoWA') continue;
+      if (soloAsesor && (e.canal !== 'callcenter' || !e.actor.startsWith('asesor:'))) continue;
+      const tramite = abiertos.find(t => t.id === e.tramiteId);
+      const expira = Date.parse(e.ts) + 86_400_000;
+      const jti = e.payload.consentimientoId;
+      if (!tramite || expira <= Date.parse(ts) || await usados.usado(jti)) continue;
+      return {
+        jti, tramiteId: tramite.id, hiloId, nivel: e.nivelAuth, uso: 'CONTINUIDAD', canalOrigen: e.canal,
+        metodo: e.canal === 'callcenter' ? 'TOKEN_CC' : 'TOKEN_WEB',
+        ...(tramite.pacienteId ? { pacienteId: tramite.pacienteId } : {}),
+        emitidoEn: e.ts, expiraEn: new Date(expira).toISOString(),
+      };
+    }
+    return null;
+  }
 
   private eventos() {
     return [...this.tramites.eventos(), ...this.sinTramite.eventos(), ...this.huecos.eventos].map(evento => {

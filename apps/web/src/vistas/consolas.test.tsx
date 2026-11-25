@@ -36,6 +36,20 @@ async function avanzarHasta(cliente: ClienteMock, id: string) {
 }
 
 describe('Call center autorizado', () => {
+  it('cierra la llamada sin marcar la casilla y solicita la continuación una sola vez', async () => {
+    const cliente = new ClienteMock({ latenciaMs: 0 });
+    await avanzarHasta(cliente, 'COTIZADO');
+    const enviar = vi.spyOn(cliente, 'enviarComando');
+    abrir(cliente);
+    const boton = await screen.findByRole('button', { name: 'Cerrar atención (llamada cortada)' });
+    act(() => { fireEvent.click(boton); fireEvent.click(boton); });
+    expect(await screen.findByText('Llamada cerrada')).toBeDefined();
+    expect(await screen.findByRole('link', { name: 'Abrir WhatsApp' })).toBeDefined();
+    expect(enviar).toHaveBeenCalledExactlyOnceWith({
+      canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SolicitarContinuacion',
+      tramiteId: IDS.tramite, payload: { destino: 'whatsapp' },
+    }, { idempotencyKey: expect.any(String) });
+  });
   it('inicia con ANI de demo, valida el formato y descarta la captura al mostrar la ficha', async () => {
     const cliente = new ClienteMock({ latenciaMs: 0 }); const enviar = vi.spyOn(cliente, 'enviarComando');
     const { usuario } = abrir(cliente);

@@ -28,8 +28,8 @@ export function crearApiPruebas(opciones: {
   const agenda = new AgendaMemoria();
   const agendaExterna = new AgendaExternaMemoria();
   const sinTramite = new EventosSinTramiteMemoria(opcionesEventos);
-  const tokens = new TokensJose(opciones.tokenSecret ?? 'secreto-sintetico-de-pruebas-para-la-api',
-    reloj, new RegistroTokensUsadosMemoria());
+  const tokensUsados = new RegistroTokensUsadosMemoria();
+  const tokens = new TokensJose(opciones.tokenSecret ?? 'secreto-sintetico-de-pruebas-para-la-api', reloj, tokensUsados);
   const resolvedor = new ResolvedorContinuidad(tramites, contactos, tokens, pacientes, intentos, sinTramite);
   const lecturas = new LecturasMemoria(tramites, contactos, pacientes, agenda, sinTramite, ids, hilos);
   const demo = opciones.demo ?? true;
@@ -54,8 +54,13 @@ export function crearApiPruebas(opciones: {
     reloj, registro: new RegistroComandosMemoria(),
     tieneEventos: async (clave: string) => (await lecturas.eventosPorClave(clave)).length > 0,
   };
+  const codigoContinuacion = async (id: Parameters<typeof lecturas.datosContinuacion>[0], soloAsesor = false) => {
+    const datos = await lecturas.datosContinuacion(id, reloj.ahora().toISOString(), tokensUsados, soloAsesor);
+    return datos ? tokens.emitir(datos) : null;
+  };
   const whatsapp = { idempotencia, motor: new ConversacionWa({
     casos, aprobacion, contactos, lecturas, reloj, ids, registro, agendaExterna, conversaciones: new ConversacionesWaMemoria(),
+    codigoContinuacionAsesor: id => codigoContinuacion(id, true),
   }) };
   const programador: ProgramadorMemoria = new ProgramadorMemoria(async trabajo => {
     await temporizadores.ejecutar(trabajo);
@@ -66,7 +71,7 @@ export function crearApiPruebas(opciones: {
     databaseUrl: 'postgres://demo:demo@127.0.0.1:1/demo', redisUrl: 'redis://127.0.0.1:1', logger: opciones.salidaLog !== undefined,
     ...(opciones.salidaLog ? { salidaLog: opciones.salidaLog } : {}),
     ...(opciones.origen ? { origen: opciones.origen } : {}),
-    consultas: { lecturas, reloj, emisor: tokens, bandeja: new BandejaMemoria(), demo: opciones.demo ?? true },
+    consultas: { lecturas, reloj, emisor: tokens, bandeja: new BandejaMemoria(), demo: opciones.demo ?? true, codigoContinuacion },
     comandos: { casos, tokens, lecturas, ids, demo: opciones.demo ?? true, idempotencia,
       solicitarContinuacion: casos.solicitarContinuacion.bind(casos) }, whatsapp, relojDemo,
   });

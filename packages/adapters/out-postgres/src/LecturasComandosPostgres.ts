@@ -175,7 +175,7 @@ export class LecturasComandosPostgres implements LecturasPort {
     return rows[0] ?? { hiloId: null, pacienteId: null, sedeId: null };
   }
 
-  async datosContinuacion(hiloId: HiloId, ts: string): Promise<DatosEmisionToken | null> {
+  async datosContinuacion(hiloId: HiloId, ts: string, soloAsesor = false): Promise<DatosEmisionToken | null> {
     const { rows } = await sql<{
       jti: string; id: TramiteId; paciente: PacienteId | null; expira: Date; nivel: DatosEmisionToken['nivel']; canal: Canal;
     }>`SELECT te.jti, t.id, t.paciente_id AS paciente, te.expira_en AS expira, e.nivel_auth AS nivel,
@@ -185,6 +185,7 @@ export class LecturasComandosPostgres implements LecturasPort {
         AND e.payload->>'consentimientoId' = te.jti::text
       LEFT JOIN token_usado tu ON tu.jti = te.jti
       WHERE t.hilo_id = ${hiloId} AND te.uso = 'CONTINUIDAD' AND te.expira_en > ${ts}::timestamptz
+        AND (NOT ${soloAsesor}::boolean OR (e.canal = 'callcenter' AND e.actor LIKE 'asesor:%'))
         AND tu.jti IS NULL AND t.estado NOT IN ('ATENDIDA','CANCELADA','NO_ASISTIO','EXPIRADO')
       ORDER BY te.expira_en DESC, te.jti DESC LIMIT 1`.execute(this.db);
     const fila = rows[0];
