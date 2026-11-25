@@ -31,7 +31,7 @@ Cada consulta SHALL devolver exactamente el contenido siguiente:
 - `lineaTiempo`: los eventos del hilo, incluidos los que no tienen trámite, en orden de `ts` e id, sin payload.
 - `tramitesAbiertos`: los trámites del paciente que no están en `ATENDIDA`, `CANCELADA`, `NO_ASISTIO` ni `EXPIRADO`.
 - `catalogo`: cada oferta activa de servicio en sede con nombres y precio en centavos.
-- `fichaHilo`: nombre de pila del paciente del trámite abierto más reciente del hilo (`null` si no tiene), teléfono del hilo enmascarado (`null` si el hilo no tiene teléfono) a los últimos 4 dígitos, trámites del hilo, línea de tiempo, `soloLectura`, oferta cotizada del trámite abierto más reciente y `codigoContinuacion` mientras el código de continuación siga vigente y sin usar (design D12).
+- `fichaHilo`: nombre de pila del paciente del trámite abierto más reciente del hilo (`null` si no tiene), teléfono del hilo enmascarado (`null` si el hilo no tiene teléfono) a los últimos 4 dígitos, trámites del hilo, línea de tiempo, `soloLectura` (verdadero solo si el último `CanalCambiado` del hilo va de `callcenter` a otro canal y el último canal del hilo no es `callcenter`), oferta cotizada del trámite abierto más reciente y `codigoContinuacion` mientras el código de continuación siga vigente y sin usar (design D12).
 - `citasPaciente`: los trámites del paciente en `CONFIRMADA`, `EN_CLINICA` o `ATENDIDA`, ordenados por inicio, con nombres de servicio y sede, zona IANA de la sede y `tokenQr`.
 - `llegadasSede`: las citas `CONFIRMADA` o `EN_CLINICA` de la sede con inicio desde el comienzo del día actual en la zona de la sede, con `registrada` verdadero si ya están `EN_CLINICA`, máximo 50.
 - `metricas`: conteo por cada uno de los 10 estados en el orden del vocabulario (0 si no hay) y los indicadores definidos en "Claves de indicadores".
@@ -50,6 +50,14 @@ Las consultas MUST NOT incluir fecha de nacimiento, correo, RFC, PIN, CURP, tel�
 #### Scenario: Línea de tiempo con intento fallido
 - **WHEN** un contacto del hilo falla una verificación y se consulta la línea de tiempo
 - **THEN** aparece `IntentoVerificacionFallido` sin datos del intento
+
+#### Scenario: Ficha en solo lectura tras continuar en WhatsApp
+- **WHEN** un trámite del hilo se continuó del call center a WhatsApp y no hubo llamadas después
+- **THEN** `fichaHilo` tiene `soloLectura` verdadero
+
+#### Scenario: Llamada nueva desbloquea la ficha
+- **WHEN** después de esa continuación entra una llamada nueva desde el mismo número
+- **THEN** `fichaHilo` tiene `soloLectura` falso, incluye el trámite nuevo y el asesor puede cotizarlo e identificar al paciente sin `pnpm demo:reset`
 
 ### Requirement: Claves de indicadores
 `metricas.kpis` SHALL contener exactamente las claves `cambiosCanal`, `cambiosCanalPorHilo`, `tramitesRecuperados`, `citasConfirmadas`, `llegadasRegistradas`, `datosRepetidos` e `intentosVerificacionFallidos`, calculadas sobre todo el histórico de eventos según design D7. Las mismas claves y valores SHALL emitirse en `admin:metricas`.
