@@ -1,0 +1,110 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ❯ |unitarios| tests/unit/dominio.test.ts (8 tests | 2 failed) 32ms
+     ✓ declara exactamente los estados vigentes y ninguna fase obsoleta 6ms
+     ✓ exige el nivel de riesgo y rechaza el payload de un hueco 1ms
+     ✓ no referencia a quien liberó el horario en eventos del candidato 0ms
+     × mantiene las tablas de eventos tipados del documento iguales al catálogo 14ms
+     × no reserva los once eventos de huecos ni el de predicción 6ms
+     ✓ exige el tipo de trámite y vincula el payload al evento 1ms
+     ✓ detecta una rama de evento omitida y payloads con claves sensibles 0ms
+     ✓ conserva código y datos de los errores y todos son Error 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/dominio.test.ts > vocabulario y eventos de dominio > mantiene las tablas de eventos tipados del documento iguales al catálogo
+AssertionError: expected [ 'AtencionCerrada', …(28) ] to deeply equal [ 'AtencionCerrada', …(40) ]
+
+- Expected
++ Received
+
+@@ -1,41 +1,29 @@
+  [
+    "AtencionCerrada",
+    "CanalCambiado",
+-   "CitaAdelantada",
+    "CitaCancelada",
+    "CitaConfirmada",
+    "CitaReprogramada",
+    "ConsentimientoContactoWA",
+    "ConsentimientoOtorgado",
+    "CotizacionGenerada",
+    "DestinatarioDeclarado",
+    "HorarioReservado",
+-   "HuecoAsignado",
+-   "HuecoDesierto",
+-   "HuecoLiberado",
+    "IdentidadComprobada",
+    "IdentidadVinculada",
+    "Inasistencia",
+    "IntentoVerificacionFallido",
+-   "InteresAdelantoCancelado",
+-   "InteresAdelantoRegistrado",
+    "ItinerarioAceptado",
+    "ItinerarioPropuesto",
+-   "OfertaAceptada",
+-   "OfertaEnviada",
+-   "OfertaExpirada",
+-   "OfertaPerdida",
+-   "OfertaRechazada",
+    "PacienteAsignado",
+    "PacienteLlego",
+    "PacienteReconocido",
+    "PacienteRegistrado",
+    "PreparacionAceptada",
+    "RequisitoCumplido",
+    "ReservaExpirada",
+-   "RiesgoEstimado",
+    "SedeSeleccionada",
+    "ServicioSeleccionado",
+    "TramiteExpirado",
+    "TramiteIniciado",
+    "TramiteSuspendido",
+
+ ❯ tests/unit/dominio.test.ts:50:28
+     48|     const tablas = documento.split(/^## /m).filter(seccion => seccion.…
+     49|     const nombres = tablas.flatMap(tabla => [...tabla.matchAll(/^\| `(…
+     50|     expect(nombres.sort()).toEqual([...EVENTOS_DOMINIO].sort());
+       |                            ^
+     51|   });
+     52| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  |unitarios| tests/unit/dominio.test.ts > vocabulario y eventos de dominio > no reserva los once eventos de huecos ni el de predicción
+AssertionError: expected '\n\nEstos nombres de `PLAN.md` §7 est…' not to contain '`HuecoLiberado`'
+
+- Expected
++ Received
+
+- `HuecoLiberado`
++
++
++ Estos nombres de `PLAN.md` §7 están reservados y todavía no pertenecen a `EventoDominio`:
++
++ - Resultados: `ResultadoDisponible`, `ResultadoConsultado`.
++ - Relleno de huecos: `InteresAdelantoRegistrado`, `InteresAdelantoCancelado`, `HuecoLiberado`, `OfertaEnviada`, `OfertaAceptada`, `OfertaRechazada`, `OfertaExpirada`, `OfertaPerdida`, `CitaAdelantada`, `HuecoAsignado`, `HuecoDesierto`.
++ - Seguimiento: `RecordatorioProgramado`, `RecordatorioEnviado`, `RecordatorioCancelado`, `AsistenciaConfirmada`, `PreparacionConfirmada`.
++ - Atención: `FriccionDetectada`, `DevolucionLlamadaSolicitada`, `DevolucionLlamadaAtendida`.
++ - Facturación: `FacturaSolicitada`, `DatosFiscalesCapturados`, `FacturaValidada`, `FacturaRechazada`, `FacturaEmitida`, `FacturaEnviada`.
++
++ PostgreSQL guarda el estado, el evento y su fila de outbox en la misma transacción. El relay publica en Redis Streams por partición de paciente o hilo, y cada grupo descarta los duplicados con su registro de claves de idempotencia.
++
+
+ ❯ tests/unit/dominio.test.ts:57:85
+     55|     const reservadas = documento.split('## Familias reservadas')[1];
+     56|     expect(reservadas).toBeDefined();
+     57|     for (const tipo of [...eventosHuecos, 'RiesgoEstimado']) expect(re…
+       |                                                                                     ^
+     58|   });
+     59| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 6 passed (8)
+   Start at  04:17:54
+   Duration  887ms (transform 315ms, setup 0ms, import 413ms, tests 32ms, environment 0ms)
+

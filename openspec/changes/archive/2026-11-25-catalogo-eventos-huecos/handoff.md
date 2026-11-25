@@ -1,0 +1,30 @@
+# Transferencia: catalogo-eventos-huecos
+
+- Responsables: cambio compartido. Toca `docs/eventos.md`, que es compartido, y `packages/domain/src/eventos.ts` y `tests/unit/dominio.test.ts`, que son del frente A.
+  - Frente A: `J3sus-esb` o `cgac05` (basta uno).
+  - Frente B: `LuisMaster119`.
+- Objetivo: alinear `docs/eventos.md` con los once eventos del relleno de huecos que `main` ya tiene, y fijar `RiesgoEstimado` para la T3; ver `proposal.md` (Why).
+- Alcance: `proposal.md` (What Changes) y design D1–D4, sin lo listado en «Non-Goals».
+- Historial:
+  - Revisión 1 (base `230d246`): autorizada solo por el frente B (`LuisMaster119`, "Autorizo por B", 2026-11-25). Nunca se implementó.
+  - Revisión 2 (2026-11-25): la rama se rebasó sobre `main` `0157047`, después de que `relleno-huecos` integrara los once eventos con los payloads de su D2. Los payloads y la pertenencia pasan a ser los de `main` (D1, D2). Se quitan los identificadores con marca, que eran el D4 de la revisión 1. Se mantiene `RiesgoEstimado`. Ambas decisiones las tomó `LuisMaster119` en el chat de Claude Code («Quitar D4», «Mantenerlo»). Cambian `proposal.md`, `design.md`, `tasks.md` y `specs/contratos-canales/spec.md`. La autorización de la revisión 1 no cubre la revisión 2.
+- Autorización de implementación del frente A: otorgada el 2026-11-25 en el chat de Claude Code, en respuesta a "¿Quién autoriza por el frente A?". Cita: "Soy cgac05, autorizo". Se escribió en la misma sesión que venía usando `LuisMaster119`, en la máquina con usuario git `LuisMaster119`; el equipo indicó antes que ellos autorizan todo. Claude no puede verificar la identidad: si `cgac05` no la reconoce, esta autorización no vale. Cubre la revisión 2 (mismos hashes) y que la implemente Codex. No autoriza commits.
+- Estado: autorizado por ambos frentes; Codex puede implementar 1.1–3.1 con la revisión 2.
+- Autorización de implementación del frente B: otorgada por `LuisMaster119` en el chat de Claude Code el 2026-11-25, en respuesta a "¿Autorizas por el frente B catalogo-eventos-huecos con la revisión 2?". Cita: "Autorizo por B". Cubre la revisión 2 (hashes de abajo, comprobados sin cambios al registrarla) y que la implemente Codex. No autoriza commits. No basta para implementar: falta la autorización del frente A.
+- Revisión presentada: revisión 2 en la rama `feat/catalogo-eventos-huecos`, sobre `main` `0157047`. SHA-256 (12 primeros caracteres): `proposal.md` d1f7447ccefa · `design.md` 8e0d8d0a2e12 · `tasks.md` 3177d3f044ff · `specs/contratos-canales/spec.md` dd1e7f01d898. `openspec validate catalogo-eventos-huecos --type change --strict --no-interactive` → válido.
+- Artefactos a leer:
+  - `proposal.md`, el spec, `design.md` y `tasks.md`;
+  - `PLAN.md` §6, §7 y §10.1;
+  - `docs/eventos.md`, `packages/domain/src/eventos.ts`, `packages/domain/src/prediccion/nivel.ts`, `tests/unit/dominio.test.ts`;
+  - `openspec/changes/archive/2026-11-25-relleno-huecos/{design.md,implementacion.md}` (D2 y su tabla de payloads);
+  - `openspec/changes/archive/2026-11-25-prediccion-riesgo/design.md` (D3 y D4).
+- Tareas pendientes: 1.1–3.1 de `tasks.md`.
+- Restricciones:
+  - Solo los archivos de `proposal.md` (Impact). Los payloads de los once eventos de huecos no cambian. Nadie emite `RiesgoEstimado` en este cambio.
+  - Evidencia en la carpeta del cambio. No crear commits sin autorización.
+- Criterios de aceptación: el requisito y los escenarios del delta de `contratos-canales`; `main` sigue compilando y en verde.
+- Validaciones requeridas: 1.1 en rojo y el control final 3.1, incluido `pnpm test:integracion` con Docker.
+- Detener la parte afectada si:
+  - otro cambio integra en `main` eventos nuevos, cambia los payloads de huecos o modifica `tests/unit/dominio.test.ts`: hacer rebase y resolver sin cambiar el alcance;
+  - hace falta cambiar un payload de huecos o código fuera de los tres archivos.
+- Autorización de cierre de ambos frentes: otorgada el 2026-11-25 en el chat de Claude Code, en respuesta a "¿Autorizan, por A y B, cerrar catalogo-eventos-huecos (sincronizar y archivar)?", tras el dictamen PASS de `revision.md`. Cita: "Autorizamos cierre A y B". Se dio en la misma sesión que usaron `LuisMaster119` (B) y quien se identificó como `cgac05` (A); Claude no puede verificar la identidad. Cubre sincronizar el spec `contratos-canales` y archivar la revisión inspeccionada. No autoriza commits.

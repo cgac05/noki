@@ -1,0 +1,122 @@
+{
+  "cambio": "catalogo-eventos-huecos",
+  "head": "d3c2a54430f7fd8be436d02b5a71a4651021a8de",
+  "mainRemoto": "0157047babc1e009ebc6d1887d43ab824f7d4cb8",
+  "alcanceVerificado": true,
+  "archivos": [
+    {
+      "ruta": "docs/eventos.md",
+      "sha256": "8eecea0176d23c532d6a3cb541678cbdf92e816ecb680e84620157ce06ba1a0e",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/design.md",
+      "sha256": "8e0d8d0a2e12036617abdf58706fc45bc43341cea8d17f1e78f1332f6afedd4a",
+      "origen": "planificacion preexistente conservada"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/evidencias/01-rojo.txt",
+      "sha256": "6ca4ab99b9be0e2ba8e4b57a40ca0c40968c7e1a1b145a62eda1f74c2733451b",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/evidencias/01-tipos-rojo.txt",
+      "sha256": "d5ee2d19c28200f2026e30f5c3ab21b405c0a18bffcfa179b60e97fdf98ea49c",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/evidencias/02-dominio-parcial.txt",
+      "sha256": "bfcd292eeb5d1e0f1345ef74c42008bc8a503653fe4025e28c4110957df33baa",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/evidencias/02-tipos-pruebas.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/evidencias/02-tsc.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/evidencias/02-verde.txt",
+      "sha256": "5505beae7db9ed293c9b6475977837c2fbedc55e7635e07eec87a989de12d527",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/evidencias/03-deps.txt",
+      "sha256": "e8f4909d7b13b720e08f280ad73779f1111399dc53ed8fffae8ea13a59c7f16c",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/evidencias/03-diff-check.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/evidencias/03-integracion.txt",
+      "sha256": "a409612a5b90a7963270cb15f3523aff1f9b4fa5cc5fe1470c67738c80e770cb",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/evidencias/03-lint.txt",
+      "sha256": "dff0927d3e4043ebc50f3c2349dcd0a2c8f0aa22e9a9e294b8a3f9d0c2a864b7",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/evidencias/03-openspec.txt",
+      "sha256": "2a3b6ec99ec4b7fcc984b0a6e63ca5d8547975bcd7a5be84db4e6416fc88cc1b",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/evidencias/03-resultados.json",
+      "sha256": "17e71ba8572ccc7b8cc4efc33559f6c62c35d58a33c5ce7932f903ee7cc36b6b",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/evidencias/03-test.txt",
+      "sha256": "f2858e2a4627cea45261792b021d1ff1e464563ac2f116436f13f245e82eea25",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/handoff.md",
+      "sha256": "92cacfc6027f41d464cd5f48fb30f4a9382e7cb5564bce5c31ffa24bfca547ba",
+      "origen": "planificacion preexistente conservada"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/implementacion.md",
+      "sha256": "46ce402146bd100ddf2739ed8626058dde1076ca1892c2f12cb850dd294824b9",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/proposal.md",
+      "sha256": "d1f7447ccefac789feee9df99fb05c21d7843951513ea549243295d53f9d84fe",
+      "origen": "planificacion preexistente conservada"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/specs/contratos-canales/spec.md",
+      "sha256": "dd1e7f01d89825ac297d9e18a3f7b13ea424e66a26ed124031d4d30c23855f57",
+      "origen": "planificacion preexistente conservada"
+    },
+    {
+      "ruta": "openspec/changes/catalogo-eventos-huecos/tasks.md",
+      "sha256": "1c3b75e6081bcabc1895e5a055635fea3ebfa4c40eb6bcba8ab99a7dae0d4b81",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "packages/domain/src/eventos.ts",
+      "sha256": "c1ba1e9be7ae417f0b9d6aa5fd56e251557835a6883c5600d6c41348eefec3a1",
+      "origen": "modificado o creado por Codex"
+    },
+    {
+      "ruta": "tests/unit/dominio.test.ts",
+      "sha256": "f50731cf2d628c2390a6ddd5457a4d912199788578035b4b3b5ac06b79bfd82d",
+      "origen": "modificado o creado por Codex"
+    }
+  ],
+  "cambiosAjenosPreexistentesSinModificar": [
+    ".claude/launch.json"
+  ],
+  "nota": "El manifiesto se excluye de su propio hash. Las modificaciones de planificacion ya estaban presentes al iniciar; se conservan. Las casillas de tasks.md son actualizaciones de seguimiento."
+}
