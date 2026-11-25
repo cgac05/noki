@@ -1,0 +1,8 @@
+corepack pnpm lint
+HEAD: 8ea1e23
+Scope: all 14 workspace projects
+Already up to date
+Done in 799ms using pnpm v11.25.0
+$ eslint . && pnpm typecheck
+$ pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json
+Código de salida: 0

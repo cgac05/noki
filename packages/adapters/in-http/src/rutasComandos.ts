@@ -72,6 +72,9 @@ async function traducir(comando: ComandoRequest, contexto: ContextoComando,
     case 'SolicitarContinuacion':
       if (!deps.solicitarContinuacion) throw new NoEncontrado('operacion', id);
       return deps.solicitarContinuacion(id, contexto);
+    case 'ComprobarIdentidad':
+    case 'CerrarAtencion':
+      throw new NoEncontrado('operacion', id);
   }
 }
 

@@ -1,0 +1,180 @@
+corepack pnpm exec vitest run --project unitarios tests/unit/contratos.test.ts tests/unit/consultas.test.ts
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki
+
+ ❯ |unitarios| tests/unit/contratos.test.ts (15 tests | 2 failed) 43ms
+     × valida la identidad comprobada en clínica sin datos de la credencial 7ms
+     × exige el trámite y un payload vacío para cerrar la atención 1ms
+     ✓ rechaza el canal inexistente e indica el campo 3ms
+     ✓ deriva tipos del esquema y liga cada payload al comando 1ms
+     ✓ acepta contacto de 10 a 15 dígitos y rechaza un contacto mal formado 3ms
+     ✓ exige el trámite y el destino WhatsApp para solicitar continuación 1ms
+     ✓ acepta una vista con reserva y una cita confirmada sin vencimiento 3ms
+     ✓ acepta captura sensible y la variante explícita de completo 1ms
+     ✓ limita botones y filas totales de varias secciones y rechaza un PIN inicial 3ms
+     ✓ rechaza WA vacío y acepta mensajes de texto y botones 2ms
+     ✓ comparte eventos y salas y rechaza prefijos y eventos desconocidos 6ms
+     ✓ valida la sala al unirse y salir por Socket.IO 1ms
+     ✓ exige tipo en vistas de trámite y descarta datos personales y detalles internos 3ms
+   ✓ valida la identificación por pasos 5ms
+   ✓ valida una pregunta con paso de identificación 1ms
+ ❯ |unitarios| tests/unit/consultas.test.ts (22 tests | 5 failed) 78ms
+     ✓ Token del QR no es el folio: rechaza 12345678 34ms
+     ✓ Token del QR no es el folio: rechaza 123456789 1ms
+     ✓ Cita válida: valida UTC, zona de Tepic y tipos derivados exportados 2ms
+     ✓ Zona horaria inválida: indica el campo zonaHoraria 1ms
+     ✓ Precio en centavos: rechaza el monto 250.5 2ms
+     ✓ Precio en centavos: rechaza el monto -1 1ms
+     ✓ acepta un precio de 25000 centavos y rechaza fechas sin UTC y token vacío 2ms
+     ✓ Ficha sin acciones: descarta comandos y claves desconocidas al validar 3ms
+     ✓ Llegada sin comando: descarta la acción 1ms
+     × acepta una posición positiva entera solo cuando la llegada está registrada 12ms
+     × valida la alerta sin datos personales y descarta el teléfono 1ms
+     ✓ Ficha de un hilo anónimo: conserva los campos nulos 1ms
+     ✓ Teléfono completo rechazado: exige la máscara de cuatro dígitos 1ms
+     × Campos sensibles ausentes: recorre todos los modelos y sus objetos anidados 3ms
+     ✓ valida bandeja de demo y métricas con cantidades enteras no negativas 3ms
+     ✓ Ruta construida desde parámetros: conserva el hilo elegido 1ms
+     ✓ Parámetro inválido: no produce ruta con un paciente que no sea UUID v7 1ms
+     ✓ Rutas existentes conservadas: mantiene las cuatro consultas ya publicadas 1ms
+     × publica las once rutas y sus esquemas de respuesta sin acciones 4ms
+     × publica las alertas de seguridad con un máximo de 50 elementos 1ms
+     ✓ Contexto de demo: expone solo los identificadores nullables 1ms
+     ✓ Bandeja marcada como demo: su ruta y respuestas quedan identificadas 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > acepta una posición positiva entera solo cuando la llegada está registrada
+AssertionError: expected { …(2) } to deeply equal { …(3) }
+
+- Expected
++ Received
+
+@@ -11,8 +11,7 @@
+        "tipo": "AGENDAR",
+        "version": 7,
+      },
+      "zonaHoraria": "America/Mazatlan",
+    },
+-   "posicion": 2,
+    "registrada": true,
+  }
+
+ ❯ tests/unit/consultas.test.ts:63:67
+     61|   it('acepta una posición positiva entera solo cuando la llegada está …
+     62|     const llegada = { cita, registrada: true };
+     63|     expect(LlegadaVistaSchema.parse({ ...llegada, posicion: 2 })).toEq…
+       |                                                                   ^
+     64|     expect(LlegadaVistaSchema.parse(llegada)).toEqual(llegada);
+     65|     expect(LlegadaVistaSchema.safeParse({ ...llegada, registrada: fals…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > valida la alerta sin datos personales y descarta el teléfono
+TypeError: Cannot read properties of undefined (reading 'parse')
+ ❯ tests/unit/consultas.test.ts:71:34
+     69| 
+     70|   it('valida la alerta sin datos personales y descarta el teléfono', (…
+     71|     expect(AlertaSeguridadSchema.parse(alerta)).toEqual(alerta);
+       |                                  ^
+     72|     expect(AlertaSeguridadSchema.parse({ ...alerta, telefono: 'dato no…
+     73|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > Campos sensibles ausentes: recorre todos los modelos y sus objetos anidados
+TypeError: Cannot read properties of undefined (reading 'shape')
+ ❯ tests/unit/consultas.test.ts:90:48
+     88|       MetricasVistaSchema.shape.porEstado.element];
+     89|     for (const esquema of objetos) {
+     90|       for (const nombre of Object.keys(esquema.shape)) expect(['fechaN…
+       |                                                ^
+     91|     }
+     92|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Tabla compartida de rutas GET > publica las once rutas y sus esquemas de respuesta sin acciones
+AssertionError: expected [ 'tramite', 'lineaTiempo', …(8) ] to have a length of 11 but got 10
+
+- Expected
++ Received
+
+- 11
++ 10
+
+ ❯ tests/unit/consultas.test.ts:119:42
+    117| 
+    118|   it('publica las once rutas y sus esquemas de respuesta sin acciones'…
+    119|     expect(Object.keys(RUTAS_CONSULTAS)).toHaveLength(11);
+       |                                          ^
+    120|     expect(rutaConsulta('catalogo', {})).toBe('/api/catalogo');
+    121|     expect(rutaConsulta('fichaHilo', { hiloId: ids.hilo })).toBe(`/api…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Tabla compartida de rutas GET > publica las alertas de seguridad con un máximo de 50 elementos
+TypeError: Cannot read properties of undefined (reading 'metodo')
+ ❯ tests/unit/consultas.test.ts:131:17
+    129|   it('publica las alertas de seguridad con un máximo de 50 elementos',…
+    130|     const ruta = RUTAS_CONSULTAS.alertasSeguridad;
+    131|     expect(ruta.metodo).toBe('GET');
+       |                 ^
+    132|     expect(rutaConsulta('alertasSeguridad', {})).toBe('/api/admin/aler…
+    133|     expect(ruta).not.toHaveProperty('soloDemo', true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  |unitarios| tests/unit/contratos.test.ts > contratos de todos los canales > valida la identidad comprobada en clínica sin datos de la credencial
+ZodError: [
+  {
+    "code": "invalid_union",
+    "errors": [],
+    "note": "No matching discriminator",
+    "discriminator": "tipo",
+    "path": [
+      "tipo"
+    ],
+    "message": "Invalid input"
+  }
+]
+ ❯ tests/unit/contratos.test.ts:15:33
+     13|     const comando = { canal: 'clinica', actor: 'recepcion:demo', tipo:…
+     14|     const payload = { metodo: 'INE_CLINICA' };
+     15|     expect(ComandoRequestSchema.parse({ ...comando, tramiteId: id, pay…
+       |                                 ^
+     16|     expect(ComandoRequestSchema.safeParse({ ...comando, payload }).suc…
+     17|     expect(ComandoRequestSchema.safeParse({ ...comando, tramiteId: id,…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  |unitarios| tests/unit/contratos.test.ts > contratos de todos los canales > exige el trámite y un payload vacío para cerrar la atención
+ZodError: [
+  {
+    "code": "invalid_union",
+    "errors": [],
+    "note": "No matching discriminator",
+    "discriminator": "tipo",
+    "path": [
+      "tipo"
+    ],
+    "message": "Invalid input"
+  }
+]
+ ❯ tests/unit/contratos.test.ts:23:33
+     21|   it('exige el trámite y un payload vacío para cerrar la atención', ()…
+     22|     const comando = { canal: 'clinica', actor: 'recepcion:demo', tipo:…
+     23|     expect(ComandoRequestSchema.parse({ ...comando, tramiteId: id })).…
+       |                                 ^
+     24|     expect(ComandoRequestSchema.safeParse(comando).success).toBe(false…
+     25|     expect(ComandoRequestSchema.safeParse({ ...comando, tramiteId: id,…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  7 failed | 30 passed (37)
+   Start at  21:59:05
+   Duration  721ms (transform 323ms, setup 0ms, import 647ms, tests 122ms, environment 0ms)
+
+Código de salida: 1

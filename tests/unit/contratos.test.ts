@@ -1,4 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
+import { crearApiPruebas } from '../../apps/api/src/pruebas.ts';
 import {
   ComandoRequestSchema, SiguientePreguntaSchema, MensajeBotSchema, CampoFlowSchema,
   SolicitudMensajeWaSchema, RespuestaMensajeWaSchema, SalaSchema, CuerpoErrorSchema,
@@ -8,7 +9,57 @@ import {
 const id = '019b0000-0000-7000-8000-000000000001';
 const boton = { id: 'continuar', titulo: 'Continuar', payload: 'token-firmado' };
 
+describe('comandos de clínica en el adaptador HTTP', () => {
+  it('responde que la operación no está disponible sin modificar el trámite', async () => {
+    const { app, ids, tramites } = crearApiPruebas();
+    const enviar = (payload: object) => app.inject({
+      method: 'POST', url: '/api/comandos', headers: { 'idempotency-key': ids.nuevo() }, payload,
+    });
+    try {
+      const inicio = await enviar({
+        canal: 'callcenter', actor: 'asesor:demo', tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR' },
+      });
+      expect(inicio.statusCode).toBe(200);
+      const { tramite } = RespuestaComandoSchema.parse(inicio.json());
+      const leer = () => app.inject({ method: 'GET', url: '/api/tramites/' + tramite.id });
+      const antes = await leer();
+      expect(antes.statusCode).toBe(200);
+      const eventosAntes = tramites.eventos().length;
+      for (const comando of [
+        { tipo: 'ComprobarIdentidad', payload: { metodo: 'INE_CLINICA' } },
+        { tipo: 'CerrarAtencion', payload: {} },
+      ]) {
+        const respuesta = await enviar({ canal: 'clinica', actor: 'recepcion:demo', tramiteId: tramite.id, ...comando });
+        expect(respuesta.statusCode).toBe(404);
+        expect(CuerpoErrorSchema.parse(respuesta.json()).error).toMatchObject({
+          codigo: 'NO_ENCONTRADO', datos: { entidad: 'operacion', id: tramite.id },
+        });
+        const despues = await leer();
+        expect(despues.statusCode).toBe(200);
+        expect(despues.json()).toEqual(antes.json());
+        expect(tramites.eventos()).toHaveLength(eventosAntes);
+      }
+    } finally { await app.close(); }
+  });
+});
+
 describe('contratos de todos los canales', () => {
+  it('valida la identidad comprobada en clínica sin datos de la credencial', () => {
+    const comando = { canal: 'clinica', actor: 'recepcion:demo', tipo: 'ComprobarIdentidad' };
+    const payload = { metodo: 'INE_CLINICA' };
+    expect(ComandoRequestSchema.parse({ ...comando, tramiteId: id, payload })).toEqual({ ...comando, tramiteId: id, payload });
+    expect(ComandoRequestSchema.safeParse({ ...comando, payload }).success).toBe(false);
+    expect(ComandoRequestSchema.safeParse({ ...comando, tramiteId: id, payload: { metodo: 'OTP_SMS' } }).success).toBe(false);
+    expect(ComandoRequestSchema.safeParse({ ...comando, tramiteId: id, payload: { ...payload, folio: '12345678' } }).success).toBe(false);
+  });
+
+  it('exige el trámite y un payload vacío para cerrar la atención', () => {
+    const comando = { canal: 'clinica', actor: 'recepcion:demo', tipo: 'CerrarAtencion', payload: {} };
+    expect(ComandoRequestSchema.parse({ ...comando, tramiteId: id })).toEqual({ ...comando, tramiteId: id });
+    expect(ComandoRequestSchema.safeParse(comando).success).toBe(false);
+    expect(ComandoRequestSchema.safeParse({ ...comando, tramiteId: id, payload: { posicion: 1 } }).success).toBe(false);
+  });
+
   it('rechaza el canal inexistente e indica el campo', () => {
     const salida = ComandoRequestSchema.safeParse({ canal: 'fax', actor: 'paciente', tipo: 'SeleccionarServicio', payload: { servicioId: id } });
     expect(salida.success).toBe(false);

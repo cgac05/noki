@@ -1,0 +1,2 @@
+corepack pnpm -r exec tsc --noEmit
+Código de salida: 0

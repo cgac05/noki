@@ -44,8 +44,17 @@ export const ComandoRequestSchema = z.discriminatedUnion('tipo', [
   z.object({ ...comun, tipo: z.literal('ConfirmarCita'), payload: z.object({ reservaId: z.uuidv7() }) }),
   z.object({ ...comun, tipo: z.literal('CancelarCita'), payload: z.object({ motivo: z.string().min(1).max(200).optional() }) }),
   z.object({ ...comun, tipo: z.literal('RegistrarLlegada'), payload: z.object({ token: z.string().min(1) }) }),
+  z.object({
+    ...comun, tipo: z.literal('ComprobarIdentidad'), tramiteId: z.uuidv7(),
+    payload: z.strictObject({ metodo: z.literal('INE_CLINICA') }),
+  }),
+  z.object({
+    ...comun, tipo: z.literal('CerrarAtencion'), tramiteId: z.uuidv7(), payload: z.strictObject({}),
+  }),
 ]);
 export type ComandoRequest = z.infer<typeof ComandoRequestSchema>;
+export type ComprobarIdentidad = Extract<ComandoRequest, { tipo: 'ComprobarIdentidad' }>;
+export type CerrarAtencion = Extract<ComandoRequest, { tipo: 'CerrarAtencion' }>;
 export const TramiteVistaSchema = z.object({
   id: z.uuidv7(), hiloId: z.uuidv7(), tipo: TipoTramiteSchema, estado: EstadoTramiteSchema,
   version: z.number().int().nonnegative(), servicioId: z.uuidv7().optional(), sedeId: z.uuidv7().optional(),

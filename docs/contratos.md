@@ -22,6 +22,10 @@ Canales: `web | whatsapp | app | callcenter | clinica`. Estados, casillas y tipo
 | ConfirmarCita | `{ reservaId }` |
 | CancelarCita | `{ motivo? }`, hasta 200 caracteres |
 | RegistrarLlegada | `{ token }`, nunca el folio del QR en claro |
+| ComprobarIdentidad | `{ metodo: 'INE_CLINICA' }` sin campos adicionales. Requiere `tramiteId`. Recepción confirma que revisó la INE. |
+| CerrarAtencion | `{}`. Requiere `tramiteId`. Cerrar la atención de la primera cita avanza la fila. |
+
+Hasta que el núcleo implemente `ComprobarIdentidad` y `CerrarAtencion`, el adaptador devuelve 404 con `NO_ENCONTRADO` para la entidad `operacion`.
 
 `IdentificarPacienteSchema` acepta estos pasos:
 
@@ -47,7 +51,8 @@ Modelos de lectura compartidos, con tipos derivados de sus esquemas Zod:
 | `OfertaCatalogo` | `servicioId`, `servicio`, `sedeId`, `sede`, `precioCentavos` entero no negativo. |
 | `CitaVista` | `tramite`, `servicio`, `sede`, `inicio` ISO UTC, `zonaHoraria` IANA válida y `tokenQr`. |
 | `FichaHilo` | `hiloId`, `nombrePila`, `telefonoEnmascarado` (`•••• 0001`), `tramites`, `lineaTiempo`, `soloLectura`, `oferta` y `codigoContinuacion` (`nombrePila`, `telefonoEnmascarado`, `oferta` y `codigoContinuacion` admiten `null`). |
-| `LlegadaVista` | `cita` y `registrada`. |
+| `LlegadaVista` | `cita`, `registrada` y `posicion` opcional, un entero de 1 en adelante que indica el lugar en la fila de la sede. Solo admite `posicion` si `registrada` es `true`. |
+| `AlertaSeguridad` | `id` UUID v7 del evento, `tipo: 'INTENTO_VERIFICACION_FALLIDO'`, `canal`, `ts` ISO UTC, `intentos` entero de 1 en adelante, `bloqueado` booleano e `hiloId` UUID v7 o `null`. |
 | `MensajeBandeja` | `id`, `canal` (`sms` o `email`), `asunto`, `cuerpo`; solo demo. |
 | `MetricasVista` | `porEstado` con `estado`/`cantidad`, y `kpis` numéricos. |
 
@@ -55,7 +60,7 @@ No declaran fecha de nacimiento, correo del paciente, RFC, PIN ni CURP. El telé
 
 El QR contiene el token firmado de un solo uso que debe generar y consumir el núcleo (`PLAN.md` §8), nunca el folio. El esquema rechaza un `tokenQr` vacío o de 8–9 dígitos; no comprueba firmas ni sustituye al cambio de seguridad. Los tokens del mock son ficticios.
 
-`RUTAS_CONSULTAS` asocia cada nombre con la plantilla, el esquema de parámetros y el esquema de respuesta. Todas las entradas representan **GET**; el método es uniforme y no se repite por entrada. Los tipos `NombreConsulta`, `ParametrosConsulta<N>` y `RespuestaConsulta<N>` se derivan de la tabla. `rutaConsulta(nombre, parametros)` valida antes de sustituir la plantilla y lanza un error Zod si los parámetros son inválidos.
+`RUTAS_CONSULTAS` asocia cada nombre con la plantilla, el esquema de parámetros y el esquema de respuesta. Todas las entradas representan **GET**. Los tipos `NombreConsulta`, `ParametrosConsulta<N>` y `RespuestaConsulta<N>` se derivan de la tabla. `rutaConsulta(nombre, parametros)` valida antes de sustituir la plantilla y lanza un error Zod si los parámetros son inválidos.
 
 | Nombre | Ruta GET | Parámetros | Respuesta |
 |---|---|---|---|
@@ -67,8 +72,11 @@ El QR contiene el token firmado de un solo uso que debe generar y consumir el n�
 | `citasPaciente` | `/api/pacientes/:pacienteId/citas` | `pacienteId` | `CitaVista[]` |
 | `llegadasSede` | `/api/sedes/:sedeId/llegadas` | `sedeId` | `LlegadaVista[]` |
 | `metricas` | `/api/admin/kpis` | ninguno | `MetricasVista` |
+| `alertasSeguridad` | `/api/admin/alertas` | ninguno | `AlertaSeguridad[]` de hasta 50 elementos |
 | `bandeja` | `/api/demo/bandeja` | ninguno | `MensajeBandeja[]`, `soloDemo: true` |
 | `contextoDemo` | `/api/demo/contexto` | ninguno | `ContextoDemo`, `soloDemo: true` |
+
+`alertasSeguridad` omite datos personales y el método de verificación. El intento que provoca el bloqueo lleva `bloqueado: true`. La consulta no está marcada como `soloDemo` y devuelve 404 hasta que el núcleo registre la ruta.
 
 `contextoDemo` devuelve `{ hiloId, pacienteId, sedeId }` del último hilo con cita confirmada. Cada campo es UUID v7 o `null`. El servidor del cambio `api-comandos` debe responder 404 cuando `DEMO_MODE` es distinto de `true`.
 

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { EventoVistaSchema, TramiteVistaSchema } from './comandos.ts';
-import { EstadoTramiteSchema } from './vocabulario.ts';
+import { CanalSchema, EstadoTramiteSchema } from './vocabulario.ts';
 
 export const OfertaCatalogoSchema = z.object({
   servicioId: z.uuidv7(), servicio: z.string().min(1),
@@ -25,9 +25,19 @@ export const FichaHiloSchema = z.object({
 });
 export type FichaHilo = z.infer<typeof FichaHiloSchema>;
 
-export const LlegadaVistaSchema = z.object({ cita: CitaVistaSchema, registrada: z.boolean() });
+export const LlegadaVistaSchema = z.object({
+  cita: CitaVistaSchema, registrada: z.boolean(), posicion: z.number().int().positive().optional(),
+}).refine(llegada => llegada.registrada || llegada.posicion === undefined, {
+  path: ['posicion'], message: 'Solo una llegada registrada puede tener posición.',
+});
 export type LlegadaVista = z.infer<typeof LlegadaVistaSchema>;
 
+export const AlertaSeguridadSchema = z.object({
+  id: z.uuidv7(), tipo: z.literal('INTENTO_VERIFICACION_FALLIDO'), canal: CanalSchema,
+  ts: z.string().datetime(), intentos: z.number().int().positive(), bloqueado: z.boolean(),
+  hiloId: z.uuidv7().nullable(),
+});
+export type AlertaSeguridad = z.infer<typeof AlertaSeguridadSchema>;
 export const MensajeBandejaSchema = z.object({
   id: z.uuidv7(), canal: z.enum(['sms', 'email']), asunto: z.string().min(1), cuerpo: z.string().min(1),
 });
@@ -46,6 +56,7 @@ export type ContextoDemo = z.infer<typeof ContextoDemoSchema>;
 
 interface DefinicionConsulta {
   ruta: string;
+  metodo?: 'GET';
   parametros: z.ZodType;
   respuesta: z.ZodType;
   soloDemo?: true;
@@ -61,6 +72,10 @@ export const RUTAS_CONSULTAS = {
   citasPaciente: { ruta: '/api/pacientes/:pacienteId/citas', parametros: z.object({ pacienteId: z.uuidv7() }), respuesta: z.array(CitaVistaSchema) },
   llegadasSede: { ruta: '/api/sedes/:sedeId/llegadas', parametros: z.object({ sedeId: z.uuidv7() }), respuesta: z.array(LlegadaVistaSchema) },
   metricas: { ruta: '/api/admin/kpis', parametros: z.object({}), respuesta: MetricasVistaSchema },
+  alertasSeguridad: {
+    metodo: 'GET', ruta: '/api/admin/alertas', parametros: z.object({}),
+    respuesta: z.array(AlertaSeguridadSchema).max(50),
+  },
   bandeja: { ruta: '/api/demo/bandeja', parametros: z.object({}), respuesta: z.array(MensajeBandejaSchema), soloDemo: true },
   contextoDemo: { ruta: '/api/demo/contexto', parametros: z.object({}), respuesta: ContextoDemoSchema, soloDemo: true },
 } as const satisfies Record<string, DefinicionConsulta>;

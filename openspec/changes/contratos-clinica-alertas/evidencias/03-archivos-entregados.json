@@ -1,0 +1,137 @@
+{
+  "fecha": "2026-11-24",
+  "cambio": "contratos-clinica-alertas",
+  "revisionAutorizada": 1,
+  "rama": "feat/contratos-clinica-alertas",
+  "mainObservado": "0b06351623278d51820a1ea0f6d9e1f2a655e633",
+  "head": "8ea1e239650c85d56e9956737d1d3edea724349e",
+  "estado": "5/5 tareas completadas; entrega para revisión independiente",
+  "commitsDeImplementacion": 0,
+  "controles": {
+    "lint": 0,
+    "lint:deps": 0,
+    "test": 0,
+    "test:integracion": 0,
+    "diff --check": 0,
+    "openspec": "válido"
+  },
+  "alcance": "Impact y carpeta del cambio",
+  "archivoExcluidoDeAutohash": "openspec/changes/contratos-clinica-alertas/evidencias/03-archivos-entregados.json",
+  "archivos": [
+    {
+      "ruta": "AGENTS.md",
+      "bytes": 22958,
+      "sha256": "1e8a4540f505bab14627130558c96ae21283fa0f5f3f9cba2f36bac63dacc791"
+    },
+    {
+      "ruta": "apps/web/src/cliente/mock/guionFlujoA.ts",
+      "bytes": 17204,
+      "sha256": "ec6d55655c063fe4f501b5965b2dd27b2d727de613bcce22f021d6a2c3509366"
+    },
+    {
+      "ruta": "docs/contratos.md",
+      "bytes": 11159,
+      "sha256": "1a328dbb9bd4fb6faa7f670235d57c73de7ccd8b84c336e4788650df258f331b"
+    },
+    {
+      "ruta": "openspec/changes/contratos-clinica-alertas/.openspec.yaml",
+      "bytes": 40,
+      "sha256": "0b89965c6919ee9f0b3679bc8491b3c9efd623f2ceac7e5bd3929eff87f22215"
+    },
+    {
+      "ruta": "openspec/changes/contratos-clinica-alertas/design.md",
+      "bytes": 5205,
+      "sha256": "10a58add5ab2d2da38b05c0c233f4b2a90d5ce74fdd8d006d50c67c92749d9ea"
+    },
+    {
+      "ruta": "openspec/changes/contratos-clinica-alertas/evidencias/01-rojo.txt",
+      "bytes": 9078,
+      "sha256": "66e70d3e30d5fa8bc25bf12174b3fec5aa58aa9eec00f5202f2549862397b6ec"
+    },
+    {
+      "ruta": "openspec/changes/contratos-clinica-alertas/evidencias/02-http-web.txt",
+      "bytes": 7217,
+      "sha256": "b28c00d90bcf4c4208d2df7e41f5bc5fe29e5d1d9756addd160291c12d972fe1"
+    },
+    {
+      "ruta": "openspec/changes/contratos-clinica-alertas/evidencias/02-tsc.txt",
+      "bytes": 58,
+      "sha256": "8eb286f5f29de103517c60f2a21d47f6e23dc6f29e7a8e56dc5d8ef3e4950ba8"
+    },
+    {
+      "ruta": "openspec/changes/contratos-clinica-alertas/evidencias/03-deps.txt",
+      "bytes": 202,
+      "sha256": "c17d56e4a46e588b0c58827b9bb4c6344f63efca213009d376808f15f134d6b1"
+    },
+    {
+      "ruta": "openspec/changes/contratos-clinica-alertas/evidencias/03-integracion.txt",
+      "bytes": 3103,
+      "sha256": "27373b35675dfd465278e5ae4f369104a201c29b7d42b3efd8ee3cf62bea2404"
+    },
+    {
+      "ruta": "openspec/changes/contratos-clinica-alertas/evidencias/03-lint.txt",
+      "bytes": 242,
+      "sha256": "877a9eab3a6f90672f0239391a74a76ed231bfe92913049c19a86f021720b8e5"
+    },
+    {
+      "ruta": "openspec/changes/contratos-clinica-alertas/evidencias/03-test.txt",
+      "bytes": 8376,
+      "sha256": "95990db303d9ff04f6d0bb7ca3e94f1bc4ac9424c5e0896fabe72da731e9faa7"
+    },
+    {
+      "ruta": "openspec/changes/contratos-clinica-alertas/handoff.md",
+      "bytes": 4520,
+      "sha256": "f7ff3e43161b190238189926ebc4f7908f39e7121793e542a359295ddf39dcc5"
+    },
+    {
+      "ruta": "openspec/changes/contratos-clinica-alertas/implementacion.md",
+      "bytes": 3505,
+      "sha256": "c769ffa143bded71216f7fb75d2b4139202da8ac0044bba7aed77ffce6299bf7"
+    },
+    {
+      "ruta": "openspec/changes/contratos-clinica-alertas/proposal.md",
+      "bytes": 4505,
+      "sha256": "d1f032430287a7f1a949cf61e088d8071dc094a3ce43e7402697edbdaf201558"
+    },
+    {
+      "ruta": "openspec/changes/contratos-clinica-alertas/specs/contratos-canales/spec.md",
+      "bytes": 3571,
+      "sha256": "2b40e262295f167cb1cb0ef49f18e1af2d49a6db64585a1db619cd4e0e7e2238"
+    },
+    {
+      "ruta": "openspec/changes/contratos-clinica-alertas/specs/contratos-consultas/spec.md",
+      "bytes": 4593,
+      "sha256": "d8d5fcff60ed5f75811458c681819c4b44720f0f57b357a03b6fb25be1ce14f8"
+    },
+    {
+      "ruta": "openspec/changes/contratos-clinica-alertas/tasks.md",
+      "bytes": 2208,
+      "sha256": "7f9add03144cb8861962c63a84d90690b736d2e325dc54edc47d5f77e70ac76e"
+    },
+    {
+      "ruta": "packages/adapters/in-http/src/rutasComandos.ts",
+      "bytes": 6290,
+      "sha256": "44e5e1cc6d02a9a952d1344ff76394cc50310593ab2a083e031b06e8c2229b26"
+    },
+    {
+      "ruta": "packages/contracts/src/comandos.ts",
+      "bytes": 4515,
+      "sha256": "651c3d986f53c18acba1173eab0046c35ef21fc5dcf7c965d0941d003ff89c79"
+    },
+    {
+      "ruta": "packages/contracts/src/consultas.ts",
+      "bytes": 5448,
+      "sha256": "3adab3fddf39baae6447f806b7f9dd91fcbd6dccf4c84904f5a04edc45ac0d86"
+    },
+    {
+      "ruta": "tests/unit/consultas.test.ts",
+      "bytes": 9677,
+      "sha256": "3e3e06fdca003d6a1ec1d847310a2cb2cc69e2d6fb3866b39e076d23e0904e01"
+    },
+    {
+      "ruta": "tests/unit/contratos.test.ts",
+      "bytes": 11407,
+      "sha256": "00b686d74f1bc9742dd04df8a957950eef28f4ca04d451cb7c154a11c51a634e"
+    }
+  ]
+}

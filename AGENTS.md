@@ -180,6 +180,8 @@ Body:    { canal, actor, tipo, tramiteId?, hiloId?, payload }
 - `actor`: `paciente | asesor:<id> | recepcion:<id> | sistema`
 - `SolicitarContinuacion` requiere `tramiteId` y `payload: { destino: 'whatsapp' }` para solicitar la continuación por WhatsApp.
 - `IdentificarPaciente` requiere `tramiteId` y un payload discriminado por `paso`. Consulta los pasos en [docs/contratos.md](docs/contratos.md). `AsignarPaciente` por ID es exclusivo del personal interno y `sistema`.
+- `ComprobarIdentidad` requiere `tramiteId` y `payload: { metodo: 'INE_CLINICA' }`. Recepción confirma la revisión de la INE sin enviar datos de la credencial.
+- `CerrarAtencion` requiere `tramiteId` y `payload: {}`. Cerrar la atención de la primera cita avanza la fila.
 - El **token de contexto** (JWS con jose) lleva `pacienteId`, `nivel`, `canal` y `exp`.
 
 ### Consultas
@@ -193,6 +195,7 @@ Body:    { canal, actor, tipo, tramiteId?, hiloId?, payload }
 - `GET /api/pacientes/:pacienteId/citas`
 - `GET /api/sedes/:sedeId/llegadas`
 - `GET /api/admin/kpis`
+- `GET /api/admin/alertas` — contrato para hasta 50 alertas de seguridad sin datos personales. La ruta queda pendiente del cambio del núcleo.
 - `GET /api/demo/bandeja` — solo demo.
 - `GET /api/demo/contexto` — solo demo. Devuelve `hiloId`, `pacienteId` y `sedeId` nullables. La API debe responder 404 fuera de `DEMO_MODE=true`.
 

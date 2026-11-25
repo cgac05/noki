@@ -16,6 +16,7 @@
   - la implementación a cargo del frente A.
 
   No autoriza commits.
+- Confirmación directa del frente A: `cgac05` (Christian Avila) la escribió en el hilo del proyecto de Claude el 2026-11-25. Cita: "Como frente A, doy visto bueno a contratos-clinica-alertas revisión 1 (d9929d9), incluida la rama «no disponible» en rutasComandos.ts; lo implementa el frente A; confirmo D2 y D4." Hashes de `d9929d9` comprobados iguales a los de abajo; `267dad2` solo cambia este archivo.
 - Estado: con ambas autorizaciones, el frente A puede implementar. Las decisiones pendientes D2 y D4 quedan confirmadas.
 - Orden de integración acordado (2026-11-24, `cgac05`): primero se integra `contratos-clinica-alertas` en `main`; después, el cambio compartido de documentación del reloj (botón «adelantar reloj» de `/admin`) hace rebase sobre él.
 - Revisión presentada: revisión 1 en la rama `feat/contratos-clinica-alertas`, sobre `main` `465f944`. SHA-256 (12 primeros caracteres): `proposal.md` d1f032430287 · `design.md` 10a58add5ab2 · `tasks.md` 5ee446f6bbb8 · `specs/contratos-canales/spec.md` 2b40e262295f · `specs/contratos-consultas/spec.md` d8d5fcff60ed. `openspec validate contratos-clinica-alertas --type change --strict --no-interactive` → válido.
@@ -33,4 +34,8 @@
 - Detener la parte afectada si:
   - el frente A cambia D2 o D4;
   - el cambio de documentación del frente A (botón «adelantar reloj») se integra antes y choca en `docs/contratos.md` o `AGENTS.md`: rebase y resolver sin cambiar el alcance.
-- Autorización de cierre: PENDIENTE (ambos frentes).
+- Autorización de cierre: otorgada el 2026-11-25, en el hilo del proyecto de Claude, después de la primera vuelta PASS de `revision.md`:
+  - Frente A, `cgac05` (Christian Avila): "Autorizo commit, push con --force-with-lease de feat/contratos-clinica-alertas, integrar en main por fast-forward y cerrar contratos-clinica-alertas."
+  - Frente B, `LuisMaster119`, transmitido textualmente y atribuido por Christian en el mismo mensaje: "Autorizo cerrar contratos-clinica-alertas, incluido el push con --force-with-lease de feat/contratos-clinica-alertas."
+
+  Cubren el commit de la implementación, la evidencia y la revisión; el push con `--force-with-lease` de la rama rebasada sobre `0b06351`; el fast-forward de `main` y su push; y la sincronización de specs y el archivado.

@@ -1,0 +1,49 @@
+corepack pnpm test:integracion
+HEAD: 8ea1e23
+PostgreSQL: 127.0.0.1:55432
+Scope: all 14 workspace projects
+Already up to date
+Done in 856ms using pnpm v11.25.0
+$ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki
+
+ ✓ |integracion| tests/integracion/comandosHttp.test.ts (3 tests) 24795ms
+   ✓ Cotizar desde el call center y reintentar por HTTP con eventos persistidos  3273ms
+   ✓ Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez  6786ms
+   ✓ publica, programa y expira el hold desde la ruta del reloj con la API compuesta  1411ms
+ ✓ |integracion| tests/integracion/temporizadoresBullMQ.test.ts (4 tests) 3604ms
+   ✓ registra el fallo persistente tras tres intentos con los campos autorizados  3196ms
+Reinicio de la base de demo en el host 127.0.0.1.
+ ✓ |integracion| tests/integracion/semilla.test.ts (5 tests) 2987ms
+     ✓ es idempotente y guarda solo hashes argon2id verificables  836ms
+     ✓ reinicia la base de demo, migra y deja exactamente los datos semilla  1107ms
+ ✓ |integracion| tests/integracion/migracionPersistencia.test.ts (3 tests) 1666ms
+   ✓ migra una base con semilla y conserva las claves anteriores y las claves con sufijo  1249ms
+ ✓ |integracion| tests/integracion/sdAgenda.test.ts (4 tests) 1113ms
+   ✓ registra de forma idempotente, rechaza entradas inválidas y simula fallos y latencia  354ms
+   ✓ se recupera tras dos fallos y señala cuando se agotan los tres intentos  719ms
+ ✓ |integracion| tests/integracion/aplicaciones.test.ts (4 tests) 1032ms
+     ✓ señala Postgres caído dentro del límite  916ms
+ ✓ |integracion| tests/integracion/identidadPostgres.test.ts (1 test) 944ms
+   ✓ Registro concurrente y CURP con sexo X  832ms
+ ✓ |integracion| tests/integracion/agendaPostgres.test.ts (3 tests) 958ms
+   ✓ acepta uno de 50 intentos concurrentes por el mismo horario y recupera el hold vencido  399ms
+   ✓ confirma la saga con Postgres y sd-mock y libera la reserva tras un conflicto  326ms
+ ✓ |integracion| tests/integracion/puertosApiPostgres.test.ts (1 test) 780ms
+   ✓ Concurrencia con la misma clave, dos usos simultáneos y almacenamiento de API en Postgres  644ms
+ ✓ |integracion| tests/integracion/consumidorStreams.test.ts (2 tests) 628ms
+   ✓ reinicia sin pérdidas ni duplicados, y procesa los grupos por separado  427ms
+ ✓ |integracion| tests/integracion/nucleo.test.ts (8 tests) 490ms
+ ✓ |integracion| tests/integracion/relayPostgres.test.ts (1 test) 540ms
+   ✓ no publica dos veces con dos relays y reintenta si publicó sin marcar  520ms
+ ✓ |integracion| tests/integracion/tramitePostgres.test.ts (4 tests) 325ms
+ ✓ |integracion| tests/integracion/puertosPostgres.test.ts (1 test) 267ms
+ ✓ |integracion| tests/integracion/intentosPostgres.test.ts (1 test) 254ms
+
+ Test Files  15 passed (15)
+      Tests  45 passed (45)
+   Start at  22:05:36
+   Duration  77.21s (transform 5.01s, setup 0ms, import 32.57s, tests 40.38s, environment 3ms)
+
+Código de salida: 0
