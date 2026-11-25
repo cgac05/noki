@@ -1,4 +1,4 @@
-const adaptadores = ['memory', 'in-http', 'in-events', 'out-postgres', 'out-redis', 'out-sd', 'out-security'];
+const adaptadores = ['memory', 'in-http', 'in-events', 'out-postgres', 'out-redis', 'out-sd', 'out-security', 'out-modelo'];
 
 module.exports = {
   forbidden: [

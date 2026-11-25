@@ -1,0 +1,14 @@
+{
+  "sinteticos": true,
+  "semilla": 20261125,
+  "entrenamiento": 4800,
+  "validacion": 1200,
+  "modelo": {
+    "auc": 0.8118165784832452,
+    "brier": 0.13086383784056863
+  },
+  "reglas": {
+    "auc": 0.6956779748936611,
+    "brier": 0.156618249999999
+  }
+}

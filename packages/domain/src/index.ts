@@ -14,3 +14,6 @@ export * from './identidad/curp.ts';
 export * from './identidad/identificacion.ts';
 export * from './identidad/nombre.ts';
 export * from './identidad/telefono.ts';
+export * from './prediccion/factores.ts';
+export * from './prediccion/nivel.ts';
+export * from './prediccion/plan.ts';

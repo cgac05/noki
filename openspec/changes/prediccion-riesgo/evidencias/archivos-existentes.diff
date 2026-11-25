@@ -1,0 +1,69 @@
+diff --git a/.dependency-cruiser.cjs b/.dependency-cruiser.cjs
+index 2c592c4..8887762 100644
+--- a/.dependency-cruiser.cjs
++++ b/.dependency-cruiser.cjs
+@@ -1,4 +1,4 @@
+-const adaptadores = ['memory', 'in-http', 'in-events', 'out-postgres', 'out-redis', 'out-sd', 'out-security'];
++const adaptadores = ['memory', 'in-http', 'in-events', 'out-postgres', 'out-redis', 'out-sd', 'out-security', 'out-modelo'];
+ 
+ module.exports = {
+   forbidden: [
+diff --git a/packages/adapters/memory/src/index.ts b/packages/adapters/memory/src/index.ts
+index ab16fc0..b4771cd 100644
+--- a/packages/adapters/memory/src/index.ts
++++ b/packages/adapters/memory/src/index.ts
+@@ -14,3 +14,6 @@ export { AgendaExternaMemoria } from './AgendaExternaMemoria.ts';
+ export { OutboxMemoria, PublicadorEventosMemoria, RegistroProcesadosMemoria } from './publicacion.ts';
+ export * from './api.ts';
+ export { LecturasMemoria } from './LecturasMemoria.ts';
++export * from './ModeloRiesgoMemoria.ts';
++export * from './LecturasPrediccionMemoria.ts';
++export * from './CalendarioSedeMemoria.ts';
+diff --git a/packages/application/src/index.ts b/packages/application/src/index.ts
+index a3edb83..ebcc60c 100644
+--- a/packages/application/src/index.ts
++++ b/packages/application/src/index.ts
+@@ -10,3 +10,6 @@ export type * from './ports/publicacion.ts';
+ export { RelayOutbox } from './RelayOutbox.ts';
+ export * from './ports/api.ts';
+ export type * from './ports/lecturas.ts';
++export * from './ports/prediccion.ts';
++export * from './prediccion/EstimarRiesgoInasistencia.ts';
++export * from './prediccion/horaEnvio.ts';
+diff --git a/packages/domain/src/index.ts b/packages/domain/src/index.ts
+index b00bb27..d011aad 100644
+--- a/packages/domain/src/index.ts
++++ b/packages/domain/src/index.ts
+@@ -14,3 +14,6 @@ export * from './identidad/curp.ts';
+ export * from './identidad/identificacion.ts';
+ export * from './identidad/nombre.ts';
+ export * from './identidad/telefono.ts';
++export * from './prediccion/factores.ts';
++export * from './prediccion/nivel.ts';
++export * from './prediccion/plan.ts';
+diff --git a/pnpm-lock.yaml b/pnpm-lock.yaml
+index 8c7c4a3..3c64ecf 100644
+--- a/pnpm-lock.yaml
++++ b/pnpm-lock.yaml
+@@ -233,6 +233,21 @@ importers:
+         specifier: 3.2.0
+         version: 3.2.0(date-fns@4.1.0)
+ 
++  packages/adapters/out-modelo:
++    dependencies:
++      '@noki/application':
++        specifier: workspace:*
++        version: link:../../application
++      '@noki/domain':
++        specifier: workspace:*
++        version: link:../../domain
++      date-fns-tz:
++        specifier: 3.2.0
++        version: 3.2.0(date-fns@4.1.0)
++      zod:
++        specifier: 4.1.13
++        version: 4.1.13
++
+   packages/adapters/out-postgres:
+     dependencies:
+       '@noki/application':

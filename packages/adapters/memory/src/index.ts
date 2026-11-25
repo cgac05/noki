@@ -14,3 +14,6 @@ export { AgendaExternaMemoria } from './AgendaExternaMemoria.ts';
 export { OutboxMemoria, PublicadorEventosMemoria, RegistroProcesadosMemoria } from './publicacion.ts';
 export * from './api.ts';
 export { LecturasMemoria } from './LecturasMemoria.ts';
+export * from './ModeloRiesgoMemoria.ts';
+export * from './LecturasPrediccionMemoria.ts';
+export * from './CalendarioSedeMemoria.ts';

@@ -1,0 +1,8 @@
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+  error adaptador-aislado-out-modelo: packages/adapters/out-modelo/src/pruebaAislamientoTemporal.ts → packages/adapters/memory/src/index.ts
+
+x 1 dependency violations (1 errors, 0 warnings). 232 modules, 701 dependencies cruised.
+
+[ELIFECYCLE] Command failed with exit code 1.
+Código de salida: 1 (fallo esperado)

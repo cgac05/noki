@@ -1,0 +1,30 @@
+# Tasks
+
+Requisitos: PR = `prediccion-riesgo`. Decisiones: D1–D13 de `design.md`. Etapas: T0 = grupo 2, T1 = grupo 1 y 3, T2 = grupo 4. Revisión 4: puertos en `application/src/ports/`, zona horaria con `CalendarioSede` (D12) y excepción temporal de `LecturasPrediccion` (D13). El grupo 1 va primero porque `ml/` usa `vectorFactores` del dominio.
+
+## 1. Dominio (T1)
+
+- [x] 1.1 Crear `packages/domain/src/prediccion/factores.ts` con `FACTORES_RIESGO`, `FactoresRiesgo`, `factoresDesde` y `vectorFactores` (D5). `factoresDesde` recibe la hora y el día locales ya calculados; el dominio no convierte zonas (D12). Requisito: PR «Factores sin datos personales». Verificación: pruebas en `tests/unit/prediccion/factores.test.ts` de `franjaTarde` y `finDeSemana` a partir de la hora y el día locales, «Paciente sin historial» y «Conteos con tope»; una prueba comprueba que `FactoresRiesgo` no tiene campos de sexo, edad, CURP, nombre, teléfono, correo, ubicación ni sede.
+- [x] 1.2 Crear `packages/domain/src/prediccion/nivel.ts` con `NIVELES_RIESGO`, `nivelDesde`, `probabilidadPorReglas` y el tipo `RiesgoEstimado` (D6, D7). Requisito: PR «Nivel de riesgo». Verificación: «Límites de los niveles», «Probabilidad inválida» y que las reglas quedan en `[0.01, 0.95]` para vectores extremos.
+- [x] 1.3 Exportar `prediccion/` en `packages/domain/src/index.ts`, solo con líneas `export` (D11). Verificación: `corepack pnpm lint`.
+
+## 2. Entrenamiento (T0)
+
+- [x] 2.1 Crear `ml/generarDatos.ts`, `ml/entrenar.ts` y `ml/evaluar.ts` con generador de semilla fija, regresión logística con L2, separación 80/20, AUC y Brier del modelo y de las reglas (D2). Importan el dominio por ruta relativa. Requisito: PR «Modelo de riesgo reproducible». Verificación: pruebas en `tests/unit/prediccion/ml.test.ts` de «Entrenamiento repetible» (en memoria, con un conjunto pequeño) y del cálculo de AUC con un caso conocido.
+- [x] 2.2 Ejecutar `node --import tsx ml/entrenar.ts` y guardar `packages/adapters/out-modelo/modelo/riesgo-inasistencia.json` y `ml/metricas.json`. Agregar `ml/README.md` con el comando, la semilla y la advertencia de datos sintéticos. Requisito: PR «Modelo de riesgo reproducible». Verificación: «El modelo supera a las reglas» y «Modelo versionado en el repositorio» como pruebas sobre los archivos guardados; ejecutar dos veces y comparar los hashes en `evidencias/`.
+
+## 3. Aplicación y memoria (T1)
+
+- [x] 3.1 Crear los puertos `ModeloRiesgo`, `LecturasPrediccion` y `CalendarioSede` en `packages/application/src/ports/prediccion.ts` (D7, D12) y el caso de uso `EstimarRiesgoInasistencia` en `packages/application/src/prediccion/` (D6, D7); exportarlos en `packages/application/src/index.ts`. Requisitos: PR «Factores sin datos personales», «Estimar el riesgo de una cita confirmada» y «Respaldo determinista». Verificación: pruebas en `tests/unit/prediccion/estimar.test.ts` con `RelojFalso` y los adaptadores en memoria: «Hora local de la sede» (Tepic y Bahía de Banderas), «Cita confirmada con modelo», «Cita sin confirmar», «Estimación repetida», «Modelo caído», «Modelo con resultado inválido» y sede sin zona (`NO_ENCONTRADO`). Comprobar que la versión del trámite y `eventosPendientes()` no cambian.
+- [x] 3.2 Crear `ModeloRiesgoMemoria` (probabilidad fija o error configurable), `LecturasPrediccionMemoria` y `CalendarioSedeMemoria` en `packages/adapters/memory/src/` y exportarlos en su `index.ts`. `LecturasPrediccion` no tiene adaptador de Postgres en este cambio (D13, excepción temporal a `AGENTS.md` §5.4). Verificación: los usan las pruebas de 3.1.
+
+## 4. Adaptador y plan (T2)
+
+- [x] 4.1 Crear `packages/adapters/out-modelo` (manifiesto con `@noki/domain`, `@noki/application`, `zod` 4.1.13 y `date-fns-tz` 3.2.0) con `leerModeloRiesgo`, `ModeloRiesgoLogistico`, `cargarModeloRiesgo`, `ModeloInvalido` (D8) y `CalendarioSedeDateFns` (D12). Requisito: PR «Carga validada del modelo». Verificación: pruebas en `tests/unit/prediccion/outModelo.test.ts` de «Factores desordenados», «Cálculo del modelo», largo distinto, valor no finito, desviación 0 y la carga del modelo guardado en 2.2; una batería compartida de `CalendarioSede` da los mismos resultados con `CalendarioSedeDateFns` y `CalendarioSedeMemoria` en Tepic y Bahía de Banderas.
+- [x] 4.2 Agregar `'out-modelo'` a la lista `adaptadores` de `.dependency-cruiser.cjs` (línea 1), sin otro cambio en ese archivo (D11; cambio compartido). Requisito: PR «Carga validada del modelo» («Adaptador del modelo aislado»). Verificación: `corepack pnpm lint:deps` en verde; con un archivo temporal de `out-modelo` que importe `@noki/adapter-memory`, falla con `adaptador-aislado-out-modelo` (guardar la salida y borrar el archivo).
+- [x] 4.3 Crear `packages/domain/src/prediccion/plan.ts` con `planPorNivel`, `varianteDesde`, el desplazamiento nominal de cada tipo y `enSilencio`, y exportarlo. Crear `horaEnvio` en `packages/application/src/prediccion/horaEnvio.ts`, con el `CalendarioSede` como argumento, y exportarlo (D9, D10, D12). Requisitos: PR «Plan de recordatorios por nivel» y «Hora de envío en la zona de la sede». Verificación: pruebas en `tests/unit/prediccion/plan.test.ts` con los seis escenarios de esos requisitos, más un silencio que cruza la medianoche y `POST` con `null`.
+
+## 5. Controles
+
+- [x] 5.1 Punto de control: `corepack pnpm install --frozen-lockfile` después de actualizar el lockfile, `corepack pnpm lint`, `corepack pnpm lint:deps`, `corepack pnpm test` y `corepack pnpm test:integracion` en verde, con Postgres de prueba en 55432 y Redis. La prueba de `tests/unit/dominio.test.ts` sigue esperando 29 eventos. Guardar los resultados en `evidencias/`, sin rutas locales.
+- [x] 5.2 Manifiesto de archivos en `evidencias/`: todos los archivos son nuevos salvo los tres `index.ts` (solo líneas `export`), `.dependency-cruiser.cjs` (solo la línea 1) y `pnpm-lock.yaml` (solo el importador nuevo). Ningún archivo de `apps/`, `packages/contracts`, `docs/`, `infra/` ni `EVENTOS_DOMINIO` cambia. Verificación: `git diff --stat` y el diff de los archivos existentes adjuntos.

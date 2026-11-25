@@ -1,0 +1,64 @@
+$ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
+
+ RUN  v4.0.14 .
+
+ ❯ |integracion| tests/integracion/comandosHttp.test.ts (3 tests | 3 skipped) 212ms
+   ↓ Cotizar desde el call center y reintentar por HTTP con eventos persistidos
+   ↓ Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez
+   ↓ publica, programa y expira el hold desde la ruta del reloj con la API compuesta
+ ✓ |integracion| tests/integracion/identidadPostgres.test.ts (1 test) 1155ms
+   ✓ Registro concurrente y CURP con sexo X  1000ms
+ ✓ |integracion| tests/integracion/puertosApiPostgres.test.ts (1 test) 1237ms
+   ✓ Concurrencia con la misma clave, dos usos simultáneos y almacenamiento de API en Postgres  1068ms
+ ✓ |integracion| tests/integracion/migracionPersistencia.test.ts (3 tests) 2046ms
+   ✓ migra una base con semilla y conserva las claves anteriores y las claves con sufijo  1646ms
+ ✓ |integracion| tests/integracion/idempotenciaWa.test.ts (1 test) 1998ms
+   ✓ reserva y reproduce la respuesta de WhatsApp con eventos únicos en Postgres  1996ms
+ ✓ |integracion| tests/integracion/clinicaAlertas.test.ts (1 test) 2711ms
+   ✓ calcula posiciones por orden de llegada y limita alertas en Postgres  2710ms
+ ✓ |integracion| tests/integracion/consumidorStreams.test.ts (2 tests) 1334ms
+   ✓ reinicia sin pérdidas ni duplicados, y procesa los grupos por separado  984ms
+   ✓ mueve al tercer fallo una sola vez y continúa la partición  347ms
+Reinicio de la base de demo en el host 127.0.0.1.
+ ✓ |integracion| tests/integracion/semilla.test.ts (5 tests) 2561ms
+     ✓ es idempotente y guarda solo hashes argon2id verificables  843ms
+     ✓ reinicia la base de demo, migra y deja exactamente los datos semilla  1039ms
+ ✓ |integracion| tests/integracion/tramitePostgres.test.ts (4 tests) 482ms
+ ✓ |integracion| tests/integracion/relayPostgres.test.ts (1 test) 542ms
+   ✓ no publica dos veces con dos relays y reintenta si publicó sin marcar  518ms
+ ✓ |integracion| tests/integracion/intentosPostgres.test.ts (1 test) 229ms
+ ✓ |integracion| tests/integracion/agendaPostgres.test.ts (3 tests) 837ms
+   ✓ acepta uno de 50 intentos concurrentes por el mismo horario y recupera el hold vencido  379ms
+ ✓ |integracion| tests/integracion/puertosPostgres.test.ts (1 test) 277ms
+ ✓ |integracion| tests/integracion/nucleo.test.ts (8 tests) 502ms
+ ✓ |integracion| tests/integracion/temporizadoresBullMQ.test.ts (4 tests) 3540ms
+   ✓ registra el fallo persistente tras tres intentos con los campos autorizados  3143ms
+ ✓ |integracion| tests/integracion/sdAgenda.test.ts (4 tests) 1116ms
+   ✓ registra de forma idempotente, rechaza entradas inválidas y simula fallos y latencia  355ms
+   ✓ se recupera tras dos fallos y señala cuando se agotan los tres intentos  721ms
+ ✓ |integracion| tests/integracion/aplicaciones.test.ts (4 tests) 1034ms
+     ✓ señala Postgres caído dentro del límite  918ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |integracion| tests/integracion/comandosHttp.test.ts [ tests/integracion/comandosHttp.test.ts ]
+error: schema "comandos_http" already exists
+ ❯ node_modules/.pnpm/pg-pool@3.14.0_pg@8.16.3/node_modules/pg-pool/index.js:45:11
+ ❯ tests/integracion/comandosHttp.test.ts:33:3
+     31| 
+     32| beforeAll(async () => {
+     33|   await admin.query('CREATE SCHEMA comandos_http');
+       |   ^
+     34|   await migrar(url.toString(), undefined, esquema);
+     35|   await sembrar(url.toString());
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 16 passed (17)
+      Tests  44 passed | 3 skipped (47)
+   Start at  01:24:11
+   Duration  60.82s (transform 1.29s, setup 0ms, import 34.11s, tests 21.81s, environment 3ms)
+
+[ELIFECYCLE] Command failed with exit code 1.
+Código de salida: 1

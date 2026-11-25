@@ -1,0 +1,46 @@
+$ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
+
+ RUN  v4.0.14 .
+
+ ✓ |integracion| tests/integracion/comandosHttp.test.ts (3 tests) 4405ms
+   ✓ Cotizar desde el call center y reintentar por HTTP con eventos persistidos  338ms
+   ✓ Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez  1989ms
+   ✓ publica, programa y expira el hold desde la ruta del reloj con la API compuesta  956ms
+ ✓ |integracion| tests/integracion/temporizadoresBullMQ.test.ts (4 tests) 3556ms
+   ✓ registra el fallo persistente tras tres intentos con los campos autorizados  3176ms
+ ✓ |integracion| tests/integracion/clinicaAlertas.test.ts (1 test) 1982ms
+   ✓ calcula posiciones por orden de llegada y limita alertas en Postgres  1980ms
+Reinicio de la base de demo en el host 127.0.0.1.
+ ✓ |integracion| tests/integracion/semilla.test.ts (5 tests) 2686ms
+     ✓ es idempotente y guarda solo hashes argon2id verificables  773ms
+     ✓ reinicia la base de demo, migra y deja exactamente los datos semilla  1011ms
+ ✓ |integracion| tests/integracion/migracionPersistencia.test.ts (3 tests) 2074ms
+   ✓ migra una base con semilla y conserva las claves anteriores y las claves con sufijo  1687ms
+ ✓ |integracion| tests/integracion/idempotenciaWa.test.ts (1 test) 1619ms
+   ✓ reserva y reproduce la respuesta de WhatsApp con eventos únicos en Postgres  1618ms
+ ✓ |integracion| tests/integracion/consumidorStreams.test.ts (2 tests) 734ms
+   ✓ reinicia sin pérdidas ni duplicados, y procesa los grupos por separado  470ms
+ ✓ |integracion| tests/integracion/puertosApiPostgres.test.ts (1 test) 733ms
+   ✓ Concurrencia con la misma clave, dos usos simultáneos y almacenamiento de API en Postgres  611ms
+ ✓ |integracion| tests/integracion/identidadPostgres.test.ts (1 test) 741ms
+   ✓ Registro concurrente y CURP con sexo X  631ms
+ ✓ |integracion| tests/integracion/sdAgenda.test.ts (4 tests) 1125ms
+   ✓ registra de forma idempotente, rechaza entradas inválidas y simula fallos y latencia  350ms
+   ✓ se recupera tras dos fallos y señala cuando se agotan los tres intentos  735ms
+ ✓ |integracion| tests/integracion/aplicaciones.test.ts (4 tests) 1019ms
+     ✓ señala Postgres caído dentro del límite  907ms
+ ✓ |integracion| tests/integracion/agendaPostgres.test.ts (3 tests) 804ms
+   ✓ acepta uno de 50 intentos concurrentes por el mismo horario y recupera el hold vencido  346ms
+ ✓ |integracion| tests/integracion/relayPostgres.test.ts (1 test) 573ms
+   ✓ no publica dos veces con dos relays y reintenta si publicó sin marcar  531ms
+ ✓ |integracion| tests/integracion/nucleo.test.ts (8 tests) 515ms
+ ✓ |integracion| tests/integracion/tramitePostgres.test.ts (4 tests) 318ms
+ ✓ |integracion| tests/integracion/puertosPostgres.test.ts (1 test) 249ms
+ ✓ |integracion| tests/integracion/intentosPostgres.test.ts (1 test) 222ms
+
+ Test Files  17 passed (17)
+      Tests  47 passed (47)
+   Start at  01:25:27
+   Duration  61.15s (transform 1.29s, setup 0ms, import 33.21s, tests 23.35s, environment 3ms)
+
+Código de salida: 0

@@ -10,3 +10,6 @@ export type * from './ports/publicacion.ts';
 export { RelayOutbox } from './RelayOutbox.ts';
 export * from './ports/api.ts';
 export type * from './ports/lecturas.ts';
+export * from './ports/prediccion.ts';
+export * from './prediccion/EstimarRiesgoInasistencia.ts';
+export * from './prediccion/horaEnvio.ts';

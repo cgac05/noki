@@ -1,0 +1,51 @@
+git diff --stat HEAD
+ .dependency-cruiser.cjs               |  2 +-
+ packages/adapters/memory/src/index.ts |  3 +++
+ packages/application/src/index.ts     |  3 +++
+ packages/domain/src/index.ts          |  3 +++
+ pnpm-lock.yaml                        | 15 +++++++++++++++
+ 5 files changed, 25 insertions(+), 1 deletion(-)
+
+Archivos nuevos (incluidos los artefactos OpenSpec y las evidencias)
+ml/README.md
+ml/entrenar.ts
+ml/evaluar.ts
+ml/generarDatos.ts
+ml/metricas.json
+openspec/changes/prediccion-riesgo/design.md
+openspec/changes/prediccion-riesgo/evidencias/aislamiento.txt
+openspec/changes/prediccion-riesgo/evidencias/archivos-existentes.diff
+openspec/changes/prediccion-riesgo/evidencias/entrenamiento.txt
+openspec/changes/prediccion-riesgo/evidencias/install.txt
+openspec/changes/prediccion-riesgo/evidencias/integracion-final.txt
+openspec/changes/prediccion-riesgo/evidencias/integracion-reintento.txt
+openspec/changes/prediccion-riesgo/evidencias/integracion.txt
+openspec/changes/prediccion-riesgo/evidencias/lint-deps.txt
+openspec/changes/prediccion-riesgo/evidencias/lint.txt
+openspec/changes/prediccion-riesgo/evidencias/manifiesto.txt
+openspec/changes/prediccion-riesgo/evidencias/test.txt
+openspec/changes/prediccion-riesgo/handoff.md
+openspec/changes/prediccion-riesgo/implementacion.md
+openspec/changes/prediccion-riesgo/proposal.md
+openspec/changes/prediccion-riesgo/specs/prediccion-riesgo/spec.md
+openspec/changes/prediccion-riesgo/tasks.md
+packages/adapters/memory/src/CalendarioSedeMemoria.ts
+packages/adapters/memory/src/LecturasPrediccionMemoria.ts
+packages/adapters/memory/src/ModeloRiesgoMemoria.ts
+packages/adapters/out-modelo/modelo/riesgo-inasistencia.json
+packages/adapters/out-modelo/package.json
+packages/adapters/out-modelo/src/CalendarioSedeDateFns.ts
+packages/adapters/out-modelo/src/ModeloRiesgoLogistico.ts
+packages/adapters/out-modelo/src/index.ts
+packages/adapters/out-modelo/tsconfig.json
+packages/application/src/ports/prediccion.ts
+packages/application/src/prediccion/EstimarRiesgoInasistencia.ts
+packages/application/src/prediccion/horaEnvio.ts
+packages/domain/src/prediccion/factores.ts
+packages/domain/src/prediccion/nivel.ts
+packages/domain/src/prediccion/plan.ts
+tests/unit/prediccion/estimar.test.ts
+tests/unit/prediccion/factores.test.ts
+tests/unit/prediccion/ml.test.ts
+tests/unit/prediccion/outModelo.test.ts
+tests/unit/prediccion/plan.test.ts

@@ -1,0 +1,295 @@
+$ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
+
+ RUN  v4.0.14 .
+
+ ❯ |integracion| tests/integracion/comandosHttp.test.ts (3 tests | 3 skipped) 16236ms
+   ↓ Cotizar desde el call center y reintentar por HTTP con eventos persistidos
+   ↓ Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez
+   ↓ publica, programa y expira el hold desde la ruta del reloj con la API compuesta
+ ✓ |integracion| tests/integracion/temporizadoresBullMQ.test.ts (4 tests) 6100ms
+   ✓ reemplaza, deduplica, cancela y adelanta solo los vencidos  2247ms
+   ✓ usa un jobId compatible y reemplaza un trabajo activo cuando termina  408ms
+   ✓ registra el fallo persistente tras tres intentos con los campos autorizados  3273ms
+ ❯ |integracion| tests/integracion/semilla.test.ts (5 tests | 5 skipped) 153ms
+     ↓ incluye las sedes, servicios con perfil, Xalisco y contactos de demo
+     ↓ es idempotente y guarda solo hashes argon2id verificables
+     ↓ encuentra Química sanguínea por un sinónimo con errores de escritura
+     ↓ rechaza reinicio sin DEMO_MODE=true sin modificar datos
+     ↓ reinicia la base de demo, migra y deja exactamente los datos semilla
+ ❯ |integracion| tests/integracion/idempotenciaWa.test.ts (1 test | 1 failed) 552ms
+   × reserva y reproduce la respuesta de WhatsApp con eventos únicos en Postgres 551ms
+ ❯ |integracion| tests/integracion/clinicaAlertas.test.ts (1 test | 1 failed) 442ms
+   × calcula posiciones por orden de llegada y limita alertas en Postgres 441ms
+ ❯ |integracion| tests/integracion/migracionPersistencia.test.ts (3 tests | 3 failed) 739ms
+   × migra una base con semilla y conserva las claves anteriores y las claves con sufijo 412ms
+   × acepta varias CURP nulas y rechaza una CURP duplicada 18ms
+   × aplica la migración de API una sola vez y conserva los registros 297ms
+ ✓ |integracion| tests/integracion/sdAgenda.test.ts (4 tests) 1132ms
+   ✓ registra de forma idempotente, rechaza entradas inválidas y simula fallos y latencia  346ms
+   ✓ se recupera tras dos fallos y señala cuando se agotan los tres intentos  737ms
+ ✓ |integracion| tests/integracion/aplicaciones.test.ts (4 tests) 1046ms
+     ✓ señala Postgres caído dentro del límite  919ms
+ ❯ |integracion| tests/integracion/consumidorStreams.test.ts (2 tests | 2 failed) 189ms
+   × reinicia sin pérdidas ni duplicados, y procesa los grupos por separado 89ms
+   × mueve al tercer fallo una sola vez y continúa la partición 96ms
+ ❯ |integracion| tests/integracion/identidadPostgres.test.ts (1 test | 1 failed) 1122ms
+   × Registro concurrente y CURP con sexo X 1077ms
+ ❯ |integracion| tests/integracion/agendaPostgres.test.ts (3 tests | 3 skipped) 101ms
+   ↓ acepta uno de 50 intentos concurrentes por el mismo horario y recupera el hold vencido
+   ↓ expira un hold de forma idempotente y conserva otra reserva confirmada
+   ↓ confirma la saga con Postgres y sd-mock y libera la reserva tras un conflicto
+ ❯ |integracion| tests/integracion/puertosApiPostgres.test.ts (1 test | 1 failed) 1034ms
+   × Concurrencia con la misma clave, dos usos simultáneos y almacenamiento de API en Postgres 1001ms
+ ❯ |integracion| tests/integracion/relayPostgres.test.ts (1 test | 1 failed) 130ms
+   × no publica dos veces con dos relays y reintenta si publicó sin marcar 110ms
+ ❯ |integracion| tests/integracion/tramitePostgres.test.ts (4 tests | 4 skipped) 136ms
+   ↓ recupera la última actividad de la columna en instantáneas anteriores
+   ↓ guarda instantánea, eventos y outbox, y conserva la partición por paciente o hilo
+   ↓ revierte toda la operación al encontrar una clave de evento repetida
+   ↓ acepta una sola escritura concurrente de la misma versión
+ ❯ |integracion| tests/integracion/nucleo.test.ts (8 tests | 8 skipped) 79ms
+     ↓ crea todas las tablas del núcleo y ninguna tabla excluida; tipo es obligatorio
+     ↓ repite la migración sin aplicar nada nuevo
+     ↓ rechaza dos reservas activas para el mismo horario
+     ↓ permite reservar tras una cancelación o expiración
+     ↓ permite exactamente un éxito en 50 reservas concurrentes
+     ↓ impide duplicar eventos por idempotency_key
+     ↓ registra idempotencia por consumidor y tokens de un solo uso
+     ↓ crea pg_trgm y los índices de nombre, sinónimos y outbox pendiente
+ ❯ |integracion| tests/integracion/puertosPostgres.test.ts (1 test | 1 failed) 97ms
+   × cumple la misma batería de los puertos en Postgres sin devolver datos personales en búsquedas 72ms
+ ❯ |integracion| tests/integracion/intentosPostgres.test.ts (1 test | 1 failed) 107ms
+   × cuenta tres fallos concurrentes y guarda los eventos sin trámite con su outbox 89ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |integracion| tests/integracion/agendaPostgres.test.ts [ tests/integracion/agendaPostgres.test.ts ]
+ FAIL  |integracion| tests/integracion/nucleo.test.ts [ tests/integracion/nucleo.test.ts ]
+ FAIL  |integracion| tests/integracion/semilla.test.ts [ tests/integracion/semilla.test.ts ]
+ FAIL  |integracion| tests/integracion/tramitePostgres.test.ts [ tests/integracion/tramitePostgres.test.ts ]
+error: relation "kysely_migration_lock" does not exist
+ ❯ node_modules/.pnpm/pg@8.16.3/node_modules/pg/lib/client.js:545:17
+ ❯ PostgresConnection.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/dialect/postgres/postgres-driver.js:90:49
+ ❯ node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:35:28
+ ❯ DefaultConnectionProvider.provideConnection node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/driver/default-connection-provider.js:10:20
+ ❯ DefaultQueryExecutor.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:34:16
+ ❯ SelectQueryBuilderImpl.execute node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-builder/select-query-builder.js:317:24
+ ❯ SelectQueryBuilderImpl.executeTakeFirst node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-builder/select-query-builder.js:321:26
+ ❯ Migrator.#doesLockRowExists node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:390:25
+ ❯ Migrator.#ensureLockRowExists node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:363:15
+ ❯ PostgresConnection.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/dialect/postgres/postgres-driver.js:102:41
+ ❯ node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:35:28
+ ❯ DefaultConnectionProvider.provideConnection node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/driver/default-connection-provider.js:10:20
+ ❯ DefaultQueryExecutor.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:34:16
+ ❯ SelectQueryBuilderImpl.execute node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-builder/select-query-builder.js:317:24
+ ❯ SelectQueryBuilderImpl.executeTakeFirst node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-builder/select-query-builder.js:321:26
+ ❯ Migrator.#doesLockRowExists node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:390:25
+ ❯ Migrator.#ensureLockRowExists node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:363:15
+ ❯ Migrator.#ensureMigrationTablesExists node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:298:9
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/23]⎯
+
+ FAIL  |integracion| tests/integracion/agendaPostgres.test.ts [ tests/integracion/agendaPostgres.test.ts ]
+error: relation "reserva" does not exist
+ ❯ node_modules/.pnpm/pg-pool@3.14.0_pg@8.16.3/node_modules/pg-pool/index.js:45:11
+ ❯ tests/integracion/agendaPostgres.test.ts:26:5
+     24| afterAll(async () => {
+     25|   try {
+     26|     await pool.query('DELETE FROM reserva WHERE sede_id = $1', [sedeId…
+       |     ^
+     27|     await pool.query('DELETE FROM outbox WHERE evento_id IN (SELECT id…
+     28|     await pool.query('DELETE FROM evento WHERE hilo_id = $1', [hilo]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/23]⎯
+
+ FAIL  |integracion| tests/integracion/comandosHttp.test.ts [ tests/integracion/comandosHttp.test.ts ]
+Error: Hook timed out in 15000ms.
+If this is a long-running hook, pass a timeout value as the last argument or configure it globally with "hookTimeout".
+ ❯ tests/integracion/comandosHttp.test.ts:32:1
+     30| });
+     31| 
+     32| beforeAll(async () => {
+       | ^
+     33|   await admin.query('CREATE SCHEMA comandos_http');
+     34|   await migrar(url.toString(), undefined, esquema);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/23]⎯
+
+ FAIL  |integracion| tests/integracion/comandosHttp.test.ts [ tests/integracion/comandosHttp.test.ts ]
+error: deadlock detected
+ ❯ node_modules/.pnpm/pg-pool@3.14.0_pg@8.16.3/node_modules/pg-pool/index.js:45:11
+ ❯ tests/integracion/comandosHttp.test.ts:28:3
+     26| afterAll(async () => {
+     27|   await pool.end();
+     28|   await admin.query('DROP SCHEMA IF EXISTS comandos_http CASCADE');
+       |   ^
+     29|   await admin.end();
+     30| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/23]⎯
+
+ FAIL  |integracion| tests/integracion/intentosPostgres.test.ts [ tests/integracion/intentosPostgres.test.ts ]
+error: relation "outbox" does not exist
+ ❯ node_modules/.pnpm/pg-pool@3.14.0_pg@8.16.3/node_modules/pg-pool/index.js:45:11
+ ❯ tests/integracion/intentosPostgres.test.ts:22:5
+     20| afterAll(async () => {
+     21|   try {
+     22|     await pool.query('DELETE FROM outbox WHERE evento_id IN (SELECT id…
+       |     ^
+     23|     await pool.query('DELETE FROM evento WHERE hilo_id = $1', [hiloId]…
+     24|     await pool.query('DELETE FROM intento_verificacion WHERE contacto_…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/23]⎯
+
+ FAIL  |integracion| tests/integracion/puertosPostgres.test.ts [ tests/integracion/puertosPostgres.test.ts ]
+error: relation "vinculo" does not exist
+ ❯ node_modules/.pnpm/pg-pool@3.14.0_pg@8.16.3/node_modules/pg-pool/index.js:45:11
+ ❯ tests/integracion/puertosPostgres.test.ts:14:5
+     12| afterAll(async () => {
+     13|   try {
+     14|     await pool.query('DELETE FROM vinculo WHERE contacto_id = $1', [co…
+       |     ^
+     15|     await pool.query('UPDATE contacto_canal SET hilo_id = NULL WHERE i…
+     16|     await pool.query('DELETE FROM hilo_atencion WHERE id = $1', [hilo]…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/23]⎯
+
+ FAIL  |integracion| tests/integracion/relayPostgres.test.ts [ tests/integracion/relayPostgres.test.ts ]
+error: relation "outbox" does not exist
+ ❯ node_modules/.pnpm/pg-pool@3.14.0_pg@8.16.3/node_modules/pg-pool/index.js:45:11
+ ❯ tests/integracion/relayPostgres.test.ts:34:5
+     32|   try {
+     33|     await redis.del(prefijo + particion);
+     34|     await pool.query('DELETE FROM outbox WHERE evento_id IN (SELECT id…
+       |     ^
+     35|     await pool.query('DELETE FROM evento WHERE hilo_id = $1', [hiloId]…
+     36|     await pool.query('UPDATE contacto_canal SET hilo_id = NULL WHERE i…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/23]⎯
+
+ FAIL  |integracion| tests/integracion/tramitePostgres.test.ts [ tests/integracion/tramitePostgres.test.ts ]
+error: relation "outbox" does not exist
+ ❯ node_modules/.pnpm/pg-pool@3.14.0_pg@8.16.3/node_modules/pg-pool/index.js:45:11
+ ❯ tests/integracion/tramitePostgres.test.ts:45:5
+     43| afterAll(async () => {
+     44|   try {
+     45|     await pool.query('DELETE FROM outbox WHERE evento_id IN (SELECT id…
+       |     ^
+     46|     await pool.query('DELETE FROM evento WHERE hilo_id = $1', [hilo]);
+     47|     await pool.query('DELETE FROM tramite WHERE hilo_id = $1', [hilo]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/23]⎯
+
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 12 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |integracion| tests/integracion/clinicaAlertas.test.ts > calcula posiciones por orden de llegada y limita alertas en Postgres
+ FAIL  |integracion| tests/integracion/idempotenciaWa.test.ts > reserva y reproduce la respuesta de WhatsApp con eventos únicos en Postgres
+ FAIL  |integracion| tests/integracion/identidadPostgres.test.ts > Registro concurrente y CURP con sexo X
+ FAIL  |integracion| tests/integracion/migracionPersistencia.test.ts > migra una base con semilla y conserva las claves anteriores y las claves con sufijo
+ FAIL  |integracion| tests/integracion/migracionPersistencia.test.ts > aplica la migración de API una sola vez y conserva los registros
+ FAIL  |integracion| tests/integracion/puertosApiPostgres.test.ts > Concurrencia con la misma clave, dos usos simultáneos y almacenamiento de API en Postgres
+error: operator class "gin_trgm_ops" does not exist for access method "gin"
+ ❯ node_modules/.pnpm/pg@8.16.3/node_modules/pg/lib/client.js:545:17
+ ❯ PostgresConnection.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/dialect/postgres/postgres-driver.js:90:49
+ ❯ node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:35:28
+ ❯ SingleConnectionProvider.#run node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/driver/single-connection-provider.js:24:16
+ ❯ DefaultQueryExecutor.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:34:16
+ ❯ Object.up packages/adapters/out-postgres/src/migrar.ts:14:90
+     12|     for (const nombre of nombres) {
+     13|       const contenido = await readFile(join(carpeta, nombre), 'utf8');
+     14|       migraciones[nombre.replace(/\.sql$/, '')] = { up: async (db: Kys…
+       |                                                                                          ^
+     15|     }
+     16|     return migraciones;
+ ❯ Migrator.#migrateUp node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:556:17
+ ❯ run node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:420:28
+ ❯ node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/kysely.js:571:32
+ ❯ PostgresConnection.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/dialect/postgres/postgres-driver.js:102:41
+ ❯ node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:35:28
+ ❯ SingleConnectionProvider.#run node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/driver/single-connection-provider.js:24:16
+ ❯ DefaultQueryExecutor.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:34:16
+ ❯ Object.up packages/adapters/out-postgres/src/migrar.ts:14:90
+ ❯ Migrator.#migrateUp node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:556:17
+ ❯ run node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:420:28
+ ❯ node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/kysely.js:571:32
+ ❯ DefaultConnectionProvider.provideConnection node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/driver/default-connection-provider.js:10:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/23]⎯
+
+ FAIL  |integracion| tests/integracion/consumidorStreams.test.ts > reinicia sin pérdidas ni duplicados, y procesa los grupos por separado
+ FAIL  |integracion| tests/integracion/intentosPostgres.test.ts > cuenta tres fallos concurrentes y guarda los eventos sin trámite con su outbox
+ FAIL  |integracion| tests/integracion/puertosPostgres.test.ts > cumple la misma batería de los puertos en Postgres sin devolver datos personales en búsquedas
+ FAIL  |integracion| tests/integracion/relayPostgres.test.ts > no publica dos veces con dos relays y reintenta si publicó sin marcar
+error: relation "kysely_migration_lock" does not exist
+ ❯ node_modules/.pnpm/pg@8.16.3/node_modules/pg/lib/client.js:545:17
+ ❯ PostgresConnection.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/dialect/postgres/postgres-driver.js:90:49
+ ❯ node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:35:28
+ ❯ DefaultConnectionProvider.provideConnection node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/driver/default-connection-provider.js:10:20
+ ❯ DefaultQueryExecutor.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:34:16
+ ❯ SelectQueryBuilderImpl.execute node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-builder/select-query-builder.js:317:24
+ ❯ SelectQueryBuilderImpl.executeTakeFirst node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-builder/select-query-builder.js:321:26
+ ❯ Migrator.#doesLockRowExists node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:390:25
+ ❯ Migrator.#ensureLockRowExists node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:363:15
+ ❯ PostgresConnection.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/dialect/postgres/postgres-driver.js:102:41
+ ❯ node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:35:28
+ ❯ DefaultConnectionProvider.provideConnection node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/driver/default-connection-provider.js:10:20
+ ❯ DefaultQueryExecutor.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:34:16
+ ❯ SelectQueryBuilderImpl.execute node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-builder/select-query-builder.js:317:24
+ ❯ SelectQueryBuilderImpl.executeTakeFirst node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-builder/select-query-builder.js:321:26
+ ❯ Migrator.#doesLockRowExists node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:390:25
+ ❯ Migrator.#ensureLockRowExists node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:363:15
+ ❯ Migrator.#ensureMigrationTablesExists node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:298:9
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/23]⎯
+
+ FAIL  |integracion| tests/integracion/consumidorStreams.test.ts > mueve al tercer fallo una sola vez y continúa la partición
+error: relation "evento_procesado" does not exist
+ ❯ node_modules/.pnpm/pg@8.16.3/node_modules/pg/lib/client.js:545:17
+ ❯ PostgresConnection.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/dialect/postgres/postgres-driver.js:90:49
+ ❯ node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:35:28
+ ❯ DefaultConnectionProvider.provideConnection node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/driver/default-connection-provider.js:10:20
+ ❯ DefaultQueryExecutor.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:34:16
+ ❯ RegistroProcesadosPostgres.yaProcesado packages/adapters/out-postgres/src/RegistroProcesadosPostgres.ts:8:22
+      6| 
+      7|   async yaProcesado(consumidor: string, clave: string): Promise<boolea…
+      8|     const { rows } = await sql<{ existe: boolean }>`SELECT EXISTS (SEL…
+       |                      ^
+      9|       WHERE consumidor = ${consumidor} AND idempotency_key = ${clave})…
+     10|     return rows[0]?.existe ?? false;
+ ❯ ConsumidorStreams.procesar packages/adapters/in-events/src/ConsumidorStreams.ts:82:9
+ ❯ ConsumidorStreams.leer packages/adapters/in-events/src/ConsumidorStreams.ts:73:12
+ ❯ ConsumidorStreams.consumirPendientes packages/adapters/in-events/src/ConsumidorStreams.ts:62:13
+ ❯ PostgresConnection.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/dialect/postgres/postgres-driver.js:102:41
+ ❯ node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:35:28
+ ❯ DefaultConnectionProvider.provideConnection node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/driver/default-connection-provider.js:10:20
+ ❯ DefaultQueryExecutor.executeQuery node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:34:16
+ ❯ RegistroProcesadosPostgres.yaProcesado packages/adapters/out-postgres/src/RegistroProcesadosPostgres.ts:8:22
+ ❯ ConsumidorStreams.procesar packages/adapters/in-events/src/ConsumidorStreams.ts:82:9
+ ❯ ConsumidorStreams.leer packages/adapters/in-events/src/ConsumidorStreams.ts:73:12
+ ❯ ConsumidorStreams.consumirPendientes packages/adapters/in-events/src/ConsumidorStreams.ts:62:13
+ ❯ tests/integracion/consumidorStreams.test.ts:77:31
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/23]⎯
+
+ FAIL  |integracion| tests/integracion/migracionPersistencia.test.ts > acepta varias CURP nulas y rechaza una CURP duplicada
+error: relation "paciente" does not exist
+ ❯ node_modules/.pnpm/pg-pool@3.14.0_pg@8.16.3/node_modules/pg-pool/index.js:45:11
+ ❯ tests/integracion/migracionPersistencia.test.ts:57:3
+     55|   );
+     56|   const id = (sufijo: number) => '01234567-89ab-7def-8123-456789abcd' …
+     57|   await insertar(id(10), 'PELA900228XNTRNN04');
+       |   ^
+     58|   await expect(insertar(id(11), 'PELA900228XNTRNN04')).rejects.toMatch…
+     59|   await insertar(id(12), null);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/23]⎯
+
+
+ Test Files  14 failed | 3 passed (17)
+      Tests  12 failed | 12 passed | 23 skipped (47)
+   Start at  01:22:21
+   Duration  85.67s (transform 8.29s, setup 0ms, import 50.12s, tests 29.39s, environment 3ms)
+
+[ELIFECYCLE] Command failed with exit code 1.
+Código de salida: 1
