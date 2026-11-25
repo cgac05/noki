@@ -1,5 +1,5 @@
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+ RUN  v4.0.14 <repositorio>-identidad
 
  ❯ |unitarios| tests/unit/rellenoHuecosAplicacion.test.ts (3 tests | 3 failed) 8ms
    × detecta una sola vez el hueco y ofrece a Beto sin datos de Ana 5ms

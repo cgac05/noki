@@ -1,6 +1,6 @@
 corepack pnpm exec vitest run --project unitarios tests/unit/contratos.test.ts tests/unit/consultas.test.ts
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki
+ RUN  v4.0.14 <repositorio>
 
  ❯ |unitarios| tests/unit/contratos.test.ts (15 tests | 2 failed) 43ms
      × valida la identidad comprobada en clínica sin datos de la credencial 7ms

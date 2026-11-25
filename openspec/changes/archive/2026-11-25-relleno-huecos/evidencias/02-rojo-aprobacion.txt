@@ -1,5 +1,5 @@
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+ RUN  v4.0.14 <repositorio>-identidad
 
  ❯ |unitarios| tests/unit/api/aprobacionCancelacion.test.ts (3 tests | 3 failed) 10ms
    × envía la aprobación al WhatsApp del dueño de la cita y solo ese número puede aprobar una vez 7ms

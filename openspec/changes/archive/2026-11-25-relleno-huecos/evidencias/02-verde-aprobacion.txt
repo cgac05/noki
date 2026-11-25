@@ -1,5 +1,5 @@
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+ RUN  v4.0.14 <repositorio>-identidad
 
  ✓ |unitarios| tests/unit/api/aprobacionCancelacion.test.ts (3 tests) 16ms
  ✓ |unitarios| tests/unit/api/tokensBotonWa.test.ts (8 tests) 23ms

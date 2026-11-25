@@ -1,6 +1,6 @@
 $ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+ RUN  v4.0.14 <repositorio>-identidad
 
  ✓ |integracion| tests/integracion/comandosHttp.test.ts (3 tests) 4726ms
    ✓ Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez  2038ms

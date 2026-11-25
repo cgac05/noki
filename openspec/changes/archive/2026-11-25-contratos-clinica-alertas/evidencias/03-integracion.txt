@@ -6,7 +6,7 @@ Already up to date
 Done in 856ms using pnpm v11.25.0
 $ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki
+ RUN  v4.0.14 <repositorio>
 
  ✓ |integracion| tests/integracion/comandosHttp.test.ts (3 tests) 24795ms
    ✓ Cotizar desde el call center y reintentar por HTTP con eventos persistidos  3273ms

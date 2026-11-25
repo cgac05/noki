@@ -1,5 +1,5 @@
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+ RUN  v4.0.14 <repositorio>-identidad
 
  ❯ |unitarios| tests/unit/rellenoHuecosDominio.test.ts (6 tests | 6 failed) 13ms
    × filtra el ayuno y las citas que no se adelantarían 5ms

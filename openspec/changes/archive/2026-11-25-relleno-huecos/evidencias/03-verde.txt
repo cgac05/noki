@@ -1,5 +1,5 @@
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+ RUN  v4.0.14 <repositorio>-identidad
 
 {"level":30,"time":1795599088523,"pid":4544,"hostname":"CGAC1","msg":"Server listening at http://127.0.0.1:29880"}
 {"level":30,"time":1795599090599,"pid":4544,"hostname":"CGAC1","correlation_id":"req-1","req":{"method":"POST","url":"/agenda/citas","host":"127.0.0.1:29880","remoteAddress":"127.0.0.1","remotePort":29890},"msg":"incoming request"}

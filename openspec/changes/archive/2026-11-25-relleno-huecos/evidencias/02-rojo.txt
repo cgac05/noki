@@ -1,6 +1,6 @@
 02-rojo-aprobacion.txt
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+ RUN  v4.0.14 <repositorio>-identidad
 
  ❯ |unitarios| tests/unit/api/aprobacionCancelacion.test.ts (3 tests | 3 failed) 10ms
    × envía la aprobación al WhatsApp del dueño de la cita y solo ese número puede aprobar una vez 7ms
@@ -57,7 +57,7 @@ TypeError: __vite_ssr_import_1__.AprobacionCancelacion is not a constructor
 Código de salida: 1
 02-rojo-deteccion.txt
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+ RUN  v4.0.14 <repositorio>-identidad
 
  ❯ |unitarios| tests/unit/rellenoHuecosAplicacion.test.ts (3 tests | 3 failed) 8ms
    × detecta una sola vez el hueco y ofrece a Beto sin datos de Ana 5ms
@@ -114,7 +114,7 @@ TypeError: __vite_ssr_import_2__.HuecosMemoria is not a constructor
 Código de salida: 1
 02-rojo-http.txt
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+ RUN  v4.0.14 <repositorio>-identidad
 
  ❯ |unitarios| tests/unit/api/aprobacionCancelacionHttp.test.ts (1 test | 1 failed) 73ms
    × pide aprobación desde la app y otro número no invalida el botón legítimo 72ms
@@ -158,7 +158,7 @@ AssertionError: expected { codigo: 'STEP_UP_REQUERIDO', …(2) } to match object
 Código de salida: 1
 02-rojo-saga.txt
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+ RUN  v4.0.14 <repositorio>-identidad
 
  ❯ |unitarios| tests/unit/rellenoHuecosSaga.test.ts (3 tests | 3 failed) 10ms
    × guarda el adelanto antes de liberar la reserva anterior de Beto 6ms
@@ -215,7 +215,7 @@ TypeError: __vite_ssr_import_1__.AceptarOfertaHueco is not a constructor
 Código de salida: 1
 02-rojo-temporizador.txt
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+ RUN  v4.0.14 <repositorio>-identidad
 
  ❯ |unitarios| tests/unit/persistencia/programador.test.ts (4 tests | 1 failed) 15ms
    ✓ reemplaza, deduplica, cancela y adelanta solo los vencidos 2ms
@@ -259,7 +259,7 @@ AssertionError: expected [ { tipo: 'OFERTA', …(2) } ] to deeply equal [ { tipo
 Código de salida: 1
 02-rojo-tokens.txt
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+ RUN  v4.0.14 <repositorio>-identidad
 
  ❯ |unitarios| tests/unit/api/tokensBotonWa.test.ts (8 tests | 8 failed) 11ms
      × rechaza el botón de otro número sin invalidarlo y rechaza su reutilización 6ms

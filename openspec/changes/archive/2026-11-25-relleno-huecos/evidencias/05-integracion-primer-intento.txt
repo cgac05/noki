@@ -1,6 +1,6 @@
 $ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+ RUN  v4.0.14 <repositorio>-identidad
 
 {"level":30,"time":1795599175578,"pid":28392,"hostname":"CGAC1","msg":"Server listening at http://127.0.0.1:57489"}
 {"level":30,"time":1795599177002,"pid":28392,"hostname":"CGAC1","correlation_id":"req-1","req":{"method":"POST","url":"/agenda/citas","host":"127.0.0.1:57489","remoteAddress":"127.0.0.1","remotePort":29949},"msg":"incoming request"}

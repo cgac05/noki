@@ -3,7 +3,7 @@ Código de salida: 0
 
 $ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+ RUN  v4.0.14 <repositorio>-identidad
 
  ✓ |integracion| tests/integracion/comandosHttp.test.ts (3 tests) 4268ms
    ✓ Cotizar desde el call center y reintentar por HTTP con eventos persistidos  384ms

@@ -1,6 +1,6 @@
 $ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+ RUN  v4.0.14 <repositorio>-identidad
 
  ✓ |integracion| tests/integracion/migracionPersistencia.test.ts (3 tests) 1710ms
    ✓ migra una base con semilla y conserva las claves anteriores y las claves con sufijo  1212ms

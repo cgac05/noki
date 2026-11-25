@@ -1,6 +1,6 @@
 corepack pnpm exec vitest run --project unitarios --project web
 
- RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki
+ RUN  v4.0.14 <repositorio>
 
  ✓ |unitarios| tests/unit/consultas.test.ts (22 tests) 80ms
  ✓ |unitarios| packages/adapters/in-http/test/rutasComandos.test.ts (9 tests) 273ms
