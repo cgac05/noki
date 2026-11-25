@@ -1,0 +1,233 @@
+corepack pnpm exec vitest run --project unitarios tests/unit/contratos.test.ts tests/unit/consultas.test.ts
+Código de salida: 1
+
+Scope: all 15 workspace projects
+✓ Lockfile passes supply-chain policies (verified 26m ago)
+Lockfile is up to date, resolution step is skipped
+Already up to date
+
+Done in 1.2s using pnpm v11.25.0
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ❯ |unitarios| tests/unit/consultas.test.ts (25 tests | 5 failed) 67ms
+     ✓ Token del QR no es el folio: rechaza 12345678 30ms
+     ✓ Token del QR no es el folio: rechaza 123456789 1ms
+     ✓ Cita válida: valida UTC, zona de Tepic y tipos derivados exportados 2ms
+     ✓ Zona horaria inválida: indica el campo zonaHoraria 1ms
+     ✓ Precio en centavos: rechaza el monto 250.5 1ms
+     ✓ Precio en centavos: rechaza el monto -1 0ms
+     ✓ acepta un precio de 25000 centavos y rechaza fechas sin UTC y token vacío 1ms
+     ✓ Ficha sin acciones: descarta comandos y claves desconocidas al validar 2ms
+     ✓ Llegada sin comando: descarta la acción 1ms
+     ✓ acepta una posición positiva entera solo cuando la llegada está registrada 3ms
+     ✓ valida la alerta sin datos personales y descarta el teléfono 1ms
+     × valida el hueco y descarta datos de pacientes y el canal de la oferta 5ms
+     × rechaza estados de hueco y oferta fuera del contrato 1ms
+     ✓ Ficha de un hilo anónimo: conserva los campos nulos 0ms
+     ✓ Teléfono completo rechazado: exige la máscara de cuatro dígitos 1ms
+     × Campos sensibles ausentes: recorre todos los modelos y sus objetos anidados 1ms
+     ✓ valida bandeja de demo y métricas con cantidades enteras no negativas 2ms
+     ✓ Ruta construida desde parámetros: conserva el hilo elegido 0ms
+     ✓ Parámetro inválido: no produce ruta con un paciente que no sea UUID v7 1ms
+     ✓ Rutas existentes conservadas: mantiene las cuatro consultas ya publicadas 1ms
+     × publica las doce rutas y sus esquemas de respuesta sin acciones 6ms
+     ✓ publica las alertas de seguridad con un máximo de 50 elementos 2ms
+     × publica el panel de huecos con un máximo de 50 elementos 1ms
+     ✓ Contexto de demo: expone solo los identificadores nullables 1ms
+     ✓ Bandeja marcada como demo: su ruta y respuestas quedan identificadas 0ms
+ ❯ |unitarios| tests/unit/contratos.test.ts (20 tests | 3 failed) 107ms
+     ✓ rechaza cerrar una atención sin llegada y conserva el trámite 78ms
+     ✓ publica la ruta POST y valida minutos enteros dentro del límite 2ms
+     ✓ valida la hora devuelta en ISO UTC 1ms
+     ✓ rechaza el tipo retirado de comprobación de identidad en clínica 0ms
+     ✓ exige el trámite y un payload vacío para cerrar la atención 1ms
+     ✓ rechaza el canal inexistente e indica el campo 1ms
+     ✓ deriva tipos del esquema y liga cada payload al comando 1ms
+     ✓ acepta contacto de 10 a 15 dígitos y rechaza un contacto mal formado 1ms
+     ✓ exige el trámite y el destino WhatsApp para solicitar continuación 1ms
+     ✓ acepta una vista con reserva y una cita confirmada sin vencimiento 1ms
+     ✓ acepta captura sensible y la variante explícita de completo 1ms
+     ✓ limita botones y filas totales de varias secciones y rechaza un PIN inicial 2ms
+     ✓ rechaza WA vacío y acepta mensajes de texto y botones 1ms
+     × comparte eventos y salas y rechaza prefijos y eventos desconocidos 9ms
+     × valida salas de WhatsApp con 10 a 15 dígitos 1ms
+     × valida de uno a cinco mensajes salientes de WhatsApp 1ms
+     ✓ valida la sala al unirse y salir por Socket.IO 1ms
+     ✓ exige tipo en vistas de trámite y descarta datos personales y detalles internos 1ms
+   ✓ valida la identificación por pasos 2ms
+   ✓ valida una pregunta con paso de identificación 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > valida el hueco y descarta datos de pacientes y el canal de la oferta
+TypeError: Cannot read properties of undefined (reading 'parse')
+ ❯ tests/unit/consultas.test.ts:83:40
+     81|   it('valida el hueco y descarta datos de pacientes y el canal de la o…
+     82|     const datosPaciente = { pacienteId: ids.paciente, nombre: 'Pacient…
+     83|     const resultado = HuecoVistaSchema.parse({
+       |                                        ^
+     84|       ...hueco, ...datosPaciente, ofertas: [{ ...ofertaHueco, ...datos…
+     85|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > rechaza estados de hueco y oferta fuera del contrato
+TypeError: Cannot read properties of undefined (reading 'safeParse')
+ ❯ tests/unit/consultas.test.ts:91:29
+     89| 
+     90|   it('rechaza estados de hueco y oferta fuera del contrato', () => {
+     91|     expect(HuecoVistaSchema.safeParse({ ...hueco, estado: 'CANCELADO' …
+       |                             ^
+     92|     expect(HuecoVistaSchema.safeParse({ ...hueco, ofertas: [{ ...ofert…
+     93|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Modelos compartidos de consultas > Campos sensibles ausentes: recorre todos los modelos y sus objetos anidados
+TypeError: Cannot read properties of undefined (reading 'shape')
+ ❯ tests/unit/consultas.test.ts:108:87
+    106|     const objetos = [OfertaCatalogoSchema, CitaVistaSchema, FichaHiloS…
+    107|       CitaVistaSchema.shape.tramite, FichaHiloSchema.shape.tramites.el…
+    108|       MetricasVistaSchema.shape.porEstado.element, HuecoVistaSchema, H…
+       |                                                                                       ^
+    109|     for (const esquema of objetos) {
+    110|       for (const nombre of Object.keys(esquema.shape)) expect(['fechaN…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Tabla compartida de rutas GET > publica las doce rutas y sus esquemas de respuesta sin acciones
+AssertionError: expected [ 'tramite', 'lineaTiempo', …(9) ] to have a length of 12 but got 11
+
+- Expected
++ Received
+
+- 12
++ 11
+
+ ❯ tests/unit/consultas.test.ts:139:42
+    137| 
+    138|   it('publica las doce rutas y sus esquemas de respuesta sin acciones'…
+    139|     expect(Object.keys(RUTAS_CONSULTAS)).toHaveLength(12);
+       |                                          ^
+    140|     expect(rutaConsulta('catalogo', {})).toBe('/api/catalogo');
+    141|     expect(rutaConsulta('fichaHilo', { hiloId: ids.hilo })).toBe(`/api…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  |unitarios| tests/unit/consultas.test.ts > Tabla compartida de rutas GET > publica el panel de huecos con un máximo de 50 elementos
+TypeError: Cannot read properties of undefined (reading 'parametros')
+ ❯ rutaConsulta packages/contracts/src/consultas.ts:88:30
+     86| export function rutaConsulta<N extends NombreConsulta>(nombre: N, para…
+     87|   const definicion = RUTAS_CONSULTAS[nombre];
+     88|   const valores = definicion.parametros.parse(parametros);
+       |                              ^
+     89|   let ruta: string = definicion.ruta;
+     90|   for (const [clave, valor] of Object.entries(valores)) {
+ ❯ tests/unit/consultas.test.ts:160:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  |unitarios| tests/unit/contratos.test.ts > contratos de todos los canales > comparte eventos y salas y rechaza prefijos y eventos desconocidos
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/unit/contratos.test.ts:136:161
+    134|   it('comparte eventos y salas y rechaza prefijos y eventos desconocid…
+    135|     expect(SalaSchema.safeParse('inventada:' + id).success).toBe(false…
+    136|     for (const sala of ['tramite:' + id, 'hilo:' + id, 'paciente:' + i…
+       |                                                                                                                                                                 ^
+    137|     // @ts-expect-error: el nombre no pertenece al contrato de eventos…
+    138|     const evento: NombreEventoSocket = 'inventado:secreto';
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  |unitarios| tests/unit/contratos.test.ts > contratos de todos los canales > valida salas de WhatsApp con 10 a 15 dígitos
+ZodError: [
+  {
+    "code": "invalid_union",
+    "errors": [
+      [
+        {
+          "code": "invalid_value",
+          "values": [
+            "admin"
+          ],
+          "path": [],
+          "message": "Invalid input: expected \"admin\""
+        }
+      ],
+      [
+        {
+          "code": "invalid_format",
+          "format": "template_literal",
+          "pattern": "^tramite:([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+          "path": [],
+          "message": "Invalid input"
+        }
+      ],
+      [
+        {
+          "code": "invalid_format",
+          "format": "template_literal",
+          "pattern": "^hilo:([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+          "path": [],
+          "message": "Invalid input"
+        }
+      ],
+      [
+        {
+          "code": "invalid_format",
+          "format": "template_literal",
+          "pattern": "^paciente:([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+          "path": [],
+          "message": "Invalid input"
+        }
+      ],
+      [
+        {
+          "code": "invalid_format",
+          "format": "template_literal",
+          "pattern": "^sede:([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$",
+          "path": [],
+          "message": "Invalid input"
+        }
+      ]
+    ],
+    "path": [],
+    "message": "Invalid input"
+  }
+]
+ ❯ tests/unit/contratos.test.ts:148:23
+    146| 
+    147|   it('valida salas de WhatsApp con 10 a 15 dígitos', () => {
+    148|     expect(SalaSchema.parse('wa:5210000000002')).toBe('wa:521000000000…
+       |                       ^
+    149|     expect(SalaSchema.safeParse('wa:55-1234').success).toBe(false);
+    150|     expect(SalaSchema.safeParse('wa:123').success).toBe(false);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  |unitarios| tests/unit/contratos.test.ts > contratos de todos los canales > valida de uno a cinco mensajes salientes de WhatsApp
+TypeError: Cannot read properties of undefined (reading 'parse')
+ ❯ tests/unit/contratos.test.ts:157:28
+    155|     const mensaje = { tipo: 'botones', texto: 'Continuar', botones: [b…
+    156|     const dato = { waId: '5210000000002', mensajes: [mensaje] };
+    157|     const salida = esquema.parse({ ...dato, pacienteId: id });
+       |                            ^
+    158|     expect(salida).toEqual(dato);
+    159|     expectTypeOf(salida).toEqualTypeOf<DatosEventoSocket['wa:mensajes'…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  8 failed | 37 passed (45)
+   Start at  01:47:13
+   Duration  6.49s (transform 1.07s, setup 0ms, import 6.44s, tests 174ms, environment 0ms)
+

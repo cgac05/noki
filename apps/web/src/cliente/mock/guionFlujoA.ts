@@ -188,7 +188,7 @@ export const GUION_FLUJO_A: PasoFixture[] = definiciones.map((dato, indice) => {
       bandeja: dato.id === 'IDENTIFICACION_FECHA' || dato.citas ? [
         { id: IDS.mensaje, canal: 'sms', asunto: 'Código de demostración', cuerpo: 'Código ficticio: 246810. Solo para esta bandeja simulada.' },
         { id: '019aff00-0000-7000-8000-000000000008', canal: 'email', asunto: 'Aviso de demostración', cuerpo: 'Tu trámite puede continuar en los canales de atención.' },
-      ] : [], metricas, alertasSeguridad: [], lineaTiempo, web: DATOS_WEB[0]!.vista,
+      ] : [], metricas, alertasSeguridad: [], panelHuecos: [], lineaTiempo, web: DATOS_WEB[0]!.vista,
     },
   };
 });

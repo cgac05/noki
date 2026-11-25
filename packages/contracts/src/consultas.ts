@@ -8,11 +8,13 @@ export const OfertaCatalogoSchema = z.object({
 });
 export type OfertaCatalogo = z.infer<typeof OfertaCatalogoSchema>;
 
+const ZonaHorariaSchema = z.string().refine(valor => {
+  try { new Intl.DateTimeFormat('es-MX', { timeZone: valor }); return true; } catch { return false; }
+}, { message: 'Se requiere una zona horaria IANA válida.' });
+
 export const CitaVistaSchema = z.object({
   tramite: TramiteVistaSchema, servicio: z.string().min(1), sede: z.string().min(1),
-  inicio: z.string().datetime(), zonaHoraria: z.string().refine(valor => {
-    try { new Intl.DateTimeFormat('es-MX', { timeZone: valor }); return true; } catch { return false; }
-  }, { message: 'Se requiere una zona horaria IANA válida.' }),
+  inicio: z.string().datetime(), zonaHoraria: ZonaHorariaSchema,
   // El núcleo firma y consume el token; el contrato impide usar el folio en su lugar.
   tokenQr: z.string().min(1).refine(valor => !/^\d{8,9}$/.test(valor), { message: 'El QR requiere un token firmado de un solo uso, no un folio.' }),
 });
@@ -38,6 +40,18 @@ export const AlertaSeguridadSchema = z.object({
   hiloId: z.uuidv7().nullable(),
 });
 export type AlertaSeguridad = z.infer<typeof AlertaSeguridadSchema>;
+export const HuecoVistaSchema = z.object({
+  id: z.uuidv7(),
+  servicio: z.string().min(1), sede: z.string().min(1),
+  inicio: z.string().datetime(), zonaHoraria: ZonaHorariaSchema,
+  estado: z.enum(['DETECTADO', 'OFRECIDO', 'ASIGNADO', 'DESIERTO']),
+  ofertas: z.array(z.object({
+    estado: z.enum(['OFRECIDA', 'ACEPTADA', 'RECHAZADA', 'EXPIRADA', 'PERDIDA']),
+    enviadaEn: z.string().datetime(), expiraEn: z.string().datetime(),
+  })),
+});
+export type HuecoVista = z.infer<typeof HuecoVistaSchema>;
+
 export const MensajeBandejaSchema = z.object({
   id: z.uuidv7(), canal: z.enum(['sms', 'email']), asunto: z.string().min(1), cuerpo: z.string().min(1),
 });
@@ -74,6 +88,10 @@ export const RUTAS_CONSULTAS = {
   alertasSeguridad: {
     ruta: '/api/admin/alertas', parametros: z.object({}),
     respuesta: z.array(AlertaSeguridadSchema).max(50),
+  },
+  panelHuecos: {
+    ruta: '/api/admin/huecos', parametros: z.object({}),
+    respuesta: z.array(HuecoVistaSchema).max(50),
   },
   bandeja: { ruta: '/api/demo/bandeja', parametros: z.object({}), respuesta: z.array(MensajeBandejaSchema), soloDemo: true },
   contextoDemo: { ruta: '/api/demo/contexto', parametros: z.object({}), respuesta: ContextoDemoSchema, soloDemo: true },

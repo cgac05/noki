@@ -50,6 +50,7 @@ Modelos de lectura compartidos, con tipos derivados de sus esquemas Zod:
 | `FichaHilo` | `hiloId`, `nombrePila`, `telefonoEnmascarado` (`•••• 0001`), `tramites`, `lineaTiempo`, `soloLectura`, `oferta` y `codigoContinuacion` (`nombrePila`, `telefonoEnmascarado`, `oferta` y `codigoContinuacion` admiten `null`). |
 | `LlegadaVista` | `cita`, `registrada` y `posicion` opcional, un entero de 1 en adelante que indica el lugar en la fila de la sede. Solo admite `posicion` si `registrada` es `true`. |
 | `AlertaSeguridad` | `id` UUID v7 del evento, `tipo: 'INTENTO_VERIFICACION_FALLIDO'`, `canal`, `ts` ISO UTC, `intentos` entero de 1 en adelante, `bloqueado` booleano e `hiloId` UUID v7 o `null`. |
+| `HuecoVista` | `id` UUID v7, `servicio` y `sede` por nombre, `inicio` ISO UTC, `zonaHoraria` IANA y `estado` (`DETECTADO`, `OFRECIDO`, `ASIGNADO`, `DESIERTO`). Cada oferta incluye `estado` (`OFRECIDA`, `ACEPTADA`, `RECHAZADA`, `EXPIRADA`, `PERDIDA`), `enviadaEn` y `expiraEn` en ISO UTC. El esquema descarta datos de pacientes y el canal de cada oferta. |
 | `MensajeBandeja` | `id`, `canal` (`sms` o `email`), `asunto`, `cuerpo`; solo demo. |
 | `MetricasVista` | `porEstado` con `estado`/`cantidad`, y `kpis` numéricos. |
 
@@ -70,16 +71,21 @@ El QR contiene el token firmado de un solo uso que debe generar y consumir el n�
 | `llegadasSede` | `/api/sedes/:sedeId/llegadas` | `sedeId` | `LlegadaVista[]` |
 | `metricas` | `/api/admin/kpis` | ninguno | `MetricasVista` |
 | `alertasSeguridad` | `/api/admin/alertas` | ninguno | `AlertaSeguridad[]` de hasta 50 elementos |
+| `panelHuecos` | `/api/admin/huecos` | ninguno | `HuecoVista[]` de hasta 50 elementos |
 | `bandeja` | `/api/demo/bandeja` | ninguno | `MensajeBandeja[]`, `soloDemo: true` |
 | `contextoDemo` | `/api/demo/contexto` | ninguno | `ContextoDemo`, `soloDemo: true` |
 
 `alertasSeguridad` omite datos personales y el método de verificación. El intento que provoca el bloqueo lleva `bloqueado: true`. `GET /api/admin/alertas` devuelve los 50 intentos más recientes como máximo, del más reciente al más antiguo.
 
+`panelHuecos` admite hasta 50 huecos y está disponible en el contrato sin la marca `soloDemo`. El núcleo entregará los huecos del más reciente al más antiguo. La API registrará la ruta en el cambio del núcleo.
+
 `contextoDemo` devuelve `{ hiloId, pacienteId, sedeId }` del último hilo con cita confirmada. Cada campo es UUID v7 o `null`. El servidor del cambio `api-comandos` debe responder 404 cuando `DEMO_MODE` es distinto de `true`.
 
 Según el spec `consultas-api` de `api-comandos`, `metricas.kpis` contiene `cambiosCanal`, `cambiosCanalPorHilo`, `tramitesRecuperados`, `citasConfirmadas`, `llegadasRegistradas`, `datosRepetidos` e `intentosVerificacionFallidos`. Se calculan sobre todo el histórico y se emiten con los mismos valores en `admin:metricas`.
 
-Todos los IDs de ruta son UUID v7. Se conservan las rutas anteriores, con nombres explícitos de parámetros en sus plantillas. `GET /api/admin/embudo` y `GET /api/admin/huecos` siguen pendientes de sus cambios y no pertenecen aún a la tabla.
+El cambio del núcleo agregará a `metricas.kpis` las claves numéricas `huecosLiberados`, `huecosRecuperados`, `horasRecursoRecuperadas` y `diasAdelantadosPromedio` (PLAN.md §10.8).
+
+Todos los IDs de ruta son UUID v7. Se conservan las rutas anteriores, con nombres explícitos de parámetros en sus plantillas. La consulta `GET /api/admin/embudo` sigue pendiente de su cambio.
 
 Este contrato no implementa endpoints GET ni autenticación. Las consultas exponen datos personales (nombre de pila, contacto enmascarado, citas con token, llegadas y bandeja) y **solo pueden usarse en la demo** hasta cerrar el cambio de seguridad. La web valida las respuestas en ambos modos con esta tabla; en real, las consultas marcadas `soloDemo` requieren `VITE_DEMO=true`. Historial de WhatsApp y cotización web independiente siguen siendo lecturas exclusivas de demo.
 
@@ -114,8 +120,11 @@ Un cuerpo inválido devuelve 400 con `{ codigo: 'CUERPO_INVALIDO' }` y conserva 
 | admin:metricas | mapa de métricas numéricas |
 | sede:fila | `{ tramiteId, posicion }` |
 | bandeja:mensaje | `{ mensajeId, canal: sms | email }` |
+| wa:mensajes | `DatosMensajesWa` con `{ waId, mensajes }`. El `waId` tiene de 10 a 15 dígitos y `mensajes` contiene de 1 a 5 elementos válidos según `MensajeBotSchema`. |
 
-`SalaSchema` admite únicamente `admin` o los prefijos `tramite:`, `hilo:`, `paciente:`, `sede:` seguidos de UUID v7. El tipo `Sala` se deriva del esquema. `EVENTOS_CLIENTE_SOCKET` publica `sala:unirse` y `sala:salir`. `ESQUEMAS_EVENTOS_CLIENTE_SOCKET` valida en ambos casos una `Sala`. No hay servidor Socket.IO en esta entrega.
+`SalaSchema` admite `admin`, las salas con prefijos `tramite:`, `hilo:`, `paciente:`, `sede:` seguidos de UUID v7 y `wa:<waId>` con 10 a 15 dígitos. El tipo `Sala` se deriva del esquema. `EVENTOS_CLIENTE_SOCKET` publica `sala:unirse` y `sala:salir`. `ESQUEMAS_EVENTOS_CLIENTE_SOCKET` valida en ambos casos una `Sala`.
+
+El núcleo emitirá `wa:mensajes` a la sala `wa:<waId>` para la aprobación de la cancelación y las ofertas de adelanto. El `payload` de cada botón lleva un token opaco de un solo uso. El cliente lo devuelve como `payloadBoton` en `POST /api/canales/wa/mensajes`. Los mensajes de oferta incluyen solo servicio, sede, fecha y hora, además del botón correspondiente (PLAN.md §10.1).
 
 ## errores.ts
 

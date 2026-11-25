@@ -195,10 +195,11 @@ Body:    { canal, actor, tipo, tramiteId?, hiloId?, payload }
 - `GET /api/sedes/:sedeId/llegadas`
 - `GET /api/admin/kpis`
 - `GET /api/admin/alertas` — devuelve hasta 50 alertas de seguridad sin datos personales.
+- `GET /api/admin/huecos` — contrato de hasta 50 huecos sin datos de pacientes ni canal de oferta. La API lo registrará en el cambio del núcleo.
 - `GET /api/demo/bandeja` — solo demo.
 - `GET /api/demo/contexto` — solo demo. Devuelve `hiloId`, `pacienteId` y `sedeId` nullables. La API debe responder 404 fuera de `DEMO_MODE=true`.
 
-Pendientes de sus cambios, fuera de esta tabla por ahora: `GET /api/admin/embudo` y `GET /api/admin/huecos`.
+Consulta pendiente de su cambio: `GET /api/admin/embudo`.
 
 Las lecturas contienen solo datos; el canal arma los comandos copiando los IDs del dato elegido y el token del QR de la cita. La definición del contrato no implementa los endpoints. Estas consultas todavía no tienen autenticación y solo se usan en la demo hasta el cambio de seguridad.
 
@@ -216,7 +217,9 @@ Las lecturas contienen solo datos; el canal arma los comandos copiando los IDs d
 - Tras N fallos → `eventos:fallidos` (visible en `/admin`).
 
 ### Tiempo real (Socket.IO)
-Salas: `tramite:<id>`, `hilo:<id>`, `paciente:<id>`, `sede:<id>`, `admin`. El cliente usa `sala:unirse` y `sala:salir` de `EVENTOS_CLIENTE_SOCKET` con un dato validado por `SalaSchema`. Al tablero se emiten métricas agregadas; el detalle solo cuando se abre un hilo.
+Salas: `tramite:<id>`, `hilo:<id>`, `paciente:<id>`, `sede:<id>`, `admin` y `wa:<waId>` (10 a 15 dígitos). El cliente usa `sala:unirse` y `sala:salir` de `EVENTOS_CLIENTE_SOCKET` con un dato validado por `SalaSchema`. Al tablero se emiten métricas agregadas; el detalle solo cuando se abre un hilo.
+
+El contrato declara `wa:mensajes` con `{ waId, mensajes }` (1 a 5 `MensajeBot`) para la sala `wa:<waId>`. El núcleo emitirá allí las solicitudes de aprobación y las ofertas. Los botones llevan un token opaco de un solo uso en `payload`; la respuesta viaja como `payloadBoton` al endpoint de WhatsApp.
 
 ### Trabajos diferidos (BullMQ)
 El `job_id` lógico es `${tipo}:${tramiteId}` (ej. `HOLD:0193…`). BullMQ guarda el `jobId` físico `${tipo}-${tramiteId}` porque sus IDs propios admiten el guion. El identificador determinista permite cancelar o reprogramar el trabajo.

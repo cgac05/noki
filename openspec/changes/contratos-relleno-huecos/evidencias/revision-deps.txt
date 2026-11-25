@@ -1,0 +1,10 @@
+﻿corepack : $ depcruise --config .dependency-cruiser.cjs packages apps
+En línea: 1 Carácter: 612
++ ... TEXITCODE"; corepack pnpm lint:deps *> "$env:TEMP\claude\rev-deps.txt ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ($ depcruise --c...s packages apps:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+✔ no dependency violations found (234 modules, 717 dependencies cruised)
+

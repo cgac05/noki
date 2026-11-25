@@ -1,0 +1,5 @@
+corepack pnpm lint
+Código de salida: 0
+
+$ eslint . && pnpm typecheck
+$ pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json

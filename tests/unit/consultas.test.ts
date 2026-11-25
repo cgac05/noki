@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import {
-  AlertaSeguridadSchema, CitaVistaSchema, FichaHiloSchema, LlegadaVistaSchema, MensajeBandejaSchema,
+  AlertaSeguridadSchema, CitaVistaSchema, FichaHiloSchema, LlegadaVistaSchema, HuecoVistaSchema, MensajeBandejaSchema,
   MetricasVistaSchema, OfertaCatalogoSchema, ContextoDemoSchema, RUTAS_CONSULTAS, rutaConsulta,
 } from '../../packages/contracts/src/index.ts';
-import type { CitaVista, NombreConsulta, ParametrosConsulta, RespuestaConsulta } from '../../packages/contracts/src/index.ts';
+import type { CitaVista, HuecoVista, NombreConsulta, ParametrosConsulta, RespuestaConsulta } from '../../packages/contracts/src/index.ts';
 
 const ids = {
   tramite: '019aff00-0000-7000-8000-000000000001', hilo: '019aff00-0000-7000-8000-000000000002',
@@ -15,6 +15,12 @@ const oferta = { servicioId: ids.servicio, servicio: 'Paquete US mamario + Papan
 const cita = { tramite, servicio: oferta.servicio, sede: oferta.sede, inicio: '2026-11-26T16:15:00.000Z', zonaHoraria: 'America/Mazatlan', tokenQr: 'demo.token-opaco-de-cita' };
 const ficha = { hiloId: ids.hilo, nombrePila: 'Ana', telefonoEnmascarado: '•••• 0001', tramites: [tramite], lineaTiempo: [], soloLectura: true, oferta, codigoContinuacion: null };
 const alerta = { id: ids.mensaje, tipo: 'INTENTO_VERIFICACION_FALLIDO', canal: 'whatsapp', ts: cita.inicio, intentos: 3, bloqueado: true, hiloId: null };
+
+const ofertaHueco = { estado: 'OFRECIDA', enviadaEn: '2026-11-25T16:15:00Z', expiraEn: '2026-11-25T16:20:00Z' };
+const hueco = {
+  id: ids.mensaje, servicio: cita.servicio, sede: cita.sede, inicio: cita.inicio,
+  zonaHoraria: cita.zonaHoraria, estado: 'OFRECIDO', ofertas: [ofertaHueco],
+};
 
 describe('Modelos compartidos de consultas', () => {
   it.each(['12345678', '123456789'])('Token del QR no es el folio: rechaza %s', tokenQr => {
@@ -72,6 +78,20 @@ describe('Modelos compartidos de consultas', () => {
     expect(AlertaSeguridadSchema.parse({ ...alerta, telefono: 'dato no autorizado' })).toEqual(alerta);
   });
 
+  it('valida el hueco y descarta datos de pacientes y el canal de la oferta', () => {
+    const datosPaciente = { pacienteId: ids.paciente, nombre: 'Paciente de prueba' };
+    const resultado = HuecoVistaSchema.parse({
+      ...hueco, ...datosPaciente, ofertas: [{ ...ofertaHueco, ...datosPaciente, canal: 'whatsapp' }],
+    });
+    expect(resultado).toEqual(hueco);
+    expectTypeOf(resultado).toEqualTypeOf<HuecoVista>();
+  });
+
+  it('rechaza estados de hueco y oferta fuera del contrato', () => {
+    expect(HuecoVistaSchema.safeParse({ ...hueco, estado: 'CANCELADO' }).success).toBe(false);
+    expect(HuecoVistaSchema.safeParse({ ...hueco, ofertas: [{ ...ofertaHueco, estado: 'PENDIENTE' }] }).success).toBe(false);
+  });
+
   it('Ficha de un hilo anónimo: conserva los campos nulos', () => {
     const anonima = { ...ficha, nombrePila: null, telefonoEnmascarado: null };
     expect(FichaHiloSchema.parse(anonima)).toEqual(anonima);
@@ -83,9 +103,9 @@ describe('Modelos compartidos de consultas', () => {
   });
 
   it('Campos sensibles ausentes: recorre todos los modelos y sus objetos anidados', () => {
-    const objetos = [OfertaCatalogoSchema, CitaVistaSchema, FichaHiloSchema, LlegadaVistaSchema, MensajeBandejaSchema, MetricasVistaSchema, ContextoDemoSchema, AlertaSeguridadSchema,
+    const objetos = [OfertaCatalogoSchema, CitaVistaSchema, FichaHiloSchema, LlegadaVistaSchema, HuecoVistaSchema, MensajeBandejaSchema, MetricasVistaSchema, ContextoDemoSchema, AlertaSeguridadSchema,
       CitaVistaSchema.shape.tramite, FichaHiloSchema.shape.tramites.element, FichaHiloSchema.shape.lineaTiempo.element,
-      MetricasVistaSchema.shape.porEstado.element];
+      MetricasVistaSchema.shape.porEstado.element, HuecoVistaSchema, HuecoVistaSchema.shape.ofertas.element];
     for (const esquema of objetos) {
       for (const nombre of Object.keys(esquema.shape)) expect(['fechaNac', 'email', 'rfc', 'pin', 'curp', 'telefono']).not.toContain(nombre);
     }
@@ -115,8 +135,8 @@ describe('Tabla compartida de rutas GET', () => {
     expect(rutaConsulta('metricas', {})).toBe('/api/admin/kpis');
   });
 
-  it('publica las once rutas y sus esquemas de respuesta sin acciones', () => {
-    expect(Object.keys(RUTAS_CONSULTAS)).toHaveLength(11);
+  it('publica las doce rutas y sus esquemas de respuesta sin acciones', () => {
+    expect(Object.keys(RUTAS_CONSULTAS)).toHaveLength(12);
     expect(rutaConsulta('catalogo', {})).toBe('/api/catalogo');
     expect(rutaConsulta('fichaHilo', { hiloId: ids.hilo })).toBe(`/api/hilos/${ids.hilo}/ficha`);
     expect(rutaConsulta('citasPaciente', { pacienteId: ids.paciente })).toBe(`/api/pacientes/${ids.paciente}/citas`);
@@ -133,6 +153,14 @@ describe('Tabla compartida de rutas GET', () => {
     expect(ruta).not.toHaveProperty('soloDemo', true);
     expect(ruta.respuesta.parse(Array.from({ length: 50 }, () => alerta))).toHaveLength(50);
     expect(ruta.respuesta.safeParse(Array.from({ length: 51 }, () => alerta)).success).toBe(false);
+  });
+
+  it('publica el panel de huecos con un máximo de 50 elementos', () => {
+    const ruta = RUTAS_CONSULTAS.panelHuecos;
+    expect(rutaConsulta('panelHuecos', {})).toBe('/api/admin/huecos');
+    expect(ruta).not.toHaveProperty('soloDemo', true);
+    expect(ruta.respuesta.parse(Array.from({ length: 50 }, () => hueco))).toHaveLength(50);
+    expect(ruta.respuesta.safeParse(Array.from({ length: 51 }, () => hueco)).success).toBe(false);
   });
 
   it('Contexto de demo: expone solo los identificadores nullables', () => {

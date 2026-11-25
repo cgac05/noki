@@ -1,0 +1,87 @@
+{
+  "cambio": "contratos-relleno-huecos",
+  "revision": 1,
+  "rama": "claude/project-thread-nqfp68",
+  "head": "77e52816e7104a39db52dbe1bb8a719fe31c0413",
+  "base": "230d2460e99fc87186f32352a3d8de9ba1d8a9f3",
+  "archivos": [
+    {
+      "ruta": "AGENTS.md",
+      "sha256": "ba3b1f192c5358b99a860b7299daf63de2bae35e1de6aacf8206896f6eab58ea"
+    },
+    {
+      "ruta": "apps/web/src/cliente/mock/guionFlujoA.ts",
+      "sha256": "f1d80d78e5a1dd59c6dd29676c4f3cd3cb50ef5cdc4305a918bfa01f6e6d67f0"
+    },
+    {
+      "ruta": "docs/contratos.md",
+      "sha256": "4127d21aea5db946e440ca6d2b5b1352b7ea0f9693719113e949bc7b5521e171"
+    },
+    {
+      "ruta": "openspec/changes/contratos-relleno-huecos/evidencias/01-rojo.txt",
+      "sha256": "d10dba04fdba04f65bd9ac3e78b7e4edf3ce20aafe5835be9fe349258eee14ae"
+    },
+    {
+      "ruta": "openspec/changes/contratos-relleno-huecos/evidencias/02-tsc.txt",
+      "sha256": "bc90a0ba99aedf60b7a06bd2bc789dc59e9655d342abe0e7d91a84132f214386"
+    },
+    {
+      "ruta": "openspec/changes/contratos-relleno-huecos/evidencias/02-verde.txt",
+      "sha256": "5a56936d7444ad8112bb3da72650b14e1a55ec9eee3a5ef5fa0a1d629ad3bf88"
+    },
+    {
+      "ruta": "openspec/changes/contratos-relleno-huecos/evidencias/03-deps.txt",
+      "sha256": "a103865a7b5046f3268452363ac424e94ac2cb26cee9e7c1d8b6614dfc9e7ca7"
+    },
+    {
+      "ruta": "openspec/changes/contratos-relleno-huecos/evidencias/03-integracion-primer-intento.txt",
+      "sha256": "f63465d391a4a8123f8a5f9c375be81dca76d6147789c3f9e5cac0165bba266d"
+    },
+    {
+      "ruta": "openspec/changes/contratos-relleno-huecos/evidencias/03-integracion.txt",
+      "sha256": "8a0a879a815d600e40b891abfe524c70fe77a795084f88a87bf40dfb9f43741b"
+    },
+    {
+      "ruta": "openspec/changes/contratos-relleno-huecos/evidencias/03-lint.txt",
+      "sha256": "91e96ebe20a0918eb8ab3d0332d0bc8af6b481bdd53c9f034406445c4533eab7"
+    },
+    {
+      "ruta": "openspec/changes/contratos-relleno-huecos/evidencias/03-test-primer-intento.txt",
+      "sha256": "a0a242a2ffeac0d9b683fb8b6db9a3086104707f3381496c8b7e2b662089cf44"
+    },
+    {
+      "ruta": "openspec/changes/contratos-relleno-huecos/evidencias/03-test.txt",
+      "sha256": "4e6bfeb003397665fa7482b8bb88b107cfb452ada6fe77b21f6412f88da9461c"
+    },
+    {
+      "ruta": "openspec/changes/contratos-relleno-huecos/implementacion.md",
+      "sha256": "f10b031946e79b18739d02ba289b1d7a61a228d1daa539a2ea3a56752d9d0a9b"
+    },
+    {
+      "ruta": "openspec/changes/contratos-relleno-huecos/tasks.md",
+      "sha256": "79e581a6b9242ddb68c4201fee9d77ca40a187c77ba39acd2474cb9d68be977f"
+    },
+    {
+      "ruta": "packages/contracts/src/consultas.ts",
+      "sha256": "248e5f3683b7069576f82d16a0aec8d64075e61b59036ff476faa471a834ad3c"
+    },
+    {
+      "ruta": "packages/contracts/src/tiempoReal.ts",
+      "sha256": "2fe9a64ccfe309ab0d1ac85c2ec3ef2de3bb81ab0b6b007cd1ad7e7615463bad"
+    },
+    {
+      "ruta": "tests/unit/consultas.test.ts",
+      "sha256": "6f9a66f64a03062b4e2d7062e6f6a3313c06c7151b9ab6c38e0c18c071d1d1ca"
+    },
+    {
+      "ruta": "tests/unit/contratos.test.ts",
+      "sha256": "f9c622d1a924d431f2148e28397f1f6b74f3cda9cc7dbfb604d260565cfd8796"
+    }
+  ],
+  "manifiesto": "openspec/changes/contratos-relleno-huecos/evidencias/03-archivos-entregados.json",
+  "preexistentes": [
+    "openspec/changes/contratos-relleno-huecos/handoff.md",
+    "openspec/changes/relleno-huecos/"
+  ],
+  "archivosFueraDeAlcance": []
+}

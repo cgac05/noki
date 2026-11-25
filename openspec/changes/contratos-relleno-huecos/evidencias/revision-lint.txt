@@ -1,0 +1,8 @@
+﻿corepack : $ eslint . && pnpm typecheck
+En línea: 1 Carácter: 535
++ ... $env:PATH"; corepack pnpm lint *> "$env:TEMP\claude\rev-lint.txt"; "l ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ($ eslint . && pnpm typecheck:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+$ pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json

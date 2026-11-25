@@ -1,0 +1,7 @@
+corepack pnpm lint:deps
+Código de salida: 0
+
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+✔ no dependency violations found (234 modules, 717 dependencies cruised)
+

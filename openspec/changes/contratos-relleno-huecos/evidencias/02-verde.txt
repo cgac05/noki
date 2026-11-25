@@ -1,0 +1,14 @@
+corepack pnpm exec vitest run --project unitarios tests/unit/contratos.test.ts tests/unit/consultas.test.ts
+Código de salida: 0
+
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ✓ |unitarios| tests/unit/consultas.test.ts (25 tests) 68ms
+ ✓ |unitarios| tests/unit/contratos.test.ts (20 tests) 99ms
+
+ Test Files  2 passed (2)
+      Tests  45 passed (45)
+   Start at  01:47:53
+   Duration  5.23s (transform 914ms, setup 0ms, import 5.12s, tests 167ms, environment 0ms)
+

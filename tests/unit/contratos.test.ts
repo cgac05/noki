@@ -4,7 +4,7 @@ import {
   AdelantarRelojSchema, RespuestaRelojSchema, RUTA_RELOJ_DEMO,
   ComandoRequestSchema, SiguientePreguntaSchema, MensajeBotSchema, CampoFlowSchema,
   SolicitudMensajeWaSchema, RespuestaMensajeWaSchema, SalaSchema, CuerpoErrorSchema,
-  RespuestaComandoSchema, TramiteVistaSchema, ESQUEMAS_EVENTOS_SOCKET, EVENTOS_CLIENTE_SOCKET, ESQUEMAS_EVENTOS_CLIENTE_SOCKET, type ComandoRequest, type NombreEventoSocket,
+  RespuestaComandoSchema, TramiteVistaSchema, ESQUEMAS_EVENTOS_SOCKET, EVENTOS_CLIENTE_SOCKET, ESQUEMAS_EVENTOS_CLIENTE_SOCKET, type ComandoRequest, type NombreEventoSocket, type DatosEventoSocket,
 } from '../../packages/contracts/src/index.ts';
 
 const id = '019b0000-0000-7000-8000-000000000001';
@@ -133,15 +133,34 @@ describe('contratos de todos los canales', () => {
 
   it('comparte eventos y salas y rechaza prefijos y eventos desconocidos', () => {
     expect(SalaSchema.safeParse('inventada:' + id).success).toBe(false);
-    for (const sala of ['tramite:' + id, 'hilo:' + id, 'paciente:' + id, 'sede:' + id, 'admin']) expect(SalaSchema.safeParse(sala).success).toBe(true);
+    for (const sala of ['tramite:' + id, 'hilo:' + id, 'paciente:' + id, 'sede:' + id, 'admin', 'wa:5210000000002']) expect(SalaSchema.safeParse(sala).success).toBe(true);
     // @ts-expect-error: el nombre no pertenece al contrato de eventos Socket.IO
     const evento: NombreEventoSocket = 'inventado:secreto';
     expect(evento).not.toBe('tramite:actualizado');
-    expect(Object.keys(ESQUEMAS_EVENTOS_SOCKET)).toHaveLength(5);
+    expect(Object.keys(ESQUEMAS_EVENTOS_SOCKET)).toHaveLength(6);
     expect(ESQUEMAS_EVENTOS_SOCKET['hilo:linea-tiempo'].safeParse({ hiloId: id, eventos: [] }).success).toBe(true);
     expect(ESQUEMAS_EVENTOS_SOCKET['admin:metricas'].safeParse({ confirmadas: 'secreto' }).success).toBe(false);
     expect(ESQUEMAS_EVENTOS_SOCKET['sede:fila'].safeParse({ tramiteId: id, posicion: -1 }).success).toBe(false);
     expect(ESQUEMAS_EVENTOS_SOCKET['bandeja:mensaje'].safeParse({ mensajeId: id, canal: 'fax' }).success).toBe(false);
+  });
+
+  it('valida salas de WhatsApp con 10 a 15 dígitos', () => {
+    expect(SalaSchema.parse('wa:5210000000002')).toBe('wa:5210000000002');
+    expect(SalaSchema.safeParse('wa:55-1234').success).toBe(false);
+    expect(SalaSchema.safeParse('wa:123').success).toBe(false);
+  });
+
+  it('valida de uno a cinco mensajes salientes de WhatsApp', () => {
+    const esquema = ESQUEMAS_EVENTOS_SOCKET['wa:mensajes'];
+    const mensaje = { tipo: 'botones', texto: 'Continuar', botones: [boton] } as const;
+    const dato = { waId: '5210000000002', mensajes: [mensaje] };
+    const salida = esquema.parse({ ...dato, pacienteId: id });
+    expect(salida).toEqual(dato);
+    expectTypeOf(salida).toEqualTypeOf<DatosEventoSocket['wa:mensajes']>();
+    expect(esquema.safeParse({ ...dato, mensajes: Array(5).fill(mensaje) }).success).toBe(true);
+    expect(esquema.safeParse({ ...dato, mensajes: [] }).success).toBe(false);
+    expect(esquema.safeParse({ ...dato, mensajes: Array(6).fill(mensaje) }).success).toBe(false);
+    expect(esquema.safeParse({ ...dato, waId: '12345' }).success).toBe(false);
   });
 
   it('valida la sala al unirse y salir por Socket.IO', () => {
