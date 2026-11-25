@@ -1,8 +1,9 @@
-import { act, cleanup, render, screen } from '@testing-library/react';
+import { act, cleanup, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { afterEach, expect, it, vi } from 'vitest';
 import { ClienteMock } from '../cliente/mock/ClienteMock.ts';
+import { CATALOGO_DEMO } from '../cliente/mock/datosWeb.ts';
 import { GUION_FLUJO_A, IDS } from '../cliente/mock/guionFlujoA.ts';
 import { ClienteReal } from '../cliente/real/ClienteReal.ts';
 import { ProveedorCliente } from '../cliente/ProveedorCliente.tsx';
@@ -13,18 +14,42 @@ import { rutas } from '../rutas.tsx';
 const citaAna = GUION_FLUJO_A.find(paso => paso.paso.id === 'CONFIRMADA')!.lecturas.citasPaciente[0]!;
 const idBeto = '019aff10-0000-7000-8000-000000000012';
 const citaBeto = { ...citaAna, tramite: { ...citaAna.tramite, id: IDS.reserva }, servicio: 'Ultrasonido abdominal', tokenQr: 'demo.qr.beto' };
+const telefonoContinuacion = '3112111830';
+const cotizada = GUION_FLUJO_A.find(paso => paso.paso.id === 'COTIZADO')!.lecturas.tramite;
+const pendientePaciente = { ...cotizada, id: IDS.reserva, estado: 'HORARIO_RESERVADO' };
 
 afterEach(() => { cleanup(); sessionStorage.clear(); });
 
-function abrir(modo: 'mock' | 'real') {
+function abrir(modo: 'mock' | 'real', conPendientes = false) {
   const socket = new SocketFalso();
-  const peticion = vi.fn<typeof fetch>().mockImplementation(async url => {
+  let confirmada = false;
+  const peticion = vi.fn<typeof fetch>().mockImplementation(async (url, opciones) => {
     const ruta = String(url);
+    if (ruta.endsWith('/sesion-web/' + telefonoContinuacion)) return Response.json({
+      pacienteId: IDS.paciente, nombreVisible: 'Ana P.', tramitesEnProceso: confirmada ? [] : [cotizada],
+    });
+    if (ruta.endsWith('/sesion-web/5210000000007')) return Response.json({
+      pacienteId: null, nombreVisible: null, tramitesEnProceso: [cotizada],
+    });
+    if (ruta.endsWith('/api/catalogo')) return Response.json([CATALOGO_DEMO]);
+    if (ruta.endsWith('/api/canales/wa/mensajes')) {
+      const entrada = JSON.parse(String(opciones?.body));
+      if (entrada.waId !== telefonoContinuacion) throw new Error('Teléfono de sesión inesperado');
+      if (entrada.payloadBoton === 'confirmar-demo') confirmada = true;
+      return Response.json({ mensajes: confirmada
+        ? [{ tipo: 'texto', texto: 'Cita confirmada.' }]
+        : [{ tipo: 'botones', texto: 'Elige el horario pendiente', botones: [{ id: 'confirmar', titulo: 'Confirmar horario', payload: 'confirmar-demo' }] }],
+      });
+    }
     if (ruta.endsWith('/sesion-web/5210000000001')) return Response.json({ pacienteId: IDS.paciente, nombreVisible: 'Ana P.', tramitesEnProceso: [] });
     if (ruta.endsWith('/sesion-web/5210000000002')) return Response.json({ pacienteId: idBeto, nombreVisible: 'Beto R.', tramitesEnProceso: [] });
     if (ruta.endsWith('/sesion-web/5210000000008')) return Response.json({ pacienteId: null, nombreVisible: null, tramitesEnProceso: [] });
     if (ruta.endsWith('/sesion-web/5210000000009')) return Response.json({ error: { codigo: 'NO_ENCONTRADO', mensaje: 'Sin registro.' } }, { status: 404 });
-    if (ruta.endsWith(`/${IDS.paciente}/citas`)) return Response.json([citaAna]);
+    if (ruta.endsWith(`/${IDS.paciente}/tramites-abiertos`)) return Response.json(conPendientes
+      ? [pendientePaciente, ...(confirmada ? [citaAna.tramite] : [cotizada]), { ...cotizada, id: idBeto, tipo: 'FACTURA' }]
+      : [citaAna.tramite, { ...citaBeto.tramite, estado: 'ATENDIDA' }]);
+    if (ruta.endsWith(`/${idBeto}/tramites-abiertos`)) return Response.json([]);
+    if (ruta.endsWith(`/${IDS.paciente}/citas`)) return Response.json(conPendientes && !confirmada ? [] : [citaAna]);
     if (ruta.endsWith(`/${idBeto}/citas`)) return Response.json([citaBeto]);
     throw new Error('Consulta inesperada');
   });
@@ -46,8 +71,43 @@ function abrir(modo: 'mock' | 'real') {
       }
     });
   };
-  return { usuario: userEvent.setup(), consultar, peticion, socket, confirmar };
+  return { usuario: userEvent.setup(), consultar, peticion, socket, confirmar, router };
 }
+
+it('une los trámites sin duplicarlos y permite retomar y confirmar dentro de la app', async () => {
+  const { usuario, router } = abrir('real', true);
+  await entrarSesionDemo(usuario, telefonoContinuacion);
+  const pendientes = within(await screen.findByRole('region', { name: 'Citas por terminar' }));
+  await waitFor(() => expect(pendientes.getAllByText(CATALOGO_DEMO.servicio)).toHaveLength(2));
+  expect(pendientes.getAllByText(CATALOGO_DEMO.sede)).toHaveLength(2);
+  const botones = pendientes.getAllByRole('button', { name: 'Termina tu cita' });
+  expect(botones).toHaveLength(2);
+  await usuario.click(botones[1]!);
+  expect(await screen.findByText('Elige el horario pendiente')).toBeDefined();
+  expect(router.state.location.pathname).toBe('/app');
+  await usuario.click(screen.getByRole('button', { name: 'Confirmar horario' }));
+  await screen.findByText('Cita confirmada.');
+  await usuario.click(screen.getByRole('button', { name: 'Volver' }));
+  expect(await screen.findByRole('img', { name: 'Código QR de la cita' })).toBeDefined();
+  await waitFor(() => expect(screen.getAllByRole('button', { name: 'Termina tu cita' })).toHaveLength(1));
+});
+
+it('muestra el trámite del número sin paciente vinculado', async () => {
+  const { usuario, consultar } = abrir('real');
+  await entrarSesionDemo(usuario, '5210000000007');
+  const pendientes = within(await screen.findByRole('region', { name: 'Citas por terminar' }));
+  expect(await pendientes.findByText(CATALOGO_DEMO.servicio)).toBeDefined();
+  expect(screen.queryByRole('heading', { name: 'No encontramos citas para este número' })).toBeNull();
+  expect(consultar.mock.calls.map(([nombre]) => nombre)).toEqual(['sesionWebDemo', 'catalogo']);
+});
+
+it('conserva las citas y omite la sección cuando no hay trámites en proceso', async () => {
+  const { usuario } = abrir('real');
+  await entrarSesionDemo(usuario);
+  expect(await screen.findByRole('img', { name: 'Código QR de la cita' })).toBeDefined();
+  expect(screen.getByText('CONFIRMADA')).toBeDefined();
+  expect(screen.queryByRole('heading', { name: 'Citas por terminar' })).toBeNull();
+});
 
 it.each(['mock', 'real'] as const)('entra con el número de Ana y muestra su estado y QR en modo %s', async modo => {
   const { usuario, consultar, confirmar } = abrir(modo);

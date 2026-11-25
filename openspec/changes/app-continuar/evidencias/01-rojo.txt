@@ -1,0 +1,752 @@
+﻿Base 1e692d7 + pruebas, antes de editar App.tsx
+npx.cmd vitest run --project web --maxWorkers=2 apps/web/src/vistas/appSesion.test.tsx
+node:fs:559
+  return binding.open(
+                 ^
+
+Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
+    at Object.openSync (node:fs:559:18)
+    at readFileSync (node:fs:443:35)
+    at getSourceSync (node:internal/modules/esm/load:37:14)
+    at defaultLoadSync (node:internal/modules/esm/load:153:34)
+    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:795:12)
+    at #loadSync (node:internal/modules/esm/loader:815:49)
+    at ModuleLoader.load (node:internal/modules/esm/loader:780:26)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:526:31)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:571:36)
+    at afterResolve (node:internal/modules/esm/loader:624:52) {
+  errno: -4048,
+  code: 'EPERM',
+  syscall: 'open',
+  path: 'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
+}
+
+Node.js v24.13.0
+Exit: 1
+npx.cmd vitest run --project web --maxWorkers=2 apps/web/src/vistas/appSesion.test.tsx --configLoader runner
+node:fs:559
+  return binding.open(
+                 ^
+
+Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
+    at Object.openSync (node:fs:559:18)
+    at readFileSync (node:fs:443:35)
+    at getSourceSync (node:internal/modules/esm/load:37:14)
+    at defaultLoadSync (node:internal/modules/esm/load:153:34)
+    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:795:12)
+    at #loadSync (node:internal/modules/esm/loader:815:49)
+    at ModuleLoader.load (node:internal/modules/esm/loader:780:26)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:526:31)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:571:36)
+    at afterResolve (node:internal/modules/esm/loader:624:52) {
+  errno: -4048,
+  code: 'EPERM',
+  syscall: 'open',
+  path: 'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
+}
+
+Node.js v24.13.0
+Exit: 1
+Copia temporal de 1e692d7 con pnpm install --frozen-lockfile --ignore-scripts. npx.cmd vitest run --project web --maxWorkers=2 apps/web/src/vistas/appSesion.test.tsx
+X [ERROR] Cannot read directory "../../../..": Access is denied.
+
+X [ERROR] Could not resolve "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\\vitest.config.ts"
+
+failed to load config from C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\vitest.config.ts
+
+⎯⎯⎯⎯⎯⎯⎯ Startup Error ⎯⎯⎯⎯⎯⎯⎯⎯
+Error: Build failed with 2 errors:
+error: Cannot read directory "../../../..": Access is denied.
+error: Could not resolve "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\\vitest.config.ts"
+    at failureErrorWithLog (C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1752:15)
+    at C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1211:25
+    at runOnEndCallbacks (C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1592:45)
+    at buildResponseToResult (C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1209:7)
+    at C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1236:16
+    at responseCallbacks.<computed> (C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:886:9)
+    at handleIncomingPacket (C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:941:12)
+    at Socket.readFromStdout (C:\Users\guill\AppData\Local\Temp\noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:864:7)
+    at Socket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12) {
+  errors: [Getter/Setter],
+  warnings: [Getter/Setter]
+}
+
+
+
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice
+Exit: 1
+npx.cmd vitest run --project web --maxWorkers=2 apps/web/src/vistas/appSesion.test.tsx --configLoader runner
+
+ RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-app-continuar-679fad9d-cd0a-4db0-9b36-3d2aed7df32d
+
+ ❯ |web| src/vistas/appSesion.test.tsx (12 tests | 2 failed) 10262ms
+   × une los trámites sin duplicarlos y permite retomar y confirmar dentro de la app 1694ms
+   × muestra el trámite del número sin paciente vinculado 1534ms
+   ✓ conserva las citas y omite la sección cuando no hay trámites en proceso  570ms
+   ✓ entra con el número de Ana y muestra su estado y QR en modo mock  655ms
+   ✓ entra con el número de Ana y muestra su estado y QR en modo real  554ms
+   ✓ sale de Ana y muestra solo las citas de Beto en modo mock  1176ms
+   ✓ sale de Ana y muestra solo las citas de Beto en modo real  1100ms
+   ✓ rechaza la contraseña incorrecta sin consultar en modo mock  548ms
+   ✓ rechaza la contraseña incorrecta sin consultar en modo real  561ms
+   ✓ muestra enlaces si falta el paciente en modo mock (5210000000009)  638ms
+   ✓ muestra enlaces si falta el paciente en modo real (5210000000009)  586ms
+   ✓ muestra enlaces si falta el paciente en modo real (5210000000008)  645ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/vistas/appSesion.test.tsx > une los trámites sin duplicarlos y permite retomar y confirmar dentro de la app
+TestingLibraryElementError: Unable to find role="region" and name "Citas por terminar"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"Salud Digna 360 · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mSalud Digna 360[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mHackaTec[0m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"canales-demo"[39m
+        [36m>[39m
+          [36m<ul>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/web"[39m
+              [36m>[39m
+                [0mWeb[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/wa"[39m
+              [36m>[39m
+                [0mWhatsApp[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33maria-current[39m=[32m"page"[39m
+                [33mclass[39m=[32m"active"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/app"[39m
+              [36m>[39m
+                [0mApp[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/callcenter"[39m
+              [36m>[39m
+                [0mCall Center[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/clinica"[39m
+              [36m>[39m
+                [0mClínica[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/admin"[39m
+              [36m>[39m
+                [0mAdmin[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/bandeja"[39m
+              [36m>[39m
+                [0mBandeja[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mHola, Ana P.[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"introduccion"[39m
+        [36m>[39m
+          [0mTus citas y el QR para continuar en clínica.[0m
+        [36m</p>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"seccion estado-vacio"[39m
+        [36m>[39m
+          [36m<p>[39m
+            [0mAún no hay citas para mostrar.[0m
+          [36m</p>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"enlace-principal"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/callcenter"[39m
+          [36m>[39m
+            [0mIniciar atención en Call Center[0m
+          [36m</a>[39m
+        [36m</div>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"boton-secundario"[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0mSalir[0m
+        [36m</button>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"Salud Digna 360 · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mSalud Digna 360[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mHackaTec[0m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"canales-demo"[39m
+        [36m>[39m
+          [36m<ul>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/web"[39m
+              [36m>[39m
+                [0mWeb[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/wa"[39m
+              [36m>[39m
+                [0mWhatsApp[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33maria-current[39m=[32m"page"[39m
+                [33mclass[39m=[32m"active"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/app"[39m
+              [36m>[39m
+                [0mApp[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/callcenter"[39m
+              [36m>[39m
+                [0mCall Center[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/clinica"[39m
+              [36m>[39m
+                [0mClínica[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/admin"[39m
+              [36m>[39m
+                [0mAdmin[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/bandeja"[39m
+              [36m>[39m
+                [0mBandeja[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<h1>[39m
+          [0mHola, Ana P.[0m
+        [36m</h1>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"introduccion"[39m
+        [36m>[39m
+          [0mTus citas y el QR para continuar en clínica.[0m
+        [36m</p>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"seccion estado-vacio"[39m
+        [36m>[39m
+          [36m<p>[39m
+            [0mAún no hay citas para mostrar.[0m
+          [36m</p>[39m
+          [36m<a[39m
+            [33mclass[39m=[32m"enlace-principal"[39m
+            [33mdata-discover[39m=[32m"true"[39m
+            [33mhref[39m=[32m"/callcenter"[39m
+          [36m>[39m
+            [0mIniciar atención en Call Center[0m
+          [36m</a>[39m
+        [36m</div>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"boton-secundario"[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0mSalir[0m
+        [36m</button>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/appSesion.test.tsx:80:42
+     78|   const { usuario, router } = abrir('real', true);
+     79|   await entrarSesionDemo(usuario, telefonoContinuacion);
+     80|   const pendientes = within(await screen.findByRole('region', { name: …
+       |                                          ^
+     81|   await waitFor(() => expect(pendientes.getAllByText(CATALOGO_DEMO.ser…
+     82|   expect(pendientes.getAllByText(CATALOGO_DEMO.sede)).toHaveLength(2);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  |web| src/vistas/appSesion.test.tsx > muestra el trámite del número sin paciente vinculado
+TestingLibraryElementError: Unable to find role="region" and name "Citas por terminar"
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"Salud Digna 360 · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mSalud Digna 360[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mHackaTec[0m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"canales-demo"[39m
+        [36m>[39m
+          [36m<ul>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/web"[39m
+              [36m>[39m
+                [0mWeb[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/wa"[39m
+              [36m>[39m
+                [0mWhatsApp[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33maria-current[39m=[32m"page"[39m
+                [33mclass[39m=[32m"active"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/app"[39m
+              [36m>[39m
+                [0mApp[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/callcenter"[39m
+              [36m>[39m
+                [0mCall Center[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/clinica"[39m
+              [36m>[39m
+                [0mClínica[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/admin"[39m
+              [36m>[39m
+                [0mAdmin[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/bandeja"[39m
+              [36m>[39m
+                [0mBandeja[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"seccion estado-vacio"[39m
+        [36m>[39m
+          [36m<h2>[39m
+            [0mNo encontramos citas para este número[0m
+          [36m</h2>[39m
+          [36m<p>[39m
+            [36m<a[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mAgendar en Web[0m
+            [36m</a>[39m
+            [0m o [0m
+            [36m<a[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mAgendar por WhatsApp[0m
+            [36m</a>[39m
+            [0m.[0m
+          [36m</p>[39m
+        [36m</section>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"boton-secundario"[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0mSalir[0m
+        [36m</button>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"layout min-h-dvh flex flex-col"[39m
+    [36m>[39m
+      [36m<a[39m
+        [33mclass[39m=[32m"saltar-contenido"[39m
+        [33mhref[39m=[32m"#contenido"[39m
+      [36m>[39m
+        [0mSaltar al contenido[0m
+      [36m</a>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"cabecera flex items-center justify-between gap-6"[39m
+      [36m>[39m
+        [36m<a[39m
+          [33maria-label[39m=[32m"Salud Digna 360 · Portada"[39m
+          [33mclass[39m=[32m"marca"[39m
+          [33mdata-discover[39m=[32m"true"[39m
+          [33mhref[39m=[32m"/"[39m
+        [36m>[39m
+          [0mSalud Digna 360[0m
+        [36m</a>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"contexto"[39m
+        [36m>[39m
+          [0mHackaTec[0m
+        [36m</div>[39m
+      [36m</header>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"Canales de la demo"[39m
+        [33mclass[39m=[32m"barra-demo"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"canales-demo"[39m
+        [36m>[39m
+          [36m<ul>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/web"[39m
+              [36m>[39m
+                [0mWeb[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/wa"[39m
+              [36m>[39m
+                [0mWhatsApp[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33maria-current[39m=[32m"page"[39m
+                [33mclass[39m=[32m"active"[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/app"[39m
+              [36m>[39m
+                [0mApp[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/callcenter"[39m
+              [36m>[39m
+                [0mCall Center[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/clinica"[39m
+              [36m>[39m
+                [0mClínica[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/admin"[39m
+              [36m>[39m
+                [0mAdmin[0m
+              [36m</a>[39m
+            [36m</li>[39m
+            [36m<li>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m""[39m
+                [33mdata-discover[39m=[32m"true"[39m
+                [33mhref[39m=[32m"/bandeja"[39m
+              [36m>[39m
+                [0mBandeja[0m
+              [36m</a>[39m
+            [36m</li>[39m
+          [36m</ul>[39m
+        [36m</div>[39m
+      [36m</nav>[39m
+      [36m<main[39m
+        [33mclass[39m=[32m"contenido flex-1"[39m
+        [33mid[39m=[32m"contenido"[39m
+        [33mtabindex[39m=[32m"-1"[39m
+      [36m>[39m
+        [36m<section[39m
+          [33mclass[39m=[32m"seccion estado-vacio"[39m
+        [36m>[39m
+          [36m<h2>[39m
+            [0mNo encontramos citas para este número[0m
+          [36m</h2>[39m
+          [36m<p>[39m
+            [36m<a[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/web"[39m
+            [36m>[39m
+              [0mAgendar en Web[0m
+            [36m</a>[39m
+            [0m o [0m
+            [36m<a[39m
+              [33mdata-discover[39m=[32m"true"[39m
+              [33mhref[39m=[32m"/wa"[39m
+            [36m>[39m
+              [0mAgendar por WhatsApp[0m
+            [36m</a>[39m
+            [0m.[0m
+          [36m</p>[39m
+        [36m</section>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"boton-secundario"[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0mSalir[0m
+        [36m</button>[39m
+      [36m</main>[39m
+      [36m<footer[39m
+        [33mclass[39m=[32m"pie flex flex-wrap justify-between gap-3"[39m
+      [36m>[39m
+        [36m<span>[39m
+          [0mBase en desarrollo[0m
+        [36m</span>[39m
+        [36m<span>[39m
+          [0mEntorno de demostración · Datos ficticios[0m
+        [36m</span>[39m
+      [36m</footer>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/appSesion.test.tsx:98:42
+     96|   const { usuario, consultar } = abrir('real');
+     97|   await entrarSesionDemo(usuario, '5210000000007');
+     98|   const pendientes = within(await screen.findByRole('region', { name: …
+       |                                          ^
+     99|   expect(await pendientes.findByText(CATALOGO_DEMO.servicio)).toBeDefi…
+    100|   expect(screen.queryByRole('heading', { name: 'No encontramos citas p…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 10 passed (12)
+   Start at  10:06:47
+   Duration  13.51s (transform 675ms, setup 0ms, import 1.62s, tests 10.26s, environment 1.28s)
+
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice
+Exit: 1
