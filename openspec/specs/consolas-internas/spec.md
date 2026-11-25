@@ -32,7 +32,7 @@ Define las consolas internas de la web: el call center del asesor, la recepción
 - **THEN** los botones de cotizar y de continuar están deshabilitados y se ve el aviso de solo lectura
 
 ### Requirement: Continuar por WhatsApp con consentimiento
-"Continuar por WhatsApp" SHALL pedir al asesor que confirme que el paciente aceptó continuar por WhatsApp antes de enviar `SolicitarContinuacion` (`destino: 'whatsapp'`) para el trámite activo. El comando MUST enviarse una sola vez por confirmación, aun con doble clic. Cuando la ficha trae `codigoContinuacion`, la vista SHALL mostrar el enlace `/wa?continuar=<código>` y su QR. La vista MUST NOT generar el código ni cambiar el estado del trámite por su cuenta.
+"Continuar por WhatsApp" SHALL pedir al asesor que confirme que el paciente aceptó continuar por WhatsApp antes de enviar `SolicitarContinuacion` (`destino: 'whatsapp'`) para el trámite activo. El comando MUST enviarse una sola vez por confirmación, aun con doble clic. Cuando la ficha trae `codigoContinuacion`, la vista SHALL mostrar el enlace `/wa?continuar=<código>` y su QR; si la llamada se inició en esa pestaña, el enlace y el QR SHALL incluir además `&numero=<ANI>` con el número capturado en «Llamada entrante». La vista MUST NOT generar el código ni cambiar el estado del trámite por su cuenta.
 
 #### Scenario: Sin confirmación de consentimiento
 - **WHEN** el asesor no ha marcado la aceptación del paciente
@@ -45,6 +45,10 @@ Define las consolas internas de la web: el call center del asesor, la recepción
 #### Scenario: Enlace y QR tras la solicitud
 - **WHEN** después de la solicitud la ficha trae el código de continuación
 - **THEN** se muestran el enlace `/wa?continuar=<código>` y su QR
+
+#### Scenario: Enlace con el número de la llamada
+- **WHEN** el asesor inició la llamada con el número 3112111821 y pulsa «Cerrar atención (llamada cortada)»
+- **THEN** el enlace «Abrir WhatsApp» es `/wa?continuar=<código>&numero=3112111821` y el QR codifica esa misma ruta
 
 #### Scenario: Error al solicitar
 - **WHEN** la solicitud falla
@@ -282,3 +286,44 @@ En `/callcenter`, el formulario «Identificar paciente» SHALL mostrar en claro 
 #### Scenario: WhatsApp sin cambios
 - **WHEN** `/wa` muestra un Flow con un campo `sensitive`
 - **THEN** sigue oculto con «Mostrar/Ocultar», como antes
+
+### Requirement: Completar la cita desde el call center
+Con una llamada activa en `/callcenter` y un trámite `AGENDAR` en proceso en la ficha, la vista SHALL ofrecer «Completar la cita aquí», que muestra dentro de la ficha el asistente conversacional con el número de la llamada (ANI) como número de conversación y envía automáticamente una sola vez «Hola», para que el asesor complete con el paciente el horario, la preparación, los datos y la confirmación sin salir del call center. Sin ANI de la pestaña la opción MUST NOT mostrarse.
+
+#### Scenario: Completar tras identificar
+- **WHEN** el asesor atiende la llamada del 3119990003, cotiza un servicio y pulsa «Completar la cita aquí»
+- **THEN** el asistente aparece en la ficha con el número 3119990003, retoma ese trámite y muestra el paso pendiente (el día), y el asesor puede llegar a «Confirmar cita» desde `/callcenter`
+
+#### Scenario: Sin llamada en la pestaña
+- **WHEN** la ficha no viene de una llamada iniciada en esa pestaña
+- **THEN** no se muestra «Completar la cita aquí»
+
+### Requirement: Elegir entre continuar o nueva cita en la llamada
+Cuando «Llamada entrante» retoma un trámite en proceso (la respuesta no incluye `TramiteIniciado`), `/callcenter` SHALL mostrar «Este número tiene un estudio en proceso: <servicio> en <sede>» con «Continuar con este estudio» y «Nueva cita». «Continuar con este estudio» SHALL conservar el trámite retomado. «Nueva cita» SHALL enviar una sola vez `IniciarTramite` con el mismo número y `nuevo: true`, y la ficha SHALL pasar al trámite nuevo. Si la llamada creó un trámite nuevo, el aviso MUST NOT mostrarse.
+
+#### Scenario: Continuar con el estudio
+- **WHEN** el asesor recibe la llamada de un número con un estudio cotizado y pulsa «Continuar con este estudio»
+- **THEN** la ficha sigue con ese trámite y no se envía otro comando
+
+#### Scenario: Nueva cita
+- **WHEN** el asesor pulsa «Nueva cita»
+- **THEN** se envía `IniciarTramite` con `nuevo: true` una sola vez y la ficha muestra el trámite nuevo, con el paciente ya asignado si el anterior lo tenía
+
+#### Scenario: Llamada sin trámite en proceso
+- **WHEN** la llamada crea un trámite nuevo
+- **THEN** no aparece el aviso
+
+### Requirement: Validación de la fecha de nacimiento por el asesor
+Cuando la consulta `fechaNacimientoLlamada` devuelve una fecha, `/callcenter` SHALL mostrar la fecha de nacimiento y una casilla «Validé la fecha de nacimiento con el cliente», sin marcar al abrir cada llamada. Mientras no esté marcada, «Continuar con este estudio», «Nueva cita» y «Completar la cita aquí» MUST estar deshabilitados. Sin paciente en la ficha no se muestra la casilla y esas acciones no dependen de ella. Iniciar otra llamada SHALL desmarcarla.
+
+#### Scenario: Fecha visible y casilla obligatoria
+- **WHEN** la llamada retoma un trámite con paciente nacido el 1990-02-28
+- **THEN** la ficha muestra «28/02/1990» y «Continuar con este estudio», «Nueva cita» y «Completar la cita aquí» están deshabilitados hasta marcar «Validé la fecha de nacimiento con el cliente»
+
+#### Scenario: Sin paciente
+- **WHEN** la ficha no tiene paciente
+- **THEN** no aparece la casilla y las acciones se pueden usar
+
+#### Scenario: Nueva llamada
+- **WHEN** el asesor marcó la casilla y luego inicia otra llamada
+- **THEN** la casilla aparece desmarcada

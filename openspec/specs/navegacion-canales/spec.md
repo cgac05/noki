@@ -172,3 +172,56 @@ Con el cliente real, `/web` SHALL abrir con «Paga tu cita»: pide el teléfono 
 #### Scenario: Sin contexto
 - **WHEN** no hay paciente en `contextoDemo` o el modo demo está apagado
 - **THEN** la vista indica que no hay citas pendientes y enlaza a WhatsApp y Call Center
+
+### Requirement: Sesión de paciente en la web (demo)
+Con `VITE_DEMO=true` y la API en `DEMO_MODE`, `/web` SHALL abrir con «Identifícate» (teléfono y contraseña de demostración `prueba123`). Con datos válidos SHALL buscar al paciente por teléfono y mostrar sus trámites abiertos con «Continúa donde lo dejaste», sus citas confirmadas con «Pagar con CoDi» e «Iniciar un trámite nuevo», que crea el trámite ligado al paciente sin pedir otra vez su identidad. Cada paso SHALL ofrecer «Volver». La contraseña MUST NOT enviarse a la API. Fuera de demo la consulta de sesión MUST NOT estar disponible.
+
+#### Scenario: Entrar y continuar
+- **WHEN** el paciente con un trámite abierto entra con su teléfono y `prueba123` y pulsa «Continúa donde lo dejaste»
+- **THEN** se obtiene el código de continuación y se ofrece abrir `/wa?continuar=<código>`
+
+#### Scenario: Contraseña incorrecta
+- **WHEN** la contraseña no es `prueba123`
+- **THEN** no se consulta la API y se indica el error
+
+#### Scenario: Trámite nuevo identificado
+- **WHEN** el paciente pulsa «Iniciar un trámite nuevo»
+- **THEN** el trámite queda con su `pacienteId` sin pasos de identificación
+
+#### Scenario: Teléfono desconocido
+- **WHEN** no hay paciente para ese teléfono
+- **THEN** se indica que no encontramos su registro y se enlaza a WhatsApp y Call Center
+
+### Requirement: Identificación en la app de demo
+En modo demo, `/app` SHALL pedir teléfono (10 a 15 dígitos) y la contraseña de demostración antes de mostrar citas, con el mismo formulario y validación que `/web`, y SHALL obtener el paciente con la consulta `sesionWebDemo`. Con paciente, SHALL mostrar sus citas (`citasPaciente`) con estado, QR y «Cancelar cita» según los requisitos vigentes; sin paciente vinculado o con 404, SHALL indicar que no hay citas para ese número con enlaces a `/web` y `/wa`. «Salir» SHALL volver a la identificación para consultar otro número. Una contraseña distinta MUST rechazarse sin consultar la API.
+
+#### Scenario: Entrar con un número
+- **WHEN** en `/app` se escribe `5210000000001` y `prueba123`
+- **THEN** se muestran las citas de Ana con su QR
+
+#### Scenario: Cambiar de número
+- **WHEN** después se pulsa «Salir» y se entra con `5210000000002`
+- **THEN** se muestran las citas de Beto y ya no las de Ana
+
+#### Scenario: Contraseña incorrecta
+- **WHEN** se escribe otra contraseña
+- **THEN** se muestra «Contraseña incorrecta.» y no se consulta la API
+
+#### Scenario: Número sin registro
+- **WHEN** el número no tiene paciente vinculado
+- **THEN** se indica que no hay citas para ese número, con enlaces a `/web` y `/wa`
+
+### Requirement: Terminar en la app una cita en proceso
+Después de identificarse en `/app`, la vista SHALL mostrar «Citas por terminar» con los trámites `AGENDAR` en proceso (`BORRADOR`, `COTIZADO`, `LISTO_PARA_RESERVAR`, `HORARIO_RESERVADO`) del número (`sesionWebDemo.tramitesEnProceso`) y del paciente (`tramitesAbiertos`), sin duplicados, con servicio y sede cuando existan. Cada uno SHALL ofrecer «Termina tu cita», que muestra dentro de `/app` el asistente conversacional con el teléfono de la sesión, como en `/web`, con «Volver» a la lista. Si no hay trámites en proceso, la sección MUST NOT mostrarse. Aunque el número no tenga paciente vinculado, la vista SHALL mostrar sus trámites en proceso en lugar del mensaje de que no hay citas.
+
+#### Scenario: Cita a medias
+- **WHEN** el 3112111830 tiene un trámite `COTIZADO` y entra a `/app` con `prueba123`
+- **THEN** ve «Citas por terminar» con ese estudio y, al pulsar «Termina tu cita», el asistente aparece dentro de `/app` y muestra el paso pendiente
+
+#### Scenario: Sin paciente vinculado
+- **WHEN** el número solo tiene un trámite en proceso sin paciente
+- **THEN** se muestra ese trámite en «Citas por terminar» en lugar de «No encontramos citas para este número»
+
+#### Scenario: Sin trámites en proceso
+- **WHEN** el paciente solo tiene citas confirmadas o atendidas
+- **THEN** no aparece «Citas por terminar» y las citas se muestran como antes

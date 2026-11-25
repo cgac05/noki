@@ -57,11 +57,19 @@ Al tocar un botón, una fila de lista o "Enviar", los controles del mensaje SHAL
 - **THEN** se muestra "escribiendo…" y desaparece al llegar la respuesta o el error
 
 ### Requirement: Continuación por enlace
-Al abrir `/wa?continuar=<código>`, el simulador SHALL enviar una sola vez el texto `CONTINUAR <código>` desde el número elegido, mostrar la respuesta y retirar el parámetro con `history.replaceState`. La aplicación SHALL declarar `Referrer-Policy: no-referrer`. Un código vacío MUST NOT enviarse.
+Al abrir `/wa?continuar=<código>`, el simulador SHALL enviar una sola vez el texto `CONTINUAR <código>` desde el número elegido, mostrar la respuesta y retirar el parámetro con `history.replaceState`. Si la URL trae además `numero` con 10 a 15 dígitos, el simulador SHALL cambiar a ese número antes de enviar y enviar desde él; un `numero` inválido MUST ignorarse. Ambos parámetros SHALL retirarse de la URL. La aplicación SHALL declarar `Referrer-Policy: no-referrer`. Un código vacío MUST NOT enviarse.
 
 #### Scenario: Enlace del call center
 - **WHEN** se abre `/wa?continuar=<código>` con un código válido
 - **THEN** se envía `CONTINUAR <código>` una sola vez, el bot retoma el trámite y la URL queda como `/wa`
+
+#### Scenario: Enlace con número
+- **WHEN** se abre `/wa?continuar=<código>&numero=3112111821`
+- **THEN** el número del simulador es 3112111821, `CONTINUAR <código>` se envía una sola vez con `waId` 3112111821, ningún mensaje sale desde el número de demo y la URL queda como `/wa`
+
+#### Scenario: Número inválido en el enlace
+- **WHEN** se abre `/wa?continuar=<código>&numero=12ab`
+- **THEN** se ignora el número y se envía desde el número actual
 
 #### Scenario: Sin reenvío
 - **WHEN** la vista se vuelve a renderizar o se recarga después del envío
@@ -145,3 +153,18 @@ El simulador SHALL agregar al historial de cada número los mensajes recibidos p
 #### Scenario: Botones de un mensaje anterior
 - **WHEN** después de un mensaje recibido por `wa:mensajes` llega otro mensaje del bot
 - **THEN** los botones del primero quedan deshabilitados
+
+### Requirement: Formulario y alternativa activos en la misma respuesta
+Los mensajes interactivos (Flow, botones y listas) que forman la última respuesta del bot, es decir, los recibidos después del último mensaje del usuario, SHALL estar habilitados a la vez, salvo mientras se envía un mensaje. Los mensajes interactivos de respuestas anteriores MUST seguir deshabilitados.
+
+#### Scenario: CURP con alternativa
+- **WHEN** el bot responde con el Flow «CURP» y después con el botón «No la tengo»
+- **THEN** «Abrir formulario» abre el formulario de CURP y enviarlo manda `flowResponse` con la CURP capturada; «No la tengo» también está habilitado
+
+#### Scenario: Apellido materno con alternativa
+- **WHEN** el bot responde con el Flow «Apellido materno» y el botón «No tengo», y el usuario abre el formulario y escribe «Camberos»
+- **THEN** se envía `flowResponse` con `apellidoMaterno: 'Camberos'`
+
+#### Scenario: Respuestas anteriores
+- **WHEN** el usuario ya respondió y el bot envió una respuesta nueva
+- **THEN** el formulario y los botones de la respuesta anterior están deshabilitados
