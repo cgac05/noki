@@ -1,0 +1,127 @@
+$ eslint . && pnpm typecheck
+$ pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json
+src/cliente/contexto.test.tsx(29,28): error TS2375: Type 'ClienteReal' is not assignable to type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/cliente/contexto.test.tsx(37,28): error TS2375: Type 'ClienteReal' is not assignable to type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/cliente/contexto.test.tsx(57,28): error TS2375: Type 'ClienteReal' is not assignable to type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/cliente/crearCliente.ts(10,24): error TS2375: Type 'ClienteReal' is not assignable to type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/cliente/real/ClienteReal.ts(22,14): error TS2420: Class 'ClienteReal' incorrectly implements interface 'ClienteApi'.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/cliente/refrescoReal.test.tsx(40,28): error TS2375: Type 'ClienteReal' is not assignable to type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/cliente/relojDemo.test.ts(12,11): error TS2375: Type 'ClienteReal' is not assignable to type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/cliente/relojDemo.test.ts(22,11): error TS2375: Type 'ClienteReal' is not assignable to type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/cliente/relojDemo.test.ts(37,11): error TS2375: Type 'ClienteReal' is not assignable to type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/cliente/relojDemo.test.ts(43,11): error TS2375: Type 'ClienteReal' is not assignable to type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/cliente/relojDemo.test.ts(50,11): error TS2375: Type 'ClienteReal' is not assignable to type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/vistas/catalogoReal.test.tsx(34,28): error TS2375: Type 'ClienteReal' is not assignable to type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/vistas/clinicaAlertas.test.tsx(43,28): error TS2375: Type 'ClienteReal' is not assignable to type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/vistas/consolas.test.tsx(105,40): error TS2379: Argument of type 'ClienteReal' is not assignable to parameter of type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/vistas/consolas.test.tsx(148,31): error TS2379: Argument of type 'ClienteReal' is not assignable to parameter of type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/vistas/consolas.test.tsx(160,11): error TS2379: Argument of type 'ClienteReal' is not assignable to parameter of type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/vistas/consolas.test.tsx(166,31): error TS2379: Argument of type 'ClienteReal' is not assignable to parameter of type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/vistas/consolas.test.tsx(180,77): error TS2379: Argument of type 'ClienteReal' is not assignable to parameter of type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/vistas/consolas.test.tsx(187,11): error TS2379: Argument of type 'ClienteReal' is not assignable to parameter of type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/vistas/consolas.test.tsx(195,99): error TS2379: Argument of type 'ClienteReal' is not assignable to parameter of type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/vistas/consolas.test.tsx(204,79): error TS2379: Argument of type 'ClienteReal' is not assignable to parameter of type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/vistas/consolas.test.tsx(212,96): error TS2379: Argument of type 'ClienteReal' is not assignable to parameter of type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/vistas/identidadAsesor.test.tsx(47,42): error TS2375: Type 'ClienteReal' is not assignable to type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/vistas/realWa.test.tsx(13,28): error TS2375: Type 'ClienteReal' is not assignable to type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/vistas/relojDemo.test.tsx(27,28): error TS2375: Type 'ClienteReal' is not assignable to type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+src/vistas/relojDemo.test.tsx(36,68): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+  Overload 2 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+src/vistas/relojDemo.test.tsx(50,64): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+  Overload 2 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+src/vistas/relojDemo.test.tsx(76,79): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+  Overload 2 of 2, '(role: ByRoleMatcher, options?: ByRoleOptions | undefined): HTMLElement', gave the following error.
+    Object literal may only specify known properties, and 'exact' does not exist in type 'ByRoleOptions'.
+src/vistas/wa.test.tsx(71,29): error TS2379: Argument of type 'ClienteReal' is not assignable to parameter of type 'ClienteApi' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'relojDemo' are incompatible.
+    Type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; } | undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+      Type 'undefined' is not assignable to type '{ adelantar(minutos: number): Promise<{ ahora: string; }>; }'.
+undefined
+<repositorio>\apps\web:
+[ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL] Command failed with exit code 2: tsc --noEmit
+undefined
+[ELIFECYCLE] Command failed with exit code 1.
+[ELIFECYCLE] Command failed with exit code 1.

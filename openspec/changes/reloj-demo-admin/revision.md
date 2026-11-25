@@ -1,0 +1,43 @@
+# Revisión: reloj-demo-admin
+
+- Dictamen: PASS
+- Revisión inspeccionada: rama `feat/reloj-demo-admin` sobre `main` `44c57f4` (vigente), con el diff sin commit entregado por Codex (`implementacion.md`, manifiesto `evidencias/03-archivos-entregados.json`). Revisado el 2026-11-25.
+- Cobertura:
+  - Requisitos y escenarios de los deltas de `cliente-api-canales` («Reloj de demo en el cliente») y `consolas-internas` («Reloj de demo en el tablero»).
+  - Design D1–D3 y tareas 1.1–3.1.
+  - Archivos: `cliente/{ClienteApi.ts,real/ClienteReal.ts}`, `componentes/RelojDemo.tsx`, `vistas/Admin.tsx`, `styles.css` (por encima), `README.md`, y las pruebas nuevas `cliente/relojDemo.test.ts` y `vistas/relojDemo.test.tsx`.
+- Autorización y alcance:
+  - Los hashes de `proposal.md`, `design.md` y los dos specs coinciden con la revisión 1 autorizada.
+  - `tasks.md`, al desmarcar las casillas, da `ff576ea08e40`, el hash autorizado.
+  - Cambios solo en `apps/web/**` y la carpeta del cambio. `.claude/launch.json`, sin versionar, es de Claude. No hay commits.
+- Evidencia comprobada independientemente (Claude, este checkout):
+  - `eslint .`, `pnpm -r exec tsc --noEmit` y `tsc --project tests/tsconfig.json` → 0.
+  - `pnpm lint:deps` → 0; 222 módulos / 681 dependencias, sin violaciones.
+  - `pnpm test --maxWorkers=1` → 0; 64 archivos, 373/373.
+  - `pnpm test:integracion` → 0; 17 archivos, 47/47. Las 420 pruebas del informe de Codex son 373 más 47.
+  - `VITE_API=real VITE_DEMO=true pnpm --filter @noki/web build` → 0.
+  - `openspec validate reloj-demo-admin --type change --strict` → válido.
+  - Sin rutas locales en `evidencias/`.
+- Lectura del código:
+  - D1:
+    - `ClienteApi.relojDemo` es opcional, y `ClienteReal` lo define solo si `demo` (`VITE_DEMO=true`); `ClienteMock` no lo define.
+    - `adelantar` valida la entrada con `AdelantarRelojSchema` antes de pedir, envía `POST` a `RUTA_RELOJ_DEMO.ruta` y valida la respuesta con `RespuestaRelojSchema`.
+    - `solicitar` gana el parámetro `reintentar` (por defecto `true`). El reloj lo usa en `false`, así que un fallo de red no repite un adelanto irreversible.
+    - `Idempotency-Key` solo se envía cuando hay clave. Los comandos y los mensajes siguen enviándola siempre.
+  - D2: `RelojDemo` usa un candado `useRef` y deshabilita todos los controles mientras envía. «Reintentar» repite exactamente los mismos minutos y solo a petición del usuario.
+  - D3:
+    - El aviso de irreversibilidad menciona `pnpm demo:reset`.
+    - Hay botones +15 min, +1 h, +1 día y +1 semana, y un campo validado con el mismo esquema del contrato, con mensaje de rango y `aria-invalid`.
+    - La hora aparece en la zona del navegador y en UTC, en una región `status`.
+    - Tras el éxito se invalidan las lecturas.
+    - `Admin.tsx` muestra la sección solo si existe `cliente.relojDemo`, al final del tablero.
+- Recorrido real (3.1) de Codex sobre `44c57f4`, en `03-recorrido.json`:
+  - A 1280 px, HORARIO_RESERVADO pasa de 2 a 0 y LISTO_PARA_RESERVAR de 2 a 4, con 3 `ReservaExpirada`, sin recargar.
+  - A 375 px, HORARIO_RESERVADO pasa de 1 a 0 y LISTO_PARA_RESERVAR de 3 a 4. Además, una cita pasa a NO_ASISTIO por la tolerancia. Sin recargar y sin desplazamiento horizontal (documento de 360 en un viewport de 375).
+  - En modo simulado no aparece la sección en ningún ancho.
+  - Imagen de referencia: `03-reloj-despues-1280.jpg`.
+- Controles no ejecutados: Claude no repitió el recorrido real en navegador; se acepta la evidencia de Codex, las pruebas con `ClienteReal` y la lectura del código.
+- Hallazgos: ninguno.
+- Nota de entorno: según Codex, la base local de demo quedó adelantada 30 minutos por el recorrido. `pnpm demo:reset` la devuelve al inicio antes de un ensayo.
+- Condiciones para recomendar el cierre: cumplidas.
+- Próximo responsable: `LuisMaster119`. Decide si autoriza el commit y el push de la rama, la integración en `main` y el cierre (sincronizar specs y archivar) con esta revisión.

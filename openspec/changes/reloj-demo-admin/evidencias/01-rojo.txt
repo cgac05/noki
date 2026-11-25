@@ -1,0 +1,101 @@
+
+ RUN  v4.0.14 <repositorio>
+
+ ❯ |web| src/cliente/relojDemo.test.ts (11 tests | 11 failed) 21ms
+     × adelanta 15 minutos con el contrato y sin clave de idempotencia 10ms
+     × adelanta 10080 minutos con el contrato y sin clave de idempotencia 1ms
+     × rechaza 0 minutos antes de acceder a la red 1ms
+     × rechaza 10081 minutos antes de acceder a la red 1ms
+     × rechaza -1 minutos antes de acceder a la red 1ms
+     × rechaza 1.5 minutos antes de acceder a la red 1ms
+     × rechaza NaN minutos antes de acceder a la red 1ms
+     × solo ofrece el reloj con VITE_DEMO=true y cliente real 1ms
+     × rechaza una respuesta con hora mal formada 1ms
+     × no repite automáticamente un adelanto que falla por red 1ms
+     × conserva código y mensaje públicos de un error HTTP 1ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 11 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/cliente/relojDemo.test.ts > Reloj de demo en el cliente > adelanta 15 minutos con el contrato y sin clave de idempotencia
+ FAIL  |web| src/cliente/relojDemo.test.ts > Reloj de demo en el cliente > adelanta 10080 minutos con el contrato y sin clave de idempotencia
+AssertionError: expected undefined to be defined
+ ❯ src/cliente/relojDemo.test.ts:13:31
+     11|     const peticion = vi.fn<typeof fetch>().mockResolvedValue(Response.…
+     12|     const cliente: ClienteApi = new ClienteReal({ demo: true, url: 'ht…
+     13|     expect(cliente.relojDemo).toBeDefined();
+       |                               ^
+     14|     await expect(cliente.relojDemo!.adelantar(minutos)).resolves.toEqu…
+     15|     expect(peticion).toHaveBeenCalledExactlyOnceWith('http://api.test/…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/11]⎯
+
+ FAIL  |web| src/cliente/relojDemo.test.ts > Reloj de demo en el cliente > rechaza 0 minutos antes de acceder a la red
+ FAIL  |web| src/cliente/relojDemo.test.ts > Reloj de demo en el cliente > rechaza 10081 minutos antes de acceder a la red
+ FAIL  |web| src/cliente/relojDemo.test.ts > Reloj de demo en el cliente > rechaza -1 minutos antes de acceder a la red
+ FAIL  |web| src/cliente/relojDemo.test.ts > Reloj de demo en el cliente > rechaza 1.5 minutos antes de acceder a la red
+ FAIL  |web| src/cliente/relojDemo.test.ts > Reloj de demo en el cliente > rechaza NaN minutos antes de acceder a la red
+TypeError: Cannot read properties of undefined (reading 'adelantar')
+ ❯ src/cliente/relojDemo.test.ts:23:37
+     21|     const peticion = vi.fn<typeof fetch>();
+     22|     const cliente: ClienteApi = new ClienteReal({ demo: true, fetch: p…
+     23|     await expect(cliente.relojDemo!.adelantar(minutos)).rejects.toMatc…
+       |                                     ^
+     24|     expect(peticion).not.toHaveBeenCalled();
+     25|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/11]⎯
+
+ FAIL  |web| src/cliente/relojDemo.test.ts > Reloj de demo en el cliente > solo ofrece el reloj con VITE_DEMO=true y cliente real
+AssertionError: expected undefined to be defined
+ ❯ src/cliente/relojDemo.test.ts:31:54
+     29|     expect(crearCliente({ modo: 'real' }).relojDemo).toBeUndefined();
+     30|     vi.stubEnv('VITE_DEMO', 'true');
+     31|     expect(crearCliente({ modo: 'real' }).relojDemo).toBeDefined();
+       |                                                      ^
+     32|     expect(crearCliente({ modo: 'mock' }).relojDemo).toBeUndefined();
+     33|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/11]⎯
+
+ FAIL  |web| src/cliente/relojDemo.test.ts > Reloj de demo en el cliente > rechaza una respuesta con hora mal formada
+TypeError: Cannot read properties of undefined (reading 'adelantar')
+ ❯ src/cliente/relojDemo.test.ts:38:37
+     36|     const peticion = vi.fn<typeof fetch>().mockResolvedValue(Response.…
+     37|     const cliente: ClienteApi = new ClienteReal({ demo: true, fetch: p…
+     38|     await expect(cliente.relojDemo!.adelantar(60)).rejects.toMatchObje…
+       |                                     ^
+     39|   });
+     40| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/11]⎯
+
+ FAIL  |web| src/cliente/relojDemo.test.ts > Reloj de demo en el cliente > no repite automáticamente un adelanto que falla por red
+TypeError: Cannot read properties of undefined (reading 'adelantar')
+ ❯ src/cliente/relojDemo.test.ts:44:37
+     42|     const peticion = vi.fn<typeof fetch>().mockRejectedValue(new TypeE…
+     43|     const cliente: ClienteApi = new ClienteReal({ demo: true, fetch: p…
+     44|     await expect(cliente.relojDemo!.adelantar(60)).rejects.toMatchObje…
+       |                                     ^
+     45|     expect(peticion).toHaveBeenCalledTimes(1);
+     46|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/11]⎯
+
+ FAIL  |web| src/cliente/relojDemo.test.ts > Reloj de demo en el cliente > conserva código y mensaje públicos de un error HTTP
+TypeError: Cannot read properties of undefined (reading 'adelantar')
+ ❯ src/cliente/relojDemo.test.ts:51:37
+     49|     const peticion = vi.fn<typeof fetch>().mockResolvedValue(Response.…
+     50|     const cliente: ClienteApi = new ClienteReal({ demo: true, fetch: p…
+     51|     await expect(cliente.relojDemo!.adelantar(60)).rejects.toMatchObje…
+       |                                     ^
+     52|     expect(peticion).toHaveBeenCalledTimes(1);
+     53|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/11]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  11 failed (11)
+   Start at  00:42:55
+   Duration  3.27s (transform 325ms, setup 0ms, import 679ms, tests 21ms, environment 2.07s)
+

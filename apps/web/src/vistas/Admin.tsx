@@ -1,9 +1,10 @@
-import { useConsulta, useContextoConsulta } from '../cliente/ProveedorCliente.tsx';
+import { useCliente, useConsulta, useContextoConsulta } from '../cliente/ProveedorCliente.tsx';
 import { EstadoCarga } from '../componentes/EstadoCarga.tsx';
 import { EstadoError } from '../componentes/EstadoError.tsx';
 import { LineaTiempo, NOMBRES_CANAL } from '../componentes/LineaTiempo.tsx';
 import { EstadoContexto } from '../componentes/EstadoContexto.tsx';
 import { useSala } from '../cliente/useSala.ts';
+import { RelojDemo } from '../componentes/RelojDemo.tsx';
 
 const ETIQUETAS_KPI: Record<string, string> = {
   cambiosCanal: 'Cambios de canal', cambiosCanalPorHilo: 'Cambios de canal por hilo',
@@ -15,6 +16,7 @@ const formatoNumero = new Intl.NumberFormat('es-MX', { maximumSignificantDigits:
 const formatoHora = new Intl.DateTimeFormat('es-MX', { dateStyle: 'short', timeStyle: 'short' });
 
 export function Admin() {
+  const cliente = useCliente();
   const metricas = useConsulta('metricas', {});
   const alertas = useConsulta('alertasSeguridad', {});
   const contexto = useContextoConsulta();
@@ -47,5 +49,6 @@ export function Admin() {
     {hiloId && ficha.isPending && <EstadoCarga texto="Cargando el hilo…" />}
     {ficha.isError && <EstadoError error={ficha.error} onReintentar={() => { void ficha.refetch(); }} />}
     {ficha.data && <LineaTiempo eventos={ficha.data.lineaTiempo} />}
+    {cliente.relojDemo && <RelojDemo reloj={cliente.relojDemo} />}
   </>;
 }

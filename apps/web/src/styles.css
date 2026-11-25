@@ -51,6 +51,10 @@ button:disabled { background: #e4ece3; color: #465e52; border-color: var(--linea
 .seccion h2 { font-size: 1.25rem; line-height: 1.4; }
 h3 { margin: 0.75rem 0 0.5rem; font-size: 1rem; font-weight: 600; }
 .acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-block: 1rem; }
+.reloj-demo-formulario label { display: block; font-weight: 600; }
+.reloj-demo-formulario input { box-sizing: border-box; width: min(100%, 12rem); min-height: 44px; padding: 0.625rem 0.75rem; border: 1px solid var(--linea); border-radius: 0.5rem; color: inherit; background: #fff; caret-color: #21734f; }
+.reloj-demo-formulario input[aria-invalid="true"] { border-color: #763a23; }
+.reloj-demo time { overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
 .llamada-entrante { max-width: 30rem; }
 .llamada-entrante label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
 .llamada-entrante input { box-sizing: border-box; width: 100%; min-height: 44px; padding: 0.625rem 0.75rem; border: 1px solid var(--linea); border-radius: 0.5rem; color: inherit; background: #fff; caret-color: #21734f; }

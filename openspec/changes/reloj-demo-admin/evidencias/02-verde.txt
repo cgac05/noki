@@ -1,0 +1,12 @@
+
+ RUN  v4.0.14 <repositorio>
+
+ ✓ |web| src/cliente/relojDemo.test.ts (11 tests) 22ms
+ ✓ |web| src/vistas/relojDemo.test.tsx (9 tests) 1143ms
+     ✓ adelanta una hora, presenta la hora local y UTC y refresca las lecturas  414ms
+
+ Test Files  2 passed (2)
+      Tests  20 passed (20)
+   Start at  00:46:04
+   Duration  4.70s (transform 561ms, setup 0ms, import 2.02s, tests 1.17s, environment 3.64s)
+

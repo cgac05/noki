@@ -1,0 +1,25 @@
+# Transferencia: reloj-demo-admin
+
+- Responsable: frente B (canales), `LuisMaster119`. No toca archivos compartidos ni contratos; basta su autorización.
+- Objetivo: botón «Adelantar reloj» en `/admin` sobre `POST /api/demo/reloj`, para mostrar los temporizadores en vivo en la demo; ver `proposal.md` (Why).
+- Alcance autorizado: `proposal.md` (What Changes), sin lo listado en «Fuera de alcance»; design D1–D3.
+- Autorización de implementación: otorgada por `LuisMaster119`, responsable del frente B, en el chat de Claude Code el 2026-11-25, en respuesta a "¿Autorizas implementar reloj-demo-admin con la revisión 1?". Cita: "Autorizo". Cubre la revisión 1 (hashes de abajo, comprobados sin cambios al registrarla). No autoriza commits.
+- Revisión presentada: revisión 1 en la rama `feat/reloj-demo-admin`, sobre `main` `44c57f4`. SHA-256 (12 primeros caracteres): `proposal.md` 23d64e380525 · `design.md` 152a61b64341 · `tasks.md` ff576ea08e40 · `specs/cliente-api-canales/spec.md` 4d342069a9cb · `specs/consolas-internas/spec.md` 951ab8097090. `openspec validate reloj-demo-admin --type change --strict --no-interactive` → válido.
+- Artefactos a leer:
+  - `proposal.md`, los dos specs, `design.md` y `tasks.md`.
+  - `openspec/specs/{reloj-demo,temporizadores-tramite,consolas-internas,cliente-api-canales}/spec.md`.
+  - `packages/contracts/src/demo.ts`, `docs/contratos.md` (reloj de demo) y `AGENTS.md` §5–§9 y «Reloj de demo».
+- Tareas pendientes: 1.1–3.1 de `tasks.md`.
+- Restricciones:
+  - Solo `apps/web/**` y la carpeta del cambio. Sin cambios en contratos, API ni archivos compartidos.
+  - Sin reintentos automáticos del adelanto.
+  - Usar `corepack pnpm`. Evidencia en la carpeta del cambio, sin rutas locales. No crear commits.
+- Criterios de aceptación: requisitos y escenarios de los deltas de `cliente-api-canales` y `consolas-internas`; recorrido real 3.1 en verde.
+- Validaciones requeridas: punto de control 2.4, incluido `pnpm test:integracion`, y recorrido real 3.1.
+- Detener la parte afectada si:
+  - la API de `main` no responde como dice `reloj-demo`;
+  - hace falta cambiar el contrato, por ejemplo para consultar la hora sin adelantarla.
+- Autorización de cierre: otorgada por `LuisMaster119`, responsable del frente B, en el chat de Claude Code el 2026-11-25, en respuesta a "¿Autorizas commit, push, integrar en main y cerrar reloj-demo-admin?". Cita: "Autorizo todo". Cubre:
+  - el commit de la implementación, la evidencia y la revisión, y el push de `feat/reloj-demo-admin`;
+  - la integración en `main` por fast-forward y su push;
+  - la sincronización de specs y el archivado en `main` de la revisión con dictamen PASS de `revision.md` (base `44c57f4`).

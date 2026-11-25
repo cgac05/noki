@@ -1,0 +1,749 @@
+
+ RUN  v4.0.14 <repositorio>
+
+ ❯ |web| src/vistas/relojDemo.test.tsx (9 tests | 8 failed) 738ms
+     × adelanta una hora, presenta la hora local y UTC y refresca las lecturas 306ms
+     × bloquea sincrónicamente el doble clic y deshabilita todos los controles hasta terminar 34ms
+     × explica el rango y rechaza el campo 20000 sin petición 47ms
+     × explica el rango y rechaza el campo 0 sin petición 37ms
+     × explica el rango y rechaza el campo 1.5 sin petición 31ms
+     × explica el rango y rechaza el campo  sin petición 25ms
+     × reintenta los mismos minutos aunque el campo cambie y mantiene visible el tablero 101ms
+     × refresca el conteo por un evento posterior de admin sin recargar 101ms
+     ✓ no ofrece la sección con el cliente simulado 54ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/vistas/relojDemo.test.tsx > Reloj de demo en el tablero > adelanta una hora, presenta la hora local y UTC y refresca las lecturas
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "+1 h"
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "Administración":
+  <h1 />
+
+  Name "Trámites por estado":
+  <h2 />
+
+  Name "Indicadores disponibles":
+  <h2 />
+
+  Name "Alertas de seguridad":
+  <h2
+    id="titulo-alertas"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  Name "":
+  <p />
+
+  --------------------------------------------------
+  term:
+
+  Name "":
+  <dt />
+
+  Name "":
+  <dt />
+
+  Name "":
+  <dt />
+
+  --------------------------------------------------
+  definition:
+
+  Name "":
+  <dd />
+
+  Name "":
+  <dd />
+
+  Name "":
+  <dd />
+
+  --------------------------------------------------
+  region:
+
+  Name "Alertas de seguridad":
+  <section
+    aria-labelledby="titulo-alertas"
+    class="seccion"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <h1>
+      Administración
+    </h1>
+    <p
+      class="introduccion"
+    >
+      El mismo hilo, con la trazabilidad de cada canal.
+    </p>
+    <section
+      class="seccion"
+    >
+      <h2>
+        Trámites por estado
+      </h2>
+      <dl
+        class="datos"
+      >
+        <div>
+          <dt>
+            HORARIO_RESERVADO
+          </dt>
+          <dd>
+            1
+          </dd>
+        </div>
+      </dl>
+    </section>
+    <section
+      class="seccion"
+    >
+      <h2>
+        Indicadores disponibles
+      </h2>
+      <dl
+        class="datos"
+      >
+        <div>
+          <dt>
+            Cambios de canal
+          </dt>
+          <dd>
+            1
+          </dd>
+        </div>
+        <div>
+          <dt>
+            Datos repetidos
+          </dt>
+          <dd>
+            0
+          </dd>
+        </div>
+      </dl>
+    </section>
+    <section
+      aria-labelledby="titulo-alertas"
+      class="seccion"
+    >
+      <h2
+        id="titulo-alertas"
+      >
+        Alertas de seguridad
+      </h2>
+      <p>
+        Sin alertas de seguridad
+      </p>
+    </section>
+    <p
+      class="estado-carga"
+      role="status"
+    >
+      Cargando el hilo…
+    </p>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/vistas/relojDemo.test.tsx:36:32
+     34|     await screen.findByText('Sin alertas de seguridad');
+     35|     const antes = peticion.mock.calls.length;
+     36|     await usuario.click(screen.getByRole('button', { name: '+1 h', exa…
+       |                                ^
+     37|     const reloj = screen.getByRole('region', { name: 'Reloj de demo' }…
+     38|     expect(await within(reloj).findByText(ahora)).toBeDefined();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  |web| src/vistas/relojDemo.test.tsx > Reloj de demo en el tablero > bloquea sincrónicamente el doble clic y deshabilita todos los controles hasta terminar
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "+1 día"
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "Administración":
+  <h1 />
+
+  Name "Alertas de seguridad":
+  <h2
+    id="titulo-alertas"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  --------------------------------------------------
+  region:
+
+  Name "Alertas de seguridad":
+  <section
+    aria-labelledby="titulo-alertas"
+    class="seccion"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <h1>
+      Administración
+    </h1>
+    <p
+      class="introduccion"
+    >
+      El mismo hilo, con la trazabilidad de cada canal.
+    </p>
+    <p
+      class="estado-carga"
+      role="status"
+    >
+      Cargando información…
+    </p>
+    <section
+      aria-labelledby="titulo-alertas"
+      class="seccion"
+    >
+      <h2
+        id="titulo-alertas"
+      >
+        Alertas de seguridad
+      </h2>
+      <p
+        class="estado-carga"
+        role="status"
+      >
+        Cargando alertas de seguridad…
+      </p>
+    </section>
+    <p
+      class="estado-carga"
+      role="status"
+    >
+      Consultando el contexto de atención…
+    </p>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/vistas/relojDemo.test.tsx:50:26
+     48|     let resolver!: (respuesta: Response) => void;
+     49|     post.mockImplementationOnce(() => new Promise(respuesta => { resol…
+     50|     const boton = screen.getByRole('button', { name: '+1 día', exact: …
+       |                          ^
+     51|     act(() => { fireEvent.click(boton); fireEvent.click(boton); });
+     52|     expect(post).toHaveBeenCalledTimes(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  |web| src/vistas/relojDemo.test.tsx > Reloj de demo en el tablero > explica el rango y rechaza el campo 20000 sin petición
+ FAIL  |web| src/vistas/relojDemo.test.tsx > Reloj de demo en el tablero > explica el rango y rechaza el campo 0 sin petición
+ FAIL  |web| src/vistas/relojDemo.test.tsx > Reloj de demo en el tablero > explica el rango y rechaza el campo 1.5 sin petición
+ FAIL  |web| src/vistas/relojDemo.test.tsx > Reloj de demo en el tablero > explica el rango y rechaza el campo  sin petición
+TestingLibraryElementError: Unable to find an accessible element with the role "spinbutton" and name "Minutos exactos"
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "Administración":
+  <h1 />
+
+  Name "Alertas de seguridad":
+  <h2
+    id="titulo-alertas"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  --------------------------------------------------
+  region:
+
+  Name "Alertas de seguridad":
+  <section
+    aria-labelledby="titulo-alertas"
+    class="seccion"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <h1>
+      Administración
+    </h1>
+    <p
+      class="introduccion"
+    >
+      El mismo hilo, con la trazabilidad de cada canal.
+    </p>
+    <p
+      class="estado-carga"
+      role="status"
+    >
+      Cargando información…
+    </p>
+    <section
+      aria-labelledby="titulo-alertas"
+      class="seccion"
+    >
+      <h2
+        id="titulo-alertas"
+      >
+        Alertas de seguridad
+      </h2>
+      <p
+        class="estado-carga"
+        role="status"
+      >
+        Cargando alertas de seguridad…
+      </p>
+    </section>
+    <p
+      class="estado-carga"
+      role="status"
+    >
+      Consultando el contexto de atención…
+    </p>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/vistas/relojDemo.test.tsx:61:26
+     59|   it.each(['20000', '0', '1.5', ''])('explica el rango y rechaza el ca…
+     60|     const { post } = preparar();
+     61|     const campo = screen.getByRole('spinbutton', { name: 'Minutos exac…
+       |                          ^
+     62|     expect(campo).toHaveProperty('min', '1'); expect(campo).toHaveProp…
+     63|     fireEvent.change(campo, { target: { value: valor } });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  |web| src/vistas/relojDemo.test.tsx > Reloj de demo en el tablero > reintenta los mismos minutos aunque el campo cambie y mantiene visible el tablero
+TestingLibraryElementError: Unable to find an accessible element with the role "spinbutton" and name "Minutos exactos"
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "Administración":
+  <h1 />
+
+  Name "Trámites por estado":
+  <h2 />
+
+  Name "Indicadores disponibles":
+  <h2 />
+
+  Name "Alertas de seguridad":
+  <h2
+    id="titulo-alertas"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  Name "":
+  <p />
+
+  --------------------------------------------------
+  term:
+
+  Name "":
+  <dt />
+
+  Name "":
+  <dt />
+
+  Name "":
+  <dt />
+
+  --------------------------------------------------
+  definition:
+
+  Name "":
+  <dd />
+
+  Name "":
+  <dd />
+
+  Name "":
+  <dd />
+
+  --------------------------------------------------
+  region:
+
+  Name "Alertas de seguridad":
+  <section
+    aria-labelledby="titulo-alertas"
+    class="seccion"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <h1>
+      Administración
+    </h1>
+    <p
+      class="introduccion"
+    >
+      El mismo hilo, con la trazabilidad de cada canal.
+    </p>
+    <section
+      class="seccion"
+    >
+      <h2>
+        Trámites por estado
+      </h2>
+      <dl
+        class="datos"
+      >
+        <div>
+          <dt>
+            HORARIO_RESERVADO
+          </dt>
+          <dd>
+            1
+          </dd>
+        </div>
+      </dl>
+    </section>
+    <section
+      class="seccion"
+    >
+      <h2>
+        Indicadores disponibles
+      </h2>
+      <dl
+        class="datos"
+      >
+        <div>
+          <dt>
+            Cambios de canal
+          </dt>
+          <dd>
+            1
+          </dd>
+        </div>
+        <div>
+          <dt>
+            Datos repetidos
+          </dt>
+          <dd>
+            0
+          </dd>
+        </div>
+      </dl>
+    </section>
+    <section
+      aria-labelledby="titulo-alertas"
+      class="seccion"
+    >
+      <h2
+        id="titulo-alertas"
+      >
+        Alertas de seguridad
+      </h2>
+      <p>
+        Sin alertas de seguridad
+      </p>
+    </section>
+    <p
+      class="estado-carga"
+      role="status"
+    >
+      Cargando el hilo…
+    </p>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/vistas/relojDemo.test.tsx:74:26
+     72|     post.mockResolvedValueOnce(Response.json({ error: { codigo: 'NO_EN…
+     73|     await screen.findByText('Sin alertas de seguridad');
+     74|     const campo = screen.getByRole('spinbutton', { name: 'Minutos exac…
+       |                          ^
+     75|     fireEvent.change(campo, { target: { value: '23' } });
+     76|     await usuario.click(screen.getByRole('button', { name: 'Adelantar …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  |web| src/vistas/relojDemo.test.tsx > Reloj de demo en el tablero > refresca el conteo por un evento posterior de admin sin recargar
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "+15 min"
+
+Here are the accessible roles:
+
+  heading:
+
+  Name "Administración":
+  <h1 />
+
+  Name "Trámites por estado":
+  <h2 />
+
+  Name "Indicadores disponibles":
+  <h2 />
+
+  Name "Alertas de seguridad":
+  <h2
+    id="titulo-alertas"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  Name "":
+  <p />
+
+  --------------------------------------------------
+  term:
+
+  Name "":
+  <dt />
+
+  Name "":
+  <dt />
+
+  Name "":
+  <dt />
+
+  --------------------------------------------------
+  definition:
+
+  Name "":
+  <dd />
+
+  Name "":
+  <dd />
+
+  Name "":
+  <dd />
+
+  --------------------------------------------------
+  region:
+
+  Name "Alertas de seguridad":
+  <section
+    aria-labelledby="titulo-alertas"
+    class="seccion"
+  />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <h1>
+      Administración
+    </h1>
+    <p
+      class="introduccion"
+    >
+      El mismo hilo, con la trazabilidad de cada canal.
+    </p>
+    <section
+      class="seccion"
+    >
+      <h2>
+        Trámites por estado
+      </h2>
+      <dl
+        class="datos"
+      >
+        <div>
+          <dt>
+            HORARIO_RESERVADO
+          </dt>
+          <dd>
+            1
+          </dd>
+        </div>
+      </dl>
+    </section>
+    <section
+      class="seccion"
+    >
+      <h2>
+        Indicadores disponibles
+      </h2>
+      <dl
+        class="datos"
+      >
+        <div>
+          <dt>
+            Cambios de canal
+          </dt>
+          <dd>
+            1
+          </dd>
+        </div>
+        <div>
+          <dt>
+            Datos repetidos
+          </dt>
+          <dd>
+            0
+          </dd>
+        </div>
+      </dl>
+    </section>
+    <section
+      aria-labelledby="titulo-alertas"
+      class="seccion"
+    >
+      <h2
+        id="titulo-alertas"
+      >
+        Alertas de seguridad
+      </h2>
+      <p>
+        Sin alertas de seguridad
+      </p>
+    </section>
+    <p
+      class="estado-carga"
+      role="status"
+    >
+      Cargando el hilo…
+    </p>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/vistas/relojDemo.test.tsx:92:32
+     90|     act(() => socket.recibir('connect'));
+     91|     expect(socket.emit).toHaveBeenCalledWith('sala:unirse', 'admin');
+     92|     await usuario.click(screen.getByRole('button', { name: '+15 min' }…
+       |                                ^
+     93|     await screen.findByText(ahora);
+     94|     lecturas.metricas.porEstado = [{ estado: 'LISTO_PARA_RESERVAR', ca…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 failed | 1 passed (9)
+   Start at  00:45:54
+   Duration  4.20s (transform 444ms, setup 0ms, import 1.47s, tests 738ms, environment 1.62s)
+

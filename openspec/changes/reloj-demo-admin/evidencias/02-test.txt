@@ -1,0 +1,107 @@
+$ tsc --project tests/tsconfig.json && vitest run --project unitarios --project web "--maxWorkers=2"
+
+ RUN  v4.0.14 <repositorio>
+
+ ✓ |unitarios| tests/unit/api/identificacionWaHttp.test.ts (3 tests) 265ms
+ ✓ |unitarios| tests/unit/api/clinicaMemoria.test.ts (1 test) 255ms
+ ✓ |unitarios| tests/unit/nucleo/casosTramite.test.ts (34 tests) 147ms
+ ✓ |unitarios| tests/unit/contratos.test.ts (18 tests) 197ms
+ ✓ |unitarios| tests/unit/api/idempotenciaWaMemoria.test.ts (1 test) 152ms
+ ✓ |unitarios| tests/unit/api/comandosMemoria.test.ts (4 tests) 237ms
+ ✓ |unitarios| tests/unit/api/relojDemo.test.ts (3 tests) 105ms
+ ✓ |unitarios| packages/adapters/in-http/test/rutasComandos.test.ts (9 tests) 113ms
+ ✓ |unitarios| tests/unit/consultas.test.ts (22 tests) 56ms
+ ✓ |unitarios| tests/unit/api/tokensJose.test.ts (4 tests) 23ms
+ ✓ |unitarios| tests/unit/api/consultasWaMemoria.test.ts (3 tests) 157ms
+ ✓ |unitarios| tests/unit/persistencia/relay.test.ts (1 test) 11ms
+ ✓ |unitarios| tests/unit/api/textosWa.test.ts (2 tests) 11ms
+ ✓ |unitarios| tests/unit/api/idempotencia.test.ts (2 tests) 26ms
+ ✓ |unitarios| packages/adapters/in-http/test/coherencia.test.ts (3 tests) 23ms
+ ✓ |unitarios| tests/unit/nucleo/adaptadores.test.ts (5 tests) 10ms
+ ✓ |unitarios| tests/unit/persistencia/instantanea.test.ts (1 test) 6ms
+ ✓ |unitarios| tests/unit/nucleo/tramite.test.ts (7 tests) 16ms
+ ✓ |unitarios| packages/adapters/in-http/test/identificacionWa.test.ts (2 tests) 17ms
+ ✓ |unitarios| tests/unit/persistencia/agenda.test.ts (1 test) 9ms
+ ✓ |unitarios| tests/unit/puertos.test.ts (3 tests) 9ms
+ ✓ |unitarios| tests/unit/nucleo/siguientePregunta.test.ts (5 tests) 9ms
+ ✓ |unitarios| tests/unit/nucleo/politica.test.ts (15 tests) 9ms
+ ✓ |unitarios| tests/unit/persistencia/puertos.test.ts (1 test) 7ms
+ ✓ |unitarios| tests/unit/persistencia/folios.test.ts (1 test) 16ms
+ ✓ |unitarios| tests/unit/persistencia/programador.test.ts (3 tests) 10ms
+ ✓ |unitarios| tests/unit/nucleo/hilo.test.ts (1 test) 6ms
+ ✓ |unitarios| tests/unit/api/clavesEventosMemoria.test.ts (2 tests) 12ms
+ ✓ |unitarios| tests/unit/workspace.test.ts (3 tests) 10ms
+ ✓ |unitarios| tests/unit/nucleo/identidadPaciente.test.ts (5 tests) 15ms
+ ✓ |unitarios| packages/adapters/in-http/test/siguientePregunta.test.ts (1 test) 9ms
+ ✓ |unitarios| tests/unit/persistencia/temporizadores.test.ts (1 test) 14ms
+ ✓ |unitarios| tests/unit/persistencia/relayApi.test.ts (1 test) 10ms
+ ✓ |unitarios| tests/unit/nucleo/curp.test.ts (8 tests) 17ms
+ ✓ |unitarios| tests/unit/dominio.test.ts (4 tests) 8ms
+ ✓ |unitarios| tests/unit/nucleo/registroTipos.test.ts (4 tests) 9ms
+ ✓ |unitarios| tests/unit/nucleo/agendar.test.ts (1 test) 7ms
+ ✓ |unitarios| tests/unit/persistencia/particion.test.ts (1 test) 8ms
+ ✓ |unitarios| tests/unit/api/puertosApi.test.ts (1 test) 11ms
+ ✓ |web| src/vistas/vistas.test.tsx (15 tests) 5537ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo  368ms
+     ✓ reintenta solo la sede pendiente y conserva su clave después de seleccionar el servicio  342ms
+     ✓ Ficha del call center: muestra teléfono enmascarado y datos públicos  375ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  3047ms
+     ✓ permite escribir texto fuera del guion y muestra ayuda sin avanzar  310ms
+ ✓ |web| src/vistas/flow.test.tsx (7 tests) 8705ms
+   ✓ el Flow de identificación conserva el paso al cancelar y vuelve a abrir sin la fecha  2207ms
+   ✓ Envío del Flow: controles según captura y resumen enmascarado sin valores en mutaciones ni almacenamiento  1745ms
+   ✓ Campo requerido vacío: no envía y señala el campo  415ms
+   ✓ atrapa el foco con Tab y Shift+Tab entre el primer campo y Cancelar  466ms
+   ✓ Escape y valores descartados: cancela sin enviar y abre campos vacíos  1061ms
+   ✓ reintenta el Flow con la misma solicitud y clave; cerrar descarta el pendiente protegido  1196ms
+   ✓ cerrar después de un error borra los valores y elimina el reintento del historial  1613ms
+ ✓ |web| src/vistas/identidadAsesor.test.tsx (9 tests) 2846ms
+   ✓ envía destinatario y candidato NINGUNO; captura la fecha protegida y avanza  878ms
+   ✓ envía destinatario y candidato referencia-opaca-demo; captura la fecha protegida y avanza  318ms
+   ✓ muestra código y mensaje del núcleo, conserva reiniciar y descarta al cancelar  420ms
+   ✓ reintenta sin recapturar y no filtra CURP, fecha ni datos básicos a cachés, consola, URL o almacenamiento  530ms
+ ✓ |web| src/vistas/wa.test.tsx (12 tests) 5125ms
+   ✓ identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión  1648ms
+   ✓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible  481ms
+   ✓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo  941ms
+   ✓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título  436ms
+   ✓ Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot  539ms
+ ✓ |web| src/vistas/consolas.test.tsx (16 tests) 2915ms
+     ✓ inicia con ANI de demo, valida el formato y descarta la captura al mostrar la ficha  799ms
+     ✓ exige consentimiento, envía una sola solicitud con doble clic y muestra el código de la lectura  363ms
+ ✓ |web| src/vistas/clinicaAlertas.test.tsx (8 tests) 1511ms
+     ✓ muestra dos turnos y respeta el orden recibido aunque las posiciones estén invertidas o ausentes  434ms
+ ✓ |web| src/vistas/relojDemo.test.tsx (9 tests) 1192ms
+     ✓ adelanta una hora, presenta la hora local y UTC y refresca las lecturas  464ms
+ ✓ |web| src/rutas.test.tsx (10 tests) 834ms
+     ✓ Cada ruta renderiza: /web  308ms
+ ✓ |web| src/cliente/refrescoReal.test.tsx (5 tests) 1367ms
+   ✓ vuelve a consultar contextoDemo al regresar a App aunque el valor anterior fuera vacío  586ms
+   ✓ tras confirmar en WhatsApp muestra la cita en App en la misma pestaña sin Actualizar  423ms
+ ✓ |web| src/cliente/contexto.test.tsx (5 tests) 778ms
+   ✓ comparte contextoDemo entre consumidores reales y da prioridad a la última respuesta por valor  504ms
+ ✓ |web| src/vistas/realWa.test.tsx (1 test) 816ms
+   ✓ sin API real muestra el error en la burbuja y Reintentar conserva mensaje y clave  814ms
+ ✓ |web| src/cliente/conversacion.test.tsx (2 tests) 1049ms
+   ✓ la vista envía por el almacén y acumula la respuesta sin consultar lecturas de conversación  1043ms
+ ✓ |web| src/vistas/catalogoReal.test.tsx (1 test) 852ms
+   ✓ distingue las doce ofertas sin reordenarlas y cotiza los identificadores del paquete en Tepic  849ms
+ ✓ |web| src/cliente/cliente.test.ts (25 tests) 253ms
+ ✓ |web| src/componentes/ModalFlow.test.tsx (1 test) 348ms
+   ✓ marca formato sin enviar ni mostrar el valor fuera de su campo protegido  347ms
+ ✓ |web| src/cliente/guionWa.test.ts (8 tests) 74ms
+ ✓ |web| src/vistas/red.test.ts (1 test) 187ms
+ ✓ |web| src/cliente/historialWa.test.tsx (9 tests) 57ms
+ ✓ |web| src/cliente/useIdentificacion.test.tsx (7 tests) 76ms
+ ✓ |web| src/cliente/tiempoReal.test.ts (5 tests) 33ms
+ ✓ |web| src/cliente/relojDemo.test.ts (11 tests) 31ms
+ ✓ |web| src/configuracion.test.ts (2 tests) 13ms
+ ✓ |web| src/cliente/identificacion.test.ts (13 tests) 31ms
+ ✓ |web| src/usoDemo.test.ts (2 tests) 8ms
+ ✓ |web| src/cliente/idempotenciaWa.test.ts (2 tests) 15ms
+
+ Test Files  64 passed (64)
+      Tests  373 passed (373)
+   Start at  00:53:23
+   Duration  121.53s (transform 4.03s, setup 0ms, import 134.57s, tests 36.68s, environment 44.56s)
+

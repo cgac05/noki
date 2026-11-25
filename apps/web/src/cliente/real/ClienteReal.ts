@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { io } from 'socket.io-client';
 import {
-  ComandoRequestSchema, CuerpoErrorSchema, RUTAS_CONSULTAS, rutaConsulta, RespuestaComandoSchema, RespuestaMensajeWaSchema, SolicitudMensajeWaSchema, SalaSchema, EVENTOS_CLIENTE_SOCKET, ESQUEMAS_EVENTOS_SOCKET,
+  AdelantarRelojSchema, RespuestaRelojSchema, RUTA_RELOJ_DEMO, ComandoRequestSchema, CuerpoErrorSchema, RUTAS_CONSULTAS, rutaConsulta, RespuestaComandoSchema, RespuestaMensajeWaSchema, SolicitudMensajeWaSchema, SalaSchema, EVENTOS_CLIENTE_SOCKET, ESQUEMAS_EVENTOS_SOCKET,
 } from '@noki/contracts';
 import type { ComandoRequest, DatosEventoSocket, NombreConsulta, NombreEventoSocket, RespuestaComando, SolicitudMensajeWa, RespuestaMensajeWa } from '@noki/contracts';
 import type { ClienteApi } from '../ClienteApi.ts';
@@ -21,6 +21,7 @@ type FabricaSocket = (url: string, opciones: { transports: ['websocket']; autoCo
 
 export class ClienteReal implements ClienteApi {
   readonly modo = 'real';
+  readonly relojDemo?: NonNullable<ClienteApi['relojDemo']>;
   private readonly url: string;
   private readonly peticion: typeof fetch;
   private readonly demoHabilitada: boolean;
@@ -36,6 +37,10 @@ export class ClienteReal implements ClienteApi {
     this.url = (opciones.url ?? 'http://localhost:4000').replace(/\/$/, '');
     this.peticion = opciones.fetch ?? globalThis.fetch.bind(globalThis);
     this.demoHabilitada = opciones.demo ?? false;
+    if (this.demoHabilitada) this.relojDemo = { adelantar: async minutos => {
+      const cuerpo = validar(AdelantarRelojSchema, { adelantarMinutos: minutos });
+      return validar(RespuestaRelojSchema, await this.solicitar(RUTA_RELOJ_DEMO.ruta, cuerpo, undefined, false));
+    } };
     this.fabricaSocket = opciones.fabricaSocket ?? io;
   }
 
@@ -116,17 +121,18 @@ export class ClienteReal implements ClienteApi {
     }
   }
 
-  private async solicitar(ruta: string, cuerpo?: unknown, clave?: string): Promise<unknown> {
+  private async solicitar(ruta: string, cuerpo?: unknown, clave?: string, reintentar = true): Promise<unknown> {
     const opciones: RequestInit = cuerpo === undefined
       ? { method: 'GET' }
-      : { method: 'POST', headers: { 'Content-Type': 'application/json', 'Idempotency-Key': clave! }, body: JSON.stringify(cuerpo) };
+      : { method: 'POST', headers: { 'Content-Type': 'application/json', ...(clave ? { 'Idempotency-Key': clave } : {}) }, body: JSON.stringify(cuerpo) };
     let respuesta: Response | undefined;
-    for (let intento = 0; intento < 2; intento++) {
+    const intentos = reintentar ? 2 : 1;
+    for (let intento = 0; intento < intentos; intento++) {
       try {
         respuesta = await this.peticion(`${this.url}${ruta}`, opciones);
         break;
       } catch {
-        if (intento === 1) throw new ErrorCliente('RED', 'No pudimos conectar con la API. Comprueba que esté encendida e intenta de nuevo.');
+        if (intento === intentos - 1) throw new ErrorCliente('RED', 'No pudimos conectar con la API. Comprueba que esté encendida e intenta de nuevo.');
       }
     }
     let dato: unknown;

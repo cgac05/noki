@@ -112,6 +112,16 @@ Administración muestra los conteos y KPI recibidos, con etiquetas españolas pa
 
 En modo real, cerrar atención, recalcular posiciones y consultar alertas usan el núcleo y la API del frente A, disponibles desde `main` `71f01f5`. La web requiere `VITE_API=real` y `VITE_DEMO=true`; la API, `DEMO_MODE=true`, Postgres y Redis locales. La web presenta los errores con **Reintentar**. En clínica basta el QR firmado; no se solicita una comprobación adicional de identidad.
 
+### Reloj de demo en administración
+
+Al final de `/admin`, **Reloj de demo** aparece únicamente con `VITE_API=real` y `VITE_DEMO=true`. La API de `main` debe ejecutarse con `DEMO_MODE=true`, Postgres y Redis locales. El cliente simulado y el real sin demo no ofrecen este control.
+
+Los botones **+15 min**, **+1 h**, **+1 día** y **+1 semana**, o el campo **Minutos exactos** (entero entre 1 y 10 080), envían `POST /api/demo/reloj`. Durante el envío se deshabilitan los controles. El resultado muestra la hora devuelta en la zona del navegador y su ISO UTC, y refresca las lecturas del tablero. Los eventos posteriores de la sala `admin` vuelven a actualizarlo sin recargar.
+
+Hoy dispara los temporizadores vencidos de reserva temporal (`HOLD`), inasistencia (`INASISTENCIA`) e inactividad (`INACTIVIDAD`); los recordatorios aún no están implementados. Para mostrarlo, aparta un horario en WhatsApp sin confirmar, abre `/admin` y pulsa **+15 min**: el hold de 10 minutos vence y el conteo pasa de `HORARIO_RESERVADO` a `LISTO_PARA_RESERVAR`. Si se muestra ese hilo, aparece `ReservaExpirada` en su línea de tiempo.
+
+El adelanto afecta a toda la demo y no se puede deshacer. No hay reintentos automáticos: un error conserva el tablero y ofrece **Reintentar** con los mismos minutos, aunque cambies el campo. Si se perdió la respuesta, comprueba el estado antes de repetir, porque la API pudo aplicar el adelanto. Para volver al inicio usa `corepack pnpm demo:reset` (API con `DEMO_MODE=true`); si mantienes la API en ejecución, reiníciala también para devolver su desfase del reloj a cero.
+
 Para regresar al modo simulado:
 
 ```powershell

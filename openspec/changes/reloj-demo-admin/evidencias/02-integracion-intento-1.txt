@@ -1,0 +1,31 @@
+$ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
+
+ RUN  v4.0.14 <repositorio>
+
+ ❯ |integracion| tests/integracion/comandosHttp.test.ts (3 tests | 3 skipped) 22652ms
+   ↓ Cotizar desde el call center y reintentar por HTTP con eventos persistidos
+   ↓ Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez
+   ↓ publica, programa y expira el hold desde la ruta del reloj con la API compuesta
+ ✓ |integracion| tests/integracion/temporizadoresBullMQ.test.ts (4 tests) 10479ms
+   ✓ reemplaza, deduplica, cancela y adelanta solo los vencidos  2346ms
+   ✓ usa un jobId compatible y reemplaza un trabajo activo cuando termina  1958ms
+   ✓ reprograma una ejecución anticipada sin gastar intentos y ejecuta al adelantar  1470ms
+   ✓ registra el fallo persistente tras tres intentos con los campos autorizados  4700ms
+ ❯ |integracion| tests/integracion/semilla.test.ts (5 tests | 5 skipped) 1124ms
+     ↓ incluye las sedes, servicios con perfil, Xalisco y contactos de demo
+     ↓ es idempotente y guarda solo hashes argon2id verificables
+     ↓ encuentra Química sanguínea por un sinónimo con errores de escritura
+     ↓ rechaza reinicio sin DEMO_MODE=true sin modificar datos
+     ↓ reinicia la base de demo, migra y deja exactamente los datos semilla
+ ❯ |integracion| tests/integracion/idempotenciaWa.test.ts (1 test | 1 failed) 15194ms
+   × reserva y reproduce la respuesta de WhatsApp con eventos únicos en Postgres 15190ms
+ ❯ |integracion| tests/integracion/clinicaAlertas.test.ts (1 test | 1 failed) 3895ms
+   × calcula posiciones por orden de llegada y limita alertas en Postgres 3893ms
+ ❯ |integracion| tests/integracion/migracionPersistencia.test.ts (3 tests | 3 failed) 2936ms
+   × migra una base con semilla y conserva las claves anteriores y las claves con sufijo 1480ms
+   × acepta varias CURP nulas y rechaza una CURP duplicada 42ms
+   × aplica la migración de API una sola vez y conserva los registros 1363ms
+ ✓ |integracion| tests/integracion/sdAgenda.test.ts (4 tests) 1462ms
+   ✓ registra de forma idempotente, rechaza entradas inválidas y simula fallos y latencia  432ms
+   ✓ se recupera tras dos fallos y señala cuando se agotan los tres intentos  900ms
+[ELIFECYCLE] Command failed with exit code 4294967295.

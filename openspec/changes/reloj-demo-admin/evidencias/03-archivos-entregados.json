@@ -1,0 +1,239 @@
+{
+  "base": "44c57f43a3d5341fe1a94940d1bb5ea999cf5711",
+  "alcanceAutorizado": [
+    "apps/web/**",
+    "openspec/changes/reloj-demo-admin/**"
+  ],
+  "revision": "Diff sin commit; SHA-256 de archivos entregados",
+  "exclusiones": [
+    "Este manifiesto no se incluye a sí mismo",
+    "Archivos ajenos preexistentes, node_modules y cachés"
+  ],
+  "archivos": [
+    {
+      "ruta": "apps/web/dist/assets/index-B2BmQGoi.css",
+      "bytes": 14846,
+      "sha256": "a53aef2beaf6ff48b6a38f97d8dad9b7cea633c4af452f36ebe20e6485d3de1c"
+    },
+    {
+      "ruta": "apps/web/dist/assets/index-BuFuQj6M.js",
+      "bytes": 504067,
+      "sha256": "41aefe3b89ba6597ef29e587c5542181b373b7d378fb544e246ecc41147253bd"
+    },
+    {
+      "ruta": "apps/web/dist/index.html",
+      "bytes": 626,
+      "sha256": "3e15ce54ae864863bb289c8e904c14d6ce28fa2811afcd5f7b34b1a1aa808039"
+    },
+    {
+      "ruta": "apps/web/README.md",
+      "bytes": 19621,
+      "sha256": "1542822189d59ca47c257d4539ed2efe1a62fb09bd78baae2d1c8accef41a64d"
+    },
+    {
+      "ruta": "apps/web/src/cliente/ClienteApi.ts",
+      "bytes": 1228,
+      "sha256": "88a823ddca9168ad07780c11eaaa51114a1b7ffec640a75c4f26d2bb08e0673b"
+    },
+    {
+      "ruta": "apps/web/src/cliente/real/ClienteReal.ts",
+      "bytes": 7114,
+      "sha256": "fb4bb2e56ee9eb94258ceab31e674ab00bdaea63f83f6b3341405178bf799a4c"
+    },
+    {
+      "ruta": "apps/web/src/cliente/relojDemo.test.ts",
+      "bytes": 3053,
+      "sha256": "37b821d8a846f5c4fac394a14931fefbc7cb8b38fc7c934b8459780832345c4c"
+    },
+    {
+      "ruta": "apps/web/src/componentes/RelojDemo.tsx",
+      "bytes": 3542,
+      "sha256": "934ab434f7814c6b34c9644424649f2634e5eea29729dc377c777777c4b16ada"
+    },
+    {
+      "ruta": "apps/web/src/styles.css",
+      "bytes": 12048,
+      "sha256": "b09e70d525dc5d824dee0ce4e57e3687de7c9ae1fe2fdb89a8917cd20ad8b941"
+    },
+    {
+      "ruta": "apps/web/src/vistas/Admin.tsx",
+      "bytes": 3644,
+      "sha256": "697856dbb3889aaaecb9351df8415b97833e11b214ab459a73319fb25db94618"
+    },
+    {
+      "ruta": "apps/web/src/vistas/relojDemo.test.tsx",
+      "bytes": 6497,
+      "sha256": "e52401c25ce198691d52542ba1ae3ea7c3278b19e97cc6a7c73d538f87597594"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/.openspec.yaml",
+      "bytes": 40,
+      "sha256": "3c3c72cd1a100807c59ef8347538654b4d2d22269f59561c985b01cb44c39491"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/design.md",
+      "bytes": 3201,
+      "sha256": "152a61b643416b0898b5720a69553c6123ea026d3f145000a4176391cfc48e37"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/01-rojo.txt",
+      "bytes": 5809,
+      "sha256": "b555a03e08ed43f12fcd72a9febf8a7e07b1acc73f23bf0ef80f315e9a830517"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/01-verde.txt",
+      "bytes": 268,
+      "sha256": "3aeb21aef77951bdabd0f1cbf92ffc05a236707063f4531255981bd7853a4fa1"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/02-build-intento-1.txt",
+      "bytes": 6511,
+      "sha256": "88af8acc118ef2b668447edeb9700164fd7e691d95a5295dae04e719ae5a08f6"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/02-build.txt",
+      "bytes": 6510,
+      "sha256": "0049c18f308878673bf67760cfa3d5fc602ff9b4ba716bd367f84a77918f199e"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/02-diseno.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/02-integracion-intento-1.txt",
+      "bytes": 2336,
+      "sha256": "c9da37ad27d89414a9405a18fa74226168030c6cc55e0f6d554e9ec5805ab454"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/02-integracion-intento-2.txt",
+      "bytes": 10107,
+      "sha256": "3f93066902a0c703d4e55c8abb3e51de6df2031cbd9cd0571dfab8d8a2cd5546"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/02-integracion.txt",
+      "bytes": 3041,
+      "sha256": "6d477a047212ce5a7837cf9bebec7821e8aec405bc0a9844339a2f0c37e4481a"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/02-lint-deps.txt",
+      "bytes": 140,
+      "sha256": "6d24df9b93b51f29ad801be012b5dd4fae6696a17aaad1bc20299b1da6fe5fa6"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/02-lint-intento-1.txt",
+      "bytes": 16684,
+      "sha256": "116042e46159e838d40499886074aa03ad8d3fac6349dac473cca87e6fe8e0a3"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/02-lint.txt",
+      "bytes": 96,
+      "sha256": "dff0927d3e4043ebc50f3c2349dcd0a2c8f0aa22e9a9e294b8a3f9d0c2a864b7"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/02-rojo.txt",
+      "bytes": 18242,
+      "sha256": "1684e669b7fe3272587f530c13c5823e9a30b1c23e192eb2180b9921e3d8d299"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/02-test-intento-1.txt",
+      "bytes": 20940,
+      "sha256": "78172f1bd0cc6de86880f9b4c4bdf4ec15d6f44058a481d89cb29b06327a54b2"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/02-test.txt",
+      "bytes": 7812,
+      "sha256": "5e9f540d058be216cbc9ce2274b3fb0109ca6e8981e3733fde704bf11466abfb"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/02-verde.txt",
+      "bytes": 417,
+      "sha256": "58d011bcfacee17b84031ff654f9df98246728d66addf37a7200a328a7b1083a"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/03-admin-antes-1280.jpg",
+      "bytes": 40775,
+      "sha256": "b875281d0fb9c92670b6cb00d33c90ac66dd9619220d37edddb8fd7d7dd54461"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/03-admin-antes-375.jpg",
+      "bytes": 14577,
+      "sha256": "35d63cff39c4a70f1526ddfa16311b4ae660a442f8ee912ea10f34a645d5f1e2"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/03-admin-despues-1280.jpg",
+      "bytes": 37045,
+      "sha256": "0d7ab5e0e8b75bb9c29813742fcb73716ea6f50df17253df3b89ec72c75c0e31"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/03-admin-despues-375.jpg",
+      "bytes": 22023,
+      "sha256": "f04d97016bc383aff4b2e84cd9330c452524fc8d9a08f47c1518d0df96072da9"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/03-controles.json",
+      "bytes": 1836,
+      "sha256": "8f7ef554a68642263f110d08f9a32d042e66f0e5f1768b97b6e9f227751f9882"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/03-entorno.json",
+      "bytes": 521,
+      "sha256": "38f7ee47fcb3594d1972c58924ca8c53078849671fe91f98ddf5581a3d1b31c6"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/03-mock-1280.jpg",
+      "bytes": 58218,
+      "sha256": "60df02abae6d8fbcfb212fc3c3f1e5ef3f653683bca2c368ed41a8f26448c304"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/03-mock-375.jpg",
+      "bytes": 58365,
+      "sha256": "3c07c37c29f4edbfb776cf9700b39fbfb09a590cebfa4bc610ad2172d33daab5"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/03-recorrido.json",
+      "bytes": 1908,
+      "sha256": "f378cf06b105863763469cba53c0a263de6dc1b7531468a45e3e7e7e354acd43"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/03-reloj-despues-1280.jpg",
+      "bytes": 40614,
+      "sha256": "52a445b96918715615fd0c3c24e795d47936784d7ebf15d3d1e4be9dd253b971"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/evidencias/03-reloj-despues-375.jpg",
+      "bytes": 34576,
+      "sha256": "c7b65e694e4970b065472c3137b234f203400604d180a67d0f2cc8bb3e5abf8c"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/handoff.md",
+      "bytes": 2234,
+      "sha256": "b6cba7667a8e078ade49fadc049126e5a1668a05d7c438f0e84f608b056bc6c8"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/implementacion.md",
+      "bytes": 8529,
+      "sha256": "9304c2d9dd26a0c028427408f1cc312d011ad62c7dd44186d3756847973c6673"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/proposal.md",
+      "bytes": 2606,
+      "sha256": "23d64e380525013b1ce54446934c5b88d32fe179d7187251c195bcfcf1339f64"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/specs/cliente-api-canales/spec.md",
+      "bytes": 1228,
+      "sha256": "4d342069a9cbff9afa8703914b27a2d90a9e785240bc9e2b8b119adb1a5a54e3"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/specs/consolas-internas/spec.md",
+      "bytes": 1898,
+      "sha256": "951ab809709099586128fbb60e4a0d09a2a0a7f57bbe1c56fc63ef6b03648608"
+    },
+    {
+      "ruta": "openspec/changes/reloj-demo-admin/tasks.md",
+      "bytes": 2431,
+      "sha256": "5294f32bc5b5863dffbae9bcc0880e1d455ff012651353d056954df5c1b5281d"
+    }
+  ]
+}

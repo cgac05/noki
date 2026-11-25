@@ -1,0 +1,17 @@
+{
+  "base": "44c57f43a3d5341fe1a94940d1bb5ea999cf5711",
+  "head": "44c57f43a3d5341fe1a94940d1bb5ea999cf5711",
+  "backendSinDiferenciasConMain": true,
+  "ready": {
+    "estado": "ok",
+    "postgres": "ok",
+    "redis": "ok"
+  },
+  "DEMO_MODE": "true (comprobado por contextoDemo y POST exitoso del reloj)",
+  "VITE_API": "real",
+  "VITE_DEMO": "true",
+  "postgres": "local, Docker postgres:16-alpine",
+  "redis": "local, Docker redis:7-alpine",
+  "sinResetPosterior": true,
+  "adelantoTotalMinutos": 30
+}

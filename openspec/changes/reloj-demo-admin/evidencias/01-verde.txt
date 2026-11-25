@@ -1,0 +1,10 @@
+
+ RUN  v4.0.14 <repositorio>
+
+ ✓ |web| src/cliente/relojDemo.test.ts (11 tests) 20ms
+
+ Test Files  1 passed (1)
+      Tests  11 passed (11)
+   Start at  00:43:43
+   Duration  2.97s (transform 358ms, setup 0ms, import 691ms, tests 20ms, environment 1.87s)
+

@@ -1,0 +1,67 @@
+{
+  "revisionBase": "44c57f43a3d5341fe1a94940d1bb5ea999cf5711",
+  "validaciones": [
+    {
+      "evidencia": "02-lint.txt",
+      "comando": "corepack pnpm lint",
+      "salida": 0
+    },
+    {
+      "evidencia": "02-lint-deps.txt",
+      "comando": "corepack pnpm lint:deps",
+      "salida": 0
+    },
+    {
+      "pruebas": 373,
+      "archivos": 64,
+      "comando": "corepack pnpm test --maxWorkers=2",
+      "salida": 0,
+      "evidencia": "02-test.txt"
+    },
+    {
+      "archivos": 17,
+      "comando": "corepack pnpm test:integracion",
+      "pruebas": 47,
+      "omitidas": 0,
+      "evidencia": "02-integracion.txt",
+      "salida": 0
+    },
+    {
+      "evidencia": "02-build.txt",
+      "comando": "VITE_API=real VITE_DEMO=true corepack pnpm --filter @noki/web build",
+      "salida": 0
+    },
+    {
+      "salida": 0,
+      "comando": "git diff --check"
+    },
+    {
+      "resultado": "Change 'reloj-demo-admin' is valid",
+      "comando": "openspec validate reloj-demo-admin --type change --strict --no-interactive",
+      "salida": 0
+    }
+  ],
+  "openspec": {
+    "tareas": {
+      "total": 7,
+      "complete": 7,
+      "remaining": 0
+    },
+    "estado": "all_done"
+  },
+  "modificaciones": [
+    " M apps/web/README.md",
+    " M apps/web/src/cliente/ClienteApi.ts",
+    " M apps/web/src/cliente/real/ClienteReal.ts",
+    " M apps/web/src/styles.css",
+    " M apps/web/src/vistas/Admin.tsx",
+    "?? .claude/launch.json",
+    "?? apps/web/src/cliente/relojDemo.test.ts",
+    "?? apps/web/src/componentes/RelojDemo.tsx",
+    "?? apps/web/src/vistas/relojDemo.test.tsx",
+    "?? openspec/changes/reloj-demo-admin/"
+  ],
+  "preexistenteAjenoSinModificar": ".claude/launch.json",
+  "commitsCreados": 0,
+  "revisionIndependiente": "Pendiente de Claude"
+}

@@ -1,0 +1,54 @@
+{
+  "base": "44c57f43a3d5341fe1a94940d1bb5ea999cf5711",
+  "modo": "real",
+  "web": {
+    "VITE_API": "real",
+    "VITE_DEMO": "true"
+  },
+  "casos": [
+    {
+      "ancho": 1280,
+      "antes": {
+        "HORARIO_RESERVADO": 2,
+        "LISTO_PARA_RESERVAR": 2,
+        "fuente": "Árbol accesible observado antes del clic y 03-admin-antes-1280.jpg"
+      },
+      "hora": "2026-11-25T07:12:17.482Z",
+      "despues": "Trámites por estado\nBORRADOR\n0\nCOTIZADO\n1\nLISTO_PARA_RESERVAR\n4\nHORARIO_RESERVADO\n0\nCONFIRMADA\n2\nEN_CLINICA\n1\nATENDIDA\n1\nCANCELADA\n0\nNO_ASISTIO\n0\nEXPIRADO\n0",
+      "eventosReservaExpirada": 3,
+      "sinRecargar": true,
+      "resultado": "PASS"
+    },
+    {
+      "ancho": 375,
+      "antes": "Trámites por estado\nBORRADOR\n0\nCOTIZADO\n1\nLISTO_PARA_RESERVAR\n3\nHORARIO_RESERVADO\n1\nCONFIRMADA\n2\nEN_CLINICA\n1\nATENDIDA\n1\nCANCELADA\n0\nNO_ASISTIO\n0\nEXPIRADO\n0",
+      "despues": "Trámites por estado\nBORRADOR\n0\nCOTIZADO\n1\nLISTO_PARA_RESERVAR\n4\nHORARIO_RESERVADO\n0\nCONFIRMADA\n1\nEN_CLINICA\n1\nATENDIDA\n1\nCANCELADA\n0\nNO_ASISTIO\n1\nEXPIRADO\n0",
+      "hora": "2026-11-25T07:30:11.934Z",
+      "eventosReservaExpirada": 4,
+      "sinRecargar": true,
+      "anchoDocumento": {
+        "documento": 360,
+        "viewport": 375
+      },
+      "resultado": "PASS"
+    }
+  ],
+  "modoSimulado": [
+    {
+      "ancho": 375,
+      "seccionesReloj": 0,
+      "botonesReloj": 0
+    },
+    {
+      "ancho": 1280,
+      "seccionesReloj": 0
+    }
+  ],
+  "pasos": [
+    "Cotizar paquete en Tepic en Call Center y continuar por WhatsApp",
+    "Seleccionar horario y completar requisitos e identificación ficticia, dejando la cita sin confirmar",
+    "Abrir Admin; pulsar +15 min; observar conteos y ReservaExpirada sin recargar",
+    "Repetir reserva y adelanto a 375 px",
+    "Abrir Admin simulado a 375 px y 1280 px; comprobar ausencia del reloj"
+  ]
+}

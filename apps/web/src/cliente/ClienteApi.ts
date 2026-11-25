@@ -11,6 +11,7 @@ export interface ClienteApi {
   consultar<N extends NombreConsultaCliente>(nombre: N, parametros: ParametrosConsultaCliente<N>): Promise<RespuestaConsultaCliente<N>>;
   suscribir<N extends NombreEventoSocket>(nombre: N, recibir: (dato: DatosEventoSocket[N]) => void): () => void;
   unirse(sala: string): () => void;
+  relojDemo?: { adelantar(minutos: number): Promise<{ ahora: string }> };
   demo?: {
     readonly ids: { hiloId: string; pacienteId: string; sedeId: string; tramiteWebId: string };
     revision(): number; paso(): PasoGuion; reiniciar(): void; alCambiar(recibir: () => void): () => void;

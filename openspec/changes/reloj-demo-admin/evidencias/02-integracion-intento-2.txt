@@ -1,0 +1,121 @@
+$ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
+
+ RUN  v4.0.14 <repositorio>
+
+ ❯ |integracion| tests/integracion/comandosHttp.test.ts (3 tests | 3 skipped) 532ms
+   ↓ Cotizar desde el call center y reintentar por HTTP con eventos persistidos
+   ↓ Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez
+   ↓ publica, programa y expira el hold desde la ruta del reloj con la API compuesta
+ ✓ |integracion| tests/integracion/temporizadoresBullMQ.test.ts (4 tests) 3653ms
+   ✓ registra el fallo persistente tras tres intentos con los campos autorizados  3253ms
+ ❯ |integracion| tests/integracion/semilla.test.ts (5 tests | 5 skipped) 93ms
+     ↓ incluye las sedes, servicios con perfil, Xalisco y contactos de demo
+     ↓ es idempotente y guarda solo hashes argon2id verificables
+     ↓ encuentra Química sanguínea por un sinónimo con errores de escritura
+     ↓ rechaza reinicio sin DEMO_MODE=true sin modificar datos
+     ↓ reinicia la base de demo, migra y deja exactamente los datos semilla
+ ❯ |integracion| tests/integracion/idempotenciaWa.test.ts (1 test | 1 failed) 328ms
+   × reserva y reproduce la respuesta de WhatsApp con eventos únicos en Postgres 327ms
+ ✓ |integracion| tests/integracion/clinicaAlertas.test.ts (1 test) 2325ms
+   ✓ calcula posiciones por orden de llegada y limita alertas en Postgres  2323ms
+ ✓ |integracion| tests/integracion/migracionPersistencia.test.ts (3 tests) 1864ms
+   ✓ migra una base con semilla y conserva las claves anteriores y las claves con sufijo  1413ms
+ ✓ |integracion| tests/integracion/sdAgenda.test.ts (4 tests) 1272ms
+   ✓ registra de forma idempotente, rechaza entradas inválidas y simula fallos y latencia  410ms
+   ✓ se recupera tras dos fallos y señala cuando se agotan los tres intentos  784ms
+ ✓ |integracion| tests/integracion/aplicaciones.test.ts (4 tests) 1048ms
+     ✓ señala Postgres caído dentro del límite  906ms
+ ✓ |integracion| tests/integracion/identidadPostgres.test.ts (1 test) 1439ms
+   ✓ Registro concurrente y CURP con sexo X  1053ms
+ ✓ |integracion| tests/integracion/puertosApiPostgres.test.ts (1 test) 1141ms
+   ✓ Concurrencia con la misma clave, dos usos simultáneos y almacenamiento de API en Postgres  804ms
+ ✓ |integracion| tests/integracion/agendaPostgres.test.ts (3 tests) 1290ms
+   ✓ acepta uno de 50 intentos concurrentes por el mismo horario y recupera el hold vencido  353ms
+ ✓ |integracion| tests/integracion/nucleo.test.ts (8 tests) 757ms
+     ✓ permite exactamente un éxito en 50 reservas concurrentes  351ms
+ ✓ |integracion| tests/integracion/consumidorStreams.test.ts (2 tests) 665ms
+   ✓ reinicia sin pérdidas ni duplicados, y procesa los grupos por separado  475ms
+ ✓ |integracion| tests/integracion/relayPostgres.test.ts (1 test) 607ms
+   ✓ no publica dos veces con dos relays y reintenta si publicó sin marcar  565ms
+ ✓ |integracion| tests/integracion/tramitePostgres.test.ts (4 tests) 351ms
+ ✓ |integracion| tests/integracion/puertosPostgres.test.ts (1 test) 492ms
+   ✓ cumple la misma batería de los puertos en Postgres sin devolver datos personales en búsquedas  330ms
+ ✓ |integracion| tests/integracion/intentosPostgres.test.ts (1 test) 266ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |integracion| tests/integracion/comandosHttp.test.ts [ tests/integracion/comandosHttp.test.ts ]
+error: operator class "gin_trgm_ops" does not exist for access method "gin"
+ ❯ node_modules/.pnpm/pg@8.16.3/node_modules/pg/lib/client.js:545:17
+ ❯ PostgresConnection.executeQuery <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/dialect/postgres/postgres-driver.js:90:49
+ ❯ <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:35:28
+ ❯ SingleConnectionProvider.#run <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/driver/single-connection-provider.js:24:16
+ ❯ DefaultQueryExecutor.executeQuery <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:34:16
+ ❯ Object.up packages/adapters/out-postgres/src/migrar.ts:14:90
+     12|     for (const nombre of nombres) {
+     13|       const contenido = await readFile(join(carpeta, nombre), 'utf8');
+     14|       migraciones[nombre.replace(/\.sql$/, '')] = { up: async (db: Kys…
+       |                                                                                          ^
+     15|     }
+     16|     return migraciones;
+ ❯ Migrator.#migrateUp <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:556:17
+ ❯ run <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:420:28
+ ❯ <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/kysely.js:571:32
+ ❯ PostgresConnection.executeQuery <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/dialect/postgres/postgres-driver.js:102:41
+ ❯ <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:35:28
+ ❯ SingleConnectionProvider.#run <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/driver/single-connection-provider.js:24:16
+ ❯ DefaultQueryExecutor.executeQuery <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:34:16
+ ❯ Object.up packages/adapters/out-postgres/src/migrar.ts:14:90
+ ❯ Migrator.#migrateUp <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:556:17
+ ❯ run <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:420:28
+ ❯ <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/kysely.js:571:32
+ ❯ DefaultConnectionProvider.provideConnection <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/driver/default-connection-provider.js:10:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  |integracion| tests/integracion/semilla.test.ts [ tests/integracion/semilla.test.ts ]
+error: relation "kysely_migration_lock" does not exist
+ ❯ node_modules/.pnpm/pg@8.16.3/node_modules/pg/lib/client.js:545:17
+ ❯ PostgresConnection.executeQuery <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/dialect/postgres/postgres-driver.js:90:49
+ ❯ <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:35:28
+ ❯ DefaultConnectionProvider.provideConnection <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/driver/default-connection-provider.js:10:20
+ ❯ DefaultQueryExecutor.executeQuery <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:34:16
+ ❯ SelectQueryBuilderImpl.execute <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-builder/select-query-builder.js:317:24
+ ❯ SelectQueryBuilderImpl.executeTakeFirst <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-builder/select-query-builder.js:321:26
+ ❯ Migrator.#doesLockRowExists <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:390:25
+ ❯ Migrator.#ensureLockRowExists <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:363:15
+ ❯ PostgresConnection.executeQuery <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/dialect/postgres/postgres-driver.js:102:41
+ ❯ <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:35:28
+ ❯ DefaultConnectionProvider.provideConnection <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/driver/default-connection-provider.js:10:20
+ ❯ DefaultQueryExecutor.executeQuery <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-executor/query-executor-base.js:34:16
+ ❯ SelectQueryBuilderImpl.execute <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-builder/select-query-builder.js:317:24
+ ❯ SelectQueryBuilderImpl.executeTakeFirst <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/query-builder/select-query-builder.js:321:26
+ ❯ Migrator.#doesLockRowExists <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:390:25
+ ❯ Migrator.#ensureLockRowExists <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:363:15
+ ❯ Migrator.#ensureMigrationTablesExists <repositorio>/node_modules/.pnpm/kysely@0.28.8/node_modules/kysely/dist/esm/migration/migrator.js:298:9
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |integracion| tests/integracion/idempotenciaWa.test.ts > reserva y reproduce la respuesta de WhatsApp con eventos únicos en Postgres
+error: schema "idempotencia_wa" already exists
+ ❯ node_modules/.pnpm/pg-pool@3.14.0_pg@8.16.3/node_modules/pg-pool/index.js:45:11
+ ❯ tests/integracion/idempotenciaWa.test.ts:30:5
+     28|   });
+     29|   try {
+     30|     await admin.query('CREATE SCHEMA idempotencia_wa');
+       |     ^
+     31|     await migrar(databaseUrl, undefined, esquema);
+     32|     await sembrar(databaseUrl);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  3 failed | 14 passed (17)
+      Tests  1 failed | 38 passed | 8 skipped (47)
+   Start at  00:55:51
+   Duration  83.91s (transform 1.49s, setup 0ms, import 58.90s, tests 18.12s, environment 6ms)
+
+[ELIFECYCLE] Command failed with exit code 1.
