@@ -36,3 +36,43 @@ Ejecutados uno tras otro, sin otros procesos y con la configuración por defecto
 
 - La revisión del frente B, que va en una vuelta propia en este archivo.
 - La autorización de cierre de ambos frentes.
+
+## Vuelta 1, frente B (Claude, 2026-11-25)
+
+- **Dictamen: PASS.**
+- **Alcance revisado:** `feat/contratos-relleno-huecos` en `e6d05e5` (implementación de Codex sobre `1026f07`, base `main` `230d246`), en el checkout del frente B. Tareas 1.1–3.1; requisitos «Tiempo real con nombres compartidos» (`contratos-canales`), «Modelos de lectura compartidos» y «Tabla de rutas de consulta» (`contratos-consultas`).
+- **Revisión autorizada intacta:** los hashes de `proposal.md`, `design.md` y los dos specs coinciden con `handoff.md`. `tasks.md` solo cambia en las casillas de 1.1–3.1. `openspec validate --strict` → válido.
+
+### Contraste
+
+- **Archivos:** fuera de la carpeta del cambio, el diff toca exactamente `proposal.md` (Impact): `packages/contracts/src/{tiempoReal,consultas}.ts`, `tests/unit/{contratos,consultas}.test.ts`, `docs/contratos.md`, `AGENTS.md` y `apps/web/src/cliente/mock/guionFlujoA.ts`. `index.ts` no necesitó cambios porque reexporta con `export *`. Ningún archivo del frente A.
+- **D1–D3:** coincido con la vuelta del frente A; los esquemas cumplen cada escenario de los deltas y las pruebas los cubren (sala `wa:` válida e inválidas, 0/1/5/6 mensajes, `waId` de 5 dígitos, hueco sin `pacienteId`, `nombre` ni `canal`, estados fuera del contrato, 50/51 huecos y ruta sin `soloDemo`).
+- **D5, lado web:** el único cambio en `apps/web` es `panelHuecos: []`. La web no consulta `panelHuecos` todavía (`Admin.tsx` solo usa `alertasSeguridad`), así que en modo real no hay petición a la ruta que aún responde 404. `ClienteMock` y `ClienteReal` validan con `ESQUEMAS_EVENTOS_SOCKET` y `SalaSchema` genéricos, por lo que `wa:mensajes` y `wa:<waId>` quedan disponibles para las pantallas sin otra adaptación; `EventoGuion` sigue compilando con el evento nuevo.
+- **Documentación:** `docs/contratos.md` y `AGENTS.md` §7 coinciden con D1–D4 y no contradicen `PLAN.md` §10.1.
+
+### Controles independientes
+
+Ejecutados en el checkout del frente B, uno tras otro y con la configuración por defecto de Vitest:
+
+| Control | Resultado | Evidencia |
+|---|---|---|
+| `corepack pnpm lint` (eslint + typecheck, incluido `tests/tsconfig.json`) | código 0 | `evidencias/revision-b-lint.txt` |
+| `corepack pnpm lint:deps` | código 0 | `evidencias/revision-b-deps.txt` |
+| `corepack pnpm -r exec tsc --noEmit` | código 0 | `evidencias/revision-b-tsc.txt` |
+| `corepack pnpm test` | código 0, 414/414 en 69 archivos | `evidencias/revision-b-test.txt` |
+| `corepack pnpm test:integracion` con Postgres en 5432 (base `noki_test`) y Redis en 6379 de `infra/docker-compose.yml` | código 0, 47/47 en 17 archivos | `evidencias/revision-b-integ.txt` |
+
+Nota de entorno: el script `lint` invoca `pnpm` directamente y en esta máquina solo existe vía `corepack`; se corrió con un envoltorio `pnpm → corepack pnpm` en el PATH. No afecta al cambio.
+
+### Hallazgos
+
+- **H-04 (informativo, para el cambio de pantallas del frente B):** las ofertas de `HuecoVista` no llevan identificador ni orden garantizado por el contrato. El panel de `/admin` deberá usar su posición como clave y mostrarlas en el orden recibido; si se necesita otra cosa, se pide en ese cambio. No requiere corrección aquí.
+- Sin hallazgos que bloqueen. Coincido con H-01 a H-03 del frente A.
+
+### Recomendación
+
+Recomiendo el cierre: los dos frentes tienen PASS con evidencia propia. Riesgos residuales: H-01 (pruebas web cerca del límite de 5 s con la máquina cargada) y el riesgo de privacidad aceptado de la sala por número (`proposal.md`, Impact). Esta recomendación no es una autorización: el cierre lo autorizan los responsables de ambos frentes (`LuisMaster119` por B; `J3sus-esb` o `cgac05` por A).
+
+### Pendiente
+
+- La autorización de cierre de ambos frentes; después, `/opsx:sync` y `/opsx:archive`.

@@ -1,0 +1,46 @@
+$ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
+
+[1m[46m RUN [49m[22m [36mv4.0.14 [39m[90mC:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki[39m
+
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/comandosHttp.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 4601[2mms[22m[39m
+   [33m[2m✓[22m[39m Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez [33m 1904[2mms[22m[39m
+   [33m[2m✓[22m[39m publica, programa y expira el hold desde la ruta del reloj con la API compuesta [33m 904[2mms[22m[39m
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/temporizadoresBullMQ.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 3652[2mms[22m[39m
+   [33m[2m✓[22m[39m registra el fallo persistente tras tres intentos con los campos autorizados [33m 3253[2mms[22m[39m
+Reinicio de la base de demo en el host localhost.
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/semilla.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 3125[2mms[22m[39m
+     [33m[2m✓[22m[39m es idempotente y guarda solo hashes argon2id verificables [33m 862[2mms[22m[39m
+     [33m[2m✓[22m[39m reinicia la base de demo, migra y deja exactamente los datos semilla [33m 1193[2mms[22m[39m
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/clinicaAlertas.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 2076[2mms[22m[39m
+   [33m[2m✓[22m[39m calcula posiciones por orden de llegada y limita alertas en Postgres [33m 2074[2mms[22m[39m
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/migracionPersistencia.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 1899[2mms[22m[39m
+   [33m[2m✓[22m[39m migra una base con semilla y conserva las claves anteriores y las claves con sufijo [33m 1327[2mms[22m[39m
+   [33m[2m✓[22m[39m aplica la migración de API una sola vez y conserva los registros [33m 373[2mms[22m[39m
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/idempotenciaWa.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 1811[2mms[22m[39m
+   [33m[2m✓[22m[39m reserva y reproduce la respuesta de WhatsApp con eventos únicos en Postgres [33m 1809[2mms[22m[39m
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/sdAgenda.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 1217[2mms[22m[39m
+   [33m[2m✓[22m[39m registra de forma idempotente, rechaza entradas inválidas y simula fallos y latencia [33m 358[2mms[22m[39m
+   [33m[2m✓[22m[39m se recupera tras dos fallos y señala cuando se agotan los tres intentos [33m 811[2mms[22m[39m
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/aplicaciones.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 1036[2mms[22m[39m
+     [33m[2m✓[22m[39m señala Postgres caído dentro del límite [33m 912[2mms[22m[39m
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/identidadPostgres.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 899[2mms[22m[39m
+   [33m[2m✓[22m[39m Registro concurrente y CURP con sexo X [33m 736[2mms[22m[39m
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/puertosApiPostgres.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 807[2mms[22m[39m
+   [33m[2m✓[22m[39m Concurrencia con la misma clave, dos usos simultáneos y almacenamiento de API en Postgres [33m 641[2mms[22m[39m
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/agendaPostgres.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 788[2mms[22m[39m
+   [33m[2m✓[22m[39m acepta uno de 50 intentos concurrentes por el mismo horario y recupera el hold vencido [33m 339[2mms[22m[39m
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/consumidorStreams.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 623[2mms[22m[39m
+   [33m[2m✓[22m[39m reinicia sin pérdidas ni duplicados, y procesa los grupos por separado [33m 438[2mms[22m[39m
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/nucleo.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 626[2mms[22m[39m
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/relayPostgres.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 443[2mms[22m[39m
+   [33m[2m✓[22m[39m no publica dos veces con dos relays y reintenta si publicó sin marcar [33m 421[2mms[22m[39m
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/tramitePostgres.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 316[2mms[22m[39m
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/puertosPostgres.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 264[2mms[22m[39m
+ [32m✓[39m [30m[42m integracion [49m[39m tests/integracion/intentosPostgres.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 221[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m17 passed[39m[22m[90m (17)[39m
+[2m      Tests [22m [1m[32m47 passed[39m[22m[90m (47)[39m
+[2m   Start at [22m 02:05:05
+[2m   Duration [22m 81.79s[2m (transform 1.48s, setup 0ms, import 51.89s, tests 24.40s, environment 3ms)[22m
+
+código 0

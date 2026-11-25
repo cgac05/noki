@@ -148,10 +148,16 @@ El esquema de `POST /api/canales/wa/mensajes` SHALL aceptar `{ waId, texto?, pay
 - **THEN** la validación tiene éxito
 
 ### Requirement: Tiempo real con nombres compartidos
-Los nombres de eventos de Socket.IO, el esquema del dato de cada evento, las salas `tramite:<id>`, `hilo:<id>`, `paciente:<id>`, `sede:<id>` y `admin`, y los eventos que envía el cliente para unirse a una sala (`sala:unirse`) y salir de ella (`sala:salir`) SHALL definirse una sola vez en el paquete de contratos. El dato de los eventos del cliente MUST ser una sala válida.
+El paquete de contratos SHALL definir una sola vez:
+
+- los nombres de eventos de Socket.IO y el esquema del dato de cada evento, incluido `wa:mensajes` con `{ waId, mensajes }`: `waId` de 10 a 15 dígitos y `mensajes` de 1 a 5 elementos válidos según `MensajeBotSchema`;
+- las salas `tramite:<id>`, `hilo:<id>`, `paciente:<id>`, `sede:<id>`, `admin` y `wa:<waId>`, esta última con `waId` de 10 a 15 dígitos;
+- los eventos que envía el cliente para unirse a una sala (`sala:unirse`) y salir de ella (`sala:salir`).
+
+El dato de los eventos del cliente MUST ser una sala válida.
 
 #### Scenario: Sala mal formada
-- **WHEN** se valida una sala con un prefijo distinto de los cinco definidos
+- **WHEN** se valida una sala con un prefijo distinto de los seis definidos
 - **THEN** la validación falla
 
 #### Scenario: Evento desconocido
@@ -161,6 +167,14 @@ Los nombres de eventos de Socket.IO, el esquema del dato de cada evento, las sal
 #### Scenario: Unirse a una sala inválida
 - **WHEN** se valida el dato de `sala:unirse` igual a `"tramite:123"`
 - **THEN** la validación falla
+
+#### Scenario: Sala de WhatsApp
+- **WHEN** se validan las salas `wa:5210000000002`, `wa:55-1234` y `wa:123`
+- **THEN** solo la primera es válida
+
+#### Scenario: Mensajes salientes de WhatsApp
+- **WHEN** se valida `wa:mensajes` con un `waId` válido y un mensaje de botones, sin mensajes, con 6 mensajes y con un `waId` de 5 dígitos
+- **THEN** solo el primero es válido
 
 ### Requirement: Errores de dominio traducidos a HTTP
 Cada error de dominio SHALL tener exactamente un código HTTP según `AGENTS.md` §6 (`ReglaViolada` 422, `StepUpRequerido` 403, `ConflictoVersion` 409, `NoEncontrado` 404, `TransicionInvalida` 409, validación 400). Un error inesperado SHALL usar el código `INTERNO` con HTTP 500. El cuerpo de error SHALL tener código y mensaje y MUST NOT incluir `stack` ni detalles internos.

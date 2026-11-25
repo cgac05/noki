@@ -29,4 +29,6 @@
 - Siguientes cambios previstos (no autorizados aquí):
   - frente A: núcleo y API del relleno de huecos;
   - frente B: pantallas (`/app` cancelar con aprobación, `/wa` mensajes salientes, `/admin` panel de huecos).
-- Autorización de cierre: PENDIENTE (ambos frentes).
+- Autorización de cierre del frente B: otorgada por `LuisMaster119` en el chat de Claude Code el 2026-11-25, después del PASS de la «Vuelta 1, frente B» de `revision.md` sobre `e6d05e5`. Cita: "Autorizo cierre por B" (identidad confirmada por el propio usuario al preguntárselo: "Soy LuisMaster119"). Cubre sincronizar los specs y archivar este cambio. No autoriza commits.
+- Autorización de cierre del frente A: otorgada por Christian Avila (`cgac05`) en el chat de Claude Code el 2026-11-25, después del PASS de ambas vueltas de `revision.md`. Cita: "yo avila (cgac05) autorizo". Cubre sincronizar los specs y archivar este cambio. No autoriza commits. Nota: las dos autorizaciones de cierre se dieron en la misma sesión de chat, con la identidad declarada por cada usuario en su mensaje.
+- Estado de cierre: autorizado por ambos frentes.

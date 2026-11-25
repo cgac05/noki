@@ -14,6 +14,7 @@ El paquete de contratos SHALL definir esquemas, con sus tipos derivados, para:
 - ficha del hilo;
 - llegada esperada (cita, `registrada` y, solo si está registrada, `posicion` opcional: entero de 1 en adelante con su lugar en la fila de la sede);
 - alerta de seguridad (`id` del evento, `tipo` igual a `INTENTO_VERIFICACION_FALLIDO`, `canal`, `ts` ISO, `intentos` entero de 1 en adelante, `bloqueado` booleano e `hiloId` UUID v7 o `null`);
+- hueco (`id` UUID v7, `servicio` y `sede` por nombre, `inicio` ISO en UTC, `zonaHoraria` IANA, `estado` `DETECTADO | OFRECIDO | ASIGNADO | DESIERTO` y `ofertas`, una lista de `{ estado: OFRECIDA | ACEPTADA | RECHAZADA | EXPIRADA | PERDIDA, enviadaEn, expiraEn }` en ISO), sin IDs ni datos de pacientes;
 - mensaje de bandeja de demo;
 - métricas (conteo por estado e indicadores).
 
@@ -43,6 +44,14 @@ El `tokenQr` de la cita SHALL ser el token firmado de un solo uso de `PLAN.md` �
 - **WHEN** se valida una alerta con `intentos: 3`, `bloqueado: true` e `hiloId` nulo, y otra con un campo extra `telefono`
 - **THEN** ambas son válidas y, en la segunda, `telefono` se descarta y no aparece en el resultado, igual que los campos desconocidos de las demás lecturas
 
+#### Scenario: Hueco sin datos de pacientes
+- **WHEN** se valida un hueco `OFRECIDO` con una oferta `OFRECIDA` y campos extra `pacienteId` y `nombre` en el hueco y en la oferta
+- **THEN** la validación tiene éxito y ni `pacienteId` ni `nombre` aparecen en el resultado
+
+#### Scenario: Estado de hueco inválido
+- **WHEN** se valida un hueco con estado `CANCELADO` o una oferta con estado `PENDIENTE`
+- **THEN** la validación falla
+
 ### Requirement: Lecturas sin acciones prearmadas
 Los modelos de lectura SHALL contener solo datos. MUST NOT incluir comandos listos para enviar ni listas de acciones; el canal arma cada comando con el esquema de comandos a partir del dato elegido.
 
@@ -70,11 +79,11 @@ Los modelos de lectura MUST NOT declarar fecha de nacimiento, correo, RFC, PIN n
 - **THEN** la validación tiene éxito
 
 ### Requirement: Tabla de rutas de consulta
-El contrato SHALL publicar una tabla única que asocie cada consulta (`tramite`, `lineaTiempo`, `tramitesAbiertos`, `catalogo`, `fichaHilo`, `citasPaciente`, `llegadasSede`, `metricas`, `alertasSeguridad`, `bandeja`, `contextoDemo`) con su método `GET`, su plantilla de ruta, el esquema de sus parámetros y el esquema de su respuesta. Las rutas MUST conservar las de `AGENTS.md` §7 que ya existían.
+El contrato SHALL publicar una tabla única que asocie cada consulta (`tramite`, `lineaTiempo`, `tramitesAbiertos`, `catalogo`, `fichaHilo`, `citasPaciente`, `llegadasSede`, `metricas`, `alertasSeguridad`, `panelHuecos`, `bandeja`, `contextoDemo`) con su método `GET`, su plantilla de ruta, el esquema de sus parámetros y el esquema de su respuesta. Las rutas MUST conservar las de `AGENTS.md` §7 que ya existían.
 
-`alertasSeguridad` (`/api/admin/alertas`, sin parámetros) SHALL responder una lista de alertas de seguridad de como máximo 50 elementos.
-
-`contextoDemo` (`/api/demo/contexto`) SHALL responder `{ hiloId, pacienteId, sedeId }`, cada uno UUID v7 o `null`, y MUST estar marcada como disponible solo en modo demo. La API MUST responder 404 en `/api/demo/contexto` cuando `DEMO_MODE` no es `true`.
+- `alertasSeguridad` (`/api/admin/alertas`, sin parámetros) SHALL responder una lista de alertas de seguridad de como máximo 50 elementos.
+- `panelHuecos` (`/api/admin/huecos`, sin parámetros) SHALL responder una lista de huecos de como máximo 50 elementos y no está marcada como solo demo.
+- `contextoDemo` (`/api/demo/contexto`) SHALL responder `{ hiloId, pacienteId, sedeId }`, cada uno UUID v7 o `null`, y MUST estar marcada como disponible solo en modo demo. La API MUST responder 404 en `/api/demo/contexto` cuando `DEMO_MODE` no es `true`.
 
 #### Scenario: Ruta construida desde parámetros
 - **WHEN** se arma la ruta de `lineaTiempo` con un `hiloId` UUID v7
@@ -91,6 +100,10 @@ El contrato SHALL publicar una tabla única que asocie cada consulta (`tramite`,
 #### Scenario: Alertas de seguridad
 - **WHEN** se inspecciona la entrada `alertasSeguridad` y se valida una respuesta de 51 alertas
 - **THEN** la ruta es `/api/admin/alertas`, no está marcada como solo demo y la respuesta de 51 elementos falla
+
+#### Scenario: Panel de huecos
+- **WHEN** se inspecciona la entrada `panelHuecos` y se valida una respuesta de 51 huecos
+- **THEN** la ruta es `/api/admin/huecos`, no está marcada como solo demo y la respuesta de 51 elementos falla
 
 #### Scenario: Bandeja marcada como demo
 - **WHEN** se inspecciona la entrada `bandeja` de la tabla

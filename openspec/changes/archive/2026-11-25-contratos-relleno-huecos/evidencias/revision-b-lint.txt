@@ -1,0 +1,4 @@
+## corepack pnpm lint (pnpm en PATH vía corepack)
+$ eslint . && pnpm typecheck
+$ pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json
+código 0
