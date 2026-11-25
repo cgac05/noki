@@ -257,6 +257,10 @@ export class CasosTramite {
     return this.modificar(id, comando, (tramite, contexto) => tramite.cumplirRequisito(requisito, contexto));
   }
 
+  async aceptarPreparacion(id: TramiteId, comando: ContextoComando): Promise<ResultadoComando> {
+    return this.modificar(id, comando, (tramite, contexto) => tramite.aceptarPreparacion(contexto));
+  }
+
   async reconocerElegibilidad(id: TramiteId, comando: ContextoComando): Promise<ResultadoComando> {
     return this.modificar(id, comando, (tramite, contexto) => tramite.reconocerElegibilidad(contexto));
   }

@@ -18,7 +18,8 @@ export function crearApiPruebas(opciones: {
   const ids = { nuevo: v7 };
   const reloj = new RelojFalso(new Date('2026-11-24T12:00:00Z'));
   const registro = crearRegistroTiposTramite();
-  const tramites = new TramiteRepoMemoria();
+  const opcionesEventos = { claveUnica: true, claves: new Set<string>() };
+  const tramites = new TramiteRepoMemoria(opcionesEventos);
   const hilos = new HiloRepoMemoria();
   const pacientes = new PacientesMemoria();
   const contactos = new ContactosMemoria(pacientes);
@@ -26,7 +27,7 @@ export function crearApiPruebas(opciones: {
   const catalogo = new CatalogoMemoria();
   const agenda = new AgendaMemoria();
   const agendaExterna = new AgendaExternaMemoria();
-  const sinTramite = new EventosSinTramiteMemoria();
+  const sinTramite = new EventosSinTramiteMemoria(opcionesEventos);
   const tokens = new TokensJose(opciones.tokenSecret ?? 'secreto-sintetico-de-pruebas-para-la-api',
     reloj, new RegistroTokensUsadosMemoria());
   const resolvedor = new ResolvedorContinuidad(tramites, contactos, tokens, pacientes, intentos, sinTramite);

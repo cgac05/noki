@@ -1,12 +1,19 @@
 import { ConflictoVersion, type EventoDominio, type HiloId, type PacienteId, type SedeId, type Tramite, type TramiteId } from '@noki/domain';
 import type { TramiteRepo } from '@noki/application';
 import { formatInTimeZone } from 'date-fns-tz';
+import { registrarClaves, type OpcionesClavesEventos } from './clavesEventos.ts';
 
 export class TramiteRepoMemoria implements TramiteRepo {
   private readonly tramites = new Map<TramiteId, Tramite>();
   private readonly guardados: EventoDominio[] = [];
 
   private readonly zonas = new Map<SedeId, string>();
+
+  private readonly claves: Set<string> | undefined;
+
+  constructor({ claveUnica, claves }: OpcionesClavesEventos = {}) {
+    this.claves = claveUnica ? claves ?? new Set() : undefined;
+  }
 
   registrarZonaSede(id: SedeId, zona: string): void {
     this.zonas.set(id, zona);
@@ -47,8 +54,11 @@ export class TramiteRepoMemoria implements TramiteRepo {
   async guardar(tramite: Tramite): Promise<void> {
     const actual = this.tramites.get(tramite.id)?.version ?? 0;
     if (actual !== tramite.versionCargada) throw new ConflictoVersion(tramite.versionCargada, actual);
-    this.tramites.set(tramite.id, tramite.copiaPersistida());
-    this.guardados.push(...tramite.eventosPendientes());
+    const copia = tramite.copiaPersistida();
+    const eventos = tramite.eventosPendientes();
+    registrarClaves(this.claves, eventos);
+    this.tramites.set(tramite.id, copia);
+    this.guardados.push(...eventos);
     tramite.marcarGuardado();
   }
 

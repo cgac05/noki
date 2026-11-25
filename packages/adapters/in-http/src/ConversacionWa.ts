@@ -55,6 +55,12 @@ export class ConversacionWa {
       canal: 'whatsapp', actor: 'paciente', nivel: 0, vinculado: false, factores: new Set(),
       idempotencyKey: clave, correlationId,
     };
+    let primeraOperacion = true;
+    const contextoOperacion = (): ContextoComando => {
+      if (!primeraOperacion) return { ...contexto, idempotencyKey: this.deps.ids.nuevo() };
+      primeraOperacion = false;
+      return contexto;
+    };
     const ts = reloj.ahora().toISOString();
     const previo = await contactos.buscar('whatsapp', waId);
     const guardado = previo && conversacion.safeParse(await conversaciones.obtener(previo.id));
@@ -72,7 +78,7 @@ export class ConversacionWa {
       if (verificacion && !verificacion.success) return [this.pedirVerificacion()];
       const retomado = await casos.retomar({
         valorContacto: waId, incluirReferencias: true, ...(tramiteElegidoId ? { tramiteElegidoId } : {}), ...(token ? { token } : {}), ...(verificacion?.success ? verificacion.data : {}),
-      }, contexto);
+      }, contextoOperacion());
       if (retomado.tipo === 'BLOQUEADO') return [texto('Espera antes de volver a intentarlo.')];
       if (retomado.tipo === 'RETOMADO') {
         tramite = retomado.operacion.tramite;
@@ -106,7 +112,7 @@ export class ConversacionWa {
         return filas.length ? [{ tipo: 'lista', texto: 'Tienes varios trámites abiertos.', secciones: [{ filas }] }]
           : [texto(noDisponible)];
       } else {
-        tramite = (await casos.iniciar('AGENDAR', waId, contexto)).tramite;
+        tramite = (await casos.iniciar('AGENDAR', waId, contextoOperacion())).tramite;
         estado.tramiteId = tramite.id;
       }
     }
@@ -115,17 +121,17 @@ export class ConversacionWa {
       if (tramite.estado === 'HORARIO_RESERVADO' && tramite.horario &&
           Date.parse(tramite.horario.expiraEn) <= Date.parse(ts)) {
         delete estado.horario;
-        await casos.confirmar(tramite.id, contexto);
+        await casos.confirmar(tramite.id, contextoOperacion());
       } else if (payloadBoton && !tramiteElegidoId && !token) {
         const elegida = opcionPrevia;
-        if (elegida) tramite = await this.aplicar(tramite, estado, elegida, waId, contexto);
+        if (elegida) tramite = await this.aplicar(tramite, estado, elegida, waId, contextoOperacion);
         else mensajes.push(texto(noDisponible));
       } else if (flowResponse) {
         const pregunta = this.pregunta(tramite, estado);
         const payload = pregunta.tipo === 'PREGUNTA' && pregunta.casilla === 'paciente'
           ? respuestaFlowIdentificacion(tramite.id, pregunta.pista, flowResponse) : undefined;
         if (payload) {
-          const resultado = await casos.identificarPaciente(tramite.id, payload, waId, contexto);
+          const resultado = await casos.identificarPaciente(tramite.id, payload, waId, contextoOperacion());
           tramite = resultado.tramite;
           const fallido = resultado.eventos.find(e => e.tipo === 'IntentoVerificacionFallido');
           if (fallido && fallido.payload.intentos >= 3) {
@@ -139,7 +145,7 @@ export class ConversacionWa {
       if (estado.horario && tramite.estado === 'LISTO_PARA_RESERVAR' && !tramite.advertenciaElegibilidad) {
         const inicio = estado.horario;
         delete estado.horario;
-        tramite = (await casos.reservar(tramite.id, inicio, contexto)).tramite;
+        tramite = (await casos.reservar(tramite.id, inicio, contextoOperacion())).tramite;
       }
     } catch (error) {
       if (!(error instanceof ErrorDominio)) throw error;
@@ -174,20 +180,24 @@ export class ConversacionWa {
   }
 
   private async aplicar(tramite: Tramite, estado: Estado, seleccion: Accion, waId: string,
-    contexto: ContextoComando): Promise<Tramite> {
+    contextoOperacion: () => ContextoComando): Promise<Tramite> {
     const { casos } = this.deps;
     const { id } = tramite;
     switch (seleccion.tipo) {
       case 'retomar': return tramite;
-      case 'servicio': return (await casos.seleccionarServicio(id, seleccion.id as ServicioId, contexto)).tramite;
-      case 'sede': return (await casos.seleccionarSede(id, seleccion.id as SedeId, contexto)).tramite;
-      case 'identificar': return (await casos.identificarPaciente(id, seleccion.payload, waId, contexto)).tramite;
+      case 'servicio': return (await casos.seleccionarServicio(id, seleccion.id as ServicioId, contextoOperacion())).tramite;
+      case 'sede': return (await casos.seleccionarSede(id, seleccion.id as SedeId, contextoOperacion())).tramite;
+      case 'identificar': return (await casos.identificarPaciente(id, seleccion.payload, waId, contextoOperacion())).tramite;
       case 'horario': estado.horario = seleccion.inicio; return tramite;
-      case 'confirmar': return (await casos.confirmar(id, contexto)).tramite;
-      case 'elegibilidad': return (await casos.reconocerElegibilidad(id, contexto)).tramite;
+      case 'confirmar': return (await casos.confirmar(id, contextoOperacion())).tramite;
+      case 'elegibilidad': return (await casos.reconocerElegibilidad(id, contextoOperacion())).tramite;
       case 'requisito': {
         const requisito = tramite.perfil?.requisitos.find(({ tipo }) => tipo === seleccion.requisito);
-        return requisito ? (await casos.cumplirRequisito(id, requisito.tipo, contexto)).tramite : tramite;
+        if (!requisito) return tramite;
+        if (requisito.tipo === 'ACEPTAR_PREPARACION') {
+          return (await casos.aceptarPreparacion(id, contextoOperacion())).tramite;
+        }
+        return (await casos.cumplirRequisito(id, requisito.tipo, contextoOperacion())).tramite;
       }
     }
   }
