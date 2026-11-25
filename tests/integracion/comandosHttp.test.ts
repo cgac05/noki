@@ -51,7 +51,7 @@ it('Cotizar desde el call center y reintentar por HTTP con eventos persistidos',
     await comprobarLecturasApi(deps.lecturas, undefined, 3);
     const clave = deps.ids.nuevo();
     const inicio = { tipo: 'IniciarTramite', canal: 'callcenter', actor: 'asesor:demo',
-      payload: { tipoTramite: 'AGENDAR', contacto: '0000000001' } };
+      payload: { tipoTramite: 'AGENDAR', contacto: PACIENTES_DEMO[1].wa.slice(-10) } };
     const peticion = await enviar(inicio, clave);
     expect(peticion.statusCode).toBe(200);
     const { tramite } = RespuestaComandoSchema.parse(peticion.json());
@@ -167,7 +167,9 @@ it('Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez', async
     const catalogo = RUTAS_CONSULTAS.catalogo.respuesta.parse(await leer('/api/catalogo'));
     const oferta = catalogo.find(fila => fila.servicio === 'Química sanguínea' && fila.sede === 'Clínica Tepic');
     if (!oferta) throw new Error('Falta la oferta de Tepic.');
-    const { tramite } = await cc('IniciarTramite', { tipoTramite: 'AGENDAR', contacto: ana.wa.slice(-10) });
+    const { tramite, eventos } = await cc('IniciarTramite', { tipoTramite: 'AGENDAR', contacto: ana.wa.slice(-10) });
+    expect(tramite.estado).toBe('BORRADOR');
+    expect(eventos.map(({ tipo }) => tipo)).toContain('TramiteIniciado');
     await cc('SeleccionarServicio', { servicioId: oferta.servicioId }, tramite.id);
     await cc('SeleccionarSede', { sedeId: oferta.sedeId }, tramite.id);
     await new Promise<void>((resolve, reject) => {

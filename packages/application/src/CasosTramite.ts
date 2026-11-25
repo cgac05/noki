@@ -74,6 +74,20 @@ export class CasosTramite {
     this.puertos.registro.obtener(tipo);
     const contexto = this.contexto(comando);
     const contacto = await this.contacto(valorContacto, contexto);
+    if (contexto.canal === 'callcenter' && contexto.actor.startsWith('asesor:') && /^\+?\d{10,15}$/u.test(valorContacto)) {
+      const enProceso = await this.tramiteDeLlamada(tipo, valorContacto.slice(-10));
+      if (enProceso) {
+        const hilo = await this.puertos.hilos.obtener(enProceso.hiloId);
+        if (!hilo) throw new NoEncontrado('hilo', enProceso.hiloId);
+        enProceso.retomar(contexto, 'LLAMADA_CC');
+        const resultado = await this.guardar(enProceso, contexto);
+        if (hilo.ultimoCanal !== contexto.canal) {
+          hilo.atenderEn(contexto.canal);
+          await this.puertos.hilos.guardar(hilo);
+        }
+        return resultado;
+      }
+    }
     const hilo = await this.puertos.hilos.obtener(contacto.hiloId);
     const tramite = Tramite.iniciar(this.puertos.ids.nuevo() as TramiteId, contacto.hiloId,
       tipo, this.puertos.registro, contexto);
@@ -83,6 +97,18 @@ export class CasosTramite {
       await this.puertos.hilos.guardar(hilo);
     }
     return resultado;
+  }
+
+  private async tramiteDeLlamada(tipo: TipoTramite, numero: string): Promise<Tramite | undefined> {
+    const hilos = await this.puertos.contactos.hilosPorTelefono(numero);
+    const abiertos = await Promise.all(hilos.map(id => this.puertos.tramites.abiertosPorHilo(id)));
+    return abiertos.flat()
+      .filter(tramite => tramite.tipo === tipo && (
+        tramite.estado === 'BORRADOR' || tramite.estado === 'COTIZADO'
+        || tramite.estado === 'LISTO_PARA_RESERVAR' || tramite.estado === 'HORARIO_RESERVADO'
+      ))
+      .sort((a, b) => Number(a.estado === 'BORRADOR') - Number(b.estado === 'BORRADOR')
+        || Date.parse(b.ultimaActividad) - Date.parse(a.ultimaActividad) || b.id.localeCompare(a.id))[0];
   }
 
   async solicitarContinuacion(id: TramiteId, comando: ContextoComando): Promise<ResultadoComando> {

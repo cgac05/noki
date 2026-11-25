@@ -70,4 +70,11 @@ export class ContactosMemoria implements ContactosPort {
       .filter(({ canal, valor }) => canal === 'callcenter' && normalizarTelefono(valor) === normalizado)
       .map(({ hiloId }) => hiloId))];
   }
+
+  async hilosPorTelefono(numero: string): Promise<HiloId[]> {
+    return [...new Set([...this.contactos.values()]
+      .filter(({ canal, valor }) => (canal === 'callcenter' || canal === 'whatsapp')
+        && /^\+?\d{10,15}$/u.test(valor) && valor.slice(-10) === numero)
+      .map(({ hiloId }) => hiloId))];
+  }
 }

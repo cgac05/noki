@@ -40,6 +40,7 @@ export interface ContactosPort {
   vincular(contactoId: string, vinculo: Vinculo): Promise<void>;
   pacientesPorTelefono(numero: string, desde: number): Promise<PacientePorTelefono[]>;
   buscarTelefonoCapturado(numero: string): Promise<HiloId[]>;
+  hilosPorTelefono(numero: string): Promise<HiloId[]>;
 }
 
 export interface TokenVerificado {

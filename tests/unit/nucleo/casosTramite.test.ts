@@ -67,7 +67,10 @@ it('una llamada nueva recupera el canal del hilo y permite contar la segunda con
     ]) } });
   };
   const primera = await casos.iniciar('AGENDAR', numero, cc);
+  const id = await listo(casos, primera.tramite.id);
   await continuar(primera.tramite);
+  await casos.reservar(id, '2026-11-25T18:00:00Z', cc);
+  expect((await casos.confirmar(id, cc)).tramite.estado).toBe('CONFIRMADA');
   const cambios = () => tramites.eventos().filter(evento => evento.tipo === 'CanalCambiado').length;
   const antes = cambios();
   const segunda = await casos.iniciar('AGENDAR', numero, cc);
@@ -82,14 +85,67 @@ it('una llamada nueva recupera el canal del hilo y permite contar la segunda con
   expect(cambios()).toBe(antes + 1);
 });
 
-async function listo(casos: CasosTramite) {
-  const { tramite: { id } } = await casos.iniciar('AGENDAR', '5210000000001', cc);
+async function listo(casos: CasosTramite, existente?: Parameters<CasosTramite['asignarPaciente']>[0],
+  numero = '5210000000001') {
+  const id = existente ?? (await casos.iniciar('AGENDAR', numero, cc)).tramite.id;
   await casos.asignarPaciente(id, pacienteId, cc);
   await casos.seleccionarServicio(id, servicioId, cc);
   await casos.seleccionarSede(id, sedeId, cc);
   await casos.cumplirRequisito(id, 'ORDEN_MEDICA', cc);
   return id;
 }
+
+async function cotizarWa(casos: CasosTramite, numero: string) {
+  const { tramite } = await casos.iniciar('AGENDAR', numero, wa);
+  await casos.seleccionarServicio(tramite.id, servicioId, wa);
+  return casos.seleccionarSede(tramite.id, sedeId, wa);
+}
+
+it.each(['0000000081', '5210000000081'])('retoma la cotización de WhatsApp del número de prueba %s', async numero => {
+  const { casos, hilos, tramites } = escenario();
+  const cotizacion = await cotizarWa(casos, numero);
+  const llamada = await casos.iniciar('AGENDAR', '0000000081', cc);
+  expect(llamada.tramite).toMatchObject({ id: cotizacion.tramite.id, estado: 'COTIZADO' });
+  expect(llamada.eventos).toMatchObject([
+    { tipo: 'CanalCambiado', payload: { de: 'whatsapp', a: 'callcenter', metodo: 'LLAMADA_CC' } },
+  ]);
+  expect(llamada.siguientePregunta).toMatchObject({ casilla: 'paciente' });
+  expect((await hilos.obtener(llamada.tramite.hiloId))?.ultimoCanal).toBe('callcenter');
+  expect(tramites.eventos().filter(({ tipo }) => tipo === 'TramiteIniciado')).toHaveLength(1);
+});
+
+it('prefiere una cotización de WhatsApp a un borrador de llamada más reciente', async () => {
+  const { casos, reloj, tramites } = escenario();
+  const numero = '0000000082';
+  const cotizacion = await cotizarWa(casos, numero);
+  reloj.adelantar(1);
+  await casos.iniciar('AGENDAR', numero, { ...cc, actor: 'sistema' });
+  const llamada = await casos.iniciar('AGENDAR', numero, cc);
+  expect(llamada.tramite.id).toBe(cotizacion.tramite.id);
+  expect(tramites.eventos().filter(({ tipo }) => tipo === 'TramiteIniciado')).toHaveLength(2);
+});
+
+it('crea un trámite en el hilo del contacto de llamada cuando no hay uno en proceso', async () => {
+  const { casos, contactos } = escenario();
+  const numero = '0000000083';
+  const { tramite, eventos } = await casos.iniciar('AGENDAR', numero, cc);
+  expect(tramite.hiloId).toBe((await contactos.buscar('callcenter', numero))?.hiloId);
+  expect(eventos.map(({ tipo }) => tipo)).toEqual(['TramiteIniciado']);
+});
+
+it('retoma un trámite con paciente asignado sin vincular el contacto de llamada', async () => {
+  const { casos, contactos } = escenario();
+  const numero = '0000000084';
+  const { tramite } = await cotizarWa(casos, numero);
+  await casos.asignarPaciente(tramite.id, pacienteId, { ...wa, actor: 'sistema' });
+  await casos.iniciar('AGENDAR', numero, { ...cc, actor: 'sistema' });
+  const contacto = await contactos.buscar('callcenter', numero);
+  if (!contacto) throw new Error('Falta el contacto de prueba.');
+  const llamada = await casos.iniciar('AGENDAR', numero, cc);
+  expect(llamada.tramite).toMatchObject({ id: tramite.id, pacienteId });
+  expect(llamada.eventos.map(({ tipo }) => tipo)).toEqual(['CanalCambiado']);
+  expect(await contactos.vinculosDe(contacto.id)).toEqual([]);
+});
 
 it('registra el consentimiento de un paciente anónimo desde web con nivel 0', async () => {
   const { casos } = escenario();
@@ -431,7 +487,7 @@ it('el token prevalece sobre el vínculo de otro paciente', async () => {
 it('lista varios trámites del mismo paciente solo con el resumen de nivel 1', async () => {
   const { casos, tokens } = escenario();
   const primero = await listo(casos);
-  await listo(casos);
+  await listo(casos, undefined, '5210000000085');
   const { tramite } = await casos.reconocerElegibilidad(primero, cc);
   const token = tokens.emitir({
     tramiteId: primero, hiloId: tramite.hiloId, pacienteId, nivel: 2, canalOrigen: 'callcenter', metodo: 'TOKEN_CC',
@@ -612,7 +668,7 @@ it('verifica por fecha solo al candidato elegido y conserva nivel según el mét
     await contactos.vincular(waContacto.id, { pacienteId: id, nivel: 0, relacion: 'FAMILIAR',
       metodo: 'FLOW_DECLARADO', ultimoUso: '2026-11-01T00:00:00.000Z' });
   }
-  const { tramite } = await casos.iniciar('AGENDAR', ani, cc);
+  const { tramite } = await casos.iniciar('AGENDAR', ani, { ...cc, actor: 'sistema' });
   const destinatario = await casos.identificarPaciente(tramite.id, { paso: 'DESTINATARIO', para: 'MI' }, ani, cc);
   expect(destinatario.siguientePregunta).toMatchObject({ pista: { paso: 'CONFIRMAR',
     opciones: expect.arrayContaining([{ id: 'NINGUNO', payload: 'NINGUNO', titulo: 'No soy ninguno' }]) } });
@@ -666,7 +722,7 @@ it('guarda y reutiliza un registro sin CURP, y después completa la CURP por la 
   const declarado = { paso: 'DATOS', nombre: 'Ana', apellidoPaterno: 'Pérez', apellidoMaterno: 'Luna',
     fechaNac: '1990-02-28', sexo: 'F', entidadNacimiento: 'NT' } as const;
   const iniciar = async (numero: string) => {
-    const { tramite } = await casos.iniciar('AGENDAR', numero, cc);
+    const { tramite } = await casos.iniciar('AGENDAR', numero, { ...cc, actor: 'sistema' });
     await casos.identificarPaciente(tramite.id, { paso: 'DESTINATARIO', para: 'OTRA_PERSONA' }, numero, cc);
     return tramite.id;
   };

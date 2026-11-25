@@ -42,6 +42,8 @@ Campos obligatorios: `tipo`, `tramiteId` (puede ser nulo), `hiloId`, `canal`, `a
 
 `TELEFONO_FECHA_NAC` identifica la comprobación de la fecha de nacimiento de un candidato vinculado al teléfono. Se usa en `IdentidadComprobada` y `IntentoVerificacionFallido`.
 
+`LLAMADA_CC` se usa en `CanalCambiado` cuando un asesor retoma un trámite por el número de una llamada entrante. La operación conserva la identidad y los vínculos existentes.
+
 Los payloads referencian personas por ID y no declaran fecha de nacimiento, correo, teléfono, RFC, PIN ni CURP. Los tokens de continuidad, QR y aprobaciones se implementarán en su cambio; nunca se deben sustituir por un folio en texto plano.
 
 ## Relleno de huecos: eventos tipados
