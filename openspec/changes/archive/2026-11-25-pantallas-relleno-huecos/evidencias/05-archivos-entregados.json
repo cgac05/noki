@@ -1,0 +1,239 @@
+{
+  "cambio": "pantallas-relleno-huecos",
+  "revision": 3,
+  "fechaLocal": "2026-11-25",
+  "rama": "feat/pantallas-relleno-huecos",
+  "head": "026181cee0a8b85b5a017e25c8405fc832e898d0",
+  "main": "d37b8c2dc434ad226cb895f9671fea20d58c8239",
+  "raicesPermitidas": [
+    "apps/web/src/",
+    "openspec/changes/pantallas-relleno-huecos/"
+  ],
+  "sinCommit": true,
+  "sinPush": true,
+  "archivoPreexistenteExcluido": ".claude/launch.json",
+  "notaPlanificacion": "proposal.md, design.md, handoff.md y tres specs fueron actualizados externamente a revisión 3 durante la sesión; se conservaron. tasks.md contiene las casillas actualizadas por Codex.",
+  "archivos": [
+    {
+      "ruta": "apps/web/src/cliente/cliente.test.ts",
+      "sha256": "6f6799a47918d1ba9c9ede3aed2855fc5ffaa750e9026a72547349d0b45ab125"
+    },
+    {
+      "ruta": "apps/web/src/cliente/ClienteApi.ts",
+      "sha256": "52727c44f1030a449305e93c492c825afe10996ce1bc22be1929d967ccf05c0d"
+    },
+    {
+      "ruta": "apps/web/src/cliente/demo.ts",
+      "sha256": "6a3ddab0a558e9ddf6cb6c5ae8f201b124e183b2aeef3a5913c85d04a1282a52"
+    },
+    {
+      "ruta": "apps/web/src/cliente/historialWa.test.tsx",
+      "sha256": "4fc3d423f3688b55e0fc44ad0700e8b261cc2fe8bdf03d930bba203d1ca32f50"
+    },
+    {
+      "ruta": "apps/web/src/cliente/historialWa.ts",
+      "sha256": "e6dcefbc7b3b34e2875db63559dd23ab36822764648e806df0939e4db89fdfaf"
+    },
+    {
+      "ruta": "apps/web/src/cliente/mock/ClienteMock.ts",
+      "sha256": "2cd10e8a1152e2e891ad544fdefe26836ce199f85f313131f2d07213802df2e0"
+    },
+    {
+      "ruta": "apps/web/src/cliente/mock/guionFlujoA.ts",
+      "sha256": "ddc4076fa86def209b2bc831eb6cb5b4c9043e35914be4ad511ec4e470ec521e"
+    },
+    {
+      "ruta": "apps/web/src/cliente/mock/guionFlujoC.ts",
+      "sha256": "ff58fddc21a89e514b3c1d803f4317ff122c52b3f6c73b33239d28ae7efeebb4"
+    },
+    {
+      "ruta": "apps/web/src/cliente/ProveedorCliente.tsx",
+      "sha256": "3c8fd082d603c6faadedc4b6d21bdcc8ce344cad813de441e6d2681e72adc097"
+    },
+    {
+      "ruta": "apps/web/src/componentes/BarraDemo.tsx",
+      "sha256": "5522da7b2d04f9b15571e79e5fc62cad2b7b046673e533dc9734c38654df44a2"
+    },
+    {
+      "ruta": "apps/web/src/styles.css",
+      "sha256": "51354fd31c8dbfefcc4a4ed00a4126a40b2abd0f1258012d12764a6055847fee"
+    },
+    {
+      "ruta": "apps/web/src/vistas/Admin.tsx",
+      "sha256": "1fb21d3881cdfa55e4dd88eebc6aac840078a75c4602108c2c23a545cfbb082d"
+    },
+    {
+      "ruta": "apps/web/src/vistas/App.tsx",
+      "sha256": "dccd7d3b08eade80c556e8d047d92e1f351ccaf1e94c1d4b9bf6b5d477775758"
+    },
+    {
+      "ruta": "apps/web/src/vistas/cancelarCita.test.tsx",
+      "sha256": "87a19d14978c67270b5281da15acffded3e2f202083f101541e6c70045089359"
+    },
+    {
+      "ruta": "apps/web/src/vistas/clinicaAlertas.test.tsx",
+      "sha256": "da9a0b5bb46d30cb18e63fd6ddd9a38ba340dcf7cbec16bbd141b376d19731c8"
+    },
+    {
+      "ruta": "apps/web/src/vistas/consolas.test.tsx",
+      "sha256": "ca5f35c911d793a5628b723d4b69b0b7b4db4e95916481ef537cf2a6f426e2d3"
+    },
+    {
+      "ruta": "apps/web/src/vistas/panelHuecos.test.tsx",
+      "sha256": "55be9e1d9b2ef034f95fccd4d9979b3411876dffb4664ba05ce0b9f74ede6ab7"
+    },
+    {
+      "ruta": "apps/web/src/vistas/relojDemo.test.tsx",
+      "sha256": "47709ac11133b514e4bc7ce6cc1a01ea4ea91580ee9a58777255239ca44b1c50"
+    },
+    {
+      "ruta": "apps/web/src/vistas/vistas.test.tsx",
+      "sha256": "1a35c78eafae85fa8f5327a10fddfe3bf199a1345ac7de17ac5d499a29ac3a32"
+    },
+    {
+      "ruta": "apps/web/src/vistas/wa.test.tsx",
+      "sha256": "8aff14983ad2531977d439027188870a5bbd7a1903bc22b79e355f698614f374"
+    },
+    {
+      "ruta": "apps/web/src/vistas/Wa.tsx",
+      "sha256": "29d199b2abcbf8fe823dea9c1a281b3a4c1df419fc2efb03f851ae2ce286c8b3"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/design.md",
+      "sha256": "3aacc2d6f9bbfce421cce8d6bd0b10a06162a965b778c8ba5547db7d75011a5f"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/01-r3-rojo.txt",
+      "sha256": "ec0d2e5ef8a72dd5f6cdbe7345e2f31257f26bcc783d8fb568d0eeb2c294af2a"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/01-r3-verde.txt",
+      "sha256": "d0665614b53a693c2fa41843e8c099af4f09b9913e24a17d145fadf5119388aa"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/01-rojo.txt",
+      "sha256": "f778791e044d455324fd34a1ea7fb90ddacb5c3c36007382a7d3a4860c3e0cfe"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/01-verde.txt",
+      "sha256": "c27cc983d2a61d83be4772ee15d6c15961abc1c7a6cda8aa8ba0a32f715b5003"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/02-r3-rojo.txt",
+      "sha256": "cc521d065ff236d6401e90592635a83f89e0550e7cc3b059914f31ab65c28585"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/02-r3-verde.txt",
+      "sha256": "123e2471a0ba7967f70cb9d3d255aaa6b5080c8e200af984f154e6e9f48652e3"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/02-rojo.txt",
+      "sha256": "d8afd04dc3bfd51233b9a7850be5d480d73f684e8689a3c043949ed9f3567eef"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/02-verde.txt",
+      "sha256": "16020c9c4f1d1a29bce6ed91792034035f78fe90ab9a96970587a3c97a64418c"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/03-rojo.txt",
+      "sha256": "2caa9d651ce7372a0d2c6b3e85458e287670c932e6ed76f17f0da59b40f3a806"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/03-verde.txt",
+      "sha256": "4e7a66a5fc0f585adc20a33cd9e9f299980f3ef1680e3c2bc10ac67b45cfa860"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/04-oferta-beto.jpg",
+      "sha256": "c6b21cfaf4cccb92db44747bd2f9aa91629b3da9c485f2898524b1d969f26f4f"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/04-panel-final.jpg",
+      "sha256": "50cc22e41bd5ab51beee1a684a6fe22a0927bcf5d1452d8cc469c36d5f1632e7"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/04-panel-movil.jpg",
+      "sha256": "c5e7d90ca8d86f87bbd5e626ddda938dcb55462b15cd2b4445d7564feb9f8955"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/04-recorrido.md",
+      "sha256": "a88e316a55ec9e3631c0261d15b6e597c5eeda11191d57f2c9260c933d19f806"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/04-reinicio-rojo.txt",
+      "sha256": "14916a8cd00ad0532b1112b5f2f294cacc92373f41a7b65b171bbc533724da6b"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/04-rojo.txt",
+      "sha256": "8cea086ddcf667e7a2747b5cc5925219d6433e2320b8722de8b2d517ebe68a0b"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/04-verde.txt",
+      "sha256": "5e45314314a28243610ce0d4786f7458dbe6cad19188981cf6997fdef675097e"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/05-base.txt",
+      "sha256": "92b3cbdeb7b0605fb49132c60804ab0e7bdf84e9873d998d90ef85a7c5dd2979"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/05-deps.txt",
+      "sha256": "7c63fede5e331cc9bf8667c51fc3afb51ab93ea2be08c4010feeb05eea911653"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/05-diseno.json",
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/05-lint-intento1.txt",
+      "sha256": "eda03ffa99a22db3855de561a8c123e41a3f5c7b37e75ba1e028524520ca7403"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/05-lint-intento2.txt",
+      "sha256": "b377858c1093cfad2e91f60fe1a9bb58b17781bcee3130ac6329faeae0677da8"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/05-lint.txt",
+      "sha256": "4c67dd63341c66fddc8ce3dcd065441bd5d7471dbd2e7cff89ce5f047e2ceb62"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/05-openspec.txt",
+      "sha256": "2e05238e8c58a3816e9dd9b6729f9ce697dc25afc5adab6850acbd62ef4274b9"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/05-test.txt",
+      "sha256": "283d85c242acaf5a397148e612b417dacb77c66a9fe9f4c10dcbd739e261dd41"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/handoff.md",
+      "sha256": "4fb4b27fa9609cb5796ad5338747548f92a858c92234015461011cd8ebf99ec4"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/implementacion.md",
+      "sha256": "1d9b5cbbe12f06a31aa7d6e41db2065b1cceab47e6bc23b6462dabc31a9f6335"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/proposal.md",
+      "sha256": "c083fc7a936d8056e9da912ae464d4c1575eadbec648008feb02f94c14ef5bc4"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/specs/cliente-api-canales/spec.md",
+      "sha256": "e4c6739e5da569c50884ad774db4a2804dc36e5f22b8a8530b366fcfedad59e9"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/specs/navegacion-canales/spec.md",
+      "sha256": "2f18dc2093281ac5cc537ade6f1a1f88de490b6acd1effcc2585f7c6a97e9c20"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/specs/simulador-whatsapp/spec.md",
+      "sha256": "eaf62fcf69cdde9af8aa1d306ab6f750bea71b69037736b7337c1f68ca78f0cc"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/tasks.md",
+      "sha256": "8f3a377786657529604dc7cc1feeca280ebf3bb2fbc58003bac2caa7afa08f5b"
+    },
+    {
+      "ruta": "openspec/changes/pantallas-relleno-huecos/evidencias/05-archivos-entregados.json",
+      "sha256": null,
+      "nota": "Este manifiesto se inventaría sin hash propio para evitar autorreferencia."
+    }
+  ]
+}

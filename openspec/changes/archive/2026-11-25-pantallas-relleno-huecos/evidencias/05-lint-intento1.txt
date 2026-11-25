@@ -1,0 +1,10 @@
+$ eslint . && pnpm typecheck
+
+C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\apps\web\src\cliente\mock\ClienteMock.ts
+  37:11  error  Unexpected aliasing of 'this' to local variable  @typescript-eslint/no-this-alias
+
+✖ 1 problem (1 error, 0 warnings)
+
+[ELIFECYCLE] Command failed with exit code 1.
+
+EXIT_CODE=1

@@ -1,0 +1,13 @@
+$ eslint . && pnpm typecheck
+$ pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json
+src/cliente/historialWa.ts(89,34): error TS2550: Property 'findLastIndex' does not exist on type '{ id: string; origen: "usuario" | "bot"; tipo: "texto" | "opcion" | "flow-resumen" | "mensaje-bot"; texto?: string | undefined; mensaje?: { tipo: "lista"; texto: string; secciones: { filas: { ...; }[]; titulo?: string | undefined; }[]; } | { ...; } | { ...; } | { ...; } | undefined; estado?: "error" | ... 2 more ......'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2023' or later.
+src/cliente/historialWa.ts(89,48): error TS7006: Parameter 'entrada' implicitly has an 'any' type.
+undefined
+C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\apps\web:
+[ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL] Command failed with exit code 2: tsc --noEmit
+undefined
+undefined
+[ELIFECYCLE] Command failed with exit code 1.
+[ELIFECYCLE] Command failed with exit code 1.
+
+EXIT_CODE=1

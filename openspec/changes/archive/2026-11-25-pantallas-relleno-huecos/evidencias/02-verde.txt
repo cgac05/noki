@@ -1,0 +1,18 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ✓ |web| src/vistas/cancelarCita.test.tsx (4 tests) 1504ms
+   ✓ confirma una sola vez con el trámite elegido y muestra aprobación pendiente sin alterar la cita  726ms
+   ✓ reintenta el mismo comando y clave tras error de red y presenta el resultado CANCELADA  425ms
+ ✓ |web| src/vistas/vistas.test.tsx (15 tests) 3940ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo  362ms
+     ✓ reintenta solo la sede pendiente y conserva su clave después de seleccionar el servicio  323ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  1723ms
+
+ Test Files  2 passed (2)
+      Tests  19 passed (19)
+   Start at  02:57:08
+   Duration  8.04s (transform 1.27s, setup 0ms, import 3.60s, tests 5.44s, environment 3.84s)
+
+
+EXIT_CODE=0

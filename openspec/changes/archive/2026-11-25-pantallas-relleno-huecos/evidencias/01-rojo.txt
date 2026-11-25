@@ -1,0 +1,905 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ❯ |web| src/cliente/historialWa.test.tsx (11 tests | 2 failed) 82ms
+   ✓ Historial acumulado: conserva usuario y bot en orden, por número e hidrata tras recarga 14ms
+   ✓ Código de continuación redactado y Flow: solo persiste burbujas sin valores ni solicitudes 4ms
+   ✓ Clave por mensaje y en reintento: misma solicitud/clave sin duplicar burbuja 5ms
+   ✓ bloquea dos envíos síncronos antes del primer await y notifica al terminar 3ms
+   ✓ Nueva conversación borra el número activo y descarta respuestas tardías 2ms
+   ✓ registra los códigos enviados solo en memoria y los libera al reiniciar el guion 2ms
+   ✓ conserva en memoria aunque sessionStorage no esté disponible o tenga contenido inválido 2ms
+   ✓ el cierre descarta la solicitud protegida pendiente y ya no puede reintentarse 1ms
+   ✓ el proveedor comparte el historial con el hook y reiniciar el guion vacía la sesión 41ms
+   × agrega mensajes iniciados por la empresa con redacción, orden y persistencia solo de sesión 5ms
+   × registra los tres números de demo y los conversados, ignora ajenos y marca solo los no visibles 1ms
+ ❯ |web| src/vistas/wa.test.tsx (15 tests | 3 failed) 6711ms
+   ✓ identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión  1391ms
+   ✓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible  426ms
+   ✓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo  870ms
+   ✓ Modo real: conversa solo con POST y no muestra la insignia simulada 174ms
+   ✓ Número inválido: explica el patrón de 10 a 15 dígitos e impide el envío 212ms
+   ✓ Doble toque e indicador de espera: la misma opción se envía una sola vez 216ms
+   ✓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título  411ms
+   ✓ Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot  553ms
+   ✓ Enlace del call center: envía una vez, retira el código de la URL y lo redacta 48ms
+   ✓ Código inválido: un parámetro vacío no envía nada 12ms
+   ✓ Call center solicita continuación con consentimiento y muestra enlace y QR de la lectura 257ms
+   ✓ Modo simulado: la insignia es visible en cualquier ruta 53ms
+   × recibe en el número activo y envía payloadBoton; otro mensaje deshabilita los botones anteriores 1023ms
+   × escucha los tres números desde el proveedor y conserva mensajes recibidos estando en app 15ms
+   × avisa y cambia a Beto o Carla sin mezclar historiales, e ignora números ajenos 1046ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/cliente/historialWa.test.tsx > agrega mensajes iniciados por la empresa con redacción, orden y persistencia solo de sesión
+TypeError: historial.recibirMensajes is not a function
+ ❯ src/cliente/historialWa.test.tsx:126:13
+    124| it('agrega mensajes iniciados por la empresa con redacción, orden y pe…
+    125|   const { cliente, historial } = preparar();
+    126|   historial.recibirMensajes(numero, [
+       |             ^
+    127|     { tipo: 'texto', texto: 'CONTINUAR referencia-protegida' },
+    128|     { tipo: 'flow', texto: 'Verifica', flowId: 'verificar', campos: [{…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  |web| src/cliente/historialWa.test.tsx > registra los tres números de demo y los conversados, ignora ajenos y marca solo los no visibles
+TypeError: historial.numerosSesion is not a function
+ ❯ src/cliente/historialWa.test.tsx:140:20
+    138| it('registra los tres números de demo y los conversados, ignora ajenos…
+    139|   const { historial } = preparar();
+    140|   expect(historial.numerosSesion()).toEqual(['5210000000001', '5210000…
+       |                    ^
+    141|   historial.mostrar(numero);
+    142|   historial.recibirMensajes(numero, respuesta.mensajes);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  |web| src/vistas/wa.test.tsx > recibe en el número activo y envía payloadBoton; otro mensaje deshabilita los botones anteriores
+TestingLibraryElementError: Unable to find role="button" and name "Aceptar espacio"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <div
+          class="wa-simulador"
+        >
+          <h1>
+            WhatsApp
+          </h1>
+          <p
+            class="introduccion"
+          >
+            Tu atención continúa donde la dejaste.
+          </p>
+          <div
+            class="wa-herramientas"
+          >
+            <div>
+              <label
+                for="numero-wa"
+              >
+                Número de WhatsApp
+              </label>
+              <input
+                aria-invalid="false"
+                autocomplete="off"
+                id="numero-wa"
+                inputmode="numeric"
+                type="tel"
+                value="5210000000002"
+              />
+            </div>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              Nueva conversación
+            </button>
+          </div>
+          <section
+            aria-label="Conversación de WhatsApp"
+            aria-live="polite"
+            aria-relevant="additions text"
+            class="wa-historial"
+            role="log"
+          >
+            <div
+              class="wa-vacio"
+            >
+              <h2>
+                Tu conversación empieza aquí
+              </h2>
+              <p>
+                Abre el enlace del Call Center para retomar tu atención, o envía un mensaje.
+              </p>
+            </div>
+            <div />
+          </section>
+          <form
+            class="enviar-mensaje wa-compositor"
+          >
+            <label
+              for="mensaje-wa"
+            >
+              Mensaje
+            </label>
+            <div>
+              <input
+                autocomplete="off"
+                id="mensaje-wa"
+                placeholder="Escribe un mensaje"
+                value=""
+              />
+              <button
+                disabled=""
+                type="submit"
+              >
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <div
+          class="wa-simulador"
+        >
+          <h1>
+            WhatsApp
+          </h1>
+          <p
+            class="introduccion"
+          >
+            Tu atención continúa donde la dejaste.
+          </p>
+          <div
+            class="wa-herramientas"
+          >
+            <div>
+              <label
+                for="numero-wa"
+              >
+                Número de WhatsApp
+              </label>
+              <input
+                aria-invalid="false"
+                autocomplete="off"
+                id="numero-wa"
+                inputmode="numeric"
+                type="tel"
+                value="5210000000002"
+              />
+            </div>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              Nueva conversación
+            </button>
+          </div>
+          <section
+            aria-label="Conversación de WhatsApp"
+            aria-live="polite"
+            aria-relevant="additions text"
+            class="wa-historial"
+            role="log"
+          >
+            <div
+              class="wa-vacio"
+            >
+              <h2>
+                Tu conversación empieza aquí
+              </h2>
+              <p>
+                Abre el enlace del Call Center para retomar tu atención, o envía un mensaje.
+              </p>
+            </div>
+            <div />
+          </section>
+          <form
+            class="enviar-mensaje wa-compositor"
+          >
+            <label
+              for="mensaje-wa"
+            >
+              Mensaje
+            </label>
+            <div>
+              <input
+                autocomplete="off"
+                id="mensaje-wa"
+                placeholder="Escribe un mensaje"
+                value=""
+              />
+              <button
+                disabled=""
+                type="submit"
+              >
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/wa.test.tsx:173:30
+    171|   fireEvent.change(screen.getByLabelText('Número de WhatsApp'), { targ…
+    172|   empujar('5210000000002', [ofertaEntrante]);
+    173|   const boton = await screen.findByRole('button', { name: 'Aceptar esp…
+       |                              ^
+    174|   expect((boton as HTMLButtonElement).disabled).toBe(false);
+    175|   await usuario.click(boton);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  |web| src/vistas/wa.test.tsx > escucha los tres números desde el proveedor y conserva mensajes recibidos estando en app
+AssertionError: expected "vi.fn()" to be called with arguments: [ 'sala:unirse', 'wa:5210000000001' ]
+
+Number of calls: 0
+
+ ❯ src/vistas/wa.test.tsx:183:95
+    181| it('escucha los tres números desde el proveedor y conserva mensajes re…
+    182|   const { socket, router, empujar } = prepararEmpuje('/app');
+    183|   for (const waId of ['5210000000001', '5210000000002', '5210000000003…
+       |                                                                                               ^
+    184|   empujar(CONTACTO_DEMO, [ofertaEntrante]);
+    185|   await act(async () => { await router.navigate('/wa'); });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  |web| src/vistas/wa.test.tsx > avisa y cambia a Beto o Carla sin mezclar historiales, e ignora números ajenos
+TestingLibraryElementError: Unable to find role="button" and name `/5210000000002/`
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <div
+          class="wa-simulador"
+        >
+          <h1>
+            WhatsApp
+          </h1>
+          <p
+            class="introduccion"
+          >
+            Tu atención continúa donde la dejaste.
+          </p>
+          <div
+            class="wa-herramientas"
+          >
+            <div>
+              <label
+                for="numero-wa"
+              >
+                Número de WhatsApp
+              </label>
+              <input
+                aria-invalid="false"
+                autocomplete="off"
+                id="numero-wa"
+                inputmode="numeric"
+                type="tel"
+                value="5210000000001"
+              />
+            </div>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              Nueva conversación
+            </button>
+          </div>
+          <section
+            aria-label="Conversación de WhatsApp"
+            aria-live="polite"
+            aria-relevant="additions text"
+            class="wa-historial"
+            role="log"
+          >
+            <div
+              class="wa-vacio"
+            >
+              <h2>
+                Tu conversación empieza aquí
+              </h2>
+              <p>
+                Abre el enlace del Call Center para retomar tu atención, o envía un mensaje.
+              </p>
+            </div>
+            <div />
+          </section>
+          <form
+            class="enviar-mensaje wa-compositor"
+          >
+            <label
+              for="mensaje-wa"
+            >
+              Mensaje
+            </label>
+            <div>
+              <input
+                autocomplete="off"
+                id="mensaje-wa"
+                placeholder="Escribe un mensaje"
+                value=""
+              />
+              <button
+                disabled=""
+                type="submit"
+              >
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <div
+          class="wa-simulador"
+        >
+          <h1>
+            WhatsApp
+          </h1>
+          <p
+            class="introduccion"
+          >
+            Tu atención continúa donde la dejaste.
+          </p>
+          <div
+            class="wa-herramientas"
+          >
+            <div>
+              <label
+                for="numero-wa"
+              >
+                Número de WhatsApp
+              </label>
+              <input
+                aria-invalid="false"
+                autocomplete="off"
+                id="numero-wa"
+                inputmode="numeric"
+                type="tel"
+                value="5210000000001"
+              />
+            </div>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              Nueva conversación
+            </button>
+          </div>
+          <section
+            aria-label="Conversación de WhatsApp"
+            aria-live="polite"
+            aria-relevant="additions text"
+            class="wa-historial"
+            role="log"
+
+          >
+            <div
+              class="wa-vacio"
+            >
+              <h2>
+                Tu conversación empieza aquí
+              </h2>
+              <p>
+                Abre el enlace del Call Center para retomar tu atención, o envía un mensaje.
+              </p>
+            </div>
+            <div />
+          </section>
+ Test Files  2 failed (2)
+      Tests  5 failed | 21 passed (26)
+   Start at  02:52:58
+          <form
+   Duration  11.58s (transform 806ms, setup 0ms, import 3.25s, tests 6.79s, environment 4.78s)
+
+            class="enviar-mensaje wa-compositor"
+          >
+            <label
+              for="mensaje-wa"
+            >
+              Mensaje
+            </label>
+            <div>
+              <input
+                autocomplete="off"
+                id="mensaje-wa"
+                placeholder="Escribe un mensaje"
+                value=""
+              />
+              <button
+                disabled=""
+                type="submit"
+              >
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/wa.test.tsx:197:36
+    195|   empujar('5210000000003', [{ tipo: 'texto', texto: 'Oferta para Carla…
+    196|   expect(screen.queryByText('Espacio disponible en Tepic')).toBeNull();
+    197|   await usuario.click(await screen.findByRole('button', { name: /52100…
+       |                                    ^
+    198|   expect(await screen.findByText('Espacio disponible en Tepic')).toBeD…
+    199|   expect(screen.queryByRole('button', { name: /5210000000002/ })).toBe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+EXIT_CODE=1

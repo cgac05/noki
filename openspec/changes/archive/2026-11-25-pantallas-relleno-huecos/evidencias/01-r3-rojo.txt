@@ -1,0 +1,51 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ✓ |web| src/cliente/historialWa.test.tsx (11 tests) 65ms
+ ❯ |web| src/vistas/wa.test.tsx (16 tests | 1 failed) 4883ms
+   ✓ identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión  1301ms
+   ✓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible  412ms
+   ✓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo  916ms
+   ✓ Modo real: conversa solo con POST y no muestra la insignia simulada 192ms
+   ✓ Número inválido: explica el patrón de 10 a 15 dígitos e impide el envío 216ms
+   ✓ Doble toque e indicador de espera: la misma opción se envía una sola vez 241ms
+   ✓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título  401ms
+   ✓ Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot  523ms
+   ✓ Enlace del call center: envía una vez, retira el código de la URL y lo redacta 52ms
+   ✓ Código inválido: un parámetro vacío no envía nada 14ms
+   ✓ Call center solicita continuación con consentimiento y muestra enlace y QR de la lectura 228ms
+   ✓ Modo simulado: la insignia es visible en cualquier ruta 61ms
+   × reenvío de oferta reemplaza la última burbuja y envía el payload vigente 26ms
+   ✓ recibe en el número activo y envía payloadBoton; otro mensaje deshabilita los botones anteriores 67ms
+   ✓ escucha los tres números desde el proveedor y conserva mensajes recibidos estando en app 31ms
+   ✓ avisa y cambia a Beto o Carla sin mezclar historiales, e ignora números ajenos 202ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/vistas/wa.test.tsx > reenvío de oferta reemplaza la última burbuja y envía el payload vigente
+AssertionError: expected [ <p></p>, <p></p> ] to have a length of 1 but got 2
+
+- Expected
++ Received
+
+- 1
++ 2
+
+ ❯ src/vistas/wa.test.tsx:173:87
+    171|   empujar(CONTACTO_DEMO, [ofertaEntrante]);
+    172|   empujar(CONTACTO_DEMO, [{ ...ofertaEntrante, botones: [{ id: 'acepta…
+    173|   expect(within(screen.getByRole('log')).getAllByText('Espacio disponi…
+       |                                                                                       ^
+    174|   await usuario.click(screen.getByRole('button', { name: 'Aceptar espa…
+    175|   await screen.findByText('Respuesta posterior');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 26 passed (27)
+   Start at  03:01:50
+   Duration  9.31s (transform 827ms, setup 0ms, import 2.87s, tests 4.95s, environment 4.28s)
+
+
+EXIT_CODE=1

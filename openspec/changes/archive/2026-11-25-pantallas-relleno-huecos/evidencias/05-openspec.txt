@@ -1,0 +1,3 @@
+Change 'pantallas-relleno-huecos' is valid
+
+EXIT_CODE=0

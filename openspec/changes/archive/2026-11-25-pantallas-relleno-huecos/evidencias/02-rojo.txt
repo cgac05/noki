@@ -1,0 +1,1405 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ❯ |web| src/vistas/cancelarCita.test.tsx (4 tests | 3 failed) 3158ms
+   × confirma una sola vez con el trámite elegido y muestra aprobación pendiente sin alterar la cita 1076ms
+   × desistir conserva la cita sin enviar comandos 1020ms
+   ✓ una cita atendida no ofrece cancelar 41ms
+   × reintenta el mismo comando y clave tras error de red y presenta el resultado CANCELADA 1019ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/vistas/cancelarCita.test.tsx > confirma una sola vez con el trámite elegido y muestra aprobación pendiente sin alterar la cita
+TestingLibraryElementError: Unable to find role="button" and name "Cancelar cita"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          App
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Tus citas y el QR para continuar en clínica.
+        </p>
+        <section
+          aria-label="Cita del paciente"
+          class="seccion cita"
+        >
+          <div>
+            <h2>
+              Paquete US mamario + Papanicolaou
+            </h2>
+            <dl
+              class="datos"
+            >
+              <div>
+                <dt>
+                  Estado
+                </dt>
+                <dd>
+                  CONFIRMADA
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  Sede
+                </dt>
+                <dd>
+                  Tepic
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  Fecha y hora en la sede
+                </dt>
+                <dd>
+                  <time
+                    datetime="2026-11-26T16:15:00.000Z"
+                  >
+                    26 de noviembre de 2026 a las 09:15
+                  </time>
+                  <small>
+                    America/Mazatlan
+                  </small>
+                </dd>
+              </div>
+            </dl>
+            <p>
+              Presenta este QR en recepción.
+            </p>
+          </div>
+          <div
+            aria-label="Código QR de la cita"
+            class="qr-cita"
+            role="img"
+          >
+            <svg
+              height="224"
+              shape-rendering="crispEdges"
+              viewBox="0 0 29 29"
+              width="224"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h29v29H0z"
+                fill="#ffffff"
+              />
+              <path
+                d="M2 2.5h7m1 0h3m2 0h2m3 0h7M2 3.5h1m5 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m5 0h1M2 4.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m1 0h1m1 0h3m1 0h1M2 5.5h1m1 0h3m1 0h1m2 0h1m1 0h3m1 0h2m1 0h1m1 0h3m1 0h1M2 6.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h3m1 0h1M2 7.5h1m5 0h1m3 0h5m3 0h1m5 0h1M2 8.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M11 9.5h1m2 0h5M2 10.5h1m2 0h7m1 0h2m3 0h2m2 0h1m1 0h3M2 11.5h2m2 0h1m6 0h5m3 0h3M2 12.5h2m3 0h2m3 0h1m4 0h1m2 0h1m1 0h1m3 0h1M4 13.5h2m1 0h1m2 0h1m2 0h1m2 0h1m3 0h2m1 0h2m1 0h1M4 14.5h1m1 0h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m2 0h1M2 15.5h2m1 0h2m2 0h1m1 0h1m4 0h4m2 0h3M2 16.5h3m3 0h1m2 0h1m1 0h2m1 0h3m1 0h3m2 0h2M2 17.5h1m1 0h2m3 0h1m1 0h1m1 0h1m3 0h1m2 0h2m2 0h1m1 0h1M2 18.5h1m3 0h3m1 0h2m2 0h2m2 0h7m1 0h1M10 19.5h1m2 0h2m1 0h1m1 0h1m3 0h2m1 0h1M2 20.5h7m1 0h4m1 0h2m1 0h1m1 0h1m1 0h2m2 0h1M2 21.5h1m5 0h1m1 0h4m1 0h2m1 0h1m3 0h2m1 0h2M2 22.5h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h7M2 23.5h1m1 0h3m1 0h1m1 0h4m2 0h2m1 0h2m3 0h3M2 24.5h1m1 0h3m1 0h1m3 0h2m2 0h2m1 0h1m2 0h1m2 0h2M2 25.5h1m5 0h1m2 0h2m1 0h1m1 0h1m2 0h1m2 0h5M2 26.5h7m1 0h1m1 0h3m3 0h1m1 0h3m3 0h1"
+                stroke="#163c31"
+              />
+            </svg>
+            
+
+          </div>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          App
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Tus citas y el QR para continuar en clínica.
+        </p>
+        <section
+          aria-label="Cita del paciente"
+          class="seccion cita"
+        >
+          <div>
+            <h2>
+              Paquete US mamario + Papanicolaou
+            </h2>
+            <dl
+              class="datos"
+            >
+              <div>
+                <dt>
+                  Estado
+                </dt>
+                <dd>
+                  CONFIRMADA
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  Sede
+                </dt>
+                <dd>
+                  Tepic
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  Fecha y hora en la sede
+                </dt>
+                <dd>
+                  <time
+                    datetime="2026-11-26T16:15:00.000Z"
+                  >
+                    26 de noviembre de 2026 a las 09:15
+                  </time>
+                  <small>
+                    America/Mazatlan
+                  </small>
+                </dd>
+              </div>
+            </dl>
+            <p>
+              Presenta este QR en recepción.
+            </p>
+          </div>
+          <div
+            aria-label="Código QR de la cita"
+            class="qr-cita"
+            role="img"
+          >
+            <svg
+              height="224"
+              shape-rendering="crispEdges"
+              viewBox="0 0 29 29"
+              width="224"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h29v29H0z"
+                fill="#ffffff"
+              />
+              <path
+                d="M2 2.5h7m1 0h3m2 0h2m3 0h7M2 3.5h1m5 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m5 0h1M2 4.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m1 0h1m1 0h3m1 0h1M2 5.5h1m1 0h3m1 0h1m2 0h1m1 0h3m1 0h2m1 0h1m1 0h3m1 0h1M2 6.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h3m1 0h1M2 7.5h1m5 0h1m3 0h5m3 0h1m5 0h1M2 8.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M11 9.5h1m2 0h5M2 10.5h1m2 0h7m1 0h2m3 0h2m2 0h1m1 0h3M2 11.5h2m2 0h1m6 0h5m3 0h3M2 12.5h2m3 0h2m3 0h1m4 0h1m2 0h1m1 0h1m3 0h1M4 13.5h2m1 0h1m2 0h1m2 0h1m2 0h1m3 0h2m1 0h2m1 0h1M4 14.5h1m1 0h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m2 0h1M2 15.5h2m1 0h2m2 0h1m1 0h1m4 0h4m2 0h3M2 16.5h3m3 0h1m2 0h1m1 0h2m1 0h3m1 0h3m2 0h2M2 17.5h1m1 0h2m3 0h1m1 0h1m1 0h1m3 0h1m2 0h2m2 0h1m1 0h1M2 18.5h1m3 0h3m1 0h2m2 0h2m2 0h7m1 0h1M10 19.5h1m2 0h2m1 0h1m1 0h1m3 0h2m1 0h1M2 20.5h7m1 0h4m1 0h2m1 0h1m1 0h1m1 0h2m2 0h1M2 21.5h1m5 0h1m1 0h4m1 0h2m1 0h1m3 0h2m1 0h2M2 22.5h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h7M2 23.5h1m1 0h3m1 0h1m1 0h4m2 0h2m1 0h2m3 0h3M2 24.5h1m1 0h3m1 0h1m3 0h2m2 0h2m1 0h1m2 0h1m2 0h2M2 25.5h1m5 0h1m2 0h2m1 0h1m1 0h1m2 0h1m2 0h5M2 26.5h7m1 0h1m1 0h3m3 0h1m1 0h3m3 0h1"
+                stroke="#163c31"
+              />
+            </svg>
+            
+
+          </div>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/cancelarCita.test.tsx:26:36
+     24| it('confirma una sola vez con el trámite elegido y muestra aprobación …
+     25|   const { cita, enviar, usuario } = abrir();
+     26|   await usuario.click(await screen.findByRole('button', { name: 'Cance…
+       |                                    ^
+     27|   expect(enviar).not.toHaveBeenCalled();
+     28|   let resolver!: (respuesta: RespuestaComando) => void;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  |web| src/vistas/cancelarCita.test.tsx > desistir conserva la cita sin enviar comandos
+TestingLibraryElementError: Unable to find role="button" and name "Cancelar cita"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          App
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Tus citas y el QR para continuar en clínica.
+        </p>
+        <section
+          aria-label="Cita del paciente"
+          class="seccion cita"
+        >
+          <div>
+            <h2>
+              Paquete US mamario + Papanicolaou
+            </h2>
+            <dl
+              class="datos"
+            >
+              <div>
+                <dt>
+                  Estado
+                </dt>
+                <dd>
+                  CONFIRMADA
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  Sede
+                </dt>
+                <dd>
+                  Tepic
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  Fecha y hora en la sede
+                </dt>
+                <dd>
+                  <time
+                    datetime="2026-11-26T16:15:00.000Z"
+                  >
+                    26 de noviembre de 2026 a las 09:15
+                  </time>
+                  <small>
+                    America/Mazatlan
+                  </small>
+                </dd>
+              </div>
+            </dl>
+            <p>
+              Presenta este QR en recepción.
+            </p>
+          </div>
+          <div
+            aria-label="Código QR de la cita"
+            class="qr-cita"
+            role="img"
+          >
+            <svg
+              height="224"
+              shape-rendering="crispEdges"
+              viewBox="0 0 29 29"
+              width="224"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h29v29H0z"
+                fill="#ffffff"
+              />
+              <path
+                d="M2 2.5h7m1 0h3m2 0h2m3 0h7M2 3.5h1m5 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m5 0h1M2 4.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m1 0h1m1 0h3m1 0h1M2 5.5h1m1 0h3m1 0h1m2 0h1m1 0h3m1 0h2m1 0h1m1 0h3m1 0h1M2 6.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h3m1 0h1M2 7.5h1m5 0h1m3 0h5m3 0h1m5 0h1M2 8.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M11 9.5h1m2 0h5M2 10.5h1m2 0h7m1 0h2m3 0h2m2 0h1m1 0h3M2 11.5h2m2 0h1m6 0h5m3 0h3M2 12.5h2m3 0h2m3 0h1m4 0h1m2 0h1m1 0h1m3 0h1M4 13.5h2m1 0h1m2 0h1m2 0h1m2 0h1m3 0h2m1 0h2m1 0h1M4 14.5h1m1 0h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m2 0h1M2 15.5h2m1 0h2m2 0h1m1 0h1m4 0h4m2 0h3M2 16.5h3m3 0h1m2 0h1m1 0h2m1 0h3m1 0h3m2 0h2M2 17.5h1m1 0h2m3 0h1m1 0h1m1 0h1m3 0h1m2 0h2m2 0h1m1 0h1M2 18.5h1m3 0h3m1 0h2m2 0h2m2 0h7m1 0h1M10 19.5h1m2 0h2m1 0h1m1 0h1m3 0h2m1 0h1M2 20.5h7m1 0h4m1 0h2m1 0h1m1 0h1m1 0h2m2 0h1M2 21.5h1m5 0h1m1 0h4m1 0h2m1 0h1m3 0h2m1 0h2M2 22.5h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h7M2 23.5h1m1 0h3m1 0h1m1 0h4m2 0h2m1 0h2m3 0h3M2 24.5h1m1 0h3m1 0h1m3 0h2m2 0h2m1 0h1m2 0h1m2 0h2M2 25.5h1m5 0h1m2 0h2m1 0h1m1 0h1m2 0h1m2 0h5M2 26.5h7m1 0h1m1 0h3m3 0h1m1 0h3m3 0h1"
+                stroke="#163c31"
+              />
+            </svg>
+            
+
+          </div>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          App
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Tus citas y el QR para continuar en clínica.
+        </p>
+        <section
+          aria-label="Cita del paciente"
+          class="seccion cita"
+        >
+          <div>
+            <h2>
+              Paquete US mamario + Papanicolaou
+            </h2>
+            <dl
+              class="datos"
+            >
+              <div>
+                <dt>
+                  Estado
+                </dt>
+                <dd>
+                  CONFIRMADA
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  Sede
+                </dt>
+                <dd>
+                  Tepic
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  Fecha y hora en la sede
+                </dt>
+                <dd>
+                  <time
+                    datetime="2026-11-26T16:15:00.000Z"
+                  >
+                    26 de noviembre de 2026 a las 09:15
+                  </time>
+                  <small>
+                    America/Mazatlan
+                  </small>
+                </dd>
+              </div>
+            </dl>
+            <p>
+              Presenta este QR en recepción.
+            </p>
+          </div>
+          <div
+            aria-label="Código QR de la cita"
+            class="qr-cita"
+            role="img"
+          >
+            <svg
+              height="224"
+              shape-rendering="crispEdges"
+              viewBox="0 0 29 29"
+              width="224"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h29v29H0z"
+                fill="#ffffff"
+              />
+              <path
+                d="M2 2.5h7m1 0h3m2 0h2m3 0h7M2 3.5h1m5 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m5 0h1M2 4.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m1 0h1m1 0h3m1 0h1M2 5.5h1m1 0h3m1 0h1m2 0h1m1 0h3m1 0h2m1 0h1m1 0h3m1 0h1M2 6.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h3m1 0h1M2 7.5h1m5 0h1m3 0h5m3 0h1m5 0h1M2 8.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M11 9.5h1m2 0h5M2 10.5h1m2 0h7m1 0h2m3 0h2m2 0h1m1 0h3M2 11.5h2m2 0h1m6 0h5m3 0h3M2 12.5h2m3 0h2m3 0h1m4 0h1m2 0h1m1 0h1m3 0h1M4 13.5h2m1 0h1m2 0h1m2 0h1m2 0h1m3 0h2m1 0h2m1 0h1M4 14.5h1m1 0h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m2 0h1M2 15.5h2m1 0h2m2 0h1m1 0h1m4 0h4m2 0h3M2 16.5h3m3 0h1m2 0h1m1 0h2m1 0h3m1 0h3m2 0h2M2 17.5h1m1 0h2m3 0h1m1 0h1m1 0h1m3 0h1m2 0h2m2 0h1m1 0h1M2 18.5h1m3 0h3m1 0h2m2 0h2m2 0h7m1 0h1M10 19.5h1m2 0h2m1 0h1m1 0h1m3 0h2m1 0h1M2 20.5h7m1 0h4m1 0h2m1 0h1m1 0h1m1 0h2m2 0h1M2 21.5h1m5 0h1m1 0h4m1 0h2m1 0h1m3 0h2m1 0h2M2 22.5h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h7M2 23.5h1m1 0h3m1 0h1m1 0h4m2 0h2m1 0h2m3 0h3M2 24.5h1m1 0h3m1 0h1m3 0h2m2 0h2m1 0h1m2 0h1m2 0h2M2 25.5h1m5 0h1m2 0h2m1 0h1m1 0h1m2 0h1m2 0h5M2 26.5h7m1 0h1m1 0h3m3 0h1m1 0h3m3 0h1"
+                stroke="#163c31"
+              />
+            </svg>
+            
+
+          </div>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/cancelarCita.test.tsx:41:36
+     39| it('desistir conserva la cita sin enviar comandos', async () => {
+     40|   const { enviar, usuario } = abrir();
+     41|   await usuario.click(await screen.findByRole('button', { name: 'Cance…
+       |                                    ^
+     42|   await usuario.click(screen.getByRole('button', { name: 'Conservar ci…
+     43|   expect(enviar).not.toHaveBeenCalled();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  |web| src/vistas/cancelarCita.test.tsx > reintenta el mismo comando y clave tras error de red y presenta el resultado CANCELADA
+TestingLibraryElementError: Unable to find role="button" and name "Cancelar cita"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          App
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Tus citas y el QR para continuar en clínica.
+        </p>
+        <section
+          aria-label="Cita del paciente"
+          class="seccion cita"
+        >
+          <div>
+            <h2>
+              Paquete US mamario + Papanicolaou
+            </h2>
+            <dl
+              class="datos"
+            >
+              <div>
+                <dt>
+                  Estado
+                </dt>
+                <dd>
+                  CONFIRMADA
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  Sede
+                </dt>
+                <dd>
+                  Tepic
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  Fecha y hora en la sede
+                </dt>
+                <dd>
+                  <time
+                    datetime="2026-11-26T16:15:00.000Z"
+                  >
+                    26 de noviembre de 2026 a las 09:15
+                  </time>
+                  <small>
+                    America/Mazatlan
+                  </small>
+                </dd>
+              </div>
+            </dl>
+            <p>
+              Presenta este QR en recepción.
+            </p>
+          </div>
+          <div
+            aria-label="Código QR de la cita"
+            class="qr-cita"
+            role="img"
+          >
+            <svg
+              height="224"
+              shape-rendering="crispEdges"
+              viewBox="0 0 29 29"
+              width="224"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h29v29H0z"
+                fill="#ffffff"
+              />
+              <path
+                d="M2 2.5h7m1 0h3m2 0h2m3 0h7M2 3.5h1m5 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m5 0h1M2 4.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m1 0h1m1 0h3m1 0h1M2 5.5h1m1 0h3m1 0h1m2 0h1m1 0h3m1 0h2m1 0h1m1 0h3m1 0h1M2 6.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h3m1 0h1M2 7.5h1m5 0h1m3 0h5m3 0h1m5 0h1M2 8.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M11 9.5h1m2 0h5M2 10.5h1m2 0h7m1 0h2m3 0h2m2 0h1m1 0h3M2 11.5h2m2 0h1m6 0h5m3 0h3M2 12.5h2m3 0h2m3 0h1m4 0h1m2 0h1m1 0h1m3 0h1M4 13.5h2m1 0h1m2 0h1m2 0h1m2 0h1m3 0h2m1 0h2m1 0h1M4 14.5h1m1 0h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m2 0h1M2 15.5h2m1 0h2m2 0h1m1 0h1m4 0h4m2 0h3M2 16.5h3m3 0h1m2 0h1m1 0h2m1 0h3m1 0h3m2 0h2M2 17.5h1m1 0h2m3 0h1m1 0h1m1 0h1m3 0h1m2 0h2m2 0h1m1 0h1M2 18.5h1m3 0h3m1 0h2m2 0h2m2 0h7m1 0h1M10 19.5h1m2 0h2m1 0h1m1 0h1m3 0h2m1 0h1M2 20.5h7m1 0h4m1 0h2m1 0h1m1 0h1m1 0h2m2 0h1M2 21.5h1m5 0h1m1 0h4m1 0h2m1 0h1m3 0h2m1 0h2M2 22.5h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h7M2 23.5h1m1 0h3m1 0h1m1 0h4m2 0h2m1 0h2m3 0h3M2 24.5h1m1 0h3m1 0h1m3 0h2m2 0h2m1 0h1m2 0h1m2 0h2M2 25.5h1m5 0h1m2 0h2m1 0h1m1 0h1m2 0h1m2 0h5M2 26.5h7m1 0h1m1 0h3m3 0h1m1 0h3m3 0h1"
+                stroke="#163c31"
+              />
+            </svg>
+            
+
+          </div>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          App
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Tus citas y el QR para continuar en clínica.
+        </p>
+        <section
+          aria-label="Cita del paciente"
+          class="seccion cita"
+        >
+          <div>
+            <h2>
+              Paquete US mamario + Papanicolaou
+            </h2>
+            <dl
+              class="datos"
+            >
+              <div>
+                <dt>
+                  Estado
+                </dt>
+                <dd>
+                  CONFIRMADA
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  Sede
+                </dt>
+                <dd>
+                  Tepic
+                </dd>
+              </div>
+              <div>
+                <dt>
+                  Fecha y hora en la sede
+                </dt>
+                <dd>
+                  <time
+                    datetime="2026-11-26T16:15:00.000Z"
+                  >
+                    26 de noviembre de 2026 a las 09:15
+                  </time>
+                  <small>
+                    America/Mazatlan
+                  </small>
+                </dd>
+              </div>
+            </dl>
+            <p>
+              Presenta este QR en recepción.
+            </p>
+          </div>
+          <div
+            aria-label="Código QR de la cita"
+            class="qr-cita"
+            role="img"
+          >
+            <svg
+              height="224"
+              shape-rendering="crispEdges"
+              viewBox="0 0 29 29"
+              width="224"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h29v29H0z"
+                fill="#ffffff"
+              />
+              <path
+                d="M2 2.5h7m1 0h3m2 0h2m3 0h7M2 3.5h1m5 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m5 0h1M2 4.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m1 0h1m1 0h3m1 0h1M2 5.5h1m1 0h3m1 0h1m2 0h1m1 0h3m1 0h2m1 0h1m1 0h3m1 0h1M2 6.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h3m1 0h1M2 7.5h1m5 0h1m3 0h5m3 0h1m5 0h1M2 8.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M11 9.5h1m2 0h5M2 10.5h1m2 0h7m1 0h2m3 0h2m2 0h1m1 0h3M2 11.5h2m2 0h1m6 0h5m3 0h3M2 12.5h2m3 0h2m3 0h1m4 0h1m2 0h1m1 0h1m3 0h1M4 13.5h2m1 0h1m2 0h1m2 0h1m2 0h1m3 0h2m1 0h2m1 0h1M4 14.5h1m1 0h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m2 0h1M2 15.5h2m1 0h2m2 0h1m1 0h1m4 0h4m2 0h3M2 16.5h3m3 0h1m2 0h1m1 0h2m1 0h3m1 0h3m2 0h2M2 17.5h1m1 0h2m3 0h1m1 0h1m1 0h1m3 0h1m2 0h2m2 0h1m1 0h1M2 18.5h1m3 0h3m1 0h2m2 0h2m2 0h7m1 0h1M10 19.5h1m2 0h2m1 0h1m1 0h1m3 0h2m1 0h1M2 20.5h7m1 0h4m1 0h2m1 0h1m1 0h1m1 0h2m2 0h1M2 21.5h1m5 0h1m1 0h4m1 0h2m1 0h1m3 0h2m1 0h2M2 22.5h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h7M2 23.5h1m1 0h3m1 0h1m1 0h4m2 0h2m1 0h2m3 0h3M2 24.5h1m1 0h3m1 0h1m3 0h2m2 0h2m1 0h1m2 0h1m2 0h2M2 25.5h1m5 0h1m2 0h2m1 0h1m1 0h1m2 0h1m2 0h5M2 26.5h7m1 0h1m1 0h3m3 0h1m1 0h3m3 0h1"
+                stroke="#163c31"
+              />
+            </svg>
+            
+
+          </div>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/cancelarCita.test.tsx:57:36
+     55|   const { enviar, usuario } = abrir();
+     56|   enviar.mockRejectedValueOnce(new ErrorCliente('RED', 'No hay conexió…
+     57|   await usuario.click(await screen.findByRole('button', { name: 'Cance…
+       |                                    ^
+     58|   await usuario.click(screen.getByRole('button', { name: 'Confirmar ca…
+     59|   expect(await screen.findByText('No hay conexión de prueba')).toBeDef…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 1 passed (4)
+   Start at  02:56:01
+   Duration  7.01s (transform 566ms, setup 0ms, import 1.68s, tests 3.16s, environment 1.75s)
+
+
+EXIT_CODE=1

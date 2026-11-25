@@ -1,0 +1,18 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ✓ |web| src/cliente/historialWa.test.tsx (11 tests) 68ms
+ ✓ |web| src/vistas/wa.test.tsx (16 tests) 5150ms
+   ✓ identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión  1358ms
+   ✓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible  398ms
+   ✓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo  917ms
+   ✓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título  388ms
+   ✓ Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot  510ms
+
+ Test Files  2 passed (2)
+      Tests  27 passed (27)
+   Start at  03:02:24
+   Duration  9.37s (transform 758ms, setup 0ms, import 2.88s, tests 5.22s, environment 3.88s)
+
+
+EXIT_CODE=0

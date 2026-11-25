@@ -1,0 +1,55 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ❯ |web| src/vistas/vistas.test.tsx (17 tests | 1 failed | 16 skipped) 459ms
+     ↓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo
+     ↓ Flow protegido: ofrece abrir el formulario sin repetir valores iniciales
+     ↓ Interfaz guiada por la siguiente pregunta: exactamente tres opciones y su payload
+     × reiniciar el guion C descarta la confirmación y la aprobación pendiente de la cita 457ms
+     ↓ elige Flujo C, cancela, aprueba, acepta la oferta, muestra dominó y vuelve al inicio del Flujo A
+     ↓ muestra los campos ausentes de la ficha del Call Center sin inventar datos
+     ↓ Registrar llegada desde la cita: copia el token elegido y el canal clinica, sin un comando en la lectura
+     ↓ Selección de catálogo en call center: copia los IDs de otra oferta y envía servicio antes de sede
+     ↓ reintenta solo la sede pendiente y conserva su clave después de seleccionar el servicio
+     ↓ Ficha del call center: muestra teléfono enmascarado y datos públicos
+     ↓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales
+     ↓ Estado desde el cliente y QR con token, no con folio
+     ↓ la web muestra cotización y código de continuación sin cambiar el Flujo A
+     ↓ solo la bandeja de demo muestra el OTP simulado
+     ↓ permite escribir texto fuera del guion y muestra ayuda sin avanzar
+     ↓ el reintento de una acción desde la vista conserva la clave de idempotencia
+     ↓ Estados de carga y error: explica el fallo sin mostrar detalles internos
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/vistas/vistas.test.tsx > Vistas del guion > reiniciar el guion C descarta la confirmación y la aprobación pendiente de la cita
+AssertionError: expected <button type="button"></button> to be null
+
+- Expected: 
+null
+
++ Received: 
+<button
+  type="button"
+>
+  Confirmar cancelación
+</button>
+
+ ❯ src/vistas/vistas.test.tsx:72:77
+     70|     await usuario.click(await screen.findByRole('button', { name: 'Can…
+     71|     await usuario.click(screen.getByRole('button', { name: 'Reiniciar …
+     72|     expect(screen.queryByRole('button', { name: 'Confirmar cancelación…
+       |                                                                             ^
+     73|     await usuario.click(await screen.findByRole('button', { name: 'Can…
+     74|     await usuario.click(screen.getByRole('button', { name: 'Confirmar …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 16 skipped (17)
+   Start at  03:14:54
+   Duration  4.43s (transform 658ms, setup 0ms, import 1.74s, tests 459ms, environment 1.86s)
+
+
+EXIT_CODE=1

@@ -1,0 +1,399 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ❯ |web| src/vistas/vistas.test.tsx (16 tests | 1 failed) 3381ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo 287ms
+     ✓ Flow protegido: ofrece abrir el formulario sin repetir valores iniciales 12ms
+     ✓ Interfaz guiada por la siguiente pregunta: exactamente tres opciones y su payload 77ms
+     × elige Flujo C, cancela, aprueba, acepta la oferta, muestra dominó y vuelve al inicio del Flujo A 186ms
+     ✓ muestra los campos ausentes de la ficha del Call Center sin inventar datos 64ms
+     ✓ Registrar llegada desde la cita: copia el token elegido y el canal clinica, sin un comando en la lectura 123ms
+     ✓ Selección de catálogo en call center: copia los IDs de otra oferta y envía servicio antes de sede 125ms
+     ✓ reintenta solo la sede pendiente y conserva su clave después de seleccionar el servicio 173ms
+     ✓ Ficha del call center: muestra teléfono enmascarado y datos públicos 92ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  1482ms
+     ✓ Estado desde el cliente y QR con token, no con folio 51ms
+     ✓ la web muestra cotización y código de continuación sin cambiar el Flujo A 183ms
+     ✓ solo la bandeja de demo muestra el OTP simulado 32ms
+     ✓ permite escribir texto fuera del guion y muestra ayuda sin avanzar  310ms
+     ✓ el reintento de una acción desde la vista conserva la clave de idempotencia 140ms
+     ✓ Estados de carga y error: explica el fallo sin mostrar detalles internos 44ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/cliente/cliente.test.ts [ apps/web/src/cliente/cliente.test.ts ]
+Error: Failed to resolve import "./mock/guionFlujoC.ts" from "apps/web/src/cliente/cliente.test.ts". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki/apps/web/src/cliente/cliente.test.ts:51:43
+  48 |      expect(cliente.demo.guion()).toBe("flujoC");
+  49 |      expect(cliente.demo.paso()).toMatchObject({ id: "C_INICIO", numero: 1 });
+  50 |      const { GUION_FLUJO_C } = await import("./mock/guionFlujoC.ts");
+     |                                             ^
+  51 |      const recibir = vi.fn();
+  52 |      cliente.suscribir("wa:mensajes", recibir);
+ ❯ TransformPluginContext._formatLog ../../../../../../../Luis%20Rodriguez/Documents/TEC/HackaTec/noki/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:29250:43
+ ❯ TransformPluginContext.error ../../../../../../../Luis%20Rodriguez/Documents/TEC/HackaTec/noki/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:29247:14
+ ❯ normalizeUrl ../../../../../../../Luis%20Rodriguez/Documents/TEC/HackaTec/noki/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:27370:18
+ ❯ ../../../../../../../Luis%20Rodriguez/Documents/TEC/HackaTec/noki/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:27428:32
+ ❯ TransformPluginContext.transform ../../../../../../../Luis%20Rodriguez/Documents/TEC/HackaTec/noki/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:27396:4
+ ❯ EnvironmentPluginContainer.transform ../../../../../../../Luis%20Rodriguez/Documents/TEC/HackaTec/noki/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:29048:14
+ ❯ loadAndTransform ../../../../../../../Luis%20Rodriguez/Documents/TEC/HackaTec/noki/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:22914:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/vistas/vistas.test.tsx > Vistas del guion > elige Flujo C, cancela, aprueba, acepta la oferta, muestra dominó y vuelve al inicio del Flujo A
+TestingLibraryElementError: Unable to find an accessible element with the role "combobox" and name "Guion de demo"
+
+Here are the accessible roles:
+
+  link:
+
+  Name "Saltar al contenido":
+  <a
+    class="saltar-contenido"
+    href="#contenido"
+  />
+
+  Name "noki · Portada":
+  <a
+    aria-label="noki · Portada"
+    class="marca"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Web":
+  <a
+    class=""
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    class=""
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    aria-current="page"
+    class="active"
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    class=""
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    class=""
+    data-discover="true"
+    href="/clinica"
+  />
+
+  Name "Admin":
+  <a
+    class=""
+    data-discover="true"
+    href="/admin"
+  />
+
+  Name "Bandeja":
+  <a
+    class=""
+    data-discover="true"
+    href="/bandeja"
+  />
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  <header
+    class="cabecera flex items-center justify-between gap-6"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Canales de la demo":
+  <nav
+    aria-label="Canales de la demo"
+    class="barra-demo"
+  />
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  <ul />
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  --------------------------------------------------
+  status:
+
+  Name "":
+  <p
+    role="status"
+  />
+
+  Name "":
+  <p
+    class="estado-carga"
+    role="status"
+  />
+
+  --------------------------------------------------
+  button:
+
+  Name "Reiniciar guion":
+  <button
+    type="button"
+  />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="contenido flex-1"
+    id="contenido"
+    tabindex="-1"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "App":
+  <h1 />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name "":
+  <footer
+    class="pie flex flex-wrap justify-between gap-3"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+          <span
+            class="insignia-mock"
+          >
+            Modo simulado
+          </span>
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+        <div
+          class="control-demo"
+        >
+          <p
+            role="status"
+          >
+            Paso 
+            1
+             de 
+            14
+             · 
+            Esperando llamada
+          </p>
+          <button
+            type="button"
+          >
+            Reiniciar guion
+          </button>
+        </div>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          App
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Tus citas y el QR para continuar en clínica.
+        </p>
+        <p
+          class="estado-carga"
+          role="status"
+        >
+          Cargando información…
+        </p>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/vistas/vistas.test.tsx:69:40
+     67|   it('elige Flujo C, cancela, aprueba, acepta la oferta, muestra domin…
+     68|     const { cliente, usuario, router } = abrir('/app');
+     69|     await usuario.selectOptions(screen.getByRole('combobox', { name: '…
+       |                                        ^
+     70|     expect(await screen.findByText(/Paso 1 de 4/)).toBeDefined();
+     71|     await usuario.click(await screen.findByRole('button', { name: 'Can…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  1 failed | 15 passed (16)
+   Start at  03:05:43
+   Duration  7.17s (transform 635ms, setup 0ms, import 1.51s, tests 3.38s, environment 3.75s)
+
+
+EXIT_CODE=1

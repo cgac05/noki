@@ -35,12 +35,13 @@ Un componente o efecto dentro de `ProveedorCliente` se une a `wa:<waId>` de cada
 ### D3. Aviso de mensajes en otro número
 `HistorialWa` marca como «con mensajes nuevos» un número de la sesión que recibe mensajes sin estar visible, y lo desmarca al mostrarlo. `/wa` muestra un aviso con un botón por número marcado que cambia el número del simulador. No hay contador ni notificación fuera de `/wa`.
 
-### D4. `/app` cancela con `useAccion`
-El botón «Cancelar cita» abre una confirmación en línea (sin modal nuevo); al confirmar, `useAccion` envía `CancelarCita` con `canal: 'app'`, `actor: 'paciente'`, `tramiteId` de la cita y `payload: {}`. La vista muestra un mensaje según el `estado` del trámite de la respuesta: `CANCELADA` o cualquier otro (pendiente de aprobación, con enlace a `/wa`). Es formateo de lo que llega, no una regla de negocio. La confirmación y el resultado viven por cita, con la llave del trámite.
+### D4. `/app` cancela con `useAccion` y trata el 403 como «pendiente»
+El botón «Cancelar cita» abre una confirmación en línea (sin modal nuevo); al confirmar, `useAccion` envía `CancelarCita` con `canal: 'app'`, `actor: 'paciente'`, `tramiteId` de la cita y `payload: {}`. Según D6 de `relleno-huecos`, la API responde 403 `STEP_UP_REQUERIDO` (con `BOTON_APROBACION`) mientras espera la aprobación, sin cambiar el trámite, y manda la solicitud al WhatsApp vinculado de Ana. `ClienteReal` ya convierte ese 403 en `ErrorCliente` con `codigo`; la vista reconoce `STEP_UP_REQUERIDO` y muestra «pendiente de aprobar en WhatsApp» en lugar del error. Al aprobar, la API emite `tramite:actualizado` y `/app` vuelve a leer las citas, que ya llegan `CANCELADA`. Volver a pulsar «Cancelar cita» es una acción nueva con clave nueva (si se reusara la clave, la idempotencia devolvería el 403 guardado y no reenviaría el mensaje, D1 de `relleno-huecos`); «Reintentar» tras un fallo de red conserva la clave. La confirmación y el resultado viven por cita, con la llave del trámite.
 
 ### D5. Segundo guion seleccionable en `ClienteMock`
 `ClienteMock` recibe un conjunto de guiones (`flujoA`, `flujoC`) y un guion activo. `demo` gana `guion()` y `elegirGuion(id)`, que reinicia como `reiniciar()` (sube `revision`, vacía el historial a través del aviso que ya escucha `ProveedorCliente`). `BarraDemo` muestra un selector «Flujo A / Flujo C» junto al paso. El tipo `PasoFixture` y la lógica de espera se reutilizan; `PasoGuionSchema` amplía sus IDs con los del Flujo C. Cada paso puede declarar eventos `wa:mensajes` en `eventosSocket`, que ya se validan con el contrato. `demo.ids` depende del guion activo.
-- Pasos del Flujo C (provisionales, ver Open Questions): `C_INICIO` (cita de Ana `CONFIRMADA`, panel vacío) → `C_CANCELACION_SOLICITADA` (espera `CancelarCita`; responde trámite `CONFIRMADA`; emite `wa:mensajes` a Ana con «Sí, cancelar / No, conservarla») → `C_CANCELADA` (espera el botón de Ana; responde texto de confirmación; trámite `CANCELADA`; emite `wa:mensajes` a Beto con la oferta; panel con hueco `OFRECIDO`) → `C_ADELANTADA` (espera el botón de Beto; responde confirmación; panel con el hueco `ASIGNADO` y, antes, el horario anterior de Beto `OFRECIDO`; KPI actualizados).
+- Un paso puede declarar que su comando se rechaza con un error de API (`codigo` y mensaje) en lugar de una respuesta; `ClienteMock` lanza `ErrorCliente('API', mensaje, codigo)` y aun así avanza y emite los eventos del paso. Así el mock se comporta como la API en `CancelarCita`.
+- Pasos del Flujo C, con los textos y botones de D6 de `relleno-huecos`: `C_INICIO` (cita de Ana `CONFIRMADA`, panel vacío) → `C_APROBACION_PEDIDA` (espera `CancelarCita`; lo rechaza con `STEP_UP_REQUERIDO`; emite `wa:mensajes` a Ana: «¿Confirmas que quieres cancelar tu cita de {servicio} en {sede} del {fecha y hora}?» con «Sí, cancelar» y «No, conservarla») → `C_CANCELADA` (espera «Sí, cancelar» de Ana; responde «Tu cita quedó cancelada.»; cita `CANCELADA`; emite `tramite:actualizado` y `wa:mensajes` a Beto: «Se liberó un espacio para {servicio} en {sede} el {fecha y hora locales}. ¿Quieres adelantar tu cita?» con «Sí, adelantar» y «No, gracias»; panel con hueco `OFRECIDO`) → `C_ADELANTADA` (espera «Sí, adelantar» de Beto; responde «Listo, tu cita quedó el {fecha y hora}.»; panel con el hueco `ASIGNADO` y, antes, el horario anterior de Beto `OFRECIDO`; emite `wa:mensajes` a Carla con la oferta de ese horario; KPI actualizados). Carla no necesita responder en el guion.
 - Alternativa descartada: añadir el Flujo C al final del Flujo A. La cita de Ana termina `ATENDIDA` y no se puede cancelar; además alarga cada ensayo del Flujo A.
 
 ### D6. Panel de huecos en `/admin`
@@ -48,7 +49,9 @@ Sección propia con `useConsulta('panelHuecos', {})`, con sus estados de carga, 
 
 ## Risks / Trade-offs
 
-- [El frente A cambia el texto, los botones o la respuesta a `CancelarCita`] → Las vistas muestran lo que llega; solo cambian los datos de `guionFlujoC.ts`. Se ajustan con sus respuestas antes de la prueba conjunta.
+- [El frente A cambia otra vez los textos] → Las vistas muestran lo que llega; solo cambian los datos de `guionFlujoC.ts`.
+- [La API reenvía las ofertas vigentes cada vez que la pestaña se une a `wa:<waId>`] → Un mensaje igual al último del bot lo reemplaza en vez de duplicarse (requisito de `simulador-whatsapp`).
+- [Los botones de WhatsApp solo funcionan con `DEMO_MODE=true` (D13 de `relleno-huecos`)] → La prueba en modo real (5.2) se corre con la API en `DEMO_MODE=true`; fuera de él, `/app` sigue mostrando «pendiente» y no llega ningún mensaje, que es lo esperado.
 - [El núcleo no emite ningún evento de `admin` al cambiar un hueco] → El panel no se refrescaría en vivo en modo real. Dependencia anotada para el frente A: el criterio de `PLAN.md` §10.1 pide panel y KPI en vivo, y `admin:metricas` cambia con los KPI de huecos.
 - [Mensajes perdidos con la pestaña cerrada o antes de unirse a la sala] → Aceptado para la demo; se documenta en la guía de la demo que `/wa` debe estar abierta en alguna pestaña. Sin reenvío en el contrato.
 - [Dos pestañas abiertas reciben el mismo mensaje] → Cada pestaña tiene su `sessionStorage`; se ve en ambas, sin duplicarse dentro de una.
@@ -60,9 +63,4 @@ Sin migración. La rama sale de `feat/contratos-relleno-huecos` y se rebasa sobr
 
 ## Open Questions
 
-Ninguna cambia las vistas ni las tareas; solo los datos del guion simulado del Flujo C. Se preguntaron al frente A el 2026-11-25:
-
-1. Texto y botones exactos de la solicitud de aprobación y de la oferta.
-2. Estado y `siguientePregunta` de la respuesta a `CancelarCita` mientras espera la aprobación (el guion asume `CONFIRMADA` sin pregunta).
-3. TTL de la oferta en la demo (el guion asume 15 minutos, `PLAN.md` §10.1).
-4. Orden de las ofertas dentro de un hueco (el panel muestra el orden recibido).
+Ninguna. Las cuatro preguntas al frente A se resolvieron con `relleno-huecos` revisión 3 (rama `claude/project-thread-nqfp68`, `c7650ad`): textos y botones en su D6; `CancelarCita` en espera responde 403 `STEP_UP_REQUERIDO` (D4 de aquí); la aprobación vence en 10 minutos (su D1) y la oferta sigue `PLAN.md` §10.1; las ofertas llegan en orden de `enviada_en` (su D10).

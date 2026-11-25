@@ -1,0 +1,23 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ✓ |web| src/vistas/panelHuecos.test.tsx (5 tests) 1474ms
+   ✓ muestra hueco y ofertas en orden recibido, con fecha de Tepic y sin canal ni datos de pacientes  736ms
+ ✓ |web| src/vistas/relojDemo.test.tsx (9 tests) 2067ms
+     ✓ adelanta una hora, presenta la hora local y UTC y refresca las lecturas  685ms
+     ✓ bloquea sincrónicamente el doble clic y deshabilita todos los controles hasta terminar  368ms
+     ✓ reintenta los mismos minutos aunque el campo cambie y mantiene visible el tablero  330ms
+ ✓ |web| src/vistas/clinicaAlertas.test.tsx (8 tests) 2126ms
+     ✓ muestra dos turnos y respeta el orden recibido aunque las posiciones estén invertidas o ausentes  761ms
+ ✓ |web| src/vistas/consolas.test.tsx (16 tests) 3601ms
+     ✓ inicia con ANI de demo, valida el formato y descarta la captura al mostrar la ficha  1383ms
+     ✓ exige consentimiento, envía una sola solicitud con doble clic y muestra el código de la lectura  476ms
+     ✓ permite reintentar la continuación fallida con la misma clave  345ms
+
+ Test Files  4 passed (4)
+      Tests  38 passed (38)
+   Start at  03:04:36
+   Duration  8.74s (transform 1.87s, setup 0ms, import 8.72s, tests 9.27s, environment 9.27s)
+
+
+EXIT_CODE=0

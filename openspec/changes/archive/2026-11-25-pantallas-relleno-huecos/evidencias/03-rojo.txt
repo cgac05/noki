@@ -1,0 +1,3160 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ❯ |web| src/vistas/panelHuecos.test.tsx (5 tests | 5 failed) 5177ms
+   × muestra hueco y ofertas en orden recibido, con fecha de Tepic y sin canal ni datos de pacientes 1086ms
+   × panel vacío conserva el resto del tablero 1028ms
+   × error independiente permite reintentar sin ocultar métricas ni alertas 1026ms
+   × un evento de admin refresca el panel sin recargar 1019ms
+   × presenta las cuatro etiquetas de KPI de huecos y su valor recibido 1017ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/vistas/panelHuecos.test.tsx > muestra hueco y ofertas en orden recibido, con fecha de Tepic y sin canal ni datos de pacientes
+TestingLibraryElementError: Unable to find role="region" and name "Panel de huecos"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                BORRADOR
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                huecosLiberados
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                huecosRecuperados
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+            <div>
+              <dt>
+                horasRecursoRecuperadas
+              </dt>
+              <dd>
+                1.5
+              </dd>
+            </div>
+            <div>
+              <dt>
+                diasAdelantadosPromedio
+              </dt>
+              <dd>
+                2
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-alertas"
+          class="seccion"
+        >
+          <h2
+            id="titulo-alertas"
+          >
+            Alertas de seguridad
+          </h2>
+          <p>
+            Sin alertas de seguridad
+          </p>
+        </section>
+        <div
+          class="seccion"
+        >
+          <p>
+            Aún no hay un hilo que mostrar. Inicia la atención o confirma una cita y vuelve a actualizar.
+          </p>
+          <button
+            type="button"
+          >
+            Actualizar
+          </button>
+        </div>
+        <section
+          aria-labelledby="titulo-reloj-demo"
+          class="seccion reloj-demo"
+        >
+          <h2
+            id="titulo-reloj-demo"
+          >
+            Reloj de demo
+          </h2>
+          <p
+            id="aviso-reloj-demo"
+          >
+            Adelantar el reloj afecta a toda la demo y no se puede deshacer; usa 
+            <code>
+              pnpm demo:reset
+            </code>
+             para volver al inicio.
+          </p>
+          <div
+            aria-describedby="aviso-reloj-demo"
+            aria-label="Adelantos rápidos"
+            class="acciones"
+            role="group"
+          >
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +15 min
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 h
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 día
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 semana
+            </button>
+          </div>
+          <form
+            class="reloj-demo-formulario"
+            novalidate=""
+          >
+            <label
+              for="minutos-reloj-demo"
+            >
+              Minutos exactos
+            </label>
+            <p
+              id="rango-reloj-demo"
+            >
+              Introduce un número entero de 1 a 10 080 minutos.
+            </p>
+            <div
+              class="acciones"
+            >
+              <input
+                aria-describedby="rango-reloj-demo error-rango-reloj-demo"
+                aria-invalid="false"
+                id="minutos-reloj-demo"
+                max="10080"
+                min="1"
+                required=""
+                step="1"
+                type="number"
+                value="15"
+              />
+              <button
+                type="submit"
+              >
+                Adelantar reloj
+              </button>
+            </div>
+            <div
+              id="error-rango-reloj-demo"
+            />
+          </form>
+          <div
+            aria-live="polite"
+            role="status"
+          />
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                BORRADOR
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                huecosLiberados
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                huecosRecuperados
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+            <div>
+              <dt>
+                horasRecursoRecuperadas
+              </dt>
+              <dd>
+                1.5
+              </dd>
+            </div>
+            <div>
+              <dt>
+                diasAdelantadosPromedio
+              </dt>
+              <dd>
+                2
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-alertas"
+          class="seccion"
+        >
+          <h2
+            id="titulo-alertas"
+          >
+            Alertas de seguridad
+          </h2>
+          <p>
+            Sin alertas de seguridad
+          </p>
+        </section>
+        <div
+          class="seccion"
+        >
+          <p>
+            Aún no hay un hilo que mostrar. Inicia la atención o confirma una cita y vuelve a actualizar.
+          </p>
+          <button
+            type="button"
+          >
+            Actualizar
+          </button>
+        </div>
+        <section
+          aria-labelledby="titulo-reloj-demo"
+          class="seccion reloj-demo"
+        >
+          <h2
+            id="titulo-reloj-demo"
+          >
+            Reloj de demo
+          </h2>
+          <p
+            id="aviso-reloj-demo"
+          >
+            Adelantar el reloj afecta a toda la demo y no se puede deshacer; usa 
+            <code>
+              pnpm demo:reset
+            </code>
+             para volver al inicio.
+          </p>
+          <div
+            aria-describedby="aviso-reloj-demo"
+            aria-label="Adelantos rápidos"
+            class="acciones"
+            role="group"
+          >
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +15 min
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 h
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 día
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 semana
+            </button>
+          </div>
+          <form
+            class="reloj-demo-formulario"
+            novalidate=""
+          >
+            <label
+              for="minutos-reloj-demo"
+            >
+              Minutos exactos
+            </label>
+            <p
+              id="rango-reloj-demo"
+            >
+              Introduce un número entero de 1 a 10 080 minutos.
+            </p>
+            <div
+              class="acciones"
+            >
+              <input
+                aria-describedby="rango-reloj-demo error-rango-reloj-demo"
+                aria-invalid="false"
+                id="minutos-reloj-demo"
+                max="10080"
+                min="1"
+                required=""
+                step="1"
+                type="number"
+                value="15"
+              />
+              <button
+                type="submit"
+              >
+                Adelantar reloj
+              </button>
+            </div>
+            <div
+              id="error-rango-reloj-demo"
+            />
+          </form>
+          <div
+            aria-live="polite"
+            role="status"
+          />
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/panelHuecos.test.tsx:42:30
+     40|     { ...hueco.ofertas[0]!, estado: 'RECHAZADA' }, hueco.ofertas[0]!,
+     41|   ] }, { ...hueco, id: '019aff10-0000-7000-8000-000000000002', servici…
+     42|   const panel = await screen.findByRole('region', { name: 'Panel de hu…
+       |                              ^
+     43|   await within(panel).findByText('Primero recibido');
+     44|   expect(panel.textContent).toMatch(/Primero recibido.*Rechazada.*Ofre…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  |web| src/vistas/panelHuecos.test.tsx > panel vacío conserva el resto del tablero
+TestingLibraryElementError: Unable to find an element with the text: No hay huecos liberados.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                BORRADOR
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                huecosLiberados
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                huecosRecuperados
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+            <div>
+              <dt>
+                horasRecursoRecuperadas
+              </dt>
+              <dd>
+                1.5
+              </dd>
+            </div>
+            <div>
+              <dt>
+                diasAdelantadosPromedio
+              </dt>
+              <dd>
+                2
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-alertas"
+          class="seccion"
+        >
+          <h2
+            id="titulo-alertas"
+          >
+            Alertas de seguridad
+          </h2>
+          <p>
+            Sin alertas de seguridad
+          </p>
+        </section>
+        <div
+          class="seccion"
+        >
+          <p>
+            Aún no hay un hilo que mostrar. Inicia la atención o confirma una cita y vuelve a actualizar.
+          </p>
+          <button
+            type="button"
+          >
+            Actualizar
+          </button>
+        </div>
+        <section
+          aria-labelledby="titulo-reloj-demo"
+          class="seccion reloj-demo"
+        >
+          <h2
+            id="titulo-reloj-demo"
+          >
+            Reloj de demo
+          </h2>
+          <p
+            id="aviso-reloj-demo"
+          >
+            Adelantar el reloj afecta a toda la demo y no se puede deshacer; usa 
+            <code>
+              pnpm demo:reset
+            </code>
+             para volver al inicio.
+          </p>
+          <div
+            aria-describedby="aviso-reloj-demo"
+            aria-label="Adelantos rápidos"
+            class="acciones"
+            role="group"
+          >
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +15 min
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 h
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 día
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 semana
+            </button>
+          </div>
+          <form
+            class="reloj-demo-formulario"
+            novalidate=""
+          >
+            <label
+              for="minutos-reloj-demo"
+            >
+              Minutos exactos
+            </label>
+            <p
+              id="rango-reloj-demo"
+            >
+              Introduce un número entero de 1 a 10 080 minutos.
+            </p>
+            <div
+              class="acciones"
+            >
+              <input
+                aria-describedby="rango-reloj-demo error-rango-reloj-demo"
+                aria-invalid="false"
+                id="minutos-reloj-demo"
+                max="10080"
+                min="1"
+                required=""
+                step="1"
+                type="number"
+                value="15"
+              />
+              <button
+                type="submit"
+              >
+                Adelantar reloj
+              </button>
+            </div>
+            <div
+              id="error-rango-reloj-demo"
+            />
+          </form>
+          <div
+            aria-live="polite"
+            role="status"
+          />
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                BORRADOR
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                huecosLiberados
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                huecosRecuperados
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+            <div>
+              <dt>
+                horasRecursoRecuperadas
+              </dt>
+              <dd>
+                1.5
+              </dd>
+            </div>
+            <div>
+              <dt>
+                diasAdelantadosPromedio
+              </dt>
+              <dd>
+                2
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-alertas"
+          class="seccion"
+        >
+          <h2
+            id="titulo-alertas"
+          >
+            Alertas de seguridad
+          </h2>
+          <p>
+            Sin alertas de seguridad
+          </p>
+        </section>
+        <div
+          class="seccion"
+        >
+          <p>
+            Aún no hay un hilo que mostrar. Inicia la atención o confirma una cita y vuelve a actualizar.
+          </p>
+          <button
+            type="button"
+          >
+            Actualizar
+          </button>
+        </div>
+        <section
+          aria-labelledby="titulo-reloj-demo"
+          class="seccion reloj-demo"
+        >
+          <h2
+            id="titulo-reloj-demo"
+          >
+            Reloj de demo
+          </h2>
+          <p
+            id="aviso-reloj-demo"
+          >
+            Adelantar el reloj afecta a toda la demo y no se puede deshacer; usa 
+            <code>
+              pnpm demo:reset
+            </code>
+             para volver al inicio.
+          </p>
+          <div
+            aria-describedby="aviso-reloj-demo"
+            aria-label="Adelantos rápidos"
+            class="acciones"
+            role="group"
+          >
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +15 min
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 h
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 día
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 semana
+            </button>
+          </div>
+          <form
+            class="reloj-demo-formulario"
+            novalidate=""
+          >
+            <label
+              for="minutos-reloj-demo"
+            >
+              Minutos exactos
+            </label>
+            <p
+              id="rango-reloj-demo"
+            >
+              Introduce un número entero de 1 a 10 080 minutos.
+            </p>
+            <div
+              class="acciones"
+            >
+              <input
+                aria-describedby="rango-reloj-demo error-rango-reloj-demo"
+                aria-invalid="false"
+                id="minutos-reloj-demo"
+                max="10080"
+                min="1"
+                required=""
+                step="1"
+                type="number"
+                value="15"
+              />
+              <button
+                type="submit"
+              >
+                Adelantar reloj
+              </button>
+            </div>
+            <div
+              id="error-rango-reloj-demo"
+            />
+          </form>
+          <div
+            aria-live="polite"
+            role="status"
+          />
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/panelHuecos.test.tsx:56:23
+     54| it('panel vacío conserva el resto del tablero', async () => {
+     55|   abrir([]);
+     56|   expect(await screen.findByText('No hay huecos liberados.')).toBeDefi…
+       |                       ^
+     57|   expect(screen.getByRole('heading', { name: 'Trámites por estado' }))…
+     58| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  |web| src/vistas/panelHuecos.test.tsx > error independiente permite reintentar sin ocultar métricas ni alertas
+TestingLibraryElementError: Unable to find an element with the text: No se pudo consultar el panel. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                BORRADOR
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                huecosLiberados
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                huecosRecuperados
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+            <div>
+              <dt>
+                horasRecursoRecuperadas
+              </dt>
+              <dd>
+                1.5
+              </dd>
+            </div>
+            <div>
+              <dt>
+                diasAdelantadosPromedio
+              </dt>
+              <dd>
+                2
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-alertas"
+          class="seccion"
+        >
+          <h2
+            id="titulo-alertas"
+          >
+            Alertas de seguridad
+          </h2>
+          <p>
+            Sin alertas de seguridad
+          </p>
+        </section>
+        <div
+          class="seccion"
+        >
+          <p>
+            Aún no hay un hilo que mostrar. Inicia la atención o confirma una cita y vuelve a actualizar.
+          </p>
+          <button
+            type="button"
+          >
+            Actualizar
+          </button>
+        </div>
+        <section
+          aria-labelledby="titulo-reloj-demo"
+          class="seccion reloj-demo"
+        >
+          <h2
+            id="titulo-reloj-demo"
+          >
+            Reloj de demo
+          </h2>
+          <p
+            id="aviso-reloj-demo"
+          >
+            Adelantar el reloj afecta a toda la demo y no se puede deshacer; usa 
+            <code>
+              pnpm demo:reset
+            </code>
+             para volver al inicio.
+          </p>
+          <div
+            aria-describedby="aviso-reloj-demo"
+            aria-label="Adelantos rápidos"
+            class="acciones"
+            role="group"
+          >
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +15 min
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 h
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 día
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 semana
+            </button>
+          </div>
+          <form
+            class="reloj-demo-formulario"
+            novalidate=""
+          >
+            <label
+              for="minutos-reloj-demo"
+            >
+              Minutos exactos
+            </label>
+            <p
+              id="rango-reloj-demo"
+            >
+              Introduce un número entero de 1 a 10 080 minutos.
+            </p>
+            <div
+              class="acciones"
+            >
+              <input
+                aria-describedby="rango-reloj-demo error-rango-reloj-demo"
+                aria-invalid="false"
+                id="minutos-reloj-demo"
+                max="10080"
+                min="1"
+                required=""
+                step="1"
+                type="number"
+                value="15"
+              />
+              <button
+                type="submit"
+              >
+                Adelantar reloj
+              </button>
+            </div>
+            <div
+              id="error-rango-reloj-demo"
+            />
+          </form>
+          <div
+            aria-live="polite"
+            role="status"
+          />
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                BORRADOR
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                huecosLiberados
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                huecosRecuperados
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+            <div>
+              <dt>
+                horasRecursoRecuperadas
+              </dt>
+              <dd>
+                1.5
+              </dd>
+            </div>
+            <div>
+              <dt>
+                diasAdelantadosPromedio
+              </dt>
+              <dd>
+                2
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-alertas"
+          class="seccion"
+        >
+          <h2
+            id="titulo-alertas"
+          >
+            Alertas de seguridad
+          </h2>
+          <p>
+            Sin alertas de seguridad
+          </p>
+        </section>
+        <div
+          class="seccion"
+        >
+          <p>
+            Aún no hay un hilo que mostrar. Inicia la atención o confirma una cita y vuelve a actualizar.
+          </p>
+          <button
+            type="button"
+          >
+            Actualizar
+          </button>
+        </div>
+        <section
+          aria-labelledby="titulo-reloj-demo"
+          class="seccion reloj-demo"
+        >
+          <h2
+            id="titulo-reloj-demo"
+          >
+            Reloj de demo
+          </h2>
+          <p
+            id="aviso-reloj-demo"
+          >
+            Adelantar el reloj afecta a toda la demo y no se puede deshacer; usa 
+            <code>
+              pnpm demo:reset
+            </code>
+             para volver al inicio.
+          </p>
+          <div
+            aria-describedby="aviso-reloj-demo"
+            aria-label="Adelantos rápidos"
+            class="acciones"
+            role="group"
+          >
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +15 min
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 h
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 día
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 semana
+            </button>
+          </div>
+          <form
+            class="reloj-demo-formulario"
+            novalidate=""
+          >
+            <label
+              for="minutos-reloj-demo"
+            >
+              Minutos exactos
+            </label>
+            <p
+              id="rango-reloj-demo"
+            >
+              Introduce un número entero de 1 a 10 080 minutos.
+            </p>
+            <div
+              class="acciones"
+            >
+              <input
+                aria-describedby="rango-reloj-demo error-rango-reloj-demo"
+                aria-invalid="false"
+                id="minutos-reloj-demo"
+                max="10080"
+                min="1"
+                required=""
+                step="1"
+                type="number"
+                value="15"
+              />
+              <button
+                type="submit"
+              >
+                Adelantar reloj
+              </button>
+            </div>
+            <div
+              id="error-rango-reloj-demo"
+            />
+          </form>
+          <div
+            aria-live="polite"
+            role="status"
+          />
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/panelHuecos.test.tsx:62:23
+     60| it('error independiente permite reintentar sin ocultar métricas ni ale…
+     61|   const vista = abrir(); vista.fallar(true);
+     62|   expect(await screen.findByText('No se pudo consultar el panel')).toB…
+       |                       ^
+     63|   expect(screen.getByRole('heading', { name: 'Indicadores disponibles'…
+     64|   expect(await screen.findByText('Sin alertas de seguridad')).toBeDefi…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  |web| src/vistas/panelHuecos.test.tsx > un evento de admin refresca el panel sin recargar
+TestingLibraryElementError: Unable to find role="region" and name "Panel de huecos"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                BORRADOR
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                huecosLiberados
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                huecosRecuperados
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+            <div>
+              <dt>
+                horasRecursoRecuperadas
+              </dt>
+              <dd>
+                1.5
+              </dd>
+            </div>
+            <div>
+              <dt>
+                diasAdelantadosPromedio
+              </dt>
+              <dd>
+                2
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-alertas"
+          class="seccion"
+        >
+          <h2
+            id="titulo-alertas"
+          >
+            Alertas de seguridad
+          </h2>
+          <p>
+            Sin alertas de seguridad
+          </p>
+        </section>
+        <div
+          class="seccion"
+        >
+          <p>
+            Aún no hay un hilo que mostrar. Inicia la atención o confirma una cita y vuelve a actualizar.
+          </p>
+          <button
+            type="button"
+          >
+            Actualizar
+          </button>
+        </div>
+        <section
+          aria-labelledby="titulo-reloj-demo"
+          class="seccion reloj-demo"
+        >
+          <h2
+            id="titulo-reloj-demo"
+          >
+            Reloj de demo
+          </h2>
+          <p
+            id="aviso-reloj-demo"
+          >
+            Adelantar el reloj afecta a toda la demo y no se puede deshacer; usa 
+            <code>
+              pnpm demo:reset
+            </code>
+             para volver al inicio.
+          </p>
+          <div
+            aria-describedby="aviso-reloj-demo"
+            aria-label="Adelantos rápidos"
+            class="acciones"
+            role="group"
+          >
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +15 min
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 h
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 día
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 semana
+            </button>
+          </div>
+          <form
+            class="reloj-demo-formulario"
+            novalidate=""
+          >
+            <label
+              for="minutos-reloj-demo"
+            >
+              Minutos exactos
+            </label>
+            <p
+              id="rango-reloj-demo"
+            >
+              Introduce un número entero de 1 a 10 080 minutos.
+            </p>
+            <div
+              class="acciones"
+            >
+              <input
+                aria-describedby="rango-reloj-demo error-rango-reloj-demo"
+                aria-invalid="false"
+                id="minutos-reloj-demo"
+                max="10080"
+                min="1"
+                required=""
+                step="1"
+                type="number"
+                value="15"
+              />
+              <button
+                type="submit"
+              >
+                Adelantar reloj
+              </button>
+            </div>
+            <div
+              id="error-rango-reloj-demo"
+            />
+          </form>
+          <div
+            aria-live="polite"
+            role="status"
+          />
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                BORRADOR
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                huecosLiberados
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                huecosRecuperados
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+            <div>
+              <dt>
+                horasRecursoRecuperadas
+              </dt>
+              <dd>
+                1.5
+              </dd>
+            </div>
+            <div>
+              <dt>
+                diasAdelantadosPromedio
+              </dt>
+              <dd>
+                2
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-alertas"
+          class="seccion"
+        >
+          <h2
+            id="titulo-alertas"
+          >
+            Alertas de seguridad
+          </h2>
+          <p>
+            Sin alertas de seguridad
+          </p>
+        </section>
+        <div
+          class="seccion"
+        >
+          <p>
+            Aún no hay un hilo que mostrar. Inicia la atención o confirma una cita y vuelve a actualizar.
+          </p>
+          <button
+            type="button"
+          >
+            Actualizar
+          </button>
+        </div>
+        <section
+          aria-labelledby="titulo-reloj-demo"
+          class="seccion reloj-demo"
+        >
+          <h2
+            id="titulo-reloj-demo"
+          >
+            Reloj de demo
+          </h2>
+          <p
+            id="aviso-reloj-demo"
+          >
+            Adelantar el reloj afecta a toda la demo y no se puede deshacer; usa 
+            <code>
+              pnpm demo:reset
+            </code>
+             para volver al inicio.
+          </p>
+          <div
+            aria-describedby="aviso-reloj-demo"
+            aria-label="Adelantos rápidos"
+            class="acciones"
+            role="group"
+          >
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +15 min
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 h
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 día
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 semana
+            </button>
+          </div>
+          <form
+            class="reloj-demo-formulario"
+            novalidate=""
+          >
+            <label
+              for="minutos-reloj-demo"
+            >
+              Minutos exactos
+            </label>
+            <p
+              id="rango-reloj-demo"
+            >
+              Introduce un número entero de 1 a 10 080 minutos.
+            </p>
+            <div
+              class="acciones"
+            >
+              <input
+                aria-describedby="rango-reloj-demo error-rango-reloj-demo"
+                aria-invalid="false"
+                id="minutos-reloj-demo"
+                max="10080"
+                min="1"
+                required=""
+                step="1"
+                type="number"
+                value="15"
+              />
+              <button
+                type="submit"
+              >
+                Adelantar reloj
+              </button>
+            </div>
+            <div
+              id="error-rango-reloj-demo"
+            />
+          </form>
+          <div
+            aria-live="polite"
+            role="status"
+          />
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/panelHuecos.test.tsx:72:30
+     70| it('un evento de admin refresca el panel sin recargar', async () => {
+     71|   const vista = abrir();
+     72|   const panel = await screen.findByRole('region', { name: 'Panel de hu…
+       |                              ^
+     73|   await within(panel).findByText('Ofrecido');
+     74|   act(() => vista.socket.recibir('connect'));
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  |web| src/vistas/panelHuecos.test.tsx > presenta las cuatro etiquetas de KPI de huecos y su valor recibido
+TestingLibraryElementError: Unable to find an element with the text: Huecos liberados. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                BORRADOR
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                huecosLiberados
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                huecosRecuperados
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+            <div>
+              <dt>
+                horasRecursoRecuperadas
+              </dt>
+              <dd>
+                1.5
+              </dd>
+            </div>
+            <div>
+              <dt>
+                diasAdelantadosPromedio
+              </dt>
+              <dd>
+                2
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-alertas"
+          class="seccion"
+        >
+          <h2
+            id="titulo-alertas"
+          >
+            Alertas de seguridad
+          </h2>
+          <p>
+            Sin alertas de seguridad
+          </p>
+        </section>
+        <div
+          class="seccion"
+        >
+          <p>
+            Aún no hay un hilo que mostrar. Inicia la atención o confirma una cita y vuelve a actualizar.
+          </p>
+          <button
+            type="button"
+          >
+            Actualizar
+          </button>
+        </div>
+        <section
+          aria-labelledby="titulo-reloj-demo"
+          class="seccion reloj-demo"
+        >
+          <h2
+            id="titulo-reloj-demo"
+          >
+            Reloj de demo
+          </h2>
+          <p
+            id="aviso-reloj-demo"
+          >
+            Adelantar el reloj afecta a toda la demo y no se puede deshacer; usa 
+            <code>
+              pnpm demo:reset
+            </code>
+             para volver al inicio.
+          </p>
+          <div
+            aria-describedby="aviso-reloj-demo"
+            aria-label="Adelantos rápidos"
+            class="acciones"
+            role="group"
+          >
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +15 min
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 h
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 día
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 semana
+            </button>
+          </div>
+          <form
+            class="reloj-demo-formulario"
+            novalidate=""
+          >
+            <label
+              for="minutos-reloj-demo"
+            >
+              Minutos exactos
+            </label>
+            <p
+              id="rango-reloj-demo"
+            >
+              Introduce un número entero de 1 a 10 080 minutos.
+            </p>
+            <div
+              class="acciones"
+            >
+              <input
+                aria-describedby="rango-reloj-demo error-rango-reloj-demo"
+                aria-invalid="false"
+                id="minutos-reloj-demo"
+                max="10080"
+                min="1"
+                required=""
+                step="1"
+                type="number"
+                value="15"
+              />
+              <button
+                type="submit"
+              >
+                Adelantar reloj
+              </button>
+            </div>
+            <div
+              id="error-rango-reloj-demo"
+            />
+          </form>
+          <div
+            aria-live="polite"
+            role="status"
+          />
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Administración
+        </h1>
+        <p
+          class="introduccion"
+        >
+          El mismo hilo, con la trazabilidad de cada canal.
+        </p>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Trámites por estado
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                BORRADOR
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          class="seccion"
+        >
+          <h2>
+            Indicadores disponibles
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                huecosLiberados
+              </dt>
+              <dd>
+                3
+              </dd>
+            </div>
+            <div>
+              <dt>
+                huecosRecuperados
+              </dt>
+              <dd>
+                1
+              </dd>
+            </div>
+            <div>
+              <dt>
+                horasRecursoRecuperadas
+              </dt>
+              <dd>
+                1.5
+              </dd>
+            </div>
+            <div>
+              <dt>
+                diasAdelantadosPromedio
+              </dt>
+              <dd>
+                2
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section
+          aria-labelledby="titulo-alertas"
+          class="seccion"
+        >
+          <h2
+            id="titulo-alertas"
+          >
+            Alertas de seguridad
+          </h2>
+          <p>
+            Sin alertas de seguridad
+          </p>
+        </section>
+        <div
+          class="seccion"
+        >
+          <p>
+            Aún no hay un hilo que mostrar. Inicia la atención o confirma una cita y vuelve a actualizar.
+          </p>
+          <button
+            type="button"
+          >
+            Actualizar
+          </button>
+        </div>
+        <section
+          aria-labelledby="titulo-reloj-demo"
+          class="seccion reloj-demo"
+        >
+          <h2
+            id="titulo-reloj-demo"
+          >
+            Reloj de demo
+          </h2>
+          <p
+            id="aviso-reloj-demo"
+          >
+            Adelantar el reloj afecta a toda la demo y no se puede deshacer; usa 
+            <code>
+              pnpm demo:reset
+            </code>
+             para volver al inicio.
+          </p>
+          <div
+            aria-describedby="aviso-reloj-demo"
+            aria-label="Adelantos rápidos"
+            class="acciones"
+            role="group"
+          >
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +15 min
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 h
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 día
+            </button>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              +1 semana
+            </button>
+          </div>
+          <form
+            class="reloj-demo-formulario"
+            novalidate=""
+          >
+            <label
+              for="minutos-reloj-demo"
+            >
+              Minutos exactos
+            </label>
+            <p
+              id="rango-reloj-demo"
+            >
+              Introduce un número entero de 1 a 10 080 minutos.
+            </p>
+            <div
+              class="acciones"
+            >
+              <input
+                aria-describedby="rango-reloj-demo error-rango-reloj-demo"
+                aria-invalid="false"
+                id="minutos-reloj-demo"
+                max="10080"
+                min="1"
+                required=""
+                step="1"
+                type="number"
+                value="15"
+              />
+              <button
+                type="submit"
+              >
+                Adelantar reloj
+              </button>
+            </div>
+            <div
+              id="error-rango-reloj-demo"
+            />
+          </form>
+          <div
+            aria-live="polite"
+            role="status"
+          />
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/panelHuecos.test.tsx:85:154
+     83| it('presenta las cuatro etiquetas de KPI de huecos y su valor recibido…
+     84|   abrir();
+     85|   for (const etiqueta of ['Huecos liberados', 'Huecos recuperados', 'H…
+       |                                                                                                                                                          ^
+     86|   expect(screen.getByText('Horas de recurso recuperadas').parentElemen…
+     87| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed (5)
+   Start at  02:58:12
+   Duration  9.10s (transform 592ms, setup 0ms, import 1.78s, tests 5.18s, environment 1.76s)
+
+
+EXIT_CODE=1
