@@ -1,0 +1,56 @@
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ❯ |unitarios| tests/unit/rellenoHuecosSaga.test.ts (3 tests | 3 failed) 10ms
+   × guarda el adelanto antes de liberar la reserva anterior de Beto 6ms
+   × compensa el fallo externo y conserva la cita original 1ms
+   × rechaza una oferta de otro contacto antes de apartar 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosSaga.test.ts > guarda el adelanto antes de liberar la reserva anterior de Beto
+TypeError: __vite_ssr_import_1__.AceptarOfertaHueco is not a constructor
+ ❯ preparar tests/unit/rellenoHuecosSaga.test.ts:36:17
+     34|   const guardar = vi.fn().mockResolvedValue(true);
+     35|   const expirar = vi.fn().mockResolvedValue(undefined);
+     36|   const casos = new AceptarOfertaHueco({
+       |                 ^
+     37|     demo: true, ids: { nuevo: () => reservaNueva }, reloj: new RelojFa…
+     38|     agenda: { apartar, confirmar, liberar }, agendaExterna: { registra…
+ ❯ tests/unit/rellenoHuecosSaga.test.ts:45:69
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosSaga.test.ts > compensa el fallo externo y conserva la cita original
+TypeError: __vite_ssr_import_1__.AceptarOfertaHueco is not a constructor
+ ❯ preparar tests/unit/rellenoHuecosSaga.test.ts:36:17
+     34|   const guardar = vi.fn().mockResolvedValue(true);
+     35|   const expirar = vi.fn().mockResolvedValue(undefined);
+     36|   const casos = new AceptarOfertaHueco({
+       |                 ^
+     37|     demo: true, ids: { nuevo: () => reservaNueva }, reloj: new RelojFa…
+     38|     agenda: { apartar, confirmar, liberar }, agendaExterna: { registra…
+ ❯ tests/unit/rellenoHuecosSaga.test.ts:56:72
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosSaga.test.ts > rechaza una oferta de otro contacto antes de apartar
+TypeError: __vite_ssr_import_1__.AceptarOfertaHueco is not a constructor
+ ❯ preparar tests/unit/rellenoHuecosSaga.test.ts:36:17
+     34|   const guardar = vi.fn().mockResolvedValue(true);
+     35|   const expirar = vi.fn().mockResolvedValue(undefined);
+     36|   const casos = new AceptarOfertaHueco({
+       |                 ^
+     37|     demo: true, ids: { nuevo: () => reservaNueva }, reloj: new RelojFa…
+     38|     agenda: { apartar, confirmar, liberar }, agendaExterna: { registra…
+ ❯ tests/unit/rellenoHuecosSaga.test.ts:67:30
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  03:14:31
+   Duration  2.15s (transform 481ms, setup 0ms, import 1.84s, tests 10ms, environment 0ms)
+
+Código de salida: 1

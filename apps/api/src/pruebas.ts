@@ -1,12 +1,12 @@
 import { v7 } from 'uuid';
 import type { Writable } from 'node:stream';
-import { ConversacionWa } from '@noki/adapter-in-http';
-import { CasosTramite, RelojDemo, ResolvedorContinuidad, TemporizadoresTramite } from '@noki/application';
+import { ConversacionWa, textoAprobacion } from '@noki/adapter-in-http';
+import { AprobacionCancelacion, CasosTramite, RelojDemo, ResolvedorContinuidad, TemporizadoresTramite } from '@noki/application';
 import { crearRegistroTiposTramite, PoliticaIdentidad } from '@noki/domain';
 import {
   AgendaExternaMemoria, AgendaMemoria, BandejaMemoria, CatalogoMemoria, ConversacionesWaMemoria, LecturasMemoria, ContactosMemoria, EventosSinTramiteMemoria,
   HiloRepoMemoria, PacientesMemoria, RegistroComandosMemoria, RegistroIntentosMemoria,
-  ProgramadorMemoria, RegistroTokensUsadosMemoria, RelojFalso, TramiteRepoMemoria,
+  NotificadorWaMemoria, TokensBotonWaMemoria, ProgramadorMemoria, RegistroTokensUsadosMemoria, RelojFalso, TramiteRepoMemoria,
 } from '@noki/adapter-memory';
 import { TokensJose } from '@noki/adapter-out-security';
 import { crearApi } from './crearApi.ts';
@@ -31,18 +31,31 @@ export function crearApiPruebas(opciones: {
   const tokens = new TokensJose(opciones.tokenSecret ?? 'secreto-sintetico-de-pruebas-para-la-api',
     reloj, new RegistroTokensUsadosMemoria());
   const resolvedor = new ResolvedorContinuidad(tramites, contactos, tokens, pacientes, intentos, sinTramite);
-  const casos = new CasosTramite({
+  const lecturas = new LecturasMemoria(tramites, contactos, pacientes, agenda, sinTramite, ids, hilos);
+  const demo = opciones.demo ?? true;
+  const notificadorWa = new NotificadorWaMemoria();
+  const aprobacion = new AprobacionCancelacion({
+    demo, reloj, ids, tokens: new TokensBotonWaMemoria(reloj, new RegistroTokensUsadosMemoria(), demo),
+    notificador: notificadorWa,
+    contactoVigente: contactos.whatsappVigente.bind(contactos),
+    buscarContacto: waId => contactos.buscar('whatsapp', waId),
+    leerCita: async (pacienteId, tramiteId) =>
+      (await lecturas.citasPaciente(pacienteId)).find(cita => cita.tramite.id === tramiteId) ?? null,
+    cancelar: (tramiteId, contexto) => casos.cancelar(tramiteId, contexto),
+    mensaje: textoAprobacion,
+  });
+  const casos: CasosTramite = new CasosTramite({
+    solicitarAprobacion: tramite => aprobacion.solicitar(tramite),
     ids, reloj, registro, tramites, hilos, contactos, pacientes, intentos, catalogo, agenda, agendaExterna,
     tokens, resolvedor, politica: new PoliticaIdentidad(),
     ...(opciones.registrarError ? { registrarError: opciones.registrarError } : {}),
   });
-  const lecturas = new LecturasMemoria(tramites, contactos, pacientes, agenda, sinTramite, ids, hilos);
   const idempotencia = {
     reloj, registro: new RegistroComandosMemoria(),
     tieneEventos: async (clave: string) => (await lecturas.eventosPorClave(clave)).length > 0,
   };
   const whatsapp = { idempotencia, motor: new ConversacionWa({
-    casos, contactos, lecturas, reloj, ids, registro, agendaExterna, conversaciones: new ConversacionesWaMemoria(),
+    casos, aprobacion, contactos, lecturas, reloj, ids, registro, agendaExterna, conversaciones: new ConversacionesWaMemoria(),
   }) };
   const programador: ProgramadorMemoria = new ProgramadorMemoria(async trabajo => {
     await temporizadores.ejecutar(trabajo);
@@ -57,6 +70,6 @@ export function crearApiPruebas(opciones: {
     comandos: { casos, tokens, lecturas, ids, demo: opciones.demo ?? true, idempotencia,
       solicitarContinuacion: casos.solicitarContinuacion.bind(casos) }, whatsapp, relojDemo,
   });
-  return { app, casos, tokens, ids, reloj, lecturas, tramites, contactos, pacientes, catalogo, agenda, agendaExterna, temporizadores, sinTramite };
+  return { app, casos, tokens, ids, reloj, lecturas, tramites, contactos, pacientes, catalogo, agenda, agendaExterna, temporizadores, sinTramite, notificadorWa };
 }
 export { io as clienteTiempoReal } from 'socket.io-client';

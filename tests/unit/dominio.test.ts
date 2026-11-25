@@ -11,7 +11,12 @@ describe('vocabulario y eventos de dominio', () => {
     for (const estado of ['SUSPENDIDO', 'SERVICIO_SELECCIONADO', 'REQUISITOS_PENDIENTES', 'UBICACION_SELECCIONADA']) expect(ESTADOS_TRAMITE).not.toContain(estado);
     expect(CASILLAS).toEqual(['servicio', 'sede', 'paciente', 'requisitos', 'elegibilidad', 'horario']);
     expect(TIPOS_TRAMITE).toEqual(['AGENDAR', 'ADELANTO', 'FACTURA']);
-    expect(EVENTOS_DOMINIO).toHaveLength(29);
+    expect(EVENTOS_DOMINIO).toHaveLength(40);
+    expect(EVENTOS_DOMINIO).toEqual(expect.arrayContaining([
+      'HuecoLiberado', 'HuecoAsignado', 'HuecoDesierto', 'OfertaEnviada', 'OfertaAceptada',
+      'OfertaRechazada', 'OfertaExpirada', 'OfertaPerdida', 'CitaAdelantada',
+      'InteresAdelantoRegistrado', 'InteresAdelantoCancelado',
+    ]));
     expectTypeOf<(typeof EVENTOS_DOMINIO)[number]>().toEqualTypeOf<EventoDominio['tipo']>();
   });
 

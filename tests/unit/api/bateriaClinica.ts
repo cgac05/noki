@@ -39,7 +39,8 @@ export async function comprobarClinica(
     });
   }
   const citas = await lecturas.llegadasSede(sedeId, reloj.ahora().toISOString());
-  expect(citas.map(({ tramite, posicion }) => [tramite.id, posicion]))
+  const idsDelEnsayo = new Set([a.id, b.id, c.id]);
+  expect(citas.filter(({ tramite }) => idsDelEnsayo.has(tramite.id)).map(({ tramite, posicion }) => [tramite.id, posicion]))
     .toEqual([[b.id, 2], [a.id, 1], [c.id, undefined]]);
   const hiloId = a.hiloId;
   for (let i = 1; i <= 60; i++) {

@@ -38,3 +38,16 @@ it('adelanta el reloj y entrega al ejecutor solo trabajos cuyo plazo venció', a
   expect(ejecutados).toEqual([trabajo]);
   expect(programador.vencidos(reloj.ahora().toISOString())).toEqual([]);
 });
+
+it('vence y cancela OFERTA usando su identificador de oferta', async () => {
+  const ejecutados: Temporizador[] = [];
+  const programador = new ProgramadorMemoria(async trabajo => { ejecutados.push(trabajo); });
+  const ahora = '2026-11-25T12:00:00.000Z';
+  const oferta: Temporizador = { tipo: 'OFERTA', ofertaId: 'oferta-beto', venceEn: ahora };
+  const otra: Temporizador = { ...oferta, ofertaId: 'oferta-carla' };
+  await programador.programar(oferta);
+  await programador.programar(otra);
+  await programador.cancelar('OFERTA', otra.ofertaId);
+  expect(await programador.adelantarVencidos(ahora)).toBe(1);
+  expect(ejecutados).toEqual([oferta]);
+});

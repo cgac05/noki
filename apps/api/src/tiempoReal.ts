@@ -2,13 +2,13 @@ import type { Server as ServidorHttp } from 'node:http';
 import { Server } from 'socket.io';
 import {
   ESQUEMAS_EVENTOS_SOCKET, EVENTOS_CLIENTE_SOCKET, EVENTOS_SOCKET, SalaSchema,
-  type DatosEventoSocket, type NombreEventoSocket,
+  type DatosEventoSocket, type MensajeBot, type NombreEventoSocket,
 } from '@noki/contracts';
-import type { LecturasPort, Reloj } from '@noki/application';
+import type { LecturasPort, NotificadorWa, Reloj } from '@noki/application';
 import type { EventoDominio } from '@noki/domain';
 import { vistaTramite } from '@noki/adapter-in-http';
 
-export function crearTiempoReal(servidor: ServidorHttp, origen: string, lecturas: LecturasPort, reloj: Reloj) {
+export function crearTiempoReal(servidor: ServidorHttp, origen: string, lecturas: LecturasPort, reloj: Reloj, demo = false, reenviar?: (waId: string) => Promise<void>) {
   const io = new Server(servidor, {
     cors: { origin: origen },
     allowRequest: (peticion, callback) => callback(null, !peticion.headers.origin || peticion.headers.origin === origen),
@@ -16,7 +16,12 @@ export function crearTiempoReal(servidor: ServidorHttp, origen: string, lecturas
   io.on('connection', socket => {
     socket.on(EVENTOS_CLIENTE_SOCKET.SALA_UNIRSE, (entrada: unknown, confirmar?: unknown) => {
       const sala = SalaSchema.safeParse(entrada);
-      if (sala.success) void socket.join(sala.data);
+      if (sala.success) {
+        const salaId = sala.data;
+        void Promise.resolve(socket.join(salaId)).then(async () => {
+          if (demo && salaId.startsWith('wa:')) await reenviar?.(salaId.slice(3));
+        }).catch(() => socket.emit('error', { codigo: 'REENVIO_WA_FALLIDO' }));
+      }
       if (typeof confirmar === 'function') confirmar(sala.success);
     });
     socket.on(EVENTOS_CLIENTE_SOCKET.SALA_SALIR, (entrada: unknown) => {
@@ -53,5 +58,13 @@ export function crearTiempoReal(servidor: ServidorHttp, origen: string, lecturas
     }
   }
 
-  return { manejar, emitir, cerrar: () => io.close() };
+  const enviar: NotificadorWa['enviar'] = async (waId, mensajes) => {
+    if (!demo || !mensajes.length) return;
+    const lote: MensajeBot[] = mensajes.map(({ texto, botones }) => botones?.length
+      ? { tipo: 'botones', texto, botones: botones.map(({ titulo, payload }, indice) => ({ id: String(indice + 1), titulo, payload })) }
+      : { tipo: 'texto', texto });
+    emitir('wa:' + waId, EVENTOS_SOCKET.WA_MENSAJES, { waId, mensajes: lote });
+  };
+
+  return { manejar, emitir, enviar, cerrar: () => io.close() };
 }

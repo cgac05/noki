@@ -14,3 +14,5 @@ export { OutboxPostgres } from './OutboxPostgres.ts';
 export { RegistroProcesadosPostgres } from './RegistroProcesadosPostgres.ts';
 export * from './api.ts';
 export { LecturasComandosPostgres } from './LecturasComandosPostgres.ts';
+export * from './HuecosPostgres.ts';
+export * from './LecturasHuecosPostgres.ts';

@@ -2,7 +2,6 @@ import { Queue } from 'bullmq';
 import { isDeepStrictEqual } from 'node:util';
 import { setTimeout } from 'node:timers/promises';
 import type { ProgramadorTemporizadores, Temporizador, TipoTemporizador } from '@noki/application';
-import type { TramiteId } from '@noki/domain';
 
 export class ProgramadorBullMQ implements ProgramadorTemporizadores {
   readonly cola: Queue<Temporizador, void, TipoTemporizador, Temporizador, void, TipoTemporizador>;
@@ -12,7 +11,7 @@ export class ProgramadorBullMQ implements ProgramadorTemporizadores {
   }
 
   async programar(trabajo: Temporizador, ahora: string): Promise<void> {
-    const jobId = this.id(trabajo.tipo, trabajo.tramiteId);
+    const jobId = this.id(trabajo.tipo, trabajo.tipo === 'OFERTA' ? trabajo.ofertaId : trabajo.tramiteId);
     const limite = performance.now() + 5_000;
     for (;;) {
       const existente = await this.cola.getJob(jobId);
@@ -39,8 +38,8 @@ export class ProgramadorBullMQ implements ProgramadorTemporizadores {
     });
   }
 
-  async cancelar(tipo: TipoTemporizador, tramiteId: TramiteId): Promise<void> {
-    const trabajo = await this.cola.getJob(this.id(tipo, tramiteId));
+  async cancelar(tipo: TipoTemporizador, claveId: string): Promise<void> {
+    const trabajo = await this.cola.getJob(this.id(tipo, claveId));
     if (!trabajo || await trabajo.getState() === 'active') return;
     try { await trabajo.remove(); }
     catch (error) {
@@ -66,7 +65,7 @@ export class ProgramadorBullMQ implements ProgramadorTemporizadores {
 
   cerrar(): Promise<void> { return this.cola.close(); }
 
-  private id(tipo: TipoTemporizador, tramiteId: TramiteId): string {
-    return `${tipo}-${tramiteId}`;
+  private id(tipo: TipoTemporizador, claveId: string): string {
+    return `${tipo}-${claveId}`;
   }
 }

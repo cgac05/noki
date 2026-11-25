@@ -318,6 +318,22 @@ export class Tramite {
     this.transicionar('confirmar', contexto, { tipo: 'CitaConfirmada', payload: { folio } });
   }
 
+  adelantar({ sedeId, ...horario }: HorarioReservado & { sedeId?: SedeId }, folio: string, contexto: ContextoOperacion): void {
+    this.destino('adelantar');
+    const anterior = this.datos.horario;
+    const diferencia = Date.parse(anterior?.inicio ?? '') - Date.parse(horario.inicio);
+    if (!anterior || !(diferencia > 0) || anterior.reservaId === horario.reservaId) {
+      throw new ReglaViolada('HORARIO_NO_ADELANTA_CITA');
+    }
+    this.datos.horario = { ...horario };
+    this.datos.folio = folio;
+    if (sedeId) this.datos.sedeId = sedeId;
+    this.transicionar('adelantar', contexto, { tipo: 'CitaAdelantada', payload: {
+      reservaAnteriorId: anterior.reservaId, reservaId: horario.reservaId,
+      diasAdelantados: diferencia / 86_400_000,
+    } });
+  }
+
   expirarHold(contexto: ContextoOperacion): void {
     this.destino('expirarHold');
     const horario = this.datos.horario;

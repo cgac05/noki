@@ -1,4 +1,3 @@
-import type { TramiteId } from '@noki/domain';
 import type { ProgramadorTemporizadores, Temporizador, TipoTemporizador } from '@noki/application';
 
 export class ProgramadorMemoria implements ProgramadorTemporizadores {
@@ -7,11 +6,11 @@ export class ProgramadorMemoria implements ProgramadorTemporizadores {
   constructor(private readonly ejecutar?: (temporizador: Temporizador) => Promise<void>) {}
 
   async programar(temporizador: Temporizador): Promise<void> {
-    this.trabajos.set(this.id(temporizador.tipo, temporizador.tramiteId), { ...temporizador });
+    this.trabajos.set(this.id(temporizador.tipo, temporizador.tipo === 'OFERTA' ? temporizador.ofertaId : temporizador.tramiteId), { ...temporizador });
   }
 
-  async cancelar(tipo: TipoTemporizador, tramiteId: TramiteId): Promise<void> {
-    this.trabajos.delete(this.id(tipo, tramiteId));
+  async cancelar(tipo: TipoTemporizador, claveId: string): Promise<void> {
+    this.trabajos.delete(this.id(tipo, claveId));
   }
 
   vencidos(ahora: string): Temporizador[] {
@@ -23,7 +22,7 @@ export class ProgramadorMemoria implements ProgramadorTemporizadores {
     if (!this.ejecutar) return vencidos.length;
     let ejecutados = 0;
     for (const trabajo of vencidos) {
-      const id = this.id(trabajo.tipo, trabajo.tramiteId);
+      const id = this.id(trabajo.tipo, trabajo.tipo === 'OFERTA' ? trabajo.ofertaId : trabajo.tramiteId);
       if (this.trabajos.get(id) !== trabajo) continue;
       await this.ejecutar({ ...trabajo });
       if (this.trabajos.get(id) === trabajo) this.trabajos.delete(id);
@@ -37,7 +36,7 @@ export class ProgramadorMemoria implements ProgramadorTemporizadores {
     return [...this.trabajos.values()].filter(trabajo => Date.parse(trabajo.venceEn) <= limite);
   }
 
-  private id(tipo: TipoTemporizador, tramiteId: TramiteId): string {
-    return `${tipo}:${tramiteId}`;
+  private id(tipo: TipoTemporizador, claveId: string): string {
+    return `${tipo}:${claveId}`;
   }
 }

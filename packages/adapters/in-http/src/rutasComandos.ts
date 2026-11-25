@@ -111,7 +111,9 @@ export const rutasComandos: FastifyPluginAsync<DependenciasComandos> = async (ap
         }) };
       };
       const respuesta = deps.idempotencia
-        ? await ejecutarIdempotente(deps.idempotencia, clave, '/api/comandos', comando, ejecutar, errorHttp)
+        ? await ejecutarIdempotente(deps.idempotencia, clave, '/api/comandos', comando, ejecutar, errorHttp,
+          error => comando.tipo === 'CancelarCita' && error instanceof StepUpRequerido
+            && error.factores.length === 1 && error.factores[0] === 'BOTON_APROBACION')
         : await ejecutar();
       return reply.code(respuesta.codigo).send(respuesta.cuerpo);
     } catch (error) {

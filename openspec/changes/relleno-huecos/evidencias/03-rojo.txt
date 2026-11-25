@@ -1,0 +1,40 @@
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ❯ |integracion| tests/integracion/rellenoHuecos.test.ts (1 test | 1 failed) 122ms
+   × migra las tablas de huecos, intereses y ofertas 120ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |integracion| tests/integracion/rellenoHuecos.test.ts > migra las tablas de huecos, intereses y ofertas
+AssertionError: expected { hueco: null, interes: null, …(1) } to deeply equal { hueco: 'hueco', …(2) }
+
+- Expected
++ Received
+
+  {
+-   "hueco": "hueco",
+-   "interes": "interes_adelanto",
+-   "oferta": "oferta_hueco",
++   "hueco": null,
++   "interes": null,
++   "oferta": null,
+  }
+
+ ❯ tests/integracion/rellenoHuecos.test.ts:16:21
+     14|         to_regclass('oferta_hueco')::text AS oferta
+     15|     `);
+     16|     expect(rows[0]).toEqual({ hueco: 'hueco', interes: 'interes_adelan…
+       |                     ^
+     17|   } finally { await db.end(); }
+     18| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  03:22:25
+   Duration  1.20s (transform 430ms, setup 0ms, import 803ms, tests 122ms, environment 0ms)
+
+Código de salida: 1

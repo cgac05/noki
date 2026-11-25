@@ -17,3 +17,6 @@ export { LecturasMemoria } from './LecturasMemoria.ts';
 export * from './ModeloRiesgoMemoria.ts';
 export * from './LecturasPrediccionMemoria.ts';
 export * from './CalendarioSedeMemoria.ts';
+export * from './TokensBotonWaMemoria.ts';
+export * from './NotificadorWaMemoria.ts';
+export * from './HuecosMemoria.ts';

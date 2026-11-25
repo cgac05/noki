@@ -1,9 +1,10 @@
 import { formatInTimeZone } from 'date-fns-tz';
-import type { AlertaSeguridadLeida, CitaLeida, LlegadaLeida, EventoLeido, GeneradorId, LecturasPort, OfertaLeida } from '@noki/application';
+import type { AlertaSeguridadLeida, CitaLeida, LlegadaLeida, EventoLeido, GeneradorId, HuecoLeido, LecturasPort, OfertaLeida } from '@noki/application';
 import { ESTADOS_TRAMITE, normalizarTelefono, type HiloId, type PacienteId, type SedeId, type Tramite, type TramiteId } from '@noki/domain';
 import type { AgendaMemoria } from './AgendaMemoria.ts';
 import type { ContactosMemoria } from './ContactosMemoria.ts';
 import type { EventosSinTramiteMemoria } from './EventosSinTramiteMemoria.ts';
+import { HuecosMemoria } from './HuecosMemoria.ts';
 import type { HiloRepoMemoria } from './HiloRepoMemoria.ts';
 import type { PacientesMemoria } from './PacientesMemoria.ts';
 import type { TramiteRepoMemoria } from './TramiteRepoMemoria.ts';
@@ -15,7 +16,8 @@ export class LecturasMemoria implements LecturasPort {
 
   constructor(private readonly tramites: TramiteRepoMemoria, private readonly contactos: ContactosMemoria,
     private readonly pacientes: PacientesMemoria, private readonly agenda: AgendaMemoria,
-    private readonly sinTramite: EventosSinTramiteMemoria, private readonly ids: GeneradorId, private readonly hilos: HiloRepoMemoria) {}
+    private readonly sinTramite: EventosSinTramiteMemoria, private readonly ids: GeneradorId, private readonly hilos: HiloRepoMemoria,
+    private readonly huecos = new HuecosMemoria()) {}
 
   registrarOferta(oferta: OfertaLeida, zonaHoraria: string): void {
     this.ofertas.push({ ...oferta });
@@ -27,7 +29,7 @@ export class LecturasMemoria implements LecturasPort {
   async contactoPorHilo(id: HiloId) { return this.contactos.valorPorHilo(id); }
 
   private eventos() {
-    return [...this.tramites.eventos(), ...this.sinTramite.eventos()].map(evento => {
+    return [...this.tramites.eventos(), ...this.sinTramite.eventos(), ...this.huecos.eventos].map(evento => {
       const id = this.idsEventos.get(evento.idempotencyKey) ?? this.ids.nuevo();
       this.idsEventos.set(evento.idempotencyKey, id);
       return { ...evento, id };
@@ -108,9 +110,25 @@ export class LecturasMemoria implements LecturasPort {
       }));
   }
 
+  async panelHuecos(): Promise<HuecoLeido[]> {
+    return this.huecos.listar().slice(0, 50).flatMap(hueco => {
+      const oferta = this.ofertas.find(o => o.sedeId === hueco.sedeId && o.servicioId === hueco.servicioId);
+      const zonaHoraria = this.tramites.zonaSede(hueco.sedeId);
+      if (!oferta || !zonaHoraria) return [];
+      const { id, inicio, estado } = hueco;
+      return [{ id, inicio, estado, zonaHoraria, servicio: oferta.servicio, sede: oferta.sede,
+        ofertas: hueco.ofertas.map(({ estado, enviadaEn, expiraEn }) => ({ estado, enviadaEn, expiraEn })) }];
+    });
+  }
+
   async metricas() {
     const tramites = this.tramites.todos();
     const eventos = this.eventos();
+    const huecos = this.huecos.listar();
+    const recuperados = huecos.filter(hueco => hueco.estado === 'ASIGNADO');
+    const minutosRecuperados = recuperados.reduce((minutos, hueco) =>
+      minutos + (tramites.find(t => t.id === hueco.tramiteId)?.perfil?.duracionMin ?? 0), 0);
+    const adelantos = eventos.filter(evento => evento.tipo === 'CitaAdelantada');
     const cambios = eventos.filter(evento => evento.tipo === 'CanalCambiado');
     const hilos = new Set(eventos.map(evento => evento.hiloId)).size;
     const anteriores = new Map<string, string>();
@@ -133,6 +151,12 @@ export class LecturasMemoria implements LecturasPort {
         llegadasRegistradas: eventos.filter(e => e.tipo === 'PacienteLlego').length,
         datosRepetidos,
         intentosVerificacionFallidos: eventos.filter(e => e.tipo === 'IntentoVerificacionFallido').length,
+        huecosLiberados: huecos.length,
+        huecosRecuperados: recuperados.length,
+        horasRecursoRecuperadas: Math.round(minutosRecuperados / 6) / 10,
+        diasAdelantadosPromedio: adelantos.length
+          ? adelantos.reduce((dias, evento) => dias + evento.payload.diasAdelantados, 0) / adelantos.length
+          : 0,
       },
     };
   }

@@ -1,7 +1,7 @@
-import type { HiloId, TramiteId, PacienteId, ServicioId, SedeId, ReservaId } from './identificadores.ts';
+import type { HiloId, TramiteId, PacienteId, ServicioId, SedeId, ReservaId, RecursoId } from './identificadores.ts';
 import type { Actor, Canal, NivelAuth, TipoTramite, MetodoVinculo } from './vocabulario.ts';
 
-export const EVENTOS_DOMINIO = ["TramiteIniciado","ServicioSeleccionado","SedeSeleccionada","CotizacionGenerada","PreparacionAceptada","RequisitoCumplido","PacienteAsignado","DestinatarioDeclarado","PacienteRegistrado","ItinerarioPropuesto","ItinerarioAceptado","HorarioReservado","ReservaExpirada","CitaConfirmada","CitaReprogramada","CitaCancelada","PacienteLlego","TurnoActualizado","AtencionCerrada","Inasistencia","TramiteSuspendido","TramiteExpirado","CanalCambiado","PacienteReconocido","IdentidadVinculada","IdentidadComprobada","ConsentimientoOtorgado","ConsentimientoContactoWA","IntentoVerificacionFallido"] as const;
+export const EVENTOS_DOMINIO = ["TramiteIniciado","ServicioSeleccionado","SedeSeleccionada","CotizacionGenerada","PreparacionAceptada","RequisitoCumplido","PacienteAsignado","DestinatarioDeclarado","PacienteRegistrado","ItinerarioPropuesto","ItinerarioAceptado","HorarioReservado","ReservaExpirada","CitaConfirmada","CitaReprogramada","CitaCancelada","PacienteLlego","TurnoActualizado","AtencionCerrada","Inasistencia","TramiteSuspendido","TramiteExpirado","CanalCambiado","PacienteReconocido","IdentidadVinculada","IdentidadComprobada","ConsentimientoOtorgado","ConsentimientoContactoWA","IntentoVerificacionFallido", "InteresAdelantoRegistrado", "InteresAdelantoCancelado", "HuecoLiberado", "OfertaEnviada", "OfertaAceptada", "OfertaRechazada", "OfertaExpirada", "OfertaPerdida", "CitaAdelantada", "HuecoAsignado", "HuecoDesierto"] as const;
 
 export interface EnvolturaEvento<T extends string, P> {
   tipo: T;
@@ -18,6 +18,17 @@ export interface EnvolturaEvento<T extends string, P> {
 }
 
 export interface PayloadsEvento {
+  InteresAdelantoRegistrado: { interesId: string; servicioId: ServicioId };
+  InteresAdelantoCancelado: { interesId: string };
+  HuecoLiberado: { huecoId: string; sedeId: SedeId; recursoId: RecursoId; servicioId: ServicioId; inicio: string; estrategia: 'SECUENCIAL' | 'OLEADA' };
+  OfertaEnviada: { huecoId: string; ofertaId: string; expiraEn: string };
+  OfertaAceptada: { huecoId: string; ofertaId: string };
+  OfertaRechazada: { huecoId: string; ofertaId: string };
+  OfertaExpirada: { huecoId: string; ofertaId: string };
+  OfertaPerdida: { huecoId: string; ofertaId: string };
+  CitaAdelantada: { reservaAnteriorId: ReservaId; reservaId: ReservaId; diasAdelantados: number };
+  HuecoAsignado: { huecoId: string; ofertaId: string };
+  HuecoDesierto: { huecoId: string };
   TramiteIniciado: { tipoTramite: TipoTramite };
   ServicioSeleccionado: { servicioId: ServicioId };
   SedeSeleccionada: { sedeId: SedeId };

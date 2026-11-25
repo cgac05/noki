@@ -16,10 +16,11 @@ const publicBaseUrl = process.env['PUBLIC_BASE_URL'];
 if (!sdMockUrl || !tokenSecret || !publicBaseUrl) throw new Error('Configura SD_MOCK_URL, TOKEN_SECRET y PUBLIC_BASE_URL.');
 if (Buffer.byteLength(tokenSecret) < 32) throw new Error('TOKEN_SECRET debe tener al menos 32 bytes.');
 const origen = new URL(publicBaseUrl).origin;
-const comandos = componerComandos({ databaseUrl, sdMockUrl, tokenSecret, demo: process.env['DEMO_MODE'] === 'true' },
-  datos => app.log.warn(datos, 'Incidencia de agenda externa'));
+const demo = process.env['DEMO_MODE'] === 'true';
 const nombreCola = 'temporizadores';
 const programador = new ProgramadorBullMQ(redisUrl, nombreCola);
+const comandos = componerComandos({ databaseUrl, sdMockUrl, tokenSecret, demo },
+  datos => app.log.warn(datos, 'Incidencia de agenda externa'), { enviar: (waId, mensajes) => tiempoReal.enviar(waId, mensajes) }, programador);
 const relojDemo = new RelojDemo(comandos.reloj, programador);
 const app = crearApi({ databaseUrl, redisUrl, origen, comandos, consultas: comandos.consultas, whatsapp: comandos.whatsapp, relojDemo });
 programador.cola.on('error', () => app.log.warn({ codigo: 'COLA_TEMPORIZADORES_ERROR' }));
@@ -27,14 +28,22 @@ const temporizadores = new TemporizadoresTramite({
   ...comandos, programador, registrarError: datos => app.log.warn(datos, 'Incidencia de agenda externa'),
 });
 const worker = new WorkerTemporizadores(redisUrl, nombreCola, comandos.reloj,
-  trabajo => temporizadores.ejecutar(trabajo), datos => app.log.warn(datos, 'Incidencia de temporizadores'));
+  async trabajo => {
+    if (trabajo.tipo !== 'OFERTA') return temporizadores.ejecutar(trabajo);
+    if (comandos.reloj.ahora().getTime() < Date.parse(trabajo.venceEn)) return { tipo: 'REPROGRAMAR', venceEn: trabajo.venceEn };
+    await comandos.huecos.vencer(trabajo.ofertaId);
+    return { tipo: 'APLICADO' };
+  }, datos => app.log.warn(datos, 'Incidencia de temporizadores'));
 const consumidorTemporizadores = new ConsumidorStreams(redisUrl, 'temporizadores', comandos.procesados, async evento => {
   if (evento.tramiteId) await temporizadores.reconciliar(evento.tramiteId);
 });
 let detenerTemporizadores: (() => Promise<void>) | undefined;
 let temporizadoresIniciados = false;
-const tiempoReal = crearTiempoReal(app.server, origen, comandos.lecturas, comandos.reloj);
+const tiempoReal = crearTiempoReal(app.server, origen, comandos.lecturas, comandos.reloj, demo, comandos.huecos.reenviar);
 const consumidor = new ConsumidorStreams(redisUrl, 'tiempo-real', comandos.procesados, tiempoReal.manejar);
+const consumidorHuecos = new ConsumidorStreams(redisUrl, 'huecos', comandos.procesados, comandos.huecos.detectar);
+let detenerHuecos: (() => Promise<void>) | undefined;
+let huecosIniciados = false;
 let detenerConsumo: (() => Promise<void>) | undefined;
 let consumoIniciado = false;
 const outbox = new OutboxPostgres(databaseUrl);
@@ -47,10 +56,13 @@ function cerrar(): Promise<void> {
   cierre ??= (async () => {
     await tiempoReal.cerrar();
     consumidor.detener();
+    consumidorHuecos.detener();
     consumidorTemporizadores.detener();
     await detenerConsumo?.();
+    await detenerHuecos?.();
     await detenerTemporizadores?.();
     consumidor.cerrar();
+    consumidorHuecos.cerrar();
     consumidorTemporizadores.cerrar();
     await worker.cerrar();
     await programador.cerrar();
@@ -82,6 +94,11 @@ try {
       await consumidor.consumirPendientes();
       return true;
     }, codigo => app.log.info({ codigo }, 'Estado del consumidor de tiempo real'));
+    detenerHuecos = iniciarRelay(async () => {
+      if (!huecosIniciados) { await consumidorHuecos.iniciar(); huecosIniciados = true; }
+      await consumidorHuecos.consumirPendientes();
+      return true;
+    }, codigo => app.log.info({ codigo }, 'Estado del consumidor de huecos'));
     detenerRelay = iniciarRelay(() => relay.publicarPendientes(), codigo => {
       if (codigo === 'RELAY_OUTBOX_FALLIDO') app.log.warn({ codigo }, 'No se completó el ciclo del relay.');
       else app.log.info({ codigo }, 'Se recuperó el relay del outbox.');

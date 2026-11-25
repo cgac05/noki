@@ -1,0 +1,12 @@
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ✓ |unitarios| tests/unit/api/aprobacionCancelacion.test.ts (3 tests) 16ms
+ ✓ |unitarios| tests/unit/api/tokensBotonWa.test.ts (8 tests) 23ms
+
+ Test Files  2 passed (2)
+      Tests  11 passed (11)
+   Start at  03:07:07
+   Duration  2.18s (transform 744ms, setup 0ms, import 3.59s, tests 39ms, environment 0ms)
+
+Código de salida: 0

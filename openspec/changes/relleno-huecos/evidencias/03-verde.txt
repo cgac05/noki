@@ -1,0 +1,23 @@
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+{"level":30,"time":1795599088523,"pid":4544,"hostname":"CGAC1","msg":"Server listening at http://127.0.0.1:29880"}
+{"level":30,"time":1795599090599,"pid":4544,"hostname":"CGAC1","correlation_id":"req-1","req":{"method":"POST","url":"/agenda/citas","host":"127.0.0.1:29880","remoteAddress":"127.0.0.1","remotePort":29890},"msg":"incoming request"}
+{"level":30,"time":1795599090604,"pid":4544,"hostname":"CGAC1","correlation_id":"req-1","res":{"statusCode":200},"responseTime":4.6490000039339066,"msg":"request completed"}
+{"level":30,"time":1795599090670,"pid":4544,"hostname":"CGAC1","correlation_id":"req-2","req":{"method":"DELETE","url":"/agenda/citas/90000001","host":"127.0.0.1:29880","remoteAddress":"127.0.0.1","remotePort":29890},"msg":"incoming request"}
+{"level":30,"time":1795599090672,"pid":4544,"hostname":"CGAC1","correlation_id":"req-2","res":{"statusCode":204},"responseTime":1.6436999887228012,"msg":"request completed"}
+{"level":30,"time":1795599090993,"pid":4544,"hostname":"CGAC1","msg":"Server listening at http://127.0.0.1:29892"}
+{"level":30,"time":1795599092982,"pid":4544,"hostname":"CGAC1","correlation_id":"req-1","req":{"method":"POST","url":"/agenda/citas","host":"127.0.0.1:29892","remoteAddress":"127.0.0.1","remotePort":60740},"msg":"incoming request"}
+{"level":30,"time":1795599092984,"pid":4544,"hostname":"CGAC1","correlation_id":"req-1","res":{"statusCode":200},"responseTime":1.5649000108242035,"msg":"request completed"}
+{"level":30,"time":1795599093044,"pid":4544,"hostname":"CGAC1","correlation_id":"req-2","req":{"method":"DELETE","url":"/agenda/citas/90000001","host":"127.0.0.1:29892","remoteAddress":"127.0.0.1","remotePort":60740},"msg":"incoming request"}
+{"level":30,"time":1795599093046,"pid":4544,"hostname":"CGAC1","correlation_id":"req-2","res":{"statusCode":204},"responseTime":1.1660000085830688,"msg":"request completed"}
+ ✓ |integracion| tests/integracion/rellenoHuecos.test.ts (3 tests) 5090ms
+   ✓ recorre el flujo de huecos en Postgres en modo secuencial  2583ms
+   ✓ recorre el flujo de huecos en Postgres en modo oleada  2302ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  03:31:20
+   Duration  13.12s (transform 1.29s, setup 0ms, import 7.73s, tests 5.09s, environment 0ms)
+
+Código de salida: 0

@@ -47,7 +47,7 @@ it('Cotizar desde el call center y reintentar por HTTP con eventos persistidos',
     app.inject({ method: 'POST', url: '/api/comandos', payload,
       headers: { 'idempotency-key': clave, ...extras } });
   try {
-    await comprobarLecturasApi(deps.lecturas);
+    await comprobarLecturasApi(deps.lecturas, undefined, 3);
     const clave = deps.ids.nuevo();
     const inicio = { tipo: 'IniciarTramite', canal: 'callcenter', actor: 'asesor:demo',
       payload: { tipoTramite: 'AGENDAR', contacto: '0000000001' } };
@@ -354,7 +354,9 @@ it('publica, programa y expira el hold desde la ruta del reloj con la API compue
     await lector.iniciar();
     await relay.publicarPendientes();
     await lector.consumirPendientes();
-    expect((await programador.cola.getJob('HOLD-' + id))?.data.reservaId).toBe(tramite.horario?.reservaId);
+    const trabajoHold = (await programador.cola.getJob('HOLD-' + id))?.data;
+    if (trabajoHold?.tipo !== 'HOLD') throw new Error('Falta el temporizador HOLD.');
+    expect(trabajoHold.reservaId).toBe(tramite.horario?.reservaId);
     const reservado = eventos.find(evento => evento.tipo === 'HorarioReservado');
     if (!reservado) throw new Error('Falta HorarioReservado.');
     await publicador.publicar(0, reservado);

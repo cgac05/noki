@@ -1,4 +1,4 @@
-import type { Canal, EstadoTramite, HiloId, PacienteId, SedeId, ServicioId, Tramite, TramiteId } from '@noki/domain';
+import type { HuecoInstantanea, OfertaHueco, Canal, EstadoTramite, HiloId, PacienteId, SedeId, ServicioId, Tramite, TramiteId } from '@noki/domain';
 
 export interface EventoLeido {
   id: string;
@@ -58,7 +58,18 @@ export interface ContextoDemoLeido {
   sedeId: SedeId | null;
 }
 
+export interface HuecoLeido {
+  id: string;
+  servicio: string;
+  sede: string;
+  inicio: string;
+  zonaHoraria: string;
+  estado: HuecoInstantanea['estado'];
+  ofertas: Pick<OfertaHueco, 'estado' | 'enviadaEn' | 'expiraEn'>[];
+}
+
 export interface LecturasPort {
+  panelHuecos?(): Promise<HuecoLeido[]>;
   tramite(id: TramiteId): Promise<Tramite | null>;
   contactoPorHilo(id: HiloId): Promise<string | null>;
   eventosPorClave(clave: string): Promise<EventoLeido[]>;

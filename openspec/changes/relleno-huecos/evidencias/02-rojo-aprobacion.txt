@@ -1,0 +1,56 @@
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ❯ |unitarios| tests/unit/api/aprobacionCancelacion.test.ts (3 tests | 3 failed) 10ms
+   × envía la aprobación al WhatsApp del dueño de la cita y solo ese número puede aprobar una vez 7ms
+   × conserva la cita e invalida la opción de cancelar del mismo mensaje 1ms
+   × fuera de demo no envía ni acepta una aprobación 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/api/aprobacionCancelacion.test.ts > envía la aprobación al WhatsApp del dueño de la cita y solo ese número puede aprobar una vez
+TypeError: __vite_ssr_import_1__.AprobacionCancelacion is not a constructor
+ ❯ preparar tests/unit/api/aprobacionCancelacion.test.ts:23:16
+     21|   const enviar = vi.fn();
+     22|   const cancelar = vi.fn();
+     23|   const caso = new AprobacionCancelacion({
+       |                ^
+     24|     demo, reloj, tokens, ids: { nuevo: () => 'jti' },
+     25|     contactoVigente: async id => id === pacienteId ? contacto : null,
+ ❯ tests/unit/api/aprobacionCancelacion.test.ts:34:47
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  |unitarios| tests/unit/api/aprobacionCancelacion.test.ts > conserva la cita e invalida la opción de cancelar del mismo mensaje
+TypeError: __vite_ssr_import_1__.AprobacionCancelacion is not a constructor
+ ❯ preparar tests/unit/api/aprobacionCancelacion.test.ts:23:16
+     21|   const enviar = vi.fn();
+     22|   const cancelar = vi.fn();
+     23|   const caso = new AprobacionCancelacion({
+       |                ^
+     24|     demo, reloj, tokens, ids: { nuevo: () => 'jti' },
+     25|     contactoVigente: async id => id === pacienteId ? contacto : null,
+ ❯ tests/unit/api/aprobacionCancelacion.test.ts:47:47
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  |unitarios| tests/unit/api/aprobacionCancelacion.test.ts > fuera de demo no envía ni acepta una aprobación
+TypeError: __vite_ssr_import_1__.AprobacionCancelacion is not a constructor
+ ❯ preparar tests/unit/api/aprobacionCancelacion.test.ts:23:16
+     21|   const enviar = vi.fn();
+     22|   const cancelar = vi.fn();
+     23|   const caso = new AprobacionCancelacion({
+       |                ^
+     24|     demo, reloj, tokens, ids: { nuevo: () => 'jti' },
+     25|     contactoVigente: async id => id === pacienteId ? contacto : null,
+ ❯ tests/unit/api/aprobacionCancelacion.test.ts:56:47
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  03:06:31
+   Duration  2.14s (transform 448ms, setup 0ms, import 1.85s, tests 10ms, environment 0ms)
+
+Código de salida: 1

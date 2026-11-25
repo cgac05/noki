@@ -1,0 +1,10 @@
+﻿corepack : $ depcruise --config .dependency-cruiser.cjs packages apps
+En línea: 1 Carácter: 585
++ ... le "$o\codigos.txt"; corepack pnpm lint:deps *> "$o\deps.txt"; "deps= ...
++                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ($ depcruise --c...s packages apps:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+✔ no dependency violations found (250 modules, 777 dependencies cruised)
+

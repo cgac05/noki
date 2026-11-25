@@ -1,5 +1,5 @@
 import {
-  ConflictoVersion, HiloAtencion, NoEncontrado, ReglaViolada, TransicionInvalida, siguientePregunta,
+  ConflictoVersion, HiloAtencion, NoEncontrado, ReglaViolada, StepUpRequerido, TransicionInvalida, siguientePregunta,
   coincideNombreCurp, curpBase, enmascararNombre, normalizarTelefono, validarCurp, VIGENCIA_VINCULO_DIAS,
   type EntidadNacimiento, type MetodoVinculo,
   type ContextoIdentidad, type ContextoOperacion, type Cotizacion, type DatosElegibilidad,
@@ -38,6 +38,7 @@ interface Dependencias {
   catalogo: CatalogoPort;
   agenda: AgendaPort;
   agendaExterna: AgendaExternaPort;
+  solicitarAprobacion?: (tramite: Tramite) => Promise<void>;
   registrarError?: (datos: { correlation_id: string; codigo: string }) => void;
   reloj: Reloj;
   ids: GeneradorId;
@@ -406,7 +407,15 @@ export class CasosTramite {
   }
 
   async cancelar(id: TramiteId, comando: ContextoComando): Promise<ResultadoComando> {
-    this.puertos.politica.exigir('cancelar', comando);
+    try {
+      this.puertos.politica.exigir('cancelar', comando);
+    } catch (error) {
+      const solicitar = this.puertos.solicitarAprobacion;
+      if (!solicitar || !(error instanceof StepUpRequerido) || !error.factores.includes('BOTON_APROBACION')) throw error;
+      const tramite = await this.puertos.tramites.obtener(id);
+      if (tramite) await solicitar(tramite);
+      throw new StepUpRequerido(0, ['BOTON_APROBACION']);
+    }
     const contexto = this.contexto(comando);
     const tramite = await this.cargar(id);
     tramite.cancelar(contexto);

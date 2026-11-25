@@ -1,6 +1,6 @@
 import { v7 } from 'uuid';
-import { ConversacionWa } from '@noki/adapter-in-http';
-import { CasosTramite, ResolvedorContinuidad } from '@noki/application';
+import { ConversacionWa, textoAprobacion } from '@noki/adapter-in-http';
+import { AprobacionCancelacion, CasosTramite, ResolvedorContinuidad, type NotificadorWa, type ProgramadorTemporizadores } from '@noki/application';
 import { crearRegistroTiposTramite, PoliticaIdentidad } from '@noki/domain';
 import {
   abrirPostgres, AgendaPostgres, BandejaPostgres, CatalogoPostgres, ContactosPostgres, ConversacionesWaPostgres, EventosSinTramitePostgres,
@@ -8,11 +8,12 @@ import {
   RegistroIntentosPostgres, RegistroProcesadosPostgres, RegistroTokensUsadosPostgres, TramiteRepoPostgres,
 } from '@noki/adapter-out-postgres';
 import { AgendaExternaSd } from '@noki/adapter-out-sd';
-import { TokensJose } from '@noki/adapter-out-security';
+import { TokensBotonWaJose, TokensJose } from '@noki/adapter-out-security';
+import { componerHuecos } from './componerHuecos.ts';
 import { RelojAjustable } from './sistema/RelojAjustable.ts';
 
 export function componerComandos(opciones: { databaseUrl: string; sdMockUrl: string; tokenSecret: string; demo: boolean },
-  avisar: (datos: { correlation_id: string; codigo: string }) => void) {
+  avisar: (datos: { correlation_id: string; codigo: string }) => void, notificador?: NotificadorWa, programador?: ProgramadorTemporizadores) {
   const ids = { nuevo: v7 };
   const reloj = new RelojAjustable(opciones.demo);
   const db = abrirPostgres(opciones.databaseUrl);
@@ -28,7 +29,22 @@ export function componerComandos(opciones: { databaseUrl: string; sdMockUrl: str
     new EventosSinTramitePostgres(db, ids));
   const agendaExterna = new AgendaExternaSd(opciones.sdMockUrl, avisar);
   const agenda = new AgendaPostgres(db);
-  const casos = new CasosTramite({
+  const tokensBoton = new TokensBotonWaJose(opciones.tokenSecret, reloj, new RegistroTokensUsadosPostgres(db), opciones.demo);
+  const salidaWa = notificador ?? { enviar: () => Promise.resolve() };
+  const huecos = componerHuecos({ db, ids, reloj, tramites, contactos, demo: opciones.demo,
+    tokens: tokensBoton, notificador: salidaWa, agenda, agendaExterna, avisar, programador });
+  const aprobacion = new AprobacionCancelacion({
+    demo: opciones.demo, reloj, ids, tokens: tokensBoton,
+    notificador: salidaWa,
+    contactoVigente: contactos.whatsappVigente.bind(contactos),
+    buscarContacto: waId => contactos.buscar('whatsapp', waId),
+    leerCita: async (pacienteId, tramiteId) =>
+      (await lecturas.citasPaciente(pacienteId)).find(cita => cita.tramite.id === tramiteId) ?? null,
+    cancelar: (tramiteId, contexto) => casos.cancelar(tramiteId, contexto),
+    mensaje: textoAprobacion,
+  });
+  const casos: CasosTramite = new CasosTramite({
+    solicitarAprobacion: tramite => aprobacion.solicitar(tramite),
     ids, reloj, registro, tramites, hilos, contactos, pacientes, intentos, tokens, resolvedor,
     agenda, agendaExterna,
     catalogo: new CatalogoPostgres(db), politica: new PoliticaIdentidad(), registrarError: avisar,
@@ -44,7 +60,7 @@ export function componerComandos(opciones: { databaseUrl: string; sdMockUrl: str
     },
   };
   const whatsapp = { idempotencia, motor: new ConversacionWa({
-    casos, contactos, lecturas, reloj, ids, registro, agendaExterna, conversaciones: new ConversacionesWaPostgres(db),
+    casos, aprobacion, responderOferta: huecos.responderOferta, contactos, lecturas, reloj, ids, registro, agendaExterna, conversaciones: new ConversacionesWaPostgres(db),
   }) };
-  return { casos, tokens, lecturas, ids, consultas, whatsapp, reloj, agenda, tramites, registro, procesados: new RegistroProcesadosPostgres(db), solicitarContinuacion: casos.solicitarContinuacion.bind(casos), demo: opciones.demo, idempotencia, cerrar: () => db.destroy() };
+  return { casos, huecos, tokens, lecturas, ids, consultas, whatsapp, reloj, agenda, tramites, registro, procesados: new RegistroProcesadosPostgres(db), solicitarContinuacion: casos.solicitarContinuacion.bind(casos), demo: opciones.demo, idempotencia, cerrar: () => db.destroy() };
 }

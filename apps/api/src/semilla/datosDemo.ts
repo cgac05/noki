@@ -25,6 +25,7 @@ export const SERVICIOS_DEMO: readonly ServicioDemo[] = [
 export const PACIENTES_DEMO = [
   { id: idDemo(20), nombre: 'Ana', curp: 'PADA900101MNTCMN04', entidadNacimiento: 'NT', fechaNac: '1990-01-01', sexo: 'F', wa: '5210000000001', contactoId: idDemo(30), credencialId: idDemo(40) },
   { id: idDemo(21), nombre: 'Beto', curp: 'PADB880101HNTCMT08', entidadNacimiento: 'NT', fechaNac: '1988-01-01', sexo: 'M', wa: '5210000000002', contactoId: idDemo(31), credencialId: idDemo(41) },
+  { id: idDemo(22), nombre: 'Carla', curp: 'PADC920101MNTCMR03', entidadNacimiento: 'NT', fechaNac: '1992-01-01', sexo: 'F', wa: '5210000000003', contactoId: idDemo(32), credencialId: idDemo(42) },
 ] as const;
 export const USUARIOS_DEMO = [
   { id: idDemo(50), usuario: 'asesor1', rol: 'ASESOR', sedeId: null },

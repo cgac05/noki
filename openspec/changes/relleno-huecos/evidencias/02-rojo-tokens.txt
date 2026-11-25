@@ -1,0 +1,126 @@
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ❯ |unitarios| tests/unit/api/tokensBotonWa.test.ts (8 tests | 8 failed) 11ms
+     × rechaza el botón de otro número sin invalidarlo y rechaza su reutilización 6ms
+     × consume un solo botón de aprobación entre dos acciones simultáneas 1ms
+     × rechaza los botones alterados y vencidos sin consumir el identificador 0ms
+     × fuera de demo no emite ni acepta botones 0ms
+     × rechaza el botón de otro número sin invalidarlo y rechaza su reutilización 0ms
+     × consume un solo botón de aprobación entre dos acciones simultáneas 0ms
+     × rechaza los botones alterados y vencidos sin consumir el identificador 0ms
+     × fuera de demo no emite ni acepta botones 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Memoria > rechaza el botón de otro número sin invalidarlo y rechaza su reutilización
+TypeError: __vite_ssr_import_1__.TokensBotonWaMemoria is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:20:7
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+       |       ^
+     21|   return { tokens, usados };
+     22| }
+ ❯ tests/unit/api/tokensBotonWa.test.ts:26:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Memoria > consume un solo botón de aprobación entre dos acciones simultáneas
+TypeError: __vite_ssr_import_1__.TokensBotonWaMemoria is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:20:7
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+       |       ^
+     21|   return { tokens, usados };
+     22| }
+ ❯ tests/unit/api/tokensBotonWa.test.ts:37:24
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Memoria > rechaza los botones alterados y vencidos sin consumir el identificador
+TypeError: __vite_ssr_import_1__.TokensBotonWaMemoria is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:20:7
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+       |       ^
+     21|   return { tokens, usados };
+     22| }
+ ❯ tests/unit/api/tokensBotonWa.test.ts:46:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Memoria > fuera de demo no emite ni acepta botones
+TypeError: __vite_ssr_import_1__.TokensBotonWaMemoria is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:20:7
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+       |       ^
+     21|   return { tokens, usados };
+     22| }
+ ❯ tests/unit/api/tokensBotonWa.test.ts:55:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Jose > rechaza el botón de otro número sin invalidarlo y rechaza su reutilización
+TypeError: __vite_ssr_import_2__.TokensBotonWaJose is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:19:7
+     17|   const usados = new RegistroTokensUsadosMemoria();
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+       |       ^
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+     21|   return { tokens, usados };
+ ❯ tests/unit/api/tokensBotonWa.test.ts:26:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Jose > consume un solo botón de aprobación entre dos acciones simultáneas
+TypeError: __vite_ssr_import_2__.TokensBotonWaJose is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:19:7
+     17|   const usados = new RegistroTokensUsadosMemoria();
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+       |       ^
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+     21|   return { tokens, usados };
+ ❯ tests/unit/api/tokensBotonWa.test.ts:37:24
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Jose > rechaza los botones alterados y vencidos sin consumir el identificador
+TypeError: __vite_ssr_import_2__.TokensBotonWaJose is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:19:7
+     17|   const usados = new RegistroTokensUsadosMemoria();
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+       |       ^
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+     21|   return { tokens, usados };
+ ❯ tests/unit/api/tokensBotonWa.test.ts:46:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Jose > fuera de demo no emite ni acepta botones
+TypeError: __vite_ssr_import_2__.TokensBotonWaJose is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:19:7
+     17|   const usados = new RegistroTokensUsadosMemoria();
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+       |       ^
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+     21|   return { tokens, usados };
+ ❯ tests/unit/api/tokensBotonWa.test.ts:55:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 failed (8)
+   Start at  03:05:11
+   Duration  2.66s (transform 502ms, setup 0ms, import 2.31s, tests 11ms, environment 1ms)
+
+Código de salida: 1

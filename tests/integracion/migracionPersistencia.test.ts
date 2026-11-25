@@ -61,8 +61,9 @@ it('acepta varias CURP nulas y rechaza una CURP duplicada', async () => {
 });
 
 it('aplica la migración de API una sola vez y conserva los registros', async () => {
-  expect(await migrar(url.toString(), undefined, 'persistencia_incremental')).toEqual(['004_api']);
+  expect(await migrar(url.toString(), '004_api', 'persistencia_incremental')).toEqual(['004_api']);
   await pool.query("INSERT INTO mensaje_bandeja (id, canal, asunto, cuerpo) VALUES ('01234567-89ab-7def-8123-456789abcde4', 'sms', 'Demo', 'Mensaje de prueba')");
+  expect(await migrar(url.toString(), undefined, 'persistencia_incremental')).toEqual(['005_huecos']);
   expect(await migrar(url.toString(), undefined, 'persistencia_incremental')).toEqual([]);
   expect((await pool.query('SELECT canal, asunto FROM mensaje_bandeja')).rows).toEqual([{ canal: 'sms', asunto: 'Demo' }]);
   expect((await pool.query("SELECT to_regclass('comando_idempotente') IS NOT NULL AS comandos, to_regclass('conversacion_wa') IS NOT NULL AS conversaciones, to_regclass('token_emitido') IS NOT NULL AS tokens")).rows).toEqual([{ comandos: true, conversaciones: true, tokens: true }]);

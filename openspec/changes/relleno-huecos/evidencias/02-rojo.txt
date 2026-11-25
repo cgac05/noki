@@ -1,0 +1,386 @@
+02-rojo-aprobacion.txt
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ❯ |unitarios| tests/unit/api/aprobacionCancelacion.test.ts (3 tests | 3 failed) 10ms
+   × envía la aprobación al WhatsApp del dueño de la cita y solo ese número puede aprobar una vez 7ms
+   × conserva la cita e invalida la opción de cancelar del mismo mensaje 1ms
+   × fuera de demo no envía ni acepta una aprobación 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/api/aprobacionCancelacion.test.ts > envía la aprobación al WhatsApp del dueño de la cita y solo ese número puede aprobar una vez
+TypeError: __vite_ssr_import_1__.AprobacionCancelacion is not a constructor
+ ❯ preparar tests/unit/api/aprobacionCancelacion.test.ts:23:16
+     21|   const enviar = vi.fn();
+     22|   const cancelar = vi.fn();
+     23|   const caso = new AprobacionCancelacion({
+       |                ^
+     24|     demo, reloj, tokens, ids: { nuevo: () => 'jti' },
+     25|     contactoVigente: async id => id === pacienteId ? contacto : null,
+ ❯ tests/unit/api/aprobacionCancelacion.test.ts:34:47
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  |unitarios| tests/unit/api/aprobacionCancelacion.test.ts > conserva la cita e invalida la opción de cancelar del mismo mensaje
+TypeError: __vite_ssr_import_1__.AprobacionCancelacion is not a constructor
+ ❯ preparar tests/unit/api/aprobacionCancelacion.test.ts:23:16
+     21|   const enviar = vi.fn();
+     22|   const cancelar = vi.fn();
+     23|   const caso = new AprobacionCancelacion({
+       |                ^
+     24|     demo, reloj, tokens, ids: { nuevo: () => 'jti' },
+     25|     contactoVigente: async id => id === pacienteId ? contacto : null,
+ ❯ tests/unit/api/aprobacionCancelacion.test.ts:47:47
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  |unitarios| tests/unit/api/aprobacionCancelacion.test.ts > fuera de demo no envía ni acepta una aprobación
+TypeError: __vite_ssr_import_1__.AprobacionCancelacion is not a constructor
+ ❯ preparar tests/unit/api/aprobacionCancelacion.test.ts:23:16
+     21|   const enviar = vi.fn();
+     22|   const cancelar = vi.fn();
+     23|   const caso = new AprobacionCancelacion({
+       |                ^
+     24|     demo, reloj, tokens, ids: { nuevo: () => 'jti' },
+     25|     contactoVigente: async id => id === pacienteId ? contacto : null,
+ ❯ tests/unit/api/aprobacionCancelacion.test.ts:56:47
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  03:06:31
+   Duration  2.14s (transform 448ms, setup 0ms, import 1.85s, tests 10ms, environment 0ms)
+
+Código de salida: 1
+02-rojo-deteccion.txt
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ❯ |unitarios| tests/unit/rellenoHuecosAplicacion.test.ts (3 tests | 3 failed) 8ms
+   × detecta una sola vez el hueco y ofrece a Beto sin datos de Ana 5ms
+   × al vencer la oferta para Beto se ofrece a Carla 1ms
+   × detecta el hueco fuera del modo demo y lo deja desierto 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosAplicacion.test.ts > detecta una sola vez el hueco y ofrece a Beto sin datos de Ana
+TypeError: __vite_ssr_import_2__.HuecosMemoria is not a constructor
+ ❯ preparar tests/unit/rellenoHuecosAplicacion.test.ts:35:18
+     33|   const notificador = new NotificadorWaMemoria();
+     34|   const tokens = new TokensBotonWaMemoria(reloj, new RegistroTokensUsa…
+     35|   const huecos = new HuecosMemoria();
+       |                  ^
+     36|   let consecutivo = 0;
+     37|   const casos = new RellenoHuecos({
+ ❯ tests/unit/rellenoHuecosAplicacion.test.ts:47:42
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosAplicacion.test.ts > al vencer la oferta para Beto se ofrece a Carla
+TypeError: __vite_ssr_import_2__.HuecosMemoria is not a constructor
+ ❯ preparar tests/unit/rellenoHuecosAplicacion.test.ts:35:18
+     33|   const notificador = new NotificadorWaMemoria();
+     34|   const tokens = new TokensBotonWaMemoria(reloj, new RegistroTokensUsa…
+     35|   const huecos = new HuecosMemoria();
+       |                  ^
+     36|   let consecutivo = 0;
+     37|   const casos = new RellenoHuecos({
+ ❯ tests/unit/rellenoHuecosAplicacion.test.ts:60:49
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosAplicacion.test.ts > detecta el hueco fuera del modo demo y lo deja desierto
+TypeError: __vite_ssr_import_2__.HuecosMemoria is not a constructor
+ ❯ preparar tests/unit/rellenoHuecosAplicacion.test.ts:35:18
+     33|   const notificador = new NotificadorWaMemoria();
+     34|   const tokens = new TokensBotonWaMemoria(reloj, new RegistroTokensUsa…
+     35|   const huecos = new HuecosMemoria();
+       |                  ^
+     36|   let consecutivo = 0;
+     37|   const casos = new RellenoHuecos({
+ ❯ tests/unit/rellenoHuecosAplicacion.test.ts:71:42
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  03:10:39
+   Duration  2.14s (transform 485ms, setup 0ms, import 1.86s, tests 8ms, environment 0ms)
+
+Código de salida: 1
+02-rojo-http.txt
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ❯ |unitarios| tests/unit/api/aprobacionCancelacionHttp.test.ts (1 test | 1 failed) 73ms
+   × pide aprobación desde la app y otro número no invalida el botón legítimo 72ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/api/aprobacionCancelacionHttp.test.ts > pide aprobación desde la app y otro número no invalida el botón legítimo
+AssertionError: expected { codigo: 'STEP_UP_REQUERIDO', …(2) } to match object { codigo: 'STEP_UP_REQUERIDO', …(1) }
+(2 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+    "codigo": "STEP_UP_REQUERIDO",
+    "datos": {
+      "factores": [
++       "VINCULO",
++       "OTP",
+        "BOTON_APROBACION",
+      ],
+    },
+  }
+
+ ❯ tests/unit/api/aprobacionCancelacionHttp.test.ts:36:61
+     34|     const respuesta = await cancelar();
+     35|     expect(respuesta.statusCode).toBe(403);
+     36|     expect(CuerpoErrorSchema.parse(respuesta.json()).error).toMatchObj…
+       |                                                             ^
+     37|       codigo: 'STEP_UP_REQUERIDO', datos: { factores: ['BOTON_APROBACI…
+     38|     });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  03:12:51
+   Duration  5.25s (transform 858ms, setup 0ms, import 4.90s, tests 73ms, environment 0ms)
+
+Código de salida: 1
+02-rojo-saga.txt
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ❯ |unitarios| tests/unit/rellenoHuecosSaga.test.ts (3 tests | 3 failed) 10ms
+   × guarda el adelanto antes de liberar la reserva anterior de Beto 6ms
+   × compensa el fallo externo y conserva la cita original 1ms
+   × rechaza una oferta de otro contacto antes de apartar 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosSaga.test.ts > guarda el adelanto antes de liberar la reserva anterior de Beto
+TypeError: __vite_ssr_import_1__.AceptarOfertaHueco is not a constructor
+ ❯ preparar tests/unit/rellenoHuecosSaga.test.ts:36:17
+     34|   const guardar = vi.fn().mockResolvedValue(true);
+     35|   const expirar = vi.fn().mockResolvedValue(undefined);
+     36|   const casos = new AceptarOfertaHueco({
+       |                 ^
+     37|     demo: true, ids: { nuevo: () => reservaNueva }, reloj: new RelojFa…
+     38|     agenda: { apartar, confirmar, liberar }, agendaExterna: { registra…
+ ❯ tests/unit/rellenoHuecosSaga.test.ts:45:69
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosSaga.test.ts > compensa el fallo externo y conserva la cita original
+TypeError: __vite_ssr_import_1__.AceptarOfertaHueco is not a constructor
+ ❯ preparar tests/unit/rellenoHuecosSaga.test.ts:36:17
+     34|   const guardar = vi.fn().mockResolvedValue(true);
+     35|   const expirar = vi.fn().mockResolvedValue(undefined);
+     36|   const casos = new AceptarOfertaHueco({
+       |                 ^
+     37|     demo: true, ids: { nuevo: () => reservaNueva }, reloj: new RelojFa…
+     38|     agenda: { apartar, confirmar, liberar }, agendaExterna: { registra…
+ ❯ tests/unit/rellenoHuecosSaga.test.ts:56:72
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosSaga.test.ts > rechaza una oferta de otro contacto antes de apartar
+TypeError: __vite_ssr_import_1__.AceptarOfertaHueco is not a constructor
+ ❯ preparar tests/unit/rellenoHuecosSaga.test.ts:36:17
+     34|   const guardar = vi.fn().mockResolvedValue(true);
+     35|   const expirar = vi.fn().mockResolvedValue(undefined);
+     36|   const casos = new AceptarOfertaHueco({
+       |                 ^
+     37|     demo: true, ids: { nuevo: () => reservaNueva }, reloj: new RelojFa…
+     38|     agenda: { apartar, confirmar, liberar }, agendaExterna: { registra…
+ ❯ tests/unit/rellenoHuecosSaga.test.ts:67:30
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  03:14:31
+   Duration  2.15s (transform 481ms, setup 0ms, import 1.84s, tests 10ms, environment 0ms)
+
+Código de salida: 1
+02-rojo-temporizador.txt
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ❯ |unitarios| tests/unit/persistencia/programador.test.ts (4 tests | 1 failed) 15ms
+   ✓ reemplaza, deduplica, cancela y adelanta solo los vencidos 2ms
+   ✓ reemplaza el trabajo, conserva uno por tipo y trámite y cancela por id lógico 1ms
+   ✓ adelanta el reloj y entrega al ejecutor solo trabajos cuyo plazo venció 1ms
+   × vence y cancela OFERTA usando su identificador de oferta 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/persistencia/programador.test.ts > vence y cancela OFERTA usando su identificador de oferta
+AssertionError: expected [ { tipo: 'OFERTA', …(2) } ] to deeply equal [ { tipo: 'OFERTA', …(2) } ]
+
+- Expected
++ Received
+
+  [
+    {
+-     "ofertaId": "oferta-beto",
++     "ofertaId": "oferta-carla",
+      "tipo": "OFERTA",
+      "venceEn": "2026-11-25T12:00:00.000Z",
+    },
+  ]
+
+ ❯ tests/unit/persistencia/programador.test.ts:52:22
+     50|   await programador.cancelar('OFERTA', otra.ofertaId);
+     51|   expect(await programador.adelantarVencidos(ahora)).toBe(1);
+     52|   expect(ejecutados).toEqual([oferta]);
+       |                      ^
+     53| });
+     54| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed (4)
+   Start at  03:16:22
+   Duration  2.11s (transform 474ms, setup 0ms, import 1.82s, tests 15ms, environment 0ms)
+
+Código de salida: 1
+02-rojo-tokens.txt
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ❯ |unitarios| tests/unit/api/tokensBotonWa.test.ts (8 tests | 8 failed) 11ms
+     × rechaza el botón de otro número sin invalidarlo y rechaza su reutilización 6ms
+     × consume un solo botón de aprobación entre dos acciones simultáneas 1ms
+     × rechaza los botones alterados y vencidos sin consumir el identificador 0ms
+     × fuera de demo no emite ni acepta botones 0ms
+     × rechaza el botón de otro número sin invalidarlo y rechaza su reutilización 0ms
+     × consume un solo botón de aprobación entre dos acciones simultáneas 0ms
+     × rechaza los botones alterados y vencidos sin consumir el identificador 0ms
+     × fuera de demo no emite ni acepta botones 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Memoria > rechaza el botón de otro número sin invalidarlo y rechaza su reutilización
+TypeError: __vite_ssr_import_1__.TokensBotonWaMemoria is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:20:7
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+       |       ^
+     21|   return { tokens, usados };
+     22| }
+ ❯ tests/unit/api/tokensBotonWa.test.ts:26:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Memoria > consume un solo botón de aprobación entre dos acciones simultáneas
+TypeError: __vite_ssr_import_1__.TokensBotonWaMemoria is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:20:7
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+       |       ^
+     21|   return { tokens, usados };
+     22| }
+ ❯ tests/unit/api/tokensBotonWa.test.ts:37:24
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Memoria > rechaza los botones alterados y vencidos sin consumir el identificador
+TypeError: __vite_ssr_import_1__.TokensBotonWaMemoria is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:20:7
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+       |       ^
+     21|   return { tokens, usados };
+     22| }
+ ❯ tests/unit/api/tokensBotonWa.test.ts:46:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Memoria > fuera de demo no emite ni acepta botones
+TypeError: __vite_ssr_import_1__.TokensBotonWaMemoria is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:20:7
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+       |       ^
+     21|   return { tokens, usados };
+     22| }
+ ❯ tests/unit/api/tokensBotonWa.test.ts:55:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Jose > rechaza el botón de otro número sin invalidarlo y rechaza su reutilización
+TypeError: __vite_ssr_import_2__.TokensBotonWaJose is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:19:7
+     17|   const usados = new RegistroTokensUsadosMemoria();
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+       |       ^
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+     21|   return { tokens, usados };
+ ❯ tests/unit/api/tokensBotonWa.test.ts:26:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Jose > consume un solo botón de aprobación entre dos acciones simultáneas
+TypeError: __vite_ssr_import_2__.TokensBotonWaJose is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:19:7
+     17|   const usados = new RegistroTokensUsadosMemoria();
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+       |       ^
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+     21|   return { tokens, usados };
+ ❯ tests/unit/api/tokensBotonWa.test.ts:37:24
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Jose > rechaza los botones alterados y vencidos sin consumir el identificador
+TypeError: __vite_ssr_import_2__.TokensBotonWaJose is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:19:7
+     17|   const usados = new RegistroTokensUsadosMemoria();
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+       |       ^
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+     21|   return { tokens, usados };
+ ❯ tests/unit/api/tokensBotonWa.test.ts:46:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  |unitarios| tests/unit/api/tokensBotonWa.test.ts > botones de WhatsApp en Jose > fuera de demo no emite ni acepta botones
+TypeError: __vite_ssr_import_2__.TokensBotonWaJose is not a constructor
+ ❯ preparar tests/unit/api/tokensBotonWa.test.ts:19:7
+     17|   const usados = new RegistroTokensUsadosMemoria();
+     18|   const tokens: TokensBotonWa = tipo === 'Jose'
+     19|     ? new TokensBotonWaJose('secreto-sintetico-de-prueba-con-32-bytes'…
+       |       ^
+     20|     : new TokensBotonWaMemoria(reloj, usados, demo);
+     21|   return { tokens, usados };
+ ❯ tests/unit/api/tokensBotonWa.test.ts:55:32
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  8 failed (8)
+   Start at  03:05:11
+   Duration  2.66s (transform 502ms, setup 0ms, import 2.31s, tests 11ms, environment 1ms)
+
+Código de salida: 1

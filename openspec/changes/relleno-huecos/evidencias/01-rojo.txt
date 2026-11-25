@@ -1,0 +1,126 @@
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ❯ |unitarios| tests/unit/rellenoHuecosDominio.test.ts (6 tests | 6 failed) 13ms
+   × filtra el ayuno y las citas que no se adelantarían 5ms
+   × aplica el silencio de la sede y el límite de tres ofertas en siete días 1ms
+   × ordena por registro y utiliza el umbral de 24 horas 1ms
+   × asigna un único ganador y emite eventos en el hilo que corresponde 1ms
+   × permite rechazar, expirar y declarar desierto sin asignación 0ms
+   × adelanta una cita confirmada sin cambiar su estado público 4ms
+ ❯ |unitarios| tests/unit/dominio.test.ts (4 tests | 1 failed) 15ms
+     × declara exactamente los estados vigentes y ninguna fase obsoleta 11ms
+     ✓ exige el tipo de trámite y vincula el payload al evento 1ms
+     ✓ detecta una rama de evento omitida y payloads con claves sensibles 0ms
+     ✓ conserva código y datos de los errores y todos son Error 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/dominio.test.ts > vocabulario y eventos de dominio > declara exactamente los estados vigentes y ninguna fase obsoleta
+AssertionError: expected [ 'TramiteIniciado', …(28) ] to have a length of 40 but got 29
+
+- Expected
++ Received
+
+- 40
++ 29
+
+ ❯ tests/unit/dominio.test.ts:14:29
+     12|     expect(CASILLAS).toEqual(['servicio', 'sede', 'paciente', 'requisi…
+     13|     expect(TIPOS_TRAMITE).toEqual(['AGENDAR', 'ADELANTO', 'FACTURA']);
+     14|     expect(EVENTOS_DOMINIO).toHaveLength(40);
+       |                             ^
+     15|     expect(EVENTOS_DOMINIO).toEqual(expect.arrayContaining([
+     16|       'HuecoLiberado', 'HuecoAsignado', 'HuecoDesierto', 'OfertaEnviad…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosDominio.test.ts > filtra el ayuno y las citas que no se adelantarían
+TypeError: (0 , __vite_ssr_import_1__.candidatoCompatible) is not a function
+ ❯ tests/unit/rellenoHuecosDominio.test.ts:25:10
+     23| 
+     24| it('filtra el ayuno y las citas que no se adelantarían', () => {
+     25|   expect(candidatoCompatible(hueco, interes, { anticipacionMinimaHoras…
+       |          ^
+     26|   expect(candidatoCompatible(hueco, interes, { anticipacionMinimaHoras…
+     27|   expect(candidatoCompatible(hueco, { ...interes, citaActualInicio: in…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosDominio.test.ts > aplica el silencio de la sede y el límite de tres ofertas en siete días
+TypeError: (0 , __vite_ssr_import_1__.candidatoCompatible) is not a function
+ ❯ compatible tests/unit/rellenoHuecosDominio.test.ts:32:5
+     30| it('aplica el silencio de la sede y el límite de tres ofertas en siete…
+     31|   const compatible = (horaLocal: number, enviadasEn: string[] = []) =>
+     32|     candidatoCompatible(hueco, interes, { anticipacionMinimaHoras: 5 }…
+       |     ^
+     33|   expect(compatible(23)).toBe(false);
+     34|   expect(compatible(6)).toBe(false);
+ ❯ tests/unit/rellenoHuecosDominio.test.ts:33:10
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosDominio.test.ts > ordena por registro y utiliza el umbral de 24 horas
+TypeError: (0 , __vite_ssr_import_1__.ordenarCandidatos) is not a function
+ ❯ tests/unit/rellenoHuecosDominio.test.ts:43:10
+     41| it('ordena por registro y utiliza el umbral de 24 horas', () => {
+     42|   const posterior = { ...interes, registradoEn: inicio };
+     43|   expect(ordenarCandidatos([posterior, interes])).toEqual([interes, po…
+       |          ^
+     44|   expect(elegirEstrategia(inicio, ts)).toBe('OLEADA');
+     45|   expect(elegirEstrategia(siguiente, ts)).toBe('SECUENCIAL');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosDominio.test.ts > asigna un único ganador y emite eventos en el hilo que corresponde
+TypeError: Cannot read properties of undefined (reading 'detectar')
+ ❯ tests/unit/rellenoHuecosDominio.test.ts:49:26
+     47| 
+     48| it('asigna un único ganador y emite eventos en el hilo que corresponde…
+     49|   const agregado = Hueco.detectar(hueco, contexto);
+       |                          ^
+     50|   const oferta = { interesId: 'interes', tokenJti: 'jti', expiraEn: in…
+     51|     tramiteId: 'candidato' as TramiteId, hiloId: 'otro-hilo' as HiloId…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosDominio.test.ts > permite rechazar, expirar y declarar desierto sin asignación
+TypeError: Cannot read properties of undefined (reading 'detectar')
+ ❯ tests/unit/rellenoHuecosDominio.test.ts:63:26
+     61| 
+     62| it('permite rechazar, expirar y declarar desierto sin asignación', () …
+     63|   const agregado = Hueco.detectar(hueco, contexto);
+       |                          ^
+     64|   const oferta = { ...origen, interesId: 'interes', tokenJti: 'jti', e…
+     65|   agregado.ofrecer({ ...oferta, id: 'rechazo' }, contexto);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosDominio.test.ts > adelanta una cita confirmada sin cambiar su estado público
+AssertionError: expected error to be instance of TransicionInvalida
+
+- Expected: 
+[Function TransicionInvalida]
+
++ Received: 
+TypeError {
+  "message": "borrador.adelantar is not a function",
+}
+
+ ❯ tests/unit/rellenoHuecosDominio.test.ts:78:64
+     76|   const borrador = Tramite.iniciar(origen.tramiteId, origen.hiloId, 'A…
+     77|   const horario = { reservaId: 'nueva' as ReservaId, inicio, expiraEn:…
+     78|   expect(() => borrador.adelantar(horario, 'nuevo', contexto)).toThrow…
+       |                                                                ^
+     79|   const instantanea = borrador.instantanea();
+     80|   const tramite = Tramite.rehidratar({ ...instantanea, datos: { ...ins…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  7 failed | 3 passed (10)
+   Start at  02:59:36
+   Duration  623ms (transform 415ms, setup 0ms, import 526ms, tests 28ms, environment 0ms)
+
+Código de salida: 1

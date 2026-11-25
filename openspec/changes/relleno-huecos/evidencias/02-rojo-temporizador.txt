@@ -1,0 +1,43 @@
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ❯ |unitarios| tests/unit/persistencia/programador.test.ts (4 tests | 1 failed) 15ms
+   ✓ reemplaza, deduplica, cancela y adelanta solo los vencidos 2ms
+   ✓ reemplaza el trabajo, conserva uno por tipo y trámite y cancela por id lógico 1ms
+   ✓ adelanta el reloj y entrega al ejecutor solo trabajos cuyo plazo venció 1ms
+   × vence y cancela OFERTA usando su identificador de oferta 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/persistencia/programador.test.ts > vence y cancela OFERTA usando su identificador de oferta
+AssertionError: expected [ { tipo: 'OFERTA', …(2) } ] to deeply equal [ { tipo: 'OFERTA', …(2) } ]
+
+- Expected
++ Received
+
+  [
+    {
+-     "ofertaId": "oferta-beto",
++     "ofertaId": "oferta-carla",
+      "tipo": "OFERTA",
+      "venceEn": "2026-11-25T12:00:00.000Z",
+    },
+  ]
+
+ ❯ tests/unit/persistencia/programador.test.ts:52:22
+     50|   await programador.cancelar('OFERTA', otra.ofertaId);
+     51|   expect(await programador.adelantarVencidos(ahora)).toBe(1);
+     52|   expect(ejecutados).toEqual([oferta]);
+       |                      ^
+     53| });
+     54| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed (4)
+   Start at  03:16:22
+   Duration  2.11s (transform 474ms, setup 0ms, import 1.82s, tests 15ms, environment 0ms)
+
+Código de salida: 1

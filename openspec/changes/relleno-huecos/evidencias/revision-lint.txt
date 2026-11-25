@@ -1,0 +1,8 @@
+﻿corepack : $ eslint . && pnpm typecheck
+En línea: 1 Carácter: 498
++ ... ory -Force $o | Out-Null; corepack pnpm lint *> "$o\lint.txt"; "lint= ...
++                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ($ eslint . && pnpm typecheck:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+$ pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json

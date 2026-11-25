@@ -7,12 +7,12 @@ export async function comprobarSoloLectura(lecturas: LecturasPort, id: HiloId, e
 }
 
 export async function comprobarLecturasApi(lecturas: LecturasPort,
-  datos?: { tramiteId: TramiteId; hiloId: HiloId; pacienteId: PacienteId; sedeId: SedeId; inicio: string }) {
+  datos?: { tramiteId: TramiteId; hiloId: HiloId; pacienteId: PacienteId; sedeId: SedeId; inicio: string }, confirmadasIniciales = 0) {
   const metricas = await lecturas.metricas();
   expect(metricas.porEstado).toHaveLength(10);
   if (!datos) {
-    expect(metricas.porEstado.every(({ cantidad }) => cantidad === 0)).toBe(true);
-    expect(Object.values(metricas.kpis)).toEqual([0, 0, 0, 0, 0, 0, 0]);
+    expect(metricas.porEstado.every(({ estado, cantidad }) => cantidad === (estado === 'CONFIRMADA' ? confirmadasIniciales : 0))).toBe(true);
+    expect(Object.values(metricas.kpis).every(valor => valor === 0)).toBe(true);
     return;
   }
   const ficha = await lecturas.fichaHilo(datos.hiloId);

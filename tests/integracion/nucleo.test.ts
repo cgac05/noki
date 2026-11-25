@@ -25,8 +25,8 @@ describe('migración real e integridad del núcleo', () => {
   it('crea todas las tablas del núcleo y ninguna tabla excluida; tipo es obligatorio', async () => {
     const tablas = await pool.query<{ tablename: string }>("SELECT tablename FROM pg_tables WHERE schemaname = 'public'");
     const nombres = tablas.rows.map(t => t.tablename);
-    for (const tabla of ['paciente', 'contacto_canal', 'vinculo', 'credencial', 'usuario_interno', 'hilo_atencion', 'tramite', 'evento', 'servicio', 'sede', 'oferta_sede', 'recurso', 'reserva', 'localidad', 'outbox', 'evento_procesado', 'token_usado']) expect(nombres).toContain(tabla);
-    for (const tabla of ['hueco', 'oferta_hueco', 'interes_adelanto', 'recordatorio', 'preferencias_contacto', 'factura', 'perfil_fiscal']) expect(nombres).not.toContain(tabla);
+    for (const tabla of ['paciente', 'contacto_canal', 'vinculo', 'credencial', 'usuario_interno', 'hilo_atencion', 'tramite', 'evento', 'servicio', 'sede', 'oferta_sede', 'recurso', 'reserva', 'localidad', 'outbox', 'evento_procesado', 'token_usado', 'hueco', 'oferta_hueco', 'interes_adelanto']) expect(nombres).toContain(tabla);
+    for (const tabla of ['recordatorio', 'preferencias_contacto', 'factura', 'perfil_fiscal']) expect(nombres).not.toContain(tabla);
     await expect(pool.query("INSERT INTO tramite (id, hilo_id, estado, ultimo_canal) VALUES ($1, $2, 'BORRADOR', 'web')", [ids.nuevo(), hilo])).rejects.toMatchObject({ code: '23502', column: 'tipo' });
   });
 

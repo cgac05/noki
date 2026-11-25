@@ -9,7 +9,8 @@ it('Base vacía y consultas demo solo en modo demo', async () => {
   try {
     const { kpis, porEstado } = RUTAS_CONSULTAS.metricas.respuesta.parse(
       (await demo.app.inject('/api/admin/kpis')).json());
-    expect(Object.values(kpis)).toEqual([0, 0, 0, 0, 0, 0, 0]);
+    expect(Object.values(kpis).every(valor => valor === 0)).toBe(true);
+    expect(kpis).toMatchObject({ huecosLiberados: 0, huecosRecuperados: 0, horasRecursoRecuperadas: 0, diasAdelantadosPromedio: 0 });
     expect(porEstado).toHaveLength(10);
     expect(porEstado.every(({ cantidad }) => cantidad === 0)).toBe(true);
     expect(RUTAS_CONSULTAS.bandeja.respuesta.parse((await demo.app.inject('/api/demo/bandeja')).json())).toEqual([]);

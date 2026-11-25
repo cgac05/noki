@@ -1,0 +1,87 @@
+$ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ❯ |integracion| tests/integracion/migracionPersistencia.test.ts (3 tests | 1 failed) 1656ms
+   ✓ migra una base con semilla y conserva las claves anteriores y las claves con sufijo  1278ms
+   ✓ acepta varias CURP nulas y rechaza una CURP duplicada 41ms
+   × aplica la migración de API una sola vez y conserva los registros 172ms
+ ✓ |integracion| tests/integracion/comandosHttp.test.ts (3 tests) 4406ms
+   ✓ Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez  2050ms
+   ✓ publica, programa y expira el hold desde la ruta del reloj con la API compuesta  872ms
+{"level":30,"time":1795599514146,"pid":52384,"hostname":"CGAC1","msg":"Server listening at http://127.0.0.1:29227"}
+{"level":30,"time":1795599515510,"pid":52384,"hostname":"CGAC1","correlation_id":"req-1","req":{"method":"POST","url":"/agenda/citas","host":"127.0.0.1:29227","remoteAddress":"127.0.0.1","remotePort":29243},"msg":"incoming request"}
+{"level":30,"time":1795599515513,"pid":52384,"hostname":"CGAC1","correlation_id":"req-1","res":{"statusCode":200},"responseTime":2.403300002217293,"msg":"request completed"}
+{"level":30,"time":1795599515577,"pid":52384,"hostname":"CGAC1","correlation_id":"req-2","req":{"method":"DELETE","url":"/agenda/citas/90000001","host":"127.0.0.1:29227","remoteAddress":"127.0.0.1","remotePort":29243},"msg":"incoming request"}
+{"level":30,"time":1795599515578,"pid":52384,"hostname":"CGAC1","correlation_id":"req-2","res":{"statusCode":204},"responseTime":0.9960000067949295,"msg":"request completed"}
+{"level":30,"time":1795599515923,"pid":52384,"hostname":"CGAC1","msg":"Server listening at http://127.0.0.1:29245"}
+{"level":30,"time":1795599517320,"pid":52384,"hostname":"CGAC1","correlation_id":"req-1","req":{"method":"POST","url":"/agenda/citas","host":"127.0.0.1:29245","remoteAddress":"127.0.0.1","remotePort":29261},"msg":"incoming request"}
+{"level":30,"time":1795599517321,"pid":52384,"hostname":"CGAC1","correlation_id":"req-1","res":{"statusCode":200},"responseTime":1.1415999978780746,"msg":"request completed"}
+{"level":30,"time":1795599517363,"pid":52384,"hostname":"CGAC1","correlation_id":"req-2","req":{"method":"DELETE","url":"/agenda/citas/90000003","host":"127.0.0.1:29245","remoteAddress":"127.0.0.1","remotePort":29261},"msg":"incoming request"}
+{"level":30,"time":1795599517364,"pid":52384,"hostname":"CGAC1","correlation_id":"req-2","res":{"statusCode":204},"responseTime":0.37950000166893005,"msg":"request completed"}
+ ✓ |integracion| tests/integracion/rellenoHuecos.test.ts (3 tests) 4036ms
+   ✓ migra las tablas de huecos, intereses y ofertas  537ms
+   ✓ recorre el flujo de huecos en Postgres en modo secuencial  1832ms
+   ✓ recorre el flujo de huecos en Postgres en modo oleada  1665ms
+ ✓ |integracion| tests/integracion/temporizadoresBullMQ.test.ts (5 tests) 3659ms
+   ✓ registra el fallo persistente tras tres intentos con los campos autorizados  3191ms
+Reinicio de la base de demo en el host 127.0.0.1.
+ ✓ |integracion| tests/integracion/semilla.test.ts (6 tests) 2803ms
+     ✓ es idempotente y guarda solo hashes argon2id verificables  912ms
+     ✓ reinicia la base de demo, migra y deja exactamente los datos semilla  1156ms
+ ✓ |integracion| tests/integracion/idempotenciaWa.test.ts (1 test) 1726ms
+   ✓ reserva y reproduce la respuesta de WhatsApp con eventos únicos en Postgres  1724ms
+ ✓ |integracion| tests/integracion/clinicaAlertas.test.ts (1 test) 2148ms
+   ✓ calcula posiciones por orden de llegada y limita alertas en Postgres  2147ms
+ ✓ |integracion| tests/integracion/sdAgenda.test.ts (4 tests) 1115ms
+   ✓ registra de forma idempotente, rechaza entradas inválidas y simula fallos y latencia  350ms
+   ✓ se recupera tras dos fallos y señala cuando se agotan los tres intentos  722ms
+ ✓ |integracion| tests/integracion/agendaPostgres.test.ts (3 tests) 862ms
+   ✓ acepta uno de 50 intentos concurrentes por el mismo horario y recupera el hold vencido  336ms
+ ✓ |integracion| tests/integracion/aplicaciones.test.ts (4 tests) 1002ms
+     ✓ señala Postgres caído dentro del límite  907ms
+ ✓ |integracion| tests/integracion/identidadPostgres.test.ts (1 test) 977ms
+   ✓ Registro concurrente y CURP con sexo X  818ms
+ ✓ |integracion| tests/integracion/consumidorStreams.test.ts (2 tests) 977ms
+   ✓ reinicia sin pérdidas ni duplicados, y procesa los grupos por separado  662ms
+   ✓ mueve al tercer fallo una sola vez y continúa la partición  311ms
+ ✓ |integracion| tests/integracion/puertosApiPostgres.test.ts (1 test) 753ms
+   ✓ Concurrencia con la misma clave, dos usos simultáneos y almacenamiento de API en Postgres  610ms
+ ✓ |integracion| tests/integracion/nucleo.test.ts (8 tests) 521ms
+ ✓ |integracion| tests/integracion/relayPostgres.test.ts (1 test) 523ms
+   ✓ no publica dos veces con dos relays y reintenta si publicó sin marcar  484ms
+ ✓ |integracion| tests/integracion/tramitePostgres.test.ts (4 tests) 304ms
+ ✓ |integracion| tests/integracion/puertosPostgres.test.ts (1 test) 352ms
+ ✓ |integracion| tests/integracion/intentosPostgres.test.ts (1 test) 215ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |integracion| tests/integracion/migracionPersistencia.test.ts > aplica la migración de API una sola vez y conserva los registros
+AssertionError: expected [ '004_api', '005_huecos' ] to deeply equal [ '004_api' ]
+
+- Expected
++ Received
+
+  [
+    "004_api",
++   "005_huecos",
+  ]
+
+ ❯ tests/integracion/migracionPersistencia.test.ts:64:79
+     62| 
+     63| it('aplica la migración de API una sola vez y conserva los registros',…
+     64|   expect(await migrar(url.toString(), '004_api', 'persistencia_increme…
+       |                                                                               ^
+     65|   await pool.query("INSERT INTO mensaje_bandeja (id, canal, asunto, cu…
+     66|   expect(await migrar(url.toString(), undefined, 'persistencia_increme…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 17 passed (18)
+      Tests  1 failed | 51 passed (52)
+   Start at  03:38:15
+   Duration  72.43s (transform 1.28s, setup 0ms, import 39.60s, tests 28.03s, environment 3ms)
+
+[ELIFECYCLE] Command failed with exit code 1.
+Código de salida: 1

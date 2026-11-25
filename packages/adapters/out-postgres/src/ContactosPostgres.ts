@@ -1,8 +1,8 @@
 import { sql, type Kysely } from 'kysely';
 import type { Contacto, ContactosPort, PacientePorTelefono, Vinculo } from '@noki/application';
-import type { Canal, HiloId } from '@noki/domain';
+import type { Canal, HiloId, PacienteId } from '@noki/domain';
 
-import { normalizarTelefono } from '@noki/domain';
+import { normalizarTelefono, VIGENCIA_VINCULO_DIAS } from '@noki/domain';
 
 export class ContactosPostgres implements ContactosPort {
   constructor(private readonly db: Kysely<unknown>) {}
@@ -10,6 +10,24 @@ export class ContactosPostgres implements ContactosPort {
   async buscar(canal: Canal, valor: string): Promise<Contacto | null> {
     const { rows } = await sql<Contacto>`SELECT id, canal, valor_externo AS valor, hilo_id AS "hiloId" FROM contacto_canal
       WHERE canal = ${canal} AND valor_externo = ${valor} AND hilo_id IS NOT NULL`.execute(this.db);
+    return rows[0] ?? null;
+  }
+
+  async whatsappPorId(id: string): Promise<Contacto | null> {
+    const { rows } = await sql<Contacto>`SELECT id, canal, valor_externo AS valor, hilo_id AS "hiloId"
+      FROM contacto_canal WHERE id = ${id} AND canal = 'whatsapp' AND hilo_id IS NOT NULL`.execute(this.db);
+    return rows[0] ?? null;
+  }
+
+  async whatsappVigente(pacienteId: PacienteId, ts: string): Promise<Contacto | null> {
+    const desde = Date.parse(ts) - VIGENCIA_VINCULO_DIAS * 86_400_000;
+    const { rows } = await sql<Contacto>`
+      SELECT c.id, c.canal, c.valor_externo AS valor, c.hilo_id AS "hiloId"
+      FROM contacto_canal c JOIN vinculo v ON v.contacto_id = c.id
+      WHERE c.canal = 'whatsapp' AND c.hilo_id IS NOT NULL AND v.paciente_id = ${pacienteId}
+        AND v.nivel >= 1 AND v.ultimo_uso >= to_timestamp(${desde}::double precision / 1000)
+      ORDER BY (v.relacion = 'TITULAR') DESC, v.ultimo_uso DESC, c.id LIMIT 1
+    `.execute(this.db);
     return rows[0] ?? null;
   }
 

@@ -35,7 +35,7 @@ describe('semilla y reinicio de demo sobre Postgres', () => {
     const localidad = await pool.query<{ ciudad: string }>("SELECT s.ciudad FROM localidad l CROSS JOIN sede s WHERE l.nombre_normalizado = 'xalisco' ORDER BY (s.lat-l.lat)^2 + (s.lng-l.lng)^2 LIMIT 1");
     expect(localidad.rows[0]?.ciudad).toBe('Tepic');
     const contactos = await pool.query<{ valor_externo: string }>("SELECT c.valor_externo FROM contacto_canal c JOIN vinculo v ON v.contacto_id = c.id WHERE c.canal = 'whatsapp' ORDER BY c.valor_externo");
-    expect(contactos.rows.map(c => c.valor_externo)).toEqual(['5210000000001','5210000000002']);
+    expect(contactos.rows.map(c => c.valor_externo)).toEqual(['5210000000001','5210000000002','5210000000003']);
     const usuarios = await pool.query<{ usuario: string }>('SELECT usuario FROM usuario_interno ORDER BY usuario');
     expect(usuarios.rows.map(u => u.usuario)).toEqual(['admin','asesor1','recepcion.tepic']);
     const pacientes = await pool.query<{
@@ -44,7 +44,7 @@ describe('semilla y reinicio de demo sobre Postgres', () => {
     }>(`SELECT nombre, ap_paterno AS "apellidoPaterno", ap_materno AS "apellidoMaterno",
       fecha_nac::text AS "fechaNac", sexo, curp, curp_base AS base, entidad_nac AS "entidadNacimiento"
       FROM paciente ORDER BY nombre`);
-    expect(pacientes.rows.map(({ nombre }) => nombre)).toEqual(['Ana', 'Beto']);
+    expect(pacientes.rows.map(({ nombre }) => nombre)).toEqual(['Ana', 'Beto', 'Carla']);
     for (const p of pacientes.rows) {
       expect(p).toMatchObject({ apellidoPaterno: 'Paciente', apellidoMaterno: 'Demo', entidadNacimiento: 'NT' });
       expect(validarCurp(p.curp)).toEqual({ fechaNac: p.fechaNac, sexo: p.sexo, entidadNacimiento: 'NT' });
@@ -57,7 +57,7 @@ describe('semilla y reinicio de demo sobre Postgres', () => {
     await sembrar(url);
     expect(await contar()).toEqual(antes);
     const credenciales = await pool.query<{ hash: string }>('SELECT hash FROM credencial');
-    expect(credenciales.rowCount).toBe(2);
+    expect(credenciales.rowCount).toBe(3);
     for (const c of credenciales.rows) { expect(c.hash).toMatch(/^\$argon2id\$/); expect(c.hash).not.toBe('1234'); expect(await verify(c.hash, '1234')).toBe(true); }
     const usuarios = await pool.query<{ hash: string }>('SELECT hash FROM usuario_interno');
     for (const u of usuarios.rows) { expect(u.hash).toMatch(/^\$argon2id\$/); expect(u.hash).not.toBe('demo123'); expect(await verify(u.hash, 'demo123')).toBe(true); }
@@ -74,8 +74,22 @@ describe('semilla y reinicio de demo sobre Postgres', () => {
   it('reinicia la base de demo, migra y deja exactamente los datos semilla', async () => {
     await pool.query("INSERT INTO localidad VALUES ('extra-prueba','Demo','Demo',0,0)");
     await reiniciarDemo(url, 'true');
-    expect(await contar()).toEqual([3,4,12,12,2,2,2,2,3,1]);
+    expect(await contar()).toEqual([3,4,12,12,3,3,3,3,3,1]);
     const extra = await pool.query("SELECT 1 FROM localidad WHERE nombre_normalizado = 'extra-prueba'");
     expect(extra.rowCount).toBe(0);
   });
+});
+
+it('siembra tres citas confirmadas con interés de Beto y Carla', async () => {
+  const { rows } = await pool.query<{ nombre: string; horario: string; interes: string | null }>(`
+    SELECT p.nombre, to_char(r.inicio AT TIME ZONE s.zona_horaria, 'HH24:MI') AS horario, i.estado AS interes
+    FROM reserva r JOIN tramite t ON t.id = r.tramite_id JOIN paciente p ON p.id = t.paciente_id
+      JOIN sede s ON s.id = r.sede_id LEFT JOIN interes_adelanto i ON i.tramite_id = t.id
+    WHERE t.estado = 'CONFIRMADA' AND r.estado = 'CONFIRMADA' ORDER BY r.inicio
+  `);
+  expect(rows).toEqual([
+    { nombre: 'Ana', horario: '09:15', interes: null },
+    { nombre: 'Beto', horario: '09:15', interes: 'ACTIVO' },
+    { nombre: 'Carla', horario: '09:15', interes: 'ACTIVO' },
+  ]);
 });

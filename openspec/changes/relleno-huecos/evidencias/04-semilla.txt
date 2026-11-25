@@ -1,0 +1,8 @@
+$ node --env-file=.env --import tsx packages/adapters/out-postgres/src/cli.ts
+Migraciones aplicadas: 001_nucleo, 002_persistencia, 003_identidad, 004_api, 005_huecos
+Migración, código de salida: 0
+$ node --env-file=.env --import tsx apps/api/src/semilla/cli.ts
+Semilla de demo lista: 3 sedes, 4 servicios, 3 pacientes y 3 usuarios internos.
+Semilla, código de salida: 0
+3
+2

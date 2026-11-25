@@ -35,6 +35,8 @@ El hueco es un agregado (`Hueco`) con sus ofertas y sus eventos pendientes, pers
 
 ### D3. `adelantar` en el tipo `AGENDAR`
 Se registra la transición `adelantar: { CONFIRMADA: 'CONFIRMADA' }`. `Tramite.adelantar(reservaNueva, folio, contexto)` cambia el horario, incrementa `version` y emite `CitaAdelantada`. Es dato del registro de tipos, no un `if` en el núcleo (`AGENTS.md` §5.9).
+- **Excepción explícita a `PLAN.md` §10** («No se modifica la máquina de agendado»), pendiente de autorización en la revisión 4. La saga de §10.1 (paso 5) cambia por definición el horario de la cita confirmada de B, y `CitaAdelantada` existe en §7 para eso. La excepción se limita a esta única transición: no agrega estados, no cambia `ESTADOS_TRAMITE`, no toca otras transiciones ni el contrato, y el trámite sigue `CONFIRMADA`.
+- Alternativa descartada: un trámite hijo `ADELANTO` con la cita nueva, que cancela el `AGENDAR` original. No toca la máquina, pero B vería otro trámite en `/app`, su cancelación dispararía `CitaCancelada` con otro significado y contradice D2, ya autorizada.
 
 ### D4. Candidatos y estrategia en el dominio
 `candidatoCompatible(hueco, interes, perfil, ahora, historial)` es pura y sigue §10.1. La zona horaria del silencio la resuelve el puerto `CalendarioSede` que ya existe (D12 de `prediccion-riesgo`), y el dominio recibe la hora local ya calculada. `elegirEstrategia(inicio, ahora)` devuelve `SECUENCIAL` con 24 h o más y `OLEADA` con menos. El orden es FIFO por `registradoEn`; nunca por pago.
@@ -49,7 +51,7 @@ Se registra la transición `adelantar: { CONFIRMADA: 'CONFIRMADA' }`. `Tramite.a
 - Si falla el paso 3 o 4: se libera la reserva nueva (y se cancela el folio nuevo si existía), B conserva su cita, la oferta pasa a `EXPIRADA` y el hueco sigue con el siguiente candidato. Si falla el paso 5, se registra `COMPENSACION_AGENDA_FALLIDA` en el log, igual que el riesgo residual aceptado en `temporizadores`.
 
 ### D6. Mensajes salientes y reenvío
-Puerto `NotificadorWa.enviar(waId, mensajes)` con un tipo propio de aplicación (texto y hasta 3 botones con `titulo` y `payload`). El adaptador real vive en `apps/api/src/tiempoReal.ts`, traduce a `MensajeBot` y emite `wa:mensajes` a `wa:<waId>`; el de memoria acumula los envíos para las pruebas.
+Puerto `NotificadorWa.enviar(waId, mensajes)` con un tipo propio de aplicación (texto y hasta 3 botones con `titulo` y `payload`). El adaptador real vive en `apps/api/src/tiempoReal.ts`, que ya es el adaptador de Socket.IO del proyecto y por eso no va en `packages/adapters` (cumple `AGENTS.md` §5.4: un real y uno de memoria). Traduce a `MensajeBot` y emite `wa:mensajes` a `wa:<waId>`; el de memoria acumula los envíos para las pruebas.
 - Al unirse a `wa:<waId>`, la API pide al núcleo las ofertas `OFRECIDA` vigentes de ese contacto y las reenvía con tokens nuevos del mismo `jti`. Las aprobaciones no se reenvían: si vencen, Ana vuelve a pulsar "Cancelar".
 - Textos (en `textosWa.ts`): oferta "Se liberó un espacio para {servicio} en {sede} el {fecha y hora locales}. ¿Quieres adelantar tu cita?" con "Sí, adelantar" y "No, gracias"; aprobación "¿Confirmas que quieres cancelar tu cita de {servicio} en {sede} del {fecha y hora}?" con "Sí, cancelar" y "No, conservarla"; perdida "Ese espacio ya fue tomado. Te avisaremos si se libera otro."; aceptada "Listo, tu cita quedó el {fecha y hora}."; cancelada "Tu cita quedó cancelada."; conservada "Conservamos tu cita."; token vencido o usado "Esa opción ya no está disponible." (la respuesta normal del endpoint).
 - `CancelarCita` en espera responde 403 `STEP_UP_REQUERIDO` con `BOTON_APROBACION`, sin cambiar el trámite; al aprobar, el trámite emite `tramite:actualizado` como cualquier cambio. Así se comunicó al frente B el 2026-11-25
@@ -59,7 +61,8 @@ Sin `preferencias_contacto`, el límite es 3 ofertas por paciente en 7 días y e
 - Riesgo: una demo de noche no enviaría ofertas. Se mitiga con el reloj de demo y se documenta en el README.
 
 ### D8. Temporizador `OFERTA`
-`TipoTemporizador` gana `OFERTA`, con clave lógica `OFERTA:<ofertaId>` y física `OFERTA-<ofertaId>`. El campo `tramiteId` de `Temporizador` pasa a `claveId` o se agrega `ofertaId`; la elección queda para la implementación mientras los tres tipos actuales no cambien de comportamiento. Al vencer, la oferta pasa a `EXPIRADA` y el hueco ofrece al siguiente.
+`TipoTemporizador` gana `OFERTA`, con clave lógica `OFERTA:<ofertaId>` y física `OFERTA-<ofertaId>`. El campo `tramiteId` de `Temporizador` pasa a `claveId` o se agrega `ofertaId`; la elección queda para la implementación mientras los tres tipos actuales no cambien de comportamiento.
+- **Excepción explícita al texto de `AGENTS.md` §7** («`job_id` lógico `${tipo}:${tramiteId}`»), pendiente de autorización en la revisión 4: `OFERTA` usa el `ofertaId`, porque un trámite puede tener varias ofertas en el tiempo. Se conserva la forma `${tipo}:${id}` y `${tipo}-${id}`. `AGENTS.md` es compartido y no se toca aquí; la nota va al cambio compartido de documentación de D12. Al vencer, la oferta pasa a `EXPIRADA` y el hueco ofrece al siguiente.
 
 ### D9. Consumidor `huecos`
 Grupo de Redis Streams `huecos` en `main.ts`. Con `CitaCancelada` (de una cita con reserva confirmada e `inicio` futuro) y con `CitaAdelantada` (la reserva anterior) crea el hueco y ofrece. Es idempotente con `evento_procesado` y además con una restricción única `hueco(origen_reserva_id)`.

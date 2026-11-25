@@ -69,6 +69,7 @@ const agendar: DefinicionTipoTramite = {
   transiciones: {
     apartar: { LISTO_PARA_RESERVAR: 'HORARIO_RESERVADO' },
     confirmar: { HORARIO_RESERVADO: 'CONFIRMADA' },
+    adelantar: { CONFIRMADA: 'CONFIRMADA' },
     expirarHold: { HORARIO_RESERVADO: 'LISTO_PARA_RESERVAR' },
     registrarLlegada: { CONFIRMADA: 'EN_CLINICA' },
     cerrarAtencion: { EN_CLINICA: 'ATENDIDA' },

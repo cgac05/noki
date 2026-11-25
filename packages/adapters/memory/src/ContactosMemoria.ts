@@ -1,7 +1,7 @@
 import type { Contacto, ContactosPort, PacientePorTelefono, Vinculo } from '@noki/application';
 import type { Canal, HiloId, PacienteId } from '@noki/domain';
 
-import { normalizarTelefono } from '@noki/domain';
+import { normalizarTelefono, VIGENCIA_VINCULO_DIAS } from '@noki/domain';
 import type { PacientesMemoria } from './PacientesMemoria.ts';
 
 export class ContactosMemoria implements ContactosPort {
@@ -17,6 +17,18 @@ export class ContactosMemoria implements ContactosPort {
   async buscar(canal: Canal, valor: string): Promise<Contacto | null> {
     const contacto = this.contactos.get(JSON.stringify([canal, valor]));
     return contacto ? { ...contacto } : null;
+  }
+
+  async whatsappVigente(pacienteId: PacienteId, ts: string): Promise<Contacto | null> {
+    const desde = Date.parse(ts) - VIGENCIA_VINCULO_DIAS * 86_400_000;
+    const candidatos = [...this.contactos.values()].flatMap(contacto => {
+      const vinculo = this.vinculos.get(contacto.id)?.get(pacienteId);
+      return contacto.canal === 'whatsapp' && vinculo && vinculo.nivel >= 1 && Date.parse(vinculo.ultimoUso) >= desde
+        ? [{ contacto, vinculo }] : [];
+    });
+    candidatos.sort((a, b) => Number(b.vinculo.relacion === 'TITULAR') - Number(a.vinculo.relacion === 'TITULAR')
+      || Date.parse(b.vinculo.ultimoUso) - Date.parse(a.vinculo.ultimoUso) || a.contacto.id.localeCompare(b.contacto.id));
+    return candidatos[0] ? { ...candidatos[0].contacto } : null;
   }
 
   async crear(contacto: Contacto): Promise<Contacto> {

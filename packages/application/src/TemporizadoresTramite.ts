@@ -1,6 +1,6 @@
 import { NoEncontrado, type ContextoOperacion, type RegistroTiposTramite, type ReservaId, type Tramite, type TramiteId } from '@noki/domain';
 import type { GeneradorId } from './ports/GeneradorId.ts';
-import type { ProgramadorTemporizadores, Temporizador, TipoTemporizador } from './ports/ProgramadorTemporizadores.ts';
+import type { ProgramadorTemporizadores, Temporizador, TemporizadorDeTramite, TipoTemporizadorTramite } from './ports/ProgramadorTemporizadores.ts';
 import type { Reloj } from './ports/Reloj.ts';
 import type { AgendaPort, TramiteRepo } from './ports/nucleo.ts';
 
@@ -19,7 +19,7 @@ interface PuertosTemporizadores {
   registrarError?: (datos: { correlation_id: string; codigo: string }) => void;
 }
 
-const tipos: readonly TipoTemporizador[] = ['HOLD', 'INASISTENCIA', 'INACTIVIDAD'];
+const tipos: readonly TipoTemporizadorTramite[] = ['HOLD', 'INASISTENCIA', 'INACTIVIDAD'];
 
 export class TemporizadoresTramite {
   constructor(private readonly puertos: PuertosTemporizadores) {}
@@ -35,6 +35,7 @@ export class TemporizadoresTramite {
   }
 
   async ejecutar(trabajo: Temporizador): Promise<ResultadoTemporizador> {
+    if (trabajo.tipo === 'OFERTA') return { tipo: 'SIN_EFECTO' };
     const tramite = await this.cargar(trabajo.tramiteId);
     if (!tramite) return { tipo: 'SIN_EFECTO' };
     const vigente = this.trabajo(trabajo.tipo, tramite);
@@ -68,7 +69,7 @@ export class TemporizadoresTramite {
     }
   }
 
-  private trabajo(tipo: TipoTemporizador, tramite: Tramite): Temporizador | undefined {
+  private trabajo(tipo: TipoTemporizadorTramite, tramite: Tramite): TemporizadorDeTramite | undefined {
     const { id: tramiteId, version, estado, horario, perfil } = tramite;
     const base = { tipo, tramiteId, version };
     const calcularPlazo = (inicio: string, ms: number) => {

@@ -1,5 +1,5 @@
 import { sql, type Kysely } from 'kysely';
-import type { AlertaSeguridadLeida, DatosEmisionToken, CitaLeida, LlegadaLeida, ContextoDemoLeido, EventoLeido, FichaLeida, LecturasPort, MetricasLeidas, OfertaLeida, TramiteRepo } from '@noki/application';
+import type { AlertaSeguridadLeida, DatosEmisionToken, CitaLeida, LlegadaLeida, ContextoDemoLeido, EventoLeido, FichaLeida, LecturasPort, MetricasLeidas, HuecoLeido, OfertaLeida, TramiteRepo } from '@noki/application';
 import { ESTADOS_TRAMITE, normalizarTelefono, type Canal, type EstadoTramite, type HiloId, type PacienteId, type SedeId, type Tramite, type TramiteId } from '@noki/domain';
 
 export class LecturasComandosPostgres implements LecturasPort {
@@ -118,6 +118,20 @@ export class LecturasComandosPostgres implements LecturasPort {
     return citas.filter((cita): cita is CitaLeida => cita !== null);
   }
 
+  async panelHuecos(): Promise<HuecoLeido[]> {
+    const { rows } = await sql<Omit<HuecoLeido, 'inicio'> & { inicio: Date }>`
+      SELECT h.id, h.estado, s.nombre AS servicio, d.nombre AS sede, d.zona_horaria AS "zonaHoraria", r.inicio,
+        COALESCE((SELECT jsonb_agg(jsonb_build_object('estado', o.estado,
+          'enviadaEn', to_char(o.enviada_en AT TIME ZONE 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"'),
+          'expiraEn', to_char(o.expira_en AT TIME ZONE 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"'))
+          ORDER BY o.enviada_en, o.id) FROM oferta_hueco o WHERE o.hueco_id = h.id), '[]'::jsonb) AS ofertas
+      FROM hueco h JOIN reserva r ON r.id = h.origen_reserva_id
+        JOIN servicio s ON s.id = h.servicio_id JOIN sede d ON d.id = r.sede_id
+      ORDER BY h.creado_en DESC, h.id DESC LIMIT 50
+    `.execute(this.db);
+    return rows.map(fila => ({ ...fila, inicio: fila.inicio.toISOString() }));
+  }
+
   async metricas(): Promise<MetricasLeidas> {
     const { rows: conteos } = await sql<{ estado: EstadoTramite; cantidad: number }>`
       SELECT estado, count(*)::int AS cantidad FROM tramite GROUP BY estado`.execute(this.db);
@@ -138,7 +152,14 @@ export class LecturasComandosPostgres implements LecturasPort {
           AND EXISTS (SELECT 1 FROM evento e WHERE e.tramite_id = t.id AND e.tipo = 'CanalCambiado')) AS "tramitesRecuperados",
         citas AS "citasConfirmadas", llegadas AS "llegadasRegistradas",
         (SELECT count(*)::int FROM selecciones WHERE payload = anterior) AS "datosRepetidos",
-        intentos AS "intentosVerificacionFallidos" FROM totales`.execute(this.db);
+        intentos AS "intentosVerificacionFallidos",
+        (SELECT count(*)::int FROM hueco) AS "huecosLiberados",
+        (SELECT count(*)::int FROM hueco WHERE estado = 'ASIGNADO') AS "huecosRecuperados",
+        (SELECT coalesce(round(sum((s.perfil->>'duracionMin')::numeric) / 60, 1), 0)::float8
+           FROM hueco h JOIN servicio s ON s.id = h.servicio_id WHERE h.estado = 'ASIGNADO') AS "horasRecursoRecuperadas",
+        (SELECT coalesce(avg((payload->>'diasAdelantados')::numeric), 0)::float8
+           FROM evento WHERE tipo = 'CitaAdelantada') AS "diasAdelantadosPromedio"
+        FROM totales`.execute(this.db);
     return {
       porEstado: ESTADOS_TRAMITE.map(estado => ({ estado, cantidad: conteos.find(fila => fila.estado === estado)?.cantidad ?? 0 })),
       kpis: kpis ?? {},
@@ -148,9 +169,9 @@ export class LecturasComandosPostgres implements LecturasPort {
   async contextoDemo(): Promise<ContextoDemoLeido> {
     const { rows } = await sql<ContextoDemoLeido>`
       SELECT t.hilo_id AS "hiloId", t.paciente_id AS "pacienteId", t.sede_id AS "sedeId"
-      FROM tramite t JOIN evento e ON e.tramite_id = t.id AND e.tipo = 'CitaConfirmada'
+      FROM tramite t LEFT JOIN evento e ON e.tramite_id = t.id AND e.tipo = 'CitaConfirmada'
       WHERE t.estado IN ('CONFIRMADA','EN_CLINICA','ATENDIDA')
-      ORDER BY e.ts DESC, e.id DESC LIMIT 1`.execute(this.db);
+      ORDER BY e.ts DESC NULLS LAST, e.id DESC NULLS LAST, t.ultima_actividad DESC, t.id LIMIT 1`.execute(this.db);
     return rows[0] ?? { hiloId: null, pacienteId: null, sedeId: null };
   }
 

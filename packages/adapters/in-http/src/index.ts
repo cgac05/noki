@@ -5,3 +5,4 @@ export { vistaTramite } from './vistaTramite.ts';
 export * from './ConversacionWa.ts';
 export * from './rutasWhatsApp.ts';
 export { rutaRelojDemo } from './rutaRelojDemo.ts';
+export { textoAprobacion, textoOferta, ofertaPerdida, citaAdelantada } from './textosWa.ts';

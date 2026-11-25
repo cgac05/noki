@@ -3,13 +3,17 @@ import { z } from 'zod';
 import type { Reloj, ResultadoTemporizador, Temporizador } from '@noki/application';
 import type { ReservaId, TramiteId } from '@noki/domain';
 
-const esquema = z.object({
+const trabajoTramite = z.object({
   tipo: z.enum(['HOLD', 'INASISTENCIA', 'INACTIVIDAD']),
   tramiteId: z.uuidv7().transform(id => id as TramiteId),
   venceEn: z.iso.datetime(),
   version: z.number().int().positive(),
   reservaId: z.uuidv7().transform(id => id as ReservaId).optional(),
 });
+
+const esquema = z.union([trabajoTramite, z.object({
+  tipo: z.literal('OFERTA'), ofertaId: z.uuidv7(), venceEn: z.iso.datetime(),
+})]);
 
 export class WorkerTemporizadores {
   private readonly worker: Worker<unknown>;
@@ -21,8 +25,11 @@ export class WorkerTemporizadores {
   ) {
     this.worker = new Worker(nombre, async (job, token) => {
       const datos = esquema.parse(job.data);
-      const { reservaId, ...base } = datos;
-      const resultado = await ejecutar(reservaId ? { ...base, reservaId } : base);
+      const reservaId = datos.tipo === 'OFERTA' ? undefined : datos.reservaId;
+      const resultado = await ejecutar(datos.tipo === 'OFERTA' ? datos : {
+        tipo: datos.tipo, tramiteId: datos.tramiteId, venceEn: datos.venceEn, version: datos.version,
+        ...(reservaId ? { reservaId } : {}),
+      });
       if (resultado.tipo === 'REPROGRAMAR') {
         const delay = Math.max(0, Date.parse(resultado.venceEn) - reloj.ahora().getTime());
         await job.moveToDelayed(Date.now() + delay, token);
@@ -38,7 +45,7 @@ export class WorkerTemporizadores {
       if (!job || job.attemptsMade < (job.opts.attempts ?? 1)) return;
       const datos = esquema.safeParse(job.data);
       registrar(datos.success
-        ? { codigo: 'TEMPORIZADOR_FALLIDO', tipo: datos.data.tipo, tramiteId: datos.data.tramiteId }
+        ? { codigo: 'TEMPORIZADOR_FALLIDO', tipo: datos.data.tipo, ...(datos.data.tipo === 'OFERTA' ? {} : { tramiteId: datos.data.tramiteId }) }
         : { codigo: 'TEMPORIZADOR_FALLIDO' });
     });
   }

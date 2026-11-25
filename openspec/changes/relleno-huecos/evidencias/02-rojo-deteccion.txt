@@ -1,0 +1,56 @@
+
+ RUN  v4.0.14 C:/Users/guill/Documents/GitHub/noki-identidad
+
+ ❯ |unitarios| tests/unit/rellenoHuecosAplicacion.test.ts (3 tests | 3 failed) 8ms
+   × detecta una sola vez el hueco y ofrece a Beto sin datos de Ana 5ms
+   × al vencer la oferta para Beto se ofrece a Carla 1ms
+   × detecta el hueco fuera del modo demo y lo deja desierto 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosAplicacion.test.ts > detecta una sola vez el hueco y ofrece a Beto sin datos de Ana
+TypeError: __vite_ssr_import_2__.HuecosMemoria is not a constructor
+ ❯ preparar tests/unit/rellenoHuecosAplicacion.test.ts:35:18
+     33|   const notificador = new NotificadorWaMemoria();
+     34|   const tokens = new TokensBotonWaMemoria(reloj, new RegistroTokensUsa…
+     35|   const huecos = new HuecosMemoria();
+       |                  ^
+     36|   let consecutivo = 0;
+     37|   const casos = new RellenoHuecos({
+ ❯ tests/unit/rellenoHuecosAplicacion.test.ts:47:42
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosAplicacion.test.ts > al vencer la oferta para Beto se ofrece a Carla
+TypeError: __vite_ssr_import_2__.HuecosMemoria is not a constructor
+ ❯ preparar tests/unit/rellenoHuecosAplicacion.test.ts:35:18
+     33|   const notificador = new NotificadorWaMemoria();
+     34|   const tokens = new TokensBotonWaMemoria(reloj, new RegistroTokensUsa…
+     35|   const huecos = new HuecosMemoria();
+       |                  ^
+     36|   let consecutivo = 0;
+     37|   const casos = new RellenoHuecos({
+ ❯ tests/unit/rellenoHuecosAplicacion.test.ts:60:49
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  |unitarios| tests/unit/rellenoHuecosAplicacion.test.ts > detecta el hueco fuera del modo demo y lo deja desierto
+TypeError: __vite_ssr_import_2__.HuecosMemoria is not a constructor
+ ❯ preparar tests/unit/rellenoHuecosAplicacion.test.ts:35:18
+     33|   const notificador = new NotificadorWaMemoria();
+     34|   const tokens = new TokensBotonWaMemoria(reloj, new RegistroTokensUsa…
+     35|   const huecos = new HuecosMemoria();
+       |                  ^
+     36|   let consecutivo = 0;
+     37|   const casos = new RellenoHuecos({
+ ❯ tests/unit/rellenoHuecosAplicacion.test.ts:71:42
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  03:10:39
+   Duration  2.14s (transform 485ms, setup 0ms, import 1.86s, tests 8ms, environment 0ms)
+
+Código de salida: 1

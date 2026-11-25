@@ -37,6 +37,7 @@ it('conserva el plazo tras un comando sin efectos y expira con contexto del sist
   });
   await temporizadores.reconciliar(tramite.id);
   expect(programador.vencidos('2026-11-28T12:00:00Z')).toEqual([]);
+  if (original.tipo === 'OFERTA') throw new Error('Se esperaba un temporizador de trámite.');
   expect(await temporizadores.ejecutar({ ...original, tramiteId: ids.nuevo() as TramiteId }))
     .toEqual({ tipo: 'SIN_EFECTO' });
 });

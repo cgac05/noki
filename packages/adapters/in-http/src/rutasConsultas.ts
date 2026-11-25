@@ -67,6 +67,7 @@ export const rutasConsultas: FastifyPluginAsync<DependenciasConsultas> = async (
       cita: await vistaCita(cita, emisor), registrada: cita.tramite.estado === 'EN_CLINICA',
       ...(posicion === undefined ? {} : { posicion }),
     }))));
+  registrar('panelHuecos', async () => await lecturas.panelHuecos?.() ?? []);
   registrar('metricas', () => lecturas.metricas());
   registrar('alertasSeguridad', () => lecturas.alertasSeguridad());
   registrar('bandeja', () => deps.bandeja.listar());

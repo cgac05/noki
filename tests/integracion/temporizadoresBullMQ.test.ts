@@ -89,3 +89,18 @@ it('registra el fallo persistente tras tres intentos con los campos autorizados'
   ]);
   expect(intentos).toBe(3);
 }, 10_000);
+
+it('programa OFERTA por ofertaId y el worker la recibe al adelantar el reloj', async () => {
+  const reloj = new RelojFalso(new Date(ahora));
+  const oferta: Temporizador = { tipo: 'OFERTA', ofertaId: '019ab990-01b0-7000-8000-000000000005', venceEn };
+  const recibidos: Temporizador[] = [];
+  await programador.programar(oferta, ahora);
+  expect((await programador.cola.getJob('OFERTA-' + oferta.ofertaId))?.data).toEqual(oferta);
+  worker = new WorkerTemporizadores(url, nombre, reloj, async trabajo => {
+    recibidos.push(trabajo);
+    return { tipo: 'APLICADO' };
+  }, () => {});
+  reloj.adelantar(60_000);
+  expect(await programador.adelantarVencidos(reloj.ahora().toISOString())).toBe(1);
+  await expect.poll(() => recibidos).toEqual([oferta]);
+});

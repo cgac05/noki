@@ -17,3 +17,5 @@ export * from './identidad/telefono.ts';
 export * from './prediccion/factores.ts';
 export * from './prediccion/nivel.ts';
 export * from './prediccion/plan.ts';
+export * from './huecos/candidatos.ts';
+export * from './huecos/Hueco.ts';

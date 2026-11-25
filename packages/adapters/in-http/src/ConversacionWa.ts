@@ -1,10 +1,11 @@
+import { PREFIJO_BOTON_WA } from '@noki/application';
 import { formatInTimeZone } from 'date-fns-tz';
 import { z } from 'zod';
 import {
   IdentificarPacienteSchema, type MensajeBot, type SolicitudMensajeWa,
 } from '@noki/contracts';
 import type {
-  AgendaExternaPort, CasosTramite, ContactosPort, ContextoComando, ConversacionesWa, GeneradorId, LecturasPort, Reloj,
+  AprobacionCancelacion, AgendaExternaPort, CasosTramite, ContactosPort, ContextoComando, ConversacionesWa, GeneradorId, LecturasPort, Reloj,
 } from '@noki/application';
 import {
   ErrorDominio, siguientePregunta, type PistaDominio, type RegistroTiposTramite, type SedeId,
@@ -32,6 +33,8 @@ type Accion = z.infer<typeof accion>;
 
 export interface DependenciasWa {
   casos: CasosTramite;
+  aprobacion?: AprobacionCancelacion;
+  responderOferta?: (waId: string, token: string, clave: string, correlacion: string) => Promise<string | null>;
   contactos: ContactosPort;
   conversaciones: ConversacionesWa;
   lecturas: LecturasPort;
@@ -50,6 +53,12 @@ export class ConversacionWa {
 
   async responder(mensaje: SolicitudMensajeWa, clave: string, correlationId: string): Promise<MensajeBot[]> {
     const { waId, flowResponse, payloadBoton } = mensaje;
+    if (payloadBoton?.startsWith(PREFIJO_BOTON_WA)) {
+      const resultado = await this.deps.aprobacion?.responder(waId, payloadBoton, clave, correlationId);
+      return [texto(resultado === 'CANCELADA' ? 'Tu cita quedó cancelada.'
+        : resultado === 'CONSERVADA' ? 'Conservamos tu cita.'
+        : await this.deps.responderOferta?.(waId, payloadBoton, clave, correlationId) ?? noDisponible)];
+    }
     const { casos, contactos, conversaciones, lecturas, reloj } = this.deps;
     const contexto: ContextoComando = {
       canal: 'whatsapp', actor: 'paciente', nivel: 0, vinculado: false, factores: new Set(),

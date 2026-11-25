@@ -3,7 +3,9 @@ import { Pool } from 'pg';
 import { argon2id, hash } from 'argon2';
 import { idDemo, PACIENTES_DEMO, SEDES_DEMO, SERVICIOS_DEMO, USUARIOS_DEMO } from './datosDemo.ts';
 
-export async function sembrar(connectionString: string): Promise<void> {
+import { sembrarCitasHuecos } from './sembrarCitasHuecos.ts';
+
+export async function sembrar(connectionString: string, ahora = new Date()): Promise<void> {
   const db = new Kysely<unknown>({ dialect: new PostgresDialect({ pool: new Pool({ connectionString, connectionTimeoutMillis: 1000 }) }) });
   try {
     await db.transaction().execute(async tx => {
@@ -52,6 +54,8 @@ export async function sembrar(connectionString: string): Promise<void> {
         await sql`INSERT INTO credencial (id,paciente_id,tipo,hash) VALUES (${paciente.credencialId},${paciente.id},'PIN',${hashPin})
           ON CONFLICT (paciente_id,tipo) DO UPDATE SET hash=EXCLUDED.hash`.execute(tx);
       }
+      const { rows: [tablas] } = await sql<{ huecos: boolean }>`SELECT to_regclass(format('%I.hueco', current_schema())) IS NOT NULL AS huecos`.execute(tx);
+      if (tablas?.huecos) await sembrarCitasHuecos(tx, ahora);
       for (const usuario of USUARIOS_DEMO) {
         const hashClave = await hash('demo123', { type: argon2id });
         await sql`INSERT INTO usuario_interno (id,usuario,rol,sede_id,hash)
