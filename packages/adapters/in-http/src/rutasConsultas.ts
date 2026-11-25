@@ -1,4 +1,4 @@
-import type { FastifyPluginAsync } from 'fastify';
+import type { FastifyPluginAsync, RouteShorthandOptions } from 'fastify';
 import { RUTAS_CONSULTAS, type NombreConsulta, type ParametrosConsulta } from '@noki/contracts';
 import type { BandejaPort, CitaLeida, EmisorTokens, LecturasPort, Reloj } from '@noki/application';
 import { NoEncontrado, type HiloId, type PacienteId, type SedeId, type TramiteId } from '@noki/domain';
@@ -32,7 +32,15 @@ export const rutasConsultas: FastifyPluginAsync<DependenciasConsultas> = async (
   function registrar<N extends NombreConsulta>(nombre: N, consultar: (p: ParametrosConsulta<N>) => Promise<unknown>) {
     const ruta = RUTAS_CONSULTAS[nombre];
     if ('soloDemo' in ruta && !deps.demo) return;
-    app.get(ruta.ruta, async (request, reply) => {
+    const opciones: RouteShorthandOptions = nombre === 'sesionWebDemo'
+      ? {
+        childLoggerFactory: (logger, bindings, opcionesLogger) => logger.child(bindings, {
+          ...opcionesLogger,
+          serializers: { ...opcionesLogger.serializers, req: () => ({ method: 'GET', url: ruta.ruta }) },
+        }),
+      }
+      : {};
+    app.get(ruta.ruta, opciones, async (request, reply) => {
       try {
         const parametros = ruta.parametros.parse(request.params) as ParametrosConsulta<N>;
         return ruta.respuesta.parse(await consultar(parametros));
@@ -72,4 +80,9 @@ export const rutasConsultas: FastifyPluginAsync<DependenciasConsultas> = async (
   registrar('alertasSeguridad', () => lecturas.alertasSeguridad());
   registrar('bandeja', () => deps.bandeja.listar());
   registrar('contextoDemo', () => lecturas.contextoDemo());
+  registrar('sesionWebDemo', async ({ telefono }) => {
+    const sesion = await lecturas.sesionWebDemo(telefono.slice(-10));
+    if (!sesion) throw new NoEncontrado('sesion', 'web');
+    return sesion;
+  });
 };

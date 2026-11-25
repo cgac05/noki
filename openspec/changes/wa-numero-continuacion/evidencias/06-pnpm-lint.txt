@@ -1,0 +1,7 @@
+$ eslint . && pnpm typecheck
+$ pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json
+tests/unit/nucleo/casosTramite.test.ts(655,76): error TS2353: Object literal may only specify known properties, and 'sexo' does not exist in type 'DatosDeclarados'.
+[ELIFECYCLE] Command failed with exit code 2.
+[ELIFECYCLE] Command failed with exit code 2.
+
+Código de salida: 2

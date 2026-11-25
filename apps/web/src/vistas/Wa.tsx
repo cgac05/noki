@@ -5,21 +5,30 @@ import { useConversacionWa } from '../cliente/useConversacionWa.ts';
 import { ChatWa } from '../componentes/ChatWa.tsx';
 import { useHistorialWa } from '../cliente/ProveedorCliente.tsx';
 
+const patronNumero = /^\d{10,15}$/;
+
 export function Wa() {
-  const [numero, setNumero] = useState(CONTACTO_DEMO);
+  const [parametros] = useSearchParams();
+  const navegar = useNavigate();
+  const codigo = parametros.get('continuar');
+  const numeroEnlace = parametros.get('numero');
+  const numeroDestino = numeroEnlace !== null && patronNumero.test(numeroEnlace) ? numeroEnlace : undefined;
+  const [numero, setNumero] = useState(numeroDestino ?? CONTACTO_DEMO);
   const [texto, setTexto] = useState('');
   const conversacion = useConversacionWa(numero);
   const historial = useHistorialWa();
   const nuevos = useSyncExternalStore(historial.suscribirSesion, historial.numerosNuevos);
   useEffect(() => { historial.mostrar(numero); return () => historial.ocultar(numero); }, [historial, numero]);
-  const [parametros] = useSearchParams(); const navegar = useNavigate();
-  const codigo = parametros.get('continuar');
-  const numeroValido = /^\d{10,15}$/.test(numero);
+  const numeroValido = patronNumero.test(numero);
   useEffect(() => {
-    if (codigo === null) return;
-    if (codigo.trim() && numeroValido) void conversacion.continuar(codigo);
+    if (codigo === null && numeroEnlace === null) return;
+    if (numeroDestino !== undefined && numeroDestino !== numero) {
+      setNumero(numeroDestino);
+      return;
+    }
+    if (codigo?.trim() && numeroValido) void historial.continuar(numero, codigo);
     void navegar('/wa', { replace: true });
-  }, [codigo, numeroValido, conversacion.continuar, navegar]);
+  }, [codigo, numeroEnlace, numeroDestino, numero, numeroValido, historial, navegar]);
   const enviar = () => {
     if (!numeroValido || !texto.trim() || conversacion.enviando) return;
     void conversacion.enviar({ waId: numero, texto: texto.trim() }, { tipo: 'texto', texto: texto.trim() });

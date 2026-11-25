@@ -12,9 +12,8 @@ import { LineaTiempo } from '../componentes/LineaTiempo.tsx';
 import { dinero } from '../componentes/formato.ts';
 import { IdentificacionAsesor } from '../componentes/IdentificacionAsesor.tsx';
 
-function LlamadaEntrante() {
+function LlamadaEntrante({ accion }: { accion: ReturnType<typeof useAccion> }) {
   const [numero, setNumero] = useState(CONTACTO_DEMO);
-  const accion = useAccion();
   const valido = /^\d{10,15}$/.test(numero);
   return <>
     <form className="seccion llamada-entrante" onSubmit={evento => {
@@ -33,17 +32,27 @@ function LlamadaEntrante() {
 
 export function CallCenter() {
   const [consentimientoHilo, setConsentimientoHilo] = useState<string>();
+  const [esperarNuevaLlamada, setEsperarNuevaLlamada] = useState(false);
   const cliente = useCliente();
   const contexto = useContextoConsulta();
-  const { respuesta } = useRespuestaComando();
+  const { respuesta: ultimaRespuesta } = useRespuestaComando();
+  const inicio = useAccion();
+  const mostrarLlamada = !esperarNuevaLlamada || inicio.isSuccess;
+  const respuesta = mostrarLlamada ? ultimaRespuesta : undefined;
   // Un contexto de demo ajeno no sustituye la llamada activa de esta pestaña (D4).
-  const hiloId = cliente.modo === 'mock' || respuesta ? contexto.hiloId : undefined;
+  const hiloId = mostrarLlamada && (cliente.modo === 'mock' || respuesta) ? contexto.hiloId : undefined;
   useSala(hiloId ? `hilo:${hiloId}` : undefined);
   const ficha = useConsulta('fichaHilo', hiloId ? { hiloId } : undefined);
   const catalogo = useConsulta('catalogo', {});
   const accion = useAccion();
   const codigo = ficha.data?.codigoContinuacion?.replace(/^CONTINUAR\s+/, '');
-  const rutaContinuacion = codigo ? '/wa?continuar=' + encodeURIComponent(codigo) : '/wa';
+  const accionInicio = inicio.variables?.accion;
+  const comandoInicio = accionInicio?.tipo === 'comando' ? accionInicio.comando : undefined;
+  const ani = inicio.isSuccess && inicio.data?.tramite.hiloId === hiloId && comandoInicio?.tipo === 'IniciarTramite'
+    ? comandoInicio.payload.contacto : undefined;
+  const rutaContinuacion = codigo
+    ? `/wa?continuar=${encodeURIComponent(codigo)}${ani ? `&numero=${encodeURIComponent(ani)}` : ''}`
+    : '/wa';
   const tramite = ficha.data?.tramites[0] ?? respuesta?.tramite;
   const pregunta = respuesta?.siguientePregunta;
   const llamadaCerrada = accion.isSuccess && accion.variables?.accion.titulo === 'Cerrar atención (llamada cortada)';
@@ -56,7 +65,13 @@ export function CallCenter() {
   return <>
     <h1>Call Center</h1>
     <p className="introduccion">Inicia la atención y continúa la misma conversación en WhatsApp.</p>
-    {!tramite && <LlamadaEntrante />}
+    {!tramite && <LlamadaEntrante accion={inicio} />}
+    {tramite && <button type="button" disabled={inicio.isPending || accion.isPending} onClick={() => {
+      setEsperarNuevaLlamada(true);
+      setConsentimientoHilo(undefined);
+      inicio.reset();
+      accion.reset();
+    }}>Volver a nueva llamada</button>}
     {hiloId && ficha.isPending && <EstadoCarga />}
     {ficha.isError && <EstadoError error={ficha.error} onReintentar={() => { void ficha.refetch(); }} />}
     {ficha.data && <>

@@ -9,6 +9,7 @@ export const CONTACTOS_DEMO = [CONTACTO_DEMO, CONTACTO_BETO_DEMO, CONTACTO_CARLA
 
 export interface ClienteApi {
   readonly modo: 'mock' | 'real';
+  readonly sesionWebDemoHabilitada?: boolean;
   enviarComando(comando: ComandoRequest, opciones?: { idempotencyKey?: string }): Promise<RespuestaComando>;
   enviarMensajeWa(mensaje: SolicitudMensajeWa, opciones?: { idempotencyKey?: string }): Promise<RespuestaMensajeWa>;
   consultar<N extends NombreConsultaCliente>(nombre: N, parametros: ParametrosConsultaCliente<N>): Promise<RespuestaConsultaCliente<N>>;

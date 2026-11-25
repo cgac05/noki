@@ -12,6 +12,9 @@ import { ESQUEMAS_DEMO } from './demo.ts';
 import { ClienteReal } from './real/ClienteReal.ts';
 import type { DatosEventoSocket } from '@noki/contracts';
 
+const consultasGuion = (Object.keys(RUTAS_CONSULTAS) as Array<keyof typeof RUTAS_CONSULTAS>)
+  .filter(nombre => nombre !== 'sesionWebDemo');
+
 const iniciar = { canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR', contacto: '5210000000001' } } as const;
 
 describe('Configuración y contrato de lecturas', () => {
@@ -64,7 +67,7 @@ describe('Cliente simulado', () => {
         expect(esquema.safeParse(datos).success, `${paso.paso.id}: ${nombre}`).toBe(true);
       }
       const parametros = { ...cliente.demo.ids, tramiteId: paso.respuesta.tramite.id };
-      for (const nombre of Object.keys(RUTAS_CONSULTAS) as Array<keyof typeof RUTAS_CONSULTAS>) expect(await cliente.consultar(nombre, parametros)).toEqual(paso.lecturas[nombre]);
+      for (const nombre of consultasGuion) expect(await cliente.consultar(nombre, parametros)).toEqual(paso.lecturas[nombre]);
       for (const evento of paso.eventosSocket) expect(ESQUEMAS_EVENTOS_SOCKET[evento.nombre].safeParse(evento.datos).success).toBe(true);
     }
     const ofertas = recibir.mock.calls.map(([dato]) => dato).filter(dato => dato.waId !== '5210000000001');
@@ -93,7 +96,7 @@ describe('Cliente simulado', () => {
       if (paso.espera?.tipo === 'comando') await cliente.enviarComando(paso.espera.comando);
       else if (paso.espera?.tipo === 'comandos') { for (const comando of paso.espera.comandos) await cliente.enviarComando(comando); }
       else if (paso.espera?.tipo === 'wa') await cliente.enviarMensajeWa(paso.espera.mensaje);
-      for (const nombre of Object.keys(RUTAS_CONSULTAS) as Array<keyof typeof RUTAS_CONSULTAS>) {
+      for (const nombre of consultasGuion) {
         const lectura = await cliente.consultar(nombre, parametros);
         expect(RUTAS_CONSULTAS[nombre].respuesta.parse(lectura)).toEqual(paso.lecturas[nombre]);
         expect(JSON.stringify(lectura)).not.toMatch(/"(?:acciones|accion|comando)":/);
@@ -215,12 +218,23 @@ describe('Cliente real', () => {
   it('Ruta de la tabla: resuelve todas las consultas compartidas como GET', async () => {
     const lecturas = GUION_FLUJO_A.find(paso => paso.paso.id === 'CONFIRMADA')!.lecturas;
     const parametros = { tramiteId: IDS.tramite, hiloId: IDS.hilo, pacienteId: IDS.paciente, sedeId: IDS.sede };
-    for (const nombre of Object.keys(RUTAS_CONSULTAS) as Array<keyof typeof RUTAS_CONSULTAS>) {
+    for (const nombre of consultasGuion) {
       const peticion = vi.fn<typeof fetch>().mockResolvedValue(Response.json(lecturas[nombre]));
       const cliente = new ClienteReal({ url: 'http://api.test/', fetch: peticion, demo: true });
       expect(await cliente.consultar(nombre, parametros)).toEqual(lecturas[nombre]);
       expect(peticion).toHaveBeenCalledExactlyOnceWith(`http://api.test${rutaConsulta(nombre, parametros)}`, { method: 'GET' });
     }
+  });
+
+  it('consulta la sesión web real solo con demo y envía únicamente el teléfono', async () => {
+    const telefono = '5210000000001';
+    const sesion = { pacienteId: IDS.paciente, nombreVisible: 'Ana P.' };
+    const peticion = vi.fn<typeof fetch>().mockResolvedValue(Response.json(sesion));
+    await expect(new ClienteReal({ fetch: peticion }).consultar('sesionWebDemo', { telefono }))
+      .rejects.toMatchObject({ tipo: 'NO_DISPONIBLE' });
+    expect(peticion).not.toHaveBeenCalled();
+    expect(await new ClienteReal({ fetch: peticion, demo: true }).consultar('sesionWebDemo', { telefono })).toEqual(sesion);
+    expect(peticion).toHaveBeenCalledExactlyOnceWith('http://localhost:4000/api/demo/sesion-web/' + telefono, { method: 'GET' });
   });
 
   it('Bandeja fuera de demo: no consulta la red; con demo valida la respuesta', async () => {

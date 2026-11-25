@@ -41,6 +41,8 @@ h2 { margin: 0 0 1rem; font-size: 1rem; font-weight: 600; }
 .control-demo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; width: min(100% - 3rem, 72rem); margin: 0 auto; padding-bottom: 0.5rem; }
 .control-demo p { margin: 0; font-size: 0.8125rem; color: var(--tinta-secundaria); }
 button, input { font: inherit; }
+.seccion label:has(+ input:is([type="tel"], [type="password"])) { display: block; font-weight: 600; }
+.seccion input:is([type="text"], [type="tel"], [type="password"]) { display: block; box-sizing: border-box; width: min(100%, 24rem); min-height: 44px; margin-block: 0.25rem 0.75rem; padding: 0.625rem 0.75rem; border: 1px solid var(--linea); border-radius: 0.5rem; color: inherit; background: #fff; caret-color: #21734f; }
 button { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0.625rem 1rem; border: 1px solid #21734f; border-radius: 0.5rem; background: #21734f; color: #fff; line-height: 1.4; cursor: pointer; }
 button:hover:enabled { background: #18593d; }
 button:disabled { background: #e4ece3; color: #465e52; border-color: var(--linea); cursor: default; }

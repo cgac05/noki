@@ -83,5 +83,6 @@ export interface LecturasPort {
   alertasSeguridad(): Promise<AlertaSeguridadLeida[]>;
   metricas(): Promise<MetricasLeidas>;
   contextoDemo(): Promise<ContextoDemoLeido>;
+  sesionWebDemo(numero: string): Promise<{ pacienteId: PacienteId; nombreVisible: string } | null>;
   horariosOcupados(id: SedeId, fecha: string, ts: string): Promise<string[]>;
 }

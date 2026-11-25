@@ -16,7 +16,7 @@ Canales: `web | whatsapp | app | callcenter | clinica`. Estados, casillas y tipo
 | SolicitarContinuacion | `{ destino: 'whatsapp' }`. Requiere `tramiteId` y solicita el consentimiento de contacto y el código de continuación. |
 | SeleccionarServicio | `{ servicioId }` |
 | SeleccionarSede | `{ sedeId }` |
-| AsignarPaciente | `{ pacienteId }`. Solo personal interno y `sistema`. |
+| AsignarPaciente | `{ pacienteId }`. Personal interno y `sistema`. Con `DEMO_MODE=true`, el adaptador permite también `web/paciente` y ejecuta esa asignación como `sistema`. |
 | IdentificarPaciente | Payload discriminado por `paso`. Requiere `tramiteId`. |
 | ReservarHorario | `{ recursoId, inicio }` |
 | ConfirmarCita | `{ reservaId }` |
@@ -74,12 +74,15 @@ El QR contiene el token firmado de un solo uso que debe generar y consumir el n�
 | `panelHuecos` | `/api/admin/huecos` | ninguno | `HuecoVista[]` de hasta 50 elementos |
 | `bandeja` | `/api/demo/bandeja` | ninguno | `MensajeBandeja[]`, `soloDemo: true` |
 | `contextoDemo` | `/api/demo/contexto` | ninguno | `ContextoDemo`, `soloDemo: true` |
+| `sesionWebDemo` | `/api/demo/sesion-web/:telefono` | 10 a 15 dígitos | `{ pacienteId, nombreVisible }`, `soloDemo: true` |
 
 `alertasSeguridad` omite datos personales y el método de verificación. El intento que provoca el bloqueo lleva `bloqueado: true`. `GET /api/admin/alertas` devuelve los 50 intentos más recientes como máximo, del más reciente al más antiguo.
 
 `panelHuecos` admite hasta 50 huecos y está disponible en el contrato sin la marca `soloDemo`. El núcleo entregará los huecos del más reciente al más antiguo. La API registrará la ruta en el cambio del núcleo.
 
 `contextoDemo` devuelve `{ hiloId, pacienteId, sedeId }` del último hilo con cita confirmada. Cada campo es UUID v7 o `null`. El servidor del cambio `api-comandos` debe responder 404 cuando `DEMO_MODE` es distinto de `true`.
+
+`sesionWebDemo` busca vínculos con los últimos diez dígitos y elige el de uso más reciente. Los empates se resuelven por UUID de paciente ascendente. Devuelve un nombre enmascarado y responde 404 para un teléfono desconocido o fuera de demo. La contraseña se verifica en la web.
 
 Según el spec `consultas-api` de `api-comandos`, `metricas.kpis` contiene `cambiosCanal`, `cambiosCanalPorHilo`, `tramitesRecuperados`, `citasConfirmadas`, `llegadasRegistradas`, `datosRepetidos` e `intentosVerificacionFallidos`. Se calculan sobre todo el histórico y se emiten con los mismos valores en `admin:metricas`.
 

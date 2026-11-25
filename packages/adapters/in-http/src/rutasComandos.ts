@@ -58,7 +58,10 @@ async function traducir(comando: ComandoRequest, contexto: ContextoComando,
     case 'SeleccionarSede':
       return casos.seleccionarSede(id, comando.payload.sedeId as SedeId, contexto);
     case 'AsignarPaciente':
-      return casos.asignarPaciente(id, comando.payload.pacienteId as PacienteId, contexto);
+      return casos.asignarPaciente(id, comando.payload.pacienteId as PacienteId,
+        deps.demo && comando.canal === 'web' && comando.actor === 'paciente'
+          ? { ...contexto, actor: 'sistema' }
+          : contexto);
     case 'ReservarHorario':
       return casos.reservar(id, comando.payload.inicio, contexto, comando.payload.recursoId as RecursoId);
     case 'ConfirmarCita': {

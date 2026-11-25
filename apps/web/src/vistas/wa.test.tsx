@@ -129,6 +129,20 @@ it('Enlace del call center: envía una vez, retira el código de la URL y lo red
   expect(sessionStorage.getItem(`noki:wa:${CONTACTO_DEMO}`)).not.toContain('codigo-ficticio-protegido');
 });
 
+it.each([
+  { caso: 'Enlace con número', parametro: '3110000000', esperado: '3110000000' },
+  { caso: 'Número inválido en el enlace', parametro: '12ab', esperado: CONTACTO_DEMO },
+])('$caso: envía una sola vez desde el número esperado y limpia la URL', async ({ parametro, esperado }) => {
+  const { cliente, enviar } = respuestas([{ tipo: 'texto', texto: 'Continuación recibida' }]);
+  const { router } = abrir(cliente, `/wa?continuar=codigo-ficticio&numero=${parametro}`);
+  await screen.findByText('Continuación recibida');
+  expect(enviar).toHaveBeenCalledExactlyOnceWith(
+    { waId: esperado, texto: 'CONTINUAR codigo-ficticio' }, { idempotencyKey: expect.any(String) },
+  );
+  expect(screen.getByLabelText('Número de WhatsApp')).toHaveProperty('value', esperado);
+  expect(router.state.location).toMatchObject({ pathname: '/wa', search: '' });
+});
+
 it('Código inválido: un parámetro vacío no envía nada', async () => {
   const { cliente, enviar } = respuestas([]); abrir(cliente, '/wa?continuar=');
   expect(screen.getByLabelText('Mensaje')).toBeDefined(); expect(enviar).not.toHaveBeenCalled();

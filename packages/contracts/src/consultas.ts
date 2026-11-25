@@ -95,6 +95,10 @@ export const RUTAS_CONSULTAS = {
   },
   bandeja: { ruta: '/api/demo/bandeja', parametros: z.object({}), respuesta: z.array(MensajeBandejaSchema), soloDemo: true },
   contextoDemo: { ruta: '/api/demo/contexto', parametros: z.object({}), respuesta: ContextoDemoSchema, soloDemo: true },
+  sesionWebDemo: {
+    ruta: '/api/demo/sesion-web/:telefono', parametros: z.object({ telefono: z.string().regex(/^\d{10,15}$/) }),
+    respuesta: z.object({ pacienteId: z.uuidv7(), nombreVisible: z.string().min(1) }), soloDemo: true,
+  },
 } as const satisfies Record<string, DefinicionConsulta>;
 
 export type NombreConsulta = keyof typeof RUTAS_CONSULTAS;

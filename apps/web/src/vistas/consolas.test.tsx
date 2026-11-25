@@ -36,6 +36,30 @@ async function avanzarHasta(cliente: ClienteMock, id: string) {
 }
 
 describe('Call center autorizado', () => {
+  it('incluye el número de la llamada en el enlace y el QR de continuación', async () => {
+    const cliente = new ClienteMock({ latenciaMs: 0 });
+    const enviarComando = cliente.enviarComando.bind(cliente);
+    const enviar = vi.spyOn(cliente, 'enviarComando').mockImplementation((comando, opciones) =>
+      enviarComando(comando.tipo === 'IniciarTramite'
+        ? { ...comando, payload: { ...comando.payload, contacto: CONTACTO_DEMO } }
+        : comando, opciones));
+    const numero = '3110000000';
+    const { usuario } = abrir(cliente);
+    const campo = screen.getByLabelText('Número de la llamada (ANI)');
+    await usuario.clear(campo);
+    await usuario.type(campo, numero);
+    await usuario.click(screen.getByRole('button', { name: 'Llamada entrante' }));
+    expect(enviar).toHaveBeenCalledWith(expect.objectContaining({
+      tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR', contacto: numero },
+    }), { idempotencyKey: expect.any(String) });
+    await usuario.click(await screen.findByRole('button', { name: 'Cotizar Paquete US mamario + Papanicolaou en Tepic · $250.00' }));
+    await usuario.click(await screen.findByRole('button', { name: 'Cerrar atención (llamada cortada)' }));
+    const enlace = await screen.findByRole('link', { name: 'Abrir WhatsApp' });
+    const ruta = `/wa?continuar=${IDS.tokenContinuacion}&numero=${numero}`;
+    expect(enlace.getAttribute('href')).toBe(ruta);
+    expect(await screen.findByRole('img', { name: 'Código QR de continuación' })).toBeDefined();
+    expect(QRCode.toString).toHaveBeenCalledWith(new URL(ruta, location.origin).toString(), expect.objectContaining({ type: 'svg' }));
+  });
   it('cierra la llamada sin marcar la casilla y solicita la continuación una sola vez', async () => {
     const cliente = new ClienteMock({ latenciaMs: 0 });
     await avanzarHasta(cliente, 'COTIZADO');
@@ -65,6 +89,29 @@ describe('Call center autorizado', () => {
     expect(screen.queryByLabelText('Número de la llamada (ANI)')).toBeNull();
     expect(document.body.innerHTML).not.toContain(CONTACTO_DEMO);
     expect(JSON.stringify({ ...sessionStorage, ...localStorage })).not.toContain(CONTACTO_DEMO);
+  });
+  it('vuelve al ANI sin enviar comandos y limpia el consentimiento y el error para otra llamada', async () => {
+    const cliente = new ClienteMock({ latenciaMs: 0 });
+    await avanzarHasta(cliente, 'COTIZADO');
+    const enviar = vi.spyOn(cliente, 'enviarComando')
+      .mockRejectedValueOnce(new ErrorCliente('RED', 'Fallo simulado de continuación'))
+      .mockResolvedValueOnce(structuredClone(GUION_FLUJO_A[1]!.respuesta));
+    const { usuario } = abrir(cliente);
+    await usuario.click(await screen.findByRole('checkbox', { name: 'El paciente aceptó continuar por WhatsApp' }));
+    await usuario.click(screen.getByRole('button', { name: 'Continuar por WhatsApp' }));
+    await screen.findByRole('alert');
+
+    await usuario.click(screen.getByRole('button', { name: 'Volver a nueva llamada' }));
+    expect(screen.getByLabelText('Número de la llamada (ANI)')).toHaveProperty('value', CONTACTO_DEMO);
+    expect(screen.queryByRole('region', { name: 'Ficha del hilo' })).toBeNull();
+    expect(screen.queryByRole('alert')).toBeNull();
+    expect(enviar).toHaveBeenCalledTimes(1);
+
+    await usuario.click(screen.getByRole('button', { name: 'Llamada entrante' }));
+    expect(await screen.findByRole('checkbox', { name: 'El paciente aceptó continuar por WhatsApp' })).toHaveProperty('checked', false);
+    expect(screen.getByRole('button', { name: 'Continuar por WhatsApp' })).toHaveProperty('disabled', true);
+    expect(screen.queryByRole('alert')).toBeNull();
+    expect(enviar).toHaveBeenCalledTimes(2);
   });
   it('tolera nulos y deshabilita todas las operaciones en solo lectura', async () => {
     const cliente = new ClienteMock({ latenciaMs: 0 }); await avanzarHasta(cliente, 'LLAMADA_ENTRANTE');

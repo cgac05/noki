@@ -29,6 +29,10 @@ function abrirWeb({ conPaciente = true, demo = true } = {}) {
   const peticion: typeof fetch = async (url, opciones) => {
     const ruta = new URL(String(url)).pathname;
     rutasConsultadas.push(ruta);
+    if (ruta === '/api/demo/sesion-web/' + telefono) return conPaciente
+      ? Response.json({ pacienteId, nombreVisible: 'Ana P.' })
+      : Response.json({ error: { codigo: 'NO_ENCONTRADO', mensaje: 'Sin registro' } }, { status: 404 });
+    if (ruta === `/api/pacientes/${pacienteId}/tramites-abiertos`) return Response.json([cotizado]);
     if (ruta === '/api/demo/contexto') return Response.json({ hiloId, pacienteId: conPaciente ? pacienteId : null, sedeId: oferta.sedeId });
     if (ruta === `/api/pacientes/${pacienteId}/citas`) {
       const cita = { servicio: oferta.servicio, sede: oferta.sede, inicio: '2026-11-26T15:05:00.000Z', zonaHoraria: 'America/Mazatlan', tokenQr: 'qr-cita-demo' };
@@ -65,7 +69,7 @@ function montarWeb(cliente: ClienteApi) {
 }
 
 async function abrirCotizacion() {
-  const vista = abrirWeb();
+  const vista = abrirWeb({ demo: false });
   await vista.usuario.click(screen.getByRole('button', { name: '¿Aún no tienes cita? Cotiza un estudio' }));
   const cotizar = await screen.findByRole('button', { name: 'Cotizar Ultrasonido abdominal en Bahía de Banderas · $258.50' });
   return { ...vista, cotizar };
@@ -103,18 +107,49 @@ it.each(['', '123456789', '1234567890123456', '521 0000000001'])('no cotiza con 
 
 const boton = (name: string) => screen.getByRole('button', { name });
 
-it.each(['', '123456789', '1234567890123456', '521 0000000001'])('no consulta citas con el teléfono inválido %j', async valor => {
+it.each(['', '123456789', '1234567890123456', '521 0000000001'])('no inicia sesión con el teléfono inválido %j', async valor => {
   const { usuario, rutasConsultadas } = abrirWeb();
   if (valor) await usuario.type(screen.getByLabelText('Teléfono'), valor);
-  await usuario.click(boton('Ver citas'));
-  expect(boton('Ver citas').hasAttribute('disabled')).toBe(true);
+  await usuario.type(screen.getByLabelText('Contraseña de demostración'), 'prueba123');
+  await usuario.click(boton('Entrar'));
+  expect(boton('Entrar').hasAttribute('disabled')).toBe(true);
   expect(rutasConsultadas).toEqual([]);
 });
 
-async function verCitas(usuario: ReturnType<typeof userEvent.setup>) {
+async function verCitas(usuario: ReturnType<typeof userEvent.setup>, clave = 'prueba123') {
   await usuario.type(screen.getByLabelText('Teléfono'), telefono);
-  await usuario.click(boton('Ver citas'));
+  await usuario.type(screen.getByLabelText('Contraseña de demostración'), clave);
+  await usuario.click(boton('Entrar'));
 }
+
+it('rechaza una contraseña incorrecta sin consultar la API', async () => {
+  const { usuario, rutasConsultadas } = abrirWeb();
+  await verCitas(usuario, 'incorrecta');
+  expect(screen.getByRole('alert').textContent).toContain('Contraseña incorrecta');
+  expect(rutasConsultadas).toEqual([]);
+});
+
+it('continúa el trámite del paciente en WhatsApp', async () => {
+  const { usuario, comandos, id, rutasConsultadas } = abrirWeb();
+  await verCitas(usuario);
+  expect(await screen.findByRole('heading', { name: 'Hola, Ana P.' })).toBeTruthy();
+  await usuario.click(await screen.findByRole('button', { name: 'Continúa donde lo dejaste' }));
+  expect((await screen.findByRole('link', { name: 'Abrir WhatsApp' })).getAttribute('href')).toBe('/wa?continuar=codigo.demo');
+  expect(comandos).toMatchObject([{ tipo: 'SolicitarContinuacion', canal: 'web', actor: 'paciente', tramiteId: id }]);
+  expect(rutasConsultadas).not.toContain('/api/demo/contexto');
+});
+
+it('inicia y asigna al paciente antes de cotizar sin pedir el teléfono otra vez', async () => {
+  const { usuario, comandos } = abrirWeb();
+  await verCitas(usuario);
+  await usuario.click(await screen.findByRole('button', { name: 'Iniciar un trámite nuevo' }));
+  await screen.findByRole('heading', { name: 'Servicios y sedes' });
+  expect(screen.queryByLabelText('Teléfono')).toBeNull();
+  expect(comandos.map(c => c.tipo)).toEqual(['IniciarTramite', 'AsignarPaciente']);
+  expect(comandos[1]).toMatchObject({ payload: { pacienteId: '019aff20-0000-7000-8000-000000000005' } });
+  await usuario.click(boton('Volver'));
+  expect(screen.getByRole('heading', { name: 'Hola, Ana P.' })).toBeTruthy();
+});
 
 it.each([
   ['clic', null],
@@ -166,14 +201,16 @@ it.each([
   expect(screen.queryByRole('button', { name: 'Pagar con CoDi' })).toBeNull();
 });
 
-it.each([{ conPaciente: false }, { demo: false }])('ofrece otros canales cuando no hay contexto de demo %j', async opciones => {
-  const { usuario, rutasConsultadas } = abrirWeb(opciones);
+it('ofrece otros canales cuando el teléfono es desconocido y permite volver', async () => {
+  const { usuario, rutasConsultadas } = abrirWeb({ conPaciente: false });
   await verCitas(usuario);
-  expect(await screen.findByText('No encontramos citas pendientes')).toBeTruthy();
+  expect(await screen.findByText('No encontramos tu registro')).toBeTruthy();
   const contenido = within(screen.getByRole('main'));
   expect(contenido.getByRole('link', { name: 'WhatsApp' }).getAttribute('href')).toBe('/wa');
   expect(contenido.getByRole('link', { name: 'Call Center' }).getAttribute('href')).toBe('/callcenter');
-  expect(rutasConsultadas).toEqual(opciones.demo === false ? [] : ['/api/demo/contexto']);
+  expect(rutasConsultadas).toEqual(['/api/demo/sesion-web/' + telefono]);
+  await usuario.click(boton('Volver'));
+  expect(screen.getByLabelText<HTMLInputElement>('Contraseña de demostración').value).toBe('');
 });
 
 it('permite volver de la cotización a los servicios y al pago', async () => {
@@ -187,8 +224,18 @@ it('permite volver de la cotización a los servicios y al pago', async () => {
   expect(screen.getByRole('heading', { name: 'Paga tu cita' })).toBeTruthy();
 });
 
+it('identifica y cotiza con el cliente simulado sin avanzar el guion principal', async () => {
+  const cliente = new ClienteMock({ latenciaMs: 0, sesionWebDemo: true });
+  const usuario = montarWeb(cliente);
+  await verCitas(usuario);
+  await usuario.click(await screen.findByRole('button', { name: 'Iniciar un trámite nuevo' }));
+  await usuario.click(await screen.findByRole('button', { name: /^Cotizar Paquete/ }));
+  expect(await screen.findByRole('heading', { name: 'Tu cotización' })).toBeTruthy();
+  expect(cliente.demo.paso().id).toBe('INICIO');
+});
+
 it('conserva la cotización del modo simulado', async () => {
-  montarWeb(new ClienteMock({ latenciaMs: 0 }));
+  montarWeb(new ClienteMock({ latenciaMs: 0, sesionWebDemo: false }));
   expect(await screen.findByRole('heading', { name: 'Tu cotización' })).toBeTruthy();
   expect(screen.queryByRole('heading', { name: 'Paga tu cita' })).toBeNull();
 });

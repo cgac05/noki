@@ -25,6 +25,7 @@ export class ClienteReal implements ClienteApi {
   private readonly url: string;
   private readonly peticion: typeof fetch;
   private readonly demoHabilitada: boolean;
+  get sesionWebDemoHabilitada() { return this.demoHabilitada; }
   private readonly fabricaSocket: FabricaSocket;
   private socket: SocketCliente | undefined;
   private readonly salas = new Map<string, number>();

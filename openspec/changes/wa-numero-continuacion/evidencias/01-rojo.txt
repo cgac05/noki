@@ -1,0 +1,154 @@
+﻿npx.cmd : X [ERROR] Cannot read directory "../../../..": Access is denied.
+En línea: 5 Carácter: 1
++ npx.cmd vitest run --project web apps/web/src/vistas/consolas.test.ts ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (X [ERROR] Canno...cess is denied.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+X [ERROR] Could not resolve 
+"C:\\Users\\guill\\AppData\\Local\\Temp\\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\\vitest.config.ts"
+
+failed to load config from C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\vitest.config.ts
+
+⎯⎯⎯⎯⎯⎯⎯ Startup Error ⎯⎯⎯⎯⎯⎯⎯⎯
+Error: Build failed with 2 errors:
+error: Cannot read directory "../../../..": Access is denied.
+error: Could not resolve 
+"C:\\Users\\guill\\AppData\\Local\\Temp\\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\\vitest.config.ts"
+    at failureErrorWithLog (C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.pn
+pm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1752:15)
+    at C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.pnpm\esbuild@0.28.2\nod
+e_modules\esbuild\lib\main.js:1211:25
+    at runOnEndCallbacks (C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.pnpm
+\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1592:45)
+    at buildResponseToResult (C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.
+pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1209:7)
+    at C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.pnpm\esbuild@0.28.2\nod
+e_modules\esbuild\lib\main.js:1236:16
+    at responseCallbacks.<computed> (C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_mo
+dules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:886:9)
+    at handleIncomingPacket (C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.p
+npm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:941:12)
+    at Socket.readFromStdout (C:\Users\guill\AppData\Local\Temp\noki-wa-d52f822c9b5f4a10bb7bb22e17e17856\node_modules\.
+pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:864:7)
+    at Socket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12) {
+  errors: [Getter/Setter],
+  warnings: [Getter/Setter]
+}
+
+
+
+
+ RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-wa-d52f822c9b5f4a10bb7bb22e17e17856
+
+ ❯ |web| src/vistas/wa.test.tsx (18 tests | 1 failed | 16 skipped) 188ms
+   ↓ identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión
+   ↓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible
+   ↓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo
+   ↓ Modo real: conversa solo con POST y no muestra la insignia simulada
+   ↓ Número inválido: explica el patrón de 10 a 15 dígitos e impide el envío
+   ↓ Doble toque e indicador de espera: la misma opción se envía una sola vez
+   ↓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título
+   ↓ Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot
+   ↓ Enlace del call center: envía una vez, retira el código de la URL y lo redacta
+   × 'Enlace con número': envía una sola vez desde el número esperado y limpia la URL 150ms
+   ✓ 'Número inválido en el enlace': envía una sola vez desde el número esperado y limpia la URL 36ms
+   ↓ Código inválido: un parámetro vacío no envía nada
+   ↓ Call center solicita continuación con consentimiento y muestra enlace y QR de la lectura
+   ↓ Modo simulado: la insignia es visible en cualquier ruta
+   ↓ reenvío de oferta reemplaza la última burbuja y envía el payload vigente
+   ↓ recibe en el número activo y envía payloadBoton; otro mensaje deshabilita los botones anteriores
+   ↓ escucha los tres números desde el proveedor y conserva mensajes recibidos estando en app
+   ↓ avisa y cambia a Beto o Carla sin mezclar historiales, e ignora números ajenos
+ ❯ |web| src/vistas/consolas.test.tsx (19 tests | 1 failed | 18 skipped) 798ms
+     × incluye el número de la llamada en el enlace y el QR de continuación 796ms
+     ↓ cierra la llamada sin marcar la casilla y solicita la continuación una sola vez
+     ↓ inicia con ANI de demo, valida el formato y descarta la captura al mostrar la ficha
+     ↓ vuelve al ANI sin enviar comandos y limpia el consentimiento y el error para otra llamada
+     ↓ tolera nulos y deshabilita todas las operaciones en solo lectura
+     ↓ exige consentimiento, envía una sola solicitud con doble clic y muestra el código de la lectura
+     ↓ permite reintentar la continuación fallida con la misma clave
+     ↓ en pestaña real nueva espera una llamada y cambia de sala solo con el hilo activo
+     ↓ registra con el token elegido, muestra la hora de Tepic y elimina la acción registrada
+     ↓ muestra la lista vacía como estado, sin error
+     ↓ /clinica sin contexto ofrece Actualizar y vuelve a pedir el contexto
+     ↓ /app sin contexto ofrece Actualizar y vuelve a pedir el contexto
+     ↓ sin VITE_DEMO muestra sin contexto en app sin peticiones ni error
+     ↓ muestra los siete KPI documentados y conserva una clave desconocida y su valor
+     ↓ admin sin hilo conserva las métricas y ofrece actualizar el contexto
+     ↓ /clinica se une a sus salas y las deja al desmontarse
+     ↓ /app se une a sus salas y las deja al desmontarse
+     ↓ /admin se une a sus salas y las deja al desmontarse
+     ↓ un evento válido actualiza admin sin recargar, cambia su sala de hilo y descarta un evento inválido
+npx.cmd : 
+En línea: 4 Carácter: 1
++ npx.cmd vitest run --configLoader runner --project web apps/web/src/v ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/vistas/consolas.test.tsx > Call center autorizado > incluye el número de la llamada en el enlace y el 
+QR de continuación
+AssertionError: expected '/wa?continuar=demo.cc.continuacion-op…' to be '/wa?continuar=demo.cc.continuacion-op…' // 
+Object.is equality
+
+Expected: "/wa?continuar=demo.cc.continuacion-opaca&numero=3110000000"
+Received: "/wa?continuar=demo.cc.continuacion-opaca"
+
+ ❯ src/vistas/consolas.test.tsx:59:41
+     57|     const enlace = await screen.findByRole('link', { name: 'Abrir What…
+     58|     const ruta = `/wa?continuar=${IDS.tokenContinuacion}&numero=${nume…
+     59|     expect(enlace.getAttribute('href')).toBe(ruta);
+       |                                         ^
+     60|     expect(await screen.findByRole('img', { name: 'Código QR de contin…
+     61|     expect(QRCode.toString).toHaveBeenCalledWith(new URL(ruta, locatio…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  |web| src/vistas/wa.test.tsx > 'Enlace con número': envía una sola vez desde el número esperado y limpia la URL
+AssertionError: expected "enviarMensajeWa" to be called once with arguments: [ { waId: '3110000000', …(1) }, …(1) ]
+
+Received: 
+
+  1st enviarMensajeWa call:
+
+  [
+    {
+      "texto": "CONTINUAR codigo-ficticio",
+-     "waId": "3110000000",
++     "waId": "5210000000001",
+    },
+    {
+-     "idempotencyKey": Any<String>,
++     "idempotencyKey": "b305cf04-4af4-47c0-92d3-3936354b4deb",
+    },
+  ]
+
+
+Number of calls: 1
+
+ ❯ src/vistas/wa.test.tsx:139:18
+    137|   const { router } = abrir(cliente, `/wa?continuar=codigo-ficticio&num…
+    138|   await screen.findByText('Continuación recibida');
+    139|   expect(enviar).toHaveBeenCalledExactlyOnceWith(
+       |                  ^
+    140|     { waId: esperado, texto: 'CONTINUAR codigo-ficticio' }, { idempote…
+    141|   );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  2 failed | 1 passed | 34 skipped (37)
+   Start at  07:49:08
+   Duration  4.77s (transform 1.39s, setup 0ms, import 3.80s, tests 987ms, environment 3.42s)
+
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice

@@ -53,7 +53,7 @@ export interface PasoFixture {
   espera: EntradaGuion | null;
   respuesta: RespuestaComando;
   rechazo?: CuerpoError['error'];
-  lecturas: LecturasCliente;
+  lecturas: Omit<LecturasCliente, 'sesionWebDemo'>;
   mensajes: MensajeBot[];
   eventosSocket: EventoGuion[];
   ayuda: string;

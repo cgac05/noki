@@ -1,0 +1,28 @@
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m [30m[42m unitarios [49m[39m tests/unit/api/sesionWebMemoria.test.ts[2m > [22mbusca la sesión web por los últimos diez dígitos y el vínculo más reciente
+[31m[1mAssertionError[22m: expected 404 to be 200 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 200[39m
+[31m+ 404[39m
+
+[36m [2m❯[22m tests/unit/api/sesionWebMemoria.test.ts:[2m27:34[22m[39m
+    [90m 25| [39m    const pacienteId = await registrar('Beatriz', '2026-11-24T12:00:00…
+    [90m 26| [39m    const respuesta = await app.inject('/api/demo/sesion-web/521000000…
+    [90m 27| [39m    [34mexpect[39m(respuesta[33m.[39mstatusCode)[33m.[39m[34mtoBe[39m([34m200[39m)[33m;[39m
+    [90m   | [39m                                 [31m^[39m
+    [90m 28| [39m    expect(respuesta.json()).toEqual({ pacienteId, nombreVisible: 'Bea…
+    [90m 29| [39m    expect((await app.inject('/api/demo/sesion-web/5210000000099')).st…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m80 passed[39m[22m[90m (81)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m522 passed[39m[22m[90m (523)[39m
+[2m   Start at [22m 07:30:43
+[2m   Duration [22m 38.79s[2m (transform 29.48s, setup 0ms, import 324.23s, tests 75.29s, environment 78.66s)[22m
+

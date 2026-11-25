@@ -1,0 +1,5 @@
+$ tsc --project tests/tsconfig.json && vitest run --project unitarios --project web
+tests/unit/nucleo/casosTramite.test.ts(655,76): error TS2353: Object literal may only specify known properties, and 'sexo' does not exist in type 'DatosDeclarados'.
+[ELIFECYCLE] Test failed. See above for more details.
+
+Código de salida: 2

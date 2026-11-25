@@ -1,6 +1,6 @@
 import { formatInTimeZone } from 'date-fns-tz';
 import type { AlertaSeguridadLeida, CitaLeida, DatosEmisionToken, LlegadaLeida, EventoLeido, GeneradorId, HuecoLeido, LecturasPort, OfertaLeida, RegistroTokensUsados } from '@noki/application';
-import { ESTADOS_TRAMITE, normalizarTelefono, type HiloId, type PacienteId, type SedeId, type Tramite, type TramiteId } from '@noki/domain';
+import { ESTADOS_TRAMITE, enmascararNombre, normalizarTelefono, type HiloId, type PacienteId, type SedeId, type Tramite, type TramiteId } from '@noki/domain';
 import type { AgendaMemoria } from './AgendaMemoria.ts';
 import type { ContactosMemoria } from './ContactosMemoria.ts';
 import type { EventosSinTramiteMemoria } from './EventosSinTramiteMemoria.ts';
@@ -67,6 +67,26 @@ export class LecturasMemoria implements LecturasPort {
   }
 
   tramitesAbiertos(id: PacienteId) { return this.tramites.abiertosPorPaciente(id); }
+
+  async sesionWebDemo(numero: string) {
+    let candidatos = await this.contactos.pacientesPorTelefono(numero, Number.NEGATIVE_INFINITY);
+    // La lectura pública filtra por último uso. Acota el umbral solo si hay varios pacientes.
+    let inferior = -8_640_000_000_000_000;
+    let superior = 8_640_000_000_000_000;
+    while (candidatos.length > 1 && inferior < superior) {
+      const umbral = Math.ceil(inferior / 2 + superior / 2);
+      const recientes = await this.contactos.pacientesPorTelefono(numero, umbral);
+      if (recientes.length) {
+        candidatos = recientes;
+        inferior = umbral;
+      } else {
+        superior = umbral - 1;
+      }
+    }
+    const paciente = candidatos[0];
+    return paciente ? { pacienteId: paciente.pacienteId,
+      nombreVisible: enmascararNombre(paciente.nombre, paciente.apellidoPaterno) || 'Paciente' } : null;
+  }
 
   async catalogo() {
     return structuredClone(this.ofertas).sort((a, b) => a.servicio.localeCompare(b.servicio) || a.sede.localeCompare(b.sede));

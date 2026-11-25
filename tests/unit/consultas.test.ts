@@ -135,9 +135,11 @@ describe('Tabla compartida de rutas GET', () => {
     expect(rutaConsulta('metricas', {})).toBe('/api/admin/kpis');
   });
 
-  it('publica las doce rutas y sus esquemas de respuesta sin acciones', () => {
-    expect(Object.keys(RUTAS_CONSULTAS)).toHaveLength(12);
+  it('publica las trece rutas y sus esquemas de respuesta sin acciones', () => {
+    expect(Object.keys(RUTAS_CONSULTAS)).toHaveLength(13);
     expect(rutaConsulta('catalogo', {})).toBe('/api/catalogo');
+    expect(rutaConsulta('sesionWebDemo', { telefono: '1000000001' })).toBe('/api/demo/sesion-web/1000000001');
+    expect(RUTAS_CONSULTAS.sesionWebDemo.soloDemo).toBe(true);
     expect(rutaConsulta('fichaHilo', { hiloId: ids.hilo })).toBe(`/api/hilos/${ids.hilo}/ficha`);
     expect(rutaConsulta('citasPaciente', { pacienteId: ids.paciente })).toBe(`/api/pacientes/${ids.paciente}/citas`);
     expect(rutaConsulta('llegadasSede', { sedeId: ids.sede })).toBe(`/api/sedes/${ids.sede}/llegadas`);

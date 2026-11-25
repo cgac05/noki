@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router';
-import { ComandoRequestSchema, type CitaVista, type ComandoRequest, type OfertaCatalogo, type RespuestaComando } from '@noki/contracts';
+import { ComandoRequestSchema, type CitaVista, type ComandoRequest, type OfertaCatalogo, type RespuestaComando, type TramiteVista } from '@noki/contracts';
 import { useCliente, useConsulta, useContextoConsulta } from '../cliente/ProveedorCliente.tsx';
 import { useAccion } from '../cliente/useAccion.ts';
+import { ErrorCliente } from '../cliente/errores.ts';
 import { EstadoCarga } from '../componentes/EstadoCarga.tsx';
 import { EstadoError } from '../componentes/EstadoError.tsx';
 import { QrCita } from '../componentes/QrCita.tsx';
@@ -11,6 +12,7 @@ import { dinero, fechaEnSede } from '../componentes/formato.ts';
 
 export function Web() {
   const cliente = useCliente();
+  if (cliente.sesionWebDemoHabilitada) return <SesionWeb />;
   if (cliente.modo === 'real') return <WebReal />;
   return <>
     <h1>Web</h1><p className="introduccion">Cotiza tu estudio y continúa la atención por WhatsApp.</p>
@@ -26,6 +28,110 @@ function sobreTramite(respuesta: RespuestaComando | undefined) {
 }
 
 const formatoTelefono = /^\d{10,15}$/;
+
+function SesionWeb() {
+  const [telefono, setTelefono] = useState('');
+  const [clave, setClave] = useState('');
+  const [invalida, setInvalida] = useState(false);
+  const [enviado, setEnviado] = useState(false);
+  const sesion = useConsulta('sesionWebDemo', enviado ? { telefono } : undefined);
+  const desconocido = sesion.error instanceof ErrorCliente && sesion.error.codigo === 'NO_ENCONTRADO';
+
+  if (enviado && sesion.data) return <PanelPaciente telefono={telefono} {...sesion.data} volver={() => setEnviado(false)} />;
+  return <>
+    <h1>Identifícate</h1>
+    {enviado ? <>
+      {sesion.isPending && <EstadoCarga texto="Buscando tu registro…" />}
+      {desconocido ? <section className="seccion">
+        <h2>No encontramos tu registro</h2>
+        <p>Continúa por <Link to="/wa">WhatsApp</Link> o <Link to="/callcenter">Call Center</Link>.</p>
+      </section> : sesion.isError && <EstadoError error={sesion.error} onReintentar={() => { void sesion.refetch(); }} />}
+      <button type="button" className="boton-secundario" onClick={() => setEnviado(false)}>Volver</button>
+    </> : <>
+      <form className="seccion" onSubmit={evento => {
+        evento.preventDefault();
+        if (!formatoTelefono.test(telefono)) return;
+        if (clave !== 'prueba123') { setInvalida(true); return; }
+        setClave('');
+        setInvalida(false);
+        setEnviado(true);
+      }}>
+        <label htmlFor="telefono-sesion">Teléfono</label>
+        <input id="telefono-sesion" type="tel" inputMode="numeric" autoComplete="tel"
+          value={telefono} onChange={evento => setTelefono(evento.target.value)} />
+        <label htmlFor="clave-sesion">Contraseña de demostración</label>
+        <input id="clave-sesion" type="password" autoComplete="off" value={clave}
+          onChange={evento => { setClave(evento.target.value); setInvalida(false); }} />
+        {invalida && <p role="alert">Contraseña incorrecta.</p>}
+        <button type="submit" disabled={!formatoTelefono.test(telefono) || !clave}>Entrar</button>
+      </form>
+      <Link className="enlace-principal" to="/">Volver</Link>
+    </>}
+  </>;
+}
+
+function PanelPaciente({ telefono, pacienteId, nombreVisible, volver }: {
+  telefono: string; pacienteId: string; nombreVisible: string; volver: () => void;
+}) {
+  const abiertos = useConsulta('tramitesAbiertos', { pacienteId });
+  const catalogo = useConsulta('catalogo', {});
+  const nuevo = useAccion();
+  const continuar = useAccion();
+  const [tramiteContinuado, setTramiteContinuado] = useState<TramiteVista>();
+  const [pagos, setPagos] = useState<Record<string, string>>({});
+  const pendientes = abiertos.data?.filter(t => t.estado === 'BORRADOR' || t.estado === 'COTIZADO' ||
+    t.estado === 'LISTO_PARA_RESERVAR' || t.estado === 'HORARIO_RESERVADO') ?? [];
+
+  return <>
+    <h1>Hola, {nombreVisible}</h1>
+    <p className="introduccion">Simulación: no se realiza ningún cobro</p>
+    {nuevo.data ? <CotizacionWeb telefonoInicial={telefono} tramiteInicial={nuevo.data} volver={nuevo.reset} />
+      : tramiteContinuado ? <ContinuacionPendiente tramite={tramiteContinuado} accion={continuar}
+        volver={() => { continuar.reset(); setTramiteContinuado(undefined); }} />
+      : <PagoCitas telefonoEnmascarado={`•••• ${telefono.slice(-4)}`} pagos={pagos} pacienteId={pacienteId}
+        registrar={(id, folio) => setPagos(anteriores => ({ ...anteriores, [id]: folio }))}
+        volver={volver} esperando={nuevo.isPending}>
+        <section className="seccion">
+          <h2>Trámites abiertos</h2>
+          {abiertos.isPending && <EstadoCarga />}
+          {abiertos.isError && <EstadoError error={abiertos.error} onReintentar={() => { void abiertos.refetch(); }} />}
+          {abiertos.isSuccess && pendientes.length === 0 && <p>No tienes trámites pendientes.</p>}
+          {pendientes.map(tramite => <div key={tramite.id}>
+            <p>{catalogo.data?.find(oferta => oferta.servicioId === tramite.servicioId)?.servicio ?? tramite.tipo}</p>
+            <button type="button" disabled={nuevo.isPending} onClick={() => {
+              if (continuar.ejecutar({ tipo: 'comando', titulo: 'Continuar en WhatsApp', comando: {
+                ...pacienteWeb, tramiteId: tramite.id, hiloId: tramite.hiloId, tipo: 'SolicitarContinuacion', payload: { destino: 'whatsapp' },
+              } })) setTramiteContinuado(tramite);
+            }}>Continúa donde lo dejaste</button>
+          </div>)}
+          <div className="acciones"><button type="button" disabled={nuevo.isPending || nuevo.isError} onClick={() =>
+            nuevo.ejecutar({ tipo: 'comandos', titulo: 'Iniciar un trámite nuevo', comandos: [
+              { ...pacienteWeb, tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR', contacto: telefono } },
+              previa => ({ ...sobreTramite(previa), tipo: 'AsignarPaciente', payload: { pacienteId } }),
+            ] })}>Iniciar un trámite nuevo</button></div>
+          {nuevo.isPending && <EstadoCarga texto="Iniciando tu trámite…" />}
+          {nuevo.isError && <EstadoError error={nuevo.error} onReintentar={nuevo.reintentar} />}
+        </section>
+      </PagoCitas>}
+  </>;
+}
+
+function ContinuacionPendiente({ tramite, accion, volver }: {
+  tramite: TramiteVista; accion: ReturnType<typeof useAccion>; volver: () => void;
+}) {
+  const ficha = useConsulta('fichaHilo', accion.isSuccess ? { hiloId: tramite.hiloId } : undefined);
+  const codigo = ficha.data?.codigoContinuacion?.replace(/^CONTINUAR\s+/, '');
+  return <section className="seccion">
+    <h2>Continúa en WhatsApp</h2>
+    {(accion.isPending || (accion.isSuccess && ficha.isPending)) && <EstadoCarga texto="Buscando el código de continuación…" />}
+    {accion.isError && <EstadoError error={accion.error} onReintentar={accion.reintentar} />}
+    {ficha.isError && <EstadoError error={ficha.error} onReintentar={() => { void ficha.refetch(); }} />}
+    {ficha.isSuccess && !codigo && <EstadoError error={new Error('No encontramos el código de continuación.')}
+      onReintentar={() => { void ficha.refetch(); }} />}
+    {codigo && <Link className="enlace-principal" to={'/wa?continuar=' + encodeURIComponent(codigo)}>Abrir WhatsApp</Link>}
+    <button type="button" className="boton-secundario" disabled={accion.isPending} onClick={volver}>Volver</button>
+  </section>;
+}
 
 function WebReal() {
   const [telefono, setTelefono] = useState('');
@@ -50,7 +156,7 @@ function WebReal() {
       </form>
       <button type="button" className="boton-secundario" onClick={() => setPaso('cotizar')}>¿Aún no tienes cita? Cotiza un estudio</button>
     </>}
-    {paso === 'citas' && <PagoCitas telefonoEnmascarado={`•••• ${telefono.slice(-4)}`} pagos={pagos}
+    {paso === 'citas' && <PagoCitasAnonimo telefonoEnmascarado={`•••• ${telefono.slice(-4)}`} pagos={pagos}
       registrar={(id, folio) => setPagos(anteriores => ({ ...anteriores, [id]: folio }))}
       volver={() => setPaso('telefono')} />}
     {paso === 'cotizar' && <CotizacionWeb telefonoInicial={telefono} volver={() => setPaso('telefono')} />}
@@ -66,14 +172,25 @@ function leerPago(id: string) {
   catch { return null; }
 }
 
-function PagoCitas({ telefonoEnmascarado, pagos, registrar, volver }: {
+interface ControlesPago {
   telefonoEnmascarado: string;
   pagos: Record<string, string>;
   registrar: (id: string, folio: string) => void;
   volver: () => void;
-}) {
+}
+
+function PagoCitasAnonimo(controles: ControlesPago) {
   const contexto = useContextoConsulta();
-  const { pacienteId } = contexto;
+  return <>
+    {contexto.cargando && <EstadoCarga texto="Consultando el contexto de atención…" />}
+    {contexto.error && <EstadoError error={contexto.error} onReintentar={contexto.actualizar} />}
+    {!contexto.cargando && !contexto.error && <PagoCitas {...controles} pacienteId={contexto.pacienteId} />}
+  </>;
+}
+
+function PagoCitas({ telefonoEnmascarado, pagos, registrar, volver, pacienteId, children, esperando }: ControlesPago & {
+  pacienteId?: string | undefined; children?: ReactNode; esperando?: boolean;
+}) {
   useSala(pacienteId ? `paciente:${pacienteId}` : undefined);
   const citas = useConsulta('citasPaciente', pacienteId ? { pacienteId } : undefined);
   const catalogo = useConsulta('catalogo', pacienteId ? {} : undefined);
@@ -98,7 +215,7 @@ function PagoCitas({ telefonoEnmascarado, pagos, registrar, volver }: {
 
   const precioElegido = citaElegida && precio(citaElegida);
   const pagoElegido = seleccion && (pagos[seleccion] ?? leerPago(seleccion));
-  const sinCitas = !contexto.cargando && !contexto.error && (!pacienteId || (citas.isSuccess && confirmadas.length === 0));
+  const sinCitas = !pacienteId || (citas.isSuccess && confirmadas.length === 0);
 
   return <>
     <p>{telefonoEnmascarado}</p>
@@ -127,8 +244,7 @@ function PagoCitas({ telefonoEnmascarado, pagos, registrar, volver }: {
       </>}
       <button type="button" className="boton-secundario" onClick={() => setSeleccion(undefined)}>Volver</button>
     </section> : <>
-      {contexto.cargando && <EstadoCarga texto="Consultando el contexto de atención…" />}
-      {contexto.error && <EstadoError error={contexto.error} onReintentar={contexto.actualizar} />}
+      {children}
       {pacienteId && (citas.isPending || catalogo.isPending) && <EstadoCarga texto="Consultando tus citas…" />}
       {citas.isError && <EstadoError error={citas.error} onReintentar={() => { void citas.refetch(); }} />}
       {catalogo.isError && <EstadoError error={catalogo.error} onReintentar={() => { void catalogo.refetch(); }} />}
@@ -146,16 +262,18 @@ function PagoCitas({ telefonoEnmascarado, pagos, registrar, volver }: {
           <p><time dateTime={cita.inicio}>{fechaEnSede(cita.inicio, cita.zonaHoraria)}</time></p>
           {importe !== undefined && <p className="precio">{dinero(importe)}</p>}
           {pagada ? <p>Pagada</p> : importe !== undefined
-            ? <button type="button" onClick={() => setSeleccion(id)}>Pagar con CoDi</button>
+            ? <button type="button" disabled={esperando} onClick={() => setSeleccion(id)}>Pagar con CoDi</button>
             : catalogo.isSuccess && <p>El precio de esta cita no está disponible.</p>}
         </section>;
       })}
-      <button type="button" className="boton-secundario" onClick={volver}>Volver</button>
+      <button type="button" className="boton-secundario" disabled={esperando} onClick={volver}>Volver</button>
     </>}
   </>;
 }
 
-function CotizacionWeb({ telefonoInicial, volver }: { telefonoInicial: string; volver: () => void }) {
+function CotizacionWeb({ telefonoInicial, tramiteInicial, volver }: {
+  telefonoInicial: string; tramiteInicial?: RespuestaComando; volver: () => void;
+}) {
   const catalogo = useConsulta('catalogo', {});
   const cotizar = useAccion();
   const continuar = useAccion();
@@ -170,8 +288,8 @@ function CotizacionWeb({ telefonoInicial, volver }: { telefonoInicial: string; v
   function cotizarOferta(seleccion: OfertaCatalogo) {
     if (!telefonoValido) return;
     const iniciada = cotizar.ejecutar({ tipo: 'comandos', titulo: 'Cotizar', comandos: [
-      { ...pacienteWeb, tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR', contacto: telefono } },
-      previa => ({ ...sobreTramite(previa), tipo: 'SeleccionarServicio', payload: { servicioId: seleccion.servicioId } }),
+      ...(!tramiteInicial ? [{ ...pacienteWeb, tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR', contacto: telefono } } as const] : []),
+      previa => ({ ...sobreTramite(previa ?? tramiteInicial), tipo: 'SeleccionarServicio', payload: { servicioId: seleccion.servicioId } }),
       previa => ({ ...sobreTramite(previa), tipo: 'SeleccionarSede', payload: { sedeId: seleccion.sedeId } }),
     ] });
     if (iniciada) elegirOferta(seleccion);
@@ -189,7 +307,7 @@ function CotizacionWeb({ telefonoInicial, volver }: { telefonoInicial: string; v
     {catalogo.isError && <EstadoError error={catalogo.error} onReintentar={() => { void catalogo.refetch(); }} />}
     {catalogo.data && !cotizar.data && <section className="seccion">
       <h2>Servicios y sedes</h2>
-      {catalogo.data.length > 0 && <>
+      {!tramiteInicial && catalogo.data.length > 0 && <>
         <label htmlFor="telefono-web">Teléfono</label>
         <input id="telefono-web" type="tel" inputMode="numeric" autoComplete="off"
           value={telefono} disabled={cotizar.isPending || cotizar.isError}

@@ -1,0 +1,18 @@
+
+ RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-wa-d52f822c9b5f4a10bb7bb22e17e17856
+
+ ✓ |web| src/vistas/consolas.test.tsx (19 tests) 3359ms
+     ✓ incluye el número de la llamada en el enlace y el QR de continuación  845ms
+     ✓ inicia con ANI de demo, valida el formato y descarta la captura al mostrar la ficha  547ms
+ ✓ |web| src/vistas/wa.test.tsx (18 tests) 5070ms
+   ✓ identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión  1344ms
+   ✓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible  383ms
+   ✓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo  906ms
+   ✓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título  404ms
+   ✓ Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot  527ms
+
+ Test Files  2 passed (2)
+      Tests  37 passed (37)
+   Start at  07:50:20
+   Duration  8.71s (transform 1.48s, setup 0ms, import 3.63s, tests 8.43s, environment 2.74s)
+

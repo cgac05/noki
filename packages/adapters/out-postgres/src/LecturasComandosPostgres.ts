@@ -1,6 +1,6 @@
 import { sql, type Kysely } from 'kysely';
 import type { AlertaSeguridadLeida, DatosEmisionToken, CitaLeida, LlegadaLeida, ContextoDemoLeido, EventoLeido, FichaLeida, LecturasPort, MetricasLeidas, HuecoLeido, OfertaLeida, TramiteRepo } from '@noki/application';
-import { ESTADOS_TRAMITE, normalizarTelefono, type Canal, type EstadoTramite, type HiloId, type PacienteId, type SedeId, type Tramite, type TramiteId } from '@noki/domain';
+import { ESTADOS_TRAMITE, enmascararNombre, normalizarTelefono, type Canal, type EstadoTramite, type HiloId, type PacienteId, type SedeId, type Tramite, type TramiteId } from '@noki/domain';
 
 export class LecturasComandosPostgres implements LecturasPort {
   constructor(private readonly db: Kysely<unknown>, private readonly tramites: TramiteRepo) {}
@@ -32,6 +32,16 @@ export class LecturasComandosPostgres implements LecturasPort {
 
   tramitesAbiertos(id: PacienteId): Promise<Tramite[]> {
     return this.tramites.abiertosPorPaciente(id);
+  }
+
+  async sesionWebDemo(numero: string) {
+    const { rows: [paciente] } = await sql<{ pacienteId: PacienteId; nombre: string; apellidoPaterno: string }>`
+      SELECT p.id AS "pacienteId", p.nombre, p.ap_paterno AS "apellidoPaterno"
+      FROM contacto_canal c JOIN vinculo v ON v.contacto_id = c.id JOIN paciente p ON p.id = v.paciente_id
+      WHERE right(regexp_replace(c.valor_externo, '[^0-9]', '', 'g'), 10) = ${numero}
+      ORDER BY v.ultimo_uso DESC, p.id LIMIT 1`.execute(this.db);
+    return paciente ? { pacienteId: paciente.pacienteId,
+      nombreVisible: enmascararNombre(paciente.nombre, paciente.apellidoPaterno) || 'Paciente' } : null;
   }
 
   async catalogo(): Promise<OfertaLeida[]> {
