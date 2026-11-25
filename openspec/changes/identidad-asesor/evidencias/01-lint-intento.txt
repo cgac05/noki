@@ -1,0 +1,12 @@
+Base: cb3d56a60c1e2125f9465742236f306bd99278ae
+Comando: pnpm lint
+$ eslint . && pnpm typecheck
+
+<repo>\apps\web\src\vistas\identidadAsesor.test.tsx
+  11:25  error  'IDS' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 1 problem (1 error, 0 warnings)
+
+[ELIFECYCLE] Command failed with exit code 1.
+
+Exit code: 1

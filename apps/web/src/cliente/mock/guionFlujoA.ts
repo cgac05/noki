@@ -40,6 +40,10 @@ const opcionAlternativa = { id: 'horario-tarde', titulo: 'Jueves 26 · 12:15', p
 const verHorarios = { id: 'ver-horarios', titulo: 'Ver horarios', payload: 'ver-horarios' };
 const revisar = { id: 'revisar', titulo: 'Revisar cita', payload: 'revisar-cita' };
 const confirmar = { id: 'confirmar', titulo: 'Confirmar cita', payload: 'confirmar-cita' };
+const paraMi = { id: 'MI', titulo: 'Para mí', payload: 'MI' };
+const otraPersona = { id: 'OTRA_PERSONA', titulo: 'Para otra persona', payload: 'OTRA_PERSONA' };
+const candidata = { id: 'candidata-demo', titulo: 'Soy Ana P.', payload: 'demo.candidata.referencia-opaca' };
+const ninguno = { id: 'NINGUNO', titulo: 'No soy ninguno', payload: 'NINGUNO' };
 const sinPregunta: SiguientePregunta = { tipo: 'COMPLETO' };
 const preguntarHorario: SiguientePregunta = { tipo: 'PREGUNTA', casilla: 'horario', pista: { entrada: 'BOTONES', opciones: [verHorarios] } };
 
@@ -109,29 +113,41 @@ const definiciones: Array<{
     id: 'HORARIO_RESERVADO', titulo: 'Horario reservado', espera: { tipo: 'wa', titulo: opcionHorario.titulo, mensaje: { waId: CONTACTO_DEMO, payloadBoton: opcionHorario.payload } },
     respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'HORARIO_RESERVADO', version: 7, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: { tipo: 'PREGUNTA', casilla: 'paciente', pista: { entrada: 'BOTONES', opciones: [revisar] } }, eventos: [evento(8, 'HorarioReservado', 'whatsapp')] },
     mensajes: [{ tipo: 'botones', texto: 'Jueves 26 a las 09:15, hora de Tepic. Revisa la cita para confirmar.', botones: [revisar] }],
-    ayuda: 'Pulsa Revisar cita para ver el aviso de verificación simulada.', soloLectura: true, citas: false, registrada: false, cambiosCanal: 1,
+    ayuda: 'Pulsa Revisar cita para identificar a la paciente en esta demostración.', soloLectura: true, citas: false, registrada: false, cambiosCanal: 1,
   },
   {
-    id: 'VERIFICACION', titulo: 'Verificación simulada', espera: { tipo: 'wa', titulo: revisar.titulo, mensaje: { waId: CONTACTO_DEMO, payloadBoton: revisar.payload } },
-    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'HORARIO_RESERVADO', version: 8, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: { tipo: 'PREGUNTA', casilla: 'paciente', pista: { entrada: 'FLOW', campos: [{ id: 'fechaNac', etiqueta: 'Fecha de nacimiento', captura: 'sensitive', requerido: true }] } }, eventos: [evento(9, 'PacienteReconocido', 'whatsapp')] },
-    mensajes: [{ tipo: 'flow', titulo: 'Verificación de identidad', campos: [{ id: 'fechaNac', etiqueta: 'Fecha de nacimiento', captura: 'sensitive', requerido: true }] }, { tipo: 'texto', texto: 'Abre el formulario protegido para continuar. No escribas estos datos en el chat.' }],
+    id: 'IDENTIFICACION_DESTINATARIO', titulo: 'Destinatario de la cita', espera: { tipo: 'wa', titulo: revisar.titulo, mensaje: { waId: CONTACTO_DEMO, payloadBoton: revisar.payload } },
+    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'HORARIO_RESERVADO', version: 8, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: { tipo: 'PREGUNTA', casilla: 'paciente', pista: { entrada: 'BOTONES', paso: 'DESTINATARIO', opciones: [paraMi, otraPersona] } }, eventos: [] },
+    mensajes: [{ tipo: 'botones', texto: '¿La cita es para ti o para otra persona?', botones: [paraMi, otraPersona] }],
+    ayuda: 'Este guion demuestra la cita de Ana. Elige Para mí para continuar.', soloLectura: true, citas: false, registrada: false, cambiosCanal: 1,
+  },
+  {
+    id: 'IDENTIFICACION_CONFIRMAR', titulo: 'Confirmar paciente', espera: { tipo: 'wa', titulo: paraMi.titulo, mensaje: { waId: CONTACTO_DEMO, payloadBoton: paraMi.payload } },
+    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'HORARIO_RESERVADO', version: 9, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: { tipo: 'PREGUNTA', casilla: 'paciente', pista: { entrada: 'LISTA', paso: 'CONFIRMAR', opciones: [candidata, ninguno] } }, eventos: [evento(9, 'DestinatarioDeclarado', 'whatsapp')] },
+    mensajes: [{ tipo: 'lista', texto: '¿Eres alguna de estas personas?', secciones: [{ titulo: 'Pacientes vinculados de demo', filas: [candidata, ninguno] }] }],
+    ayuda: 'Este guion usa la paciente ficticia Ana P. Elige Soy Ana P. para continuar.', soloLectura: true, citas: false, registrada: false, cambiosCanal: 1,
+  },
+  {
+    id: 'IDENTIFICACION_FECHA', titulo: 'Fecha de nacimiento protegida', espera: { tipo: 'wa', titulo: candidata.titulo, mensaje: { waId: CONTACTO_DEMO, payloadBoton: candidata.payload } },
+    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'HORARIO_RESERVADO', version: 10, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: { tipo: 'PREGUNTA', casilla: 'paciente', pista: { entrada: 'FLOW', paso: 'FECHA_NAC', campos: [{ id: 'fechaNac', etiqueta: 'Fecha de nacimiento', captura: 'sensitive', requerido: true }] } }, eventos: [] },
+    mensajes: [{ tipo: 'flow', titulo: 'Fecha de nacimiento', campos: [{ id: 'fechaNac', etiqueta: 'Fecha de nacimiento', captura: 'sensitive', requerido: true }] }, { tipo: 'texto', texto: 'Abre el formulario protegido para continuar. No escribas estos datos en el chat.' }],
     ayuda: 'Abre el formulario y completa los campos requeridos para continuar.', soloLectura: true, citas: false, registrada: false, cambiosCanal: 1,
   },
   {
     id: 'VERIFICADA', titulo: 'Verificación completada', espera: { tipo: 'wa', titulo: 'Enviar formulario', mensaje: { waId: CONTACTO_DEMO, flowResponse: { fechaNac: '2000-01-02' } } },
-    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'HORARIO_RESERVADO', version: 9, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: { tipo: 'PREGUNTA', casilla: 'paciente', pista: { entrada: 'BOTONES', opciones: [confirmar] } }, eventos: [] },
+    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'HORARIO_RESERVADO', version: 11, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: { tipo: 'PREGUNTA', casilla: 'elegibilidad', pista: { entrada: 'BOTONES', opciones: [confirmar] } }, eventos: [evento(10, 'IdentidadComprobada', 'whatsapp')] },
     mensajes: [{ tipo: 'botones', texto: 'Formulario recibido en esta demostración. Puedes confirmar tu cita.', botones: [confirmar] }],
     ayuda: 'Pulsa Confirmar cita para continuar.', soloLectura: true, citas: false, registrada: false, cambiosCanal: 1,
   },
   {
     id: 'CONFIRMADA', titulo: 'Cita confirmada · App', espera: { tipo: 'wa', titulo: confirmar.titulo, mensaje: { waId: CONTACTO_DEMO, payloadBoton: confirmar.payload } },
-    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'CONFIRMADA', version: 10, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: sinPregunta, eventos: [evento(10, 'CitaConfirmada', 'whatsapp'), evento(11, 'CanalCambiado', 'app')] },
+    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'CONFIRMADA', version: 12, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: sinPregunta, eventos: [evento(11, 'CitaConfirmada', 'whatsapp'), evento(12, 'CanalCambiado', 'app')] },
     mensajes: [{ tipo: 'texto', texto: 'Cita confirmada. Abre App para ver tu QR y Clínica para registrar tu llegada.' }],
     ayuda: 'Abre App para ver el QR y luego Clínica para registrar la llegada.', soloLectura: true, citas: true, registrada: false, cambiosCanal: 2,
   },
   {
     id: 'EN_CLINICA', titulo: 'Llegada registrada · Clínica', espera: { tipo: 'comando', titulo: 'Registrar llegada', comando: llegada },
-    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'EN_CLINICA', version: 11, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: sinPregunta, eventos: [evento(12, 'CanalCambiado', 'clinica'), evento(13, 'PacienteLlego', 'clinica')] },
+    respuesta: { tramite: { id: IDS.tramite, hiloId: IDS.hilo, tipo: 'AGENDAR', estado: 'EN_CLINICA', version: 13, servicioId: IDS.servicio, sedeId: IDS.sede }, siguientePregunta: sinPregunta, eventos: [evento(13, 'CanalCambiado', 'clinica'), evento(14, 'PacienteLlego', 'clinica')] },
     mensajes: [{ tipo: 'texto', texto: 'Llegada registrada en Tepic. La atención continúa en clínica.' }],
     ayuda: 'El Flujo A terminó. Consulta Administración o reinicia el guion.', soloLectura: true, citas: true, registrada: true, cambiosCanal: 3,
   },
@@ -149,7 +165,7 @@ export const GUION_FLUJO_A: PasoFixture[] = definiciones.map((dato, indice) => {
     { nombre: 'hilo:linea-tiempo', datos: { hiloId: IDS.hilo, eventos: lineaTiempo } },
     { nombre: 'admin:metricas', datos: metricas.kpis },
   ];
-  if (dato.id === 'VERIFICACION') eventosSocket.push({ nombre: 'bandeja:mensaje', datos: { mensajeId: IDS.mensaje, canal: 'sms' } });
+  if (dato.id === 'IDENTIFICACION_FECHA') eventosSocket.push({ nombre: 'bandeja:mensaje', datos: { mensajeId: IDS.mensaje, canal: 'sms' } });
   if (dato.id === 'EN_CLINICA') eventosSocket.push({ nombre: 'sede:fila', datos: { tramiteId: IDS.tramite, posicion: 1 } });
   return {
     paso: { id: dato.id, titulo: dato.titulo, numero: indice + 1, total: definiciones.length },
@@ -162,7 +178,7 @@ export const GUION_FLUJO_A: PasoFixture[] = definiciones.map((dato, indice) => {
         ? { hiloId: IDS.hilo, pacienteId: IDS.paciente, sedeId: IDS.sede }
         : { hiloId: null, pacienteId: null, sedeId: null },
       citasPaciente: dato.citas ? [cita] : [], llegadasSede: dato.citas ? [{ cita, registrada: dato.registrada }] : [],
-      bandeja: dato.id === 'VERIFICACION' || dato.citas ? [
+      bandeja: dato.id === 'IDENTIFICACION_FECHA' || dato.citas ? [
         { id: IDS.mensaje, canal: 'sms', asunto: 'Código de demostración', cuerpo: 'Código ficticio: 246810. Solo para esta bandeja simulada.' },
         { id: '019aff00-0000-7000-8000-000000000008', canal: 'email', asunto: 'Aviso de demostración', cuerpo: 'Tu trámite puede continuar en los canales de atención.' },
       ] : [], metricas, lineaTiempo, web: DATOS_WEB[0]!.vista,

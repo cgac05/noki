@@ -10,6 +10,7 @@ import { EstadoCarga } from '../componentes/EstadoCarga.tsx';
 import { EstadoError } from '../componentes/EstadoError.tsx';
 import { LineaTiempo } from '../componentes/LineaTiempo.tsx';
 import { dinero } from '../componentes/formato.ts';
+import { IdentificacionAsesor } from '../componentes/IdentificacionAsesor.tsx';
 
 function LlamadaEntrante() {
   const [numero, setNumero] = useState(CONTACTO_DEMO);
@@ -44,6 +45,7 @@ export function CallCenter() {
   const codigo = ficha.data?.codigoContinuacion?.replace(/^CONTINUAR\s+/, '');
   const rutaContinuacion = codigo ? '/wa?continuar=' + encodeURIComponent(codigo) : '/wa';
   const tramite = ficha.data?.tramites[0] ?? respuesta?.tramite;
+  const pregunta = respuesta?.siguientePregunta;
   return <>
     <h1>Call Center</h1>
     <p className="introduccion">Inicia la atención y continúa la misma conversación en WhatsApp.</p>
@@ -53,6 +55,7 @@ export function CallCenter() {
     {ficha.data && <>
       <section className="seccion" aria-labelledby="titulo-ficha"><h2 id="titulo-ficha">Ficha del hilo</h2>
         <dl className="datos"><div><dt>Paciente de demo</dt><dd>{ficha.data.nombrePila ?? '—'}</dd></div><div><dt>Contacto</dt><dd>{ficha.data.telefonoEnmascarado ?? '—'}</dd></div></dl>
+        {!ficha.data.soloLectura && respuesta && pregunta?.tipo === 'PREGUNTA' && pregunta.casilla === 'paciente' && pregunta.pista.paso && <IdentificacionAsesor key={respuesta.tramite.id + JSON.stringify(pregunta.pista)} tramiteId={respuesta.tramite.id} pista={pregunta.pista} />}
         {ficha.data.tramites.map(tramite => <p key={tramite.id}>Estado del trámite: <strong>{tramite.estado}</strong></p>)}
         {ficha.data.oferta && <dl className="datos"><div><dt>Servicio</dt><dd>{ficha.data.oferta.servicio}</dd></div><div><dt>Sede</dt><dd>{ficha.data.oferta.sede}</dd></div><div><dt>Cotización</dt><dd>{dinero(ficha.data.oferta.precioCentavos)}</dd></div></dl>}
         {ficha.data.soloLectura && <p className="aviso">La atención continúa en otro canal. Esta ficha es de solo lectura.</p>}

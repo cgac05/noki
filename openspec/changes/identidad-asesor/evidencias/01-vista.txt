@@ -1,0 +1,15 @@
+Base: cb3d56a
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |web| src/vistas/identidadAsesor.test.tsx (8 tests) 1759ms
+   ✓ envía destinatario y candidato NINGUNO; captura la fecha protegida y avanza  531ms
+   ✓ reintenta sin recapturar y no filtra CURP, fecha ni datos básicos a cachés, consola, URL o almacenamiento  312ms
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  16:43:31
+   Duration  6.72s (transform 776ms, setup 0ms, import 2.35s, tests 1.76s, environment 2.15s)
+
+
+Exit code: 0

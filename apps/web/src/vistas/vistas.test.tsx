@@ -165,11 +165,15 @@ describe('Vistas del guion', () => {
     await usuario.click(await screen.findByRole('button', { name: 'Ver opciones' }));
     await usuario.click(await screen.findByRole('button', { name: 'Jueves 26 · 09:15' }));
     await usuario.click(await screen.findByRole('button', { name: 'Revisar cita' }));
+    await usuario.click(await screen.findByRole('button', { name: 'Para mí' }));
+    await usuario.click((await screen.findAllByRole('button', { name: 'Ver opciones' })).find(boton => !(boton as HTMLButtonElement).disabled)!);
+    await usuario.click(await screen.findByRole('button', { name: 'Soy Ana P.' }));
     await usuario.click(await screen.findByRole('button', { name: 'Abrir formulario' }));
-    await usuario.type(screen.getByLabelText('Fecha de nacimiento', { exact: true }), '2000-01-02');
+    await usuario.type(screen.getByLabelText('Fecha de nacimiento', { exact: true, selector: 'input' }), '2000-01-02');
     await usuario.click(screen.getByRole('button', { name: 'Enviar formulario' }));
     await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
     expect(document.body.textContent).not.toContain('2000-01-02');
+    expect(JSON.stringify({ ...sessionStorage })).not.toContain('2000-01-02');
     await usuario.click(await screen.findByRole('button', { name: 'Confirmar cita' }));
     await usuario.click(screen.getByRole('link', { name: 'App' }));
     expect(await screen.findByText('CONFIRMADA')).toBeDefined();
@@ -187,6 +191,8 @@ describe('Vistas del guion', () => {
     const filas = within(linea).getAllByRole('listitem');
     expect(filas.at(-1)?.textContent).toContain('PacienteLlego');
     expect(linea.textContent).toContain('CanalCambiado');
+    expect(linea.textContent).toContain('DestinatarioDeclarado');
+    expect(linea.textContent).toContain('IdentidadComprobada');
     for (const canal of ['Call Center', 'WhatsApp', 'App', 'Clínica']) expect(linea.textContent).toContain(canal);
     await usuario.click(screen.getByRole('button', { name: 'Reiniciar guion' }));
     await waitFor(() => expect(cliente.demo?.paso().id).toBe('INICIO'));

@@ -1,0 +1,32 @@
+Base: cb3d56a
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |web| src/cliente/guionWa.test.ts (7 tests) 50ms
+ ✓ |web| src/cliente/cliente.test.ts (25 tests) 283ms
+ ✓ |web| src/vistas/vistas.test.tsx (15 tests) 4072ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo  562ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  1698ms
+     ✓ permite escribir texto fuera del guion y muestra ayuda sin avanzar  343ms
+ ✓ |web| src/vistas/wa.test.tsx (12 tests) 5233ms
+   ✓ identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión  1889ms
+   ✓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible  462ms
+   ✓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo  956ms
+   ✓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título  410ms
+   ✓ Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot  554ms
+ ✓ |web| src/vistas/flow.test.tsx (7 tests) 7021ms
+   ✓ el Flow de identificación conserva el paso al cancelar y vuelve a abrir sin la fecha  1597ms
+   ✓ Envío del Flow: controles según captura y resumen enmascarado sin valores en mutaciones ni almacenamiento  1251ms
+   ✓ Campo requerido vacío: no envía y señala el campo  353ms
+   ✓ atrapa el foco con Tab y Shift+Tab entre el primer campo y Cancelar  427ms
+   ✓ Escape y valores descartados: cancela sin enviar y abre campos vacíos  1068ms
+   ✓ reintenta el Flow con la misma solicitud y clave; cerrar descarta el pendiente protegido  1087ms
+   ✓ cerrar después de un error borra los valores y elimina el reintento del historial  1236ms
+
+ Test Files  5 passed (5)
+      Tests  66 passed (66)
+   Start at  16:55:47
+   Duration  13.79s (transform 2.31s, setup 0ms, import 9.78s, tests 16.66s, environment 17.08s)
+
+
+Exit code: 0

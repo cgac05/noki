@@ -1,0 +1,19 @@
+Base: cb3d56a60c1e2125f9465742236f306bd99278ae
+Revisión: H-01, pruebas finales tras corrección de selectores de tipos
+Comando: pnpm exec vitest run --project web src/cliente/useIdentificacion.test.tsx src/vistas/identidadAsesor.test.tsx
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |web| src/cliente/useIdentificacion.test.tsx (7 tests) 121ms
+ ✓ |web| src/vistas/identidadAsesor.test.tsx (9 tests) 3022ms
+   ✓ envía destinatario y candidato NINGUNO; captura la fecha protegida y avanza  713ms
+   ✓ muestra código y mensaje del núcleo, conserva reiniciar y descarta al cancelar  576ms
+   ✓ reintenta sin recapturar y no filtra CURP, fecha ni datos básicos a cachés, consola, URL o almacenamiento  749ms
+
+ Test Files  2 passed (2)
+      Tests  16 passed (16)
+   Start at  18:54:39
+   Duration  10.75s (transform 1.47s, setup 0ms, import 7.42s, tests 3.14s, environment 4.92s)
+
+
+Exit code: 0

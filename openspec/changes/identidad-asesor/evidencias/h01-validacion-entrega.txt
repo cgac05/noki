@@ -1,0 +1,13 @@
+Corrección H-01; base: cb3d56a60c1e2125f9465742236f306bd99278ae
+HEAD = main = origin/main: PASS tras git fetch origin main
+Autorización rev. 1 intacta: proposal.md a73adbc7cdfd3dc881c3c032cab9863755ff21b5ca81e69385cc6716b1746476
+Autorización rev. 1 intacta: design.md 09f05e1dbe5b54c65249ee9b1114efeb100986395c86408d063d01b71f6e2190
+Autorización rev. 1 intacta: specs/consolas-internas/spec.md 4ac721f10137564b7db6f8aa80946e57cafcc21f80266faa61e6bb0cf3ca4a89
+Autorización rev. 1 intacta: specs/cliente-api-canales/spec.md 72d7958f87574a06c0bf026c598fce8375b4cb8ffdfea58bd41ff5bf0caa4cb2
+Tareas originales, normalizando casillas: b37d2d99ddf69d633eef088a35a9e0652a83bd81955f70dd632065654b2f69fb
+Alcance global: PASS; solo apps/web/** y carpeta del cambio
+Diff de producto de esta corrección respecto a la entrega revisada: apps/web/src/cliente/useIdentificacion.test.tsx, apps/web/src/cliente/useIdentificacion.ts, apps/web/src/vistas/identidadAsesor.test.tsx
+OpenSpec estricto: Change 'identidad-asesor' is valid
+git diff --check: PASS
+Commits propios sobre main: 0
+Evidencia H-01 sin rutas locales: PASS

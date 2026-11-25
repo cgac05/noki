@@ -1,0 +1,113 @@
+Base: cb3d56a60c1e2125f9465742236f306bd99278ae
+Revisión: H-01, antes de corregir useIdentificacion
+Comando: pnpm exec vitest run --project web src/cliente/useIdentificacion.test.tsx src/vistas/identidadAsesor.test.tsx
+
+ RUN  v4.0.14 <repo>
+
+ ❯ |web| src/cliente/useIdentificacion.test.tsx (7 tests | 2 failed) 62ms
+   ✓ doble clic envía una vez, recuerda e invalida sin mutaciones con datos 25ms
+   ✓ reintenta con los mismos valores y clave; un envío nuevo usa otra clave 5ms
+   × H-01: reemplaza el pendiente fallido al elegir 'otra opción de destinatario' 14ms
+   × H-01: reemplaza el pendiente fallido al elegir 'CURP capturada después de No la tengo' 6ms
+   ✓ conserva el pendiente al reenviar un comando idéntico creado de nuevo 5ms
+   ✓ descarta el pendiente al cancelar e ignora la respuesta tardía 3ms
+   ✓ descarta el pendiente al desmontar e ignora la respuesta tardía 2ms
+ ❯ |web| src/vistas/identidadAsesor.test.tsx (9 tests | 1 failed) 1846ms
+   ✓ envía destinatario y candidato NINGUNO; captura la fecha protegida y avanza  498ms
+   ✓ envía destinatario y candidato referencia-opaca-demo; captura la fecha protegida y avanza 224ms
+   ✓ permite omitir identificación y cotizar sin bloquear las demás operaciones 76ms
+   × H-01: tras fallar Para mí envía Para otra persona con otro payload y clave 117ms
+   ✓ oculta la sección sin pregunta o en solo lectura (servicio, false) 56ms
+   ✓ oculta la sección sin pregunta o en solo lectura (DESTINATARIO, true) 45ms
+   ✓ ofrece sin CURP junto al formulario y rechaza el formato antes de enviar 202ms
+   ✓ muestra código y mensaje del núcleo, conserva reiniciar y descarta al cancelar 298ms
+   ✓ reintenta sin recapturar y no filtra CURP, fecha ni datos básicos a cachés, consola, URL o almacenamiento  329ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/cliente/useIdentificacion.test.tsx > H-01: reemplaza el pendiente fallido al elegir 'otra opción de destinatario'
+AssertionError: expected { canal: 'callcenter', …(4) } to deeply equal { canal: 'callcenter', …(4) }
+
+- Expected
++ Received
+
+  {
+    "actor": "asesor:asesor1",
+    "canal": "callcenter",
+    "payload": {
+-     "para": "OTRA_PERSONA",
++     "para": "MI",
+      "paso": "DESTINATARIO",
+    },
+    "tipo": "IdentificarPaciente",
+    "tramiteId": "019aff00-0000-7000-8000-000000000001",
+  }
+
+ ❯ src/cliente/useIdentificacion.test.tsx:61:36
+     59|   await act(async () => { expect(await result.current.accion.enviar(pr…
+     60|   await act(async () => { expect(await result.current.accion.enviar(nu…
+     61|   expect(enviar.mock.calls[1]![0]).toEqual(nuevo);
+       |                                    ^
+     62|   expect(enviar.mock.calls[1]![1]?.idempotencyKey).not.toBe(enviar.moc…
+     63|   await act(async () => { expect(await result.current.accion.reintenta…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  |web| src/cliente/useIdentificacion.test.tsx > H-01: reemplaza el pendiente fallido al elegir 'CURP capturada después de No la tengo'
+AssertionError: expected { canal: 'callcenter', …(4) } to deeply equal { canal: 'callcenter', …(4) }
+
+- Expected
++ Received
+
+  {
+    "actor": "asesor:asesor1",
+    "canal": "callcenter",
+    "payload": {
+-     "curp": "PEMA000102MNTXXX00",
++     "curp": null,
+      "paso": "CURP",
+    },
+    "tipo": "IdentificarPaciente",
+    "tramiteId": "019aff00-0000-7000-8000-000000000001",
+  }
+
+ ❯ src/cliente/useIdentificacion.test.tsx:61:36
+     59|   await act(async () => { expect(await result.current.accion.enviar(pr…
+     60|   await act(async () => { expect(await result.current.accion.enviar(nu…
+     61|   expect(enviar.mock.calls[1]![0]).toEqual(nuevo);
+       |                                    ^
+     62|   expect(enviar.mock.calls[1]![1]?.idempotencyKey).not.toBe(enviar.moc…
+     63|   await act(async () => { expect(await result.current.accion.reintenta…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  |web| src/vistas/identidadAsesor.test.tsx > H-01: tras fallar Para mí envía Para otra persona con otro payload y clave
+AssertionError: expected { paso: 'DESTINATARIO', para: 'MI' } to deeply equal { paso: 'DESTINATARIO', …(1) }
+
+- Expected
++ Received
+
+  {
+-   "para": "OTRA_PERSONA",
++   "para": "MI",
+    "paso": "DESTINATARIO",
+  }
+
+ ❯ src/vistas/identidadAsesor.test.tsx:83:41
+     81|   await usuario.click(screen.getByRole('button', { name: 'Para otra pe…
+     82|   await waitFor(() => expect(recibidos).toHaveLength(4));
+     83|   expect(recibidos[3]!.comando.payload).toEqual({ paso: 'DESTINATARIO'…
+       |                                         ^
+     84|   expect(recibidos[3]!.clave).not.toBe(recibidos[1]!.clave);
+     85| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  3 failed | 13 passed (16)
+   Start at  17:41:34
+   Duration  7.29s (transform 985ms, setup 0ms, import 3.78s, tests 1.91s, environment 5.24s)
+
+
+Exit code: 1

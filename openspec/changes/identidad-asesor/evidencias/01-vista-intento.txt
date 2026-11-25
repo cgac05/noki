@@ -1,0 +1,1186 @@
+Base: cb3d56a
+
+ RUN  v4.0.14 <repo>
+
+ ❯ |web| src/vistas/identidadAsesor.test.tsx (8 tests | 2 failed) 3653ms
+   ✓ envía destinatario y candidato NINGUNO; captura la fecha protegida y avanza  662ms
+   ✓ envía destinatario y candidato referencia-opaca-demo; captura la fecha protegida y avanza 279ms
+   ✓ permite omitir identificación y cotizar sin bloquear las demás operaciones 108ms
+   ✓ oculta la sección sin pregunta o en solo lectura (servicio, false) 63ms
+   ✓ oculta la sección sin pregunta o en solo lectura (DESTINATARIO, true) 68ms
+   ✓ ofrece sin CURP junto al formulario y rechaza el formato antes de enviar 225ms
+   × muestra código y mensaje del núcleo, conserva reiniciar y descarta al cancelar 1124ms
+   × reintenta sin recapturar y no filtra CURP, fecha ni datos básicos a cachés, consola, URL o almacenamiento 1121ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/vistas/identidadAsesor.test.tsx > muestra código y mensaje del núcleo, conserva reiniciar y descarta al cancelar
+TestingLibraryElementError: Unable to find an element with the text: Identificación bloqueada temporalmente.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Call Center
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Inicia la atención y continúa la misma conversación en WhatsApp.
+        </p>
+        <section
+          aria-labelledby="titulo-ficha"
+          class="seccion"
+        >
+          <h2
+            id="titulo-ficha"
+          >
+            Ficha del hilo
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Paciente de demo
+              </dt>
+              <dd>
+                Ana
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Contacto
+              </dt>
+              <dd>
+                •••• 0001
+              </dd>
+            </div>
+          </dl>
+          <section
+            aria-label="Identificar paciente (opcional)"
+            class="seccion"
+          >
+            <h3>
+              Identificar paciente (opcional)
+            </h3>
+            <p>
+              Paso: 
+              FECHA_NAC
+            </p>
+            <div
+              class="acciones"
+            >
+              <button
+                type="button"
+              >
+                Capturar datos
+              </button>
+              <button
+                class="boton-secundario"
+                type="button"
+              >
+                Reiniciar identificación
+              </button>
+            </div>
+            <div
+              class="estado-error"
+              role="alert"
+            >
+              <p>
+                La información recibida no tiene el formato esperado. Intenta de nuevo.
+              </p>
+            </div>
+            <dialog
+              aria-labelledby="_r_3_-titulo"
+              class="dialogo-wa modal-flow"
+              open=""
+            >
+              <h2
+                id="_r_3_-titulo"
+              >
+                Identificar paciente
+              </h2>
+              <p
+                class="ayuda-flow"
+              >
+                Tus respuestas se envían al completar el formulario. En el chat solo aparecerá un resumen enmascarado.
+              </p>
+              <form
+                novalidate=""
+              >
+                <div
+                  class="campo-flow"
+                >
+                  <label
+                    for="_r_3_-fechaNac"
+                  >
+                    Fecha de nacimiento
+                  </label>
+                  <div
+                    class="captura-flow"
+                  >
+                    <input
+                      aria-invalid="false"
+                      autocomplete="off"
+                      disabled=""
+                      id="_r_3_-fechaNac"
+                      required=""
+                      type="password"
+                      value="2000-01-02"
+                    />
+                    <button
+                      aria-label="Mostrar Fecha de nacimiento"
+                      class="boton-secundario"
+                      disabled=""
+                      type="button"
+                    >
+                      Mostrar
+                    </button>
+                  </div>
+                </div>
+                <p
+                  class="wa-error"
+                  role="alert"
+                >
+                  No pudimos enviar el formulario. Reintenta el mismo envío o cancela para volver a capturarlo.
+                </p>
+                <div
+                  class="acciones"
+                >
+                  <button
+                    type="submit"
+                  >
+                    Reintentar envío
+                  </button>
+                  <button
+                    class="boton-secundario"
+                    type="button"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </form>
+            </dialog>
+          </section>
+          <p>
+            Estado del trámite: 
+            <strong>
+              BORRADOR
+            </strong>
+          </p>
+          <div
+            class="acciones"
+          >
+            <button
+              type="button"
+            >
+              Cotizar paquete en 
+              Tepic
+            </button>
+          </div>
+          <label
+            class="consentimiento"
+          >
+            <input
+              type="checkbox"
+            />
+            El paciente aceptó continuar por WhatsApp
+          </label>
+          <button
+            disabled=""
+            type="button"
+          >
+            Continuar por WhatsApp
+          </button>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Call Center
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Inicia la atención y continúa la misma conversación en WhatsApp.
+        </p>
+        <section
+          aria-labelledby="titulo-ficha"
+          class="seccion"
+        >
+          <h2
+            id="titulo-ficha"
+          >
+            Ficha del hilo
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Paciente de demo
+              </dt>
+              <dd>
+                Ana
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Contacto
+              </dt>
+              <dd>
+                •••• 0001
+              </dd>
+            </div>
+          </dl>
+          <section
+            aria-label="Identificar paciente (opcional)"
+            class="seccion"
+          >
+            <h3>
+              Identificar paciente (opcional)
+            </h3>
+            <p>
+              Paso: 
+              FECHA_NAC
+            </p>
+            <div
+              class="acciones"
+            >
+              <button
+                type="button"
+              >
+                Capturar datos
+              </button>
+              <button
+                class="boton-secundario"
+                type="button"
+              >
+                Reiniciar identificación
+              </button>
+            </div>
+            <div
+              class="estado-error"
+              role="alert"
+            >
+              <p>
+                La información recibida no tiene el formato esperado. Intenta de nuevo.
+              </p>
+            </div>
+            <dialog
+              aria-labelledby="_r_3_-titulo"
+              class="dialogo-wa modal-flow"
+              open=""
+            >
+              <h2
+                id="_r_3_-titulo"
+              >
+                Identificar paciente
+              </h2>
+              <p
+                class="ayuda-flow"
+              >
+                Tus respuestas se envían al completar el formulario. En el chat solo aparecerá un resumen enmascarado.
+              </p>
+              <form
+                novalidate=""
+              >
+                <div
+                  class="campo-flow"
+                >
+                  <label
+                    for="_r_3_-fechaNac"
+                  >
+                    Fecha de nacimiento
+                  </label>
+                  <div
+                    class="captura-flow"
+                  >
+                    <input
+                      aria-invalid="false"
+                      autocomplete="off"
+                      disabled=""
+                      id="_r_3_-fechaNac"
+                      required=""
+                      type="password"
+                      value="2000-01-02"
+                    />
+                    <button
+                      aria-label="Mostrar Fecha de nacimiento"
+                      class="boton-secundario"
+                      disabled=""
+                      type="button"
+                    >
+                      Mostrar
+                    </button>
+                  </div>
+                </div>
+                <p
+                  class="wa-error"
+                  role="alert"
+                >
+                  No pudimos enviar el formulario. Reintenta el mismo envío o cancela para volver a capturarlo.
+                </p>
+                <div
+                  class="acciones"
+                >
+                  <button
+                    type="submit"
+                  >
+                    Reintentar envío
+                  </button>
+                  <button
+                    class="boton-secundario"
+                    type="button"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </form>
+            </dialog>
+          </section>
+          <p>
+            Estado del trámite: 
+            <strong>
+              BORRADOR
+            </strong>
+          </p>
+          <div
+            class="acciones"
+          >
+            <button
+              type="button"
+            >
+              Cotizar paquete en 
+              Tepic
+            </button>
+          </div>
+          <label
+            class="consentimiento"
+          >
+            <input
+              type="checkbox"
+            />
+            El paciente aceptó continuar por WhatsApp
+          </label>
+          <button
+            disabled=""
+            type="button"
+          >
+            Continuar por WhatsApp
+          </button>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/identidadAsesor.test.tsx:94:23
+     92|   fireEvent.change(screen.getByLabelText('Fecha de nacimiento', { exac…
+     93|   await usuario.click(screen.getByRole('button', { name: 'Enviar formu…
+     94|   expect(await screen.findByText('Identificación bloqueada temporalmen…
+       |                       ^
+     95|   expect(screen.getByText('IDENTIFICACION_BLOQUEADA')).toBeDefined();
+     96|   expect(screen.getByRole('button', { name: 'Reiniciar identificación'…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  |web| src/vistas/identidadAsesor.test.tsx > reintenta sin recapturar y no filtra CURP, fecha ni datos básicos a cachés, consola, URL o almacenamiento
+TestingLibraryElementError: Unable to find role="button" and name "Reintentar envío"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Call Center
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Inicia la atención y continúa la misma conversación en WhatsApp.
+        </p>
+        <section
+          aria-labelledby="titulo-ficha"
+          class="seccion"
+        >
+          <h2
+            id="titulo-ficha"
+          >
+            Ficha del hilo
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Paciente de demo
+              </dt>
+              <dd>
+                Ana
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Contacto
+              </dt>
+              <dd>
+                •••• 0001
+              </dd>
+            </div>
+          </dl>
+          <section
+            aria-label="Identificar paciente (opcional)"
+            class="seccion"
+          >
+            <h3>
+              Identificar paciente (opcional)
+            </h3>
+            <p>
+              Paso: 
+              DATOS
+            </p>
+            <div
+              class="acciones"
+            >
+              <button
+                type="button"
+              >
+                Capturar datos
+              </button>
+              <button
+                class="boton-secundario"
+                type="button"
+              >
+                Reiniciar identificación
+              </button>
+            </div>
+          </section>
+          <p>
+            Estado del trámite: 
+            <strong>
+              BORRADOR
+            </strong>
+          </p>
+          <div
+            class="acciones"
+          >
+            <button
+              type="button"
+            >
+              Cotizar paquete en 
+              Tepic
+            </button>
+          </div>
+          <label
+            class="consentimiento"
+          >
+            <input
+              type="checkbox"
+            />
+            El paciente aceptó continuar por WhatsApp
+          </label>
+          <button
+            disabled=""
+            type="button"
+          >
+            Continuar por WhatsApp
+          </button>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Call Center
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Inicia la atención y continúa la misma conversación en WhatsApp.
+        </p>
+        <section
+          aria-labelledby="titulo-ficha"
+          class="seccion"
+        >
+          <h2
+            id="titulo-ficha"
+          >
+            Ficha del hilo
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Paciente de demo
+              </dt>
+              <dd>
+                Ana
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Contacto
+              </dt>
+              <dd>
+                •••• 0001
+              </dd>
+            </div>
+          </dl>
+          <section
+            aria-label="Identificar paciente (opcional)"
+            class="seccion"
+          >
+            <h3>
+              Identificar paciente (opcional)
+            </h3>
+            <p>
+              Paso: 
+              DATOS
+            </p>
+            <div
+              class="acciones"
+            >
+              <button
+                type="button"
+              >
+                Capturar datos
+              </button>
+              <button
+                class="boton-secundario"
+                type="button"
+              >
+                Reiniciar identificación
+              </button>
+            </div>
+          </section>
+          <p>
+            Estado del trámite: 
+            <strong>
+              BORRADOR
+            </strong>
+          </p>
+          <div
+            class="acciones"
+          >
+            <button
+              type="button"
+            >
+              Cotizar paquete en 
+              Tepic
+            </button>
+          </div>
+          <label
+            class="consentimiento"
+          >
+            <input
+              type="checkbox"
+            />
+            El paciente aceptó continuar por WhatsApp
+          </label>
+          <button
+            disabled=""
+            type="button"
+          >
+            Continuar por WhatsApp
+          </button>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/vistas/identidadAsesor.test.tsx:115:36
+    113|   fireEvent.change(screen.getByLabelText('CURP', { exact: true }), { t…
+    114|   fallarRed(); await usuario.click(screen.getByRole('button', { name: …
+    115|   await usuario.click(await screen.findByRole('button', { name: 'Reint…
+       |                                    ^
+    116|   await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
+    117|   expect(recibidos[2]).toEqual(recibidos[1]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 6 passed (8)
+   Start at  16:40:28
+   Duration  8.74s (transform 723ms, setup 0ms, import 2.25s, tests 3.65s, environment 2.37s)
+
+
+Exit code: 1

@@ -1,0 +1,167 @@
+{
+  "DESTINATARIO": {
+    "paso": "DESTINATARIO",
+    "entrada": "BOTONES",
+    "opciones": [
+      {
+        "id": "MI",
+        "payload": "MI",
+        "titulo": "Para mí"
+      },
+      {
+        "id": "OTRA_PERSONA",
+        "payload": "OTRA_PERSONA",
+        "titulo": "Para otra persona"
+      }
+    ]
+  },
+  "CONFIRMAR": {
+    "paso": "CONFIRMAR",
+    "entrada": "LISTA",
+    "opciones": [
+      {
+        "id": "referencia-opaca-demo",
+        "payload": "referencia-opaca-demo",
+        "titulo": "Soy Ana P."
+      },
+      {
+        "id": "NINGUNO",
+        "payload": "NINGUNO",
+        "titulo": "No soy ninguno"
+      }
+    ]
+  },
+  "FECHA_NAC": {
+    "paso": "FECHA_NAC",
+    "entrada": "FLOW",
+    "campos": [
+      {
+        "id": "fechaNac",
+        "etiqueta": "Fecha de nacimiento",
+        "captura": "sensitive",
+        "requerido": true
+      }
+    ]
+  },
+  "CURP": {
+    "paso": "CURP",
+    "entrada": "FLOW",
+    "campos": [
+      {
+        "id": "curp",
+        "etiqueta": "CURP",
+        "captura": "sensitive",
+        "requerido": true
+      }
+    ],
+    "opciones": [
+      {
+        "id": "SIN_CURP",
+        "payload": "SIN_CURP",
+        "titulo": "No la tengo"
+      }
+    ]
+  },
+  "DATOS": {
+    "paso": "DATOS",
+    "entrada": "FLOW",
+    "campos": [
+      {
+        "id": "nombre",
+        "etiqueta": "Nombre",
+        "captura": "sensitive",
+        "requerido": true
+      },
+      {
+        "id": "apellidoPaterno",
+        "etiqueta": "Apellido paterno",
+        "captura": "sensitive",
+        "requerido": true
+      },
+      {
+        "id": "apellidoMaterno",
+        "etiqueta": "Apellido materno",
+        "captura": "sensitive",
+        "requerido": false
+      },
+      {
+        "id": "fechaNac",
+        "etiqueta": "Fecha de nacimiento",
+        "captura": "sensitive",
+        "requerido": true
+      },
+      {
+        "id": "sexo",
+        "etiqueta": "Sexo",
+        "captura": "sensitive",
+        "requerido": true
+      },
+      {
+        "id": "entidadNacimiento",
+        "etiqueta": "Entidad de nacimiento",
+        "captura": "sensitive",
+        "requerido": true
+      }
+    ]
+  },
+  "DATOS_CON_CURP": {
+    "paso": "DATOS",
+    "entrada": "FLOW",
+    "campos": [
+      {
+        "id": "nombre",
+        "etiqueta": "Nombre",
+        "captura": "sensitive",
+        "requerido": true
+      },
+      {
+        "id": "apellidoPaterno",
+        "etiqueta": "Apellido paterno",
+        "captura": "sensitive",
+        "requerido": true
+      },
+      {
+        "id": "apellidoMaterno",
+        "etiqueta": "Apellido materno",
+        "captura": "sensitive",
+        "requerido": false
+      }
+    ]
+  },
+  "DATOS_CON_FECHA": {
+    "paso": "DATOS",
+    "entrada": "FLOW",
+    "campos": [
+      {
+        "id": "nombre",
+        "etiqueta": "Nombre",
+        "captura": "sensitive",
+        "requerido": true
+      },
+      {
+        "id": "apellidoPaterno",
+        "etiqueta": "Apellido paterno",
+        "captura": "sensitive",
+        "requerido": true
+      },
+      {
+        "id": "apellidoMaterno",
+        "etiqueta": "Apellido materno",
+        "captura": "sensitive",
+        "requerido": false
+      },
+      {
+        "id": "sexo",
+        "etiqueta": "Sexo",
+        "captura": "sensitive",
+        "requerido": true
+      },
+      {
+        "id": "entidadNacimiento",
+        "etiqueta": "Entidad de nacimiento",
+        "captura": "sensitive",
+        "requerido": true
+      }
+    ]
+  }
+}

@@ -11,8 +11,24 @@ import { ProveedorCliente } from '../cliente/ProveedorCliente.tsx';
 import { ErrorCliente } from '../cliente/errores.ts';
 import { rutas } from '../rutas.tsx';
 import '../pruebas/dialogo.ts';
+import { identificarEnWa, prepararContinuacionWa } from '../pruebas/identificarEnWa.ts';
+import { IDS } from '../cliente/mock/guionFlujoA.ts';
 
 afterEach(() => { cleanup(); sessionStorage.clear(); localStorage.clear(); vi.restoreAllMocks(); });
+it('el Flow de identificación conserva el paso al cancelar y vuelve a abrir sin la fecha', async () => {
+  const cliente = await prepararContinuacionWa();
+  const router = createMemoryRouter(rutas, { initialEntries: ['/wa?continuar=' + IDS.tokenContinuacion] });
+  render(<ProveedorCliente cliente={cliente}><RouterProvider router={router} /></ProveedorCliente>);
+  const usuario = userEvent.setup({ delay: null });
+  await identificarEnWa(usuario);
+  fireEvent.change(screen.getByLabelText('Fecha de nacimiento', { exact: true, selector: 'input' }), { target: { value: '2000-01-02' } });
+  await usuario.click(screen.getByRole('button', { name: 'Cancelar' }));
+  expect(cliente.demo.paso().id).toBe('IDENTIFICACION_FECHA');
+  await usuario.click(screen.getByRole('button', { name: 'Abrir formulario' }));
+  expect((screen.getByLabelText('Fecha de nacimiento', { exact: true, selector: 'input' }) as HTMLInputElement).value).toBe('');
+  expect(document.body.textContent).not.toContain('2000-01-02');
+  expect(JSON.stringify({ ...sessionStorage })).not.toContain('2000-01-02');
+});
 const flow: MensajeBot = { tipo: 'flow', titulo: 'Verificación protegida', campos: [
   { id: 'nombre', etiqueta: 'Nombre de prueba', captura: 'texto', requerido: true },
   { id: 'fecha', etiqueta: 'Fecha de prueba', captura: 'fecha', requerido: true },
@@ -35,7 +51,7 @@ async function abrir() {
 async function completar(usuario: ReturnType<typeof userEvent.setup>) {
   await usuario.type(screen.getByLabelText('Nombre de prueba'), valores.nombre);
   fireEvent.change(screen.getByLabelText('Fecha de prueba'), { target: { value: valores.fecha } });
-  await usuario.type(screen.getByLabelText('Fecha de nacimiento', { exact: true }), valores.fechaNac);
+  await usuario.type(screen.getByLabelText('Fecha de nacimiento', { exact: true, selector: 'input' }), valores.fechaNac);
   await usuario.type(screen.getByLabelText('PIN', { exact: true }), valores.pin);
 }
 
@@ -68,7 +84,7 @@ it('Campo requerido vacío: no envía y señala el campo', async () => {
   const { usuario, enviar } = await abrir();
   await usuario.click(screen.getByRole('button', { name: 'Enviar formulario' }));
   expect(enviar).toHaveBeenCalledTimes(1);
-  expect(screen.getByLabelText('Fecha de nacimiento', { exact: true }).getAttribute('aria-invalid')).toBe('true');
+  expect(screen.getByLabelText('Fecha de nacimiento', { exact: true, selector: 'input' }).getAttribute('aria-invalid')).toBe('true');
   expect(screen.getAllByText('Completa este campo.').length).toBeGreaterThan(0);
 });
 
@@ -102,6 +118,6 @@ it('cerrar después de un error borra los valores y elimina el reintento del his
   await screen.findByRole('button', { name: 'Reintentar envío' });
   await usuario.click(screen.getByRole('button', { name: 'Cancelar' }));
   await usuario.click(screen.getByRole('button', { name: 'Abrir formulario' }));
-  expect((screen.getByLabelText('Fecha de nacimiento', { exact: true }) as HTMLInputElement).value).toBe('');
+  expect((screen.getByLabelText('Fecha de nacimiento', { exact: true, selector: 'input' }) as HTMLInputElement).value).toBe('');
   expect(screen.queryByRole('button', { name: 'Reintentar' })).toBeNull();
 });

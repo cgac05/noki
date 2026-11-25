@@ -2,11 +2,12 @@ import { useEffect, useId, useRef, useState } from 'react';
 import type { MensajeBot } from '@noki/contracts';
 
 type Flow = Extract<MensajeBot, { tipo: 'flow' }>;
-export function ModalFlow({ mensaje, onEnviar, onCerrar, onDescartar }: { mensaje: Flow; onEnviar: (valores: Record<string, string>, resumen: string) => Promise<boolean>; onCerrar: () => void; onDescartar: () => void }) {
+export function ModalFlow({ mensaje, onEnviar, onCerrar, onDescartar, validar }: { mensaje: Flow; onEnviar: (valores: Record<string, string>, resumen: string) => Promise<boolean>; onCerrar: () => void; onDescartar: () => void; validar?: (valores: Record<string, string>) => string[] }) {
   const dialogo = useRef<HTMLDialogElement>(null); const prefijo = useId();
   const [valores, setValores] = useState<Record<string, string>>({});
   const [visibles, setVisibles] = useState<Set<string>>(new Set());
   const [errores, setErrores] = useState<Set<string>>(new Set());
+  const [formatos, setFormatos] = useState<Set<string>>(new Set());
   const [enviando, setEnviando] = useState(false); const bloqueo = useRef(false);
   const [fallo, setFallo] = useState(false);
   useEffect(() => { dialogo.current?.showModal(); return onDescartar; }, []);
@@ -30,6 +31,9 @@ export function ModalFlow({ mensaje, onEnviar, onCerrar, onDescartar }: { mensaj
       const faltantes = new Set(mensaje.campos.filter(campo => campo.requerido && !valores[campo.id]?.trim()).map(campo => campo.id));
       setErrores(faltantes);
       if (faltantes.size) { dialogo.current?.querySelector<HTMLInputElement>('[aria-invalid="true"]')?.focus(); return; }
+      const invalidos = new Set(validar?.(valores) ?? []);
+      setFormatos(invalidos); setErrores(invalidos);
+      if (invalidos.size) return;
       bloqueo.current = true; setEnviando(true);
       const resumen = mensaje.campos.map(campo => `${campo.etiqueta} ••••`).join('\n');
       const exito = await onEnviar(Object.fromEntries(mensaje.campos.map(campo => [campo.id, valores[campo.id] ?? ''])), resumen);
@@ -43,7 +47,7 @@ export function ModalFlow({ mensaje, onEnviar, onCerrar, onDescartar }: { mensaj
           <label htmlFor={id}>{campo.etiqueta}</label>
           <div className="captura-flow"><input id={id} type={tipo} inputMode={campo.captura === 'passcode' ? 'numeric' : undefined} autoComplete="off" autoFocus={indice === 0} required={campo.requerido} aria-invalid={errores.has(campo.id)} aria-describedby={errores.has(campo.id) ? `${id}-error` : undefined} value={valores[campo.id] ?? ''} disabled={enviando || fallo} onChange={evento => setValores(actual => ({ ...actual, [campo.id]: evento.target.value }))} />
           {secreto && <button type="button" className="boton-secundario" disabled={enviando || fallo} aria-label={`${visibles.has(campo.id) ? 'Ocultar' : 'Mostrar'} ${campo.etiqueta}`} onClick={() => setVisibles(actual => { const siguiente = new Set(actual); if (siguiente.has(campo.id)) siguiente.delete(campo.id); else siguiente.add(campo.id); return siguiente; })}>{visibles.has(campo.id) ? 'Ocultar' : 'Mostrar'}</button>}</div>
-          {errores.has(campo.id) && <p className="wa-error" id={`${id}-error`}>Completa este campo.</p>}
+          {errores.has(campo.id) && <p className="wa-error" id={`${id}-error`}>{formatos.has(campo.id) ? 'Revisa el formato de este campo' : 'Completa este campo.'}</p>}
         </div>;
       })}
       {fallo && <p role="alert" className="wa-error">No pudimos enviar el formulario. Reintenta el mismo envío o cancela para volver a capturarlo.</p>}

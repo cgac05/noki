@@ -11,8 +11,21 @@ import { ProveedorCliente } from '../cliente/ProveedorCliente.tsx';
 import { GUION_FLUJO_A, IDS } from '../cliente/mock/guionFlujoA.ts';
 import { rutas } from '../rutas.tsx';
 import '../pruebas/dialogo.ts';
+import { identificarEnWa, prepararContinuacionWa } from '../pruebas/identificarEnWa.ts';
 
 afterEach(() => { cleanup(); sessionStorage.clear(); localStorage.clear(); vi.restoreAllMocks(); });
+it('identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión', async () => {
+  const cliente = await prepararContinuacionWa(); const enviar = vi.spyOn(cliente, 'enviarMensajeWa');
+  const { usuario } = abrir(cliente, '/wa?continuar=' + IDS.tokenContinuacion);
+  await identificarEnWa(usuario);
+  fireEvent.change(screen.getByLabelText('Fecha de nacimiento', { exact: true, selector: 'input' }), { target: { value: '2000-01-02' } });
+  await usuario.click(screen.getByRole('button', { name: 'Enviar formulario' }));
+  await screen.findByRole('button', { name: 'Confirmar cita' });
+  expect(enviar.mock.calls.map(([mensaje]) => mensaje.payloadBoton)).toContain('MI');
+  expect(enviar.mock.calls.map(([mensaje]) => mensaje.payloadBoton)).toContain('demo.candidata.referencia-opaca');
+  expect(document.body.textContent).not.toContain('2000-01-02');
+  expect(JSON.stringify({ ...sessionStorage })).not.toContain('2000-01-02');
+});
 function abrir(cliente: ClienteApi = new ClienteMock({ latenciaMs: 0 }), ruta = '/wa') {
   const router = createMemoryRouter(rutas, { initialEntries: [ruta] });
   const vista = render(<ProveedorCliente cliente={cliente}><RouterProvider router={router} /></ProveedorCliente>);

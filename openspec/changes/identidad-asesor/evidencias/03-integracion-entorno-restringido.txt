@@ -1,0 +1,7 @@
+Base: cb3d56a60c1e2125f9465742236f306bd99278ae
+Comando: pnpm test:integracion
+$ node --env-file=.env --import tsx tests/integracion/ejecutar.ts
+No hay infraestructura de pruebas disponible. Inicia PostgreSQL y Redis: docker compose -f infra/docker-compose.yml up -d postgres redis. No se omitieron pruebas ni se declaró éxito.
+[ELIFECYCLE] Command failed with exit code 1.
+
+Exit code: 1

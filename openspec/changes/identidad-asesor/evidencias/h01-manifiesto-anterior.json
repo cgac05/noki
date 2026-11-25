@@ -1,0 +1,383 @@
+{
+  "fecha": "2026-11-24",
+  "cambio": "identidad-asesor",
+  "rama": "feat/identidad-asesor",
+  "revisionAutorizada": 1,
+  "baseAutorizada": "cb3d56a60c1e2125f9465742236f306bd99278ae",
+  "mainObservado": "cb3d56a60c1e2125f9465742236f306bd99278ae",
+  "mainRemotoObservado": "cb3d56a60c1e2125f9465742236f306bd99278ae",
+  "estado": "12/12 tareas completadas; entrega para revisión independiente",
+  "controles": {
+    "lint": "PASS",
+    "dependencias": "PASS: 175 módulos, 500 dependencias",
+    "pruebas": "PASS: 271 pruebas / 43 archivos, sin limitar trabajadores",
+    "integracion": "PASS: 32 pruebas / 12 archivos; PostgreSQL y Redis en Docker desde host",
+    "buildReal": "PASS",
+    "buildMock": "PASS",
+    "manual": "PASS: 375 y 1280 px, 16 capturas, 26 registros",
+    "formato": "PASS: git diff --check",
+    "openspec": "PASS: validación estricta",
+    "planificacion": "PASS: hashes autorizados intactos; solo casillas de tareas",
+    "pistasReales": "PASS: fixture reproducible mediante evidencias/pistas.ts"
+  },
+  "alcance": "PASS: solo apps/web/** y carpeta del cambio; sin dependencias nuevas ni cambios en lockfile",
+  "commitsPropiosSobreMain": 0,
+  "pendientesExternos": [
+    "Revisión independiente de Claude y autorización de cierre",
+    "Recorrido real del asesor bloqueado hasta api-comandos en main; confirmar servidor Socket.IO 4.x con frente A"
+  ],
+  "intentosConservados": "01-rojo.txt, 01-vista-rojo.txt, *-intento.txt, 02-rojo.txt y 03-integracion-entorno-restringido.txt conservan fallos previos; los logs finales PASS son los enumerados por el informe",
+  "archivoExcluidoDeAutohash": "openspec/changes/identidad-asesor/evidencias/03-archivos-entregados.json",
+  "archivos": [
+    {
+      "ruta": "apps/web/README.md",
+      "bytes": 16096,
+      "sha256": "04f1c0160533176c8ee465202a5bbcf6fa3a7920b7a676ebe544e1b96fd5fd8a"
+    },
+    {
+      "ruta": "apps/web/src/cliente/cliente.test.ts",
+      "bytes": 18216,
+      "sha256": "a6d732a34ebb221fffc4ab747a38ce8a5f33177cd8651bb051ecb4d07dedf2bd"
+    },
+    {
+      "ruta": "apps/web/src/cliente/demo.ts",
+      "bytes": 1170,
+      "sha256": "1ded4ed4bddbcaf50fb36e81f3ddf0b1d9830a98331d97566090de97ffa478e6"
+    },
+    {
+      "ruta": "apps/web/src/cliente/guionWa.test.ts",
+      "bytes": 5475,
+      "sha256": "b4eb1fa211782e4956a497c4ab3452471485a2b79359f2821ec799c5ec55e82a"
+    },
+    {
+      "ruta": "apps/web/src/cliente/identificacion.test.ts",
+      "bytes": 3175,
+      "sha256": "bd42b424b0efd6f076b4f1ff6b413da109a6dd634f4265d900472e970785454a"
+    },
+    {
+      "ruta": "apps/web/src/cliente/identificacion.ts",
+      "bytes": 2487,
+      "sha256": "9ea1e9a830984d0adbc83aed9dce201e134f3e10fda0d214349b996857b90db9"
+    },
+    {
+      "ruta": "apps/web/src/cliente/mock/guionFlujoA.ts",
+      "bytes": 17182,
+      "sha256": "4464962b2e5ac2d8f5d8247ef2ab4fab1418761629540aa30da6b60f997add53"
+    },
+    {
+      "ruta": "apps/web/src/cliente/useIdentificacion.test.tsx",
+      "bytes": 3896,
+      "sha256": "f20b9c03109a0a76592a1916e95a081db03ac0b5b8f051b970ab307713f526e8"
+    },
+    {
+      "ruta": "apps/web/src/cliente/useIdentificacion.ts",
+      "bytes": 2269,
+      "sha256": "60a4326eea7a199eb8d1c39bfa266ee99850f91235dab8b2e39b5993c449b152"
+    },
+    {
+      "ruta": "apps/web/src/componentes/IdentificacionAsesor.tsx",
+      "bytes": 2583,
+      "sha256": "7446ca20934c608b3600bf0e58319b96206f86128165e63bcf3743f45fcfdaa1"
+    },
+    {
+      "ruta": "apps/web/src/componentes/ModalFlow.test.tsx",
+      "bytes": 1111,
+      "sha256": "c6e3820431d9e0abaefe1b05e166d0c4bb581546ac0b518d6fab49af4a6ac63c"
+    },
+    {
+      "ruta": "apps/web/src/componentes/ModalFlow.tsx",
+      "bytes": 4935,
+      "sha256": "f00579a5d55d3b7e43e096f4fd27b9dded86d945d8bd804f3fd6085e7d6fe15f"
+    },
+    {
+      "ruta": "apps/web/src/pruebas/identificarEnWa.ts",
+      "bytes": 1599,
+      "sha256": "2eefe217b5f33a7b42072ba626a28b736213dee3180e851d1ffa5f548f0daf28"
+    },
+    {
+      "ruta": "apps/web/src/pruebas/pistasIdentificacion.json",
+      "bytes": 3469,
+      "sha256": "4d619574db598d10bc49e2eda259727ca1f762cd4f29d6309f0a9721ec49e60b"
+    },
+    {
+      "ruta": "apps/web/src/vistas/CallCenter.tsx",
+      "bytes": 6634,
+      "sha256": "aa7dd923c6b39b528e20306e58aafb19e3b3a1854d7e45a93de200b540df3ecd"
+    },
+    {
+      "ruta": "apps/web/src/vistas/flow.test.tsx",
+      "bytes": 8815,
+      "sha256": "52d5cf8c98455e0333c46388935ad6491d84ef7a28ee8ffcc9a1e74b89961436"
+    },
+    {
+      "ruta": "apps/web/src/vistas/identidadAsesor.test.tsx",
+      "bytes": 10282,
+      "sha256": "8f40a24a1e741a730509a8fe046d6ad07fbb464ad3446aaacc20ee7d2a916606"
+    },
+    {
+      "ruta": "apps/web/src/vistas/vistas.test.tsx",
+      "bytes": 17930,
+      "sha256": "fdfb5d7a299ca5d6c9efb02eb1a46fc731d5765a84cfe59e1e48001ebb95586e"
+    },
+    {
+      "ruta": "apps/web/src/vistas/wa.test.tsx",
+      "bytes": 11249,
+      "sha256": "0a4694856b64614a0e47a101b3305e518df30fcb4c90663f1806e8cf10e4bbbe"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/.openspec.yaml",
+      "bytes": 40,
+      "sha256": "0b89965c6919ee9f0b3679bc8491b3c9efd623f2ceac7e5bd3929eff87f22215"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/design.md",
+      "bytes": 7678,
+      "sha256": "09f05e1dbe5b54c65249ee9b1114efeb100986395c86408d063d01b71f6e2190"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/01-cliente-flow.txt",
+      "bytes": 1587,
+      "sha256": "788e49cff8311018b7ec91fa09d4dbe2fc831618517f9a90c11439d911fb4be6"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/01-deps.txt",
+      "bytes": 225,
+      "sha256": "99cea8cb8f68a4a441e1efed78d4841f3e015733d817b6f41e8b37d0c36c5d7c"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/01-lint-intento.txt",
+      "bytes": 337,
+      "sha256": "b805c7b1cd2853617cbff332024660d62e753f8af4c33ca9d9c573c605085a9c"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/01-lint.txt",
+      "bytes": 176,
+      "sha256": "fbb83b995301cf2d6bb0971b268616b10d7c111d948e385fab5bb725951d0515"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/01-rojo.txt",
+      "bytes": 2303,
+      "sha256": "a05aee6906d27765a42a4efe2bde69eee34528b4232fa0f3d91a5aa37ed14711"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/01-test.txt",
+      "bytes": 6361,
+      "sha256": "2bd1b9acaccbcb510339086fcae25045add7a6758f3a6291c648a11ad01f5371"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/01-vista-intento.txt",
+      "bytes": 30757,
+      "sha256": "0223b66f7330f545fa5f8bbc479ada42ebe5d152f3746db29c191968055157f5"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/01-vista-rojo.txt",
+      "bytes": 37135,
+      "sha256": "9aea6e9ec3214da8c7936868574b864f4d8f012a47cc45c575b51e4e2f59ac34"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/01-vista-sobre-error-intento.txt",
+      "bytes": 18581,
+      "sha256": "fa77a824cee08597a112314d0f697b074c2d24eebaa58dcf9b4fb0e5faf905e3"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/01-vista.txt",
+      "bytes": 510,
+      "sha256": "09d00c99ff0be9ac0c7efa44677fe2148debe3cb986fe3df6f2fe3ad1b45d4e6"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/02-deps.txt",
+      "bytes": 225,
+      "sha256": "3e3944980c65bfcb79597fc855e85c86b90ef67e8fc301ccc6d9e0cfc421aaed"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/02-guion-selectores-intento.txt",
+      "bytes": 47285,
+      "sha256": "6f11afa09aa8c5ce54d20e1c508505278783df4540d7f57719361d582a00e1b6"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/02-guion.txt",
+      "bytes": 1963,
+      "sha256": "43b1338366dcc51828021934a6d4978768c51b91eb2e888dc5b7eaccbd8d28bb"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/02-lint.txt",
+      "bytes": 176,
+      "sha256": "fbb83b995301cf2d6bb0971b268616b10d7c111d948e385fab5bb725951d0515"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/02-rojo.txt",
+      "bytes": 4848,
+      "sha256": "4b8fe9b3c855abd356e43a67dc697f7e211c6a6b6124871b806d6ceffa4521f8"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/02-test.txt",
+      "bytes": 6770,
+      "sha256": "a950caa42552e1ba22c5debf29e52acaf4c3288c2e6ce1176a6093de5e4642b7"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-1280-admin.jpg",
+      "bytes": 134504,
+      "sha256": "91ed94052ca307be05759abf7c11c54bfb3374401c1f1aa568a686f94ed0d12f"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-1280-app.jpg",
+      "bytes": 58902,
+      "sha256": "91b149068e1d90fa42a4e87b6f3e816ca5194a0565dbb965a50a33e9260264c6"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-1280-callcenter.jpg",
+      "bytes": 111102,
+      "sha256": "bfd04c1dd76d3ed5ae5bf201840e35f30d6ccd5ed36cf742d7529a47fe4a7921"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-1280-clinica.jpg",
+      "bytes": 42058,
+      "sha256": "2ecc1d6e9eb46d53965deeb9c11a9a7f0cad88ad2ce75566ed55eb5f29450424"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-1280-wa-candidata.jpg",
+      "bytes": 42107,
+      "sha256": "c1afebb6faf769372e81e0e698873ef234ec3c9bc791a47de75ff9f21e272bdc"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-1280-wa-confirmada.jpg",
+      "bytes": 51013,
+      "sha256": "19f8d32d55e4e95956dba071cf0b6074e53172554ebb091ad5dc8c2bfd33c11e"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-1280-wa-destinatario.jpg",
+      "bytes": 47488,
+      "sha256": "1b9a968d778be610e2c16cbb557a3419aedb9424357ded339f13177f066e487a"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-1280-wa-flow.jpg",
+      "bytes": 48337,
+      "sha256": "4cf9e93df1430bd7be962809facf61bcf525dcc3fc19fb84717789f03c65e09f"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-375-admin.jpg",
+      "bytes": 97149,
+      "sha256": "f4af24925d32b7f3c10fb648d0928896c7f0125e45cedfa560f6060762429f48"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-375-app.jpg",
+      "bytes": 45179,
+      "sha256": "4466c1c0826de392ebf89ade38a215eb7646de972a6ec25c86802ea0e97f68c8"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-375-callcenter.jpg",
+      "bytes": 85745,
+      "sha256": "5b929635994ff4b58cc22fde6018498a0cdab13dca910c6df67e3e5a73945b1b"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-375-clinica.jpg",
+      "bytes": 29621,
+      "sha256": "2704891274da55b87a0c525dbc5ae232319e4782cff40109870c06667c564de2"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-375-wa-candidata.jpg",
+      "bytes": 23455,
+      "sha256": "64d4b4a7ede72cc3317831e0e647ce212d2d7caac2b6b5764122c35bf59075d0"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-375-wa-confirmada.jpg",
+      "bytes": 27244,
+      "sha256": "26f07773aeb4a8ba1bf3a5241b87955b3099c9e8e50524328bfede8d52ae9feb"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-375-wa-destinatario.jpg",
+      "bytes": 24299,
+      "sha256": "5cde3b9a7666e0da70c72072d22a75a39a7f60510c2754981605b8bb9d1f2e75"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-375-wa-flow.jpg",
+      "bytes": 29478,
+      "sha256": "185b11083b777802dbd1b73c5e9fc21cee3ead900b85839c273cca00f3256400"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-build-mock.txt",
+      "bytes": 6302,
+      "sha256": "81794d96516b53071b802708a9fe87a64c95d596c18a20bd0c04be645ede079b"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-build-real.txt",
+      "bytes": 6302,
+      "sha256": "764eb7eced799542da6e91f9bf8c5643a174a76350ea11c4033e89273b05bde9"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-deps.txt",
+      "bytes": 225,
+      "sha256": "3e3944980c65bfcb79597fc855e85c86b90ef67e8fc301ccc6d9e0cfc421aaed"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-integracion-entorno-restringido.txt",
+      "bytes": 392,
+      "sha256": "911d4ace3b5af167784783ea10990763db24d94a98021d0c36f0d4cf03ef0606"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-integracion.txt",
+      "bytes": 2227,
+      "sha256": "3e168ccf08022a690c71ec3331e46746284cabb3c9bf84d556d6d90c15cc8056"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-lint.txt",
+      "bytes": 176,
+      "sha256": "fbb83b995301cf2d6bb0971b268616b10d7c111d948e385fab5bb725951d0515"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-recorrido-manual.json",
+      "bytes": 6333,
+      "sha256": "73567d831669f70be4ba4f7e2454485b988eaf20a877bdd2bc2f15dad088e5a2"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-test.txt",
+      "bytes": 6655,
+      "sha256": "764f5dbb93fed5703af17dd48f325b97f1b9bd9c7abb83b6ca5b7935f1d27433"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/03-validacion-entrega.txt",
+      "bytes": 1002,
+      "sha256": "78dd3fa3bb37bafab6600969ac462c7a9709990ed43706e9b49719adb7264f4d"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/pistas.ts",
+      "bytes": 949,
+      "sha256": "9284beb8156c2c675afb94a193776b819fc92c51842fa2d472fe9c896c089628"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/evidencias/validar.ps1",
+      "bytes": 1267,
+      "sha256": "ecc7ff291bf9e4b1f215ca2cde829eb50dd7211d47a05d58046079b4096091c2"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/handoff.md",
+      "bytes": 3089,
+      "sha256": "30e830437c0034f58d0fc8a3f8bd03cbf03f499f97e01d0a83cb140272469ec6"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/implementacion.md",
+      "bytes": 13545,
+      "sha256": "38a370d2e21e36ad17cd21723664afef175f06d6ec9b6c9a806b90c48205cea3"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/proposal.md",
+      "bytes": 4318,
+      "sha256": "a73adbc7cdfd3dc881c3c032cab9863755ff21b5ca81e69385cc6716b1746476"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/specs/cliente-api-canales/spec.md",
+      "bytes": 3218,
+      "sha256": "72d7958f87574a06c0bf026c598fce8375b4cb8ffdfea58bd41ff5bf0caa4cb2"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/specs/consolas-internas/spec.md",
+      "bytes": 4505,
+      "sha256": "4ac721f10137564b7db6f8aa80946e57cafcc21f80266faa61e6bb0cf3ca4a89"
+    },
+    {
+      "ruta": "openspec/changes/identidad-asesor/tasks.md",
+      "bytes": 4726,
+      "sha256": "26b1bf30075accb6dee47f83b73b3ae77b475dec6d1848ae4668a6e98c0c8868"
+    }
+  ]
+}

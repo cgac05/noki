@@ -1,0 +1,1686 @@
+Base: cb3d56a
+
+ RUN  v4.0.14 <repo>
+
+ ❯ |web| src/vistas/identidadAsesor.test.tsx (8 tests | 5 failed) 1294ms
+   × envía destinatario y candidato NINGUNO; captura la fecha protegida y avanza 318ms
+   × envía destinatario y candidato referencia-opaca-demo; captura la fecha protegida y avanza 72ms
+   ✓ permite omitir identificación y cotizar sin bloquear las demás operaciones 91ms
+   ✓ oculta la sección sin pregunta o en solo lectura (servicio, false) 79ms
+   ✓ oculta la sección sin pregunta o en solo lectura (DESTINATARIO, true) 62ms
+   × ofrece sin CURP junto al formulario y rechaza el formato antes de enviar 229ms
+   × muestra código y mensaje del núcleo, conserva reiniciar y descarta al cancelar 210ms
+   × reintenta sin recapturar y no filtra CURP, fecha ni datos básicos a cachés, consola, URL o almacenamiento 232ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/vistas/identidadAsesor.test.tsx > envía destinatario y candidato NINGUNO; captura la fecha protegida y avanza
+ FAIL  |web| src/vistas/identidadAsesor.test.tsx > envía destinatario y candidato referencia-opaca-demo; captura la fecha protegida y avanza
+TestingLibraryElementError: Unable to find an element with the text: Identificar paciente (opcional). This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Call Center
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Inicia la atención y continúa la misma conversación en WhatsApp.
+        </p>
+        <section
+          aria-labelledby="titulo-ficha"
+          class="seccion"
+        >
+          <h2
+            id="titulo-ficha"
+          >
+            Ficha del hilo
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Paciente de demo
+              </dt>
+              <dd>
+                Ana
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Contacto
+              </dt>
+              <dd>
+                •••• 0001
+              </dd>
+            </div>
+          </dl>
+          <p>
+            Estado del trámite: 
+            <strong>
+              BORRADOR
+            </strong>
+          </p>
+          <div
+            class="acciones"
+          >
+            <button
+              type="button"
+            >
+              Cotizar paquete en 
+              Tepic
+            </button>
+          </div>
+          <label
+            class="consentimiento"
+          >
+            <input
+              type="checkbox"
+            />
+            El paciente aceptó continuar por WhatsApp
+          </label>
+          <button
+            disabled=""
+            type="button"
+          >
+            Continuar por WhatsApp
+          </button>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/vistas/identidadAsesor.test.tsx:57:17
+     55| it.each(['NINGUNO', 'referencia-opaca-demo'])('envía destinatario y ca…
+     56|   const { usuario, recibidos } = await abrir();
+     57|   expect(screen.getByText('Identificar paciente (opcional)')).toBeDefi…
+       |                 ^
+     58|   await usuario.click(screen.getByRole('button', { name: 'Para mí' }));
+     59|   await usuario.click(await screen.findByRole('button', { name: candid…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  |web| src/vistas/identidadAsesor.test.tsx > ofrece sin CURP junto al formulario y rechaza el formato antes de enviar
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "Capturar datos"
+
+Here are the accessible roles:
+
+  link:
+
+  Name "Saltar al contenido":
+  <a
+    class="saltar-contenido"
+    href="#contenido"
+  />
+
+  Name "noki · Portada":
+  <a
+    aria-label="noki · Portada"
+    class="marca"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Web":
+  <a
+    class=""
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    class=""
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    class=""
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    aria-current="page"
+    class="active"
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    class=""
+    data-discover="true"
+    href="/clinica"
+  />
+
+  Name "Admin":
+  <a
+    class=""
+    data-discover="true"
+    href="/admin"
+  />
+
+  Name "Bandeja":
+  <a
+    class=""
+    data-discover="true"
+    href="/bandeja"
+  />
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  <header
+    class="cabecera flex items-center justify-between gap-6"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Canales de la demo":
+  <nav
+    aria-label="Canales de la demo"
+    class="barra-demo"
+  />
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  <ul />
+
+  Name "Eventos del hilo":
+  <ol
+    aria-label="Eventos del hilo"
+    class="linea-tiempo"
+  />
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="contenido flex-1"
+    id="contenido"
+    tabindex="-1"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Call Center":
+  <h1 />
+
+  Name "Ficha del hilo":
+  <h2
+    id="titulo-ficha"
+  />
+
+  Name "Línea de tiempo":
+  <h2
+    id="titulo-linea-tiempo"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  Name "":
+  <p />
+
+  --------------------------------------------------
+  region:
+
+  Name "Ficha del hilo":
+  <section
+    aria-labelledby="titulo-ficha"
+    class="seccion"
+  />
+
+  Name "Línea de tiempo":
+  <section
+    aria-labelledby="titulo-linea-tiempo"
+    class="seccion"
+  />
+
+  --------------------------------------------------
+  term:
+
+  Name "":
+  <dt />
+
+  Name "":
+  <dt />
+
+  --------------------------------------------------
+  definition:
+
+  Name "":
+  <dd />
+
+  Name "":
+  <dd />
+
+  --------------------------------------------------
+  strong:
+
+  Name "":
+  <strong />
+
+  Name "":
+  <strong />
+
+  --------------------------------------------------
+  button:
+
+  Name "Cotizar paquete en Tepic":
+  <button
+    type="button"
+  />
+
+  Name "Continuar por WhatsApp":
+  <button
+    disabled=""
+    type="button"
+  />
+
+  --------------------------------------------------
+  checkbox:
+
+  Name "El paciente aceptó continuar por WhatsApp":
+  <input
+    type="checkbox"
+  />
+
+  --------------------------------------------------
+  time:
+
+  Name "":
+  <time
+    datetime="2026-11-24T15:01:00.000Z"
+  />
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name "":
+  <footer
+    class="pie flex flex-wrap justify-between gap-3"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Call Center
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Inicia la atención y continúa la misma conversación en WhatsApp.
+        </p>
+        <section
+          aria-labelledby="titulo-ficha"
+          class="seccion"
+        >
+          <h2
+            id="titulo-ficha"
+          >
+            Ficha del hilo
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Paciente de demo
+              </dt>
+              <dd>
+                Ana
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Contacto
+              </dt>
+              <dd>
+                •••• 0001
+              </dd>
+            </div>
+          </dl>
+          <p>
+            Estado del trámite: 
+            <strong>
+              BORRADOR
+            </strong>
+          </p>
+          <div
+            class="acciones"
+          >
+            <button
+              type="button"
+            >
+              Cotizar paquete en 
+              Tepic
+            </button>
+          </div>
+          <label
+            class="consentimiento"
+          >
+            <input
+              type="checkbox"
+            />
+            El paciente aceptó continuar por WhatsApp
+          </label>
+          <button
+            disabled=""
+            type="button"
+          >
+            Continuar por WhatsApp
+          </button>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/vistas/identidadAsesor.test.tsx:79:30
+     77| it('ofrece sin CURP junto al formulario y rechaza el formato antes de …
+     78|   const { usuario, recibidos } = await abrir('CURP');
+     79|   await usuario.click(screen.getByRole('button', { name: 'Capturar dat…
+       |                              ^
+     80|   fireEvent.change(screen.getByLabelText('CURP', { exact: true }), { t…
+     81|   await usuario.click(screen.getByRole('button', { name: 'Enviar formu…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  |web| src/vistas/identidadAsesor.test.tsx > muestra código y mensaje del núcleo, conserva reiniciar y descarta al cancelar
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "Capturar datos"
+
+Here are the accessible roles:
+
+  link:
+
+  Name "Saltar al contenido":
+  <a
+    class="saltar-contenido"
+    href="#contenido"
+  />
+
+  Name "noki · Portada":
+  <a
+    aria-label="noki · Portada"
+    class="marca"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Web":
+  <a
+    class=""
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    class=""
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    class=""
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    aria-current="page"
+    class="active"
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    class=""
+    data-discover="true"
+    href="/clinica"
+  />
+
+  Name "Admin":
+  <a
+    class=""
+    data-discover="true"
+    href="/admin"
+  />
+
+  Name "Bandeja":
+  <a
+    class=""
+    data-discover="true"
+    href="/bandeja"
+  />
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  <header
+    class="cabecera flex items-center justify-between gap-6"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Canales de la demo":
+  <nav
+    aria-label="Canales de la demo"
+    class="barra-demo"
+  />
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  <ul />
+
+  Name "Eventos del hilo":
+  <ol
+    aria-label="Eventos del hilo"
+    class="linea-tiempo"
+  />
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="contenido flex-1"
+    id="contenido"
+    tabindex="-1"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Call Center":
+  <h1 />
+
+  Name "Ficha del hilo":
+  <h2
+    id="titulo-ficha"
+  />
+
+  Name "Línea de tiempo":
+  <h2
+    id="titulo-linea-tiempo"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  Name "":
+  <p />
+
+  --------------------------------------------------
+  region:
+
+  Name "Ficha del hilo":
+  <section
+    aria-labelledby="titulo-ficha"
+    class="seccion"
+  />
+
+  Name "Línea de tiempo":
+  <section
+    aria-labelledby="titulo-linea-tiempo"
+    class="seccion"
+  />
+
+  --------------------------------------------------
+  term:
+
+  Name "":
+  <dt />
+
+  Name "":
+  <dt />
+
+  --------------------------------------------------
+  definition:
+
+  Name "":
+  <dd />
+
+  Name "":
+  <dd />
+
+  --------------------------------------------------
+  strong:
+
+  Name "":
+  <strong />
+
+  Name "":
+  <strong />
+
+  --------------------------------------------------
+  button:
+
+  Name "Cotizar paquete en Tepic":
+  <button
+    type="button"
+  />
+
+  Name "Continuar por WhatsApp":
+  <button
+    disabled=""
+    type="button"
+  />
+
+  --------------------------------------------------
+  checkbox:
+
+  Name "El paciente aceptó continuar por WhatsApp":
+  <input
+    type="checkbox"
+  />
+
+  --------------------------------------------------
+  time:
+
+  Name "":
+  <time
+    datetime="2026-11-24T15:01:00.000Z"
+  />
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name "":
+  <footer
+    class="pie flex flex-wrap justify-between gap-3"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Call Center
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Inicia la atención y continúa la misma conversación en WhatsApp.
+        </p>
+        <section
+          aria-labelledby="titulo-ficha"
+          class="seccion"
+        >
+          <h2
+            id="titulo-ficha"
+          >
+            Ficha del hilo
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Paciente de demo
+              </dt>
+              <dd>
+                Ana
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Contacto
+              </dt>
+              <dd>
+                •••• 0001
+              </dd>
+            </div>
+          </dl>
+          <p>
+            Estado del trámite: 
+            <strong>
+              BORRADOR
+            </strong>
+          </p>
+          <div
+            class="acciones"
+          >
+            <button
+              type="button"
+            >
+              Cotizar paquete en 
+              Tepic
+            </button>
+          </div>
+          <label
+            class="consentimiento"
+          >
+            <input
+              type="checkbox"
+            />
+            El paciente aceptó continuar por WhatsApp
+          </label>
+          <button
+            disabled=""
+            type="button"
+          >
+            Continuar por WhatsApp
+          </button>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/vistas/identidadAsesor.test.tsx:91:30
+     89| it('muestra código y mensaje del núcleo, conserva reiniciar y descarta…
+     90|   const { usuario, recibidos, bloquear } = await abrir('FECHA_NAC'); b…
+     91|   await usuario.click(screen.getByRole('button', { name: 'Capturar dat…
+       |                              ^
+     92|   fireEvent.change(screen.getByLabelText('Fecha de nacimiento', { exac…
+     93|   await usuario.click(screen.getByRole('button', { name: 'Enviar formu…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  |web| src/vistas/identidadAsesor.test.tsx > reintenta sin recapturar y no filtra CURP, fecha ni datos básicos a cachés, consola, URL o almacenamiento
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "Capturar datos"
+
+Here are the accessible roles:
+
+  link:
+
+  Name "Saltar al contenido":
+  <a
+    class="saltar-contenido"
+    href="#contenido"
+  />
+
+  Name "noki · Portada":
+  <a
+    aria-label="noki · Portada"
+    class="marca"
+    data-discover="true"
+    href="/"
+  />
+
+  Name "Web":
+  <a
+    class=""
+    data-discover="true"
+    href="/web"
+  />
+
+  Name "WhatsApp":
+  <a
+    class=""
+    data-discover="true"
+    href="/wa"
+  />
+
+  Name "App":
+  <a
+    class=""
+    data-discover="true"
+    href="/app"
+  />
+
+  Name "Call Center":
+  <a
+    aria-current="page"
+    class="active"
+    data-discover="true"
+    href="/callcenter"
+  />
+
+  Name "Clínica":
+  <a
+    class=""
+    data-discover="true"
+    href="/clinica"
+  />
+
+  Name "Admin":
+  <a
+    class=""
+    data-discover="true"
+    href="/admin"
+  />
+
+  Name "Bandeja":
+  <a
+    class=""
+    data-discover="true"
+    href="/bandeja"
+  />
+
+  --------------------------------------------------
+  banner:
+
+  Name "":
+  <header
+    class="cabecera flex items-center justify-between gap-6"
+  />
+
+  --------------------------------------------------
+  navigation:
+
+  Name "Canales de la demo":
+  <nav
+    aria-label="Canales de la demo"
+    class="barra-demo"
+  />
+
+  --------------------------------------------------
+  list:
+
+  Name "":
+  <ul />
+
+  Name "Eventos del hilo":
+  <ol
+    aria-label="Eventos del hilo"
+    class="linea-tiempo"
+  />
+
+  --------------------------------------------------
+  listitem:
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  Name "":
+  <li />
+
+  --------------------------------------------------
+  main:
+
+  Name "":
+  <main
+    class="contenido flex-1"
+    id="contenido"
+    tabindex="-1"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Call Center":
+  <h1 />
+
+  Name "Ficha del hilo":
+  <h2
+    id="titulo-ficha"
+  />
+
+  Name "Línea de tiempo":
+  <h2
+    id="titulo-linea-tiempo"
+  />
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  <p
+    class="introduccion"
+  />
+
+  Name "":
+  <p />
+
+  --------------------------------------------------
+  region:
+
+  Name "Ficha del hilo":
+  <section
+    aria-labelledby="titulo-ficha"
+    class="seccion"
+  />
+
+  Name "Línea de tiempo":
+  <section
+    aria-labelledby="titulo-linea-tiempo"
+    class="seccion"
+  />
+
+  --------------------------------------------------
+  term:
+
+  Name "":
+  <dt />
+
+  Name "":
+  <dt />
+
+  --------------------------------------------------
+  definition:
+
+  Name "":
+  <dd />
+
+  Name "":
+  <dd />
+
+  --------------------------------------------------
+  strong:
+
+  Name "":
+  <strong />
+
+  Name "":
+  <strong />
+
+  --------------------------------------------------
+  button:
+
+  Name "Cotizar paquete en Tepic":
+  <button
+    type="button"
+  />
+
+  Name "Continuar por WhatsApp":
+  <button
+    disabled=""
+    type="button"
+  />
+
+  --------------------------------------------------
+  checkbox:
+
+  Name "El paciente aceptó continuar por WhatsApp":
+  <input
+    type="checkbox"
+  />
+
+  --------------------------------------------------
+  time:
+
+  Name "":
+  <time
+    datetime="2026-11-24T15:01:00.000Z"
+  />
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name "":
+  <footer
+    class="pie flex flex-wrap justify-between gap-3"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          Call Center
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Inicia la atención y continúa la misma conversación en WhatsApp.
+        </p>
+        <section
+          aria-labelledby="titulo-ficha"
+          class="seccion"
+        >
+          <h2
+            id="titulo-ficha"
+          >
+            Ficha del hilo
+          </h2>
+          <dl
+            class="datos"
+          >
+            <div>
+              <dt>
+                Paciente de demo
+              </dt>
+              <dd>
+                Ana
+              </dd>
+            </div>
+            <div>
+              <dt>
+                Contacto
+              </dt>
+              <dd>
+                •••• 0001
+              </dd>
+            </div>
+          </dl>
+          <p>
+            Estado del trámite: 
+            <strong>
+              BORRADOR
+            </strong>
+          </p>
+          <div
+            class="acciones"
+          >
+            <button
+              type="button"
+            >
+              Cotizar paquete en 
+              Tepic
+            </button>
+          </div>
+          <label
+            class="consentimiento"
+          >
+            <input
+              type="checkbox"
+            />
+            El paciente aceptó continuar por WhatsApp
+          </label>
+          <button
+            disabled=""
+            type="button"
+          >
+            Continuar por WhatsApp
+          </button>
+        </section>
+        <section
+          aria-labelledby="titulo-linea-tiempo"
+          class="seccion"
+        >
+          <h2
+            id="titulo-linea-tiempo"
+          >
+            Línea de tiempo
+          </h2>
+          <ol
+            aria-label="Eventos del hilo"
+            class="linea-tiempo"
+          >
+            <li>
+              <strong>
+                TramiteIniciado
+              </strong>
+              <span>
+                Call Center
+              </span>
+              <time
+                datetime="2026-11-24T15:01:00.000Z"
+              >
+                24 de noviembre de 2026 a las 15:01
+                 UTC
+              </time>
+            </li>
+          </ol>
+        </section>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/vistas/identidadAsesor.test.tsx:112:30
+    110|   const { usuario, recibidos, cache, fallarRed } = await abrir('CURP');
+    111|   const curp = 'PEMA000102MNTXXX00';
+    112|   await usuario.click(screen.getByRole('button', { name: 'Capturar dat…
+       |                              ^
+    113|   fireEvent.change(screen.getByLabelText('CURP', { exact: true }), { t…
+    114|   fallarRed(); await usuario.click(screen.getByRole('button', { name: …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 3 passed (8)
+   Start at  16:39:14
+   Duration  6.26s (transform 699ms, setup 0ms, import 2.17s, tests 1.29s, environment 2.21s)
+
+
+Exit code: 1

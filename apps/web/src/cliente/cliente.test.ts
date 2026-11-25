@@ -69,6 +69,7 @@ describe('Cliente simulado', () => {
   });
 
   it('Datos simulados válidos: todas las respuestas, lecturas y eventos cumplen sus esquemas', () => {
+    expect(GUION_FLUJO_A).toHaveLength(13);
     for (const paso of GUION_FLUJO_A) {
       expect(RespuestaComandoSchema.safeParse(paso.respuesta).success).toBe(true);
       expect(RespuestaMensajeWaSchema.safeParse({ mensajes: paso.mensajes }).success).toBe(true);

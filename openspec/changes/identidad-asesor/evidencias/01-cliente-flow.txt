@@ -1,0 +1,28 @@
+Base: cb3d56a
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |web| src/cliente/identificacion.test.ts (13 tests) 46ms
+ ✓ |web| src/componentes/ModalFlow.test.tsx (1 test) 467ms
+   ✓ marca formato sin enviar ni mostrar el valor fuera de su campo protegido  465ms
+ ✓ |web| src/cliente/useIdentificacion.test.tsx (4 tests) 45ms
+ ✓ |web| src/vistas/wa.test.tsx (11 tests) 3860ms
+   ✓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible  788ms
+   ✓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo  963ms
+   ✓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título  488ms
+   ✓ Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot  537ms
+ ✓ |web| src/vistas/flow.test.tsx (6 tests) 5892ms
+   ✓ Envío del Flow: controles según captura y resumen enmascarado sin valores en mutaciones ni almacenamiento  1525ms
+   ✓ Campo requerido vacío: no envía y señala el campo  417ms
+   ✓ atrapa el foco con Tab y Shift+Tab entre el primer campo y Cancelar  398ms
+   ✓ Escape y valores descartados: cancela sin enviar y abre campos vacíos  1114ms
+   ✓ reintenta el Flow con la misma solicitud y clave; cerrar descarta el pendiente protegido  1160ms
+   ✓ cerrar después de un error borra los valores y elimina el reintento del historial  1275ms
+
+ Test Files  5 passed (5)
+      Tests  35 passed (35)
+   Start at  16:37:46
+   Duration  13.07s (transform 1.49s, setup 0ms, import 9.36s, tests 10.31s, environment 18.47s)
+
+
+Exit code: 0

@@ -1,0 +1,259 @@
+{
+  "fecha": "2026-11-24",
+  "base": "cb3d56a60c1e2125f9465742236f306bd99278ae",
+  "modo": "mock",
+  "resultado": "PASS",
+  "anchos": [
+    375,
+    1280
+  ],
+  "pasos": [
+    {
+      "paso": "llamada",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/callcenter"
+    },
+    {
+      "paso": "continuacion",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/callcenter"
+    },
+    {
+      "paso": "retoma-horario",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/wa"
+    },
+    {
+      "paso": "destinatario",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/wa"
+    },
+    {
+      "paso": "confirmar-candidata",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/wa"
+    },
+    {
+      "paso": "flow-protegido",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/wa"
+    },
+    {
+      "paso": "identidad-comprobada",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/wa"
+    },
+    {
+      "paso": "cita-confirmada-wa",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/wa"
+    },
+    {
+      "paso": "app-confirmada-qr",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/app"
+    },
+    {
+      "paso": "clinica-registrada",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/clinica"
+    },
+    {
+      "paso": "admin-eventos",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/admin"
+    },
+    {
+      "ancho": 375,
+      "focoAtrapado": true,
+      "erroresConsola": []
+    },
+    {
+      "paso": "llamada",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/callcenter"
+    },
+    {
+      "ancho": 1280,
+      "intento": "Se reinició tras una continuación prematura antes de asentarse la cotización; el recorrido siguiente espera cada estado visible."
+    },
+    {
+      "paso": "cotizado",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/callcenter"
+    },
+    {
+      "paso": "continuacion",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/callcenter"
+    },
+    {
+      "paso": "retoma-horario",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/wa"
+    },
+    {
+      "paso": "destinatario",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/wa"
+    },
+    {
+      "paso": "confirmar-candidata",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/wa"
+    },
+    {
+      "paso": "flow-protegido",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/wa"
+    },
+    {
+      "paso": "identidad-comprobada",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/wa"
+    },
+    {
+      "paso": "cita-confirmada-wa",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/wa"
+    },
+    {
+      "paso": "app-confirmada-qr",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/app"
+    },
+    {
+      "paso": "clinica-registrada",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1280,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/clinica"
+    },
+    {
+      "paso": "admin-eventos",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desplazamientoHorizontal": false,
+      "fechaEnTexto": false,
+      "ruta": "/admin"
+    },
+    {
+      "ancho": 1280,
+      "focoAtrapado": true,
+      "erroresConsola": []
+    }
+  ],
+  "capturas": [
+    "03-375-callcenter.jpg",
+    "03-375-wa-destinatario.jpg",
+    "03-375-wa-candidata.jpg",
+    "03-375-wa-flow.jpg",
+    "03-375-wa-confirmada.jpg",
+    "03-375-app.jpg",
+    "03-375-clinica.jpg",
+    "03-375-admin.jpg",
+    "03-1280-callcenter.jpg",
+    "03-1280-wa-destinatario.jpg",
+    "03-1280-wa-candidata.jpg",
+    "03-1280-wa-flow.jpg",
+    "03-1280-wa-confirmada.jpg",
+    "03-1280-app.jpg",
+    "03-1280-clinica.jpg",
+    "03-1280-admin.jpg"
+  ],
+  "comprobaciones": {
+    "fechaFueraDelCampo": false,
+    "desplazamientoHorizontal": false,
+    "app": "CONFIRMADA con QR y America/Mazatlan",
+    "clinica": "EN_CLINICA y llegada registrada",
+    "admin": "DestinatarioDeclarado, IdentidadComprobada y PacienteLlego; EN_CLINICA=1, cambios de canal=3 y datos repetidos=0"
+  },
+  "observaciones": "Las capturas WA son de viewport tras desplazamiento; las demás son completas. Datos exclusivamente ficticios. La privacidad en cachés y almacenamiento se verifica además en las pruebas automatizadas."
+}

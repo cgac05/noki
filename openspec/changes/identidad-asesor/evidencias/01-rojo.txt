@@ -1,0 +1,36 @@
+Base: cb3d56a
+Comando: pnpm exec vitest run --project web src/cliente/identificacion.test.ts
+
+ RUN  v4.0.14 <repo>
+
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/cliente/identificacion.test.ts [ apps/web/src/cliente/identificacion.test.ts ]
+Error: Failed to resolve import "./identificacion.ts" from "apps/web/src/cliente/identificacion.test.ts". Does the file exist?
+  Plugin: vite:import-analysis
+  File: <repo>/apps/web/src/cliente/identificacion.test.ts:4:36
+  2  |  import { SiguientePreguntaSchema } from "@noki/contracts";
+  3  |  import pistas from "../pruebas/pistasIdentificacion.json";
+  4  |  import { armarIdentificacion } from "./identificacion.ts";
+     |                                       ^
+  5  |  import { IDS } from "./mock/guionFlujoA.ts";
+  6  |  const pista = (nombre) => {
+ ❯ TransformPluginContext._formatLog <repo>/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:29250:43
+ ❯ TransformPluginContext.error <repo>/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:29247:14
+ ❯ normalizeUrl <repo>/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:27370:18
+ ❯ <repo>/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:27428:32
+ ❯ TransformPluginContext.transform <repo>/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:27396:4
+ ❯ EnvironmentPluginContainer.transform <repo>/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:29048:14
+ ❯ loadAndTransform <repo>/node_modules/.pnpm/vite@7.3.8_@types+node@24.1_e938219faa6aa30260fd8aefa12d2a0e/node_modules/vite/dist/node/chunks/config.js:22914:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  16:35:16
+   Duration  3.04s (transform 0ms, setup 0ms, import 0ms, tests 0ms, environment 2.54s)
+
+
+Exit code: 1
