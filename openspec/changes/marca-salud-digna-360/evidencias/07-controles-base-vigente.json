@@ -1,0 +1,7 @@
+{
+  "comando": "corepack pnpm lint",
+  "codigo": 2,
+  "segundos": 52.2095141,
+  "revision": "Ajuste 5 D7 sobre origin/main f5260a8",
+  "entorno": "Acceso a sockets locales"
+}

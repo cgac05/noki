@@ -1,0 +1,7 @@
+{
+  "comando": "corepack pnpm lint",
+  "codigo": 1,
+  "segundos": 32.7905396,
+  "revision": "Ajuste 5 D7 sobre origin/main eedd179",
+  "entorno": "Acceso a sockets locales"
+}

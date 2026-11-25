@@ -1,0 +1,1 @@
+PASS: antes, 44 capturas y mediciones, ocho rutas, dos modos y dos tamaños.

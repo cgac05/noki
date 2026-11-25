@@ -1,0 +1,18 @@
+[
+  {
+    "segundos": 52.4900955,
+    "comando": "corepack pnpm lint",
+    "codigo": 0
+  },
+  {
+    "segundos": 4.8933522,
+    "comando": "corepack pnpm lint:deps",
+    "codigo": 0
+  },
+  {
+    "segundos": 127.6270458,
+    "comando": "corepack pnpm test",
+    "codigo": 1
+  }
+]
+

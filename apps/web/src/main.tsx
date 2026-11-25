@@ -5,6 +5,9 @@ import { rutas } from './rutas.tsx';
 import { crearCliente } from './cliente/crearCliente.ts';
 import { ErrorCliente } from './cliente/errores.ts';
 import { ProveedorCliente } from './cliente/ProveedorCliente.tsx';
+import '@fontsource/open-sans/latin-400.css';
+import '@fontsource/open-sans/latin-600.css';
+import '@fontsource/open-sans/latin-700.css';
 import './styles.css';
 
 const root = document.getElementById('root');

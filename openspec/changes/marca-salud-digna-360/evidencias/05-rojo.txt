@@ -1,0 +1,41 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ❯ |web| src/identidadVisual.test.ts (6 tests | 1 failed) 59ms
+   ✓ mantiene contraste AA del texto en todas las superficies declaradas 3ms
+   ✓ distingue el foco y los bordes de control de sus superficies 2ms
+   ✓ centraliza los colores y reserva el verde para la marca grande 4ms
+   × separa los canales y la simulación con los colores y contrastes de D5 9ms
+   ✓ sirve Open Sans latina local en los tres pesos sin fuentes de terceros 18ms
+   ✓ declara la marca en los metadatos y no incluye archivos gráficos del logo 23ms
+ ✓ |web| src/componentes/BarraDemo.test.tsx (4 tests) 671ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/identidadVisual.test.ts > separa los canales y la simulación con los colores y contrastes de D5
+AssertionError: expected ' display: inline-flex; align-items: c…' to match /border:\s*0/
+
+- Expected: 
+/border:\s*0/
+
++ Received: 
+" display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding-inline: 0.75rem; color: var(--sd-enlace); text-underline-offset: 0.2em; 
+ border: 1px solid var(--borde-control); border-radius: 0.5rem; background: var(--sd-fondo); text-decoration: none; font-size: 0.875rem; 
+ white-space: nowrap; font-size: 0.875rem; "
+
+ ❯ src/identidadVisual.test.ts:66:34
+     64|   expect(regla('.barra-demo ul')).toMatch(/gap:\s*0\.5rem/);
+     65|   expect(regla('.barra-demo')).toMatch(/background:\s*var\(--sd-fondo-…
+     66|   expect(regla('.barra-demo a')).toMatch(/border:\s*0/);
+       |                                  ^
+     67|   expect(regla('.barra-demo a')).toMatch(/background:\s*transparent/);
+     68|   const divisor = regla('.barra-demo li + li::before');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 9 passed (10)
+   Start at  05:56:48
+   Duration  5.24s (transform 416ms, setup 0ms, import 1.89s, tests 730ms, environment 2.29s)
+

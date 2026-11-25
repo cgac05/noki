@@ -1,0 +1,1 @@
+PASS: 32 vistas, dos tamaños, dos modos, guiones A/C y errores de red.

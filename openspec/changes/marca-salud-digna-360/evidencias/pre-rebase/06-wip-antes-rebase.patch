@@ -1,0 +1,539 @@
+diff --git a/apps/web/index.html b/apps/web/index.html
+index d5a9ddd..7765467 100644
+--- a/apps/web/index.html
++++ b/apps/web/index.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <meta name="referrer" content="no-referrer" />
+-    <meta name="theme-color" content="#174c3c" />
+-    <meta name="description" content="Base de demostración de noki: continuidad de atención entre canales." />
+-    <title>noki · Atención conectada</title>
++    <meta name="theme-color" content="#008959" />
++    <meta name="description" content="Salud Digna 360: continuidad de atención entre canales." />
++    <title>Salud Digna 360 · Atención conectada</title>
+   </head>
+   <body>
+     <div id="root"></div>
+diff --git a/apps/web/package.json b/apps/web/package.json
+index 96667de..9c9e0ac 100644
+--- a/apps/web/package.json
++++ b/apps/web/package.json
+@@ -7,6 +7,7 @@
+     ".": "./src/index.ts"
+   },
+   "dependencies": {
++    "@fontsource/open-sans": "5.3.0",
+     "@noki/contracts": "workspace:*",
+     "@tanstack/react-query": "5.90.10",
+     "qrcode": "1.5.4",
+diff --git a/apps/web/src/componentes/BarraDemo.tsx b/apps/web/src/componentes/BarraDemo.tsx
+index cf90f80..1faaf4b 100644
+--- a/apps/web/src/componentes/BarraDemo.tsx
++++ b/apps/web/src/componentes/BarraDemo.tsx
+@@ -1,5 +1,5 @@
+ import { NavLink } from 'react-router';
+-import { useEffect, useRef, useSyncExternalStore } from 'react';
++import { useEffect, useId, useRef, useSyncExternalStore } from 'react';
+ import { useCliente } from '../cliente/ProveedorCliente.tsx';
+ import { IdGuionSchema } from '../cliente/demo.ts';
+ 
+@@ -18,6 +18,7 @@ const canales = [
+ 
+ export function BarraDemo() {
+   const barra = useRef<HTMLElement>(null);
++  const idPaso = useId();
+   useEffect(() => {
+     if (!barra.current || typeof ResizeObserver === 'undefined') return;
+     const actualizar = () => document.documentElement.style.setProperty('--alto-barra-demo', `${barra.current!.getBoundingClientRect().height}px`);
+@@ -28,12 +29,24 @@ export function BarraDemo() {
+   const paso = useSyncExternalStore(demo?.alCambiar ?? sinCambios, demo?.paso ?? sinPaso);
+   return (
+     <nav className="barra-demo" aria-label="Canales de la demo" ref={barra}>
+-      <ul>
++      <div className="canales-demo"><ul>
+         {canales.map(({ ruta, nombre }) => (
+           <li key={ruta}><NavLink to={ruta}>{nombre}</NavLink></li>
+         ))}
+-      </ul>
+-      {paso && <div className="control-demo"><label>Guion de demo <select value={demo?.guion()} onChange={evento => demo?.elegirGuion(IdGuionSchema.parse(evento.target.value))}><option value="flujoA">Flujo A</option><option value="flujoC">Flujo C</option></select></label><p role="status">Paso {paso.numero} de {paso.total} · {paso.titulo}</p><button type="button" onClick={() => demo?.reiniciar()}>Reiniciar guion</button></div>}
++      </ul></div>
++      {paso && (
++        <div className="franja-simulacion">
++          <div className="control-demo">
++            <span className="etiqueta-simulacion">Simulación</span>
++            <label>Guion de demo <select value={demo?.guion()} onChange={evento => demo?.elegirGuion(IdGuionSchema.parse(evento.target.value))}><option value="flujoA">Flujo A</option><option value="flujoC">Flujo C</option></select></label>
++            <div className="avance-demo">
++              <p id={idPaso} role="status">Paso {paso.numero} de {paso.total} · {paso.titulo}</p>
++              <progress className="progreso-demo" value={paso.numero} max={paso.total} aria-labelledby={idPaso} />
++            </div>
++            <button type="button" onClick={() => demo?.reiniciar()}>Reiniciar guion</button>
++          </div>
++        </div>
++      )}
+     </nav>
+   );
+ }
+diff --git a/apps/web/src/componentes/EstadoContexto.tsx b/apps/web/src/componentes/EstadoContexto.tsx
+index 789bfa7..0bae6a8 100644
+--- a/apps/web/src/componentes/EstadoContexto.tsx
++++ b/apps/web/src/componentes/EstadoContexto.tsx
+@@ -6,5 +6,5 @@ export function EstadoContexto({ contexto, texto }: {
+ }) {
+   if (contexto.cargando) return <EstadoCarga texto="Consultando el contexto de atención…" />;
+   if (contexto.error) return <EstadoError error={contexto.error} onReintentar={contexto.actualizar} />;
+-  return <div className="seccion"><p>{texto}</p><button type="button" onClick={contexto.actualizar}>Actualizar</button></div>;
++  return <div className="seccion estado-vacio"><p>{texto}</p><button type="button" onClick={contexto.actualizar}>Actualizar</button></div>;
+ }
+diff --git a/apps/web/src/componentes/Layout.tsx b/apps/web/src/componentes/Layout.tsx
+index c1aa917..79336d5 100644
+--- a/apps/web/src/componentes/Layout.tsx
++++ b/apps/web/src/componentes/Layout.tsx
+@@ -16,8 +16,8 @@ export function Layout() {
+     <div className="layout min-h-dvh flex flex-col">
+       <a className="saltar-contenido" href="#contenido">Saltar al contenido</a>
+       <header className="cabecera flex items-center justify-between gap-6">
+-        <Link className="marca" to="/" aria-label="noki · Portada">noki</Link>
+-        <div className="contexto">Salud Digna · HackaTec{cliente.modo === 'mock' && <span className="insignia-mock">Modo simulado</span>}</div>
++        <Link className="marca" to="/" aria-label="Salud Digna 360 · Portada">Salud Digna 360</Link>
++        <div className="contexto">HackaTec{cliente.modo === 'mock' && <span className="insignia-mock">Modo simulado</span>}</div>
+       </header>
+       <BarraDemo />
+       <main className="contenido flex-1" id="contenido" ref={contenido} tabIndex={-1}>
+diff --git a/apps/web/src/componentes/LineaTiempo.tsx b/apps/web/src/componentes/LineaTiempo.tsx
+index 5ae5c84..56b0dc6 100644
+--- a/apps/web/src/componentes/LineaTiempo.tsx
++++ b/apps/web/src/componentes/LineaTiempo.tsx
+@@ -7,7 +7,7 @@ export function LineaTiempo({ eventos }: { eventos: EventoVista[] }) {
+   return (
+     <section className="seccion" aria-labelledby="titulo-linea-tiempo">
+       <h2 id="titulo-linea-tiempo">Línea de tiempo</h2>
+-      {eventos.length === 0 ? <p>Aún no hay eventos en este hilo.</p> : (
++      {eventos.length === 0 ? <p className="estado-vacio">Aún no hay eventos en este hilo.</p> : (
+         <ol className="linea-tiempo" aria-label="Eventos del hilo">
+           {eventos.map(evento => <li key={evento.id}>
+             <strong>{evento.tipo}</strong><span>{NOMBRES_CANAL[evento.canal]}</span>
+diff --git a/apps/web/src/main.tsx b/apps/web/src/main.tsx
+index 76c311b..f25b38e 100644
+--- a/apps/web/src/main.tsx
++++ b/apps/web/src/main.tsx
+@@ -5,6 +5,9 @@ import { rutas } from './rutas.tsx';
+ import { crearCliente } from './cliente/crearCliente.ts';
+ import { ErrorCliente } from './cliente/errores.ts';
+ import { ProveedorCliente } from './cliente/ProveedorCliente.tsx';
++import '@fontsource/open-sans/latin-400.css';
++import '@fontsource/open-sans/latin-600.css';
++import '@fontsource/open-sans/latin-700.css';
+ import './styles.css';
+ 
+ const root = document.getElementById('root');
+diff --git a/apps/web/src/rutas.test.tsx b/apps/web/src/rutas.test.tsx
+index d1fec79..04c5bbc 100644
+--- a/apps/web/src/rutas.test.tsx
++++ b/apps/web/src/rutas.test.tsx
+@@ -5,6 +5,8 @@ import { afterEach, describe, expect, it } from 'vitest';
+ import { rutas } from './rutas.tsx';
+ import { ProveedorCliente } from './cliente/ProveedorCliente.tsx';
+ import { ClienteMock } from './cliente/mock/ClienteMock.ts';
++import { readFileSync } from 'node:fs';
++import { resolve } from 'node:path';
+ 
+ afterEach(cleanup);
+ 
+@@ -15,6 +17,19 @@ function abrir(ruta: string) {
+ }
+ 
+ describe('Navegación de canales', () => {
++  it.each(['/', '/web', '/wa', '/app', '/callcenter', '/clinica', '/admin', '/bandeja', '/inexistente'])('presenta la identidad aprobada en %s', ruta => {
++    // El router en memoria no carga index.html; se inspecciona el documento de entrada real.
++    const documento = new DOMParser().parseFromString(readFileSync(resolve(import.meta.dirname, '../index.html'), 'utf8'), 'text/html');
++    abrir(ruta);
++    const marca = screen.getByRole('link', { name: 'Salud Digna 360 · Portada' });
++    expect(marca.textContent).toBe('Salud Digna 360');
++    expect(marca.getAttribute('href')).toBe('/');
++    expect(documento.title).toContain('Salud Digna 360');
++    expect(documento.title).not.toMatch(/noki/i);
++    expect(document.body.textContent).not.toMatch(/noki/i);
++    expect(screen.getByText('Modo simulado')).toBeDefined();
++  });
++
+   it.each([
+     ['/web', 'Web'],
+     ['/wa', 'WhatsApp'],
+diff --git a/apps/web/src/styles.css b/apps/web/src/styles.css
+index b8bb885..77b4883 100644
+--- a/apps/web/src/styles.css
++++ b/apps/web/src/styles.css
+@@ -2,24 +2,39 @@
+ 
+ :root {
+   color-scheme: light;
+-  font-family: "Segoe UI", system-ui, sans-serif;
+-  color: #163c31;
+-  background: #f7faf6;
++  font-family: "Open Sans", system-ui, sans-serif;
++  color: var(--tinta);
++  background: var(--sd-fondo);
+   font-synthesis: none;
+   text-rendering: optimizeLegibility;
+-  --tinta-secundaria: #465e52;
+-  --linea: #bacdbd;
++  --sd-marca: #008959;
++  --sd-accion: #0074D9;
++  --sd-accion-hover: #0066BF;
++  --sd-enlace: #005BB5;
++  --sd-fondo: #FFFFFF;
++  --sd-fondo-suave: #ECF3F9;
++  --sd-fondo-interactivo: #E6F2FC;
++  --tinta: #2E3133;
++  --tinta-secundaria: #43474A;
++  --borde-control: #868589;
++  --linea: #EEF0F2;
++  --error: #763a23;
++  --fondo-error: #f5e8df;
++  --fondo-deshabilitado: #EEF0F2;
++  --fondo-modal: rgb(10 35 26 / 55%);
+ }
+ body { margin: 0; min-width: 320px; }
+-::selection { background: #c9e8c8; color: #163c31; }
+-:focus-visible { outline: 3px solid #21734f; outline-offset: 4px; }
++a { color: var(--sd-enlace); }
++::selection { background: var(--sd-fondo-interactivo); color: var(--tinta); }
++:focus-visible { outline: 3px solid var(--sd-accion); outline-offset: 4px; }
+ .cabecera, .contenido, .pie { width: min(100% - 3rem, 72rem); margin-inline: auto; }
+ .cabecera { padding-block: 1.5rem; border-bottom: 1px solid var(--linea); }
+ .marca { font-size: 2rem; font-weight: 700; letter-spacing: -0.035em; }
+-.marca { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; color: inherit; }
++.marca { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; color: var(--sd-marca); }
+ .contexto { font-size: 0.875rem; color: var(--tinta-secundaria); text-align: right; }
+-.contenido { padding-block: clamp(3.5rem, 8vw, 7rem); }
+-h1 { max-width: 15ch; margin: 0; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; text-wrap: balance; }
++.contenido { padding-block: clamp(2rem, 5vw, 3.5rem); }
++h1 { max-width: 15ch; margin: 0; font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; text-wrap: balance; }
++.titulo-portada { font-size: clamp(2.5rem, 6vw, 4.5rem); }
+ .introduccion { max-width: 46ch; margin-top: 2rem; font-size: 1.125rem; line-height: 1.65; color: var(--tinta-secundaria); }
+ .canales { margin-top: 4rem; }
+ h2 { margin: 0 0 1rem; font-size: 1rem; font-weight: 600; }
+@@ -27,27 +42,37 @@ h2 { margin: 0 0 1rem; font-size: 1rem; font-weight: 600; }
+ .canales li { padding-block: 1rem; border-top: 1px solid var(--linea); font-size: 1.125rem; }
+ .alcance { margin-top: 2rem; max-width: 65ch; color: var(--tinta-secundaria); font-size: 0.9375rem; line-height: 1.6; }
+ .pie { border-top: 1px solid var(--linea); padding-block: 1.5rem; color: var(--tinta-secundaria); font-size: 0.8125rem; line-height: 1.5; }
+-.barra-demo { position: sticky; top: 0; z-index: 10; background: #f7faf6; border-bottom: 1px solid var(--linea); }
+-.barra-demo ul { display: flex; flex-wrap: wrap; gap: 0.25rem; width: min(100% - 3rem, 72rem); margin: 0 auto; padding-block: 0.5rem; list-style: none; }
+-.barra-demo a, .canales a, .enlace-principal { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding-inline: 0.75rem; color: inherit; text-underline-offset: 0.2em; }
+-.barra-demo a { text-decoration: none; font-size: 0.875rem; }
+-.barra-demo a[aria-current="page"] { background: #c9e8c8; font-weight: 600; }
+-.barra-demo a:hover, .canales a:hover, .enlace-principal:hover { background: #dfedde; }
++.barra-demo { position: sticky; top: 0; z-index: 10; background: var(--sd-fondo-suave); border-bottom: 1px solid var(--linea); }
++.canales-demo { position: relative; }
++.barra-demo ul { display: flex; flex-wrap: wrap; gap: 0.5rem; width: min(100% - 3rem, 72rem); margin: 0 auto; padding-block: 0.5rem; list-style: none; }
++.barra-demo a, .canales a, .enlace-principal { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding-inline: 0.75rem; color: var(--sd-enlace); text-underline-offset: 0.2em; }
++.barra-demo li { position: relative; }
++.barra-demo li + li::before { content: ""; position: absolute; top: 50%; left: -0.25rem; height: 1.25rem; border-left: 1px solid var(--borde-control); transform: translateY(-50%); }
++.barra-demo a { border: 0; background: transparent; text-decoration: none; font-size: 0.875rem; }
++.barra-demo a:hover, .canales a:hover, .enlace-principal:hover { background: var(--sd-fondo-interactivo); }
++.barra-demo a[aria-current="page"] { background: var(--sd-accion); color: var(--sd-fondo); font-weight: 600; }
+ .canales li { padding-block: 0.5rem; }
+ .canales a { justify-content: flex-start; width: 100%; padding-inline: 0; }
+-.saltar-contenido { position: fixed; top: 0.5rem; left: 1rem; z-index: 20; padding: 0.75rem; background: #f7faf6; transform: translateY(-200%); }
++.saltar-contenido { position: fixed; top: 0.5rem; left: 1rem; z-index: 20; padding: 0.75rem; background: var(--sd-fondo); transform: translateY(-200%); }
+ .saltar-contenido:focus { transform: translateY(0); }
+ .contenido:focus { outline: none; }
+-.control-demo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; width: min(100% - 3rem, 72rem); margin: 0 auto; padding-bottom: 0.5rem; }
+-.control-demo p { margin: 0; font-size: 0.8125rem; color: var(--tinta-secundaria); }
++.franja-simulacion { background: var(--sd-fondo-suave); }
++.control-demo { display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; align-items: center; gap: 0.75rem 1rem; width: min(100% - 3rem, 72rem); margin: 0 auto; padding-block: 0.75rem; }
++.etiqueta-simulacion { justify-self: start; color: var(--tinta); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
++.avance-demo { min-width: 0; }
++.control-demo p { margin: 0; font-size: 0.9375rem; color: var(--tinta); }
++.progreso-demo { display: block; box-sizing: border-box; appearance: none; width: 100%; height: 8px; margin-top: 0.375rem; overflow: hidden; border: 1px solid var(--borde-control); border-radius: 0.5rem; background: var(--linea); }
++.progreso-demo::-webkit-progress-bar { background: var(--linea); }
++.progreso-demo::-webkit-progress-value { background: var(--sd-marca); }
++.progreso-demo::-moz-progress-bar { background: var(--sd-marca); }
+ button, input { font: inherit; }
+-button { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0.625rem 1rem; border: 1px solid #21734f; border-radius: 0.5rem; background: #21734f; color: #fff; line-height: 1.4; cursor: pointer; }
+-button:hover:enabled { background: #18593d; }
+-button:disabled { background: #e4ece3; color: #465e52; border-color: var(--linea); cursor: default; }
+-.control-demo button { background: transparent; color: #163c31; border-color: var(--linea); font-size: 0.8125rem; }
+-.control-demo button:hover:enabled { background: #dfedde; }
++button { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0.625rem 1rem; border: 1px solid var(--sd-accion); border-radius: 0.5rem; background: var(--sd-accion); color: var(--sd-fondo); line-height: 1.4; cursor: pointer; }
++button:hover:enabled { background: var(--sd-accion-hover); }
++button:disabled { background: var(--fondo-deshabilitado); color: var(--tinta-secundaria); border-color: var(--borde-control); cursor: default; }
++.control-demo button { justify-self: end; background: transparent; color: var(--tinta); border-color: var(--borde-control); font-size: 0.8125rem; }
++.control-demo button:hover:enabled { background: var(--sd-fondo-interactivo); }
+ .control-demo label { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.8125rem; }
+-.control-demo select { min-height: 44px; max-width: 100%; padding: 0.5rem; border: 1px solid var(--linea); border-radius: 0.5rem; color: inherit; background: #fff; font: inherit; }
++.control-demo select { min-height: 44px; max-width: 100%; padding: 0.5rem; border: 1px solid var(--borde-control); border-radius: 0.5rem; color: inherit; background: var(--sd-fondo-suave); font: inherit; }
+ .panel-huecos, .ofertas-hueco { margin: 0; padding: 0; list-style: none; }
+ .panel-huecos > li { padding-block: 1.5rem; border-bottom: 1px solid var(--linea); }
+ .panel-huecos h3 { margin-top: 0; }
+@@ -57,38 +82,44 @@ button:disabled { background: #e4ece3; color: #465e52; border-color: var(--linea
+ .seccion { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--linea); }
+ .seccion p, .mensaje-bot p, .estado-error p { max-width: 65ch; line-height: 1.65; margin-block: 0.5rem 1rem; }
+ .seccion h2 { font-size: 1.25rem; line-height: 1.4; }
++.estado-vacio { background: var(--sd-fondo-suave); border: 1px solid var(--linea); border-radius: 0.5rem; padding: 1.25rem; color: var(--tinta-secundaria); }
++.estado-vacio a { color: var(--sd-enlace); }
+ h3 { margin: 0.75rem 0 0.5rem; font-size: 1rem; font-weight: 600; }
+ .acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-block: 1rem; }
+ .reloj-demo-formulario label { display: block; font-weight: 600; }
+-.reloj-demo-formulario input { box-sizing: border-box; width: min(100%, 12rem); min-height: 44px; padding: 0.625rem 0.75rem; border: 1px solid var(--linea); border-radius: 0.5rem; color: inherit; background: #fff; caret-color: #21734f; }
+-.reloj-demo-formulario input[aria-invalid="true"] { border-color: #763a23; }
++.reloj-demo-formulario input { box-sizing: border-box; width: min(100%, 12rem); min-height: 44px; padding: 0.625rem 0.75rem; border: 1px solid var(--borde-control); border-radius: 0.5rem; color: inherit; background: var(--sd-fondo); caret-color: var(--sd-accion); }
++.reloj-demo-formulario input[aria-invalid="true"] { border-color: var(--error); }
+ .reloj-demo time { overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+ .llamada-entrante { max-width: 30rem; }
+ .llamada-entrante label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+-.llamada-entrante input { box-sizing: border-box; width: 100%; min-height: 44px; padding: 0.625rem 0.75rem; border: 1px solid var(--linea); border-radius: 0.5rem; color: inherit; background: #fff; caret-color: #21734f; }
+-.llamada-entrante input[aria-invalid="true"] { border-color: #763a23; }
++.llamada-entrante input { box-sizing: border-box; width: 100%; min-height: 44px; padding: 0.625rem 0.75rem; border: 1px solid var(--borde-control); border-radius: 0.5rem; color: inherit; background: var(--sd-fondo); caret-color: var(--sd-accion); }
++.llamada-entrante input[aria-invalid="true"] { border-color: var(--error); }
+ .ayuda-ani { color: var(--tinta-secundaria); }
+ .consentimiento { display: flex; align-items: center; gap: 0.75rem; min-height: 44px; max-width: 46ch; margin-block: 1.5rem 0.75rem; line-height: 1.5; cursor: pointer; }
+-.consentimiento input { flex-shrink: 0; width: 24px; height: 24px; margin: 10px; accent-color: #21734f; }
++.consentimiento input { flex-shrink: 0; width: 24px; height: 24px; margin: 10px; accent-color: var(--sd-accion); }
+ .datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1.5rem; margin-block: 1.5rem; }
+ .datos div { min-width: 0; }
+ .datos dt { margin-bottom: 0.375rem; color: var(--tinta-secundaria); font-size: 0.875rem; overflow-wrap: anywhere; }
+ .datos dd { margin: 0; font-size: 1.125rem; line-height: 1.5; overflow-wrap: anywhere; }
++.datos-tarjetas { grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: 0.75rem; }
++.datos-tarjetas > div { display: flex; flex-direction: column; background: var(--sd-fondo-suave); border: 1px solid var(--linea); border-radius: 0.5rem; padding: 1rem; }
++.datos-tarjetas dd { order: -1; font-size: 1.75rem; font-weight: 600; color: var(--tinta); }
++.datos-tarjetas dt { margin: 0; font-size: 0.8125rem; color: var(--tinta-secundaria); }
+ small { display: block; margin-top: 0.25rem; font-size: 0.8125rem; color: var(--tinta-secundaria); }
+-.aviso, .estado-error, .estado-carga { margin-block: 1rem; padding: 1rem; background: #e4ece3; line-height: 1.6; }
+-.estado-error { background: #f5e8df; color: #763a23; }
++.aviso, .estado-error, .estado-carga { margin-block: 1rem; padding: 1rem; background: var(--sd-fondo-suave); line-height: 1.6; }
++.estado-error { background: var(--fondo-error); color: var(--error); }
+ .linea-tiempo { margin: 0; padding: 0; list-style: none; }
+ .linea-tiempo li { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 1rem; padding-block: 1rem; border-bottom: 1px solid var(--linea); overflow-wrap: anywhere; }
+ .linea-tiempo time { grid-column: 1 / -1; margin-top: 0.375rem; color: var(--tinta-secundaria); font-size: 0.8125rem; }
+ .conversacion { max-width: 44rem; margin-top: 2rem; }
+ .mensaje-bot { padding-block: 1rem; border-bottom: 1px solid var(--linea); }
+ .seccion-lista ul { display: grid; gap: 0.5rem; padding: 0; margin: 0; list-style: none; }
+-.seccion-lista button { width: 100%; justify-content: flex-start; background: transparent; color: #163c31; border-color: var(--linea); }
+-.seccion-lista button:hover:enabled { background: #dfedde; }
++.seccion-lista button { width: 100%; justify-content: flex-start; background: transparent; color: var(--tinta); border-color: var(--borde-control); }
++.seccion-lista button:hover:enabled { background: var(--sd-fondo-interactivo); }
+ .enviar-mensaje { margin-top: 2rem; }
+ .enviar-mensaje label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+ .enviar-mensaje > div { display: flex; gap: 0.5rem; }
+-.enviar-mensaje input { min-width: 0; width: 100%; min-height: 44px; padding-inline: 0.75rem; border: 1px solid var(--linea); border-radius: 0.5rem; background: #fff; color: #163c31; caret-color: #21734f; }
++.enviar-mensaje input { min-width: 0; width: 100%; min-height: 44px; padding-inline: 0.75rem; border: 1px solid var(--borde-control); border-radius: 0.5rem; background: var(--sd-fondo); color: var(--tinta); caret-color: var(--sd-accion); }
+ .enviar-mensaje input::placeholder { color: var(--tinta-secundaria); }
+ .cita { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+ .cita > div:first-child { flex: 1 1 20rem; min-width: 0; }
+@@ -98,32 +129,30 @@ small { display: block; margin-top: 0.25rem; font-size: 0.8125rem; color: var(--
+ .continuacion { margin-top: 1.5rem; max-width: 100%; }
+ .continuacion code { display: block; overflow-wrap: anywhere; padding-block: 0.5rem; }
+ .canal-mensaje { font-weight: 600; color: var(--tinta-secundaria); }
+-.insignia-mock { display: block; width: fit-content; margin: 0.35rem 0 0 auto; padding: 0.2rem 0.5rem; border: 1px solid var(--linea); border-radius: 0.25rem; color: #163c31; font-size: 0.75rem; font-weight: 600; background: #dfedde; }
++.insignia-mock { display: block; width: fit-content; white-space: nowrap; margin: 0.35rem 0 0 auto; padding: 0.2rem 0.5rem; border: 1px solid var(--linea); border-radius: 0.25rem; color: var(--tinta); font-size: 0.75rem; font-weight: 600; background: var(--sd-fondo-interactivo); }
+ .wa-simulador { max-width: 44rem; margin-inline: auto; }
+-.contenido:has(.wa-simulador) { padding-block: 2rem; }
+-.wa-simulador h1 { font-size: 2rem; }
+ .wa-simulador .introduccion { margin-top: 0.75rem; font-size: 1rem; }
+ .wa-herramientas { display: flex; align-items: end; flex-wrap: wrap; gap: 0.75rem; margin-block: 1.5rem; }
+ .wa-herramientas > div { flex: 1 1 12rem; min-width: 0; }
+ .wa-herramientas label { display: block; margin-bottom: 0.375rem; font-size: 0.875rem; font-weight: 600; }
+-.wa-herramientas input, .dialogo-wa input { box-sizing: border-box; width: 100%; min-height: 44px; border: 1px solid var(--linea); border-radius: 0.5rem; padding: 0.625rem 0.75rem; background: #fff; color: #163c31; font: inherit; }
+-.boton-secundario { color: #163c31; background: transparent; border-color: var(--linea); }
+-.boton-secundario:hover:enabled { color: #163c31; background: #dfedde; }
+-.wa-historial { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; max-height: 52dvh; min-height: 16rem; overflow-y: auto; padding: 1rem; background: #edf2e9; border-radius: 0.75rem; scrollbar-color: #21734f #edf2e9; scroll-padding-block: 1rem; }
++.wa-herramientas input, .dialogo-wa input { box-sizing: border-box; width: 100%; min-height: 44px; border: 1px solid var(--borde-control); border-radius: 0.5rem; padding: 0.625rem 0.75rem; background: var(--sd-fondo); color: var(--tinta); font: inherit; }
++.boton-secundario { color: var(--tinta); background: transparent; border-color: var(--borde-control); }
++.boton-secundario:hover:enabled { color: var(--tinta); background: var(--sd-fondo-interactivo); }
++.wa-historial { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; max-height: 52dvh; min-height: 16rem; overflow-y: auto; padding: 1rem; background: var(--sd-fondo-suave); border-radius: 0.75rem; scrollbar-color: var(--sd-accion) var(--sd-fondo-suave); scroll-padding-block: 1rem; }
+ .wa-vacio { align-self: center; max-width: 28rem; padding-block: 3rem; color: var(--tinta-secundaria); line-height: 1.65; }
+ .wa-burbuja { max-width: 90%; padding: 0.75rem 1rem; border-radius: 0.75rem; overflow-wrap: anywhere; line-height: 1.6; }
+-.wa-bot { background: #fff; }
+-.wa-usuario { align-self: flex-end; background: #c9e8c8; }
++.wa-bot { background: var(--sd-fondo); }
++.wa-usuario { align-self: flex-end; background: var(--sd-fondo-interactivo); }
+ .wa-burbuja p { margin: 0 0 0.5rem; }
+ .wa-burbuja p:last-child { margin-bottom: 0; }
+ .wa-burbuja .mensaje-bot { padding: 0; border: 0; }
+ .wa-burbuja .acciones { margin-bottom: 0; }
+-.wa-error { color: #763a23; line-height: 1.6; }
++.wa-error { color: var(--error); line-height: 1.6; }
+ .wa-error button { margin-top: 0.5rem; }
+ .wa-escribiendo { color: var(--tinta-secundaria); margin: 0; font-size: 0.875rem; }
+-.wa-compositor { margin-top: 1rem; background: #f7faf6; }
+-.dialogo-wa { width: min(32rem, calc(100% - 2rem)); max-height: calc(100dvh - 2rem); margin: auto; box-sizing: border-box; border: 0; border-radius: 0.75rem; padding: 1.5rem; background: #f7faf6; color: #163c31; overflow-y: auto; }
+-.dialogo-wa::backdrop { background: rgb(10 35 26 / 55%); }
++.wa-compositor { margin-top: 1rem; background: var(--sd-fondo); }
++.dialogo-wa { width: min(32rem, calc(100% - 2rem)); max-height: calc(100dvh - 2rem); margin: auto; box-sizing: border-box; border: 0; border-radius: 0.75rem; padding: 1.5rem; background: var(--sd-fondo); color: var(--tinta); overflow-y: auto; }
++.dialogo-wa::backdrop { background: var(--fondo-modal); }
+ .dialogo-wa header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+ .dialogo-wa h2 { margin: 0; font-size: 1.25rem; line-height: 1.4; overflow-wrap: anywhere; }
+ .dialogo-wa .seccion-lista { margin-bottom: 1rem; }
+@@ -132,24 +161,45 @@ small { display: block; margin-top: 0.25rem; font-size: 0.8125rem; color: var(--
+ .campo-flow label { display: block; font-weight: 600; margin-bottom: 0.5rem; }
+ .captura-flow { display: flex; align-items: center; gap: 0.5rem; }
+ .captura-flow input { min-width: 0; }
+-.campo-flow input[aria-invalid="true"] { border-color: #763a23; }
++.campo-flow input[aria-invalid="true"] { border-color: var(--error); }
+ .campo-flow .wa-error { margin: 0.5rem 0 0; font-size: 0.875rem; }
+-@media (max-width: 639px) {
+-  .layout { padding-bottom: calc(8rem + env(safe-area-inset-bottom)); }
++@media (min-width: 768px) {
++  #contenido, h1 { scroll-margin-top: calc(var(--alto-barra-demo, 0px) + 1rem); }
++}
++@media (max-width: 767px) {
++  .cabecera { gap: 0.75rem; }
++  .marca { font-size: 1.5rem; white-space: nowrap; }
++  .contexto { flex-shrink: 0; }
++  .layout { padding-bottom: var(--alto-barra-demo, calc(12rem + env(safe-area-inset-bottom))); }
+   .barra-demo { position: fixed; inset: auto 0 0; padding-bottom: env(safe-area-inset-bottom); border-top: 1px solid var(--linea); border-bottom: 0; }
+-  .barra-demo ul { flex-wrap: nowrap; width: calc(100% - 1rem); overflow-x: auto; overscroll-behavior-x: contain; scroll-padding-inline: 0.5rem; scrollbar-width: thin; scrollbar-color: #21734f #e4ece3; }
++  .canales-demo { overflow-x: auto; overscroll-behavior-x: contain; scroll-padding-inline: 0.5rem; scrollbar-width: thin; scrollbar-color: var(--sd-accion) var(--fondo-deshabilitado); container-type: scroll-state; container-name: canales; }
++  .barra-demo ul { box-sizing: border-box; flex-wrap: nowrap; width: max-content; min-width: 100%; padding: 0.375rem 0.5rem; }
++  .barra-demo ul::before, .barra-demo ul::after { content: ""; position: sticky; z-index: 1; flex: 0 0 1.5rem; align-self: stretch; pointer-events: none; opacity: 0; }
++  .barra-demo ul::before { left: 0; margin-right: -2rem; background: linear-gradient(to left, transparent, var(--sd-fondo-suave)); }
++  .barra-demo ul::after { right: 0; margin-left: -2rem; background: linear-gradient(to right, transparent, var(--sd-fondo-suave)); }
++  @container canales scroll-state(scrollable: left) {
++    .barra-demo ul::before { opacity: 1; }
++  }
++  @container canales scroll-state(scrollable: right) {
++    .barra-demo ul::after { opacity: 1; }
++  }
+   .barra-demo li { flex: 0 0 auto; }
+   .barra-demo a { white-space: nowrap; font-size: 0.875rem; }
+-  .control-demo { width: calc(100% - 2rem); }
+-  .control-demo p { flex: 1 1 0; min-width: 0; }
+-  .control-demo button { flex: 0 0 auto; }
++  .control-demo { grid-template-columns: auto minmax(0, 1fr) auto; align-items: end; width: calc(100% - 2rem); gap: 0.25rem 0.5rem; padding-block: 0.375rem; }
++  .etiqueta-simulacion { align-self: center; }
++  .control-demo label { grid-column: 2; grid-row: 1; display: grid; gap: 0; justify-self: center; font-size: 0.625rem; line-height: 1.1; }
++  .control-demo select { min-width: 44px; font-size: 0.8125rem; }
++  .control-demo button { grid-column: 3; grid-row: 1; }
++  .avance-demo { grid-column: 1 / -1; grid-row: 2; }
++  .control-demo p { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 0.8125rem; }
++  .progreso-demo { height: 4px; margin-top: 0.25rem; }
+   .cita > .qr-cita { order: -1; }
+   .wa-simulador { padding-bottom: 6rem; }
+-  .wa-compositor { position: fixed; z-index: 9; inset: auto 1rem calc(var(--alto-barra-demo, 8rem) + env(safe-area-inset-bottom)) 1rem; max-width: 44rem; margin: 0 auto; padding-block: 0.75rem; }
++  .wa-compositor { position: fixed; z-index: 9; inset: auto 1rem var(--alto-barra-demo, calc(12rem + env(safe-area-inset-bottom))) 1rem; max-width: 44rem; margin: 0 auto; padding-block: 0.75rem; }
+   .wa-compositor label { font-size: 0.875rem; margin-bottom: 0.25rem; }
+   .wa-historial { max-height: 48dvh; }
+ }
+ @media (max-width: 400px) {
+   .cabecera, .contenido, .pie { width: calc(100% - 2rem); }
+-  .contexto { max-width: 12ch; }
++  .contexto { max-width: none; }
+ }
+diff --git a/apps/web/src/vistas/Admin.tsx b/apps/web/src/vistas/Admin.tsx
+index 7aedac6..d6cb18c 100644
+--- a/apps/web/src/vistas/Admin.tsx
++++ b/apps/web/src/vistas/Admin.tsx
+@@ -36,14 +36,14 @@ export function Admin() {
+     {metricas.isPending && <EstadoCarga />}
+     {metricas.isError && <EstadoError error={metricas.error} onReintentar={() => { void metricas.refetch(); }} />}
+     {metricas.data && <>
+-      <section className="seccion"><h2>Trámites por estado</h2><dl className="datos">{metricas.data.porEstado.map(fila => <div key={fila.estado}><dt>{fila.estado}</dt><dd>{fila.cantidad}</dd></div>)}</dl></section>
+-      <section className="seccion"><h2>Indicadores disponibles</h2><dl className="datos">{Object.entries(metricas.data.kpis).map(([nombre, valor]) => <div key={nombre}><dt>{Object.hasOwn(ETIQUETAS_KPI, nombre) ? ETIQUETAS_KPI[nombre] : nombre}</dt><dd>{formatoNumero.format(valor)}</dd></div>)}</dl></section>
++      <section className="seccion"><h2>Trámites por estado</h2><dl className="datos datos-tarjetas">{metricas.data.porEstado.map(fila => <div key={fila.estado}><dt>{fila.estado}</dt><dd>{fila.cantidad}</dd></div>)}</dl></section>
++      <section className="seccion"><h2>Indicadores disponibles</h2><dl className="datos datos-tarjetas">{Object.entries(metricas.data.kpis).map(([nombre, valor]) => <div key={nombre}><dt>{Object.hasOwn(ETIQUETAS_KPI, nombre) ? ETIQUETAS_KPI[nombre] : nombre}</dt><dd>{formatoNumero.format(valor)}</dd></div>)}</dl></section>
+     </>}
+     <section className="seccion" aria-labelledby="titulo-huecos">
+       <h2 id="titulo-huecos">Panel de huecos</h2>
+       {huecos.isPending && <EstadoCarga texto="Cargando huecos…" />}
+       {huecos.isError && <EstadoError error={huecos.error} onReintentar={() => { void huecos.refetch(); }} />}
+-      {huecos.data?.length === 0 && <p>No hay huecos liberados.</p>}
++      {huecos.data?.length === 0 && <p className="estado-vacio">No hay huecos liberados.</p>}
+       {huecos.data && huecos.data.length > 0 && <ol className="panel-huecos" aria-label="Huecos liberados">{huecos.data.map(hueco => <li key={hueco.id}>
+         <h3>{hueco.servicio}</h3>
+         <dl className="datos">
+@@ -62,7 +62,7 @@ export function Admin() {
+       <h2 id="titulo-alertas">Alertas de seguridad</h2>
+       {alertas.isPending && <EstadoCarga texto="Cargando alertas de seguridad…" />}
+       {alertas.isError && <EstadoError error={alertas.error} onReintentar={() => { void alertas.refetch(); }} />}
+-      {alertas.data?.length === 0 && <p>Sin alertas de seguridad</p>}
++      {alertas.data?.length === 0 && <p className="estado-vacio">Sin alertas de seguridad</p>}
+       {alertas.data && alertas.data.length > 0 && <ol className="linea-tiempo" aria-label="Alertas de seguridad">
+         {alertas.data.map(alerta => <li key={alerta.id}>
+           <strong>{NOMBRES_CANAL[alerta.canal]}</strong>
+diff --git a/apps/web/src/vistas/App.tsx b/apps/web/src/vistas/App.tsx
+index df28ea2..7368b56 100644
+--- a/apps/web/src/vistas/App.tsx
++++ b/apps/web/src/vistas/App.tsx
+@@ -40,7 +40,7 @@ export function App() {
+     {!pacienteId && <EstadoContexto contexto={contexto} texto="Aún no hay un paciente en el contexto de atención. Confirma una cita y vuelve a actualizar para ver tus citas." />}
+     {pacienteId && citas.isPending && <EstadoCarga />}
+     {citas.isError && <EstadoError error={citas.error} onReintentar={() => { void citas.refetch(); }} />}
+-    {citas.data?.length === 0 && <div className="seccion"><p>Aún no hay citas para mostrar.</p><Link className="enlace-principal" to="/callcenter">Iniciar atención en Call Center</Link></div>}
++    {citas.data?.length === 0 && <div className="seccion estado-vacio"><p>Aún no hay citas para mostrar.</p><Link className="enlace-principal" to="/callcenter">Iniciar atención en Call Center</Link></div>}
+     {citas.data?.map(cita => <section className="seccion cita" key={cita.tramite.id} aria-label="Cita del paciente">
+       <div><h2>{cita.servicio}</h2><dl className="datos">
+         <div><dt>Estado</dt><dd>{cita.tramite.estado}</dd></div><div><dt>Sede</dt><dd>{cita.sede}</dd></div>
+diff --git a/apps/web/src/vistas/Bandeja.tsx b/apps/web/src/vistas/Bandeja.tsx
+index 3500568..2bcb1f8 100644
+--- a/apps/web/src/vistas/Bandeja.tsx
++++ b/apps/web/src/vistas/Bandeja.tsx
+@@ -8,7 +8,7 @@ export function Bandeja() {
+     <h1>Bandeja simulada</h1><p className="introduccion">SMS y correos ficticios de la demo. Los códigos se muestran solo aquí.</p>
+     {mensajes.isPending && <EstadoCarga />}
+     {mensajes.isError && <EstadoError error={mensajes.error} onReintentar={() => { void mensajes.refetch(); }} />}
+-    {mensajes.data?.length === 0 && <p className="seccion">No hay mensajes simulados todavía.</p>}
++    {mensajes.data?.length === 0 && <p className="seccion estado-vacio">No hay mensajes simulados todavía.</p>}
+     {mensajes.data?.map(mensaje => <article className="seccion" key={mensaje.id}><h2>{mensaje.asunto}</h2><p className="canal-mensaje">{mensaje.canal === 'sms' ? 'SMS' : 'Correo'}</p><p>{mensaje.cuerpo}</p></article>)}
+   </>;
+ }
+diff --git a/apps/web/src/vistas/Clinica.tsx b/apps/web/src/vistas/Clinica.tsx
+index 71a96c7..1f5f671 100644
+--- a/apps/web/src/vistas/Clinica.tsx
++++ b/apps/web/src/vistas/Clinica.tsx
+@@ -15,7 +15,7 @@ export function Clinica() {
+     {!sedeId && <EstadoContexto contexto={contexto} texto="Aún no hay llegadas que mostrar: falta la sede de atención. Confirma una cita y vuelve a actualizar." />}
+     {sedeId && llegadas.isPending && <EstadoCarga />}
+     {llegadas.isError && <EstadoError error={llegadas.error} onReintentar={() => { void llegadas.refetch(); }} />}
+-    {llegadas.data?.length === 0 && <p className="seccion">Aún no hay llegadas esperadas. Confirma una cita en WhatsApp.</p>}
++    {llegadas.data?.length === 0 && <p className="seccion estado-vacio">Aún no hay llegadas esperadas. Confirma una cita en WhatsApp.</p>}
+     {llegadas.data?.map(llegada => <LlegadaClinica key={llegada.cita.tramite.id} llegada={llegada} />)}
+   </>;
+ }
+diff --git a/apps/web/src/vistas/Portada.tsx b/apps/web/src/vistas/Portada.tsx
+index 98e47de..621a893 100644
+--- a/apps/web/src/vistas/Portada.tsx
++++ b/apps/web/src/vistas/Portada.tsx
+@@ -14,7 +14,7 @@ const rutas = {
+ export function Portada() {
+   return (
+     <>
+-      <h1>Un mismo hilo,<br /> en cada canal.</h1>
++      <h1 className="titulo-portada">Un mismo hilo,<br /> en cada canal.</h1>
+       <p className="introduccion">Una base compartida para que la atención continúe de un canal a otro, sin volver a empezar.</p>
+       <section className="canales" aria-labelledby="titulo-canales">
+         <h2 id="titulo-canales">Canales de atención</h2>
+diff --git a/pnpm-lock.yaml b/pnpm-lock.yaml
+index 3c64ecf..fc11611 100644
+--- a/pnpm-lock.yaml
++++ b/pnpm-lock.yaml
+@@ -123,6 +123,9 @@ importers:
+ 
+   apps/web:
+     dependencies:
++      '@fontsource/open-sans':
++        specifier: 5.3.0
++        version: 5.3.0
+       '@noki/contracts':
+         specifier: workspace:*
+         version: link:../../packages/contracts
+@@ -752,6 +755,9 @@ packages:
+   '@fastify/proxy-addr@5.1.3':
+     resolution: {integrity: sha512-ptgIgB+abBNTs5lsKNvFaKMCauPaTOE6ZIjxJr3FxCLehmYQQKYGg4srwwNICR9QQlFrYw59jWAo+i9GalVCaw==}
+ 
++  '@fontsource/open-sans@5.3.0':
++    resolution: {integrity: sha512-V1bdMlGNyZrJwzrdusshMOw2YR0aqYDL7kOo9dkxUEKl8dFv66A9HLckOOXl572sG/7ohhDQrCrTFGSn9LZcSw==}
++
+   '@humanfs/core@0.19.2':
+     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
+     engines: {node: '>=18.18.0'}
+@@ -2966,6 +2972,8 @@ snapshots:
+       '@fastify/forwarded': 3.1.2
+       ipaddr.js: 2.5.0
+ 
++  '@fontsource/open-sans@5.3.0': {}
++
+   '@humanfs/core@0.19.2':
+     dependencies:
+       '@humanfs/types': 0.15.0

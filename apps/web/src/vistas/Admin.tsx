@@ -17,6 +17,7 @@ const ETIQUETAS_KPI: Record<string, string> = {
   horasRecursoRecuperadas: 'Horas de recurso recuperadas', diasAdelantadosPromedio: 'Días adelantados en promedio',
 };
 const ESTADOS_HUECO: Record<HuecoVista['estado'], string> = { DETECTADO: 'Detectado', OFRECIDO: 'Ofrecido', ASIGNADO: 'Asignado', DESIERTO: 'Desierto' };
+const CLAVES_LOGRO = new Set(['huecosRecuperados', 'horasRecursoRecuperadas', 'diasAdelantadosPromedio']);
 const ESTADOS_OFERTA: Record<HuecoVista['ofertas'][number]['estado'], string> = { OFRECIDA: 'Ofrecida', ACEPTADA: 'Aceptada', RECHAZADA: 'Rechazada', EXPIRADA: 'Expirada', PERDIDA: 'Perdida' };
 const formatoNumero = new Intl.NumberFormat('es-MX', { maximumSignificantDigits: 21 });
 const formatoHora = new Intl.DateTimeFormat('es-MX', { dateStyle: 'short', timeStyle: 'short' });
@@ -36,14 +37,14 @@ export function Admin() {
     {metricas.isPending && <EstadoCarga />}
     {metricas.isError && <EstadoError error={metricas.error} onReintentar={() => { void metricas.refetch(); }} />}
     {metricas.data && <>
-      <section className="seccion"><h2>Trámites por estado</h2><dl className="datos">{metricas.data.porEstado.map(fila => <div key={fila.estado}><dt>{fila.estado}</dt><dd>{fila.cantidad}</dd></div>)}</dl></section>
-      <section className="seccion"><h2>Indicadores disponibles</h2><dl className="datos">{Object.entries(metricas.data.kpis).map(([nombre, valor]) => <div key={nombre}><dt>{Object.hasOwn(ETIQUETAS_KPI, nombre) ? ETIQUETAS_KPI[nombre] : nombre}</dt><dd>{formatoNumero.format(valor)}</dd></div>)}</dl></section>
+      <section className="seccion"><h2>Trámites por estado</h2><dl className="datos datos-tarjetas">{metricas.data.porEstado.map(fila => <div key={fila.estado}><dt>{fila.estado}</dt><dd>{fila.cantidad}</dd></div>)}</dl></section>
+      <section className="seccion"><h2>Indicadores disponibles</h2><dl className="datos datos-tarjetas">{Object.entries(metricas.data.kpis).map(([nombre, valor]) => <div key={nombre} className={CLAVES_LOGRO.has(nombre) ? 'tarjeta-logro' : undefined}><dt>{Object.hasOwn(ETIQUETAS_KPI, nombre) ? ETIQUETAS_KPI[nombre] : nombre}</dt><dd>{formatoNumero.format(valor)}</dd></div>)}</dl></section>
     </>}
     <section className="seccion" aria-labelledby="titulo-huecos">
       <h2 id="titulo-huecos">Panel de huecos</h2>
       {huecos.isPending && <EstadoCarga texto="Cargando huecos…" />}
       {huecos.isError && <EstadoError error={huecos.error} onReintentar={() => { void huecos.refetch(); }} />}
-      {huecos.data?.length === 0 && <p>No hay huecos liberados.</p>}
+      {huecos.data?.length === 0 && <p className="estado-vacio">No hay huecos liberados.</p>}
       {huecos.data && huecos.data.length > 0 && <ol className="panel-huecos" aria-label="Huecos liberados">{huecos.data.map(hueco => <li key={hueco.id}>
         <h3>{hueco.servicio}</h3>
         <dl className="datos">
@@ -62,7 +63,7 @@ export function Admin() {
       <h2 id="titulo-alertas">Alertas de seguridad</h2>
       {alertas.isPending && <EstadoCarga texto="Cargando alertas de seguridad…" />}
       {alertas.isError && <EstadoError error={alertas.error} onReintentar={() => { void alertas.refetch(); }} />}
-      {alertas.data?.length === 0 && <p>Sin alertas de seguridad</p>}
+      {alertas.data?.length === 0 && <p className="estado-vacio">Sin alertas de seguridad</p>}
       {alertas.data && alertas.data.length > 0 && <ol className="linea-tiempo" aria-label="Alertas de seguridad">
         {alertas.data.map(alerta => <li key={alerta.id}>
           <strong>{NOMBRES_CANAL[alerta.canal]}</strong>

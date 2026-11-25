@@ -6,5 +6,5 @@ export function EstadoContexto({ contexto, texto }: {
 }) {
   if (contexto.cargando) return <EstadoCarga texto="Consultando el contexto de atención…" />;
   if (contexto.error) return <EstadoError error={contexto.error} onReintentar={contexto.actualizar} />;
-  return <div className="seccion"><p>{texto}</p><button type="button" onClick={contexto.actualizar}>Actualizar</button></div>;
+  return <div className="seccion estado-vacio"><p>{texto}</p><button type="button" onClick={contexto.actualizar}>Actualizar</button></div>;
 }

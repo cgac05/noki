@@ -1,0 +1,23 @@
+[
+  {
+    "comando": "corepack pnpm lint",
+    "codigo": 0,
+    "segundos": 54.7341023,
+    "revision": "Ajuste 5 D7 sobre origin/main eedd179",
+    "entorno": "Acceso a sockets locales"
+  },
+  {
+    "comando": "corepack pnpm lint:deps",
+    "codigo": 0,
+    "segundos": 4.3807538,
+    "revision": "Ajuste 5 D7 sobre origin/main eedd179",
+    "entorno": "Acceso a sockets locales"
+  },
+  {
+    "comando": "corepack pnpm test --maxWorkers 2",
+    "codigo": 0,
+    "segundos": 176.7934911,
+    "revision": "Ajuste 5 D7 sobre origin/main eedd179",
+    "entorno": "Acceso a sockets locales"
+  }
+]

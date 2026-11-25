@@ -1,0 +1,2098 @@
+{
+  "fecha": "2026-11-25",
+  "base": "f5260a8974a7f49ccc97a15a6b24938f3435bfe0",
+  "rama": "feat/marca-salud-digna-360",
+  "autorizacion": {
+    "responsable": "LuisMaster119",
+    "frente": "B",
+    "cita": "dile a codex que suba mis cambios",
+    "referencia": "handoff.md, autorización de subida a main",
+    "permite": [
+      "commit en la rama",
+      "merge no-ff en main",
+      "push main",
+      "push rama"
+    ],
+    "cierre": false
+  },
+  "mensajeCommit": "feat(web): identidad visual Salud Digna 360 (marca, paleta, presentación y acento verde)",
+  "controles": [
+    {
+      "comando": "corepack pnpm exec vitest run --project web",
+      "codigo": 0,
+      "segundos": 47.5179304,
+      "base": "f5260a8974a7f49ccc97a15a6b24938f3435bfe0",
+      "fecha": "2026-11-25"
+    },
+    {
+      "comando": "corepack pnpm exec eslint .",
+      "codigo": 0,
+      "segundos": 8.1902844,
+      "base": "f5260a8974a7f49ccc97a15a6b24938f3435bfe0",
+      "fecha": "2026-11-25"
+    },
+    {
+      "comando": "corepack pnpm lint:deps",
+      "codigo": 0,
+      "segundos": 4.0278899,
+      "base": "f5260a8974a7f49ccc97a15a6b24938f3435bfe0",
+      "fecha": "2026-11-25"
+    }
+  ],
+  "productosSinCambiosDesdeEntregaD7": 21,
+  "pendienteExterno": "TS2353 tests/unit/nucleo/casosTramite.test.ts:655, heredado de main/frente A; no corregido; 4.1 sigue pendiente",
+  "estadoOpenSpec": "Activo en openspec/changes/marca-salud-digna-360; revisión independiente de Claude y cierre pendientes",
+  "manifiesto04": "Histórico de D7 anterior a la autorización de subida; este manifiesto identifica la preparación actual",
+  "archivos": [
+    {
+      "ruta": "apps/web/index.html",
+      "sha256": "204699df47b5067c44c3071b95287c999e9210fb2ccf6e94d2a70e0dd9fa4b86"
+    },
+    {
+      "ruta": "apps/web/package.json",
+      "sha256": "d21ca820ef87e7b9e0ef1dfde7f495ee9c6022aaa571aadaac682d584ac3bf8d"
+    },
+    {
+      "ruta": "apps/web/src/acentoIdentidad.test.tsx",
+      "sha256": "c444fa6b8978ee478a9269b965929a89b86c5cce9eee908a3449d96388cb49d5"
+    },
+    {
+      "ruta": "apps/web/src/componentes/BarraDemo.test.tsx",
+      "sha256": "d0cd080b6999c87313fe47c66ed7b5437a0d86e63054ea74e8370542f4cddbf2"
+    },
+    {
+      "ruta": "apps/web/src/componentes/BarraDemo.tsx",
+      "sha256": "e3f0399c278195c468a586bb0ebe654dbdd8836aad9a7336b4edc21069ced3e0"
+    },
+    {
+      "ruta": "apps/web/src/componentes/EstadoContexto.tsx",
+      "sha256": "f97c35c0c421c3ad419f16bfc4eced35782f87b35ff0b782421d656bcc6201c1"
+    },
+    {
+      "ruta": "apps/web/src/componentes/Layout.tsx",
+      "sha256": "e0e24176f2eb1ea77fc4f6e070dc6436a4d18f0e531b6795b2f49bc6ff67b27e"
+    },
+    {
+      "ruta": "apps/web/src/componentes/LineaTiempo.tsx",
+      "sha256": "da862fdd02f344ef7cd7aebb80335fac30123fa82b57305f2f264e0adf2320e2"
+    },
+    {
+      "ruta": "apps/web/src/componentes/LlegadaClinica.tsx",
+      "sha256": "f2be098ebca8c4f6403bfd9689ca93e23fb9efb48c7a616804e022bb8450db9c"
+    },
+    {
+      "ruta": "apps/web/src/identidadVisual.test.ts",
+      "sha256": "28ff2f0d4259fdc8b4de1cfc70c72aa2fba951ac68e065af922eb92342b3c740"
+    },
+    {
+      "ruta": "apps/web/src/main.tsx",
+      "sha256": "1aadc388bb96c2b1bb34d7241bd4032776c451b804f61370da9ddfb09d5f0009"
+    },
+    {
+      "ruta": "apps/web/src/presentacion.test.tsx",
+      "sha256": "3bbf38831536a8ba95affe90d636326f861a2513f2217dc6b67a21476aa9b8d4"
+    },
+    {
+      "ruta": "apps/web/src/presentacionEstilos.test.ts",
+      "sha256": "4a2012a3007c3a7bba4a8ffdf6aea60ec7070810e84b57fa0773bb1ab3105b1e"
+    },
+    {
+      "ruta": "apps/web/src/rutas.test.tsx",
+      "sha256": "6f59f985793d1b971eb23a2c70d0827a65834b58bbf8e907ebc2240fa8b01f20"
+    },
+    {
+      "ruta": "apps/web/src/styles.css",
+      "sha256": "9cb56fc8bc6f688674fedc8dd4251eeeae2e6e2f7284d6c8acdf612d3d6f193e"
+    },
+    {
+      "ruta": "apps/web/src/vistas/Admin.tsx",
+      "sha256": "60ef8ce46d2d44732bbb9c982be658d56ed2da410233e2273d3862948b41379c"
+    },
+    {
+      "ruta": "apps/web/src/vistas/App.tsx",
+      "sha256": "14574e4f59ccee8814747d69bfee40ac7da69da643393701df2d5c04176cc84c"
+    },
+    {
+      "ruta": "apps/web/src/vistas/Bandeja.tsx",
+      "sha256": "c7f3a0467537e84c0fa352629f06a67fa55bd9c66d13cc90c01a5947cbc9d51a"
+    },
+    {
+      "ruta": "apps/web/src/vistas/Clinica.tsx",
+      "sha256": "59b45f4f541fbd3c1e9f7d73b19c6b43631783a141fb3567288a711d704600a2"
+    },
+    {
+      "ruta": "apps/web/src/vistas/Portada.tsx",
+      "sha256": "ceddd9074231be40be2c06ea310afb1d498bef1b3fc3760a8cc7631d6d735e90"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/.openspec.yaml",
+      "sha256": "3c3c72cd1a100807c59ef8347538654b4d2d22269f59561c985b01cb44c39491"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/design.md",
+      "sha256": "ea0c82919681aa9a85f0856802142c6bb644b0ebf85a0a8828d6b23ef30695fd"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/00-antes.png",
+      "sha256": "314c3c339a8e455e7f1f072d6d309eeef50ec4fd8b0e3466afca44dc206edacb"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/01-rojo.txt",
+      "sha256": "6faaaa8a12a7693a3718c9d43e2e914844257299590c3a1812953557cd972965"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/02-build.txt",
+      "sha256": "9fcdfb1604bcbeaad3c9427fa1c5536377094347a9229a2f6d09ec9d91de5a6a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/02-install.txt",
+      "sha256": "94cdd1217aece39cd0cef19a55ee6622569a651fcbad68e34a972820fc71bdac"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/02-verde.txt",
+      "sha256": "57319fdefbc2fdab53beaaa84ebf19b9e7fdb709aa3b7aaa67edbf2b051fae4c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-deshabilitado-1280.png",
+      "sha256": "c8b6a3f9db44788e8d8b5420bde69ae92d1e1ef63cbe9ab2e527a93c23598e65"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-deshabilitado-375.png",
+      "sha256": "f12215d36a6e104f1fa770cb74fdc1e589f53783af55bbabca909a23d918c07b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-ejecucion.txt",
+      "sha256": "b6d70392ade3a4a9a0ecab12c2fef07cd0269d11557e8f8aff58d7824be80d7a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-error-1280.png",
+      "sha256": "0a8cb09c995067d3172d30c56dd0d0ef9c7378b78c472d32a31715d3c0135db2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-error-375.png",
+      "sha256": "2d4cbeb895ddc15d1bcc54fae4942dc6310aee1153170945794d02ae400bd981"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-flujoA-1280.png",
+      "sha256": "3df256b2e36aa9f3b0a144e7ae2f1a00dd7bdbf7a11b15b5ccd4dad8c494d3e0"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-flujoA-375.png",
+      "sha256": "140989af3f0083298d0737051e3c82dca714adb51c779c92c154cea4c41bf554"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-flujoC-1280.png",
+      "sha256": "ae213d42ba5aec62fcbf5aff77a71dfceb1959d187315cc6dcc633a62a61d01f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-flujoC-375.png",
+      "sha256": "672c62b027b18685b520389db9aae8d015152a57fd17fea0a207d4d6f98a4e15"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-impeccable.json",
+      "sha256": "ba758c7700327c68c843157ef983b28c5abb069aace28234dcd0cca560a736a9"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-1280-admin.png",
+      "sha256": "5a5e8b6cc805ba3a9e17bd2f52697daa396f2eb2fe7d126ad6ae7d2d098102cd"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-1280-app.png",
+      "sha256": "6d64776bde46b127c848f1ec2a60a2e07b1844e3cb87fb01701ad2b273d5ee8b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-1280-bandeja.png",
+      "sha256": "971756166e5a2311d371eda1a825f62b3e46a98f8ffadae63f52e2ccd7627db8"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-1280-callcenter.png",
+      "sha256": "9eb9088cc6f8c4cdc7c8012edaaf070ee5720b4c6c60ac218c351dc7a97defbe"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-1280-clinica.png",
+      "sha256": "7cae5ea9b2f01d64d971216c41d02fd617e9542e4f4720d94c503b48f89cdf9f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-1280-portada.png",
+      "sha256": "fbf39b4a1d951f711c358dd70fd6883153f6f158bdcb3833bddfedb77db03282"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-1280-wa.png",
+      "sha256": "b55639ccf6d79a0c530e0b52049dd33bc3ebe7fb25d699e834c3b0b0f9381b17"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-1280-web.png",
+      "sha256": "37aa50e9f9905d5c3875f7a05f0e2ce328a159816218002b2cec12e765c2e6e2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-375-admin.png",
+      "sha256": "cf6efae2bbe2730e9dbc0c59b4588b307f4d3f3939c2a37d476edeb77e040fbe"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-375-app.png",
+      "sha256": "7ec8bdfbc4c9712c6aa769fa454a4f2beca61923aaacd38468670a5abe14cf66"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-375-bandeja.png",
+      "sha256": "1e5a4686d05d113cf37cb1b5c8e3473ed81268816651acfa9f53cc57c1edd352"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-375-callcenter.png",
+      "sha256": "bf55cc9edd8cfa068cde84c4fe3debb819e1153cf3b2f5cecbb8a787b7923de3"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-375-clinica.png",
+      "sha256": "9f9019629471f2dfb9145e09c7d85923bd24c315b4d594459d90601d3e76951d"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-375-portada.png",
+      "sha256": "bd7901cd835076f9f0f71f6f69468fdc58adffb71e87f1a4699e709fc3a6fbf5"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-375-wa.png",
+      "sha256": "e621996ce9cc50c5fc971787d71299aa6fd8cc8532bf68cd6e9841b26a800a43"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-mock-375-web.png",
+      "sha256": "d33cb92dd9f32263ac7750e8c2604fe1ce9e02f5d77b32531306075bdbc8e2be"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-1280-admin.png",
+      "sha256": "e406d8f3a35eb40943f7b841f1425f2e1e2ecb672ae4a85ed1b748b155ca6c9b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-1280-app.png",
+      "sha256": "a61883c35b10cce34a502a7182967f74ff795a448b5ad16b80df119aa2962777"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-1280-bandeja.png",
+      "sha256": "da8d46b579d3c77feabae41dc9e71a70bd9e5e8a8b7ab87d7452b264e0f03d47"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-1280-callcenter.png",
+      "sha256": "cd2b40913a5e179e0d7da5eed8938a72ed8dc3c40cfba9370e53d82c9cba09b2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-1280-clinica.png",
+      "sha256": "3ec33dce4664d649bef9077092add636dbb23db651887c680bd29667b0dee763"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-1280-portada.png",
+      "sha256": "87c5058dd6f37493683030822f4f4ae8b72ddac1e43526842c638bfe12edf346"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-1280-wa.png",
+      "sha256": "eec260e0103183cc4a5e4a578c3d42b182419d159a791717dd72de85dd82211d"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-1280-web.png",
+      "sha256": "afc04ec40eb4d7d79bf53eaa63a3424e1017da417dd40adc138ee786cca49f2b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-375-admin.png",
+      "sha256": "115fd5cd47f7b834cabb06235ef64296c420cd54213f8bf00dad26dea964ac36"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-375-app.png",
+      "sha256": "a5db4b6031a488b6178e63105d2246391881b125264d5255e5b780fc28cf0f16"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-375-bandeja.png",
+      "sha256": "d61dbd71ba7b917fdd346d788fb906b66b3a2aa8c3fbae9dd5e7977c50108733"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-375-callcenter.png",
+      "sha256": "a71c1bb0b037045b4e976a080b18f5117e35997ae69e352be2d90fa43c9e5bb6"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-375-clinica.png",
+      "sha256": "072896dd76f0176efb9c51c21634a53b33ce1c51635197eeb7a1091dafa78827"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-375-portada.png",
+      "sha256": "0da3b68f6534fc3325ab8244a6375921686ab2f6c02233d962315e1894076e92"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-375-wa.png",
+      "sha256": "9401134a395f1469779ed08592f82b6af94640c188637fdc8450e666a2abf2ef"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-real-375-web.png",
+      "sha256": "c2299216e6b7431f4d4ec73516263ca43d0065033a8a47276f3660b3a0a62067"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-recorrido.md",
+      "sha256": "5ee3595d1e764b7cdf7365097ed72aa8c7cf088ccfdb7738fa1e9f36d7bdbd91"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/03-resultados.json",
+      "sha256": "73246a68eb36e1f17aca4e23766e95c146cd18a96068d8a447cf9e0b8ff1536f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/04-archivos-entregados.json",
+      "sha256": "cfabc9499409f4cee837f8a1d96bcf592ece5a318bc494f0ecf8dbbef7cc31f6"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/04-deps.txt",
+      "sha256": "4278f0edf55b1da80b45d39af590006b3878f15e5fb2edfc079c7a648e60cf59"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/04-lint.txt",
+      "sha256": "304988bf09a1f788b32c78b724f0dbc0fab696b09c0b4f8fdd94f57b199fbffb"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/04-resultados-sandbox.json",
+      "sha256": "5affbcb53091d370b3042e24393011d589c7426b9533713021af06391d3a84a9"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/04-resultados.json",
+      "sha256": "b1aae558fa41e74be4495465af4acaca95279646b8be9e32ccf7f032ec76af95"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/04-test-sandbox.txt",
+      "sha256": "1d74469f8d1861146b545820873db8d81d6803ee0416ed0c83560f6e5db7f5d5"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/04-test.txt",
+      "sha256": "a8735c2a7b3139c50f54b1bc78e2de6a3aad725040083f9209eeca1f69fa3c35"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-antes-375.png",
+      "sha256": "743afe34577f2096694cad01fd379bad823c86f446907dce02bd44aacff17c8f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-barra-final-1280.png",
+      "sha256": "37376bfc5ea68129020ccf4c982d1d762c9e2c192d8999cd33a3bb5edf8c6d24"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-barra.md",
+      "sha256": "29144a2b9f8fe75731d1976e87b97977c3c08f0df289d5463204dca363e680d7"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-ejecucion.txt",
+      "sha256": "81ec7c212f56428f51dea9a03865e499a9d8a6ece1ac4743a6f3a3f500ee8f96"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-1280-flujoA-paso1-callcenter.png",
+      "sha256": "94f3fd93aa3a360b915351f4c5e6718fa5a9db0ee75183cc7fd6be28dd788a95"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-1280-flujoA-paso1-wa.png",
+      "sha256": "73e0ff037bdca3814ec85cec79974804dc497384093dcc30bec6dccd9250799e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-1280-flujoA-paso2-callcenter.png",
+      "sha256": "fd1ea185ae63460b2bd3a2776aee9d4c0793c81862d3caa3e34979b3dd43cdaa"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-1280-flujoA-paso2-wa.png",
+      "sha256": "9aaed421f71e4c7370e4553202f7eb3891d6e15dfa14bdc72f21ba7ed5d82530"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-1280-flujoC-paso1-app.png",
+      "sha256": "e2188ba4716058ccfc9fdd6d80125583cda90923da8580f2555e508969523265"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-1280-flujoC-paso1-wa.png",
+      "sha256": "3fcea0f5de01a0d386c361c8cf7947f397a249007c1036bfbf75aec3e5f3b3fb"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-1280-flujoC-paso2-app.png",
+      "sha256": "7ad5b933c82a559c9f6e0fb7463052b2d129991706204c5e77d552dfefd6b474"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-1280-flujoC-paso2-wa.png",
+      "sha256": "c77e8c5a7b7b326ac4d52101dec6e4481ec84759f26939cb72a339e18927ba1a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-1280-foco-wa.png",
+      "sha256": "fe75973a698c3e0d56c9be5275822a0224d812e40033cfac4702834cd955bbe9"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-375-flujoA-paso1-callcenter.png",
+      "sha256": "27ee362687b443ee08e3edcda442a9f1a66de4b66ce65ca2e555189b05476b32"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-375-flujoA-paso1-wa.png",
+      "sha256": "3c9191edfb08987f2d9073ec263e24c0bf044797892c7eb039cf9f1b07c3c147"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-375-flujoA-paso2-callcenter.png",
+      "sha256": "8c1459370dcb27c3da51cb398147d030d8caed77d54d6bbc78f61edbe5072c77"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-375-flujoA-paso2-wa.png",
+      "sha256": "3e44002d96aee1e81a90abfbb52a95dca12288cf966bb40430d20d3c473ea3ad"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-375-flujoC-paso1-app.png",
+      "sha256": "8d3bb038c60066c22213f8b4bafdb1ab947e43b7ac0c1ba53481325d7e58ebec"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-375-flujoC-paso1-wa.png",
+      "sha256": "7687868b0e393053c7897051f5a80f122432f5ccb4667d09b1485c2ddee0239e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-375-flujoC-paso2-app.png",
+      "sha256": "b34aba26edb69a892e82ea4bdf43275a3dd4f616e2a661d16bd316cdc4e13383"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-375-flujoC-paso2-wa.png",
+      "sha256": "4645f76b457c3bd4bf9748be994d79b9a3ca19e3cc9379061e40695f1ee543de"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-mock-375-foco-wa.png",
+      "sha256": "aaaf1d28df442fb5d607515c2fe24a2e3bc80d9efd6c6016e9370d3fbdef6910"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-real-1280-foco-wa.png",
+      "sha256": "1442b293a2f0ef3e3561039d29b02c985e89c0ac912d2b42037975ccb3024bf7"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-real-1280-inicial-wa.png",
+      "sha256": "e7d1fa8bc5804221a05e539a4c1c0ce927ddd8c7a009248318a0bb7b10880073"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-real-375-foco-wa.png",
+      "sha256": "1b3b2a82f7bbc18f4653f6fb49ebe79d56481843cb6347095cd33c52d972bba2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-real-375-inicial-wa.png",
+      "sha256": "e1f2ec12d6cbc1d9c5e53738a05fc762a4496f947f6628786cc379a83941dd9e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-resultados.json",
+      "sha256": "19bf85a0e2d386652fa815a0dad4c0681442c527c9d4cf919202d8fbaeaba240"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-rojo.txt",
+      "sha256": "4a9826d747bc146f70b9e819c0e166807a54311cdd913ff360539f30b1803c50"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/05-verde.txt",
+      "sha256": "9a65e280008b098dcc1660ba409a584996c3f7a60da8937a47b7aafb998ca213"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-ejecucion.txt",
+      "sha256": "11774606ca06ead723da7d34cfa76b10f97a718e0ea63048406a57ce344da7eb"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-1280-flujoA-paso1-wa.png",
+      "sha256": "baa8071c2561f7a42bf94f1cbaa22036de78403c5cbd2e630d7b3872cbade0b8"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-1280-flujoA-paso2-wa.png",
+      "sha256": "c321193ba20aa61357366c44562c296f049388267572b7828061b6697ed41d8a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-1280-flujoC-paso1-wa.png",
+      "sha256": "8bc22783641428d6eaef244578d900470a655e0b1d02dc1738a9acb283f6359c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-1280-flujoC-paso2-wa.png",
+      "sha256": "eac0df5037cbf9f427381fc51e6c639f180ae43d23e528bf70ce0f66dfe1fefa"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-1280-inicial-admin.png",
+      "sha256": "23e04f573e05721bd5add08c19f0bbf1d69d2036862f0aa457fe73552a560077"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-1280-inicial-app.png",
+      "sha256": "c61e7102bb59e40ff080c2c26e9936561a7fc886554563e96ef0244b31256c15"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-1280-inicial-bandeja.png",
+      "sha256": "88c834b25f5fdc34d2f913ee4a0e1b49093bcfc8c08d9f72c9437343f589303c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-1280-inicial-callcenter.png",
+      "sha256": "ec8939d18f58e30dab9f06c9997599c3729d9c435459c84dd4dc28404488fb4d"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-1280-inicial-clinica.png",
+      "sha256": "4d5964bbc5b07b50386cc679b32ced3337dab530b48e2718f97b18f4bd3fb3f1"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-1280-inicial-portada.png",
+      "sha256": "073544e3db1b147e6e692ca7e0457b6450af6ad902f21359a302fadd1fb067e1"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-1280-inicial-wa.png",
+      "sha256": "769156556b77e01b182d9fe112011793a7fb05b41d1b51af67227d0374e3cb7a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-1280-inicial-web.png",
+      "sha256": "408e1d56a6c8416a13dfccb8fd39f770f455f00a3ec241d508382a6daf4597cc"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-1280-navegacion-admin.png",
+      "sha256": "23e04f573e05721bd5add08c19f0bbf1d69d2036862f0aa457fe73552a560077"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-375-flujoA-paso1-wa.png",
+      "sha256": "3c9191edfb08987f2d9073ec263e24c0bf044797892c7eb039cf9f1b07c3c147"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-375-flujoA-paso2-wa.png",
+      "sha256": "3e44002d96aee1e81a90abfbb52a95dca12288cf966bb40430d20d3c473ea3ad"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-375-flujoC-paso1-wa.png",
+      "sha256": "7687868b0e393053c7897051f5a80f122432f5ccb4667d09b1485c2ddee0239e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-375-flujoC-paso2-wa.png",
+      "sha256": "4645f76b457c3bd4bf9748be994d79b9a3ca19e3cc9379061e40695f1ee543de"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-375-inicial-admin.png",
+      "sha256": "65b30a02f622cf82c75521fae42d051d34e0e516519bab69f47c7e2081df3826"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-375-inicial-app.png",
+      "sha256": "282819643b00948fb40d41220cc2dd05ca77d175f3b81c0517e9a045062e92de"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-375-inicial-bandeja.png",
+      "sha256": "244778aaeae7e97f067a0086ad986d54fc672077d9798353ba7c1c5bea1511a1"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-375-inicial-callcenter.png",
+      "sha256": "27ee362687b443ee08e3edcda442a9f1a66de4b66ce65ca2e555189b05476b32"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-375-inicial-clinica.png",
+      "sha256": "c1a7b8d0f841a53891e3092a008608442a9a85ab55b4a9e2058bf51688d7da14"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-375-inicial-portada.png",
+      "sha256": "df3b96638a924802133c65b2833135222cfd0eb851486e2a709cdf152d4a25a2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-375-inicial-wa.png",
+      "sha256": "3c9191edfb08987f2d9073ec263e24c0bf044797892c7eb039cf9f1b07c3c147"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-375-inicial-web.png",
+      "sha256": "b260fff89740c26185ce511ba0e09ba16d57a8a6b1eec0bf0bd9a372eb821940"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-mock-375-navegacion-admin.png",
+      "sha256": "a81f904078c9359834eea7455334ad6250a58e2a18c25e75d85bad1be296a3d4"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-1280-inicial-admin.png",
+      "sha256": "bfa47482472b9b4a2b160a7e3865654a755d2dd506577181504c331d17f19dc0"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-1280-inicial-app.png",
+      "sha256": "40cb713d59bd7b2762cdc231741d0d442b76ad0214bafcf44e93792aaa5b3a62"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-1280-inicial-bandeja.png",
+      "sha256": "35c0690fa4813efc23394fe66a34eb4372f8c6141d007c582c5ad7758dbe7516"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-1280-inicial-callcenter.png",
+      "sha256": "52868d2314bf362b233983a5d1fb9e75e76b8f27f6828e0486c51cd5c9d4b0c7"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-1280-inicial-clinica.png",
+      "sha256": "aa6b3e215fcc50d3a99c784205ce18f1b5b33bf87c4e896abce5c376baf69685"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-1280-inicial-portada.png",
+      "sha256": "27dca772545c97fdf38a7db3053e7bb2195238cb624ef4c582f56cafd5bd66fa"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-1280-inicial-wa.png",
+      "sha256": "70474c89c1772e4c383bad560342eeab3ff081e0ac1bf0ff13e40f45e7f6b389"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-1280-inicial-web.png",
+      "sha256": "33611bf562c45e41bef5ac7d258f59ce9045b6e1c1257ef09429a1dab67bd8b0"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-1280-navegacion-admin.png",
+      "sha256": "bfa47482472b9b4a2b160a7e3865654a755d2dd506577181504c331d17f19dc0"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-375-inicial-admin.png",
+      "sha256": "8e1538febc82262b8fb4d70a954eb59f8621307767d7b0feba79f13106a10cb4"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-375-inicial-app.png",
+      "sha256": "e4ee58bc1c21835bd7e9a2bfaaa8817da368840f2ef7d4e6f23f422eb547110e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-375-inicial-bandeja.png",
+      "sha256": "4d8d29582f2d214d6db2894169fa44098587a3f74358c093754781ab0e1e6c22"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-375-inicial-callcenter.png",
+      "sha256": "3ba4d66846463d1b4688da9420c490551f5a90f2ad641c626edda89a02452fe0"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-375-inicial-clinica.png",
+      "sha256": "8567180f98f6a28a28469c9d3fa291a1d7d478bccc0941d0be3cf3959db5ba40"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-375-inicial-portada.png",
+      "sha256": "6ec5944265f1338ed3efadb7cfd7b4ce97b8af0cc3ff7949b3733f39071a8cf2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-375-inicial-wa.png",
+      "sha256": "e1f2ec12d6cbc1d9c5e53738a05fc762a4496f947f6628786cc379a83941dd9e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-375-inicial-web.png",
+      "sha256": "114f56533d55c4ef95c21f10af6dece4ce579241d5e837685deaf8da247f0f26"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-real-375-navegacion-admin.png",
+      "sha256": "6b12c29fcc4e574ea2209af648a91b4f10ce38615b3ce5e198e800cfa11955bd"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-antes-resultados.json",
+      "sha256": "c02b472a12aebd21f86db51201fac7c90ec8f5f905837e865069e82dcd04e615"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-base-rebasada.json",
+      "sha256": "e840e15e34a0bf66a737564d31917020b9a0d3beeb363a340e4253ccfa08de20"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-base.json",
+      "sha256": "fa1f433475b17b228258447922b6da553b1d78413428538a165a4934dcce9774"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-ejecucion.txt",
+      "sha256": "8fd6e0fb4e12ee4f7f034a411c7cb50180dd956abe5196b80dcdeafcc030b94e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-1280-flujoA-paso1-wa.png",
+      "sha256": "41fe601c4441cf2c5589c5a8602cd73e06282548a2bad4762a8a0278ac7303ee"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-1280-flujoA-paso2-wa.png",
+      "sha256": "2a8fd275463d5b94804f267530f32875692794c0954a11707e4eae1d19324cee"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-1280-flujoC-paso1-wa.png",
+      "sha256": "0b2a559c914b86c4886e1e15ceb64bf3c7c34392fdc14afce5598d8782c3d709"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-1280-flujoC-paso2-wa.png",
+      "sha256": "8eedddbb7e0e931a7e15f1ef55a6d7eb3bf1f65fbb2bead40c2b75f7df23149d"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-1280-inicial-admin.png",
+      "sha256": "bb0f6b068f871ad0edd511a65818156a4066025ceae5c51fdd62c0dab13a19ac"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-1280-inicial-app.png",
+      "sha256": "c38319ea3256a39e76eaf1035d0699ea9bb2e57bbd083b0920d3403b56754006"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-1280-inicial-bandeja.png",
+      "sha256": "98451be7280f32b1e70ae5b39691c62ad6e8e509f1f5b541e334bfdf9183ad93"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-1280-inicial-callcenter.png",
+      "sha256": "282f0e91a4ad5c308f4e0d178e616ee901c191cf42c96dce3e2a1f10d3bfbf1c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-1280-inicial-clinica.png",
+      "sha256": "0e962f5e2af90907bca4ca04d2ecff802bb2f4a929acae028f52b7c1494f742a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-1280-inicial-portada.png",
+      "sha256": "287663501e8dd3f0642036b5ff4a6001c6675b2340d6c8d5db277a4b1b4d9fc8"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-1280-inicial-wa.png",
+      "sha256": "41fe601c4441cf2c5589c5a8602cd73e06282548a2bad4762a8a0278ac7303ee"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-1280-inicial-web.png",
+      "sha256": "e54e251d28fa36f13daac196dd5c6e1b94ed2054d27225339f7068ff918a74c8"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-1280-navegacion-admin.png",
+      "sha256": "bb0f6b068f871ad0edd511a65818156a4066025ceae5c51fdd62c0dab13a19ac"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-deslizar-fin-wa.png",
+      "sha256": "bc73fa5a1404ea32dc8b443bb5ab0316c439f7cea89753fb7b9fd479c694d134"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-deslizar-inicio-wa.png",
+      "sha256": "1e207e3d666cf59b2222a897883473c3c2d492cbd379ea020ef4d22a4d102be7"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-deslizar-medio-wa.png",
+      "sha256": "199ac09fec0d73463382886077b5f662a5100bf5cb0d88a88b03145659334fc3"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-flujoA-paso1-wa.png",
+      "sha256": "ba169b9f517cc857c4c7ec3dd493d0b9e9f2f2b2df678dfacac9e0ceaf7bf87f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-flujoA-paso2-wa.png",
+      "sha256": "3c5f9059895885b5db7193065bc4f279577c78bb7bdbd5220d420474765ca07a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-flujoC-paso1-wa.png",
+      "sha256": "9ecd9cf61e4cb75417ecdd9e68e92b0a7a796f079ebec1dcbd1a5304d626d7ac"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-flujoC-paso2-wa.png",
+      "sha256": "288af1f39b78f38563d8bcc7348383fd89245e0f3c54d821f29e20eb7ee66684"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-inicial-admin.png",
+      "sha256": "167b6645fef04ce55162709eb015d495d0ffdb26a94972dc8ec8960362aa2699"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-inicial-app.png",
+      "sha256": "b5d8fb4fa716002cd949a9b7f5e8a5d16f3e9e57199616a06950abad5c7e743b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-inicial-bandeja.png",
+      "sha256": "4814f6400f5b1d222f0f27f70984ccc00fa37a312327e51f80292dd2f66331f3"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-inicial-callcenter.png",
+      "sha256": "fc799e657a26550899c1afd52d84cdb7221de4233a5e07bd13d8bcbc31e82f1c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-inicial-clinica.png",
+      "sha256": "0b69f59e06257c3572d96e833dd0d166a2c583dcc426d9949d2c177b6d94e85b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-inicial-portada.png",
+      "sha256": "15faa6c6121c0f8afc8da4cd0d8977042d3ac7057a99824198e619ade2b332ba"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-inicial-wa.png",
+      "sha256": "727a11821b386738a7a6e120ed8f9bd65799fafd45e4a716f83f0e6802360f42"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-inicial-web.png",
+      "sha256": "68b7247d13ba463f75120ee70a0a451b928e889824c6f5b26ca2276b71939341"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-375-navegacion-admin.png",
+      "sha256": "f1197775b487f10db99610ebeb7cbe9da8b92913aaac50e458178e005a8ce308"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-mock-767-canales-sin-desbordamiento-wa.png",
+      "sha256": "636d0dc378130a4f08354fef2faf72b6e5df6c369af56775f4544518f8051223"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-1280-inicial-admin.png",
+      "sha256": "782bb3b071df31c6f245af9658d99eff62497a78570f82855ee8d8a9d733cc0b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-1280-inicial-app.png",
+      "sha256": "bb15d80f9de0d228a8bdd7feb7ca8b42c4cf78e7559ae8273428a2eaa15a5a2c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-1280-inicial-bandeja.png",
+      "sha256": "9e5cf5a450353d2258711a0ce9b84122a1ca3f929749811e66074a9bed7a96ce"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-1280-inicial-callcenter.png",
+      "sha256": "6c658864911431316cb215eeede47090c5bddae61dd407a992cc05ea48b17f6f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-1280-inicial-clinica.png",
+      "sha256": "02adf2f5f156c103ea39549d0b6f57302d134a73181e5d99d7c00cb76649814f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-1280-inicial-portada.png",
+      "sha256": "5b90d6aca7c89e40221c85a1230cb89a17fceca93ddd7b2ddc96e4b6d3d2b915"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-1280-inicial-wa.png",
+      "sha256": "2fedcc72828f365e6eb02642bcd88aac5dbe10e02f7a08dbaa4b8db9926da894"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-1280-inicial-web.png",
+      "sha256": "01c3b22c8eb8937069583f3e1bb51611160fa25f9bf29e168cb13aa85c51c872"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-1280-navegacion-admin.png",
+      "sha256": "782bb3b071df31c6f245af9658d99eff62497a78570f82855ee8d8a9d733cc0b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-375-deslizar-fin-wa.png",
+      "sha256": "6aa6a14234341e2b2cdda8e9aad59131c18d4707310bddbb989a0142fcfb2d1e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-375-deslizar-inicio-wa.png",
+      "sha256": "55316767a706078a3203522c66b5217e114d767c8a4d6b74ee19242bdc8d3b67"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-375-deslizar-medio-wa.png",
+      "sha256": "0b6c676ff008a319ce9e2d3eca7f7ee476a09accbb3389c63ecb510b16b01d35"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-375-inicial-admin.png",
+      "sha256": "dd53a42786d97d34c408e55b57dfaac673e02cc6f4245b86283e8827cba345d2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-375-inicial-app.png",
+      "sha256": "e08c7eda0f509797c69273538160cc3d51f364e73a86c2889e525b31ea8512c4"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-375-inicial-bandeja.png",
+      "sha256": "b2b3a405fa7328afd092816f223b62f6c2a48ba259a646137db288bdfe133a1f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-375-inicial-callcenter.png",
+      "sha256": "602ffa2843c115e5315e8019acd4677caad1e599c3e4d03edab5693cf68ffb4f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-375-inicial-clinica.png",
+      "sha256": "60fbb270d2d3302922286b679a9a0de9c0e14fa74173389b72b7bf9a76da5763"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-375-inicial-portada.png",
+      "sha256": "5d62fd4c8077f9ce50972a94010146b40d693c30b3c62d0ae4e31b4f1e903de3"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-375-inicial-wa.png",
+      "sha256": "91bc74a05010711d17dd04f7e262bded24c543f83e0d91afc29fb8a0ec9fd9c4"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-375-inicial-web.png",
+      "sha256": "d728da578373e423ab67924cc56b3b76cd8089ebc60ba348217dfacf2d8daea0"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-375-navegacion-admin.png",
+      "sha256": "6917dd4f00ad8d17b536168d8696b5712573b97731b4a724b096f128e88b4612"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-real-767-canales-sin-desbordamiento-wa.png",
+      "sha256": "da8c10734872022e3ec09dec48b75030d381ecc145480ccff749ad4d4e2fa15e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-despues-resultados.json",
+      "sha256": "fd01eb88ae5fc844eb0d86b38918bb0858f6e162fb334b847c5b081aac446239"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-presentacion.md",
+      "sha256": "98e12fcde32e2d9703decd63eb55def52c4e0aba5e4dff23b31cc5ea9ea9556e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-producto-final-rebasado.json",
+      "sha256": "e3a2bcd0162a93dbcccb6c2e0b72450fe6bf2cd7544348255cb90e31ab713963"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-regresion.txt",
+      "sha256": "0bf3ec7ad388e7b5ce4b45cecba38fe9418437fb6d7833e19e75ab28ee03c6fa"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-rojo.txt",
+      "sha256": "5b730c8df5eac783fd883b09b4f3f37e708680b3847bc6e2d1ead41e8254c3dc"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-solo-presentacion.json",
+      "sha256": "b07f4738b74240205e48903c9b6ee22d4d3b794e9429a83417a47b2ca48d0398"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-verde-carga.txt",
+      "sha256": "1dd308a737ae03856aa3acb90653e6f0b9907863eb4b3896c8733d69e039ddc5"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-verde.txt",
+      "sha256": "5213663690089bf40569f073219da55a21ae385d4a6da269931412dd55d6f7fa"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/06-wip-antes-rebase.patch",
+      "sha256": "b5c27cf90410252189ea55503ff72bec8258fbb8808bedac2bb2df56144b2e89"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-ejecucion.txt",
+      "sha256": "c37a6328088f48da773154db7f785bf07cb7aa5d6ef23c3ed25fe485fc184303"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-1280-flujoA-llegada-clinica.png",
+      "sha256": "6e97a668d8a4f2ba3892e56974892021c04b43633d7de3291a273ef3aee7f1a3"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-1280-flujoC-cancelada-app.png",
+      "sha256": "df5f8ce6a3f441f2809bf4fafa969bdc05b54f283e439c42b005749034575a49"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-1280-flujoC-logros-admin.png",
+      "sha256": "4b2462eb73533fb1aacf72e0babff58f3e900cb79d7d15e3fcc7be3b474b28b6"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-1280-flujoC-pendiente-app.png",
+      "sha256": "1e32998f14c6cebb136791fdc8a00713b8d2954b91cb8e889c80a87d89b47c75"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-1280-inicial-admin.png",
+      "sha256": "b534d4ffef16d0643af13405f3e743f3d0821ff5002c81c10aa46017818771da"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-1280-inicial-app.png",
+      "sha256": "c38319ea3256a39e76eaf1035d0699ea9bb2e57bbd083b0920d3403b56754006"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-1280-inicial-bandeja.png",
+      "sha256": "98451be7280f32b1e70ae5b39691c62ad6e8e509f1f5b541e334bfdf9183ad93"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-1280-inicial-callcenter.png",
+      "sha256": "8486efde7275c468c422e7e165a7abe509694639350233660a992363241dda67"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-1280-inicial-clinica.png",
+      "sha256": "0e962f5e2af90907bca4ca04d2ecff802bb2f4a929acae028f52b7c1494f742a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-1280-inicial-portada.png",
+      "sha256": "646f20de973a6bba17a8924b3af3473e1bffa89d9bf0ff08abe824ae2545cec8"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-1280-inicial-wa.png",
+      "sha256": "7c024cfc59672979891305dd0638cc2a7ae0017ccde7711d0593a1595eeaf431"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-1280-inicial-web.png",
+      "sha256": "e54e251d28fa36f13daac196dd5c6e1b94ed2054d27225339f7068ff918a74c8"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-375-flujoA-llegada-clinica.png",
+      "sha256": "398dd8c137f6af45a5f4322656ebf55e5500aa007ba0f9c96c3e3cd53fc5e61e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-375-flujoC-cancelada-app.png",
+      "sha256": "dd2b45e9c7b7403d9806ecdf9c3b76822962a57b3c928f291d2781a40134ac2e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-375-flujoC-logros-admin.png",
+      "sha256": "29a5eba9e97094e54d07f292134a774694247a5d4e30d4ea3b4ce77469e9fa9b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-375-flujoC-pendiente-app.png",
+      "sha256": "c4ae6c9aaecc09b1597225b8e3d9a89597d9b125dd930c9997bfd3beedb2b1ec"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-375-inicial-admin.png",
+      "sha256": "167b6645fef04ce55162709eb015d495d0ffdb26a94972dc8ec8960362aa2699"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-375-inicial-app.png",
+      "sha256": "b5d8fb4fa716002cd949a9b7f5e8a5d16f3e9e57199616a06950abad5c7e743b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-375-inicial-bandeja.png",
+      "sha256": "4814f6400f5b1d222f0f27f70984ccc00fa37a312327e51f80292dd2f66331f3"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-375-inicial-callcenter.png",
+      "sha256": "fc799e657a26550899c1afd52d84cdb7221de4233a5e07bd13d8bcbc31e82f1c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-375-inicial-clinica.png",
+      "sha256": "0b69f59e06257c3572d96e833dd0d166a2c583dcc426d9949d2c177b6d94e85b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-375-inicial-portada.png",
+      "sha256": "130eaeff6c91b0e666932f0459362f9d0fb58de2fc750db6f84d4a34d5dc64d7"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-375-inicial-wa.png",
+      "sha256": "727a11821b386738a7a6e120ed8f9bd65799fafd45e4a716f83f0e6802360f42"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-mock-375-inicial-web.png",
+      "sha256": "68b7247d13ba463f75120ee70a0a451b928e889824c6f5b26ca2276b71939341"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-1280-cancelacion-local-app.png",
+      "sha256": "7d1560f89db6997052dcbdeb48a77df41fa5cfe888b4e57ec222e9886f5c71ef"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-1280-inicial-admin.png",
+      "sha256": "a68f08aa0d13e4fa2340d1e4e3a63c06b3842512fba6aa31760f628b7c4c1a2a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-1280-inicial-app.png",
+      "sha256": "7d1560f89db6997052dcbdeb48a77df41fa5cfe888b4e57ec222e9886f5c71ef"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-1280-inicial-bandeja.png",
+      "sha256": "9e5cf5a450353d2258711a0ce9b84122a1ca3f929749811e66074a9bed7a96ce"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-1280-inicial-callcenter.png",
+      "sha256": "6c658864911431316cb215eeede47090c5bddae61dd407a992cc05ea48b17f6f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-1280-inicial-clinica.png",
+      "sha256": "76ee320cf8abe5c3c95daa1f37a23f9c5037d5584be9ddfe9e1e870ca8f5b356"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-1280-inicial-portada.png",
+      "sha256": "5b90d6aca7c89e40221c85a1230cb89a17fceca93ddd7b2ddc96e4b6d3d2b915"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-1280-inicial-wa.png",
+      "sha256": "5518f207debe03c49612cf436ea5d29ee7aded5480fddbff5a5a0337917ca4db"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-1280-inicial-web.png",
+      "sha256": "0f1f5103f37f3a5bbeadcd51af5c5183d3e909f22942aa98268417e58a1e1c0e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-1280-llegada-local-clinica.png",
+      "sha256": "76ee320cf8abe5c3c95daa1f37a23f9c5037d5584be9ddfe9e1e870ca8f5b356"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-1280-logros-local-admin.png",
+      "sha256": "82f6e2151115c70d063e1cb3f327d52ab5abdd6f00ca5961bd456cdfae7e7e81"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-375-cancelacion-local-app.png",
+      "sha256": "0bff1e74279fc63171236b867797d97fd3a34c65dfc64fb446a531faec6fa9d1"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-375-inicial-admin.png",
+      "sha256": "230c452f0bab0e319fb290cb4a793524046d43523803ad94283b8a2f141c6540"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-375-inicial-app.png",
+      "sha256": "0bff1e74279fc63171236b867797d97fd3a34c65dfc64fb446a531faec6fa9d1"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-375-inicial-bandeja.png",
+      "sha256": "b2b3a405fa7328afd092816f223b62f6c2a48ba259a646137db288bdfe133a1f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-375-inicial-callcenter.png",
+      "sha256": "602ffa2843c115e5315e8019acd4677caad1e599c3e4d03edab5693cf68ffb4f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-375-inicial-clinica.png",
+      "sha256": "d7f413d3e34bd0fe250a8e3aee890e17f8fdb3ae2fae9e960af8904f2fe87e68"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-375-inicial-portada.png",
+      "sha256": "75d537069b5e5e5a839040b06f74b8c528896b4fc74c5c248962ae056db8be8d"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-375-inicial-wa.png",
+      "sha256": "91bc74a05010711d17dd04f7e262bded24c543f83e0d91afc29fb8a0ec9fd9c4"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-375-inicial-web.png",
+      "sha256": "7f2b2e4aadbb9b5f7baf18a8b87959d022f12cc212c4a100a3a6be5622483038"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-375-llegada-local-clinica.png",
+      "sha256": "d7f413d3e34bd0fe250a8e3aee890e17f8fdb3ae2fae9e960af8904f2fe87e68"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-real-375-logros-local-admin.png",
+      "sha256": "3065005bc7b17f69dff8ffeef652ec046b2656f8c95d751fe829fab520220481"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-antes-resultados.json",
+      "sha256": "9fe7e3170b6737912e5b53b3e504765a1cc82c046145a0f468516e3c51c98ef0"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-base.json",
+      "sha256": "6cd959706c4fcd922d166f622f1817e1c43c4e4a62b14f54d5fddbe0f0c1d664"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-captura-selector.txt",
+      "sha256": "cb8588cbe5e1d0de41d69d00460783a78a1b97b2918021a4ea36194cc0b5a2ba"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-control-entrega.mjs",
+      "sha256": "64874d6dae194051993cd90741bcca330d5ef9da91c7c3c90e44cf9e819a5cbf"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-controles-base-vigente.json",
+      "sha256": "8e3b88b158c89c06563cb089d5c8f17900346bc368775904b8d6a693275d53b6"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-controles-ejecutor.json",
+      "sha256": "08f04fa64e3cf4e4732e968c34d90a8b896c844b31ca0af16815774a742c535a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-controles-primer-intento.json",
+      "sha256": "dc6564c1d58edda288a083d9a240514e0fe65e3c3f00e3b77e1287aa62a54bf2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-ejecucion.txt",
+      "sha256": "ee6c2d3a7fa536d1ba0e3f889daddff364eeaa2cf7c105a638d78839b4fb2ea2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-1280-flujoA-llegada-clinica.png",
+      "sha256": "48a9b68778104687194b9217ee1be95c09b23d00471e596d35521520cc565864"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-1280-flujoC-cancelada-app.png",
+      "sha256": "900a920bf6cd5a4f04fc68f3666e573441e5cc820bb6292dbee95cdb63df0bb5"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-1280-flujoC-logros-admin.png",
+      "sha256": "7689252c9e349ec6b34390c78ab37a45eb50dd7e4250408c1d86b4494364f754"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-1280-flujoC-pendiente-app.png",
+      "sha256": "fd78ab6410c68ef96e23ef6705ca0f43b0028e27c470d244fa7171b9895e1798"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-1280-inicial-admin.png",
+      "sha256": "0d68db06a936581b563db0c3eaffeeafa3509436795dcccd32b2fe7565e62b55"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-1280-inicial-app.png",
+      "sha256": "0c812439b673bdf130645c21ed9f456f2d1cda0ce05bda82c5935dab5c25e554"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-1280-inicial-bandeja.png",
+      "sha256": "3b78513b4fe3f6ecc47ef7720109b9404b1eca21c24b3be20e3da6c60bf6dc12"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-1280-inicial-callcenter.png",
+      "sha256": "114c9cfffb8d16f9458a527e2569173beed98fda4c5175b6122aa8c846a1db7e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-1280-inicial-clinica.png",
+      "sha256": "60784e7e4c585150ae84b20a481a0d3dbd4aa1ced2a4ddd21aceabc6b5636757"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-1280-inicial-portada.png",
+      "sha256": "671d607f2b5decd01747d36249a63f169b426f6393e863a9943866a67575cd35"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-1280-inicial-wa.png",
+      "sha256": "10b993b471b6fad6704adfe948cc7b72e6ab519a4f70b0793a39194dc4cc1b2f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-1280-inicial-web.png",
+      "sha256": "d9d25497b88c6c5e5bad6967746a69f031053397e167c148b0f16dc2675eb642"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-375-flujoA-llegada-clinica.png",
+      "sha256": "f843e843af2066a20c7e3b5de1e0cb37e151b91e331f3d809294c77aeea76eb6"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-375-flujoC-cancelada-app.png",
+      "sha256": "7ce940ac09f730b34d69916ca3cce3431b27adf3a2c412dde160fc30dfdd7c81"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-375-flujoC-logros-admin.png",
+      "sha256": "0f65fdb7991cc355de0cf67b60f25f7da2beebd89be81b19eaca1abbe7b738a3"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-375-flujoC-pendiente-app.png",
+      "sha256": "c4ae6c9aaecc09b1597225b8e3d9a89597d9b125dd930c9997bfd3beedb2b1ec"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-375-inicial-admin.png",
+      "sha256": "9b683a47366646c9dc71ba696bf37b5065a72744cf3b24d37c5121dce108ae63"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-375-inicial-app.png",
+      "sha256": "cccf4348ff9b1a32e792508f8b8ecdbbb339dd2fd93a4f32ab02322df067d257"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-375-inicial-bandeja.png",
+      "sha256": "5285dd2155a1dd9016a730670f71c2f483078204b5ff080cc293ae25db12f83c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-375-inicial-callcenter.png",
+      "sha256": "0a9cc19290f2b668fb0e3610b5eabea45ca72170276159319628aba8552edf8b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-375-inicial-clinica.png",
+      "sha256": "82e8b155f8489c20531c001b2a13c304e6c4b12c3b4e5a329aa82677190f1036"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-375-inicial-portada.png",
+      "sha256": "00da41aa39384d9ffef5f4e095d507f08b6b884e676109ded34e8a79c43ac869"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-375-inicial-wa.png",
+      "sha256": "951765a52fa2f8ab65c9247e30f0ed0eebea4cb1c473021c84d3b55c3b4fb579"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-mock-375-inicial-web.png",
+      "sha256": "d98ddae60fe523d858228014e1161ef0e5d733ac7f52a3038c3cb03d3bb05fa8"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-1280-cancelacion-local-app.png",
+      "sha256": "06f8378cf8ea37a7965bc2fb5a266727da7f26c69781ad03a2a35770fdfd1f14"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-1280-inicial-admin.png",
+      "sha256": "6da8fb289c108e3d1d3c6ae4bda9d9c59a8ac47d41b667fa73d912e22bf8bad2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-1280-inicial-app.png",
+      "sha256": "06f8378cf8ea37a7965bc2fb5a266727da7f26c69781ad03a2a35770fdfd1f14"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-1280-inicial-bandeja.png",
+      "sha256": "a3798f10d4cc8cd494530325ab96f4cc1c5cc0ccde9302a6852667823ffd8ed3"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-1280-inicial-callcenter.png",
+      "sha256": "f1a667edd6e30062f516a4a6721113ed85eaaaf2884016bc904d5f94ddd0808c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-1280-inicial-clinica.png",
+      "sha256": "804c385c7e1a911896924245dffa193b16dc80afa331baf54805bb5800c935f9"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-1280-inicial-portada.png",
+      "sha256": "6542fb04fe4c9a344b494160e9959c89a5db954b48587805f2d479e0779da781"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-1280-inicial-wa.png",
+      "sha256": "a19e9bb591d6964a387409504196d68f733f9839d45747cfde5f723864767f5d"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-1280-inicial-web.png",
+      "sha256": "1ba26aef5bc281a7b20495b785092fa0a546d0d889acaa7b50b915ccb5ce6561"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-1280-llegada-local-clinica.png",
+      "sha256": "804c385c7e1a911896924245dffa193b16dc80afa331baf54805bb5800c935f9"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-1280-logros-local-admin.png",
+      "sha256": "82f6e2151115c70d063e1cb3f327d52ab5abdd6f00ca5961bd456cdfae7e7e81"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-375-cancelacion-local-app.png",
+      "sha256": "d108098b305ffea069041cd6718303afb241ba79c795188d81231a758169b4e0"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-375-inicial-admin.png",
+      "sha256": "93eb4d28ec50653266f8410262167aa48d00b1fe8bb714037c377fe71d8de611"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-375-inicial-app.png",
+      "sha256": "d108098b305ffea069041cd6718303afb241ba79c795188d81231a758169b4e0"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-375-inicial-bandeja.png",
+      "sha256": "d09dba2a0756a1a14bd71648b67a7fa8703ea6594880fab65005b750e8204628"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-375-inicial-callcenter.png",
+      "sha256": "7faa5984368aa7921a35051955bfc99ce0ccacf29241259700ef9a8f1801b970"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-375-inicial-clinica.png",
+      "sha256": "a586857b2cdf08715320759461b7362fbe1e6e387686aa4a4f858a9e43c07c47"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-375-inicial-portada.png",
+      "sha256": "d2855719ea1c121e22cc566f6801a1f16c3da8ca38ca40660d6c6912b618d33f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-375-inicial-wa.png",
+      "sha256": "17cdbf30cbbe499a852771eca82eea74e2a7ecc21616bb5695162bd6aa8e69be"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-375-inicial-web.png",
+      "sha256": "f16d05a7a6757bfbede8fe22f63a4a2f03bfe988d84a5fdc89977cca88657462"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-375-llegada-local-clinica.png",
+      "sha256": "a586857b2cdf08715320759461b7362fbe1e6e387686aa4a4f858a9e43c07c47"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-real-375-logros-local-admin.png",
+      "sha256": "3065005bc7b17f69dff8ffeef652ec046b2656f8c95d751fe829fab520220481"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-despues-resultados.json",
+      "sha256": "4c6c708a1c279e7821c426f5642bc04b6ade7e89a4adc5f8175935c9a1e263e2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-lint-base-vigente.txt",
+      "sha256": "304988bf09a1f788b32c78b724f0dbc0fab696b09c0b4f8fdd94f57b199fbffb"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-lint-ejecutor.txt",
+      "sha256": "d938fd58c4327558c916b050c82d10893831f57a82759f573a7d632d0d745470"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-lint-primer-intento.txt",
+      "sha256": "2be1dea059dd97ea1b1e1bce86912434b0c01fb72b3b89e35e00db94ad5f3cc6"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-lint-web.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-real-contexto.json",
+      "sha256": "5a249ef65a7cccd628c78fc069ab45108a310b45c23c9fa1bce27d35895496d2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-rojo.txt",
+      "sha256": "b2a90e5ecbbef2faa090b2629c97600b8d5cc8da0895074c5ca7e2ca81dc7fa8"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-solo-presentacion.json",
+      "sha256": "fbd0b73ae1c48df4cbd3d33a7168c325b715223b85d8f55500cd5bc219b919d3"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-typecheck-web.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-validacion-web.json",
+      "sha256": "7f3748ed3d18b6caa2e1e34cb3ab3e4fba61e4d52f7d7060a47916b2000dc5e6"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-verde.md",
+      "sha256": "7030573e8eac6679eb911839f21d517f80c26d3f63aa747b25ab2e8b8a1a43e4"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/07-web.txt",
+      "sha256": "6de0988cf698b6f66960d39965d71b73904ac357150472b30d7b7f73c2b22719"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/08-subida-deps.txt",
+      "sha256": "4278f0edf55b1da80b45d39af590006b3878f15e5fb2edfc079c7a648e60cf59"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/08-subida-eslint.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/08-subida-resultados.json",
+      "sha256": "0400d9be26fbc19a49c2e2a420d2b3c76f153b0da308573bbe00e6f20a567c18"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/08-subida-web.txt",
+      "sha256": "af35876d6eba85f7a243c1172515ec7a8c05e094f1b60f3a5c0046582a42fa81"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-3/04-archivos-entregados.json",
+      "sha256": "38801bcc72ac8c5ea1c203f0025abbadade4c1dda1e8e886a415731d2ddd9b9a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-3/04-deps.txt",
+      "sha256": "cff4676ba4e55fc292723a458665b07eb62e08af4f77f351cbbc28d11538879c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-3/04-lint.txt",
+      "sha256": "73cf4da840094ad8025c48298367fe143265bef93a891900cf8d572babeaae46"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-3/04-resultados-sandbox.json",
+      "sha256": "5affbcb53091d370b3042e24393011d589c7426b9533713021af06391d3a84a9"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-3/04-resultados.json",
+      "sha256": "0facb480dfeb6fe6d9d1e50c3deb69b3fc350f3e707bedf917d208e64e9f0cfc"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-3/04-test-sandbox.txt",
+      "sha256": "1d74469f8d1861146b545820873db8d81d6803ee0416ed0c83560f6e5db7f5d5"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-3/04-test.txt",
+      "sha256": "39399165fd6b84d52a73c9b9251420b045a87429929a19e9ac102a815efde345"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-3/implementacion.md",
+      "sha256": "5c8e2539761db232b2153ed27e4ab032836ea66c448cca7290d92736988cdd58"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-4/04-archivos-entregados.json",
+      "sha256": "bd3fbf48e8d6ec8d9e2591edc68195daa729956f7874f8be70d864f380dacab9"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-4/04-deps.txt",
+      "sha256": "cca744fd1cfeb8dc0aafd3b30a7699b8058a514d8b4a7a822d7243a8dfe45858"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-4/04-lint.txt",
+      "sha256": "73cf4da840094ad8025c48298367fe143265bef93a891900cf8d572babeaae46"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-4/04-resultados-sandbox.json",
+      "sha256": "5affbcb53091d370b3042e24393011d589c7426b9533713021af06391d3a84a9"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-4/04-resultados.json",
+      "sha256": "d8bf59949a85854de3b0d4c890917e519566955de7b8eefa291a477c65c34678"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-4/04-test-sandbox.txt",
+      "sha256": "1d74469f8d1861146b545820873db8d81d6803ee0416ed0c83560f6e5db7f5d5"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-4/04-test.txt",
+      "sha256": "b37ab1d937180294baa1e888b165c35d6867836c782092d41356dc4aaec2e7e3"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-4/implementacion.md",
+      "sha256": "5546d28ba3795865a2fd6246af909ac377fed65d3704c91ae62759ab7024989c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-5-base-inicial/04-deps.txt",
+      "sha256": "4278f0edf55b1da80b45d39af590006b3878f15e5fb2edfc079c7a648e60cf59"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-5-base-inicial/04-lint.txt",
+      "sha256": "73cf4da840094ad8025c48298367fe143265bef93a891900cf8d572babeaae46"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-5-base-inicial/04-resultados.json",
+      "sha256": "ebeb1b8432899733570b8a6df15b5cbb9a3cc57db23b3ba3216661ce67fb3f45"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-5-base-inicial/04-test.txt",
+      "sha256": "8f4517a1f1e804ac9447df5e8b997fd1e68b895ab63cb068f0ac0a57dd6894b9"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/ajuste-5-base-inicial/07-web.txt",
+      "sha256": "9608a140a36d01c99f5042b6a214ead6a02c8db4361c34c9f6607803e27c5457"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/barra.mjs",
+      "sha256": "f638b68b6456a006e057919e21e07d1f9be0158b698dbdd5cf00087bccc103d3"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/04-archivos-entregados.json",
+      "sha256": "38801bcc72ac8c5ea1c203f0025abbadade4c1dda1e8e886a415731d2ddd9b9a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/04-deps.txt",
+      "sha256": "b7bca836c9b64578582b4bca6045ac519f291741818812f9739574acbfa5248e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/04-lint.txt",
+      "sha256": "73cf4da840094ad8025c48298367fe143265bef93a891900cf8d572babeaae46"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/04-resultados-sandbox.json",
+      "sha256": "5affbcb53091d370b3042e24393011d589c7426b9533713021af06391d3a84a9"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/04-resultados.json",
+      "sha256": "62df2e615eccf2ff84065cf3a1a7b40fad29924e7adbe781a72d0f4491477913"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/04-test-sandbox.txt",
+      "sha256": "1d74469f8d1861146b545820873db8d81d6803ee0416ed0c83560f6e5db7f5d5"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/04-test.txt",
+      "sha256": "0b1d554c945b4e38b6f5054e0628f6f4afd8140ff017e504fcf197531f7c6209"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-ejecucion.txt",
+      "sha256": "11774606ca06ead723da7d34cfa76b10f97a718e0ea63048406a57ce344da7eb"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-1280-flujoA-paso1-wa.png",
+      "sha256": "baa8071c2561f7a42bf94f1cbaa22036de78403c5cbd2e630d7b3872cbade0b8"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-1280-flujoA-paso2-wa.png",
+      "sha256": "c321193ba20aa61357366c44562c296f049388267572b7828061b6697ed41d8a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-1280-flujoC-paso1-wa.png",
+      "sha256": "8bc22783641428d6eaef244578d900470a655e0b1d02dc1738a9acb283f6359c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-1280-flujoC-paso2-wa.png",
+      "sha256": "eac0df5037cbf9f427381fc51e6c639f180ae43d23e528bf70ce0f66dfe1fefa"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-1280-inicial-admin.png",
+      "sha256": "23e04f573e05721bd5add08c19f0bbf1d69d2036862f0aa457fe73552a560077"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-1280-inicial-app.png",
+      "sha256": "c61e7102bb59e40ff080c2c26e9936561a7fc886554563e96ef0244b31256c15"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-1280-inicial-bandeja.png",
+      "sha256": "88c834b25f5fdc34d2f913ee4a0e1b49093bcfc8c08d9f72c9437343f589303c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-1280-inicial-callcenter.png",
+      "sha256": "ec8939d18f58e30dab9f06c9997599c3729d9c435459c84dd4dc28404488fb4d"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-1280-inicial-clinica.png",
+      "sha256": "4d5964bbc5b07b50386cc679b32ced3337dab530b48e2718f97b18f4bd3fb3f1"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-1280-inicial-portada.png",
+      "sha256": "073544e3db1b147e6e692ca7e0457b6450af6ad902f21359a302fadd1fb067e1"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-1280-inicial-wa.png",
+      "sha256": "769156556b77e01b182d9fe112011793a7fb05b41d1b51af67227d0374e3cb7a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-1280-inicial-web.png",
+      "sha256": "408e1d56a6c8416a13dfccb8fd39f770f455f00a3ec241d508382a6daf4597cc"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-1280-navegacion-admin.png",
+      "sha256": "23e04f573e05721bd5add08c19f0bbf1d69d2036862f0aa457fe73552a560077"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-375-flujoA-paso1-wa.png",
+      "sha256": "3c9191edfb08987f2d9073ec263e24c0bf044797892c7eb039cf9f1b07c3c147"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-375-flujoA-paso2-wa.png",
+      "sha256": "3e44002d96aee1e81a90abfbb52a95dca12288cf966bb40430d20d3c473ea3ad"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-375-flujoC-paso1-wa.png",
+      "sha256": "7687868b0e393053c7897051f5a80f122432f5ccb4667d09b1485c2ddee0239e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-375-flujoC-paso2-wa.png",
+      "sha256": "4645f76b457c3bd4bf9748be994d79b9a3ca19e3cc9379061e40695f1ee543de"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-375-inicial-admin.png",
+      "sha256": "65b30a02f622cf82c75521fae42d051d34e0e516519bab69f47c7e2081df3826"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-375-inicial-app.png",
+      "sha256": "282819643b00948fb40d41220cc2dd05ca77d175f3b81c0517e9a045062e92de"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-375-inicial-bandeja.png",
+      "sha256": "244778aaeae7e97f067a0086ad986d54fc672077d9798353ba7c1c5bea1511a1"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-375-inicial-callcenter.png",
+      "sha256": "27ee362687b443ee08e3edcda442a9f1a66de4b66ce65ca2e555189b05476b32"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-375-inicial-clinica.png",
+      "sha256": "c1a7b8d0f841a53891e3092a008608442a9a85ab55b4a9e2058bf51688d7da14"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-375-inicial-portada.png",
+      "sha256": "df3b96638a924802133c65b2833135222cfd0eb851486e2a709cdf152d4a25a2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-375-inicial-wa.png",
+      "sha256": "3c9191edfb08987f2d9073ec263e24c0bf044797892c7eb039cf9f1b07c3c147"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-375-inicial-web.png",
+      "sha256": "b260fff89740c26185ce511ba0e09ba16d57a8a6b1eec0bf0bd9a372eb821940"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-mock-375-navegacion-admin.png",
+      "sha256": "a81f904078c9359834eea7455334ad6250a58e2a18c25e75d85bad1be296a3d4"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-1280-inicial-admin.png",
+      "sha256": "bfa47482472b9b4a2b160a7e3865654a755d2dd506577181504c331d17f19dc0"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-1280-inicial-app.png",
+      "sha256": "40cb713d59bd7b2762cdc231741d0d442b76ad0214bafcf44e93792aaa5b3a62"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-1280-inicial-bandeja.png",
+      "sha256": "35c0690fa4813efc23394fe66a34eb4372f8c6141d007c582c5ad7758dbe7516"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-1280-inicial-callcenter.png",
+      "sha256": "52868d2314bf362b233983a5d1fb9e75e76b8f27f6828e0486c51cd5c9d4b0c7"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-1280-inicial-clinica.png",
+      "sha256": "aa6b3e215fcc50d3a99c784205ce18f1b5b33bf87c4e896abce5c376baf69685"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-1280-inicial-portada.png",
+      "sha256": "27dca772545c97fdf38a7db3053e7bb2195238cb624ef4c582f56cafd5bd66fa"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-1280-inicial-wa.png",
+      "sha256": "70474c89c1772e4c383bad560342eeab3ff081e0ac1bf0ff13e40f45e7f6b389"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-1280-inicial-web.png",
+      "sha256": "3fe91a1569e240c1cfc37a9fce86c5d219dfdc26688b41d324eec1eb6a6b45d4"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-1280-navegacion-admin.png",
+      "sha256": "bfa47482472b9b4a2b160a7e3865654a755d2dd506577181504c331d17f19dc0"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-375-inicial-admin.png",
+      "sha256": "8e1538febc82262b8fb4d70a954eb59f8621307767d7b0feba79f13106a10cb4"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-375-inicial-app.png",
+      "sha256": "e4ee58bc1c21835bd7e9a2bfaaa8817da368840f2ef7d4e6f23f422eb547110e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-375-inicial-bandeja.png",
+      "sha256": "4d8d29582f2d214d6db2894169fa44098587a3f74358c093754781ab0e1e6c22"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-375-inicial-callcenter.png",
+      "sha256": "3ba4d66846463d1b4688da9420c490551f5a90f2ad641c626edda89a02452fe0"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-375-inicial-clinica.png",
+      "sha256": "8567180f98f6a28a28469c9d3fa291a1d7d478bccc0941d0be3cf3959db5ba40"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-375-inicial-portada.png",
+      "sha256": "6ec5944265f1338ed3efadb7cfd7b4ce97b8af0cc3ff7949b3733f39071a8cf2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-375-inicial-wa.png",
+      "sha256": "e1f2ec12d6cbc1d9c5e53738a05fc762a4496f947f6628786cc379a83941dd9e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-375-inicial-web.png",
+      "sha256": "fd1e5daa1ff78d6dc3785b9d2dcb021883fd9037b3853aaed8bda472d50644d2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-real-375-navegacion-admin.png",
+      "sha256": "6b12c29fcc4e574ea2209af648a91b4f10ce38615b3ce5e198e800cfa11955bd"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-antes-resultados.json",
+      "sha256": "0a179f010fd5d5e733ac0f7d618517d9699d1a4f0c3c483a263a3889621fe03f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-base.json",
+      "sha256": "fa1f433475b17b228258447922b6da553b1d78413428538a165a4934dcce9774"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-ejecucion.txt",
+      "sha256": "8fd6e0fb4e12ee4f7f034a411c7cb50180dd956abe5196b80dcdeafcc030b94e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-1280-flujoA-paso1-wa.png",
+      "sha256": "41fe601c4441cf2c5589c5a8602cd73e06282548a2bad4762a8a0278ac7303ee"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-1280-flujoA-paso2-wa.png",
+      "sha256": "2a8fd275463d5b94804f267530f32875692794c0954a11707e4eae1d19324cee"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-1280-flujoC-paso1-wa.png",
+      "sha256": "0b2a559c914b86c4886e1e15ceb64bf3c7c34392fdc14afce5598d8782c3d709"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-1280-flujoC-paso2-wa.png",
+      "sha256": "8eedddbb7e0e931a7e15f1ef55a6d7eb3bf1f65fbb2bead40c2b75f7df23149d"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-1280-inicial-admin.png",
+      "sha256": "bb0f6b068f871ad0edd511a65818156a4066025ceae5c51fdd62c0dab13a19ac"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-1280-inicial-app.png",
+      "sha256": "c38319ea3256a39e76eaf1035d0699ea9bb2e57bbd083b0920d3403b56754006"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-1280-inicial-bandeja.png",
+      "sha256": "98451be7280f32b1e70ae5b39691c62ad6e8e509f1f5b541e334bfdf9183ad93"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-1280-inicial-callcenter.png",
+      "sha256": "282f0e91a4ad5c308f4e0d178e616ee901c191cf42c96dce3e2a1f10d3bfbf1c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-1280-inicial-clinica.png",
+      "sha256": "0e962f5e2af90907bca4ca04d2ecff802bb2f4a929acae028f52b7c1494f742a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-1280-inicial-portada.png",
+      "sha256": "5bcd700142d7f075fe478a8ea9d0c6b2ced36c46913d78d12f7b5b5900832b0a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-1280-inicial-wa.png",
+      "sha256": "41fe601c4441cf2c5589c5a8602cd73e06282548a2bad4762a8a0278ac7303ee"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-1280-inicial-web.png",
+      "sha256": "e54e251d28fa36f13daac196dd5c6e1b94ed2054d27225339f7068ff918a74c8"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-1280-navegacion-admin.png",
+      "sha256": "bb0f6b068f871ad0edd511a65818156a4066025ceae5c51fdd62c0dab13a19ac"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-deslizar-fin-wa.png",
+      "sha256": "a26ece909ed629259692895e9ee96e242b370e6fb116bf72ecac9874a7dad1a4"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-deslizar-inicio-wa.png",
+      "sha256": "b035b687c0a9d60a7134549f7979748d7c906d9be05d838a297539d8c6325742"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-deslizar-medio-wa.png",
+      "sha256": "695d5edd1a3b3a5147097663628585ce2bc400c021fb8a7ece9ea8ddad719c76"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-flujoA-paso1-wa.png",
+      "sha256": "ba169b9f517cc857c4c7ec3dd493d0b9e9f2f2b2df678dfacac9e0ceaf7bf87f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-flujoA-paso2-wa.png",
+      "sha256": "3c5f9059895885b5db7193065bc4f279577c78bb7bdbd5220d420474765ca07a"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-flujoC-paso1-wa.png",
+      "sha256": "9ecd9cf61e4cb75417ecdd9e68e92b0a7a796f079ebec1dcbd1a5304d626d7ac"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-flujoC-paso2-wa.png",
+      "sha256": "288af1f39b78f38563d8bcc7348383fd89245e0f3c54d821f29e20eb7ee66684"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-inicial-admin.png",
+      "sha256": "167b6645fef04ce55162709eb015d495d0ffdb26a94972dc8ec8960362aa2699"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-inicial-app.png",
+      "sha256": "b5d8fb4fa716002cd949a9b7f5e8a5d16f3e9e57199616a06950abad5c7e743b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-inicial-bandeja.png",
+      "sha256": "4814f6400f5b1d222f0f27f70984ccc00fa37a312327e51f80292dd2f66331f3"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-inicial-callcenter.png",
+      "sha256": "fc799e657a26550899c1afd52d84cdb7221de4233a5e07bd13d8bcbc31e82f1c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-inicial-clinica.png",
+      "sha256": "0b69f59e06257c3572d96e833dd0d166a2c583dcc426d9949d2c177b6d94e85b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-inicial-portada.png",
+      "sha256": "15faa6c6121c0f8afc8da4cd0d8977042d3ac7057a99824198e619ade2b332ba"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-inicial-wa.png",
+      "sha256": "727a11821b386738a7a6e120ed8f9bd65799fafd45e4a716f83f0e6802360f42"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-inicial-web.png",
+      "sha256": "68b7247d13ba463f75120ee70a0a451b928e889824c6f5b26ca2276b71939341"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-375-navegacion-admin.png",
+      "sha256": "f1197775b487f10db99610ebeb7cbe9da8b92913aaac50e458178e005a8ce308"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-mock-767-canales-sin-desbordamiento-wa.png",
+      "sha256": "636d0dc378130a4f08354fef2faf72b6e5df6c369af56775f4544518f8051223"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-1280-inicial-admin.png",
+      "sha256": "782bb3b071df31c6f245af9658d99eff62497a78570f82855ee8d8a9d733cc0b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-1280-inicial-app.png",
+      "sha256": "bb15d80f9de0d228a8bdd7feb7ca8b42c4cf78e7559ae8273428a2eaa15a5a2c"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-1280-inicial-bandeja.png",
+      "sha256": "9e5cf5a450353d2258711a0ce9b84122a1ca3f929749811e66074a9bed7a96ce"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-1280-inicial-callcenter.png",
+      "sha256": "6c658864911431316cb215eeede47090c5bddae61dd407a992cc05ea48b17f6f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-1280-inicial-clinica.png",
+      "sha256": "02adf2f5f156c103ea39549d0b6f57302d134a73181e5d99d7c00cb76649814f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-1280-inicial-portada.png",
+      "sha256": "5b90d6aca7c89e40221c85a1230cb89a17fceca93ddd7b2ddc96e4b6d3d2b915"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-1280-inicial-wa.png",
+      "sha256": "2fedcc72828f365e6eb02642bcd88aac5dbe10e02f7a08dbaa4b8db9926da894"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-1280-inicial-web.png",
+      "sha256": "03104f7c12db86e493c59693c89ee564a50cfb4f64e915426975162efb4be9db"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-1280-navegacion-admin.png",
+      "sha256": "782bb3b071df31c6f245af9658d99eff62497a78570f82855ee8d8a9d733cc0b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-375-deslizar-fin-wa.png",
+      "sha256": "6aa6a14234341e2b2cdda8e9aad59131c18d4707310bddbb989a0142fcfb2d1e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-375-deslizar-inicio-wa.png",
+      "sha256": "55316767a706078a3203522c66b5217e114d767c8a4d6b74ee19242bdc8d3b67"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-375-deslizar-medio-wa.png",
+      "sha256": "0b6c676ff008a319ce9e2d3eca7f7ee476a09accbb3389c63ecb510b16b01d35"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-375-inicial-admin.png",
+      "sha256": "dd53a42786d97d34c408e55b57dfaac673e02cc6f4245b86283e8827cba345d2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-375-inicial-app.png",
+      "sha256": "e08c7eda0f509797c69273538160cc3d51f364e73a86c2889e525b31ea8512c4"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-375-inicial-bandeja.png",
+      "sha256": "b2b3a405fa7328afd092816f223b62f6c2a48ba259a646137db288bdfe133a1f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-375-inicial-callcenter.png",
+      "sha256": "602ffa2843c115e5315e8019acd4677caad1e599c3e4d03edab5693cf68ffb4f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-375-inicial-clinica.png",
+      "sha256": "60fbb270d2d3302922286b679a9a0de9c0e14fa74173389b72b7bf9a76da5763"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-375-inicial-portada.png",
+      "sha256": "5d62fd4c8077f9ce50972a94010146b40d693c30b3c62d0ae4e31b4f1e903de3"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-375-inicial-wa.png",
+      "sha256": "91bc74a05010711d17dd04f7e262bded24c543f83e0d91afc29fb8a0ec9fd9c4"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-375-inicial-web.png",
+      "sha256": "eab765abb0abbd06c7f0d6a7c69df6529453f821494858afc2ff6a9c2beaeaea"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-375-navegacion-admin.png",
+      "sha256": "6917dd4f00ad8d17b536168d8696b5712573b97731b4a724b096f128e88b4612"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-real-767-canales-sin-desbordamiento-wa.png",
+      "sha256": "da8c10734872022e3ec09dec48b75030d381ecc145480ccff749ad4d4e2fa15e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-despues-resultados.json",
+      "sha256": "fd01eb88ae5fc844eb0d86b38918bb0858f6e162fb334b847c5b081aac446239"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-presentacion.md",
+      "sha256": "43b332e1cd79b1e907b8652d3aeb8ee43d2a006636cba4bf4efafb780269e80b"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-regresion.txt",
+      "sha256": "0bf3ec7ad388e7b5ce4b45cecba38fe9418437fb6d7833e19e75ab28ee03c6fa"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-rojo.txt",
+      "sha256": "98e10800421480b379d086735af96c131153eee417f2957cc95515e7159fbd57"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-solo-presentacion.json",
+      "sha256": "2754fee25b7b47414bd6663a75e3963d9d387276476cb7ec2d9faaa122a09016"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-verde-carga.txt",
+      "sha256": "1dd308a737ae03856aa3acb90653e6f0b9907863eb4b3896c8733d69e039ddc5"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-verde.txt",
+      "sha256": "c80b0e0371f20bc194e6a60445b622a5ba8a1ec250666fa6a7e2c38b9195a442"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/pre-rebase/06-wip-antes-rebase.patch",
+      "sha256": "b5c27cf90410252189ea55503ff72bec8258fbb8808bedac2bb2df56144b2e89"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/presentacion.mjs",
+      "sha256": "5cee1eee34ef6b77a703b4a94d4f448aaf8140528973102e494d2d5b6890746e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/recorrido.mjs",
+      "sha256": "13522d9c1c9d3e6ee11d11a32cd0f4b7de7ae0e2f36db827e30892bdb3d50894"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/04-test.txt",
+      "sha256": "1c985f68b60c541cf23ac2c82dbfce06c4317c551170c6c2ea4dc9e0a85dbd9d"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-antes-375.png",
+      "sha256": "be17a5780da1d7b469e67e5c27afc96b9c476c1ee7e84a4bbbe890b286aed736"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-barra.md",
+      "sha256": "dac4c1dba85d1353888a66ac3476a06a7f9a1c14b92485dbb3c434bfe94b79b4"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-ejecucion.txt",
+      "sha256": "81ec7c212f56428f51dea9a03865e499a9d8a6ece1ac4743a6f3a3f500ee8f96"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-1280-flujoA-paso1-callcenter.png",
+      "sha256": "dabdcb6dd31c9c8e8dec10940456d7547660ade2c431c4b690c40c230fe366ee"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-1280-flujoA-paso1-wa.png",
+      "sha256": "94a016108acaf9d4fe7479a872919441a354dda72a75898cafadf05a65bcf52f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-1280-flujoA-paso2-callcenter.png",
+      "sha256": "edf21000fe839f378f57ad9cf9979c9fe62c13df24fd4bce0519a1e3f5e53309"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-1280-flujoA-paso2-wa.png",
+      "sha256": "487848a6bb586fcf3d63539f17a691609ba7bf5ec69e72010eb7f15322d460db"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-1280-flujoC-paso1-app.png",
+      "sha256": "ab3a986763b057395043744b0e79cc8eaaade0bccf5a0d86df222dac68fd62b8"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-1280-flujoC-paso1-wa.png",
+      "sha256": "a6a524378688f7c5282b8c63e3c41af32b72329739dbba3e0217adfd443d43ba"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-1280-flujoC-paso2-app.png",
+      "sha256": "e1793530eac7e931b25d2d37ef1c848821f484be2c15bef0b4735363529f8725"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-1280-flujoC-paso2-wa.png",
+      "sha256": "7af353180f1c8bdab7a7a5b6c8e806b44addb9d33e19837fd6f7a2520b4fde3f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-1280-foco-wa.png",
+      "sha256": "cd015ab8b3ef0f343485b751282ee1f3eb2c3396895ef02d88954e8e606b0541"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-375-flujoA-paso1-callcenter.png",
+      "sha256": "d79fcaf849f33b69919f5fcb46eedd0d5ad0d5336c0903c2c81b4eb79020ecad"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-375-flujoA-paso1-wa.png",
+      "sha256": "743afe34577f2096694cad01fd379bad823c86f446907dce02bd44aacff17c8f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-375-flujoA-paso2-callcenter.png",
+      "sha256": "c4a726b8fcbd29f76e5f909dfdbfc07c2f73979e079893d73b506f1760c59446"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-375-flujoA-paso2-wa.png",
+      "sha256": "37467b804af433c923607095c7de0a2192fe9d842a01697a0956f7a7650556e9"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-375-flujoC-paso1-app.png",
+      "sha256": "c3ff44d237bb30237c6121113e21f68d65c5788d89d7cfe0a653d6aa088c0c43"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-375-flujoC-paso1-wa.png",
+      "sha256": "15b766bdaf41b8e1d619767b6ee8323bb7eb9359c4297818a68e1ba1652f2ced"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-375-flujoC-paso2-app.png",
+      "sha256": "ff08b5233ce1c826808f9ed7dadef82ec4ba0a6757cb2b64da9530e6ec26cd6e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-375-flujoC-paso2-wa.png",
+      "sha256": "4a552e8a41f8325893058537719f012fba55a2f847d7ffee1e8b845f36e7cdce"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-mock-375-foco-wa.png",
+      "sha256": "269a5a518400170e41a7f9c7b6c87c95977e4206e5d87978b1792146d0d7e3fc"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-real-1280-foco-wa.png",
+      "sha256": "caf30258912406da6db0bd9a5ddf7a182662c0d1c4af60265062180af82c5a5f"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-real-1280-inicial-wa.png",
+      "sha256": "9fd3d958caaf5f6b2981649e6df8b7df71fafc8dd9356158d974f067d3ff5dde"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-real-375-foco-wa.png",
+      "sha256": "f161f8a0eb356bb0d01eab5b464467dddced4292ec75d1a23a7bfc0c7bddb1b2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-real-375-inicial-wa.png",
+      "sha256": "ec3feb75fb7ffbaa5aa8a0afd221af5e6106d77cb38ae6c2276404633c3c7453"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-resultados.json",
+      "sha256": "f618502c1c2261e52b05985d31725c85def7ce84a9eb5660dc31a9c2476d4eb7"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-rojo.txt",
+      "sha256": "785349814a2ceb54e1a20bd598d40b68588059523226301ca69e644623e0c6bc"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/05-verde.txt",
+      "sha256": "fa59b7bd16545d81aa548f23a60d2c3d5bd185c0d58fce433676a1397b00f5c9"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/revision-2/barra.mjs",
+      "sha256": "30ac27ee5d88d11fe5405151ee9cef3b4bee3ab98a73ff01a11831345d5d2f33"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/evidencias/verde.mjs",
+      "sha256": "49e4b9226295346cab67a68a10f1d2a29b42f1d33666f2e6e87b8d6022fa8314"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/handoff.md",
+      "sha256": "d392c75877879d82afa1c6fa168cc4521fc81c8d8b0417addec7b6a0a08c906e"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/implementacion.md",
+      "sha256": "d5689e5e7af3f3905a460d55199f36592f9558f6e59e15590a17c12f56072c12"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/proposal.md",
+      "sha256": "6a65e5eb589c06388c5305ec9d5d4559df25edb85f3047fce11b09aac7675fa2"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/specs/navegacion-canales/spec.md",
+      "sha256": "4d99af95cdeca9ed40a3541d4628efc1b5c2a164624ed918e54ddc9271070982"
+    },
+    {
+      "ruta": "openspec/changes/marca-salud-digna-360/tasks.md",
+      "sha256": "8146c28190893a0993d67d8fa72deee9ee334484ac6ef546222ab88b0e9dd6ac"
+    },
+    {
+      "ruta": "pnpm-lock.yaml",
+      "sha256": "a8a7cfdf7b7cecca2acc681182befaf0f6138b51da5fa0e3f88eb13593e86ca7"
+    }
+  ],
+  "excluidos": [
+    ".claude/launch.json: ajeno al cambio",
+    "El propio manifiesto para evitar circularidad"
+  ],
+  "origenHashes": "Contenido del índice Git, con finales de línea normalizados por sus atributos; excluye el propio manifiesto",
+  "continuacion": {
+    "fecha": "2026-11-25",
+    "cita": "continua y subelos",
+    "evidenciaOriginalConservada": true
+  }
+}

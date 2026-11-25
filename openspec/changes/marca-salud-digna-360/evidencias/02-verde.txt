@@ -1,0 +1,12 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ✓ |web| src/identidadVisual.test.ts (5 tests) 46ms
+ ✓ |web| src/rutas.test.tsx (19 tests) 1608ms
+     ✓ presenta la identidad aprobada en /  551ms
+
+ Test Files  2 passed (2)
+      Tests  24 passed (24)
+   Start at  05:24:00
+   Duration  6.74s (transform 694ms, setup 0ms, import 2.02s, tests 1.65s, environment 2.75s)
+

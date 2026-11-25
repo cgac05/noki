@@ -1,0 +1,45 @@
+{
+  "base": "51e4df6222fdcec0c099d1a0e053f3f80ca7e9fa",
+  "referenciaPrevia": "06-base-rebasada.json",
+  "raizCSSSinCambios": true,
+  "sinSombras": true,
+  "resultados": [
+    {
+      "ruta": "apps/web/src/componentes/BarraDemo.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/componentes/Layout.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/componentes/LineaTiempo.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/componentes/EstadoContexto.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/vistas/Portada.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/vistas/Admin.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/vistas/App.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/vistas/Clinica.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    },
+    {
+      "ruta": "apps/web/src/vistas/Bandeja.tsx",
+      "soloClasesYEnvolturaDecorativa": true
+    }
+  ],
+  "metodo": "Comparación exacta de TSX sin clases y envoltura; Clínica usa la base actual de origin/main. Las diferencias funcionales incorporadas del main están fuera del diff del ajuste."
+}

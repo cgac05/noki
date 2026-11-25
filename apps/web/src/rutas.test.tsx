@@ -5,6 +5,8 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { rutas } from './rutas.tsx';
 import { ProveedorCliente } from './cliente/ProveedorCliente.tsx';
 import { ClienteMock } from './cliente/mock/ClienteMock.ts';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 afterEach(cleanup);
 
@@ -15,6 +17,19 @@ function abrir(ruta: string) {
 }
 
 describe('Navegación de canales', () => {
+  it.each(['/', '/web', '/wa', '/app', '/callcenter', '/clinica', '/admin', '/bandeja', '/inexistente'])('presenta la identidad aprobada en %s', ruta => {
+    // El router en memoria no carga index.html; se inspecciona el documento de entrada real.
+    const documento = new DOMParser().parseFromString(readFileSync(resolve(import.meta.dirname, '../index.html'), 'utf8'), 'text/html');
+    abrir(ruta);
+    const marca = screen.getByRole('link', { name: 'Salud Digna 360 · Portada' });
+    expect(marca.textContent).toBe('Salud Digna 360');
+    expect(marca.getAttribute('href')).toBe('/');
+    expect(documento.title).toContain('Salud Digna 360');
+    expect(documento.title).not.toMatch(/noki/i);
+    expect(document.body.textContent).not.toMatch(/noki/i);
+    expect(screen.getByText('Modo simulado')).toBeDefined();
+  });
+
   it.each([
     ['/web', 'Web'],
     ['/wa', 'WhatsApp'],

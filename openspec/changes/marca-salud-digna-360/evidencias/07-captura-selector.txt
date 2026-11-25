@@ -1,0 +1,28 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for getByRole('button', { name: 'Ver opciones', exact: true }).filter({ visible: true }).last()
+    - locator resolved to <button disabled type="button" class="boton-secundario">Ver opciones</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not enabled
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not enabled
+    - retrying click action
+      - waiting 100ms
+    57 × waiting for element to be visible, enabled and stable
+       - element is not enabled
+     - retrying click action
+       - waiting 500ms
+
+    at flujoA (C:\Users\Luis Rodriguez\Documents\TEC\HackaTec\noki\openspec\changes\marca-salud-digna-360\evidencias\verde.mjs:95:108)
+    at async file:///C:/Users/Luis%20Rodriguez/Documents/TEC/HackaTec/noki/openspec/changes/marca-salud-digna-360/evidencias/verde.mjs:186:28 {
+  name: 'TimeoutError'
+}
+
+Node.js v24.20.0
