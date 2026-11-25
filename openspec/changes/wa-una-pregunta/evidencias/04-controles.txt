@@ -1,0 +1,16 @@
+Base 0b59599 más los archivos de la revisión 3. Controles en serie.
+
+Checkout compartido
+- lint: bloqueado antes de ejecutar ESLint (EPERM).
+- lint:deps: bloqueado antes de ejecutar dependency-cruiser (EPERM).
+- test: bloqueado antes de ejecutar TypeScript (EPERM).
+- test:integracion: bloqueado al resolver tsx (ERR_MODULE_NOT_FOUND).
+- OpenSpec 1.14.0 offline: status, instructions apply y validate quedaron sin ejecutar (ENOTCACHED).
+
+Copia aislada con instalación congelada por el lockfile
+- lint: PASS, 0 errores. Shim temporal de pnpm.
+- lint:deps: PASS, 0 violaciones, 253 módulos y 813 dependencias.
+- Integración: PASS, 55 de 55 pruebas y 18 de 18 archivos. Runner con Node 24 y cargador runner de Vitest. Postgres desechable noki_test en 55432.
+- Primera corrida de integración: 54 de 55. La prueba nueva agregaba dos citas antes de la aserción de métricas del Flujo A. Se movió después de las pruebas existentes.
+- Primera corrida de unitarios y web: 476 de 476. En la repetición posterior al ajuste de pruebas, 449 aprobadas y 27 fallidas, todas de web. Hubo varios timeouts de 5000 ms. No se editaron archivos web.
+- Corrida final de unitarios y web con archivos en serie: PASS, 476 de 476 pruebas y 78 de 78 archivos. Se conservó el timeout habitual.

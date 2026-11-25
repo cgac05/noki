@@ -1,0 +1,4 @@
+Vitest 4.0.14 — preguntasWa.test.ts — 5 fallidas de 5.
+Varios días: recibió «¿Qué horario prefieres?» en lugar de «¿Qué día prefieres?».
+Día sin horarios restantes: recibió «mié 25 nov · 09:00» en lugar de «mié 25 nov».
+Elegir otro día, paginación y zona de Tepic: falta la opción «jue 26 nov».

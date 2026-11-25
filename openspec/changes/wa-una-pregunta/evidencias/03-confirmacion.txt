@@ -1,0 +1,7 @@
+4.1 — Confirmación con un fallo forzado de agenda en memoria.
+Rojo: 1 de 1 fallida en la prueba seleccionada. El bot respondió «No pudimos verificar la información.».
+Verde: 10 de 10 aprobadas en preguntasWa.test.ts. La confirmación ofrece reintento y el siguiente intento termina en cita confirmada.
+
+4.2 — Reinicio de sd-mock con dos arranques separados por un segundo y Postgres desechable.
+Con D5: 1 de 1 aprobada en la prueba seleccionada. Ambas citas quedan confirmadas con folios distintos de nueve dígitos.
+Con la secuencia anterior, solo en una copia aislada: 1 de 1 fallida. La primera cita se confirma y la segunda recibe «El horario ya no está disponible.».

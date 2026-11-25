@@ -1,4 +1,5 @@
 import { expect } from 'vitest';
+import { diaCorto } from '../../../packages/adapters/in-http/src/textosWa.ts';
 import type { crearApiPruebas } from '../../../apps/api/src/pruebas.ts';
 import { RespuestaComandoSchema, RespuestaMensajeWaSchema, RUTAS_CONSULTAS, type MensajeBot } from '../../../packages/contracts/src/index.ts';
 
@@ -44,8 +45,12 @@ export async function comprobarIdempotenciaWa(
   await comando('SolicitarContinuacion', { destino: 'whatsapp' }, tramite.id);
   const token = await datos.codigoContinuacion(tramite.hiloId, tramite.id);
   if (!token) throw new Error('Falta el código de continuación.');
-  const horarios = await wa({ texto: 'CONTINUAR ' + token });
-  const requisitos = await wa({ payloadBoton: opcion(horarios, / · 09:00$/u) });
+  const dias = await wa({ texto: 'CONTINUAR ' + token });
+  const manana = dias.flatMap(m => m.tipo === 'lista' ? m.secciones.flatMap(s => s.filas) : [])
+    .find(fila => fila.titulo === diaCorto(datos.inicio, 'America/Mazatlan'));
+  if (!manana) throw new Error('Falta el día de mañana.');
+  const horarios = await wa({ payloadBoton: manana.payload });
+  const requisitos = await wa({ payloadBoton: opcion(horarios, /^09:00$/u) });
   const payload = { waId: datos.waId, payloadBoton: opcion(requisitos, /^Acepto la preparación$/u) };
   const clave = ids.nuevo();
   const ruta = '/api/canales/wa/mensajes';

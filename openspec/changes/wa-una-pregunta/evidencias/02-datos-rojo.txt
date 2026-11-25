@@ -1,0 +1,2 @@
+Vitest 4.0.14 — preguntasWa.test.ts — 4 fallidas, 5 aprobadas.
+El Flow inicial todavía contiene cinco campos, falta «No tengo» en dos escenarios y enviar solo el nombre devuelve el mismo formulario.

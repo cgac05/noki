@@ -12,6 +12,7 @@ import { crearApi } from '../../apps/api/src/crearApi.ts';
 import { componerComandos } from '../../apps/api/src/componerComandos.ts';
 import { sembrar } from '../../apps/api/src/semilla/sembrar.ts';
 import { crearSdMock } from '../../apps/sd-mock/src/index.ts';
+import { diaCorto } from '../../packages/adapters/in-http/src/textosWa.ts';
 import type { HiloId, PacienteId, SedeId, ServicioId, TramiteId } from '../../packages/domain/src/index.ts';
 import { idDemo, PACIENTES_DEMO } from '../../apps/api/src/semilla/datosDemo.ts';
 import { CuerpoErrorSchema, RespuestaComandoSchema, RespuestaMensajeWaSchema, RUTAS_CONSULTAS, type MensajeBot } from '../../packages/contracts/src/index.ts';
@@ -200,9 +201,13 @@ it('Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez', async
     let mensajes = await wa({ texto });
     expect(JSON.stringify(mensajes)).toContain('Clínica Tepic');
     expect(mensajes[0]).toMatchObject({ texto: expect.stringContaining('Lo iniciaste por teléfono.') });
-    expect(opciones(mensajes)[0]?.titulo).toMatch(/^[\p{L}]+ \d+ [\p{L}]+ · 09:00$/u);
+    const fechaManana = new Date(deps.reloj.ahora().getTime() + 86_400_000).toISOString();
+    const manana = opciones(mensajes).find(fila => fila.titulo === diaCorto(fechaManana, 'America/Mazatlan'));
+    if (!manana) throw new Error('Falta el día de mañana.');
+    mensajes = await wa({ payloadBoton: manana.payload });
+    expect(opciones(mensajes)[0]?.titulo).toBe('09:00');
     expect(await wa({ texto })).toMatchObject([{ tipo: 'texto' }]);
-    mensajes = await elegir(mensajes, / · 09:00$/u);
+    mensajes = await elegir(mensajes, /^09:00$/u);
     while (!opciones(mensajes).some(({ titulo }) => titulo === 'Para mí')) {
       expect(opciones(mensajes).map(({ titulo }) => titulo)).toContain('Acepto la preparación');
       mensajes = await elegir(mensajes, /Acepto la preparación/u);
@@ -412,3 +417,69 @@ it('publica, programa y expira el hold desde la ruta del reloj con la API compue
     redis.disconnect();
   }
 }, 15_000);
+
+it('confirma el registro de un contacto nuevo sin CURP después de reiniciar sd-mock', async () => {
+  const instante = Date.parse('2026-11-25T12:00:00Z');
+  let sd = crearSdMock(false, () => instante);
+  const sdMockUrl = await sd.listen({ host: '127.0.0.1', port: 0 });
+  const deps = componerComandos({
+    databaseUrl: url.toString(), sdMockUrl, tokenSecret: 'secreto-sintetico-de-integracion-32-bytes', demo: true,
+  }, () => {});
+  const app = crearApi({ databaseUrl: url.toString(), redisUrl: 'redis://127.0.0.1:1',
+    logger: false, comandos: deps, consultas: deps.consultas, whatsapp: deps.whatsapp });
+  const registrar = async (waId: string, nombre: string) => {
+    const enviar = async (payload: object) => {
+      const respuesta = await app.inject({ method: 'POST', url: '/api/canales/wa/mensajes',
+        headers: { 'idempotency-key': deps.ids.nuevo() }, payload: { waId, ...payload } });
+      expect(respuesta.statusCode).toBe(200);
+      return RespuestaMensajeWaSchema.parse(respuesta.json()).mensajes;
+    };
+    const elegir = (mensajes: MensajeBot[], titulo: string) => {
+      const opcion = opciones(mensajes).find(fila => fila.titulo === titulo);
+      if (!opcion) throw new Error('Falta la opción ' + titulo);
+      return enviar({ payloadBoton: opcion.payload });
+    };
+    const servicios = await enviar({ texto: 'Hola' });
+    const sedes = await elegir(servicios, 'Química sanguínea');
+    const dias = await elegir(sedes, 'Clínica Tepic');
+    const dia = opciones(dias)[2];
+    if (!dia) throw new Error('No hay tres días con disponibilidad.');
+    const horas = await elegir(dias, dia.titulo);
+    const hora = opciones(horas)[0];
+    if (!hora) throw new Error('No hay horarios.');
+    const requisitos = await elegir(horas, hora.titulo);
+    const destinatario = await elegir(requisitos, 'Acepto la preparación');
+    await elegir(destinatario, 'Para mí');
+    const curp = await enviar({ flowResponse: { fechaNac: '1990-01-01' } });
+    await elegir(curp, 'No la tengo');
+    await enviar({ flowResponse: { nombre } });
+    const materno = await enviar({ flowResponse: { apellidoPaterno: 'Sintético' } });
+    const sexo = await elegir(materno, 'No tengo');
+    let entidad = await elegir(sexo, 'Mujer');
+    while (!opciones(entidad).some(fila => fila.titulo === 'Nayarit')) entidad = await elegir(entidad, 'Más estados');
+    const reserva = await elegir(entidad, 'Nayarit');
+    const confirmacion = await elegir(reserva, 'Confirmar cita');
+    expect(confirmacion).toMatchObject([{ texto: expect.stringMatching(/^Cita confirmada/u) }]);
+  };
+  try {
+    const folios = async () => (await pool.query<{ folio: string }>('SELECT folio FROM reserva WHERE folio IS NOT NULL')).rows
+      .map(({ folio }) => folio);
+    const sembrados = await folios();
+    await registrar('5210000000082', 'Primera');
+    const anteriores = (await folios()).filter(folio => !sembrados.includes(folio));
+    expect(anteriores).toHaveLength(1);
+    await sd.close();
+    sd = crearSdMock(false, () => instante + 1000);
+    await sd.listen({ host: '127.0.0.1', port: Number(new URL(sdMockUrl).port) });
+    await registrar('5210000000083', 'Segunda');
+    const nuevos = (await folios()).filter(folio => !sembrados.includes(folio));
+    expect(nuevos).toHaveLength(2);
+    expect(nuevos).toEqual(expect.arrayContaining(anteriores));
+    expect(new Set(nuevos).size).toBe(2);
+    for (const folio of nuevos) expect(folio).toMatch(/^\d{9}$/);
+  } finally {
+    await app.close();
+    await deps.cerrar();
+    await sd.close();
+  }
+});

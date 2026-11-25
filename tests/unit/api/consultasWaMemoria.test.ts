@@ -60,11 +60,12 @@ it('Solicitud WA vacía, sin trámites y opción vieja', async () => {
       if (!elegida) throw new Error('Falta la opción esperada.');
       return leer({ payloadBoton: elegida.payload });
     };
-    const horarios = await pulsar(vieja.mensajes, 'Tepic');
+    const dias = await pulsar(vieja.mensajes, 'Tepic');
+    const horarios = await pulsar(dias, 'mié 25 nov');
     expect(horarios[0]).toMatchObject({ tipo: 'lista', secciones: [{ filas: expect.arrayContaining([
-      expect.objectContaining({ titulo: 'mié 25 nov · 09:00' }),
+      expect.objectContaining({ titulo: '09:00' }),
     ]) }] });
-    const destinatario = await pulsar(horarios, 'mié 25 nov · 09:00');
+    const destinatario = await pulsar(horarios, '09:00');
     await agenda.apartar({
       inicio: '2026-11-25T16:00:00.000Z', sedeId, servicioId,
       reservaId: ids.nuevo() as ReservaId, tramiteId: ids.nuevo() as TramiteId,
@@ -77,10 +78,16 @@ it('Solicitud WA vacía, sin trámites y opción vieja', async () => {
     expect(datos[0]).toMatchObject({ tipo: 'flow', campos: expect.arrayContaining([
       expect.objectContaining({ id: 'nombre' }),
     ]) });
-    const ocupado = await leer({ flowResponse: { nombre: 'Paciente sintético', apellidoPaterno: 'Demo',
-      sexo: 'F', entidadNacimiento: 'NT' } });
+    await leer({ flowResponse: { nombre: 'Paciente sintético' } });
+    const materno = await leer({ flowResponse: { apellidoPaterno: 'Demo' } });
+    const sexo = await pulsar(materno, 'No tengo');
+    let entidad = await pulsar(sexo, 'Mujer');
+    while (!entidad.some(m => m.tipo === 'lista' && m.secciones.some(s => s.filas.some(f => f.titulo === 'Nayarit')))) {
+      entidad = await pulsar(entidad, 'Más estados');
+    }
+    const ocupado = await pulsar(entidad, 'Nayarit');
     expect(ocupado[0]).toMatchObject({ tipo: 'texto', texto: 'El horario ya no está disponible.' });
-    const reserva = await pulsar(ocupado, 'mié 25 nov · 09:30');
+    const reserva = await pulsar(await pulsar(ocupado, 'mié 25 nov'), '09:30');
     expect(reserva[0]).toMatchObject({ tipo: 'botones', botones: [{ titulo: 'Confirmar cita' }] });
     expect(JSON.stringify(reserva)).not.toContain('Paciente sintético');
   } finally { await app.close(); }
@@ -107,7 +114,7 @@ it('Requisitos con etiqueta muestra consentimiento y orden médica sin identific
   };
   try {
     let mensajes = await enviar({ texto: 'Hola' });
-    for (const titulo of ['Química', 'Tepic', 'mié 25 nov · 09:00']) {
+    for (const titulo of ['Química', 'Tepic', 'mié 25 nov', '09:00']) {
       const filas = mensajes.flatMap(m => m.tipo === 'lista' ? m.secciones.flatMap(s => s.filas) : []);
       const opcion = filas.find(fila => fila.titulo === titulo);
       if (!opcion) throw new Error('Falta la opción ' + titulo);

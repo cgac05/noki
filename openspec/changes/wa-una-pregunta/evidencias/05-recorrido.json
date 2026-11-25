@@ -1,0 +1,221 @@
+{
+  "resultado": {
+    "estado": "confirmada",
+    "diaElegido": "vie 27 nov",
+    "ordenDelDia": 3,
+    "digitosFolio": null
+  },
+  "mensajes": [
+    [
+      {
+        "tipo": "lista",
+        "texto": "¿Qué servicio necesitas?",
+        "opciones": [
+          "Consulta nutricional",
+          "Paquete US mamario + Papanicolaou",
+          "Química sanguínea",
+          "Ultrasonido abdominal"
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "lista",
+        "texto": "¿En qué clínica te atendemos?",
+        "opciones": [
+          "Clínica Bahía de Banderas",
+          "Clínica Tepic",
+          "Clínica Tijuana"
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "lista",
+        "texto": "¿Qué día prefieres?",
+        "opciones": [
+          "mié 25 nov",
+          "jue 26 nov",
+          "vie 27 nov",
+          "sáb 28 nov",
+          "dom 29 nov",
+          "lun 30 nov",
+          "mar 1 dic"
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "lista",
+        "texto": "¿A qué hora?",
+        "opciones": [
+          "09:00",
+          "09:30",
+          "10:00",
+          "10:30",
+          "11:00",
+          "11:30",
+          "12:00",
+          "12:30",
+          "Ver más horarios",
+          "Elegir otro día"
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "botones",
+        "texto": "Completa los requisitos del servicio.",
+        "opciones": [
+          "Acepto la preparación"
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "botones",
+        "texto": "¿Para quién es la cita?",
+        "opciones": [
+          "Para mí",
+          "Para otra persona"
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "flow",
+        "titulo": "Fecha de nacimiento",
+        "campos": [
+          {
+            "etiqueta": "Fecha de nacimiento",
+            "captura": "sensitive"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "flow",
+        "titulo": "CURP",
+        "campos": [
+          {
+            "etiqueta": "CURP",
+            "captura": "sensitive"
+          }
+        ]
+      },
+      {
+        "tipo": "botones",
+        "texto": "Si no tienes la CURP, puedes continuar con tus datos.",
+        "opciones": [
+          "No la tengo"
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "flow",
+        "titulo": "Nombre",
+        "campos": [
+          {
+            "etiqueta": "Nombre",
+            "captura": "sensitive"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "flow",
+        "titulo": "Apellido paterno",
+        "campos": [
+          {
+            "etiqueta": "Apellido paterno",
+            "captura": "sensitive"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "flow",
+        "titulo": "Apellido materno",
+        "campos": [
+          {
+            "etiqueta": "Apellido materno",
+            "captura": "sensitive"
+          }
+        ]
+      },
+      {
+        "tipo": "botones",
+        "texto": "Si no tienes apellido materno, puedes omitirlo.",
+        "opciones": [
+          "No tengo"
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "botones",
+        "texto": "¿Cuál es tu sexo?",
+        "opciones": [
+          "Mujer",
+          "Hombre",
+          "No binario"
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "lista",
+        "texto": "¿En qué entidad naciste?",
+        "opciones": [
+          "Aguascalientes",
+          "Baja California",
+          "Baja California Sur",
+          "Campeche",
+          "Chiapas",
+          "Chihuahua",
+          "Ciudad de México",
+          "Coahuila",
+          "Colima",
+          "Más estados"
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "lista",
+        "texto": "¿En qué entidad naciste?",
+        "opciones": [
+          "Durango",
+          "Estado de México",
+          "Guanajuato",
+          "Guerrero",
+          "Hidalgo",
+          "Jalisco",
+          "Michoacán",
+          "Morelos",
+          "Nayarit",
+          "Más estados"
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "botones",
+        "texto": "Tu reserva vence el miércoles 25 de noviembre, 05:29",
+        "opciones": [
+          "Confirmar cita"
+        ]
+      }
+    ],
+    [
+      {
+        "tipo": "texto",
+        "texto": "Cita confirmada para viernes 27 de noviembre, 09:00. Tu QR está en la App."
+      }
+    ]
+  ]
+}

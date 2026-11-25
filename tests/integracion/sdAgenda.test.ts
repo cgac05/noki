@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import { afterEach, expect, it } from 'vitest';
 import { crearSdMock } from '../../apps/sd-mock/src/index.ts';
 import { AgendaExternaMemoria } from '../../packages/adapters/memory/src/index.ts';
@@ -12,6 +13,25 @@ const cita = {
   servicioId: '01234567-89ab-7def-8123-456789abcde2' as ServicioId,
   inicio: '2026-11-25T12:00:00Z',
 };
+
+it.each([[10, 3], [1, 2]])('emite folios distintos entre arranques separados por %i segundos', async (segundos, cantidad) => {
+  const instante = Date.parse('2026-11-25T12:00:00Z');
+  const folios: string[] = [];
+  for (const ahora of [instante, instante + segundos * 1000]) {
+    const servidor = crearSdMock(false, () => ahora);
+    try {
+      for (let indice = 0; indice < cantidad; indice++) {
+        const respuesta = await servidor.inject({
+          method: 'POST', url: '/agenda/citas', payload: { ...cita, reservaId: randomUUID() },
+        });
+        expect(respuesta.statusCode).toBe(200);
+        folios.push(respuesta.json<{ folio: string }>().folio);
+      }
+    } finally { await servidor.close(); }
+  }
+  expect(new Set(folios).size).toBe(cantidad * 2);
+  for (const folio of folios) expect(folio).toMatch(/^\d{9}$/);
+});
 
 it('registra de forma idempotente, rechaza entradas inválidas y simula fallos y latencia', async () => {
   const enviar = (url: string, payload: object) => app.inject({ method: 'POST', url, payload });

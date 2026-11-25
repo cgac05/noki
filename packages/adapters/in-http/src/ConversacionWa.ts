@@ -11,14 +11,19 @@ import {
   ErrorDominio, siguientePregunta, type PistaDominio, type RegistroTiposTramite, type SedeId,
   type ServicioId, type Tramite, type TramiteId,
 } from '@noki/domain';
-import { canalOrigen, fechaCorta, fechaLarga, preguntaCasilla, requisito } from './textosWa.ts';
-import { mensajesIdentificacion, respuestaFlowIdentificacion } from './identificacionWa.ts';
+import { canalOrigen, diaCorto, fechaLarga, preguntaCasilla, preguntaDia, preguntaHora, requisito } from './textosWa.ts';
+import { campoPendiente, completarDatos, mensajeDato, mensajesIdentificacion, respuestaFlowIdentificacion, validarDato } from './identificacionWa.ts';
 
 const accion = z.discriminatedUnion('tipo', [
   z.object({ tipo: z.literal('retomar'), id: z.uuidv7() }),
   z.object({ tipo: z.literal('servicio'), id: z.uuidv7() }),
   z.object({ tipo: z.literal('sede'), id: z.uuidv7() }),
   z.object({ tipo: z.literal('horario'), inicio: z.iso.datetime() }),
+  z.object({ tipo: z.literal('dia'), fecha: z.iso.date() }),
+  z.object({ tipo: z.literal('paginaHora'), pagina: z.number().int().nonnegative() }),
+  z.object({ tipo: z.literal('otroDia') }),
+  z.object({ tipo: z.literal('dato'), campo: z.string(), valor: z.string() }),
+  z.object({ tipo: z.literal('paginaEntidad'), pagina: z.number().int().min(0).max(3) }),
   z.object({ tipo: z.literal('requisito'), requisito: z.string() }),
   z.object({ tipo: z.literal('elegibilidad') }),
   z.object({ tipo: z.literal('confirmar') }),
@@ -26,6 +31,8 @@ const accion = z.discriminatedUnion('tipo', [
 ]);
 const conversacion = z.object({
   tramiteId: z.uuidv7().optional(), horario: z.iso.datetime().optional(),
+  dia: z.iso.date().optional(), paginaHora: z.number().int().nonnegative().optional(),
+  datos: z.record(z.string(), z.string()).optional(), paginaEntidad: z.number().int().min(0).max(3).optional(),
   opciones: z.record(z.string(), accion), verificacion: z.boolean().optional(),
 });
 type Estado = z.infer<typeof conversacion>;
@@ -47,6 +54,16 @@ export interface DependenciasWa {
 const texto = (contenido: string): MensajeBot => ({ tipo: 'texto', texto: contenido });
 const noDisponible = 'Esa opción ya no está disponible.';
 const resumenInvalido = 'No pudimos verificar la información.';
+
+function borrarDia(estado: Estado) {
+  delete estado.dia;
+  delete estado.paginaHora;
+}
+
+function borrarDatos(estado: Estado) {
+  delete estado.datos;
+  delete estado.paginaEntidad;
+}
 
 export class ConversacionWa {
   constructor(private readonly deps: DependenciasWa) {}
@@ -91,9 +108,11 @@ export class ConversacionWa {
       if (retomado.tipo === 'BLOQUEADO') return [texto('Espera antes de volver a intentarlo.')];
       if (retomado.tipo === 'RETOMADO') {
         tramite = retomado.operacion.tramite;
+        if (estado.tramiteId !== tramite.id) borrarDatos(estado);
         estado.tramiteId = tramite.id;
         delete estado.verificacion;
         delete estado.horario;
+        borrarDia(estado);
         const oferta = (await lecturas.catalogo()).find(o => o.servicioId === tramite?.servicioId && o.sedeId === tramite?.sedeId);
         const momento = tramite.horario && tramite.sedeId ? await this.formatear(tramite.horario.inicio, tramite.sedeId) : undefined;
         const detalle = [oferta?.servicio, oferta?.sede].filter(Boolean).join(' en ');
@@ -122,6 +141,7 @@ export class ConversacionWa {
           : [texto(noDisponible)];
       } else {
         tramite = (await casos.iniciar('AGENDAR', waId, contextoOperacion())).tramite;
+        borrarDatos(estado);
         estado.tramiteId = tramite.id;
       }
     }
@@ -137,31 +157,42 @@ export class ConversacionWa {
         else mensajes.push(texto(noDisponible));
       } else if (flowResponse) {
         const pregunta = this.pregunta(tramite, estado);
-        const payload = pregunta.tipo === 'PREGUNTA' && pregunta.casilla === 'paciente'
-          ? respuestaFlowIdentificacion(tramite.id, pregunta.pista, flowResponse) : undefined;
-        if (payload) {
-          const resultado = await casos.identificarPaciente(tramite.id, payload, waId, contextoOperacion());
-          tramite = resultado.tramite;
-          const fallido = resultado.eventos.find(e => e.tipo === 'IntentoVerificacionFallido');
-          if (fallido && fallido.payload.intentos >= 3) {
-            estado.opciones = {};
-            await this.guardar(waId, estado, ts);
-            return [texto('Espera antes de volver a intentarlo.')];
-          }
-          if (fallido) mensajes.push(texto(resumenInvalido));
-        } else mensajes.push(texto('Revisa los campos requeridos.'));
+        const pista = pregunta.tipo === 'PREGUNTA' && pregunta.casilla === 'paciente' ? pregunta.pista : undefined;
+        if (pista?.paso === 'DATOS') {
+          const campo = campoPendiente(pista, estado.datos ?? {});
+          if (campo && campo.id !== 'sexo' && campo.id !== 'entidadNacimiento' &&
+              validarDato(campo.id, flowResponse[campo.id]) !== undefined) {
+            tramite = await this.capturarDato(tramite, estado, campo.id, flowResponse[campo.id], waId, contextoOperacion);
+          } else mensajes.push(texto('Revisa los campos requeridos.'));
+        } else {
+          const payload = pista ? respuestaFlowIdentificacion(tramite.id, pista, flowResponse) : undefined;
+          if (payload) {
+            const resultado = await casos.identificarPaciente(tramite.id, payload, waId, contextoOperacion());
+            tramite = resultado.tramite;
+            const fallido = resultado.eventos.find(e => e.tipo === 'IntentoVerificacionFallido');
+            if (fallido && fallido.payload.intentos >= 3) {
+              estado.opciones = {};
+              await this.guardar(waId, estado, ts);
+              return [texto('Espera antes de volver a intentarlo.')];
+            }
+            if (fallido) mensajes.push(texto(resumenInvalido));
+          } else mensajes.push(texto('Revisa los campos requeridos.'));
+        }
       }
       if (estado.horario && tramite.estado === 'LISTO_PARA_RESERVAR' && !tramite.advertenciaElegibilidad) {
         const inicio = estado.horario;
         delete estado.horario;
+        borrarDia(estado);
         tramite = (await casos.reservar(tramite.id, inicio, contextoOperacion())).tramite;
       }
     } catch (error) {
       if (!(error instanceof ErrorDominio)) throw error;
       const actual = await lecturas.tramite(tramite.id);
       if (actual) tramite = actual;
-      mensajes.push(texto('regla' in error && error.regla === 'HORARIO_NO_DISPONIBLE'
-        ? 'El horario ya no está disponible.' : resumenInvalido));
+      const regla = 'regla' in error ? error.regla : undefined;
+      const aviso = regla === 'AGENDA_NO_DISPONIBLE' ? 'La agenda no respondió. Intenta de nuevo en un momento.'
+        : regla === 'HORARIO_NO_DISPONIBLE' ? 'El horario ya no está disponible.' : resumenInvalido;
+      mensajes.push(texto(aviso));
     }
     estado.opciones = {};
     mensajes.push(...await this.mensajes(tramite, estado, ts, correlationId));
@@ -188,6 +219,25 @@ export class ConversacionWa {
     }, 'whatsapp', this.deps.registro);
   }
 
+  private async capturarDato(tramite: Tramite, estado: Estado, campo: string, valor: string | undefined, waId: string,
+    contextoOperacion: () => ContextoComando): Promise<Tramite> {
+    const pregunta = this.pregunta(tramite, estado);
+    if (pregunta.tipo !== 'PREGUNTA' || pregunta.casilla !== 'paciente' || pregunta.pista.paso !== 'DATOS') return tramite;
+    const datos = estado.datos ?? {};
+    if (campoPendiente(pregunta.pista, datos)?.id !== campo) return tramite;
+    const validado = validarDato(campo, valor);
+    if (validado === undefined) return tramite;
+    datos[campo] = validado;
+    estado.datos = datos;
+    delete estado.paginaEntidad;
+    if (campoPendiente(pregunta.pista, datos)) return tramite;
+    const payload = completarDatos(datos);
+    borrarDatos(estado);
+    return payload?.success
+      ? (await this.deps.casos.identificarPaciente(tramite.id, payload.data, waId, contextoOperacion())).tramite
+      : tramite;
+  }
+
   private async aplicar(tramite: Tramite, estado: Estado, seleccion: Accion, waId: string,
     contextoOperacion: () => ContextoComando): Promise<Tramite> {
     const { casos } = this.deps;
@@ -198,7 +248,12 @@ export class ConversacionWa {
       case 'sede': return (await casos.seleccionarSede(id, seleccion.id as SedeId, contextoOperacion())).tramite;
       case 'identificar': return (await casos.identificarPaciente(id, seleccion.payload, waId, contextoOperacion())).tramite;
       case 'horario': estado.horario = seleccion.inicio; return tramite;
-      case 'confirmar': return (await casos.confirmar(id, contextoOperacion())).tramite;
+      case 'dia': estado.dia = seleccion.fecha; delete estado.paginaHora; return tramite;
+      case 'paginaHora': estado.paginaHora = seleccion.pagina; return tramite;
+      case 'otroDia': borrarDia(estado); return tramite;
+      case 'dato': return this.capturarDato(tramite, estado, seleccion.campo, seleccion.valor, waId, contextoOperacion);
+      case 'paginaEntidad': estado.paginaEntidad = seleccion.pagina; return tramite;
+      case 'confirmar': borrarDia(estado); return (await casos.confirmar(id, contextoOperacion())).tramite;
       case 'elegibilidad': return (await casos.reconocerElegibilidad(id, contextoOperacion())).tramite;
       case 'requisito': {
         const requisito = tramite.perfil?.requisitos.find(({ tipo }) => tipo === seleccion.requisito);
@@ -226,6 +281,8 @@ export class ConversacionWa {
       const payload = op(seleccion);
       return { id: payload, titulo, payload };
     };
+    const pregunta = this.pregunta(tramite, estado);
+    if (pregunta.tipo !== 'PREGUNTA' || pregunta.casilla !== 'paciente' || pregunta.pista.paso !== 'DATOS') borrarDatos(estado);
     if (tramite.estado === 'CONFIRMADA' && tramite.horario && tramite.sedeId) {
       return [texto('Cita confirmada para ' + await this.formatear(tramite.horario.inicio, tramite.sedeId) + '. Tu QR está en la App.')];
     }
@@ -233,10 +290,15 @@ export class ConversacionWa {
       return [{ tipo: 'botones', texto: 'Tu reserva vence el ' + await this.formatear(tramite.horario.expiraEn, tramite.sedeId),
         botones: [opcion({ tipo: 'confirmar' }, 'Confirmar cita')] }];
     }
-    const pregunta = this.pregunta(tramite, estado);
     if (pregunta.tipo !== 'PREGUNTA') return [texto('No hay más pasos pendientes.')];
     const { casilla, pista } = pregunta;
-    if (casilla === 'paciente') return mensajesIdentificacion(pista satisfies PistaDominio, payload => op({ tipo: 'identificar', payload }));
+    if (casilla === 'paciente') {
+      if (pista.paso === 'DATOS') {
+        const campo = campoPendiente(pista, estado.datos ?? {});
+        return campo ? mensajeDato(campo, estado.paginaEntidad ?? 0, opcion) : [];
+      }
+      return mensajesIdentificacion(pista satisfies PistaDominio, payload => op({ tipo: 'identificar', payload }));
+    }
     if (casilla === 'elegibilidad') return [{ tipo: 'botones', texto: 'Confirma que revisaste la elegibilidad.',
       botones: [opcion({ tipo: 'elegibilidad' }, 'Entendido')] }];
     if (casilla === 'requisitos') {
@@ -247,25 +309,59 @@ export class ConversacionWa {
     }
     type Opcion = ReturnType<typeof opcion>;
     let filas: Opcion[] = [];
-    const catalogo = await this.deps.lecturas.catalogo();
+    const catalogo = casilla === 'servicio' || casilla === 'sede' ? await this.deps.lecturas.catalogo() : [];
     if (casilla === 'servicio') {
       filas = [...new Map(catalogo.map(item => [item.servicioId, item.servicio])).entries()].slice(0, 10)
         .map(([id, nombre]) => opcion({ tipo: 'servicio', id }, nombre));
     } else if (casilla === 'sede') {
       filas = catalogo.filter(item => item.servicioId === tramite.servicioId).slice(0, 10)
         .map(item => opcion({ tipo: 'sede', id: item.sedeId }, item.sede));
-    } else if (tramite.sedeId && tramite.servicioId) {
-      const { sedeId, servicioId } = tramite;
-      const zona = await this.deps.lecturas.zonaSede(sedeId) ?? 'UTC';
-      const fecha = formatInTimeZone(new Date(Date.parse(ts) + 86_400_000), zona, 'yyyy-MM-dd');
-      const [horarios, ocupados] = await Promise.all([
-        this.deps.agendaExterna.disponibilidad({ fecha, sedeId, servicioId, zonaHoraria: zona }, correlationId),
-        this.deps.lecturas.horariosOcupados(sedeId, fecha, ts),
-      ]);
-      filas = horarios.filter(inicio => !ocupados.includes(inicio) && Date.parse(inicio) > Date.parse(ts)).slice(0, 10)
-        .map(inicio => opcion({ tipo: 'horario', inicio }, fechaCorta(inicio, zona)));
+    } else if (casilla === 'horario' && tramite.sedeId && tramite.servicioId) {
+      return this.preguntarHorario(tramite.sedeId, tramite.servicioId, estado, ts, correlationId, opcion);
     }
     return filas.length ? [{ tipo: 'lista', texto: preguntaCasilla[casilla] ?? '¿Qué opción prefieres?', secciones: [{ filas }] }]
+      : [texto('No hay opciones disponibles.')];
+  }
+
+  private async preguntarHorario(sedeId: SedeId, servicioId: ServicioId, estado: Estado, ts: string,
+    correlationId: string, opcion: (accion: Accion, titulo: string) => { id: string; titulo: string; payload: string }): Promise<MensajeBot[]> {
+    const { lecturas, agendaExterna } = this.deps;
+    const zona = await lecturas.zonaSede(sedeId) ?? 'UTC';
+    const consultados = new Map<string, string[]>();
+    const libres = async (fecha: string) => {
+      const anterior = consultados.get(fecha);
+      if (anterior) return anterior;
+      const [horarios, ocupados] = await Promise.all([
+        agendaExterna.disponibilidad({ fecha, sedeId, servicioId, zonaHoraria: zona }, correlationId),
+        lecturas.horariosOcupados(sedeId, fecha, ts),
+      ]);
+      const disponibles = horarios.filter(inicio => !ocupados.includes(inicio) && Date.parse(inicio) > Date.parse(ts));
+      consultados.set(fecha, disponibles);
+      return disponibles;
+    };
+    if (estado.dia) {
+      const horarios = await libres(estado.dia);
+      if (horarios.length) {
+        const pagina = Math.min(estado.paginaHora ?? 0, Math.max(0, Math.ceil((horarios.length - 9) / 8)));
+        const restantes = horarios.slice(pagina * 8);
+        const hayMas = restantes.length > 9;
+        const filas = restantes.slice(0, hayMas ? 8 : 9)
+          .map(inicio => opcion({ tipo: 'horario', inicio }, formatInTimeZone(inicio, zona, 'HH:mm')));
+        if (hayMas) filas.push(opcion({ tipo: 'paginaHora', pagina: pagina + 1 }, 'Ver más horarios'));
+        filas.push(opcion({ tipo: 'otroDia' }, 'Elegir otro día'));
+        return [{ tipo: 'lista', texto: preguntaHora, secciones: [{ filas }] }];
+      }
+      borrarDia(estado);
+    }
+    const hoy = Date.parse(formatInTimeZone(ts, zona, 'yyyy-MM-dd'));
+    const filas = [];
+    for (let desplazamiento = 0; desplazamiento < 14 && filas.length < 7; desplazamiento++) {
+      const fecha = new Date(hoy + desplazamiento * 86_400_000).toISOString().slice(0, 10);
+      if (consultados.size === 14 && !consultados.has(fecha)) break;
+      const [inicio] = await libres(fecha);
+      if (inicio) filas.push(opcion({ tipo: 'dia', fecha }, diaCorto(inicio, zona)));
+    }
+    return filas.length ? [{ tipo: 'lista', texto: preguntaDia, secciones: [{ filas }] }]
       : [texto('No hay opciones disponibles.')];
   }
 }

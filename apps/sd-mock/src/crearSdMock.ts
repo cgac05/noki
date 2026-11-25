@@ -21,13 +21,14 @@ const opcionesSchema = z.object({
 });
 const folioSchema = z.object({ folio: z.string().regex(/^\d{8,9}$/) });
 
-export function crearSdMock(logger = true) {
+export function crearSdMock(logger = true, ahora: () => number = Date.now) {
   const app = Fastify({
     logger: logger ? { level: process.env['LOG_LEVEL'] ?? 'info', redact: ['fechaNac', 'email', 'telefono', 'rfc', 'pin', 'curp'] } : false,
     requestIdLogLabel: 'correlation_id',
   });
   const citas = new Map<string, { folio: string; activa: boolean }>();
-  let secuencia = 10_000_000;
+  const segundosDesdeEpoch = Math.floor(ahora() / 1000);
+  let secuencia = 100_000_000 + (segundosDesdeEpoch % 899_999) * 1000;
   let simulacion = { latenciaMs: 0, falloPorcentaje: 0, fallarSiguientes: 0 };
   const invalidos = { codigo: 'ENTRADA_INVALIDA' };
   app.get('/health', async () => ({ estado: 'ok' }));
