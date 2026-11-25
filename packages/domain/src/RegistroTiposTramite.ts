@@ -11,6 +11,7 @@ export interface PistaDominio {
 }
 
 export interface DefinicionTipoTramite {
+  inactividadHoras: number;
   casillas: readonly Casilla[];
   dependencias: Partial<Record<Casilla, readonly Casilla[]>>;
   ordenPorCanal: Record<Canal, readonly Casilla[]>;

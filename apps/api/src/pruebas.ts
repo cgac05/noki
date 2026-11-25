@@ -1,12 +1,12 @@
 import { v7 } from 'uuid';
 import type { Writable } from 'node:stream';
 import { ConversacionWa } from '@noki/adapter-in-http';
-import { CasosTramite, ResolvedorContinuidad } from '@noki/application';
+import { CasosTramite, RelojDemo, ResolvedorContinuidad, TemporizadoresTramite } from '@noki/application';
 import { crearRegistroTiposTramite, PoliticaIdentidad } from '@noki/domain';
 import {
   AgendaExternaMemoria, AgendaMemoria, BandejaMemoria, CatalogoMemoria, ConversacionesWaMemoria, LecturasMemoria, ContactosMemoria, EventosSinTramiteMemoria,
   HiloRepoMemoria, PacientesMemoria, RegistroComandosMemoria, RegistroIntentosMemoria,
-  RegistroTokensUsadosMemoria, RelojFalso, TramiteRepoMemoria,
+  ProgramadorMemoria, RegistroTokensUsadosMemoria, RelojFalso, TramiteRepoMemoria,
 } from '@noki/adapter-memory';
 import { TokensJose } from '@noki/adapter-out-security';
 import { crearApi } from './crearApi.ts';
@@ -43,13 +43,18 @@ export function crearApiPruebas(opciones: {
   const whatsapp = { idempotencia, motor: new ConversacionWa({
     casos, contactos, lecturas, reloj, ids, registro, agendaExterna, conversaciones: new ConversacionesWaMemoria(),
   }) };
+  const programador: ProgramadorMemoria = new ProgramadorMemoria(async trabajo => {
+    await temporizadores.ejecutar(trabajo);
+  });
+  const temporizadores = new TemporizadoresTramite({ ids, reloj, registro, tramites, agenda, programador });
+  const relojDemo = new RelojDemo(reloj, programador);
   const app = crearApi({
     databaseUrl: 'postgres://demo:demo@127.0.0.1:1/demo', redisUrl: 'redis://127.0.0.1:1', logger: opciones.salidaLog !== undefined,
     ...(opciones.salidaLog ? { salidaLog: opciones.salidaLog } : {}),
     ...(opciones.origen ? { origen: opciones.origen } : {}),
     consultas: { lecturas, reloj, emisor: tokens, bandeja: new BandejaMemoria(), demo: opciones.demo ?? true },
-    comandos: { casos, tokens, lecturas, ids, demo: opciones.demo ?? true, idempotencia }, whatsapp,
+    comandos: { casos, tokens, lecturas, ids, demo: opciones.demo ?? true, idempotencia }, whatsapp, relojDemo,
   });
-  return { app, casos, tokens, ids, reloj, lecturas, tramites, contactos, pacientes, catalogo, agenda, agendaExterna };
+  return { app, casos, tokens, ids, reloj, lecturas, tramites, contactos, pacientes, catalogo, agenda, agendaExterna, temporizadores };
 }
 export { io as clienteTiempoReal } from 'socket.io-client';

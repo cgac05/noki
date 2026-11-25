@@ -24,7 +24,8 @@ it('rehidrata una instantánea JSON sin modificar casillas, estado ni versión',
     reservaId: 'reserva' as ReservaId, inicio: '2026-11-25T13:00:00Z', expiraEn: '2026-11-24T12:10:00Z',
   }, contexto);
   tramite.confirmar('12345678', contexto);
-  tramite.retomar({ ...contexto, canal: 'whatsapp' }, 'TOKEN_CC');
+  const ultimaActividad = '2026-11-24T12:03:00Z';
+  tramite.retomar({ ...contexto, canal: 'whatsapp', ts: ultimaActividad }, 'TOKEN_CC');
   const datos = JSON.parse(JSON.stringify(tramite.instantanea())) as TramiteInstantanea;
   const recuperado = Tramite.rehidratar(datos, registro);
   expect(recuperado.instantanea()).toEqual(tramite.instantanea());
@@ -34,6 +35,8 @@ it('rehidrata una instantánea JSON sin modificar casillas, estado ni versión',
   expect(recuperado.folio).toBe('12345678');
   expect(recuperado.canalOrigen).toBe('callcenter');
   expect(recuperado.ultimoCanal).toBe('whatsapp');
+  expect(recuperado.ultimaActividad).toBe(ultimaActividad);
+  expect(datos.datos.ultimaActividad).toBe(ultimaActividad);
   expect(recuperado.eventosPendientes()).toEqual([]);
   expect(tramite.eventosPendientes().length).toBeGreaterThan(0);
   for (const casilla of CASILLAS) expect(recuperado.casillaLlena(casilla)).toBe(tramite.casillaLlena(casilla));

@@ -1,10 +1,11 @@
 import Fastify from 'fastify';
 import type { Writable } from 'node:stream';
 import cors from '@fastify/cors';
-import { rutasComandos, rutasConsultas, rutasWhatsApp, type DependenciasRutaWa, type DependenciasComandos, type DependenciasConsultas } from '@noki/adapter-in-http';
+import { rutaRelojDemo, rutasComandos, rutasConsultas, rutasWhatsApp, type DependenciasRutaWa, type DependenciasComandos, type DependenciasConsultas } from '@noki/adapter-in-http';
 import { comprobarPostgres } from '@noki/adapter-out-postgres';
 import { comprobarRedis } from '@noki/adapter-out-redis';
 import { v7 } from 'uuid';
+import type { RelojDemo } from '@noki/application';
 
 export interface DependenciasApi {
   databaseUrl: string;
@@ -15,6 +16,7 @@ export interface DependenciasApi {
   comandos?: DependenciasComandos;
   consultas?: DependenciasConsultas;
   whatsapp?: DependenciasRutaWa;
+  relojDemo?: RelojDemo;
 }
 
 export function crearApi(opciones: DependenciasApi) {
@@ -34,6 +36,7 @@ export function crearApi(opciones: DependenciasApi) {
   if (opciones.comandos) void app.register(rutasComandos, opciones.comandos);
   if (opciones.consultas) void app.register(rutasConsultas, opciones.consultas);
   if (opciones.whatsapp) void app.register(rutasWhatsApp, opciones.whatsapp);
+  if (opciones.comandos?.demo && opciones.relojDemo) void app.register(rutaRelojDemo, { relojDemo: opciones.relojDemo });
   app.get('/health', async () => ({ estado: 'ok' }));
   app.get('/ready', async (_request, reply) => {
     const [postgres, redis] = await Promise.all([

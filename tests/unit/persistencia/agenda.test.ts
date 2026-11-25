@@ -13,4 +13,11 @@ it('rechaza un horario ocupado y confirma de forma idempotente con el mismo foli
   await expect(agenda.confirmar(reservaId, '12345678', ts)).resolves.toBeUndefined();
   await expect(agenda.confirmar(reservaId, '12345678', ts)).resolves.toBeUndefined();
   await expect(agenda.confirmar(reservaId, '12345679', ts)).rejects.toMatchObject({ regla: 'HORARIO_NO_DISPONIBLE' });
+  await agenda.expirar(reservaId);
+  await expect(agenda.confirmar(reservaId, '12345678', ts)).resolves.toBeUndefined();
+  const pendiente = 'pendiente' as ReservaId;
+  await agenda.apartar({ ...solicitud, inicio: '2026-11-25T13:00:00Z', reservaId: pendiente });
+  await agenda.expirar(pendiente);
+  await agenda.expirar(pendiente);
+  await expect(agenda.confirmar(pendiente, '12345679', ts)).rejects.toMatchObject({ regla: 'HORARIO_NO_DISPONIBLE' });
 });

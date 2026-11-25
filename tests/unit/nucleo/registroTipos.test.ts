@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { RegistroTiposTramite, type DefinicionTipoTramite } from '../../../packages/domain/src/index.ts';
 
 const definicion: DefinicionTipoTramite = {
+  inactividadHoras: 24,
   casillas: ['servicio', 'sede'],
   dependencias: { sede: ['servicio'] },
   ordenPorCanal: {

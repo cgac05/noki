@@ -60,6 +60,15 @@ const filas = async (id: TramiteId) => (await pool.query(
   'SELECT tipo, idempotency_key, particion, publicado_en FROM evento JOIN outbox ON evento.id = evento_id WHERE tramite_id = $1 ORDER BY idempotency_key', [id],
 )).rows;
 
+it('recupera la última actividad de la columna en instantáneas anteriores', async () => {
+  const tramite = nuevo();
+  await repositorio.guardar(tramite);
+  const ultimaActividad = '2026-11-24T13:00:00.000Z';
+  await pool.query("UPDATE tramite SET datos = datos #- '{datos,ultimaActividad}', ultima_actividad = $2 WHERE id = $1",
+    [tramite.id, ultimaActividad]);
+  expect((await repositorio.obtener(tramite.id))?.ultimaActividad).toBe(ultimaActividad);
+});
+
 it('guarda instantánea, eventos y outbox, y conserva la partición por paciente o hilo', async () => {
   const tramite = nuevo();
   await repositorio.guardar(tramite);

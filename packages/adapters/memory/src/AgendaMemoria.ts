@@ -2,17 +2,17 @@ import type { AgendaPort, SolicitudReserva } from '@noki/application';
 import { ReglaViolada, type ReservaId } from '@noki/domain';
 
 export class AgendaMemoria implements AgendaPort {
-  private readonly reservas = new Map<ReservaId, SolicitudReserva & { expiraEn: string; folio?: string }>();
+  private readonly reservas = new Map<ReservaId, SolicitudReserva & { expiraEn: string; folio?: string; expirada?: true }>();
 
   horariosOcupados(sedeId: SolicitudReserva['sedeId'], ts: string): string[] {
-    return [...new Set([...this.reservas.values()].filter(reserva => reserva.sedeId === sedeId &&
+    return [...new Set([...this.reservas.values()].filter(reserva => !reserva.expirada && reserva.sedeId === sedeId &&
       (reserva.folio || Date.parse(reserva.expiraEn) > Date.parse(ts))).map(reserva => reserva.inicio))].sort();
   }
 
   async apartar(solicitud: SolicitudReserva): Promise<{ reservaId: ReservaId; expiraEn: string }> {
     const { reservaId, inicio, sedeId, servicioId, ts, ttlReservaMin } = solicitud;
     const ocupado = [...this.reservas.values()].some((reserva) =>
-      reserva.sedeId === sedeId && reserva.inicio === inicio
+      !reserva.expirada && reserva.sedeId === sedeId && reserva.inicio === inicio
       && (reserva.recursoId ?? reserva.servicioId) === (solicitud.recursoId ?? servicioId)
       && (reserva.folio !== undefined || Date.parse(reserva.expiraEn) > Date.parse(ts)),
     );
@@ -25,13 +25,18 @@ export class AgendaMemoria implements AgendaPort {
   async confirmar(reservaId: ReservaId, folio: string, ts: string): Promise<void> {
     const reserva = this.reservas.get(reservaId);
     if (reserva?.folio === folio) return;
-    if (!reserva || reserva.folio || Date.parse(ts) >= Date.parse(reserva.expiraEn)) {
+    if (!reserva || reserva.expirada || reserva.folio || Date.parse(ts) >= Date.parse(reserva.expiraEn)) {
       throw new ReglaViolada('HORARIO_NO_DISPONIBLE');
     }
     reserva.folio = folio;
   }
 
   async liberar(reservaId: ReservaId): Promise<void> {
-    this.reservas.delete(reservaId);
+    if (!this.reservas.get(reservaId)?.expirada) this.reservas.delete(reservaId);
+  }
+
+  async expirar(reservaId: ReservaId): Promise<void> {
+    const reserva = this.reservas.get(reservaId);
+    if (reserva && reserva.folio === undefined) reserva.expirada = true;
   }
 }

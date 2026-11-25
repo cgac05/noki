@@ -70,6 +70,21 @@ it('acepta uno de 50 intentos concurrentes por el mismo horario y recupera el ho
   expect((await pool.query('SELECT estado, folio FROM reserva WHERE id = $1', [nueva.reservaId])).rows).toEqual([{ estado: 'CONFIRMADA', folio: '80000000' }]);
 });
 
+it('expira un hold de forma idempotente y conserva otra reserva confirmada', async () => {
+  const tramiteId = randomUUID() as TramiteId;
+  await pool.query("INSERT INTO tramite (id, hilo_id, tipo, estado, ultimo_canal) VALUES ($1, $2, 'AGENDAR', 'BORRADOR', 'web')",
+    [tramiteId, hilo]);
+  const campos = { sedeId, servicioId, tramiteId, ts: '2026-12-01T15:00:00Z', ttlReservaMin: 10 };
+  const hold = await agenda.apartar({ ...campos, inicio: '2026-12-02T16:00:00Z', reservaId: randomUUID() as ReservaId });
+  const cita = await agenda.apartar({ ...campos, inicio: '2026-12-02T17:00:00Z', reservaId: randomUUID() as ReservaId });
+  await agenda.confirmar(cita.reservaId, '80000001', campos.ts);
+  await agenda.expirar(hold.reservaId);
+  await agenda.expirar(hold.reservaId);
+  await agenda.expirar(cita.reservaId);
+  const { rows } = await pool.query('SELECT estado FROM reserva WHERE tramite_id = $1 ORDER BY inicio', [tramiteId]);
+  expect(rows).toEqual([{ estado: 'EXPIRADA' }, { estado: 'CONFIRMADA' }]);
+});
+
 it('confirma la saga con Postgres y sd-mock y libera la reserva tras un conflicto', async () => {
   const sd = crearSdMock(false);
   try {

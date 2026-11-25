@@ -41,6 +41,7 @@ const pistaPaciente: NonNullable<DefinicionTipoTramite['pistaPaciente']> = (paso
 const remoto = ['servicio', 'sede', 'horario', 'requisitos', 'paciente', 'elegibilidad'] as const;
 
 const agendar: DefinicionTipoTramite = {
+  inactividadHoras: 24,
   casillas: CASILLAS,
   dependencias: {
     servicio: [],

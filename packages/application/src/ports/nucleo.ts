@@ -107,6 +107,7 @@ export interface AgendaPort {
   apartar(solicitud: SolicitudReserva): Promise<{ reservaId: ReservaId; expiraEn: string }>;
   confirmar(reservaId: ReservaId, folio: string, ts: string): Promise<void>;
   liberar(reservaId: ReservaId): Promise<void>;
+  expirar(reservaId: ReservaId): Promise<void>;
 }
 
 export type SolicitudCitaExterna = Pick<SolicitudReserva, 'reservaId' | 'sedeId' | 'servicioId' | 'inicio'>;

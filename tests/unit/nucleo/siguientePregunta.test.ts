@@ -84,6 +84,7 @@ const iniciarIdentificacion = () => Tramite.iniciar('tramite' as TramiteId, 'hil
 it('permite extender el registro sin tocar el núcleo', () => {
   const orden = ['paciente'] as const;
   registro.registrar('FACTURA', {
+      inactividadHoras: 24,
     casillas: orden,
     ordenPorCanal: { web: orden, whatsapp: orden, app: orden, callcenter: orden, clinica: orden },
     dependencias: {},

@@ -39,6 +39,7 @@ type EventoIdentidad = Extract<EventoNuevo, { tipo: 'PacienteReconocido' | 'Iden
 
 interface DatosTramite {
   version: number;
+  ultimaActividad: string;
   fase?: EstadoTramite;
   servicioId?: ServicioId;
   sedeId?: SedeId;
@@ -92,7 +93,7 @@ export class Tramite {
 
   static iniciar(id: TramiteId, hiloId: HiloId, tipo: TipoTramite, registro: RegistroTiposTramite, contexto: ContextoOperacion): Tramite {
     const tramite = new Tramite(id, hiloId, tipo, contexto.canal, registro.obtener(tipo), {
-      version: 0, requisitos: [], ultimoCanal: contexto.canal,
+      version: 0, requisitos: [], ultimoCanal: contexto.canal, ultimaActividad: contexto.ts,
     }, 0);
     tramite.anotar(contexto, { tipo: 'TramiteIniciado', payload: { tipoTramite: tipo } });
     return tramite;
@@ -109,6 +110,7 @@ export class Tramite {
   get horario() { return structuredClone(this.datos.horario); }
   get folio() { return this.datos.folio; }
   get ultimoCanal() { return this.datos.ultimoCanal; }
+  get ultimaActividad() { return this.datos.ultimaActividad; }
   get advertenciaElegibilidad() {
     return this.datos.elegibilidad === 'ADVERTENCIA_ELEGIBILIDAD' ? this.datos.elegibilidad : undefined;
   }
@@ -415,6 +417,7 @@ export class Tramite {
   }
 
   private anotar(contexto: ContextoOperacion, ...eventos: EventoNuevo[]): void {
+    this.datos.ultimaActividad = contexto.ts;
     this.datos.version++;
     for (const [indice, evento] of eventos.entries()) {
       this.pendientes.push({

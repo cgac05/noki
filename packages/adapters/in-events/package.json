@@ -7,8 +7,10 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
-    "@noki/domain": "workspace:*",
     "@noki/application": "workspace:*",
-    "ioredis": "5.8.2"
+    "@noki/domain": "workspace:*",
+    "bullmq": "5.81.6",
+    "ioredis": "5.8.2",
+    "zod": "4.1.13"
   }
 }

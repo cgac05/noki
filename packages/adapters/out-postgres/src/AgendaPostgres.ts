@@ -43,4 +43,8 @@ export class AgendaPostgres implements AgendaPort {
     await sql`UPDATE reserva SET estado = 'CANCELADA' WHERE id = ${reservaId}
       AND estado IN ('APARTADA','CONFIRMADA')`.execute(this.db);
   }
+
+  async expirar(reservaId: ReservaId): Promise<void> {
+    await sql`UPDATE reserva SET estado = 'EXPIRADA' WHERE id = ${reservaId} AND estado = 'APARTADA'`.execute(this.db);
+  }
 }

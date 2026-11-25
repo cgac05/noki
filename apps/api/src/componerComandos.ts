@@ -9,12 +9,12 @@ import {
 } from '@noki/adapter-out-postgres';
 import { AgendaExternaSd } from '@noki/adapter-out-sd';
 import { TokensJose } from '@noki/adapter-out-security';
-import { RelojSistema } from './sistema/RelojSistema.ts';
+import { RelojAjustable } from './sistema/RelojAjustable.ts';
 
 export function componerComandos(opciones: { databaseUrl: string; sdMockUrl: string; tokenSecret: string; demo: boolean },
   avisar: (datos: { correlation_id: string; codigo: string }) => void) {
   const ids = { nuevo: v7 };
-  const reloj = new RelojSistema();
+  const reloj = new RelojAjustable(opciones.demo);
   const db = abrirPostgres(opciones.databaseUrl);
   const registro = crearRegistroTiposTramite();
   const tramites = new TramiteRepoPostgres(db, registro, ids);
@@ -27,9 +27,10 @@ export function componerComandos(opciones: { databaseUrl: string; sdMockUrl: str
   const resolvedor = new ResolvedorContinuidad(tramites, contactos, tokens, pacientes, intentos,
     new EventosSinTramitePostgres(db, ids));
   const agendaExterna = new AgendaExternaSd(opciones.sdMockUrl, avisar);
+  const agenda = new AgendaPostgres(db);
   const casos = new CasosTramite({
     ids, reloj, registro, tramites, hilos, contactos, pacientes, intentos, tokens, resolvedor,
-    agenda: new AgendaPostgres(db), agendaExterna,
+    agenda, agendaExterna,
     catalogo: new CatalogoPostgres(db), politica: new PoliticaIdentidad(), registrarError: avisar,
   });
   const idempotencia = {
@@ -45,5 +46,5 @@ export function componerComandos(opciones: { databaseUrl: string; sdMockUrl: str
   const whatsapp = { idempotencia, motor: new ConversacionWa({
     casos, contactos, lecturas, reloj, ids, registro, agendaExterna, conversaciones: new ConversacionesWaPostgres(db),
   }) };
-  return { casos, tokens, lecturas, ids, consultas, whatsapp, reloj, procesados: new RegistroProcesadosPostgres(db), solicitarContinuacion: casos.solicitarContinuacion.bind(casos), demo: opciones.demo, idempotencia, cerrar: () => db.destroy() };
+  return { casos, tokens, lecturas, ids, consultas, whatsapp, reloj, agenda, tramites, registro, procesados: new RegistroProcesadosPostgres(db), solicitarContinuacion: casos.solicitarContinuacion.bind(casos), demo: opciones.demo, idempotencia, cerrar: () => db.destroy() };
 }

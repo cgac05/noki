@@ -1,8 +1,8 @@
 import { expect, it, vi } from 'vitest';
-import { CasosTramite, ResolvedorContinuidad, type DatosDeclarados } from '../../../packages/application/src/index.ts';
+import { CasosTramite, RelojDemo, ResolvedorContinuidad, TemporizadoresTramite, type DatosDeclarados } from '../../../packages/application/src/index.ts';
 import {
   AgendaExternaMemoria, AgendaMemoria, CatalogoMemoria, ContactosMemoria, GeneradorIdSecuencial, HiloRepoMemoria,
-  PacientesMemoria, RegistroIntentosMemoria, EventosSinTramiteMemoria, RelojFalso, TramiteRepoMemoria, VerificadorTokensMemoria,
+  PacientesMemoria, ProgramadorMemoria, RegistroIntentosMemoria, EventosSinTramiteMemoria, RelojFalso, TramiteRepoMemoria, VerificadorTokensMemoria,
 } from '../../../packages/adapters/memory/src/index.ts';
 import {
   crearRegistroTiposTramite, PoliticaIdentidad,
@@ -27,7 +27,7 @@ const cc = {
 } as const;
 const wa = { ...cc, actor: 'paciente', canal: 'whatsapp', nivel: 0, idempotencyKey: 'wa' } as const;
 
-function escenario() {
+function escenario(registrarError = vi.fn<(datos: { correlation_id: string; codigo: string }) => void>()) {
   const tramites = new TramiteRepoMemoria();
   const pacientes = new PacientesMemoria();
   const hilos = new HiloRepoMemoria();
@@ -40,15 +40,16 @@ function escenario() {
   const reloj = new RelojFalso(new Date('2026-11-24T12:00:00Z'));
   const politica = new PoliticaIdentidad();
   const ids = new GeneradorIdSecuencial();
+  const registro = crearRegistroTiposTramite();
   catalogo.registrar(servicioId, perfil, new Map([[sedeId, 5500]]));
   pacientes.registrar(pacienteId, { ...datos, sexo: 'F' });
   const eventos = new EventosSinTramiteMemoria();
   const resolvedor = new ResolvedorContinuidad(tramites, contactos, tokens, pacientes, intentos, eventos);
   const casos = new CasosTramite({
     tramites, hilos, contactos, tokens, pacientes, catalogo, agenda, agendaExterna, reloj, politica, ids,
-    registro: crearRegistroTiposTramite(), resolvedor, intentos,
+    registro, resolvedor, intentos, registrarError,
   });
-  return { casos, reloj, contactos, tokens, intentos, tramites, eventos, agendaExterna, pacientes };
+  return { casos, reloj, contactos, tokens, intentos, tramites, eventos, agendaExterna, pacientes, agenda, registro, ids };
 }
 
 async function listo(casos: CasosTramite) {
@@ -59,6 +60,147 @@ async function listo(casos: CasosTramite) {
   await casos.cumplirRequisito(id, 'ORDEN_MEDICA', cc);
   return id;
 }
+
+it('mantiene un hold futuro y lo expira al adelantar el reloj más allá del plazo', async () => {
+  const puertos = escenario();
+  const { casos, reloj, tramites, agenda } = puertos;
+  const programador: ProgramadorMemoria = new ProgramadorMemoria(async trabajo => {
+    await temporizadores.ejecutar(trabajo);
+  });
+  const temporizadores = new TemporizadoresTramite({ ...puertos, programador });
+  const demo = new RelojDemo(reloj, programador);
+  const id = await listo(casos);
+  const inicio = '2026-11-25T18:00:00Z';
+  await casos.reservar(id, inicio, cc);
+  await temporizadores.reconciliar(id);
+  await demo.adelantar(5);
+  expect((await tramites.obtener(id))?.estado).toBe('HORARIO_RESERVADO');
+  await demo.adelantar(6);
+  expect((await tramites.obtener(id))?.estado).toBe('LISTO_PARA_RESERVAR');
+  expect(tramites.eventos().at(-1)).toMatchObject({ tipo: 'ReservaExpirada', actor: 'sistema', canal: cc.canal, nivelAuth: 0 });
+  expect(agenda.horariosOcupados(sedeId, '2026-11-24T12:00:00Z')).not.toContain(inicio);
+});
+
+it('compensa la cita externa cuando el temporizador gana a la confirmación', async () => {
+  const puertos = escenario();
+  const { casos, reloj, tramites, agendaExterna } = puertos;
+  const programador = new ProgramadorMemoria();
+  const temporizadores = new TemporizadoresTramite({ ...puertos, programador });
+  const id = await listo(casos);
+  const { tramite } = await casos.reservar(id, '2026-11-25T18:00:00Z', cc);
+  await temporizadores.reconciliar(id);
+  const hold = programador.vencidos(tramite.horario!.expiraEn).find(({ tipo }) => tipo === 'HOLD')!;
+  const registrar = agendaExterna.registrarCita.bind(agendaExterna);
+  let folio = '';
+  vi.spyOn(agendaExterna, 'registrarCita').mockImplementationOnce(async solicitud => {
+    folio = await registrar(solicitud);
+    reloj.fijar(new Date(hold.venceEn));
+    expect(await temporizadores.ejecutar(hold)).toEqual({ tipo: 'APLICADO' });
+    return folio;
+  });
+  await expect(casos.confirmar(id, cc)).rejects.toMatchObject({ regla: 'HORARIO_NO_DISPONIBLE' });
+  expect(agendaExterna.activa(folio)).toBe(false);
+  expect((await tramites.obtener(id))?.estado).toBe('LISTO_PARA_RESERVAR');
+});
+
+it('registra la compensación imposible en la carrera y conserva el error original', async () => {
+  const registrarError = vi.fn<(datos: { correlation_id: string; codigo: string }) => void>();
+  const puertos = escenario(registrarError);
+  const { casos, reloj, tramites, agenda, agendaExterna } = puertos;
+  const programador = new ProgramadorMemoria();
+  const temporizadores = new TemporizadoresTramite({ ...puertos, programador });
+  const id = await listo(casos);
+  const inicio = '2026-11-25T18:00:00Z';
+  const { tramite } = await casos.reservar(id, inicio, cc);
+  await temporizadores.reconciliar(id);
+  const hold = programador.vencidos(tramite.horario!.expiraEn).find(({ tipo }) => tipo === 'HOLD')!;
+  const registrar = agendaExterna.registrarCita.bind(agendaExterna);
+  let folio = '';
+  const cancelar = vi.spyOn(agendaExterna, 'cancelarCita').mockRejectedValueOnce(new Error('Agenda no disponible'));
+  vi.spyOn(agendaExterna, 'registrarCita').mockImplementationOnce(async solicitud => {
+    folio = await registrar(solicitud);
+    reloj.fijar(new Date(hold.venceEn));
+    expect(await temporizadores.ejecutar(hold)).toEqual({ tipo: 'APLICADO' });
+    return folio;
+  });
+  await expect(casos.confirmar(id, cc)).rejects.toMatchObject({ regla: 'HORARIO_NO_DISPONIBLE' });
+  expect(cancelar).toHaveBeenCalledExactlyOnceWith(folio, cc.correlationId);
+  expect(registrarError).toHaveBeenCalledExactlyOnceWith({
+    correlation_id: cc.correlationId, codigo: 'COMPENSACION_AGENDA_FALLIDA',
+  });
+  expect((await tramites.obtener(id))?.estado).toBe('LISTO_PARA_RESERVAR');
+  expect(agenda.horariosOcupados(sedeId, reloj.ahora().toISOString())).not.toContain(inicio);
+  expect(agendaExterna.activa(folio)).toBe(true);
+});
+
+it('al confirmar cambia los trabajos, ignora el hold anterior y marca inasistencia al terminar la tolerancia', async () => {
+  const puertos = escenario();
+  const { casos, reloj, tramites, agenda } = puertos;
+  const programador = new ProgramadorMemoria();
+  const temporizadores = new TemporizadoresTramite({ ...puertos, programador });
+  const id = await listo(casos);
+  const inicio = '2026-11-25T18:00:00.000Z';
+  await casos.reservar(id, inicio, cc);
+  await temporizadores.reconciliar(id);
+  const limite = '2026-11-26T12:00:00.000Z';
+  const hold = programador.vencidos(limite).find(trabajo => trabajo.tipo === 'HOLD')!;
+  await casos.confirmar(id, cc);
+  await temporizadores.reconciliar(id);
+  await temporizadores.reconciliar(id);
+  const trabajos = programador.vencidos(limite);
+  expect(trabajos).toMatchObject([{ tipo: 'INASISTENCIA', venceEn: '2026-11-25T18:05:00.000Z' }]);
+  const inasistencia = trabajos[0]!;
+  expect(await temporizadores.ejecutar(hold)).toEqual({ tipo: 'SIN_EFECTO' });
+  expect(await temporizadores.ejecutar(inasistencia)).toEqual({ tipo: 'REPROGRAMAR', venceEn: inasistencia.venceEn });
+  reloj.fijar(new Date(inasistencia.venceEn));
+  expect(await temporizadores.ejecutar(inasistencia)).toEqual({ tipo: 'APLICADO' });
+  expect((await tramites.obtener(id))?.estado).toBe('NO_ASISTIO');
+  expect(tramites.eventos().at(-1)).toMatchObject({ tipo: 'Inasistencia', actor: 'sistema', payload: { sedeId } });
+  expect(agenda.horariosOcupados(sedeId, inasistencia.venceEn)).toContain(inicio);
+  await temporizadores.reconciliar(id);
+  expect(programador.vencidos(limite)).toEqual([]);
+});
+
+it('reprograma la inactividad con actividad nueva y desconoce el trabajo anterior', async () => {
+  const puertos = escenario();
+  const { casos, reloj, tramites } = puertos;
+  const programador = new ProgramadorMemoria();
+  const temporizadores = new TemporizadoresTramite({ ...puertos, programador });
+  const { tramite: { id } } = await casos.iniciar('AGENDAR', '5210000000001', cc);
+  await casos.seleccionarServicio(id, servicioId, cc);
+  await casos.seleccionarSede(id, sedeId, cc);
+  await temporizadores.reconciliar(id);
+  const original = programador.vencidos('2026-11-25T12:00:00Z')[0]!;
+  reloj.adelantar(23 * 3_600_000);
+  await casos.seleccionarSede(id, sedeId, cc);
+  await temporizadores.reconciliar(id);
+  reloj.adelantar(2 * 3_600_000);
+  expect(await temporizadores.ejecutar(original)).toEqual({ tipo: 'SIN_EFECTO' });
+  expect(programador.vencidos(reloj.ahora().toISOString())).toEqual([]);
+  expect(programador.vencidos('2026-11-26T11:00:00Z')).toMatchObject([{ venceEn: '2026-11-26T11:00:00.000Z' }]);
+  expect((await tramites.obtener(id))?.estado).toBe('COTIZADO');
+});
+
+it('descarta inasistencia pendiente cuando la recepción ya registró la llegada', async () => {
+  const puertos = escenario();
+  const { casos, reloj, tokens, tramites } = puertos;
+  const programador = new ProgramadorMemoria();
+  const temporizadores = new TemporizadoresTramite({ ...puertos, programador });
+  const id = await listo(casos);
+  await casos.reservar(id, '2026-11-25T18:00:00Z', cc);
+  const { tramite } = await casos.confirmar(id, cc);
+  await temporizadores.reconciliar(id);
+  const trabajo = programador.vencidos('2026-11-26T12:00:00Z')[0]!;
+  const qr = tokens.emitir({
+    tramiteId: id, hiloId: tramite.hiloId, nivel: 1, canalOrigen: 'app', metodo: 'TOKEN_WEB',
+  }, 'LLEGADA');
+  await casos.registrarLlegada(qr, { ...cc, canal: 'clinica', actor: 'recepcion:demo' });
+  reloj.fijar(new Date(trabajo.venceEn));
+  expect(await temporizadores.ejecutar(trabajo)).toEqual({ tipo: 'SIN_EFECTO' });
+  await temporizadores.reconciliar(id);
+  expect(programador.vencidos(reloj.ahora().toISOString())).toEqual([]);
+  expect((await tramites.obtener(id))?.estado).toBe('EN_CLINICA');
+});
 
 it('Continuidad Call Center → WhatsApp conserva las casillas y permite apartar el horario', async () => {
   const { casos, tokens } = escenario();

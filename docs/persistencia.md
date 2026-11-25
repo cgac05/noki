@@ -22,6 +22,16 @@ La migración `004_api` crea `comando_idempotente`, `conversacion_wa` y `mensaje
 
 `api-comandos` debe conectar los repositorios, proporcionar el cliente de agenda externa configurado con `SD_MOCK_URL`, conservar las claves de evento en los consumidores y traducir las reglas de agenda a HTTP 422.
 
+## Temporizadores
+
+El grupo `temporizadores` reconcilia los trabajos BullMQ con el estado del trámite tras cada evento publicado. El identificador lógico es `${tipo}:${tramiteId}` y BullMQ guarda `${tipo}-${tramiteId}`.
+
+- `HOLD` vence en `expiraEn`. El trámite emite `ReservaExpirada` y la reserva apartada pasa a `EXPIRADA`.
+- `INASISTENCIA` vence al terminar la tolerancia de una cita confirmada. La reserva confirmada se conserva como histórico.
+- `INACTIVIDAD` vence a las 24 horas de la última operación de agendado que guardó eventos. Si el trámite aún tenía un hold, la reserva pasa a `EXPIRADA`.
+
+Cada ejecución comprueba el estado y el plazo contra el reloj de la API. Con `DEMO_MODE=true`, `POST /api/demo/reloj` con `{"adelantarMinutos":11}` adelanta el reloj y activa los trabajos que ya vencieron.
+
 ## Arranque y persistencia de la API
 
 Configura `DATABASE_URL`, `REDIS_URL`, `SD_MOCK_URL`, `PUBLIC_BASE_URL` y un `TOKEN_SECRET` de al menos 32 bytes en el entorno. Con Postgres, Redis y sd-mock disponibles, aplica `pnpm db:migrate`, ejecuta `pnpm seed` para la demo e inicia la API con `pnpm dev`. Los endpoints de bandeja y contexto demo requieren `DEMO_MODE=true`.

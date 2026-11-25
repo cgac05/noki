@@ -4,3 +4,4 @@ export * from './rutasConsultas.ts';
 export { vistaTramite } from './vistaTramite.ts';
 export * from './ConversacionWa.ts';
 export * from './rutasWhatsApp.ts';
+export { rutaRelojDemo } from './rutaRelojDemo.ts';

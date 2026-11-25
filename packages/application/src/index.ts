@@ -1,4 +1,7 @@
-export type { Reloj } from './ports/Reloj.ts';
+export type { Reloj, RelojAjustable } from './ports/Reloj.ts';
+export type * from './ports/ProgramadorTemporizadores.ts';
+export { RelojDemo } from './RelojDemo.ts';
+export { TemporizadoresTramite, type ResultadoTemporizador } from './TemporizadoresTramite.ts';
 export type { GeneradorId } from './ports/GeneradorId.ts';
 export type * from './ports/nucleo.ts';
 export * from './ResolvedorContinuidad.ts';

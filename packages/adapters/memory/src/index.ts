@@ -1,4 +1,5 @@
 export { RelojFalso } from './RelojFalso.ts';
+export { ProgramadorMemoria } from './ProgramadorMemoria.ts';
 export { GeneradorIdSecuencial } from './GeneradorIdSecuencial.ts';
 export { TramiteRepoMemoria } from './TramiteRepoMemoria.ts';
 export { HiloRepoMemoria } from './HiloRepoMemoria.ts';

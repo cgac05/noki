@@ -1,8 +1,8 @@
 import { afterAll, beforeAll, expect, it } from 'vitest';
 import { Redis } from 'ioredis';
-import { RelayOutbox } from '../../packages/application/src/index.ts';
-import { ConsumidorStreams } from '../../packages/adapters/in-events/src/index.ts';
-import { PublicadorRedisStreams } from '../../packages/adapters/out-redis/src/index.ts';
+import { RelayOutbox, RelojDemo, TemporizadoresTramite } from '../../packages/application/src/index.ts';
+import { ConsumidorStreams, WorkerTemporizadores } from '../../packages/adapters/in-events/src/index.ts';
+import { ProgramadorBullMQ, PublicadorRedisStreams } from '../../packages/adapters/out-redis/src/index.ts';
 import { crearTiempoReal } from '../../apps/api/src/tiempoReal.ts';
 import { clienteTiempoReal } from '../../apps/api/src/pruebas.ts';
 import { Pool } from 'pg';
@@ -12,8 +12,8 @@ import { crearApi } from '../../apps/api/src/crearApi.ts';
 import { componerComandos } from '../../apps/api/src/componerComandos.ts';
 import { sembrar } from '../../apps/api/src/semilla/sembrar.ts';
 import { crearSdMock } from '../../apps/sd-mock/src/index.ts';
-import type { HiloId, SedeId, TramiteId } from '../../packages/domain/src/index.ts';
-import { PACIENTES_DEMO } from '../../apps/api/src/semilla/datosDemo.ts';
+import type { HiloId, PacienteId, SedeId, ServicioId, TramiteId } from '../../packages/domain/src/index.ts';
+import { idDemo, PACIENTES_DEMO } from '../../apps/api/src/semilla/datosDemo.ts';
 import { CuerpoErrorSchema, RespuestaComandoSchema, RespuestaMensajeWaSchema, RUTAS_CONSULTAS, type MensajeBot } from '../../packages/contracts/src/index.ts';
 
 const url = new URL(process.env['TEST_DATABASE_URL'] ?? '');
@@ -293,3 +293,102 @@ it('Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez', async
     await sd.close();
   }
 });
+
+it('publica, programa y expira el hold desde la ruta del reloj con la API compuesta', async () => {
+  const databaseUrl = url.toString();
+  const redisUrl = process.env['REDIS_URL']!;
+  const nombre = 'prueba-temporizadores-api-' + Date.now();
+  const prefijo = nombre + ':';
+  const redis = new Redis(redisUrl);
+  const sd = crearSdMock(false);
+  const sdMockUrl = await sd.listen({ host: '127.0.0.1', port: 0 });
+  const deps = componerComandos({
+    databaseUrl, sdMockUrl,
+    tokenSecret: 'secreto-sintetico-de-integracion-de-32-bytes', demo: true,
+  }, () => {});
+  const programador = new ProgramadorBullMQ(redisUrl, nombre);
+  const temporizadores = new TemporizadoresTramite({ ...deps, programador });
+  const crearWorker = () => new WorkerTemporizadores(redisUrl, nombre, deps.reloj, trabajo => temporizadores.ejecutar(trabajo), () => {});
+  let worker = crearWorker();
+  const crearLector = () => new ConsumidorStreams(redisUrl, nombre, deps.procesados, async evento => {
+    if (evento.tramiteId) await temporizadores.reconciliar(evento.tramiteId);
+  }, prefijo);
+  let lector = crearLector();
+  const publicador = new PublicadorRedisStreams(redisUrl, prefijo);
+  const outbox = new OutboxPostgres(databaseUrl);
+  const relay = new RelayOutbox(outbox, publicador, deps.reloj);
+  const app = crearApi({
+    databaseUrl, redisUrl, logger: false, comandos: deps, consultas: deps.consultas,
+    relojDemo: new RelojDemo(deps.reloj, programador),
+  });
+  const comando = () => ({
+    canal: 'callcenter', actor: 'asesor:demo', nivel: 1, vinculado: false, factores: new Set<never>(),
+    idempotencyKey: deps.ids.nuevo(), correlationId: deps.ids.nuevo(),
+  } as const);
+  try {
+    const { tramite: { id } } = await deps.casos.iniciar('AGENDAR', '0000000018', comando());
+    await deps.casos.asignarPaciente(id, PACIENTES_DEMO[0].id as PacienteId, comando());
+    await deps.casos.seleccionarServicio(id, idDemo(10) as ServicioId, comando());
+    await deps.casos.seleccionarSede(id, idDemo(1) as SedeId, comando());
+    await deps.casos.cumplirRequisito(id, 'ACEPTAR_PREPARACION', comando());
+    const inicio = new Date(deps.reloj.ahora().getTime() + 24 * 3_600_000).toISOString();
+    const { tramite, eventos } = await deps.casos.reservar(id, inicio, comando());
+    await lector.iniciar();
+    await relay.publicarPendientes();
+    await lector.consumirPendientes();
+    expect((await programador.cola.getJob('HOLD-' + id))?.data.reservaId).toBe(tramite.horario?.reservaId);
+    const reservado = eventos.find(evento => evento.tipo === 'HorarioReservado');
+    if (!reservado) throw new Error('Falta HorarioReservado.');
+    await publicador.publicar(0, reservado);
+    await lector.consumirPendientes();
+    expect((await programador.cola.getDelayed()).filter(trabajo => trabajo.data.tipo === 'HOLD' && trabajo.data.tramiteId === id)).toHaveLength(1);
+    await worker.cerrar();
+    lector.cerrar();
+    const respuesta = await app.inject({ method: 'POST', url: '/api/demo/reloj', payload: { adelantarMinutos: 11 } });
+    expect(respuesta.statusCode).toBe(200);
+    expect((await deps.tramites.obtener(id))?.estado).toBe('HORARIO_RESERVADO');
+    worker = crearWorker();
+    lector = crearLector();
+    await lector.iniciar();
+    await expect.poll(async () => (await deps.tramites.obtener(id))?.estado, { timeout: 4_500 }).toBe('LISTO_PARA_RESERVAR');
+    await expect.poll(async () => (await pool.query('SELECT estado FROM reserva WHERE id = $1',
+      [tramite.horario?.reservaId])).rows).toEqual([{ estado: 'EXPIRADA' }]);
+    expect((await pool.query("SELECT actor FROM evento WHERE tramite_id = $1 AND tipo = 'ReservaExpirada'", [id])).rows)
+      .toEqual([{ actor: 'sistema' }]);
+    await publicador.publicar(0, { ...reservado, idempotencyKey: deps.ids.nuevo() });
+    await lector.consumirPendientes();
+    await expect.poll(() => programador.cola.getJob('HOLD-' + id)).toBeUndefined();
+    const siguiente = await deps.casos.reservar(id, inicio, comando());
+    const anterior = siguiente.eventos.find(evento => evento.tipo === 'HorarioReservado');
+    if (!anterior) throw new Error('Falta el nuevo HorarioReservado.');
+    await relay.publicarPendientes();
+    await lector.consumirPendientes();
+    // Otro escenario de esta suite ya confirmó el primer folio del simulador.
+    const primeraCitaSimulada = await sd.inject({
+      method: 'POST', url: '/agenda/citas',
+      payload: { reservaId: deps.ids.nuevo(), sedeId: idDemo(1), servicioId: idDemo(10), inicio },
+    });
+    expect(primeraCitaSimulada.statusCode).toBe(200);
+    await deps.casos.confirmar(id, comando());
+    await relay.publicarPendientes();
+    await lector.consumirPendientes();
+    await expect.poll(() => programador.cola.getJob('HOLD-' + id)).toBeUndefined();
+    expect(await programador.cola.getJob('INASISTENCIA-' + id)).toBeDefined();
+    await publicador.publicar(0, { ...anterior, idempotencyKey: deps.ids.nuevo() });
+    await lector.consumirPendientes();
+    await expect.poll(() => programador.cola.getJob('HOLD-' + id)).toBeUndefined();
+    expect(await programador.cola.getJob('INASISTENCIA-' + id)).toBeDefined();
+  } finally {
+    lector.cerrar();
+    await worker.cerrar();
+    await programador.cola.obliterate({ force: true });
+    await programador.cerrar();
+    publicador.cerrar();
+    await outbox.cerrar();
+    await app.close();
+    await deps.cerrar();
+    await sd.close();
+    await redis.del(...Array.from({ length: 8 }, (_, particion) => prefijo + particion));
+    redis.disconnect();
+  }
+}, 15_000);

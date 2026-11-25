@@ -9,6 +9,7 @@
   "dependencies": {
     "@noki/application": "workspace:*",
     "@noki/domain": "workspace:*",
+    "bullmq": "5.81.6",
     "ioredis": "5.8.2"
   }
 }

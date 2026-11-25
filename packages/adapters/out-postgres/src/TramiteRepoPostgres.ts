@@ -68,9 +68,15 @@ export class TramiteRepoPostgres implements TramiteRepo {
   }
 
   private async buscar(filtro: RawBuilder<unknown>): Promise<Tramite[]> {
-    const { rows } = await sql<{ datos: TramiteInstantanea }>`
-      SELECT datos FROM tramite WHERE ${filtro} AND datos <> '{}'::jsonb ORDER BY id
+    type DatosAnteriores = Omit<TramiteInstantanea, 'datos'> & {
+      datos: Omit<TramiteInstantanea['datos'], 'ultimaActividad'> & { ultimaActividad?: string };
+    };
+    const { rows } = await sql<{ datos: DatosAnteriores; ultima_actividad: Date }>`
+      SELECT datos, ultima_actividad FROM tramite WHERE ${filtro} AND datos <> '{}'::jsonb ORDER BY id
     `.execute(this.db);
-    return rows.map(({ datos }) => Tramite.rehidratar(datos, this.registro));
+    return rows.map(({ datos, ultima_actividad }) => Tramite.rehidratar({
+      ...datos,
+      datos: { ...datos.datos, ultimaActividad: datos.datos.ultimaActividad ?? ultima_actividad.toISOString() },
+    }, this.registro));
   }
 }
