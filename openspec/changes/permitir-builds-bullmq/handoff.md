@@ -1,0 +1,16 @@
+# Transferencia: permitir-builds-bullmq
+
+- Responsable: cambio compartido (configuración raíz `pnpm-workspace.yaml`). Necesita a un responsable del frente A (`J3sus-esb` o Christian Avila, `cgac05`) y al del frente B (`LuisMaster119`), registrados por separado.
+- Objetivo: que `pnpm install --frozen-lockfile` no falle con la dependencia nativa opcional que trae BullMQ; ver `proposal.md` (Why) y H-01 de `openspec/changes/temporizadores/revision.md`.
+- Alcance autorizado: `proposal.md` (What Changes) sin "Fuera de alcance"; design D1–D2; tareas 1.1–1.2.
+- Preparación: autorizada por Christian Avila el 2026-11-25 en el hilo del proyecto. Cita: "Autorizo preparar el cambio compartido para declarar msgpackr-extract en pnpm-workspace.yaml." Cubre escribir estos artefactos, no implementarlos.
+- Autorización de implementación, frente A: otorgada para la revisión 1 por Christian Avila, co-responsable del frente A, en el hilo del proyecto el 2026-11-25. Cita: "Autorizo implementar permitir-builds-bullmq con la revisión 1." Hashes comprobados sin cambios al registrarla. No autoriza commits ni publicar cambios.
+- Autorización de implementación, frente B: visto bueno de `LuisMaster119` para la revisión 1, transmitido textualmente por Christian Avila en el hilo del proyecto el 2026-11-25. Cita: «Luis escribió: «Doy visto bueno a permitir-builds-bullmq con la revisión 1.». Hashes comprobados sin cambios al registrarla. No autoriza commits ni publicar cambios.
+- Revisión autorizada: revisión 1 (sin commit, en el árbol de `feat/temporizadores` sobre `d7f7590`), SHA-256 (12 primeros caracteres): `proposal.md` cf23ead9dd40 · `design.md` 3ec78e393a17 · `tasks.md` 3ad702a16330 · `specs/entorno-desarrollo/spec.md` 5c0e7d7c556d. `openspec validate permitir-builds-bullmq --type change --strict` pasó el 2026-11-25.
+- Artefactos a leer: `proposal.md`, `design.md`, `tasks.md`, `specs/entorno-desarrollo/spec.md`; `openspec/specs/entorno-desarrollo/spec.md`; `docs/trabajo-paralelo.md` (archivos compartidos e integración).
+- Tareas pendientes: 1.1–1.2.
+- Restricciones: solo la línea `msgpackr-extract: false` en `pnpm-workspace.yaml`. No tocar `package.json` raíz, `.npmrc`, `pnpm-lock.yaml` (salvo lo que ya trae `temporizadores`) ni otra configuración. Sin commits.
+- Integración (requiere autorización de commit aparte): el commit de este cambio va solo con `pnpm-workspace.yaml`, en una rama `feat/permitir-builds-bullmq` desde `main`, y se integra antes que `temporizadores` (design D2).
+- Criterios de aceptación: los dos escenarios de "Scripts de instalación declarados".
+- Detener la parte afectada si: `false` hace fallar alguna prueba de BullMQ, o pnpm exige otra configuración además de esa línea.
+- Autorización de cierre: frente A, Christian Avila en el hilo del proyecto el 2026-11-25. Cita: "Autorizo cerrar permitir-builds-bullmq y temporizadores con las revisiones verificadas: commits, integración en main, push, sincronizar specs y archivar." Frente B, `LuisMaster119`, transmitido textualmente por Christian Avila en el mismo mensaje. Cita: «Luis escribió: «Doy visto bueno para cerrar permitir-builds-bullmq con la revisión 1 verificada.». Cubre la revisión 1 verificada (`revision.md` PASS).
