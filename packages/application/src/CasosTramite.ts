@@ -46,6 +46,7 @@ interface Dependencias {
   registro: RegistroTiposTramite;
   resolvedor: ResolvedorContinuidad;
   intentos: RegistroIntentos;
+  curpFlexible?: boolean;
 }
 
 type DatosIdentificacion = {
@@ -210,9 +211,12 @@ export class CasosTramite {
       return;
     }
     const datos = validarCurp(curp);
-    if (!datos) throw new ReglaViolada('CURP_INVALIDA');
     const fechaDeclarada = tramite.identificacion?.fechaNac;
-    if (fechaDeclarada && fechaDeclarada !== datos.fechaNac) throw new ReglaViolada('CURP_NO_COINCIDE');
+    if (!datos || (fechaDeclarada && fechaDeclarada !== datos.fechaNac)) {
+      if (!this.puertos.curpFlexible) throw new ReglaViolada(datos ? 'CURP_NO_COINCIDE' : 'CURP_INVALIDA');
+      tramite.marcarSinCurp();
+      return;
+    }
     const pacientes = this.puertos.pacientes;
     let pacienteId = await pacientes.buscarPorCurp(curp);
     if (!pacienteId) {
@@ -236,14 +240,17 @@ export class CasosTramite {
     const { nombre, apellidoPaterno, apellidoMaterno } = payload;
     const nombres = { nombre, apellidoPaterno, ...(apellidoMaterno ? { apellidoMaterno } : {}) };
     const estado = tramite.identificacion;
-    const curp = estado?.curp;
+    let curp = estado?.curp;
     const nacimiento = curp ? validarCurp(curp) : {
       fechaNac: estado?.fechaNac ?? payload.fechaNac, sexo: payload.sexo, entidadNacimiento: payload.entidadNacimiento,
     };
     if (!nacimiento?.fechaNac || !nacimiento.sexo || !nacimiento.entidadNacimiento) {
       throw new ReglaViolada('DATOS_IDENTIFICACION_INCOMPLETOS');
     }
-    if (curp && !coincideNombreCurp(curp, nombres)) throw new ReglaViolada('CURP_NO_COINCIDE');
+    if (curp && !coincideNombreCurp(curp, nombres)) {
+      if (!this.puertos.curpFlexible) throw new ReglaViolada('CURP_NO_COINCIDE');
+      curp = undefined;
+    }
     const datos = { ...nombres, fechaNac: nacimiento.fechaNac, sexo: nacimiento.sexo,
       entidadNacimiento: nacimiento.entidadNacimiento };
     const base = curpBase(datos);

@@ -9,10 +9,7 @@ export const ENTIDADES_NACIMIENTO = [
   'SL', 'SR', 'TC', 'TS', 'TL', 'VZ', 'YN', 'ZS', 'NE',
 ] as const;
 
-const formatoCurp = new RegExp(
-  '^[A-Z][AEIOUX][A-Z]{2}[0-9]{6}[HMX](' + ENTIDADES_NACIMIENTO.join('|') +
-  ')[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9][0-9]$',
-);
+const formatoCurp = /^[A-Z0-9]{18}$/;
 
 const datosNombre = z.string().trim().min(1);
 export const IdentificarPacienteSchema = z.object({

@@ -45,6 +45,7 @@ export function crearApiPruebas(opciones: {
     mensaje: textoAprobacion,
   });
   const casos: CasosTramite = new CasosTramite({
+    curpFlexible: demo,
     solicitarAprobacion: tramite => aprobacion.solicitar(tramite),
     ids, reloj, registro, tramites, hilos, contactos, pacientes, intentos, catalogo, agenda, agendaExterna,
     tokens, resolvedor, politica: new PoliticaIdentidad(),

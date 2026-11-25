@@ -27,7 +27,8 @@ const cc = {
 } as const;
 const wa = { ...cc, actor: 'paciente', canal: 'whatsapp', nivel: 0, idempotencyKey: 'wa' } as const;
 
-function escenario(registrarError = vi.fn<(datos: { correlation_id: string; codigo: string }) => void>()) {
+function escenario(registrarError = vi.fn<(datos: { correlation_id: string; codigo: string }) => void>(),
+  opciones: { curpFlexible?: boolean } = {}) {
   const tramites = new TramiteRepoMemoria();
   tramites.registrarZonaSede(sedeId, 'America/Mazatlan');
   const pacientes = new PacientesMemoria();
@@ -48,7 +49,7 @@ function escenario(registrarError = vi.fn<(datos: { correlation_id: string; codi
   const resolvedor = new ResolvedorContinuidad(tramites, contactos, tokens, pacientes, intentos, eventos);
   const casos = new CasosTramite({
     tramites, hilos, contactos, tokens, pacientes, catalogo, agenda, agendaExterna, reloj, politica, ids,
-    registro, resolvedor, intentos, registrarError,
+    registro, resolvedor, intentos, registrarError, ...opciones,
   });
   return { casos, reloj, contactos, tokens, intentos, tramites, eventos, agendaExterna, pacientes, agenda, registro, ids, hilos };
 }
@@ -608,6 +609,51 @@ it('rechaza CURP_INVALIDA en el caso de uso sin avanzar ni contar intento', asyn
   expect(actual?.pasoIdentificacion()).toBe('CURP');
   expect(actual?.version).toBe(pendiente.tramite.version);
   expect(fallar).not.toHaveBeenCalled();
+});
+
+it.each([
+  { curp: 'PELA900228XNTRNN05', fechaNac: undefined },
+  { curp: 'PELA900228XNTRNN04', fechaNac: '1990-02-27' },
+])('en demo continúa sin CURP cuando el verificador o la fecha no coinciden', async ({ curp, fechaNac }) => {
+  const { casos, intentos, pacientes } = escenario(undefined, { curpFlexible: true });
+  const numero = '5210000000073';
+  const { tramite } = await casos.iniciar('AGENDAR', numero, cc);
+  await casos.identificarPaciente(tramite.id, { paso: 'DESTINATARIO', para: fechaNac ? 'MI' : 'OTRA_PERSONA' }, numero, cc);
+  if (fechaNac) {
+    await casos.identificarPaciente(tramite.id, { paso: 'FECHA_NAC', fechaNac }, numero, cc);
+  }
+  const fallar = vi.spyOn(intentos, 'fallar');
+  const resultado = await casos.identificarPaciente(tramite.id, { paso: 'CURP', curp }, numero, cc);
+  const pregunta = resultado.siguientePregunta;
+  expect(pregunta).toMatchObject({ pista: { paso: 'DATOS' } });
+  const campos = pregunta.tipo === 'PREGUNTA' ? pregunta.pista?.campos?.map(campo => campo.id) : [];
+  expect(campos).toEqual(expect.arrayContaining(['sexo', 'entidadNacimiento']));
+  expect(campos?.includes('fechaNac')).toBe(!fechaNac);
+  expect(resultado.eventos.map(evento => evento.tipo)).not.toContain('IntentoVerificacionFallido');
+  expect(fallar).not.toHaveBeenCalled();
+  const asignado = await casos.identificarPaciente(tramite.id, {
+    paso: 'DATOS', nombre: 'Paciente', apellidoPaterno: 'Prueba', fechaNac: fechaNac ?? '1990-02-28',
+    sexo: 'X', entidadNacimiento: 'NT',
+  }, numero, cc);
+  expect(asignado.tramite.pacienteId).toBeDefined();
+  expect(await pacientes.buscarPorCurp(curp)).toBeUndefined();
+});
+
+it('en demo asigna al paciente sin guardar una CURP válida con nombres distintos', async () => {
+  const { casos, pacientes } = escenario(undefined, { curpFlexible: true });
+  const numero = '5210000000073';
+  const curp = 'PELA900228XNTRNN04';
+  const { tramite } = await casos.iniciar('AGENDAR', numero, cc);
+  await casos.identificarPaciente(tramite.id, { paso: 'DESTINATARIO', para: 'OTRA_PERSONA' }, numero, cc);
+  await casos.identificarPaciente(tramite.id, { paso: 'CURP', curp }, numero, cc);
+  const resultado = await casos.identificarPaciente(tramite.id, {
+    paso: 'DATOS', nombre: 'Paciente', apellidoPaterno: 'Prueba',
+  }, numero, cc);
+  expect(resultado.tramite.pacienteId).toBeDefined();
+  expect(await pacientes.buscarPorCurp(curp)).toBeUndefined();
+  expect(await pacientes.buscarPorDatos({
+    nombre: 'Paciente', apellidoPaterno: 'Prueba', fechaNac: '1990-02-28', sexo: 'X', entidadNacimiento: 'NT',
+  })).toEqual([resultado.tramite.pacienteId]);
 });
 
 it('Declaración no reactiva un vínculo vencido', async () => {

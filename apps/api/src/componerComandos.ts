@@ -44,6 +44,7 @@ export function componerComandos(opciones: { databaseUrl: string; sdMockUrl: str
     mensaje: textoAprobacion,
   });
   const casos: CasosTramite = new CasosTramite({
+    curpFlexible: opciones.demo,
     solicitarAprobacion: tramite => aprobacion.solicitar(tramite),
     ids, reloj, registro, tramites, hilos, contactos, pacientes, intentos, tokens, resolvedor,
     agenda, agendaExterna,

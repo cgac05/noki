@@ -197,6 +197,17 @@ it('valida la identificación por pasos', () => {
   }
 });
 
+it('acepta exactamente 18 caracteres alfanuméricos en mayúsculas en el paso CURP', () => {
+  const acepta = (curp: string) => ComandoRequestSchema.safeParse({
+    canal: 'callcenter', actor: 'asesor:demo', tipo: 'IdentificarPaciente',
+    tramiteId: '01937954-6c40-7000-8000-000000000001', payload: { paso: 'CURP', curp },
+  }).success;
+  expect(acepta('ABCD123456EFGHIJ78')).toBe(true);
+  expect(acepta('ABCD123456EFGHIJ7')).toBe(false);
+  expect(acepta('ABCD123456EFGHIJ-8')).toBe(false);
+  expect(acepta('aBCD123456EFGHIJ78')).toBe(false);
+});
+
 it('valida una pregunta con paso de identificación', () => {
   const base = { tipo: 'PREGUNTA', casilla: 'paciente' };
   expect(SiguientePreguntaSchema.safeParse({ ...base, pista: { entrada: 'FLOW', paso: 'CURP' } }).success).toBe(true);
