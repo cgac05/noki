@@ -7,7 +7,17 @@ Fija en el paquete de contratos la forma de los datos de lectura que consultan l
 ## Requirements
 
 ### Requirement: Modelos de lectura compartidos
-El paquete de contratos SHALL definir esquemas, con sus tipos derivados, para: oferta de catálogo (servicio y sede con nombres y precio en centavos), cita (trámite, servicio, sede, inicio ISO en UTC, zona horaria IANA de la sede y token para el QR), ficha del hilo, llegada esperada, mensaje de bandeja de demo y métricas (conteo por estado e indicadores). El `tokenQr` de la cita SHALL ser el token firmado de un solo uso de `PLAN.md` §8, que genera el núcleo, y MUST NOT ser el folio.
+El paquete de contratos SHALL definir esquemas, con sus tipos derivados, para:
+
+- oferta de catálogo (servicio y sede con nombres y precio en centavos);
+- cita (trámite, servicio, sede, inicio ISO en UTC, zona horaria IANA de la sede y token para el QR);
+- ficha del hilo;
+- llegada esperada (cita, `registrada` y, solo si está registrada, `posicion` opcional: entero de 1 en adelante con su lugar en la fila de la sede);
+- alerta de seguridad (`id` del evento, `tipo` igual a `INTENTO_VERIFICACION_FALLIDO`, `canal`, `ts` ISO, `intentos` entero de 1 en adelante, `bloqueado` booleano e `hiloId` UUID v7 o `null`);
+- mensaje de bandeja de demo;
+- métricas (conteo por estado e indicadores).
+
+El `tokenQr` de la cita SHALL ser el token firmado de un solo uso de `PLAN.md` §8, que genera el núcleo, y MUST NOT ser el folio.
 
 #### Scenario: Token del QR no es el folio
 - **WHEN** se valida una cita cuyo `tokenQr` es un folio de 8 o 9 dígitos
@@ -24,6 +34,14 @@ El paquete de contratos SHALL definir esquemas, con sus tipos derivados, para: o
 #### Scenario: Precio en centavos
 - **WHEN** se valida una oferta de catálogo con precio `250.5`
 - **THEN** la validación falla porque el precio debe ser un entero no negativo en centavos
+
+#### Scenario: Posición solo en llegadas registradas
+- **WHEN** se validan una llegada registrada con `posicion: 2`, una sin `posicion`, una no registrada con `posicion: 1` y una registrada con `posicion: 0`
+- **THEN** las dos primeras son válidas y las otras dos fallan
+
+#### Scenario: Alerta sin datos personales
+- **WHEN** se valida una alerta con `intentos: 3`, `bloqueado: true` e `hiloId` nulo, y otra con un campo extra `telefono`
+- **THEN** ambas son válidas y, en la segunda, `telefono` se descarta y no aparece en el resultado, igual que los campos desconocidos de las demás lecturas
 
 ### Requirement: Lecturas sin acciones prearmadas
 Los modelos de lectura SHALL contener solo datos. MUST NOT incluir comandos listos para enviar ni listas de acciones; el canal arma cada comando con el esquema de comandos a partir del dato elegido.
@@ -52,7 +70,11 @@ Los modelos de lectura MUST NOT declarar fecha de nacimiento, correo, RFC, PIN n
 - **THEN** la validación tiene éxito
 
 ### Requirement: Tabla de rutas de consulta
-El contrato SHALL publicar una tabla única que asocie cada consulta (`tramite`, `lineaTiempo`, `tramitesAbiertos`, `catalogo`, `fichaHilo`, `citasPaciente`, `llegadasSede`, `metricas`, `bandeja`, `contextoDemo`) con su método `GET`, su plantilla de ruta, el esquema de sus parámetros y el esquema de su respuesta. Las rutas MUST conservar las de `AGENTS.md` §7 que ya existían. `contextoDemo` (`/api/demo/contexto`) SHALL responder `{ hiloId, pacienteId, sedeId }`, cada uno UUID v7 o `null`, y MUST estar marcada como disponible solo en modo demo. La API MUST responder 404 en `/api/demo/contexto` cuando `DEMO_MODE` no es `true`.
+El contrato SHALL publicar una tabla única que asocie cada consulta (`tramite`, `lineaTiempo`, `tramitesAbiertos`, `catalogo`, `fichaHilo`, `citasPaciente`, `llegadasSede`, `metricas`, `alertasSeguridad`, `bandeja`, `contextoDemo`) con su método `GET`, su plantilla de ruta, el esquema de sus parámetros y el esquema de su respuesta. Las rutas MUST conservar las de `AGENTS.md` §7 que ya existían.
+
+`alertasSeguridad` (`/api/admin/alertas`, sin parámetros) SHALL responder una lista de alertas de seguridad de como máximo 50 elementos.
+
+`contextoDemo` (`/api/demo/contexto`) SHALL responder `{ hiloId, pacienteId, sedeId }`, cada uno UUID v7 o `null`, y MUST estar marcada como disponible solo en modo demo. La API MUST responder 404 en `/api/demo/contexto` cuando `DEMO_MODE` no es `true`.
 
 #### Scenario: Ruta construida desde parámetros
 - **WHEN** se arma la ruta de `lineaTiempo` con un `hiloId` UUID v7
@@ -65,6 +87,10 @@ El contrato SHALL publicar una tabla única que asocie cada consulta (`tramite`,
 #### Scenario: Rutas existentes conservadas
 - **WHEN** se compara la tabla con las consultas de `AGENTS.md` §7
 - **THEN** `tramite`, `lineaTiempo`, `tramitesAbiertos` y `metricas` usan `/api/tramites/:id`, `/api/hilos/:id/linea-tiempo`, `/api/pacientes/:id/tramites-abiertos` y `/api/admin/kpis`
+
+#### Scenario: Alertas de seguridad
+- **WHEN** se inspecciona la entrada `alertasSeguridad` y se valida una respuesta de 51 alertas
+- **THEN** la ruta es `/api/admin/alertas`, no está marcada como solo demo y la respuesta de 51 elementos falla
 
 #### Scenario: Bandeja marcada como demo
 - **WHEN** se inspecciona la entrada `bandeja` de la tabla
