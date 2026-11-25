@@ -1,4 +1,4 @@
-import { it } from 'vitest';
+import { expect, it } from 'vitest';
 import { Pool } from 'pg';
 import { componerComandos } from '../../apps/api/src/componerComandos.ts';
 import { crearApi } from '../../apps/api/src/crearApi.ts';
@@ -6,7 +6,8 @@ import { idDemo, PACIENTES_DEMO } from '../../apps/api/src/semilla/datosDemo.ts'
 import { sembrar } from '../../apps/api/src/semilla/sembrar.ts';
 import { crearSdMock } from '../../apps/sd-mock/src/index.ts';
 import { migrar } from '../../packages/adapters/out-postgres/src/index.ts';
-import { RUTAS_CONSULTAS } from '../../packages/contracts/src/index.ts';
+import { RespuestaMensajeWaSchema, RUTAS_CONSULTAS } from '../../packages/contracts/src/index.ts';
+import type { SedeId, ServicioId } from '../../packages/domain/src/index.ts';
 import { comprobarIdempotenciaWa } from '../unit/api/bateriaIdempotenciaWa.ts';
 
 it('reserva y reproduce la respuesta de WhatsApp con eventos únicos en Postgres', async () => {
@@ -30,6 +31,24 @@ it('reserva y reproduce la respuesta de WhatsApp con eventos únicos en Postgres
     await admin.query('CREATE SCHEMA idempotencia_wa');
     await migrar(databaseUrl, undefined, esquema);
     await sembrar(databaseUrl);
+    const contexto = () => ({
+      canal: 'callcenter', actor: 'asesor:demo', nivel: 1, vinculado: false,
+      factores: new Set<never>(), correlationId: deps.ids.nuevo(), idempotencyKey: deps.ids.nuevo(),
+    } as const);
+    const { tramite } = await deps.casos.iniciar('AGENDAR', '3119990002', contexto());
+    await deps.casos.seleccionarServicio(tramite.id, idDemo(12) as ServicioId, contexto());
+    await deps.casos.seleccionarSede(tramite.id, idDemo(2) as SedeId, contexto());
+    const respuesta = await app.inject({
+      method: 'POST', url: '/api/canales/wa/mensajes',
+      headers: { 'idempotency-key': deps.ids.nuevo() }, payload: { waId: '523119990002', texto: 'Hola' },
+    });
+    expect(respuesta.statusCode).toBe(200);
+    expect(RespuestaMensajeWaSchema.parse(respuesta.json()).mensajes).toEqual(expect.arrayContaining([
+      expect.objectContaining({ texto: 'Retomamos tu trámite: Consulta nutricional en Clínica Bahía de Banderas. Lo iniciaste por teléfono.' }),
+      expect.objectContaining({ texto: '¿Qué día prefieres?' }),
+    ]));
+    const cambio = await pool.query('SELECT payload FROM evento WHERE tramite_id = $1 AND tipo = $2', [tramite.id, 'CanalCambiado']);
+    expect(cambio.rows).toEqual([{ payload: { de: 'callcenter', a: 'whatsapp', metodo: 'MISMO_NUMERO' } }]);
     const fecha = new Intl.DateTimeFormat('sv-SE', { timeZone: 'America/Mazatlan', dateStyle: 'short' })
       .format(new Date(deps.reloj.ahora().getTime() + 86_400_000));
     const ana = PACIENTES_DEMO[0];

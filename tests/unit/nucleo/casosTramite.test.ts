@@ -652,7 +652,7 @@ it('en demo asigna al paciente sin guardar una CURP válida con nombres distinto
   expect(resultado.tramite.pacienteId).toBeDefined();
   expect(await pacientes.buscarPorCurp(curp)).toBeUndefined();
   expect(await pacientes.buscarPorDatos({
-    nombre: 'Paciente', apellidoPaterno: 'Prueba', fechaNac: '1990-02-28', sexo: 'X', entidadNacimiento: 'NT',
+    nombre: 'Paciente', apellidoPaterno: 'Prueba', fechaNac: '1990-02-28',
   })).toEqual([resultado.tramite.pacienteId]);
 });
 

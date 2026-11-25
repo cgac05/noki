@@ -1,0 +1,2 @@
+﻿npx tsc --noEmit -p apps/web
+Exit code: 0

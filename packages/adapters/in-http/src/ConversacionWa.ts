@@ -11,7 +11,7 @@ import {
   ErrorDominio, normalizarTelefono, siguientePregunta, type HiloId, type PistaDominio, type RegistroTiposTramite, type SedeId,
   type ServicioId, type Tramite, type TramiteId,
 } from '@noki/domain';
-import { avisoLlamadaCortada, canalOrigen, diaCorto, fechaLarga, preguntaCasilla, preguntaDia, preguntaHora, requisito } from './textosWa.ts';
+import { avisoLlamadaCortada, canalOrigen, diaCorto, fechaLarga, preguntaCasilla, preguntaDia, preguntaHora, requisito, resumenRetoma } from './textosWa.ts';
 import { campoPendiente, completarDatos, mensajeDato, mensajesIdentificacion, respuestaFlowIdentificacion, validarDato } from './identificacionWa.ts';
 
 const accion = z.discriminatedUnion('tipo', [
@@ -98,7 +98,8 @@ export class ConversacionWa {
 
     const opcionPrevia = payloadBoton?.startsWith('op:') ? estado.opciones[payloadBoton] : undefined;
     const tramiteElegidoId = opcionPrevia?.tipo === 'retomar' ? opcionPrevia.id as TramiteId : undefined;
-    const tokenLlamada = !tokenExplicito && !tramiteElegidoId && !tramite && mensaje.texto && !flowResponse
+    const textoSinContinuacion = !tokenExplicito && !payloadBoton && !tramite && mensaje.texto && !flowResponse;
+    const tokenLlamada = textoSinContinuacion
       ? await this.continuacionPorAni(waId) : null;
     const token = tokenExplicito ?? tokenLlamada;
     if (token || tramiteElegidoId || (!tramite && (mensaje.texto || (estado.verificacion && flowResponse)))) {
@@ -106,9 +107,11 @@ export class ConversacionWa {
         folio: z.string().regex(/^[0-9]{8,9}$/u), fechaNac: z.iso.date(),
       }).safeParse(flowResponse) : undefined;
       if (verificacion && !verificacion.success) return [this.pedirVerificacion()];
-      const retomado = await casos.retomar({
+      const entrada = contextoOperacion();
+      const porNumero = textoSinContinuacion && !token ? await casos.retomarPorTelefono(waId, entrada) : null;
+      const retomado = porNumero ?? await casos.retomar({
         valorContacto: waId, incluirReferencias: true, ...(tramiteElegidoId ? { tramiteElegidoId } : {}), ...(token ? { token } : {}), ...(verificacion?.success ? verificacion.data : {}),
-      }, contextoOperacion());
+      }, entrada);
       if (retomado.tipo === 'BLOQUEADO') return [texto('Espera antes de volver a intentarlo.')];
       if (retomado.tipo === 'RETOMADO') {
         tramite = retomado.operacion.tramite;
@@ -120,12 +123,11 @@ export class ConversacionWa {
         const catalogo = await lecturas.catalogo();
         const oferta = catalogo.find(o => o.servicioId === tramite?.servicioId && o.sedeId === tramite?.sedeId);
         const momento = tramite.horario && tramite.sedeId ? await this.formatear(tramite.horario.inicio, tramite.sedeId) : undefined;
-        const detalle = tokenLlamada
+        const detalle = tokenLlamada || porNumero
           ? [oferta?.servicio ?? catalogo.find(o => o.servicioId === tramite?.servicioId)?.servicio,
             oferta?.sede ?? catalogo.find(o => o.sedeId === tramite?.sedeId)?.sede].filter(Boolean).join(' en ')
           : [oferta?.servicio, oferta?.sede].filter(Boolean).join(' en ');
-        const resumen = detalle ? 'Retomamos tu trámite: ' + detalle : 'Retomamos tu trámite';
-        const descripcion = resumen + (momento ? ', ' + momento : '') + '. Lo iniciaste ' + canalOrigen[tramite.canalOrigen] + '.';
+        const descripcion = resumenRetoma(detalle, tramite.canalOrigen, momento);
         mensajes.push(texto(tokenLlamada ? avisoLlamadaCortada(descripcion, Boolean(tramite.pacienteId)) : descripcion));
       } else if (token || verificacion || tramiteElegidoId) {
         return [texto(resumenInvalido)];

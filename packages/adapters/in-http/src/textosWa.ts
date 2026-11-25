@@ -59,3 +59,8 @@ export const citaAdelantada = (inicio: string, zona: string): string => 'Listo, 
 
 export const avisoLlamadaCortada = (resumen: string, pacienteGuardado: boolean): string =>
   'Parece que la llamada se cortó. ' + resumen + (pacienteGuardado ? ' Paciente: ••••.' : '');
+
+export function resumenRetoma(detalle: string, origen: Canal, momento?: string): string {
+  const resumen = detalle ? 'Retomamos tu trámite: ' + detalle : 'Retomamos tu trámite';
+  return resumen + (momento ? ', ' + momento : '') + '. Lo iniciaste ' + canalOrigen[origen] + '.';
+}

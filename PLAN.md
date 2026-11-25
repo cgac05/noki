@@ -253,7 +253,7 @@ La CURP completa es única cuando está presente. `curp_base` guarda los 16 cara
 |---|---|
 | cotizar, ver preparación | nada |
 | agendar | datos declarados (en clínica basta el QR firmado de la cita) |
-| retomar trámite | `wa_id` vinculado; si no lo está: folio + fecha de nacimiento |
+| retomar trámite | `wa_id` vinculado; si no lo está: folio + fecha de nacimiento, salvo al retomar una cita `AGENDAR` en proceso desde el mismo número. Esta excepción solo muestra datos N1 y no vincula la identidad. |
 | reprogramar / cancelar | `wa_id` vinculado + **OTP** o botón de aprobación |
 | ver resultados | identidad ≥1 + **PIN**, vía **enlace mágico a la web** |
 | cambiar teléfono o correo | identidad ≥1 + OTP al contacto **anterior** + PIN |

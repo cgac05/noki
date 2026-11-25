@@ -1,6 +1,6 @@
 import { ComandoRequestSchema, CuerpoErrorSchema, ESQUEMAS_EVENTOS_SOCKET, RUTAS_CONSULTAS, RespuestaComandoSchema, RespuestaMensajeWaSchema, SolicitudMensajeWaSchema } from '@noki/contracts';
-import type { ComandoRequest, DatosEventoSocket, MensajeBot, NombreEventoSocket, SolicitudMensajeWa, TramiteVista } from '@noki/contracts';
-import { CONTACTO_DEMO, type ClienteApi } from '../ClienteApi.ts';
+import type { CitaVista, ComandoRequest, DatosEventoSocket, MensajeBot, NombreEventoSocket, SolicitudMensajeWa, TramiteVista } from '@noki/contracts';
+import { CONTACTO_BETO_DEMO, CONTACTO_DEMO, type ClienteApi } from '../ClienteApi.ts';
 import { ErrorCliente, validar } from '../errores.ts';
 import { esConsultaCompartida, validarConsulta } from '../consultas.ts';
 import type { NombreConsultaCliente, ParametrosConsultaCliente, RespuestaConsultaCliente } from '../consultas.ts';
@@ -15,12 +15,23 @@ type TramiteWeb = TramiteVista & { pacienteId?: string };
 
 type Guiones = Record<IdGuion, { pasos: PasoFixture[]; ids: NonNullable<ClienteApi['demo']>['ids'] }>;
 
+const pacienteBetoId = '019aff10-0000-7000-8000-000000000012';
+const citaBeto: CitaVista = {
+  tramite: {
+    id: '019aff10-0000-7000-8000-000000000003', hiloId: '019aff10-0000-7000-8000-000000000004',
+    tipo: 'AGENDAR', estado: 'CONFIRMADA', version: 1, servicioId: IDS.servicio, sedeId: IDS.sede,
+  },
+  servicio: 'Ultrasonido abdominal', sede: 'Tepic', zonaHoraria: 'America/Mazatlan',
+  inicio: '2026-12-03T16:15:00.000Z', tokenQr: 'demo.qr.beto',
+};
+
 export class ClienteMock implements ClienteApi {
   readonly modo = 'mock';
   private indice = 0;
   private indiceWeb = 0;
   private secuenciaWeb = 0;
   private readonly tramitesWeb = new Map<string, TramiteWeb>();
+  private readonly telefonosWeb = new Map<string, string>();
   private readonly codigosWeb = new Set<string>();
   readonly sesionWebDemoHabilitada: boolean;
   private indiceComando = 0;
@@ -48,7 +59,7 @@ export class ClienteMock implements ClienteApi {
       elegirGuion: id => { this.guionActivo = validar(IdGuionSchema, id); this.demo.reiniciar(); },
       revision: () => this.revision,
       paso: () => this.actual().paso,
-      reiniciar: () => { this.revision++; this.indice = 0; this.indiceWeb = 0; this.tramitesWeb.clear(); this.codigosWeb.clear(); this.indiceComando = 0; this.ayuda = []; this.avisar(); },
+      reiniciar: () => { this.revision++; this.indice = 0; this.indiceWeb = 0; this.tramitesWeb.clear(); this.telefonosWeb.clear(); this.codigosWeb.clear(); this.indiceComando = 0; this.ayuda = []; this.avisar(); },
       alCambiar: (recibir: () => void) => { this.cambios.add(recibir); return () => { this.cambios.delete(recibir); }; },
     };
   }
@@ -117,10 +128,29 @@ export class ClienteMock implements ClienteApi {
     if (nombre === 'sesionWebDemo') {
       const { telefono } = validar(RUTAS_CONSULTAS.sesionWebDemo.parametros, parametros);
       if (!this.sesionWebDemoHabilitada) throw new ErrorCliente('NO_DISPONIBLE', 'La sesión solo está disponible en modo demo.');
-      if (telefono.slice(-10) !== CONTACTO_DEMO.slice(-10)) throw new ErrorCliente('API', 'Sin registro.', 'NO_ENCONTRADO');
-      return validarConsulta(nombre, { pacienteId: this.demo.ids.pacienteId, nombreVisible: 'Ana P.' });
+      const numero = telefono.slice(-10);
+      const esAna = numero === CONTACTO_DEMO.slice(-10);
+      const esBeto = numero === CONTACTO_BETO_DEMO.slice(-10);
+      const delGuion = esAna ? this.actual().lecturas.tramitesAbiertos : [];
+      const propios = [...this.tramitesWeb.values()].filter(t => this.telefonosWeb.get(t.id) === numero);
+      const tramitesEnProceso = [...delGuion, ...propios].filter(t => t.tipo === 'AGENDAR' &&
+        (t.estado === 'BORRADOR' || t.estado === 'COTIZADO' || t.estado === 'LISTO_PARA_RESERVAR' || t.estado === 'HORARIO_RESERVADO'));
+      if (!esAna && !esBeto && !tramitesEnProceso.length) throw new ErrorCliente('API', 'Sin registro.', 'NO_ENCONTRADO');
+      return validarConsulta(nombre, {
+        pacienteId: esAna ? this.demo.ids.pacienteId : esBeto ? pacienteBetoId : null,
+        nombreVisible: esAna ? 'Ana P.' : esBeto ? 'Beto R.' : null,
+        tramitesEnProceso,
+      });
     }
     const lecturas = this.actual().lecturas;
+    if (this.sesionWebDemoHabilitada && nombre === 'citasPaciente') {
+      const { pacienteId } = validar(RUTAS_CONSULTAS.citasPaciente.parametros, parametros);
+      if (pacienteId === pacienteBetoId) {
+        const adelantada = this.actual().paso.id === 'C_ADELANTADA';
+        return validarConsulta(nombre, [{ ...citaBeto, inicio: adelantada ? '2026-11-26T16:15:00.000Z' : citaBeto.inicio }]);
+      }
+      return validarConsulta(nombre, pacienteId === this.demo.ids.pacienteId ? lecturas.citasPaciente : []);
+    }
     if (this.sesionWebDemoHabilitada && nombre === 'tramitesAbiertos') {
       const { pacienteId } = validar(RUTAS_CONSULTAS.tramitesAbiertos.parametros, parametros);
       const delGuion = pacienteId === this.demo.ids.pacienteId ? lecturas.tramitesAbiertos : [];
@@ -158,6 +188,7 @@ export class ClienteMock implements ClienteApi {
       const sufijo = (++this.secuenciaWeb).toString().padStart(12, '0');
       tramite = { id: '019aff30-0000-7000-8000-' + sufijo, hiloId: '019aff30-0001-7000-8000-' + sufijo,
         tipo: comando.payload.tipoTramite, estado: 'BORRADOR', version: 1 };
+      if (comando.payload.contacto) this.telefonosWeb.set(tramite.id, comando.payload.contacto.slice(-10));
     } else {
       if (!previo) throw new ErrorCliente('API', 'No encontramos el trámite.', 'NO_ENCONTRADO');
       tramite = { ...previo, version: previo.version + 1 };

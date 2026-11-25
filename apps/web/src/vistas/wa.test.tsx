@@ -111,11 +111,40 @@ it('Elegir una fila: abre las dos secciones, envía su payload y guarda el títu
   expect(enviar).toHaveBeenLastCalledWith({ waId: CONTACTO_DEMO, payloadBoton: 'opaco:b' }, { idempotencyKey: expect.any(String) });
 });
 
-it('Opciones de mensajes anteriores: no reutiliza botones después de otra respuesta del bot', async () => {
-  const { cliente, enviar } = respuestas([{ tipo: 'botones', texto: 'Elige', botones: [{ id: 'uno', titulo: 'Elegir uno', payload: 'uno' }] }]);
+it.each([
+  { titulo: 'CURP', campo: 'curp', valor: 'XXXX000000XXXXXX00', alternativa: 'No la tengo' },
+  { titulo: 'Apellido materno', campo: 'apellidoMaterno', valor: 'Camberos', alternativa: 'No tengo' },
+])('envía el formulario de $titulo aunque la respuesta incluya la alternativa', async ({ titulo, campo, valor, alternativa }) => {
+  const { cliente, enviar } = respuestas([
+    { tipo: 'flow', titulo, campos: [{ id: campo, etiqueta: titulo, captura: 'sensitive', requerido: true }] },
+    { tipo: 'botones', texto: 'También puedes omitirlo', botones: [{ id: 'omitir', titulo: alternativa, payload: 'omitir' }] },
+  ]);
+  const { usuario } = abrir(cliente);
+  await texto(usuario);
+  const abrirFormulario = await screen.findByRole('button', { name: 'Abrir formulario' });
+  expect(screen.getByRole('button', { name: alternativa })).toHaveProperty('disabled', false);
+  expect(abrirFormulario).toHaveProperty('disabled', false);
+  await usuario.click(abrirFormulario);
+  const dialogo = screen.getByRole('dialog', { name: titulo });
+  await usuario.type(within(dialogo).getByLabelText(titulo), valor);
+  enviar.mockResolvedValue({ mensajes: [{ tipo: 'texto', texto: 'Formulario recibido' }] });
+  await usuario.click(within(dialogo).getByRole('button', { name: 'Enviar formulario' }));
+  await screen.findByText('Formulario recibido');
+  expect(enviar).toHaveBeenLastCalledWith(
+    { waId: CONTACTO_DEMO, flowResponse: { [campo]: valor } },
+    { idempotencyKey: expect.any(String) },
+  );
+});
+
+it('Opciones de mensajes anteriores: deshabilita el formulario y los botones después de otra respuesta del bot', async () => {
+  const { cliente, enviar } = respuestas([
+    { tipo: 'botones', texto: 'Elige', botones: [{ id: 'uno', titulo: 'Elegir uno', payload: 'uno' }] },
+    { tipo: 'flow', titulo: 'CURP', campos: [{ id: 'curp', etiqueta: 'CURP', captura: 'sensitive', requerido: true }] },
+  ]);
   const { usuario } = abrir(cliente); await texto(usuario); enviar.mockResolvedValue({ mensajes: [{ tipo: 'texto', texto: 'Respuesta posterior' }] });
   await texto(usuario, 'Otra cosa'); await screen.findByText('Respuesta posterior');
   expect((screen.getByRole('button', { name: 'Elegir uno' }) as HTMLButtonElement).disabled).toBe(true);
+  expect(screen.getByRole('button', { name: 'Abrir formulario' })).toHaveProperty('disabled', true);
 });
 
 it('Enlace del call center: envía una vez, retira el código de la URL y lo redacta', async () => {

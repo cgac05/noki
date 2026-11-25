@@ -1,0 +1,16 @@
+
+ RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-retoma-3793ae9760604b4c9846a4c17efcb33a
+
+ ✓ |unitarios| tests/unit/nucleo/casosTramite.test.ts (44 tests) 90ms
+ ✓ |unitarios| tests/unit/api/llamadaCortadaWa.test.ts (10 tests) 212ms
+
+ Test Files  2 passed (2)
+      Tests  54 passed (54)
+   Start at  08:14:46
+   Duration  6.26s (transform 1.26s, setup 0ms, import 7.91s, tests 302ms, environment 0ms)
+
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice

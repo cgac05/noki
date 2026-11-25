@@ -1,0 +1,19 @@
+﻿npx vitest run --project web apps/web/src/vistas/wa.test.tsx --configLoader runner
+
+ RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-wa-formulario-2b1f9298fe2847ec9d2d0a6f7c6aadef
+
+ ✓ |web| src/vistas/wa.test.tsx (20 tests) 6595ms
+   ✓ identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión  1555ms
+   ✓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible  419ms
+   ✓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo  897ms
+   ✓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título  437ms
+   ✓ envía el formulario de 'CURP' aunque la respuesta incluya la alternativa  701ms
+   ✓ envía el formulario de 'Apellido materno' aunque la respuesta incluya la alternativa  576ms
+   ✓ Opciones de mensajes anteriores: deshabilita el formulario y los botones después de otra respuesta del bot  501ms
+
+ Test Files  1 passed (1)
+      Tests  20 passed (20)
+   Start at  08:25:09
+   Duration  10.69s (transform 845ms, setup 0ms, import 2.11s, tests 6.60s, environment 1.57s)
+
+Exit code: 0

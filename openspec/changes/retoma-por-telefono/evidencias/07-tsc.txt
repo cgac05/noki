@@ -1,0 +1,64 @@
+tsc --noEmit --project packages/domain/tsconfig.json
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice
+Salida: 0
+tsc --noEmit --project packages/application/tsconfig.json
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice
+Salida: 0
+tsc --noEmit --project packages/contracts/tsconfig.json
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice
+Salida: 0
+tsc --noEmit --project packages/adapters/in-http/tsconfig.json
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice
+Salida: 0
+tsc --noEmit --project packages/adapters/memory/tsconfig.json
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice
+Salida: 0
+tsc --noEmit --project packages/adapters/out-postgres/tsconfig.json
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice
+Salida: 0
+tsc --noEmit --project apps/api/tsconfig.json
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice
+Salida: 0
+tsc --noEmit --project apps/web/tsconfig.json
+apps/web/src/cliente/mock/ClienteMock.ts(127,17): error TS2339: Property 'pacienteId' does not exist on type '{ id: string; hiloId: string; tipo: "AGENDAR" | "ADELANTO" | "FACTURA"; estado: "BORRADOR" | "COTIZADO" | "LISTO_PARA_RESERVAR" | "HORARIO_RESERVADO" | "CONFIRMADA" | "EN_CLINICA" | "ATENDIDA" | "CANCELADA" | "NO_ASISTIO" | "EXPIRADO"; version: number; servicioId?: string | undefined; sedeId?: string | undefined; ho...'.
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice
+Salida: 2
+tsc --noEmit --project tests/tsconfig.json
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice
+Salida: 0

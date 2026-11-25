@@ -1,0 +1,2 @@
+﻿npx eslint apps/web/src/componentes/ChatWa.tsx apps/web/src/vistas/wa.test.tsx
+Exit code: 0

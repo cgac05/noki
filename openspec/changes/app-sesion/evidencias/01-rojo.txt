@@ -1,0 +1,94 @@
+﻿npx.cmd vitest run --project web --maxWorkers=2 apps/web/src/vistas/appSesion.test.tsx
+npx.cmd : node:fs:559
+En línea: 5 Carácter: 1
++ npx.cmd vitest run --project web --maxWorkers=2 apps/web/src/vistas/a ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (node:fs:559:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  return binding.open(
+                 ^
+
+Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
+    at Object.openSync (node:fs:559:18)
+    at readFileSync (node:fs:443:35)
+    at getSourceSync (node:internal/modules/esm/load:37:14)
+    at defaultLoadSync (node:internal/modules/esm/load:153:34)
+    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:795:12)
+    at #loadSync (node:internal/modules/esm/loader:815:49)
+    at ModuleLoader.load (node:internal/modules/esm/loader:780:26)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:526:31)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:571:36)
+    at afterResolve (node:internal/modules/esm/loader:624:52) {
+  errno: -4048,
+  code: 'EPERM',
+  syscall: 'open',
+  path: 'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
+}
+
+Node.js v24.13.0
+
+Salida: 1
+Segundo intento en copia temporal con el lockfile instalado.
+npx.cmd : X [ERROR] Cannot read directory "../../../..": Access is denied.
+En línea: 5 Carácter: 1
++ npx.cmd vitest run --project web --maxWorkers=2 apps/web/src/vistas/a ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (X [ERROR] Canno...cess is denied.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+X [ERROR] Could not resolve "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-app-sesion-validacion\\vitest.config.ts"
+
+failed to load config from C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\vitest.config.ts
+
+⎯⎯⎯⎯⎯⎯⎯ Startup Error ⎯⎯⎯⎯⎯⎯⎯⎯
+Error: Build failed with 2 errors:
+error: Cannot read directory "../../../..": Access is denied.
+error: Could not resolve "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-app-sesion-validacion\\vitest.config.ts"
+    at failureErrorWithLog (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1752:15)
+    at C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1211:25
+    at runOnEndCallbacks (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1592:45)
+    at buildResponseToResult (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1209:7)
+    at C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1236:16
+    at responseCallbacks.<computed> (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:886:9)
+    at handleIncomingPacket (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:941:12)
+    at Socket.readFromStdout (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:864:7)
+    at Socket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12) {
+  errors: [Getter/Setter],
+  warnings: [Getter/Setter]
+}
+
+
+
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice
+
+Salida: 1
+npx.cmd vitest run --configLoader native --project web --maxWorkers=2 apps/web/src/vistas/appSesion.test.tsx
+ ❯ |web| src/vistas/appSesion.test.tsx (9 tests | 9 failed) 319ms
+   × entra con el número de Ana y muestra su estado y QR en modo mock 117ms
+   × entra con el número de Ana y muestra su estado y QR en modo real 21ms
+   × sale de Ana y muestra solo las citas de Beto en modo mock 106ms
+   × sale de Ana y muestra solo las citas de Beto en modo real 14ms
+   × rechaza la contraseña incorrecta sin consultar en modo mock 14ms
+   × rechaza la contraseña incorrecta sin consultar en modo real 11ms
+   × muestra enlaces si falta el paciente en modo mock (5210000000009) 13ms
+   × muestra enlaces si falta el paciente en modo real (5210000000009) 11ms
+   × muestra enlaces si falta el paciente en modo real (5210000000008) 11ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 9 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: expected "consultar" to not be called at all, but actually been called 11 times
+AssertionError: expected "consultar" to not be called at all, but actually been called 1 times
+TestingLibraryElementError: Unable to find a label with the text of: Teléfono
+TestingLibraryElementError: Unable to find a label with the text of: Teléfono
+TestingLibraryElementError: Unable to find a label with the text of: Teléfono
+TestingLibraryElementError: Unable to find a label with the text of: Teléfono
+TestingLibraryElementError: Unable to find a label with the text of: Teléfono
+TestingLibraryElementError: Unable to find a label with the text of: Teléfono
+ Test Files  1 failed (1)
+      Tests  9 failed (9)
+Salida: 1

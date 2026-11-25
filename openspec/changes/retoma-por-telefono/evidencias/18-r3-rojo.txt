@@ -1,0 +1,18 @@
+npx vitest run --project web --configLoader runner apps/web/src/vistas/webReal.test.tsx apps/web/src/vistas/consolas.test.tsx -t 'retoma en la web|completa la cita en la ficha|sin ANI de la pestaña' --reporter=verbose
+Extracto de la ejecución anterior a los cambios de producto (código 1).
+
+ RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-r3-264ab2e8
+ × |web| src/vistas/consolas.test.tsx > Call center autorizado > completa la cita en la ficha usando el ANI de la llamada 848ms
+   → Unable to find an accessible element with the role "button" and name "Completar la cita aquí"
+ ✓ |web| src/vistas/consolas.test.tsx > Call center autorizado > no ofrece completar la cita en una ficha sin ANI de la pestaña 46ms
+ × |web| src/vistas/webReal.test.tsx > retoma en la web con paciente=false y horario reservado=false 1533ms
+   → Unable to find role="heading" and name "Continúa tu cita"
+ × |web| src/vistas/webReal.test.tsx > retoma en la web con paciente=true y horario reservado=true 1203ms
+   → Unable to find role="heading" and name "Continúa tu cita"
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "Completar la cita 
+TestingLibraryElementError: Unable to find role="heading" and name "Continúa tu cita"
+TestingLibraryElementError: Unable to find role="heading" and name "Continúa tu cita"
+ Test Files  2 failed (2)
+      Tests  3 failed | 1 passed | 38 skipped (42)
+   Start at  08:29:07
+   Duration  6.46s (transform 1.81s, setup 0ms, import 4.08s, tests 3.63s, environment 2.65s)

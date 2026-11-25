@@ -9,6 +9,7 @@ import { HistorialWa } from './historialWa.ts';
 import { CONTACTO_DEMO } from './ClienteApi.ts';
 import { GUION_FLUJO_A, IDS } from './mock/guionFlujoA.ts';
 import { SocketFalso } from '../pruebas/socketFalso.ts';
+import { entrarSesionDemo } from '../pruebas/entrarSesionDemo.ts';
 import { rutas } from '../rutas.tsx';
 
 vi.mock('qrcode', () => ({ default: { toString: vi.fn(async () => '<svg></svg>') } }));
@@ -31,9 +32,12 @@ function preparar(ruta = '/app', observar = false, falla = false) {
       }
       return Response.json({ mensajes: [{ tipo: 'botones', texto: 'Confirmación de prueba', botones: [{ id: 'confirmar', titulo: 'Confirmar cita', payload: 'confirmar-cita' }] }] });
     }
-    if (String(url).endsWith('/contexto')) return Response.json(confirmada ? { hiloId: IDS.hilo, pacienteId: IDS.paciente, sedeId: IDS.sede } : { hiloId: null, pacienteId: null, sedeId: null });
+    if (String(url).endsWith(`/sesion-web/${CONTACTO_DEMO}`)) return Response.json({
+      pacienteId: confirmada ? IDS.paciente : null, nombreVisible: confirmada ? 'Ana P.' : null, tramitesEnProceso: [],
+    });
     if (String(url).endsWith('/kpis')) return Response.json({ porEstado: [], kpis: { respuestas } });
-    return Response.json(cita);
+    if (String(url).endsWith(`/pacientes/${IDS.paciente}/citas`)) return Response.json(cita);
+    throw new Error('Consulta inesperada');
   });
   const cliente = new ClienteReal({ fetch: peticion, demo: true, fabricaSocket: () => new SocketFalso() });
   const router = createMemoryRouter(rutas, { initialEntries: [ruta] });
@@ -41,24 +45,27 @@ function preparar(ruta = '/app', observar = false, falla = false) {
   return { peticion, usuario: userEvent.setup({ delay: null }), confirmarEnServidor: () => { confirmada = true; } };
 }
 
-it('vuelve a consultar contextoDemo al regresar a App aunque el valor anterior fuera vacío', async () => {
+it('vuelve a consultar la sesión al identificarse tras un registro sin paciente', async () => {
   const { usuario, confirmarEnServidor, peticion } = preparar();
-  await screen.findByText(/Aún no hay un paciente en el contexto de atención/);
+  await entrarSesionDemo(usuario);
+  await screen.findByText('No encontramos citas para este número');
   await usuario.click(screen.getByRole('link', { name: 'WhatsApp' }));
   confirmarEnServidor();
   await usuario.click(screen.getByRole('link', { name: 'App' }));
+  await entrarSesionDemo(usuario);
   expect(await screen.findByText('CONFIRMADA')).toBeDefined();
-  expect(peticion.mock.calls.filter(([url]) => String(url).endsWith('/contexto'))).toHaveLength(2);
+  expect(peticion.mock.calls.filter(([url]) => String(url).endsWith(`/sesion-web/${CONTACTO_DEMO}`))).toHaveLength(2);
 });
 it('tras confirmar en WhatsApp muestra la cita en App en la misma pestaña sin Actualizar', async () => {
   const { usuario } = preparar();
-  await screen.findByText(/Aún no hay un paciente en el contexto de atención/);
+  await screen.findByRole('heading', { name: 'Identifícate' });
   await usuario.click(screen.getByRole('link', { name: 'WhatsApp' }));
   await usuario.type(screen.getByRole('textbox', { name: 'Mensaje' }), 'Hola');
   await usuario.click(screen.getByRole('button', { name: 'Enviar' }));
   await usuario.click(await screen.findByRole('button', { name: 'Confirmar cita' }));
   await screen.findByText('Cita confirmada en la API de prueba.');
   await usuario.click(screen.getByRole('link', { name: 'App' }));
+  await entrarSesionDemo(usuario);
   expect(await screen.findByText('CONFIRMADA')).toBeDefined();
 });
 it.each([false, true])('refresca las lecturas activas solo tras respuesta exitosa de WhatsApp (fallo=%s)', async falla => {

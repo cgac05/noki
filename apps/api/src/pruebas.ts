@@ -72,7 +72,8 @@ export function crearApiPruebas(opciones: {
     databaseUrl: 'postgres://demo:demo@127.0.0.1:1/demo', redisUrl: 'redis://127.0.0.1:1', logger: opciones.salidaLog !== undefined,
     ...(opciones.salidaLog ? { salidaLog: opciones.salidaLog } : {}),
     ...(opciones.origen ? { origen: opciones.origen } : {}),
-    consultas: { lecturas, reloj, emisor: tokens, bandeja: new BandejaMemoria(), demo: opciones.demo ?? true, codigoContinuacion },
+    consultas: { lecturas, reloj, emisor: tokens, bandeja: new BandejaMemoria(), demo: opciones.demo ?? true, codigoContinuacion,
+      tramitesEnProcesoPorTelefono: casos.tramitesEnProcesoPorTelefono.bind(casos) },
     comandos: { casos, tokens, lecturas, ids, demo: opciones.demo ?? true, idempotencia,
       solicitarContinuacion: casos.solicitarContinuacion.bind(casos) }, whatsapp, relojDemo,
   });

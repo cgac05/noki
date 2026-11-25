@@ -74,7 +74,7 @@ El QR contiene el token firmado de un solo uso que debe generar y consumir el n�
 | `panelHuecos` | `/api/admin/huecos` | ninguno | `HuecoVista[]` de hasta 50 elementos |
 | `bandeja` | `/api/demo/bandeja` | ninguno | `MensajeBandeja[]`, `soloDemo: true` |
 | `contextoDemo` | `/api/demo/contexto` | ninguno | `ContextoDemo`, `soloDemo: true` |
-| `sesionWebDemo` | `/api/demo/sesion-web/:telefono` | 10 a 15 dígitos | `{ pacienteId, nombreVisible }`, `soloDemo: true` |
+| `sesionWebDemo` | `/api/demo/sesion-web/:telefono` | 10 a 15 dígitos | `{ pacienteId, nombreVisible, tramitesEnProceso }`, `soloDemo: true` |
 
 `alertasSeguridad` omite datos personales y el método de verificación. El intento que provoca el bloqueo lleva `bloqueado: true`. `GET /api/admin/alertas` devuelve los 50 intentos más recientes como máximo, del más reciente al más antiguo.
 

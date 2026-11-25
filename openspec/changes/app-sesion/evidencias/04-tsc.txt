@@ -1,0 +1,2 @@
+﻿npx.cmd tsc --noEmit -p apps/web
+Salida: 0

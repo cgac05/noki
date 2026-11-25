@@ -1,0 +1,76 @@
+﻿ChatWa.tsx SHA-256: 856E7288D2FFFF9FE0B307D9BE72B1410892C3F83E220E4325848A84BEBF3F89
+wa.test.tsx SHA-256: C091805B53E155C7C0735DA5E11F45D509D6B43B9FE2E4E3B9D67890D4E795EE
+npx vitest run --project web apps/web/src/vistas/wa.test.tsx --configLoader runner
+
+ RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-wa-formulario-2b1f9298fe2847ec9d2d0a6f7c6aadef
+
+ ❯ |web| src/vistas/wa.test.tsx (20 tests | 3 failed) 5688ms
+   ✓ identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión  1383ms
+   ✓ Historial acumulado: muestra cuatro burbujas en orden en un log accesible  389ms
+   ✓ Cambio de vista y recarga: conserva la sesión y Nueva conversación borra solo el número activo  920ms
+   ✓ Modo real: conversa solo con POST y no muestra la insignia simulada 185ms
+   ✓ Número inválido: explica el patrón de 10 a 15 dígitos e impide el envío 222ms
+   ✓ Doble toque e indicador de espera: la misma opción se envía una sola vez 270ms
+   ✓ Elegir una fila: abre las dos secciones, envía su payload y guarda el título  460ms
+   × envía el formulario de 'CURP' aunque la respuesta incluya la alternativa 272ms
+   × envía el formulario de 'Apellido materno' aunque la respuesta incluya la alternativa 215ms
+   × Opciones de mensajes anteriores: deshabilita el formulario y los botones después de otra respuesta del bot 511ms
+   ✓ Enlace del call center: envía una vez, retira el código de la URL y lo redacta 46ms
+   ✓ 'Enlace con número': envía una sola vez desde el número esperado y limpia la URL 36ms
+   ✓ 'Número inválido en el enlace': envía una sola vez desde el número esperado y limpia la URL 31ms
+   ✓ Código inválido: un parámetro vacío no envía nada 15ms
+   ✓ Call center solicita continuación con consentimiento y muestra enlace y QR de la lectura 281ms
+   ✓ Modo simulado: la insignia es visible en cualquier ruta 63ms
+   ✓ reenvío de oferta reemplaza la última burbuja y envía el payload vigente 77ms
+   ✓ recibe en el número activo y envía payloadBoton; otro mensaje deshabilita los botones anteriores 93ms
+   ✓ escucha los tres números desde el proveedor y conserva mensajes recibidos estando en app 30ms
+   ✓ avisa y cambia a Beto o Carla sin mezclar historiales, e ignora números ajenos 188ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/vistas/wa.test.tsx > envía el formulario de 'CURP' aunque la respuesta incluya la alternativa
+ FAIL  |web| src/vistas/wa.test.tsx > envía el formulario de 'Apellido materno' aunque la respuesta incluya la alternativa
+AssertionError: expected <button type="button" disabled></button> to have property "disabled" with value false
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ src/vistas/wa.test.tsx:126:27
+    124|   const abrirFormulario = await screen.findByRole('button', { name: 'A…
+    125|   expect(screen.getByRole('button', { name: alternativa })).toHaveProp…
+    126|   expect(abrirFormulario).toHaveProperty('disabled', false);
+       |                           ^
+    127|   await usuario.click(abrirFormulario);
+    128|   const dialogo = screen.getByRole('dialog', { name: titulo });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  |web| src/vistas/wa.test.tsx > Opciones de mensajes anteriores: deshabilita el formulario y los botones después de otra respuesta del bot
+AssertionError: expected <button type="button"></button> to have property "disabled" with value true
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/vistas/wa.test.tsx:147:68
+    145|   await texto(usuario, 'Otra cosa'); await screen.findByText('Respuest…
+    146|   expect((screen.getByRole('button', { name: 'Elegir uno' }) as HTMLBu…
+    147|   expect(screen.getByRole('button', { name: 'Abrir formulario' })).toH…
+       |                                                                    ^
+    148| });
+    149| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 17 passed (20)
+   Start at  08:23:56
+   Duration  9.25s (transform 730ms, setup 0ms, import 1.81s, tests 5.69s, environment 1.38s)
+
+Exit code: 1

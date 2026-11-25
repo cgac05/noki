@@ -97,7 +97,7 @@ export const RUTAS_CONSULTAS = {
   contextoDemo: { ruta: '/api/demo/contexto', parametros: z.object({}), respuesta: ContextoDemoSchema, soloDemo: true },
   sesionWebDemo: {
     ruta: '/api/demo/sesion-web/:telefono', parametros: z.object({ telefono: z.string().regex(/^\d{10,15}$/) }),
-    respuesta: z.object({ pacienteId: z.uuidv7(), nombreVisible: z.string().min(1) }), soloDemo: true,
+    respuesta: z.object({ pacienteId: z.uuidv7().nullable(), nombreVisible: z.string().min(1).nullable(), tramitesEnProceso: z.array(TramiteVistaSchema) }), soloDemo: true,
   },
 } as const satisfies Record<string, DefinicionConsulta>;
 

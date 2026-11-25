@@ -1,12 +1,12 @@
 import { Link } from 'react-router';
 import { useState } from 'react';
 import type { CitaVista } from '@noki/contracts';
-import { useConsulta, useContextoConsulta } from '../cliente/ProveedorCliente.tsx';
+import { useCliente, useConsulta } from '../cliente/ProveedorCliente.tsx';
 import { EstadoCarga } from '../componentes/EstadoCarga.tsx';
 import { EstadoError } from '../componentes/EstadoError.tsx';
 import { QrCita } from '../componentes/QrCita.tsx';
 import { fechaEnSede } from '../componentes/formato.ts';
-import { EstadoContexto } from '../componentes/EstadoContexto.tsx';
+import { SesionDemo } from '../componentes/SesionDemo.tsx';
 import { useSala } from '../cliente/useSala.ts';
 import { useAccion } from '../cliente/useAccion.ts';
 import { ErrorCliente } from '../cliente/errores.ts';
@@ -31,14 +31,33 @@ function CancelacionCita({ cita }: { cita: CitaVista }) {
 }
 
 export function App() {
-  const contexto = useContextoConsulta();
-  const { pacienteId } = contexto;
-  useSala(pacienteId ? `paciente:${pacienteId}` : undefined);
-  const citas = useConsulta('citasPaciente', pacienteId ? { pacienteId } : undefined);
+  const cliente = useCliente();
+  if (!cliente.sesionWebDemoHabilitada) return <>
+    <h1>App</h1>
+    <p>La consulta de citas está disponible en modo demo.</p>
+  </>;
+
+  const sinRegistro = <SinCitasParaNumero />;
+  return <SesionDemo textoVolver="Salir" sinRegistro={sinRegistro}
+    mostrarSesion={({ pacienteId, nombreVisible }, _telefono, salir) => <>
+      {pacienteId ? <CitasPaciente key={pacienteId} pacienteId={pacienteId} nombreVisible={nombreVisible} /> : sinRegistro}
+      <button type="button" className="boton-secundario" onClick={salir}>Salir</button>
+    </>} />;
+}
+
+function SinCitasParaNumero() {
+  return <section className="seccion">
+    <h2>No encontramos citas para este número</h2>
+    <p><Link to="/web">Agendar en Web</Link> o <Link to="/wa">Agendar por WhatsApp</Link>.</p>
+  </section>;
+}
+
+function CitasPaciente({ pacienteId, nombreVisible }: { pacienteId: string; nombreVisible: string | null }) {
+  useSala(`paciente:${pacienteId}`);
+  const citas = useConsulta('citasPaciente', { pacienteId });
   return <>
-    <h1>App</h1><p className="introduccion">Tus citas y el QR para continuar en clínica.</p>
-    {!pacienteId && <EstadoContexto contexto={contexto} texto="Aún no hay un paciente en el contexto de atención. Confirma una cita y vuelve a actualizar para ver tus citas." />}
-    {pacienteId && citas.isPending && <EstadoCarga />}
+    <h1>{nombreVisible ? `Hola, ${nombreVisible}` : 'Tus citas'}</h1><p className="introduccion">Tus citas y el QR para continuar en clínica.</p>
+    {citas.isPending && <EstadoCarga />}
     {citas.isError && <EstadoError error={citas.error} onReintentar={() => { void citas.refetch(); }} />}
     {citas.data?.length === 0 && <div className="seccion"><p>Aún no hay citas para mostrar.</p><Link className="enlace-principal" to="/callcenter">Iniciar atención en Call Center</Link></div>}
     {citas.data?.map(cita => <section className="seccion cita" key={cita.tramite.id} aria-label="Cita del paciente">

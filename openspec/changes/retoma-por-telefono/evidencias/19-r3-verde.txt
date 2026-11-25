@@ -1,0 +1,27 @@
+npx vitest run --project web --configLoader runner --maxWorkers=2 apps/web/src/vistas/webReal.test.tsx apps/web/src/vistas/consolas.test.tsx
+Código de salida: 0
+
+ RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-r3-264ab2e8
+
+ ✓ |web| src/vistas/consolas.test.tsx (21 tests) 4299ms
+     ✓ completa la cita en la ficha usando el ANI de la llamada  1235ms
+     ✓ incluye el número de la llamada en el enlace y el QR de continuación  477ms
+     ✓ inicia con ANI de demo, valida el formato y descarta la captura al mostrar la ficha  494ms
+     ✓ vuelve al ANI sin enviar comandos y limpia el consentimiento y el error para otra llamada  304ms
+ ✓ |web| src/vistas/webReal.test.tsx (21 tests) 4406ms
+   ✓ cotiza con el teléfono y genera una sola continuación aunque se pulse dos veces  586ms
+   ✓ registra por clic un pago con CoDi que persiste al reabrir la web  489ms
+   ✓ registra por Enter un pago con CoDi que persiste al reabrir la web  460ms
+   ✓ registra por Espacio un pago con CoDi que persiste al reabrir la web  457ms
+   ✓ retoma en la web con paciente=true y horario reservado=true  325ms
+
+ Test Files  2 passed (2)
+      Tests  42 passed (42)
+   Start at  08:32:24
+   Duration  7.63s (transform 1.25s, setup 0ms, import 3.22s, tests 8.71s, environment 2.54s)
+
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice

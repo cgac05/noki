@@ -58,7 +58,8 @@ export function componerComandos(opciones: { databaseUrl: string; sdMockUrl: str
     const datos = await lecturas.datosContinuacion(id, reloj.ahora().toISOString(), soloAsesor);
     return datos ? tokens.emitir(datos) : null;
   };
-  const consultas = { lecturas, reloj, emisor: tokens, bandeja: new BandejaPostgres(db), demo: opciones.demo, codigoContinuacion };
+  const consultas = { lecturas, reloj, emisor: tokens, bandeja: new BandejaPostgres(db), demo: opciones.demo, codigoContinuacion,
+    tramitesEnProcesoPorTelefono: casos.tramitesEnProcesoPorTelefono.bind(casos) };
   const whatsapp = { idempotencia, motor: new ConversacionWa({
     casos, aprobacion, responderOferta: huecos.responderOferta, contactos, lecturas, reloj, ids, registro, agendaExterna, conversaciones: new ConversacionesWaPostgres(db),
     codigoContinuacionAsesor: id => codigoContinuacion(id, true),

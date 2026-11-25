@@ -92,7 +92,7 @@ export class ContactosPostgres implements ContactosPort {
   async hilosPorTelefono(numero: string): Promise<HiloId[]> {
     const { rows } = await sql<{ id: HiloId }>`SELECT DISTINCT h.id FROM contacto_canal c
       JOIN hilo_atencion h ON h.contacto_id = c.id
-      WHERE c.canal IN ('whatsapp', 'callcenter') AND right(c.valor_externo, 10) = ${numero}
+      WHERE c.canal IN ('whatsapp', 'callcenter', 'web') AND right(c.valor_externo, 10) = ${numero}
         AND c.valor_externo ~ '^[+]?[0-9]{10,15}$'`.execute(this.db);
     return rows.map(({ id }) => id);
   }

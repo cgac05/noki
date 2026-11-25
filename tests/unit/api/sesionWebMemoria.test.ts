@@ -25,7 +25,7 @@ it('busca la sesión web por los últimos diez dígitos y el vínculo más recie
     const pacienteId = await registrar('Beatriz', '2026-11-24T12:00:00Z');
     const respuesta = await app.inject('/api/demo/sesion-web/5210000000001');
     expect(respuesta.statusCode).toBe(200);
-    expect(respuesta.json()).toEqual({ pacienteId, nombreVisible: 'Beatriz P.' });
+    expect(respuesta.json()).toEqual({ pacienteId, nombreVisible: 'Beatriz P.', tramitesEnProceso: [] });
     expect((await app.inject('/api/demo/sesion-web/5210000000099')).statusCode).toBe(404);
     expect((await app.inject('/api/demo/sesion-web/123')).statusCode).toBe(400);
     const log = registros.join('');
@@ -56,5 +56,40 @@ it('la sesión web solo existe en demo', async () => {
   const { app } = crearApiPruebas({ demo: false });
   try {
     expect((await app.inject('/api/demo/sesion-web/123')).statusCode).toBe(404);
+  } finally { await app.close(); }
+});
+
+it('lista el trámite de la llamada sin paciente ni eventos y permite continuarlo en WhatsApp', async () => {
+  const { app, casos, ids, tramites } = crearApiPruebas();
+  try {
+    const { tramite } = await casos.iniciar('AGENDAR', '3119990002', {
+      canal: 'callcenter', actor: 'asesor:demo', nivel: 1, vinculado: false,
+      factores: new Set(), correlationId: ids.nuevo(), idempotencyKey: ids.nuevo(),
+    });
+    const antes = tramites.eventos();
+    const sesion = await app.inject('/api/demo/sesion-web/523119990002');
+    expect(sesion.statusCode).toBe(200);
+    expect(sesion.json()).toEqual({
+      pacienteId: null, nombreVisible: null,
+      tramitesEnProceso: [expect.objectContaining({ id: tramite.id, hiloId: tramite.hiloId })],
+    });
+    expect(tramites.eventos()).toEqual(antes);
+    const continuacion = await app.inject({
+      method: 'POST', url: '/api/comandos', headers: { 'idempotency-key': ids.nuevo() },
+      payload: { canal: 'web', actor: 'paciente', tramiteId: tramite.id, hiloId: tramite.hiloId,
+        tipo: 'SolicitarContinuacion', payload: { destino: 'whatsapp' } },
+    });
+    expect(continuacion.statusCode).toBe(200);
+    const ficha = await app.inject('/api/hilos/' + tramite.hiloId + '/ficha');
+    const { codigoContinuacion } = ficha.json<{ codigoContinuacion: string }>();
+    expect(codigoContinuacion).toBeTruthy();
+    expect(tramites.eventos().some(e => e.tipo === 'CanalCambiado')).toBe(false);
+    const wa = await app.inject({
+      method: 'POST', url: '/api/canales/wa/mensajes', headers: { 'idempotency-key': ids.nuevo() },
+      payload: { waId: '523119990002', texto: 'CONTINUAR ' + codigoContinuacion.replace(/^CONTINUAR\s+/, '') },
+    });
+    expect(wa.statusCode).toBe(200);
+    expect(tramites.eventos().find(e => e.tipo === 'CanalCambiado')?.payload)
+      .toMatchObject({ a: 'whatsapp', metodo: 'TOKEN_WEB' });
   } finally { await app.close(); }
 });

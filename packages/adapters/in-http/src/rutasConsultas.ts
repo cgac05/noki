@@ -1,6 +1,6 @@
 import type { FastifyPluginAsync, RouteShorthandOptions } from 'fastify';
 import { RUTAS_CONSULTAS, type NombreConsulta, type ParametrosConsulta } from '@noki/contracts';
-import type { BandejaPort, CitaLeida, EmisorTokens, LecturasPort, Reloj } from '@noki/application';
+import type { BandejaPort, CasosTramite, CitaLeida, EmisorTokens, LecturasPort, Reloj } from '@noki/application';
 import { NoEncontrado, type HiloId, type PacienteId, type SedeId, type TramiteId } from '@noki/domain';
 import { respuestaError } from './respuestaError.ts';
 import { vistaTramite } from './vistaTramite.ts';
@@ -11,6 +11,7 @@ export interface DependenciasConsultas {
   emisor: EmisorTokens;
   bandeja: BandejaPort;
   demo: boolean;
+  tramitesEnProcesoPorTelefono: CasosTramite['tramitesEnProcesoPorTelefono'];
   codigoContinuacion?: (id: HiloId) => Promise<string | null>;
 }
 
@@ -81,8 +82,15 @@ export const rutasConsultas: FastifyPluginAsync<DependenciasConsultas> = async (
   registrar('bandeja', () => deps.bandeja.listar());
   registrar('contextoDemo', () => lecturas.contextoDemo());
   registrar('sesionWebDemo', async ({ telefono }) => {
-    const sesion = await lecturas.sesionWebDemo(telefono.slice(-10));
-    if (!sesion) throw new NoEncontrado('sesion', 'web');
-    return sesion;
+    const [sesion, tramites] = await Promise.all([
+      lecturas.sesionWebDemo(telefono.slice(-10)),
+      deps.tramitesEnProcesoPorTelefono(telefono),
+    ]);
+    if (!sesion && !tramites.length) throw new NoEncontrado('sesion', 'web');
+    return {
+      pacienteId: sesion?.pacienteId ?? null,
+      nombreVisible: sesion?.nombreVisible ?? null,
+      tramitesEnProceso: tramites.map(vistaTramite),
+    };
   });
 };

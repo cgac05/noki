@@ -1,0 +1,2 @@
+﻿npx.cmd eslint apps/web
+Salida: 0

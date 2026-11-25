@@ -13,6 +13,7 @@ import { ProveedorCliente, useRespuestaComando } from '../cliente/ProveedorClien
 import { GUION_FLUJO_A, IDS } from '../cliente/mock/guionFlujoA.ts';
 import { SocketFalso } from '../pruebas/socketFalso.ts';
 import { ErrorCliente } from '../cliente/errores.ts';
+import { entrarSesionDemo } from '../pruebas/entrarSesionDemo.ts';
 import { rutas } from '../rutas.tsx';
 
 vi.mock('qrcode', () => ({ default: { toString: vi.fn(async () => '<svg></svg>') } }));
@@ -36,6 +37,52 @@ async function avanzarHasta(cliente: ClienteMock, id: string) {
 }
 
 describe('Call center autorizado', () => {
+  it('completa la cita en la ficha usando el ANI de la llamada', async () => {
+    const cliente = new ClienteMock({ latenciaMs: 0 });
+    const enviarComando = cliente.enviarComando.bind(cliente);
+    vi.spyOn(cliente, 'enviarComando').mockImplementation((comando, opciones) =>
+      enviarComando(comando.tipo === 'IniciarTramite'
+        ? { ...comando, payload: { ...comando.payload, contacto: CONTACTO_DEMO } }
+        : comando, opciones));
+    const enviar = vi.spyOn(cliente, 'enviarMensajeWa')
+      .mockResolvedValueOnce({ mensajes: [{ tipo: 'texto', texto: '¿Qué día prefieres?' }] })
+      .mockResolvedValueOnce({ mensajes: [{ tipo: 'botones', texto: 'Horario disponible', botones: [{ id: 'confirmar', titulo: 'Confirmar cita', payload: 'confirmar' }] }] })
+      .mockResolvedValueOnce({ mensajes: [{ tipo: 'texto', texto: 'Cita confirmada' }] });
+    const ani = '3119990003';
+    const { usuario, router } = abrir(cliente);
+    const campo = screen.getByLabelText('Número de la llamada (ANI)');
+    await usuario.clear(campo);
+    await usuario.type(campo, ani);
+    await usuario.click(screen.getByRole('button', { name: 'Llamada entrante' }));
+    await usuario.click(await screen.findByRole('button', { name: /^Cotizar Paquete/ }));
+    await screen.findByText('COTIZADO');
+    const ficha = within(screen.getByRole('region', { name: 'Ficha del hilo' }));
+    await usuario.dblClick(ficha.getByRole('button', { name: 'Completar la cita aquí' }));
+    expect(await ficha.findByText('¿Qué día prefieres?')).toBeTruthy();
+    expect(enviar.mock.calls.map(([mensaje]) => mensaje)).toEqual([{ waId: ani, texto: 'Hola' }]);
+    await usuario.type(ficha.getByRole('textbox', { name: 'Mensaje' }), 'Mañana');
+    await usuario.click(ficha.getByRole('button', { name: 'Enviar' }));
+    await usuario.click(await ficha.findByRole('button', { name: 'Confirmar cita' }));
+    expect(await ficha.findByText('Cita confirmada')).toBeTruthy();
+    expect(enviar.mock.calls.map(([mensaje]) => mensaje)).toEqual([
+      { waId: ani, texto: 'Hola' }, { waId: ani, texto: 'Mañana' }, { waId: ani, payloadBoton: 'confirmar' },
+    ]);
+    expect(router.state.location.pathname).toBe('/callcenter');
+    await usuario.click(screen.getByRole('button', { name: 'Volver a nueva llamada' }));
+    expect(screen.queryByRole('textbox', { name: 'Mensaje' })).toBeNull();
+  });
+
+  it('no ofrece completar la cita en una ficha sin ANI de la pestaña', async () => {
+    const cliente = new ClienteMock({ latenciaMs: 0 });
+    await avanzarHasta(cliente, 'COTIZADO');
+    const enviar = vi.spyOn(cliente, 'enviarMensajeWa');
+    abrir(cliente);
+    const ficha = within(await screen.findByRole('region', { name: 'Ficha del hilo' }));
+    expect(ficha.getByText('COTIZADO')).toBeTruthy();
+    expect(ficha.queryByRole('button', { name: 'Completar la cita aquí' })).toBeNull();
+    expect(enviar).not.toHaveBeenCalled();
+  });
+
   it('incluye el número de la llamada en el enlace y el QR de continuación', async () => {
     const cliente = new ClienteMock({ latenciaMs: 0 });
     const enviarComando = cliente.enviarComando.bind(cliente);
@@ -194,6 +241,7 @@ function prepararLecturas(contextoInicial?: ContextoDemo, demo = true) {
     if (ruta.endsWith('/alertas')) return Response.json(lecturas.alertasSeguridad);
     if (ruta.endsWith('/huecos')) return Response.json(lecturas.panelHuecos);
     if (ruta.endsWith('/llegadas')) return Response.json(lecturas.llegadasSede);
+    if (ruta.includes('/sesion-web/')) return Response.json({ pacienteId: IDS.paciente, nombreVisible: 'Ana P.', tramitesEnProceso: [] });
     if (ruta.endsWith('/citas')) return Response.json(lecturas.citasPaciente);
     if (ruta.endsWith('/ficha')) return Response.json({ ...lecturas.fichaHilo, hiloId: contexto.hiloId });
     if (ruta.endsWith('/bandeja')) return Response.json([]);
@@ -223,9 +271,9 @@ describe('Clínica, administración y app en modo real', () => {
     expect(await screen.findByText(/Aún no hay llegadas esperadas/)).toBeDefined();
     expect(screen.queryByRole('alert')).toBeNull();
   });
-  it.each(['/clinica', '/app'])('%s sin contexto ofrece Actualizar y vuelve a pedir el contexto', async ruta => {
+  it('clínica sin contexto ofrece Actualizar y vuelve a pedir el contexto', async () => {
     const { cliente, cambiarContexto, peticion } = prepararLecturas({ hiloId: null, pacienteId: null, sedeId: null });
-    const { usuario } = abrir(cliente, ruta);
+    const { usuario } = abrir(cliente, '/clinica');
     const actualizar = await screen.findByRole('button', { name: 'Actualizar' });
     expect(screen.queryByRole('alert')).toBeNull();
     expect(peticion.mock.calls.every(([url]) => String(url).endsWith('/contexto'))).toBe(true);
@@ -233,15 +281,12 @@ describe('Clínica, administración y app en modo real', () => {
     await usuario.click(actualizar);
     expect(await screen.findByText('CONFIRMADA')).toBeDefined();
     expect(peticion.mock.calls.filter(([url]) => String(url).endsWith('/contexto'))).toHaveLength(2);
-    if (ruta === '/app') {
-      expect(await screen.findByRole('img', { name: 'Código QR de la cita' })).toBeDefined();
-      expect(QRCode.toString).toHaveBeenCalledWith(IDS.tokenQr, expect.objectContaining({ type: 'svg' }));
-    }
   });
-  it('sin VITE_DEMO muestra sin contexto en app sin peticiones ni error', async () => {
+  it('sin VITE_DEMO la app no inicia sesión ni consulta citas', () => {
     const { cliente, peticion } = prepararLecturas(undefined, false); abrir(cliente, '/app');
-    expect(await screen.findByRole('button', { name: 'Actualizar' })).toBeDefined();
-    expect(screen.queryByRole('alert')).toBeNull(); expect(peticion).not.toHaveBeenCalled();
+    expect(screen.getByText('La consulta de citas está disponible en modo demo.')).toBeDefined();
+    expect(screen.queryByRole('button', { name: 'Entrar' })).toBeNull();
+    expect(peticion).not.toHaveBeenCalled();
   });
   it('muestra los siete KPI documentados y conserva una clave desconocida y su valor', async () => {
     const { cliente, lecturas } = prepararLecturas();
@@ -263,7 +308,8 @@ describe('Clínica, administración y app en modo real', () => {
   it.each([
     ['/clinica', `sede:${IDS.sede}`], ['/app', `paciente:${IDS.paciente}`], ['/admin', 'admin'],
   ])('%s se une a sus salas y las deja al desmontarse', async (ruta, sala) => {
-    const { cliente, socket } = prepararLecturas(); const { unmount } = abrir(cliente, ruta);
+    const { cliente, socket } = prepararLecturas(); const { unmount, usuario } = abrir(cliente, ruta);
+    if (ruta === '/app') await entrarSesionDemo(usuario);
     await screen.findByText('CONFIRMADA'); act(() => socket.recibir('connect'));
     expect(socket.emit).toHaveBeenCalledWith('sala:unirse', sala);
     if (ruta === '/admin') expect(socket.emit).toHaveBeenCalledWith('sala:unirse', `hilo:${IDS.hilo}`);

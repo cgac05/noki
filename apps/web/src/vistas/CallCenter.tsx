@@ -11,6 +11,9 @@ import { EstadoError } from '../componentes/EstadoError.tsx';
 import { LineaTiempo } from '../componentes/LineaTiempo.tsx';
 import { dinero } from '../componentes/formato.ts';
 import { IdentificacionAsesor } from '../componentes/IdentificacionAsesor.tsx';
+import { AsistenteCita } from '../componentes/AsistenteCita.tsx';
+
+const estadosEnProceso = ['BORRADOR', 'COTIZADO', 'LISTO_PARA_RESERVAR', 'HORARIO_RESERVADO'];
 
 function LlamadaEntrante({ accion }: { accion: ReturnType<typeof useAccion> }) {
   const [numero, setNumero] = useState(CONTACTO_DEMO);
@@ -33,6 +36,7 @@ function LlamadaEntrante({ accion }: { accion: ReturnType<typeof useAccion> }) {
 export function CallCenter() {
   const [consentimientoHilo, setConsentimientoHilo] = useState<string>();
   const [esperarNuevaLlamada, setEsperarNuevaLlamada] = useState(false);
+  const [hiloConAsistente, setHiloConAsistente] = useState<string>();
   const cliente = useCliente();
   const contexto = useContextoConsulta();
   const { respuesta: ultimaRespuesta } = useRespuestaComando();
@@ -56,6 +60,7 @@ export function CallCenter() {
   const tramite = ficha.data?.tramites[0] ?? respuesta?.tramite;
   const pregunta = respuesta?.siguientePregunta;
   const llamadaCerrada = accion.isSuccess && accion.variables?.accion.titulo === 'Cerrar atención (llamada cortada)';
+  const citaEnProceso = ficha.data?.tramites.some(t => t.tipo === 'AGENDAR' && estadosEnProceso.includes(t.estado));
   const continuacionDeshabilitada = accion.isPending || accion.isError || ficha.data?.soloLectura || Boolean(codigo) || llamadaCerrada;
   const solicitarContinuacion = (tramiteId: string, titulo: string) => accion.ejecutar({
     tipo: 'comando', titulo, comando: ComandoRequestSchema.parse({
@@ -69,6 +74,7 @@ export function CallCenter() {
     {tramite && <button type="button" disabled={inicio.isPending || accion.isPending} onClick={() => {
       setEsperarNuevaLlamada(true);
       setConsentimientoHilo(undefined);
+      setHiloConAsistente(undefined);
       inicio.reset();
       accion.reset();
     }}>Volver a nueva llamada</button>}
@@ -94,6 +100,10 @@ export function CallCenter() {
             <button type="button" disabled={continuacionDeshabilitada} onClick={() => solicitarContinuacion(tramite.id, 'Cerrar atención (llamada cortada)')}>Cerrar atención (llamada cortada)</button>}
         </>}
         {llamadaCerrada && <p role="status">Llamada cerrada</p>}
+        {ani && !llamadaCerrada && (hiloConAsistente === hiloId
+          ? <AsistenteCita key={hiloId} telefono={ani} />
+          : citaEnProceso && <button type="button" disabled={accion.isPending}
+            onClick={() => setHiloConAsistente(hiloId)}>Completar la cita aquí</button>)}
         {codigo && <div className="continuacion"><Link className="enlace-principal" to={rutaContinuacion}>Abrir WhatsApp</Link><QrCita token={new URL(rutaContinuacion, location.origin).toString()} etiqueta="Código QR de continuación" /></div>}
       </section>
       <LineaTiempo eventos={ficha.data.lineaTiempo} />

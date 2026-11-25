@@ -1,0 +1,74 @@
+{
+  "changeName": "retoma-por-telefono",
+  "changeDir": "C:\\Users\\guill\\Documents\\GitHub\\noki\\openspec\\changes\\retoma-por-telefono",
+  "schemaName": "spec-driven",
+  "contextFiles": {
+    "proposal": [
+      "C:\\Users\\guill\\Documents\\GitHub\\noki\\openspec\\changes\\retoma-por-telefono\\proposal.md"
+    ],
+    "specs": [
+      "C:\\Users\\guill\\Documents\\GitHub\\noki\\openspec\\changes\\retoma-por-telefono\\specs\\canal-whatsapp\\spec.md",
+      "C:\\Users\\guill\\Documents\\GitHub\\noki\\openspec\\changes\\retoma-por-telefono\\specs\\continuidad-canales\\spec.md"
+    ],
+    "design": [
+      "C:\\Users\\guill\\Documents\\GitHub\\noki\\openspec\\changes\\retoma-por-telefono\\design.md"
+    ],
+    "tasks": [
+      "C:\\Users\\guill\\Documents\\GitHub\\noki\\openspec\\changes\\retoma-por-telefono\\tasks.md"
+    ]
+  },
+  "progress": {
+    "total": 5,
+    "complete": 5,
+    "remaining": 0
+  },
+  "tasks": [
+    {
+      "id": "1",
+      "description": "0.1 H-01 de `web-sesion`: corregir solo la prueba `tests/unit/nucleo/casosTramite.test.ts:655` (campos admitidos por `DatosDeclarados`).",
+      "done": true,
+      "sourcePath": "C:\\Users\\guill\\Documents\\GitHub\\noki\\openspec\\changes\\retoma-por-telefono\\tasks.md",
+      "line": 5
+    },
+    {
+      "id": "2",
+      "description": "1.1 En rojo: escenarios de MN para WhatsApp (sin botón, con prefijo, confirmada no, sin vínculo y sin datos del paciente) en memoria (`tests/unit/`) y uno en integración Postgres (`tests/integracion/`). Evidencia en `evidencias/01-rojo.txt`.",
+      "done": true,
+      "sourcePath": "C:\\Users\\guill\\Documents\\GitHub\\noki\\openspec\\changes\\retoma-por-telefono\\tasks.md",
+      "line": 6
+    },
+    {
+      "id": "3",
+      "description": "1.2 Implementar D1, D2 y D4 (dominio, `CasosTramite`, `ConversacionWa`, contactos memoria/Postgres, `docs/eventos.md`, excepción en `PLAN.md §8` y `AGENTS.md §8`). Verificación: 1.1 en verde; pruebas existentes de llamada entrante, llamada cortada y continuidad en verde.",
+      "done": true,
+      "sourcePath": "C:\\Users\\guill\\Documents\\GitHub\\noki\\openspec\\changes\\retoma-por-telefono\\tasks.md",
+      "line": 7
+    },
+    {
+      "id": "4",
+      "description": "2.1 En rojo y luego en verde: «Web tras llamada cortada» (D3: contrato `sesionWebDemo`, lecturas memoria/Postgres, ruta, `Web.tsx`, cliente simulado).",
+      "done": true,
+      "sourcePath": "C:\\Users\\guill\\Documents\\GitHub\\noki\\openspec\\changes\\retoma-por-telefono\\tasks.md",
+      "line": 8
+    },
+    {
+      "id": "5",
+      "description": "3.1 Controles en serie: `vitest run --project unitarios --project web`, integración de los archivos tocados con `node --import tsx tests/integracion/ejecutar.ts` (base de prueba en 55432), `eslint` y `tsc` de los paquetes tocados (incluido `tests/tsconfig.json`), `lint:deps`. Si el sandbox lo bloquea (`EPERM`), anotarlo: el revisor los corre.",
+      "done": true,
+      "sourcePath": "C:\\Users\\guill\\Documents\\GitHub\\noki\\openspec\\changes\\retoma-por-telefono\\tasks.md",
+      "line": 9
+    }
+  ],
+  "taskTrackingConfigured": true,
+  "state": "all_done",
+  "instruction": "All tasks are complete! This change is ready to be archived.\nConsider running tests and reviewing the changes before archiving.",
+  "context": "Escribe los artefactos en español y conserva los encabezados y palabras\nnormativas que el esquema exige para validación.\nClaude Code analiza, planifica y revisa; Codex implementa y prueba;\nel usuario autoriza el alcance y el cierre.\nLee docs/colaboracion-openspec.md para el protocolo y los formatos persistentes,\nCLAUDE.md o AGENTS.md para el rol y PLAN.md para las restricciones del proyecto.\nPrioriza el Flujo A estable. Los artefactos aprobados son la fuente de verdad\ndel alcance; ante contradicciones con las reglas del proyecto, consulta al usuario.\n",
+  "operationGuidance": [
+    "Sigue AGENTS.md y el handoff del cambio; comprueba la autorización existente del usuario sin pedirla otra vez cuando ya cubra ese alcance y revisión.",
+    "Actualiza las tareas solo con evidencia y entrega implementacion.md según la guía compartida; devuelve a Claude los cambios de planificación que requieran autorización."
+  ],
+  "root": {
+    "path": "C:\\Users\\guill\\Documents\\GitHub\\noki",
+    "source": "nearest"
+  }
+}

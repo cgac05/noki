@@ -1,0 +1,6 @@
+﻿corepack.cmd pnpm lint:deps
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+✔ no dependency violations found (259 modules, 851 dependencies cruised)
+
+Salida: 0

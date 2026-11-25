@@ -1,0 +1,10 @@
+﻿corepack.cmd pnpm lint
+$ eslint . && pnpm typecheck
+"pnpm" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+[ELIFECYCLE] Command failed with exit code 1.
+Salida: 1
+pnpm.cmd lint
+$ eslint . && pnpm typecheck
+$ pnpm -r exec tsc --noEmit && tsc --project tests/tsconfig.json
+Salida: 0

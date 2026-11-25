@@ -231,7 +231,7 @@ El `job_id` lógico es `${tipo}:${tramiteId}` (ej. `HOLD:0193…`). BullMQ guard
 - [ ] El teléfono **nunca** es la llave del paciente; se usa `paciente.id` (UUID).
 - [ ] Ningún secreto se pide como texto libre en el chat. PIN = campo `passcode`; fecha de nacimiento y datos fiscales = campos `sensitive` en el modal tipo Flow.
 - [ ] **El bot nunca repite datos sensibles** (fecha de nacimiento, correo, RFC, resultados).
-- [ ] En N1 solo se revelan servicio, sede, fecha y canal de origen.
+- [ ] En N1 solo se revelan servicio, sede, fecha y canal de origen. El mismo número puede retomar una cita `AGENDAR` en proceso con esos datos, sin crear vínculo de identidad.
 - [ ] Cuando la búsqueda es ambigua, **no se revela nada**. La pista de identificación del paso `CONFIRMAR` puede mostrar el primer nombre y la inicial del apellido paterno de candidatos con vínculo vigente. Elegir un candidato requiere confirmar su fecha de nacimiento antes de asignarlo.
 - [ ] Los QR, enlaces y botones llevan un **token firmado de un solo uso** (`jti` registrado), nunca el folio en texto plano.
 - [ ] El PIN se guarda con argon2. Máximo 3 intentos → bloqueo + `IntentoVerificacionFallido`.

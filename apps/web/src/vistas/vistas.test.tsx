@@ -10,6 +10,7 @@ import { GUION_FLUJO_A, IDS } from '../cliente/mock/guionFlujoA.ts';
 import { ProveedorCliente } from '../cliente/ProveedorCliente.tsx';
 import { MensajeBot, EntradaPregunta } from '../componentes/MensajeBot.tsx';
 import '../pruebas/dialogo.ts';
+import { entrarSesionDemo } from '../pruebas/entrarSesionDemo.ts';
 import { rutas } from '../rutas.tsx';
 
 vi.mock('qrcode', () => ({ default: { toString: vi.fn().mockResolvedValue('<svg viewBox="0 0 10 10"><path d="M0 0h10v10H0z"/></svg>') } }));
@@ -65,22 +66,26 @@ describe('Mensajes y siguiente pregunta', () => {
 
 describe('Vistas del guion', () => {
   it('reiniciar el guion C descarta la confirmación y la aprobación pendiente de la cita', async () => {
-    const { usuario } = abrir('/app');
+    const { usuario } = abrir('/app', new ClienteMock({ latenciaMs: 0, sesionWebDemo: true }));
     await usuario.selectOptions(screen.getByRole('combobox', { name: 'Guion de demo' }), 'flujoC');
+    await entrarSesionDemo(usuario);
     await usuario.click(await screen.findByRole('button', { name: 'Cancelar cita' }));
     await usuario.click(screen.getByRole('button', { name: 'Reiniciar guion' }));
+    await entrarSesionDemo(usuario);
     expect(screen.queryByRole('button', { name: 'Confirmar cancelación' })).toBeNull();
     await usuario.click(await screen.findByRole('button', { name: 'Cancelar cita' }));
     await usuario.click(screen.getByRole('button', { name: 'Confirmar cancelación' }));
     await screen.findByText(/cancelación espera aprobación en WhatsApp/i);
     await usuario.click(screen.getByRole('button', { name: 'Reiniciar guion' }));
+    await entrarSesionDemo(usuario);
     expect(screen.queryByText(/cancelación espera aprobación en WhatsApp/i)).toBeNull();
     expect(await screen.findByRole('button', { name: 'Cancelar cita' })).toBeDefined();
     expect(await screen.findByText(/Paso 1 de 4/)).toBeDefined();
   });
   it('elige Flujo C, cancela, aprueba, acepta la oferta, muestra dominó y vuelve al inicio del Flujo A', async () => {
-    const { cliente, usuario, router } = abrir('/app');
+    const { cliente, usuario, router } = abrir('/app', new ClienteMock({ latenciaMs: 0, sesionWebDemo: true }));
     await usuario.selectOptions(screen.getByRole('combobox', { name: 'Guion de demo' }), 'flujoC');
+    await entrarSesionDemo(usuario);
     expect(await screen.findByText(/Paso 1 de 4/)).toBeDefined();
     await usuario.click(await screen.findByRole('button', { name: 'Cancelar cita' }));
     await usuario.click(screen.getByRole('button', { name: 'Confirmar cancelación' }));
@@ -199,7 +204,7 @@ describe('Vistas del guion', () => {
   });
 
   it('recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales', async () => {
-    const { cliente } = abrir();
+    const { cliente } = abrir('/callcenter', new ClienteMock({ latenciaMs: 0, sesionWebDemo: true }));
     // Este recorrido verifica respuestas y navegación, sin pausas artificiales entre teclas.
     const usuario = userEvent.setup({ delay: null });
     await usuario.click(await screen.findByRole('button', { name: 'Llamada entrante' }));
@@ -226,6 +231,7 @@ describe('Vistas del guion', () => {
     expect(JSON.stringify({ ...sessionStorage })).not.toContain('2000-01-02');
     await usuario.click(await screen.findByRole('button', { name: 'Confirmar cita' }));
     await usuario.click(screen.getByRole('link', { name: 'App' }));
+    await entrarSesionDemo(usuario);
     expect(await screen.findByText('CONFIRMADA')).toBeDefined();
     expect(await screen.findByRole('img', { name: 'Código QR de la cita' })).toBeDefined();
     expect(QRCode.toString).toHaveBeenLastCalledWith(IDS.tokenQr, expect.objectContaining({ type: 'svg' }));
@@ -252,12 +258,13 @@ describe('Vistas del guion', () => {
     await usuario.click(screen.getByRole('button', { name: 'Reiniciar guion' }));
     await waitFor(() => expect(cliente.demo?.paso().id).toBe('INICIO'));
     await usuario.click(screen.getByRole('link', { name: 'App' }));
+    await entrarSesionDemo(usuario);
     expect(await screen.findByText('Aún no hay citas para mostrar.')).toBeDefined();
     expect(screen.queryByRole('img', { name: 'Código QR de la cita' })).toBeNull();
   });
 
   it('Estado desde el cliente y QR con token, no con folio', async () => {
-    const cliente = new ClienteMock({ latenciaMs: 0 });
+    const cliente = new ClienteMock({ latenciaMs: 0, sesionWebDemo: true });
     await confirmarGuion(cliente);
     const consultar = cliente.consultar.bind(cliente);
     vi.spyOn(cliente, 'consultar').mockImplementation(async (nombre, parametros) => {
@@ -267,7 +274,8 @@ describe('Vistas del guion', () => {
       }
       return dato;
     });
-    abrir('/app', cliente);
+    const { usuario } = abrir('/app', cliente);
+    await entrarSesionDemo(usuario);
     expect(await screen.findByText('EN_CLINICA')).toBeDefined();
     expect(await screen.findByRole('img', { name: 'Código QR de la cita' })).toBeDefined();
     expect(QRCode.toString).toHaveBeenCalledWith(IDS.tokenQr, expect.objectContaining({ type: 'svg' }));

@@ -3,16 +3,22 @@ import { Link } from 'react-router';
 import { ComandoRequestSchema, type CitaVista, type ComandoRequest, type OfertaCatalogo, type RespuestaComando, type TramiteVista } from '@noki/contracts';
 import { useCliente, useConsulta, useContextoConsulta } from '../cliente/ProveedorCliente.tsx';
 import { useAccion } from '../cliente/useAccion.ts';
-import { ErrorCliente } from '../cliente/errores.ts';
+import { formatoTelefono, SesionDemo } from '../componentes/SesionDemo.tsx';
 import { EstadoCarga } from '../componentes/EstadoCarga.tsx';
 import { EstadoError } from '../componentes/EstadoError.tsx';
 import { QrCita } from '../componentes/QrCita.tsx';
+import { AsistenteCita } from '../componentes/AsistenteCita.tsx';
 import { useSala } from '../cliente/useSala.ts';
 import { dinero, fechaEnSede } from '../componentes/formato.ts';
 
 export function Web() {
   const cliente = useCliente();
-  if (cliente.sesionWebDemoHabilitada) return <SesionWeb />;
+  if (cliente.sesionWebDemoHabilitada) return <SesionDemo
+    mostrarSesion={(sesion, telefono, volver) => <PanelPaciente telefono={telefono} {...sesion} volver={volver} />}
+    sinRegistro={<section className="seccion">
+      <h2>No encontramos tu registro</h2>
+      <p>Continúa por <Link to="/wa">WhatsApp</Link> o <Link to="/callcenter">Call Center</Link>.</p>
+    </section>} />;
   if (cliente.modo === 'real') return <WebReal />;
   return <>
     <h1>Web</h1><p className="introduccion">Cotiza tu estudio y continúa la atención por WhatsApp.</p>
@@ -27,110 +33,51 @@ function sobreTramite(respuesta: RespuestaComando | undefined) {
   return { ...pacienteWeb, tramiteId: respuesta.tramite.id, hiloId: respuesta.tramite.hiloId };
 }
 
-const formatoTelefono = /^\d{10,15}$/;
-
-function SesionWeb() {
-  const [telefono, setTelefono] = useState('');
-  const [clave, setClave] = useState('');
-  const [invalida, setInvalida] = useState(false);
-  const [enviado, setEnviado] = useState(false);
-  const sesion = useConsulta('sesionWebDemo', enviado ? { telefono } : undefined);
-  const desconocido = sesion.error instanceof ErrorCliente && sesion.error.codigo === 'NO_ENCONTRADO';
-
-  if (enviado && sesion.data) return <PanelPaciente telefono={telefono} {...sesion.data} volver={() => setEnviado(false)} />;
-  return <>
-    <h1>Identifícate</h1>
-    {enviado ? <>
-      {sesion.isPending && <EstadoCarga texto="Buscando tu registro…" />}
-      {desconocido ? <section className="seccion">
-        <h2>No encontramos tu registro</h2>
-        <p>Continúa por <Link to="/wa">WhatsApp</Link> o <Link to="/callcenter">Call Center</Link>.</p>
-      </section> : sesion.isError && <EstadoError error={sesion.error} onReintentar={() => { void sesion.refetch(); }} />}
-      <button type="button" className="boton-secundario" onClick={() => setEnviado(false)}>Volver</button>
-    </> : <>
-      <form className="seccion" onSubmit={evento => {
-        evento.preventDefault();
-        if (!formatoTelefono.test(telefono)) return;
-        if (clave !== 'prueba123') { setInvalida(true); return; }
-        setClave('');
-        setInvalida(false);
-        setEnviado(true);
-      }}>
-        <label htmlFor="telefono-sesion">Teléfono</label>
-        <input id="telefono-sesion" type="tel" inputMode="numeric" autoComplete="tel"
-          value={telefono} onChange={evento => setTelefono(evento.target.value)} />
-        <label htmlFor="clave-sesion">Contraseña de demostración</label>
-        <input id="clave-sesion" type="password" autoComplete="off" value={clave}
-          onChange={evento => { setClave(evento.target.value); setInvalida(false); }} />
-        {invalida && <p role="alert">Contraseña incorrecta.</p>}
-        <button type="submit" disabled={!formatoTelefono.test(telefono) || !clave}>Entrar</button>
-      </form>
-      <Link className="enlace-principal" to="/">Volver</Link>
-    </>}
-  </>;
-}
-
-function PanelPaciente({ telefono, pacienteId, nombreVisible, volver }: {
-  telefono: string; pacienteId: string; nombreVisible: string; volver: () => void;
+function PanelPaciente({ telefono, pacienteId, nombreVisible, tramitesEnProceso, volver }: {
+  telefono: string; pacienteId: string | null; nombreVisible: string | null; tramitesEnProceso: TramiteVista[]; volver: () => void;
 }) {
-  const abiertos = useConsulta('tramitesAbiertos', { pacienteId });
+  const abiertos = useConsulta('tramitesAbiertos', pacienteId ? { pacienteId } : undefined);
   const catalogo = useConsulta('catalogo', {});
   const nuevo = useAccion();
-  const continuar = useAccion();
-  const [tramiteContinuado, setTramiteContinuado] = useState<TramiteVista>();
+  const [mostrarAsistente, setMostrarAsistente] = useState(false);
   const [pagos, setPagos] = useState<Record<string, string>>({});
-  const pendientes = abiertos.data?.filter(t => t.estado === 'BORRADOR' || t.estado === 'COTIZADO' ||
+  const pendientesDelPaciente = abiertos.data?.filter(t => t.estado === 'BORRADOR' || t.estado === 'COTIZADO' ||
     t.estado === 'LISTO_PARA_RESERVAR' || t.estado === 'HORARIO_RESERVADO') ?? [];
+  const pendientes = [...new Map([...pendientesDelPaciente, ...tramitesEnProceso].map(t => [t.id, t])).values()];
 
   return <>
-    <h1>Hola, {nombreVisible}</h1>
+    <h1>{nombreVisible ? 'Hola, ' + nombreVisible : 'Tus trámites'}</h1>
     <p className="introduccion">Simulación: no se realiza ningún cobro</p>
     {nuevo.data ? <CotizacionWeb telefonoInicial={telefono} tramiteInicial={nuevo.data} volver={nuevo.reset} />
-      : tramiteContinuado ? <ContinuacionPendiente tramite={tramiteContinuado} accion={continuar}
-        volver={() => { continuar.reset(); setTramiteContinuado(undefined); }} />
-      : <PagoCitas telefonoEnmascarado={`•••• ${telefono.slice(-4)}`} pagos={pagos} pacienteId={pacienteId}
+      : mostrarAsistente ? <section className="seccion">
+        <h2>Continúa tu cita</h2>
+        <AsistenteCita telefono={telefono} />
+        <button type="button" className="boton-secundario" onClick={() => setMostrarAsistente(false)}>Volver</button>
+      </section>
+      : <PagoCitas telefonoEnmascarado={`•••• ${telefono.slice(-4)}`} pagos={pagos} pacienteId={pacienteId ?? undefined}
         registrar={(id, folio) => setPagos(anteriores => ({ ...anteriores, [id]: folio }))}
         volver={volver} esperando={nuevo.isPending}>
         <section className="seccion">
           <h2>Trámites abiertos</h2>
-          {abiertos.isPending && <EstadoCarga />}
+          {pacienteId && abiertos.isPending && <EstadoCarga />}
           {abiertos.isError && <EstadoError error={abiertos.error} onReintentar={() => { void abiertos.refetch(); }} />}
-          {abiertos.isSuccess && pendientes.length === 0 && <p>No tienes trámites pendientes.</p>}
+          {(!pacienteId || abiertos.isSuccess) && pendientes.length === 0 && <p>No tienes trámites pendientes.</p>}
           {pendientes.map(tramite => <div key={tramite.id}>
             <p>{catalogo.data?.find(oferta => oferta.servicioId === tramite.servicioId)?.servicio ?? tramite.tipo}</p>
-            <button type="button" disabled={nuevo.isPending} onClick={() => {
-              if (continuar.ejecutar({ tipo: 'comando', titulo: 'Continuar en WhatsApp', comando: {
-                ...pacienteWeb, tramiteId: tramite.id, hiloId: tramite.hiloId, tipo: 'SolicitarContinuacion', payload: { destino: 'whatsapp' },
-              } })) setTramiteContinuado(tramite);
-            }}>Continúa donde lo dejaste</button>
+            <button type="button" disabled={nuevo.isPending} onClick={() => setMostrarAsistente(true)}>Continúa donde lo dejaste</button>
           </div>)}
           <div className="acciones"><button type="button" disabled={nuevo.isPending || nuevo.isError} onClick={() =>
             nuevo.ejecutar({ tipo: 'comandos', titulo: 'Iniciar un trámite nuevo', comandos: [
               { ...pacienteWeb, tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR', contacto: telefono } },
-              previa => ({ ...sobreTramite(previa), tipo: 'AsignarPaciente', payload: { pacienteId } }),
+              ...(pacienteId ? [(previa: RespuestaComando | undefined) => ({
+                ...sobreTramite(previa), tipo: 'AsignarPaciente' as const, payload: { pacienteId },
+              })] : []),
             ] })}>Iniciar un trámite nuevo</button></div>
           {nuevo.isPending && <EstadoCarga texto="Iniciando tu trámite…" />}
           {nuevo.isError && <EstadoError error={nuevo.error} onReintentar={nuevo.reintentar} />}
         </section>
       </PagoCitas>}
   </>;
-}
-
-function ContinuacionPendiente({ tramite, accion, volver }: {
-  tramite: TramiteVista; accion: ReturnType<typeof useAccion>; volver: () => void;
-}) {
-  const ficha = useConsulta('fichaHilo', accion.isSuccess ? { hiloId: tramite.hiloId } : undefined);
-  const codigo = ficha.data?.codigoContinuacion?.replace(/^CONTINUAR\s+/, '');
-  return <section className="seccion">
-    <h2>Continúa en WhatsApp</h2>
-    {(accion.isPending || (accion.isSuccess && ficha.isPending)) && <EstadoCarga texto="Buscando el código de continuación…" />}
-    {accion.isError && <EstadoError error={accion.error} onReintentar={accion.reintentar} />}
-    {ficha.isError && <EstadoError error={ficha.error} onReintentar={() => { void ficha.refetch(); }} />}
-    {ficha.isSuccess && !codigo && <EstadoError error={new Error('No encontramos el código de continuación.')}
-      onReintentar={() => { void ficha.refetch(); }} />}
-    {codigo && <Link className="enlace-principal" to={'/wa?continuar=' + encodeURIComponent(codigo)}>Abrir WhatsApp</Link>}
-    <button type="button" className="boton-secundario" disabled={accion.isPending} onClick={volver}>Volver</button>
-  </section>;
 }
 
 function WebReal() {

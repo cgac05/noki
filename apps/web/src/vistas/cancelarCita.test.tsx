@@ -7,22 +7,25 @@ import { ClienteMock } from '../cliente/mock/ClienteMock.ts';
 import { GUION_FLUJO_A } from '../cliente/mock/guionFlujoA.ts';
 import { ProveedorCliente } from '../cliente/ProveedorCliente.tsx';
 import { ErrorCliente } from '../cliente/errores.ts';
+import { entrarSesionDemo } from '../pruebas/entrarSesionDemo.ts';
 import { rutas } from '../rutas.tsx';
 
 const confirmada = GUION_FLUJO_A.find(p => p.paso.id === 'CONFIRMADA')!;
 afterEach(() => { cleanup(); sessionStorage.clear(); vi.restoreAllMocks(); });
-function abrir(estado: 'CONFIRMADA' | 'ATENDIDA' = 'CONFIRMADA') {
-  const cliente = new ClienteMock({ latenciaMs: 0 });
+async function abrir(estado: 'CONFIRMADA' | 'ATENDIDA' = 'CONFIRMADA') {
+  const cliente = new ClienteMock({ latenciaMs: 0, sesionWebDemo: true });
   const consultar = cliente.consultar.bind(cliente);
   const cita = { ...confirmada.lecturas.citasPaciente[0]!, tramite: { ...confirmada.respuesta.tramite, id: '019aff00-0000-7000-8000-000000000099', estado } };
   vi.spyOn(cliente, 'consultar').mockImplementation(async (nombre, parametros) => nombre === 'citasPaciente' ? [cita] as Awaited<ReturnType<typeof consultar<typeof nombre>>> : consultar(nombre, parametros));
   const enviar = vi.spyOn(cliente, 'enviarComando').mockResolvedValue(confirmada.respuesta);
   render(<ProveedorCliente cliente={cliente}><RouterProvider router={createMemoryRouter(rutas, { initialEntries: ['/app'] })} /></ProveedorCliente>);
-  return { cita, enviar, usuario: userEvent.setup() };
+  const usuario = userEvent.setup();
+  await entrarSesionDemo(usuario);
+  return { cita, enviar, usuario };
 }
 
 it('confirma una sola vez con el trámite elegido y muestra aprobación pendiente sin alterar la cita', async () => {
-  const { cita, enviar, usuario } = abrir();
+  const { cita, enviar, usuario } = await abrir();
   await usuario.click(await screen.findByRole('button', { name: 'Cancelar cita' }));
   expect(enviar).not.toHaveBeenCalled();
   let rechazar!: (error: ErrorCliente) => void;
@@ -38,7 +41,7 @@ it('confirma una sola vez con el trámite elegido y muestra aprobación pendient
 });
 
 it('pedir otra aprobación crea una clave distinta y no reutiliza el rechazo anterior', async () => {
-  const { enviar, usuario } = abrir();
+  const { enviar, usuario } = await abrir();
   enviar.mockRejectedValue(new ErrorCliente('API', 'Verificación requerida', 'STEP_UP_REQUERIDO'));
   for (let intento = 0; intento < 2; intento++) {
     await usuario.click(await screen.findByRole('button', { name: 'Cancelar cita' }));
@@ -51,7 +54,7 @@ it('pedir otra aprobación crea una clave distinta y no reutiliza el rechazo ant
 });
 
 it('desistir conserva la cita sin enviar comandos', async () => {
-  const { enviar, usuario } = abrir();
+  const { enviar, usuario } = await abrir();
   await usuario.click(await screen.findByRole('button', { name: 'Cancelar cita' }));
   await usuario.click(screen.getByRole('button', { name: 'Conservar cita' }));
   expect(enviar).not.toHaveBeenCalled();
@@ -60,13 +63,13 @@ it('desistir conserva la cita sin enviar comandos', async () => {
 });
 
 it('una cita atendida no ofrece cancelar', async () => {
-  abrir('ATENDIDA');
+  await abrir('ATENDIDA');
   await screen.findByText('ATENDIDA');
   expect(screen.queryByRole('button', { name: 'Cancelar cita' })).toBeNull();
 });
 
 it('reintenta el mismo comando y clave tras error de red y presenta el resultado CANCELADA', async () => {
-  const { enviar, usuario } = abrir();
+  const { enviar, usuario } = await abrir();
   enviar.mockRejectedValueOnce(new ErrorCliente('RED', 'No hay conexión de prueba')).mockResolvedValue({ ...confirmada.respuesta, tramite: { ...confirmada.respuesta.tramite, estado: 'CANCELADA' } });
   await usuario.click(await screen.findByRole('button', { name: 'Cancelar cita' }));
   await usuario.click(screen.getByRole('button', { name: 'Confirmar cancelación' }));

@@ -1,0 +1,480 @@
+node:fs:559
+  return binding.open(
+                 ^
+
+Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\node_modules\vitest\vitest.mjs'
+    at Object.openSync (node:fs:559:18)
+    at readFileSync (node:fs:443:35)
+    at getSourceSync (node:internal/modules/esm/load:37:14)
+    at defaultLoadSync (node:internal/modules/esm/load:153:34)
+    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:795:12)
+    at #loadSync (node:internal/modules/esm/loader:815:49)
+    at ModuleLoader.load (node:internal/modules/esm/loader:780:26)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:526:31)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:571:36)
+    at afterResolve (node:internal/modules/esm/loader:624:52) {
+  errno: -4048,
+  code: 'EPERM',
+  syscall: 'open',
+  path: 'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\vitest@4.0.14_@types+node@2_5e2ef910af17890de669f9959bc2d545\\node_modules\\vitest\\vitest.mjs'
+}
+
+Node.js v24.13.0
+X [ERROR] Cannot read directory "../../../..": Access is denied.
+
+X [ERROR] Could not resolve "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\vitest.config.ts"
+
+failed to load config from C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\vitest.config.ts
+
+⎯⎯⎯⎯⎯⎯⎯ Startup Error ⎯⎯⎯⎯⎯⎯⎯⎯
+Error: Build failed with 2 errors:
+error: Cannot read directory "../../../..": Access is denied.
+error: Could not resolve "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\\vitest.config.ts"
+    at failureErrorWithLog (C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1752:15)
+    at C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1211:25
+    at runOnEndCallbacks (C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1592:45)
+    at buildResponseToResult (C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1209:7)
+    at C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1236:16
+    at responseCallbacks.<computed> (C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:886:9)
+    at handleIncomingPacket (C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:941:12)
+    at Socket.readFromStdout (C:\Users\guill\AppData\Local\Temp\noki-retoma-3793ae9760604b4c9846a4c17efcb33a\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:864:7)
+    at Socket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12) {
+  errors: [Getter/Setter],
+  warnings: [Getter/Setter]
+}
+
+
+
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice
+
+ RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-retoma-3793ae9760604b4c9846a4c17efcb33a
+
+ ❯ |unitarios| tests/unit/api/llamadaCortadaWa.test.ts (10 tests | 6 failed) 197ms
+   ✓ continúa la llamada solo con el mismo número y la solicitud vigente: 'mismo ANI con prefijo' 95ms
+   ✓ continúa la llamada solo con el mismo número y la solicitud vigente: 'ANI sin prefijo' 16ms
+   ✓ continúa la llamada solo con el mismo número y la solicitud vigente: 'WhatsApp sin prefijo' 13ms
+   ✓ continúa la llamada solo con el mismo número y la solicitud vigente: 'otro ANI' 7ms
+   × continúa la llamada solo con el mismo número y la solicitud vigente: 'token usado' 23ms
+   × continúa la llamada solo con el mismo número y la solicitud vigente: 'token vencido' 8ms
+   × continúa la llamada solo con el mismo número y la solicitud vigente: 'sin solicitud' 8ms
+   × continúa la llamada solo con el mismo número y la solicitud vigente: 'sin solicitud con prefijo' 7ms
+   × continúa la llamada solo con el mismo número y la solicitud vigente: 'confirmada' 10ms
+   × continúa la llamada solo con el mismo número y la solicitud vigente: 'sin solicitud con paciente' 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/api/llamadaCortadaWa.test.ts > continúa la llamada solo con el mismo número y la solicitud vigente: 'token usado'
+AssertionError: expected { tipo: 'lista', …(2) } to deeply equal { tipo: 'texto', …(1) }
+
+- Expected
++ Received
+
+  {
+-   "texto": "Retomamos tu trámite: Química en Tepic. Lo iniciaste por teléfono.",
+-   "tipo": "texto",
++   "secciones": [
++     {
++       "filas": [
++         {
++           "id": "op:01a2130d-ced5-76db-8d1c-8f35af4225ee",
++           "payload": "op:01a2130d-ced5-76db-8d1c-8f35af4225ee",
++           "titulo": "Química",
++         },
++       ],
++     },
++   ],
++   "texto": "¿Qué servicio necesitas?",
++   "tipo": "lista",
+  }
+
+ ❯ tests/unit/api/llamadaCortadaWa.test.ts:66:29
+     64|         expect(await enviar(waId, 'Hola')).not.toContainEqual(mensajes…
+     65|       } else if (caso !== 'otro ANI' && caso !== 'confirmada') {
+     66|         expect(mensajes[0]).toEqual({ tipo: 'texto', texto: 'Retomamos…
+       |                             ^
+     67|         expect(mensajes[1]).toMatchObject({ tipo: 'lista', texto: '¿Qu…
+     68|         if (caso !== 'token usado') {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  |unitarios| tests/unit/api/llamadaCortadaWa.test.ts > continúa la llamada solo con el mismo número y la solicitud vigente: 'token vencido'
+AssertionError: expected { tipo: 'lista', …(2) } to deeply equal { tipo: 'texto', …(1) }
+
+- Expected
++ Received
+
+  {
+-   "texto": "Retomamos tu trámite: Química en Tepic. Lo iniciaste por teléfono.",
+-   "tipo": "texto",
++   "secciones": [
++     {
++       "filas": [
++         {
++           "id": "op:01a2130d-cee6-724d-8fcb-0e509d5f7a43",
++           "payload": "op:01a2130d-cee6-724d-8fcb-0e509d5f7a43",
++           "titulo": "Química",
++         },
++       ],
++     },
++   ],
++   "texto": "¿Qué servicio necesitas?",
++   "tipo": "lista",
+  }
+
+ ❯ tests/unit/api/llamadaCortadaWa.test.ts:66:29
+     64|         expect(await enviar(waId, 'Hola')).not.toContainEqual(mensajes…
+     65|       } else if (caso !== 'otro ANI' && caso !== 'confirmada') {
+     66|         expect(mensajes[0]).toEqual({ tipo: 'texto', texto: 'Retomamos…
+       |                             ^
+     67|         expect(mensajes[1]).toMatchObject({ tipo: 'lista', texto: '¿Qu…
+     68|         if (caso !== 'token usado') {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  |unitarios| tests/unit/api/llamadaCortadaWa.test.ts > continúa la llamada solo con el mismo número y la solicitud vigente: 'sin solicitud'
+AssertionError: expected { tipo: 'lista', …(2) } to deeply equal { tipo: 'texto', …(1) }
+
+- Expected
++ Received
+
+  {
+-   "texto": "Retomamos tu trámite: Química en Tepic. Lo iniciaste por teléfono.",
+-   "tipo": "texto",
++   "secciones": [
++     {
++       "filas": [
++         {
++           "id": "op:01a2130d-ceee-7129-9947-57293fe7fbca",
++           "payload": "op:01a2130d-ceee-7129-9947-57293fe7fbca",
++           "titulo": "Química",
++         },
++       ],
++     },
++   ],
++   "texto": "¿Qué servicio necesitas?",
++   "tipo": "lista",
+  }
+
+ ❯ tests/unit/api/llamadaCortadaWa.test.ts:66:29
+     64|         expect(await enviar(waId, 'Hola')).not.toContainEqual(mensajes…
+     65|       } else if (caso !== 'otro ANI' && caso !== 'confirmada') {
+     66|         expect(mensajes[0]).toEqual({ tipo: 'texto', texto: 'Retomamos…
+       |                             ^
+     67|         expect(mensajes[1]).toMatchObject({ tipo: 'lista', texto: '¿Qu…
+     68|         if (caso !== 'token usado') {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  |unitarios| tests/unit/api/llamadaCortadaWa.test.ts > continúa la llamada solo con el mismo número y la solicitud vigente: 'sin solicitud con prefijo'
+AssertionError: expected { tipo: 'lista', …(2) } to deeply equal { tipo: 'texto', …(1) }
+
+- Expected
++ Received
+
+  {
+-   "texto": "Retomamos tu trámite: Química en Tepic. Lo iniciaste por teléfono.",
+-   "tipo": "texto",
++   "secciones": [
++     {
++       "filas": [
++         {
++           "id": "op:01a2130d-cef5-74a9-b99c-4a303343e4c7",
++           "payload": "op:01a2130d-cef5-74a9-b99c-4a303343e4c7",
++           "titulo": "Química",
++         },
++       ],
++     },
++   ],
++   "texto": "¿Qué servicio necesitas?",
++   "tipo": "lista",
+  }
+
+ ❯ tests/unit/api/llamadaCortadaWa.test.ts:66:29
+     64|         expect(await enviar(waId, 'Hola')).not.toContainEqual(mensajes…
+     65|       } else if (caso !== 'otro ANI' && caso !== 'confirmada') {
+     66|         expect(mensajes[0]).toEqual({ tipo: 'texto', texto: 'Retomamos…
+       |                             ^
+     67|         expect(mensajes[1]).toMatchObject({ tipo: 'lista', texto: '¿Qu…
+     68|         if (caso !== 'token usado') {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  |unitarios| tests/unit/api/llamadaCortadaWa.test.ts > continúa la llamada solo con el mismo número y la solicitud vigente: 'confirmada'
+AssertionError: expected { tipo: 'flow', …(2) } to match object { tipo: 'lista', …(1) }
+(2 matching properties omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "texto": "¿Qué servicio necesitas?",
+-   "tipo": "lista",
++   "tipo": "flow",
+  }
+
+ ❯ tests/unit/api/llamadaCortadaWa.test.ts:74:29
+     72|         expect(tramites.eventos().filter(e => e.tipo === 'IdentidadVin…
+     73|       } else {
+     74|         expect(mensajes[0]).toMatchObject({ tipo: 'lista', texto: '¿Qu…
+       |                             ^
+     75|       }
+     76|       const cambios = tramites.eventos().filter(e => e.tramiteId === t…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  |unitarios| tests/unit/api/llamadaCortadaWa.test.ts > continúa la llamada solo con el mismo número y la solicitud vigente: 'sin solicitud con paciente'
+AssertionError: expected { tipo: 'flow', …(2) } to deeply equal { tipo: 'texto', …(1) }
+
+- Expected
++ Received
+
+  {
+-   "texto": "Retomamos tu trámite: Química en Tepic. Lo iniciaste por teléfono.",
+-   "tipo": "texto",
++   "campos": [
++     {
++       "captura": "sensitive",
++       "etiqueta": "Folio",
++       "id": "folio",
++       "requerido": true,
++     },
++     {
++       "captura": "sensitive",
++       "etiqueta": "Fecha de nacimiento",
++       "id": "fechaNac",
++       "requerido": true,
++     },
++   ],
++   "tipo": "flow",
++   "titulo": "Verifica tu solicitud",
+  }
+
+ ❯ tests/unit/api/llamadaCortadaWa.test.ts:66:29
+     64|         expect(await enviar(waId, 'Hola')).not.toContainEqual(mensajes…
+     65|       } else if (caso !== 'otro ANI' && caso !== 'confirmada') {
+     66|         expect(mensajes[0]).toEqual({ tipo: 'texto', texto: 'Retomamos…
+       |                             ^
+     67|         expect(mensajes[1]).toMatchObject({ tipo: 'lista', texto: '¿Qu…
+     68|         if (caso !== 'token usado') {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  6 failed | 4 passed (10)
+   Start at  08:13:12
+   Duration  9.26s (transform 1.21s, setup 0ms, import 8.70s, tests 197ms, environment 0ms)
+
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice
+
+ RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-retoma-3793ae9760604b4c9846a4c17efcb33a
+
+ ❯ |unitarios| tests/unit/api/llamadaCortadaWa.test.ts (10 tests | 5 failed) 216ms
+   ✓ continúa la llamada solo con el mismo número y la solicitud vigente: 'mismo ANI con prefijo' 89ms
+   ✓ continúa la llamada solo con el mismo número y la solicitud vigente: 'ANI sin prefijo' 14ms
+   ✓ continúa la llamada solo con el mismo número y la solicitud vigente: 'WhatsApp sin prefijo' 13ms
+   ✓ continúa la llamada solo con el mismo número y la solicitud vigente: 'otro ANI' 8ms
+   × continúa la llamada solo con el mismo número y la solicitud vigente: 'token usado' 22ms
+   × continúa la llamada solo con el mismo número y la solicitud vigente: 'token vencido' 17ms
+   × continúa la llamada solo con el mismo número y la solicitud vigente: 'sin solicitud' 9ms
+   × continúa la llamada solo con el mismo número y la solicitud vigente: 'sin solicitud con prefijo' 8ms
+   ✓ continúa la llamada solo con el mismo número y la solicitud vigente: 'confirmada' 26ms
+   × continúa la llamada solo con el mismo número y la solicitud vigente: 'sin solicitud con paciente' 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/api/llamadaCortadaWa.test.ts > continúa la llamada solo con el mismo número y la solicitud vigente: 'token usado'
+AssertionError: expected { tipo: 'lista', …(2) } to deeply equal { tipo: 'texto', …(1) }
+
+- Expected
++ Received
+
+  {
+-   "texto": "Retomamos tu trámite: Química en Tepic. Lo iniciaste por teléfono.",
+-   "tipo": "texto",
++   "secciones": [
++     {
++       "filas": [
++         {
++           "id": "op:01a2130e-491f-72fc-9496-931befd71967",
++           "payload": "op:01a2130e-491f-72fc-9496-931befd71967",
++           "titulo": "Química",
++         },
++       ],
++     },
++   ],
++   "texto": "¿Qué servicio necesitas?",
++   "tipo": "lista",
+  }
+
+ ❯ tests/unit/api/llamadaCortadaWa.test.ts:66:29
+     64|         expect(await enviar(waId, 'Hola')).not.toContainEqual(mensajes…
+     65|       } else if (caso !== 'otro ANI' && caso !== 'confirmada') {
+     66|         expect(mensajes[0]).toEqual({ tipo: 'texto', texto: 'Retomamos…
+       |                             ^
+     67|         expect(mensajes[1]).toMatchObject({ tipo: 'lista', texto: '¿Qu…
+     68|         if (caso !== 'token usado') {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  |unitarios| tests/unit/api/llamadaCortadaWa.test.ts > continúa la llamada solo con el mismo número y la solicitud vigente: 'token vencido'
+AssertionError: expected { tipo: 'lista', …(2) } to deeply equal { tipo: 'texto', …(1) }
+
+- Expected
++ Received
+
+  {
+-   "texto": "Retomamos tu trámite: Química en Tepic. Lo iniciaste por teléfono.",
+-   "tipo": "texto",
++   "secciones": [
++     {
++       "filas": [
++         {
++           "id": "op:01a2130e-4937-70ad-ac39-9bc123a61845",
++           "payload": "op:01a2130e-4937-70ad-ac39-9bc123a61845",
++           "titulo": "Química",
++         },
++       ],
++     },
++   ],
++   "texto": "¿Qué servicio necesitas?",
++   "tipo": "lista",
+  }
+
+ ❯ tests/unit/api/llamadaCortadaWa.test.ts:66:29
+     64|         expect(await enviar(waId, 'Hola')).not.toContainEqual(mensajes…
+     65|       } else if (caso !== 'otro ANI' && caso !== 'confirmada') {
+     66|         expect(mensajes[0]).toEqual({ tipo: 'texto', texto: 'Retomamos…
+       |                             ^
+     67|         expect(mensajes[1]).toMatchObject({ tipo: 'lista', texto: '¿Qu…
+     68|         if (caso !== 'token usado') {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  |unitarios| tests/unit/api/llamadaCortadaWa.test.ts > continúa la llamada solo con el mismo número y la solicitud vigente: 'sin solicitud'
+AssertionError: expected { tipo: 'lista', …(2) } to deeply equal { tipo: 'texto', …(1) }
+
+- Expected
++ Received
+
+  {
+-   "texto": "Retomamos tu trámite: Química en Tepic. Lo iniciaste por teléfono.",
+-   "tipo": "texto",
++   "secciones": [
++     {
++       "filas": [
++         {
++           "id": "op:01a2130e-4941-757d-97d0-7695040225f4",
++           "payload": "op:01a2130e-4941-757d-97d0-7695040225f4",
++           "titulo": "Química",
++         },
++       ],
++     },
++   ],
++   "texto": "¿Qué servicio necesitas?",
++   "tipo": "lista",
+  }
+
+ ❯ tests/unit/api/llamadaCortadaWa.test.ts:66:29
+     64|         expect(await enviar(waId, 'Hola')).not.toContainEqual(mensajes…
+     65|       } else if (caso !== 'otro ANI' && caso !== 'confirmada') {
+     66|         expect(mensajes[0]).toEqual({ tipo: 'texto', texto: 'Retomamos…
+       |                             ^
+     67|         expect(mensajes[1]).toMatchObject({ tipo: 'lista', texto: '¿Qu…
+     68|         if (caso !== 'token usado') {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  |unitarios| tests/unit/api/llamadaCortadaWa.test.ts > continúa la llamada solo con el mismo número y la solicitud vigente: 'sin solicitud con prefijo'
+AssertionError: expected { tipo: 'lista', …(2) } to deeply equal { tipo: 'texto', …(1) }
+
+- Expected
++ Received
+
+  {
+-   "texto": "Retomamos tu trámite: Química en Tepic. Lo iniciaste por teléfono.",
+-   "tipo": "texto",
++   "secciones": [
++     {
++       "filas": [
++         {
++           "id": "op:01a2130e-494a-724a-914a-c80a80daf38c",
++           "payload": "op:01a2130e-494a-724a-914a-c80a80daf38c",
++           "titulo": "Química",
++         },
++       ],
++     },
++   ],
++   "texto": "¿Qué servicio necesitas?",
++   "tipo": "lista",
+  }
+
+ ❯ tests/unit/api/llamadaCortadaWa.test.ts:66:29
+     64|         expect(await enviar(waId, 'Hola')).not.toContainEqual(mensajes…
+     65|       } else if (caso !== 'otro ANI' && caso !== 'confirmada') {
+     66|         expect(mensajes[0]).toEqual({ tipo: 'texto', texto: 'Retomamos…
+       |                             ^
+     67|         expect(mensajes[1]).toMatchObject({ tipo: 'lista', texto: '¿Qu…
+     68|         if (caso !== 'token usado') {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  |unitarios| tests/unit/api/llamadaCortadaWa.test.ts > continúa la llamada solo con el mismo número y la solicitud vigente: 'sin solicitud con paciente'
+AssertionError: expected { tipo: 'flow', …(2) } to deeply equal { tipo: 'texto', …(1) }
+
+- Expected
++ Received
+
+  {
+-   "texto": "Retomamos tu trámite: Química en Tepic. Lo iniciaste por teléfono.",
+-   "tipo": "texto",
++   "campos": [
++     {
++       "captura": "sensitive",
++       "etiqueta": "Folio",
++       "id": "folio",
++       "requerido": true,
++     },
++     {
++       "captura": "sensitive",
++       "etiqueta": "Fecha de nacimiento",
++       "id": "fechaNac",
++       "requerido": true,
++     },
++   ],
++   "tipo": "flow",
++   "titulo": "Verifica tu solicitud",
+  }
+
+ ❯ tests/unit/api/llamadaCortadaWa.test.ts:66:29
+     64|         expect(await enviar(waId, 'Hola')).not.toContainEqual(mensajes…
+     65|       } else if (caso !== 'otro ANI' && caso !== 'confirmada') {
+     66|         expect(mensajes[0]).toEqual({ tipo: 'texto', texto: 'Retomamos…
+       |                             ^
+     67|         expect(mensajes[1]).toMatchObject({ tipo: 'lista', texto: '¿Qu…
+     68|         if (caso !== 'token usado') {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 5 passed (10)
+   Start at  08:13:46
+   Duration  6.95s (transform 966ms, setup 0ms, import 6.40s, tests 216ms, environment 0ms)
+
+npm notice
+npm notice New minor version of npm available! 11.6.2 -> 11.21.3
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.21.3
+npm notice To update run: npm install -g npm@11.21.3
+npm notice
+
+Postgres: reproducido después contra el manejador original de WhatsApp. Véase 16-postgres-rojo.txt (1 fallo de aserción esperado).

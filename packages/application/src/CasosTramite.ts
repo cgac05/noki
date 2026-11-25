@@ -76,17 +76,9 @@ export class CasosTramite {
     const contexto = this.contexto(comando);
     const contacto = await this.contacto(valorContacto, contexto);
     if (contexto.canal === 'callcenter' && contexto.actor.startsWith('asesor:') && /^\+?\d{10,15}$/u.test(valorContacto)) {
-      const enProceso = await this.tramiteDeLlamada(tipo, valorContacto.slice(-10));
+      const enProceso = await (await this.tramitesEnProcesoPorTelefono(valorContacto, tipo))[0];
       if (enProceso) {
-        const hilo = await this.puertos.hilos.obtener(enProceso.hiloId);
-        if (!hilo) throw new NoEncontrado('hilo', enProceso.hiloId);
-        enProceso.retomar(contexto, 'LLAMADA_CC');
-        const resultado = await this.guardar(enProceso, contexto);
-        if (hilo.ultimoCanal !== contexto.canal) {
-          hilo.atenderEn(contexto.canal);
-          await this.puertos.hilos.guardar(hilo);
-        }
-        return resultado;
+        return this.retomarEnProceso(enProceso, contexto, 'LLAMADA_CC');
       }
     }
     const hilo = await this.puertos.hilos.obtener(contacto.hiloId);
@@ -100,8 +92,8 @@ export class CasosTramite {
     return resultado;
   }
 
-  private async tramiteDeLlamada(tipo: TipoTramite, numero: string): Promise<Tramite | undefined> {
-    const hilos = await this.puertos.contactos.hilosPorTelefono(numero);
+  async tramitesEnProcesoPorTelefono(numero: string, tipo: TipoTramite = 'AGENDAR'): Promise<Tramite[]> {
+    const hilos = await this.puertos.contactos.hilosPorTelefono(numero.slice(-10));
     const abiertos = await Promise.all(hilos.map(id => this.puertos.tramites.abiertosPorHilo(id)));
     return abiertos.flat()
       .filter(tramite => tramite.tipo === tipo && (
@@ -109,7 +101,32 @@ export class CasosTramite {
         || tramite.estado === 'LISTO_PARA_RESERVAR' || tramite.estado === 'HORARIO_RESERVADO'
       ))
       .sort((a, b) => Number(a.estado === 'BORRADOR') - Number(b.estado === 'BORRADOR')
-        || Date.parse(b.ultimaActividad) - Date.parse(a.ultimaActividad) || b.id.localeCompare(a.id))[0];
+        || Date.parse(b.ultimaActividad) - Date.parse(a.ultimaActividad) || b.id.localeCompare(a.id));
+  }
+
+  async retomarPorTelefono(numero: string, comando: ContextoComando): Promise<ResultadoRetomar | null> {
+    const contexto = this.contexto({ ...comando, nivel: 1 });
+    const contacto = await this.contacto(numero, contexto);
+    const hasta = await this.puertos.intentos.bloqueo(contacto.id, contexto.ts);
+    if (hasta) return { tipo: 'BLOQUEADO', hasta };
+    const [tramite] = await this.tramitesEnProcesoPorTelefono(numero);
+    if (!tramite) return null;
+    const operacion = await this.retomarEnProceso(tramite, contexto, 'MISMO_NUMERO');
+    await this.puertos.intentos.reiniciar(contacto.id);
+    return { tipo: 'RETOMADO', nivel: 1, operacion };
+  }
+
+  private async retomarEnProceso(tramite: Tramite, contexto: ContextoOperacion,
+    metodo: 'LLAMADA_CC' | 'MISMO_NUMERO'): Promise<ResultadoComando> {
+    const hilo = await this.puertos.hilos.obtener(tramite.hiloId);
+    if (!hilo) throw new NoEncontrado('hilo', tramite.hiloId);
+    tramite.retomar(contexto, metodo);
+    const resultado = await this.guardar(tramite, contexto);
+    if (hilo.ultimoCanal !== contexto.canal) {
+      hilo.atenderEn(contexto.canal);
+      await this.puertos.hilos.guardar(hilo);
+    }
+    return resultado;
   }
 
   async solicitarContinuacion(id: TramiteId, comando: ContextoComando): Promise<ResultadoComando> {

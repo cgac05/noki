@@ -228,7 +228,7 @@ describe('Cliente real', () => {
 
   it('consulta la sesión web real solo con demo y envía únicamente el teléfono', async () => {
     const telefono = '5210000000001';
-    const sesion = { pacienteId: IDS.paciente, nombreVisible: 'Ana P.' };
+    const sesion = { pacienteId: IDS.paciente, nombreVisible: 'Ana P.', tramitesEnProceso: [] };
     const peticion = vi.fn<typeof fetch>().mockResolvedValue(Response.json(sesion));
     await expect(new ClienteReal({ fetch: peticion }).consultar('sesionWebDemo', { telefono }))
       .rejects.toMatchObject({ tipo: 'NO_DISPONIBLE' });

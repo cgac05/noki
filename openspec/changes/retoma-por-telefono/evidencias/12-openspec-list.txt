@@ -1,0 +1,36 @@
+{
+  "changes": [
+    {
+      "name": "retoma-por-telefono",
+      "completedTasks": 4,
+      "totalTasks": 5,
+      "lastModified": "2026-11-25T14:21:39.315Z",
+      "status": "in-progress"
+    },
+    {
+      "name": "wa-formulario-activo",
+      "completedTasks": 0,
+      "totalTasks": 3,
+      "lastModified": "2026-11-25T14:19:52.000Z",
+      "status": "in-progress"
+    },
+    {
+      "name": "wa-numero-continuacion",
+      "completedTasks": 3,
+      "totalTasks": 3,
+      "lastModified": "2026-11-25T14:04:23.249Z",
+      "status": "complete"
+    },
+    {
+      "name": "web-sesion",
+      "completedTasks": 5,
+      "totalTasks": 5,
+      "lastModified": "2026-11-25T14:04:23.143Z",
+      "status": "complete"
+    }
+  ],
+  "root": {
+    "path": "C:\\Users\\guill\\Documents\\GitHub\\noki",
+    "source": "nearest"
+  }
+}

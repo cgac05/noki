@@ -1,0 +1,94 @@
+﻿corepack.cmd pnpm test
+$ tsc --project tests/tsconfig.json && vitest run --project unitarios --project web
+X [ERROR] Cannot read directory "../../../..": Access is denied.
+System.Management.Automation.RemoteException
+X [ERROR] Could not resolve "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-app-sesion-validacion\\vitest.config.ts"
+System.Management.Automation.RemoteException
+failed to load config from C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\vitest.config.ts
+System.Management.Automation.RemoteException
+⎯⎯⎯⎯⎯⎯⎯ Startup Error ⎯⎯⎯⎯⎯⎯⎯⎯
+Error: Build failed with 2 errors:
+error: Cannot read directory "../../../..": Access is denied.
+error: Could not resolve "C:\\Users\\guill\\AppData\\Local\\Temp\\noki-app-sesion-validacion\\vitest.config.ts"
+    at failureErrorWithLog (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1752:15)
+    at C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1211:25
+    at runOnEndCallbacks (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1592:45)
+    at buildResponseToResult (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1209:7)
+    at C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:1236:16
+    at responseCallbacks.<computed> (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:886:9)
+    at handleIncomingPacket (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:941:12)
+    at Socket.readFromStdout (C:\Users\guill\AppData\Local\Temp\noki-app-sesion-validacion\node_modules\.pnpm\esbuild@0.28.2\node_modules\esbuild\lib\main.js:864:7)
+    at Socket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12) {
+  errors: [Getter/Setter],
+  warnings: [Getter/Setter]
+}
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+[ELIFECYCLE] Test failed. See above for more details.
+Salida: 1
+npx.cmd vitest run --project unitarios --maxWorkers=2 --configLoader native
+
+ RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-app-sesion-validacion
+
+ ✓ |unitarios| tests/unit/nucleo/casosTramite.test.ts (44 tests) 96ms
+ ✓ |unitarios| tests/unit/consultas.test.ts (25 tests) 70ms
+ ✓ |unitarios| tests/unit/contratos.test.ts (21 tests) 193ms
+ ✓ |unitarios| packages/adapters/in-http/test/rutasComandos.test.ts (9 tests) 119ms
+ ✓ |unitarios| tests/unit/api/preguntasWa.test.ts (10 tests) 238ms
+ ✓ |unitarios| tests/unit/api/comandosMemoria.test.ts (4 tests) 158ms
+ ✓ |unitarios| tests/unit/api/consultasWaMemoria.test.ts (3 tests) 165ms
+ ✓ |unitarios| tests/unit/nucleo/tramite.test.ts (7 tests) 11ms
+ ✓ |unitarios| tests/unit/rellenoHuecosAplicacion.test.ts (5 tests) 12ms
+ ✓ |unitarios| tests/unit/dominio.test.ts (8 tests) 12ms
+ ✓ |unitarios| tests/unit/api/identificacionWaHttp.test.ts (3 tests) 215ms
+ ✓ |unitarios| tests/unit/rellenoHuecosDominio.test.ts (6 tests) 10ms
+ ✓ |unitarios| tests/unit/api/llamadaCortadaWa.test.ts (10 tests) 224ms
+ ✓ |unitarios| tests/unit/nucleo/siguientePregunta.test.ts (5 tests) 10ms
+ ✓ |unitarios| tests/unit/api/sesionWebMemoria.test.ts (5 tests) 175ms
+ ✓ |unitarios| tests/unit/nucleo/identidadPaciente.test.ts (5 tests) 9ms
+ ✓ |unitarios| tests/unit/prediccion/estimar.test.ts (7 tests) 19ms
+ ✓ |unitarios| tests/unit/rellenoHuecosSaga.test.ts (3 tests) 10ms
+ ✓ |unitarios| tests/unit/api/tokensBotonWa.test.ts (10 tests) 22ms
+ ✓ |unitarios| tests/unit/api/aprobacionCancelacion.test.ts (3 tests) 10ms
+ ✓ |unitarios| tests/unit/api/aprobacionCancelacionHttp.test.ts (1 test) 93ms
+ ✓ |unitarios| tests/unit/nucleo/adaptadores.test.ts (5 tests) 12ms
+ ✓ |unitarios| packages/adapters/in-http/test/coherencia.test.ts (3 tests) 12ms
+ ✓ |unitarios| tests/unit/api/tokensJose.test.ts (4 tests) 20ms
+ ✓ |unitarios| tests/unit/api/clinicaMemoria.test.ts (1 test) 239ms
+ ✓ |unitarios| tests/unit/api/relojDemo.test.ts (3 tests) 80ms
+ ✓ |unitarios| tests/unit/persistencia/programador.test.ts (4 tests) 6ms
+ ✓ |unitarios| tests/unit/persistencia/instantanea.test.ts (1 test) 6ms
+ ✓ |unitarios| tests/unit/persistencia/temporizadores.test.ts (1 test) 8ms
+ ✓ |unitarios| tests/unit/prediccion/plan.test.ts (6 tests) 11ms
+ ✓ |unitarios| tests/unit/prediccion/outModelo.test.ts (10 tests) 21ms
+ ✓ |unitarios| tests/unit/api/clavesEventosMemoria.test.ts (2 tests) 8ms
+ ✓ |unitarios| tests/unit/prediccion/factores.test.ts (9 tests) 7ms
+ ✓ |unitarios| packages/adapters/in-http/test/identificacionWa.test.ts (2 tests) 12ms
+ ✓ |unitarios| tests/unit/nucleo/politica.test.ts (15 tests) 8ms
+ ✓ |unitarios| tests/unit/api/idempotencia.test.ts (2 tests) 10ms
+ ✓ |unitarios| tests/unit/api/idempotenciaWaMemoria.test.ts (1 test) 120ms
+ ✓ |unitarios| tests/unit/persistencia/folios.test.ts (1 test) 7ms
+ ✓ |unitarios| tests/unit/persistencia/relay.test.ts (1 test) 6ms
+ ✓ |unitarios| tests/unit/nucleo/registroTipos.test.ts (4 tests) 6ms
+ ✓ |unitarios| tests/unit/puertos.test.ts (3 tests) 5ms
+ ✓ |unitarios| tests/unit/workspace.test.ts (3 tests) 9ms
+ ✓ |unitarios| tests/unit/nucleo/curp.test.ts (8 tests) 7ms
+ ✓ |unitarios| tests/unit/prediccion/ml.test.ts (4 tests) 64ms
+ ✓ |unitarios| tests/unit/persistencia/agenda.test.ts (1 test) 6ms
+ ✓ |unitarios| tests/unit/nucleo/agendar.test.ts (1 test) 5ms
+ ✓ |unitarios| tests/unit/persistencia/relayApi.test.ts (1 test) 8ms
+ ✓ |unitarios| packages/adapters/in-http/test/siguientePregunta.test.ts (1 test) 7ms
+ ✓ |unitarios| tests/unit/persistencia/puertos.test.ts (1 test) 8ms
+ ✓ |unitarios| tests/unit/nucleo/hilo.test.ts (1 test) 3ms
+ ✓ |unitarios| tests/unit/api/puertosApi.test.ts (1 test) 6ms
+ ✓ |unitarios| tests/unit/api/textosWa.test.ts (2 tests) 8ms
+ ✓ |unitarios| tests/unit/persistencia/particion.test.ts (1 test) 3ms
+
+ Test Files  53 passed (53)
+      Tests  297 passed (297)
+   Start at  08:47:28
+   Duration  59.74s (transform 2.40s, setup 0ms, import 98.52s, tests 2.61s, environment 9ms)
+
+Salida: 0

@@ -73,7 +73,7 @@ export class ContactosMemoria implements ContactosPort {
 
   async hilosPorTelefono(numero: string): Promise<HiloId[]> {
     return [...new Set([...this.contactos.values()]
-      .filter(({ canal, valor }) => (canal === 'callcenter' || canal === 'whatsapp')
+      .filter(({ canal, valor }) => (canal === 'callcenter' || canal === 'whatsapp' || canal === 'web')
         && /^\+?\d{10,15}$/u.test(valor) && valor.slice(-10) === numero)
       .map(({ hiloId }) => hiloId))];
   }

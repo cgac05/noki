@@ -7,6 +7,7 @@ import { ClienteReal } from './real/ClienteReal.ts';
 import { ClienteMock } from './mock/ClienteMock.ts';
 import { GUION_FLUJO_A, IDS } from './mock/guionFlujoA.ts';
 import { SocketFalso } from '../pruebas/socketFalso.ts';
+import { entrarSesionDemo } from '../pruebas/entrarSesionDemo.ts';
 import { App } from '../vistas/App.tsx';
 
 vi.mock('qrcode', () => ({ default: { toString: vi.fn(async () => '<svg></svg>') } }));
@@ -52,12 +53,19 @@ it('en simulado manda el guion sobre una respuesta recordada y no consulta conte
   expect(screen.getByText(`${IDS.hilo} / ${IDS.paciente} / ${IDS.sede}`)).toBeDefined();
   expect(consultar).not.toHaveBeenCalled();
 });
-it('app nueva consulta las citas del paciente de contextoDemo y un evento refresca el contexto', async () => {
+it('la app consulta las citas del paciente identificado y las refresca con un evento', async () => {
   const { cliente, peticion, socket } = preparar();
+  const urlCitas = `http://localhost:4000/api/pacientes/${IDS.paciente}/citas`;
+  const citas = GUION_FLUJO_A.find(p => p.paso.id === 'CONFIRMADA')!.lecturas.citasPaciente;
+  peticion.mockImplementation(async url => {
+    if (String(url).includes('/sesion-web/')) return Response.json({ pacienteId: IDS.paciente, nombreVisible: 'Ana P.', tramitesEnProceso: [] });
+    if (url === urlCitas) return Response.json(citas);
+    throw new Error('Consulta inesperada');
+  });
   render(<ProveedorCliente cliente={cliente}><MemoryRouter><App /></MemoryRouter></ProveedorCliente>);
+  await entrarSesionDemo(userEvent.setup());
   expect(await screen.findByText('CONFIRMADA')).toBeDefined();
-  expect(peticion.mock.calls.map(([url]) => url)).toContain(`http://localhost:4000/api/pacientes/${IDS.paciente}/citas`);
-  const antes = peticion.mock.calls.filter(([url]) => String(url).endsWith('/contexto')).length;
   await act(async () => socket.recibir('admin:metricas', { citasConfirmadas: 2 }));
-  await waitFor(() => expect(peticion.mock.calls.filter(([url]) => String(url).endsWith('/contexto'))).toHaveLength(antes + 1));
+  await waitFor(() => expect(peticion.mock.calls.filter(([url]) => url === urlCitas)).toHaveLength(2));
+  expect(peticion.mock.calls.some(([url]) => String(url).endsWith('/contexto'))).toBe(false);
 });

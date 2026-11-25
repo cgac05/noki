@@ -1,0 +1,23 @@
+node:fs:559
+  return binding.open(
+                 ^
+
+Error: EPERM: operation not permitted, open 'C:\Users\guill\Documents\GitHub\noki\node_modules\.pnpm\dependency-cruiser@17.2.0\node_modules\dependency-cruiser\bin\dependency-cruise.mjs'
+    at Object.openSync (node:fs:559:18)
+    at readFileSync (node:fs:443:35)
+    at getSourceSync (node:internal/modules/esm/load:37:14)
+    at defaultLoadSync (node:internal/modules/esm/load:153:34)
+    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:795:12)
+    at #loadSync (node:internal/modules/esm/loader:815:49)
+    at ModuleLoader.load (node:internal/modules/esm/loader:780:26)
+    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:526:31)
+    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:571:36)
+    at afterResolve (node:internal/modules/esm/loader:624:52) {
+  errno: -4048,
+  code: 'EPERM',
+  syscall: 'open',
+  path: 'C:\\Users\\guill\\Documents\\GitHub\\noki\\node_modules\\.pnpm\\dependency-cruiser@17.2.0\\node_modules\\dependency-cruiser\\bin\\dependency-cruise.mjs'
+}
+
+Node.js v24.13.0
+Salida: 1

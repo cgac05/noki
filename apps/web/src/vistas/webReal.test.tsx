@@ -2,8 +2,8 @@ import { cleanup, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { afterEach, expect, it } from 'vitest';
-import { ComandoRequestSchema } from '@noki/contracts';
-import type { ComandoRequest } from '@noki/contracts';
+import { ComandoRequestSchema, SolicitudMensajeWaSchema } from '@noki/contracts';
+import type { ComandoRequest, SolicitudMensajeWa } from '@noki/contracts';
 import { ClienteReal } from '../cliente/real/ClienteReal.ts';
 import { ProveedorCliente } from '../cliente/ProveedorCliente.tsx';
 import { SocketFalso } from '../pruebas/socketFalso.ts';
@@ -14,7 +14,7 @@ import '../pruebas/dialogo.ts';
 
 afterEach(() => { cleanup(); sessionStorage.clear(); });
 
-function abrirWeb({ conPaciente = true, demo = true } = {}) {
+function abrirWeb({ conPaciente = true, demo = true, porNumero = false, reservado = false } = {}) {
   const id = '019aff20-0000-7000-8000-000000000001';
   const hiloId = '019aff20-0000-7000-8000-000000000002';
   const oferta = {
@@ -22,15 +22,17 @@ function abrirWeb({ conPaciente = true, demo = true } = {}) {
     sedeId: '019aff20-0000-7000-8000-000000000004', sede: 'Bahía de Banderas', precioCentavos: 25850,
   };
   const tramite = { id, hiloId, tipo: 'AGENDAR', estado: 'BORRADOR', version: 1 };
-  const cotizado = { ...tramite, estado: 'COTIZADO', version: 3, servicioId: oferta.servicioId, sedeId: oferta.sedeId };
+  const cotizado = { ...tramite, estado: reservado ? 'HORARIO_RESERVADO' : 'COTIZADO', version: 3, servicioId: oferta.servicioId, sedeId: oferta.sedeId };
   const comandos: ComandoRequest[] = [];
+  const mensajes: SolicitudMensajeWa[] = [];
   const pacienteId = '019aff20-0000-7000-8000-000000000005';
   const rutasConsultadas: string[] = [];
   const peticion: typeof fetch = async (url, opciones) => {
     const ruta = new URL(String(url)).pathname;
     rutasConsultadas.push(ruta);
     if (ruta === '/api/demo/sesion-web/' + telefono) return conPaciente
-      ? Response.json({ pacienteId, nombreVisible: 'Ana P.' })
+      ? Response.json({ pacienteId, nombreVisible: 'Ana P.', tramitesEnProceso: [cotizado] })
+      : porNumero ? Response.json({ pacienteId: null, nombreVisible: null, tramitesEnProceso: [cotizado] })
       : Response.json({ error: { codigo: 'NO_ENCONTRADO', mensaje: 'Sin registro' } }, { status: 404 });
     if (ruta === `/api/pacientes/${pacienteId}/tramites-abiertos`) return Response.json([cotizado]);
     if (ruta === '/api/demo/contexto') return Response.json({ hiloId, pacienteId: conPaciente ? pacienteId : null, sedeId: oferta.sedeId });
@@ -42,6 +44,12 @@ function abrirWeb({ conPaciente = true, demo = true } = {}) {
       ]);
     }
     if (ruta === '/api/catalogo') return Response.json([{ ...oferta, sedeId: hiloId, precioCentavos: 100 }, oferta]);
+    if (ruta === '/api/canales/wa/mensajes') {
+      mensajes.push(SolicitudMensajeWaSchema.parse(JSON.parse(String(opciones?.body))));
+      return Response.json({ mensajes: reservado
+        ? [{ tipo: 'botones', texto: 'Horario apartado', botones: [{ id: 'confirmar', titulo: 'Confirmar cita', payload: 'confirmar' }] }]
+        : [{ tipo: 'texto', texto: '¿Qué día prefieres?' }] });
+    }
     if (ruta === '/api/comandos' && opciones?.method === 'POST') {
       const comando = ComandoRequestSchema.parse(JSON.parse(String(opciones.body)));
       comandos.push(comando);
@@ -59,7 +67,7 @@ function abrirWeb({ conPaciente = true, demo = true } = {}) {
     throw new Error(`Ruta inesperada: ${ruta}`);
   };
   const cliente = new ClienteReal({ demo, fetch: peticion, fabricaSocket: () => new SocketFalso() });
-  return { id, hiloId, oferta, comandos, rutasConsultadas, cliente, usuario: montarWeb(cliente) };
+  return { id, hiloId, oferta, comandos, mensajes, rutasConsultadas, cliente, usuario: montarWeb(cliente) };
 }
 
 function montarWeb(cliente: ClienteApi) {
@@ -127,16 +135,6 @@ it('rechaza una contraseña incorrecta sin consultar la API', async () => {
   await verCitas(usuario, 'incorrecta');
   expect(screen.getByRole('alert').textContent).toContain('Contraseña incorrecta');
   expect(rutasConsultadas).toEqual([]);
-});
-
-it('continúa el trámite del paciente en WhatsApp', async () => {
-  const { usuario, comandos, id, rutasConsultadas } = abrirWeb();
-  await verCitas(usuario);
-  expect(await screen.findByRole('heading', { name: 'Hola, Ana P.' })).toBeTruthy();
-  await usuario.click(await screen.findByRole('button', { name: 'Continúa donde lo dejaste' }));
-  expect((await screen.findByRole('link', { name: 'Abrir WhatsApp' })).getAttribute('href')).toBe('/wa?continuar=codigo.demo');
-  expect(comandos).toMatchObject([{ tipo: 'SolicitarContinuacion', canal: 'web', actor: 'paciente', tramiteId: id }]);
-  expect(rutasConsultadas).not.toContain('/api/demo/contexto');
 });
 
 it('inicia y asigna al paciente antes de cotizar sin pedir el teléfono otra vez', async () => {
@@ -238,4 +236,35 @@ it('conserva la cotización del modo simulado', async () => {
   montarWeb(new ClienteMock({ latenciaMs: 0, sesionWebDemo: false }));
   expect(await screen.findByRole('heading', { name: 'Tu cotización' })).toBeTruthy();
   expect(screen.queryByRole('heading', { name: 'Paga tu cita' })).toBeNull();
+});
+
+it.each([
+  { conPaciente: false, reservado: false, paso: '¿Qué día prefieres?' },
+  { conPaciente: true, reservado: true, paso: 'Horario apartado' },
+])('retoma en la web con paciente=$conPaciente y horario reservado=$reservado', async ({ conPaciente, reservado, paso }) => {
+  const { usuario, comandos, mensajes } = abrirWeb({ conPaciente, porNumero: true, reservado });
+  await verCitas(usuario);
+  const continuar = await screen.findByRole('button', { name: 'Continúa donde lo dejaste' });
+  expect(comandos).toEqual([]);
+  await usuario.dblClick(continuar);
+  expect(await screen.findByRole('heading', { name: 'Continúa tu cita' })).toBeTruthy();
+  expect(await screen.findByText(paso)).toBeTruthy();
+  expect(mensajes).toEqual([{ waId: telefono, texto: 'Hola' }]);
+  expect(comandos).toEqual([]);
+  expect(screen.queryByRole('link', { name: 'Abrir WhatsApp' })).toBeNull();
+  expect(screen.queryByRole('alert')).toBeNull();
+  if (reservado) expect(boton('Confirmar cita')).toHaveProperty('disabled', false);
+  await usuario.type(screen.getByRole('textbox', { name: 'Mensaje' }), 'Mañana');
+  await usuario.click(boton('Enviar'));
+  expect(mensajes).toEqual([{ waId: telefono, texto: 'Hola' }, { waId: telefono, texto: 'Mañana' }]);
+  await usuario.click(boton('Volver'));
+  expect(await screen.findByRole('heading', { name: 'Trámites abiertos' })).toBeTruthy();
+});
+
+it('inicia otro trámite con el número de la sesión sin asignar un paciente', async () => {
+  const { usuario, comandos } = abrirWeb({ conPaciente: false, porNumero: true });
+  await verCitas(usuario);
+  await usuario.click(await screen.findByRole('button', { name: 'Iniciar un trámite nuevo' }));
+  await screen.findByRole('heading', { name: 'Servicios y sedes' });
+  expect(comandos).toMatchObject([{ tipo: 'IniciarTramite', payload: { contacto: telefono } }]);
 });
