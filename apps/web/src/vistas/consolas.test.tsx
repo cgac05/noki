@@ -62,7 +62,7 @@ describe('Call center autorizado', () => {
     abrir(cliente); const ficha = await screen.findByRole('region', { name: 'Ficha del hilo' });
     expect(within(ficha).getAllByText('—')).toHaveLength(2);
     expect(within(ficha).getByText(/solo lectura/)).toBeDefined();
-    expect((screen.getByRole('button', { name: 'Cotizar paquete en Tepic' }) as HTMLButtonElement).disabled).toBe(true);
+    expect((screen.getByRole('button', { name: 'Cotizar Paquete US mamario + Papanicolaou en Tepic · $250.00' }) as HTMLButtonElement).disabled).toBe(true);
     expect((screen.getByRole('button', { name: 'Continuar por WhatsApp' }) as HTMLButtonElement).disabled).toBe(true);
     expect((screen.getByRole('checkbox') as HTMLInputElement).disabled).toBe(true);
   });

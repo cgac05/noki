@@ -63,7 +63,7 @@ export function CallCenter() {
           {tramite && !ficha.data.oferta && catalogo.data?.map(oferta => <button type="button" key={`${oferta.servicioId}:${oferta.sedeId}`} disabled={accion.isPending || ficha.data.soloLectura} onClick={() => accion.ejecutar({ tipo: 'comandos', titulo: 'Cotizar paquete', comandos: [
             ComandoRequestSchema.parse({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SeleccionarServicio', tramiteId: tramite.id, payload: { servicioId: oferta.servicioId } }),
             ComandoRequestSchema.parse({ canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SeleccionarSede', tramiteId: tramite.id, payload: { sedeId: oferta.sedeId } }),
-          ] })}>Cotizar paquete en {oferta.sede}</button>)}
+          ] })}>Cotizar {oferta.servicio} en {oferta.sede} · {dinero(oferta.precioCentavos)}</button>)}
         </div>
         {tramite && <>
           <label className="consentimiento"><input type="checkbox" checked={consentimientoHilo === hiloId} disabled={accion.isPending || ficha.data.soloLectura || Boolean(codigo)} onChange={evento => setConsentimientoHilo(evento.target.checked ? hiloId : undefined)} />El paciente aceptó continuar por WhatsApp</label>

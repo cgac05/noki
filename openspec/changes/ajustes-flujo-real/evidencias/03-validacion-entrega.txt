@@ -1,0 +1,13 @@
+Base autorizada: f0d8e703b3b8e3411560c3d1a5cd663efa0bc50a
+HEAD = main = origin/main: PASS tras fetch
+Planificación autorizada intacta: proposal.md 0355ea45c48c993ab7eea6a1934fb6a94dd8b0b3dff84cb7fa54b4596ac72fdc
+Planificación autorizada intacta: design.md 107d8de43b14d85162130851f7261c118866a61420b0a757cff62089341ecb38
+Planificación autorizada intacta: specs/consolas-internas/spec.md 9fd75a1719f741910b8bf06dc8018a4d910a58a6e139599e08e8521203ae91b8
+Planificación autorizada intacta: specs/cliente-api-canales/spec.md 94590d37d6c39422bb0d158f0128e68177470024388b2fee49f74439a7476de6
+Tareas autorizadas, normalizando casillas: cbb06f175331d2dc5d4f99562da8deb79738df67cf95a16ffea29b1d5b312f2c
+Archivo previo excluido y sin cambios: .claude/launch.json 1e60f70ce6a3e57d4f06e8feda6ef51c5510a715d05667769e95bd387b18428a
+Alcance: PASS; solo apps/web/** y carpeta del cambio, aparte del archivo ajeno previo intacto
+OpenSpec: Change 'ajustes-flujo-real' is valid
+git diff --check: PASS
+Commits propios sobre main: 0
+Evidencia de texto/JSON sin rutas locales: PASS

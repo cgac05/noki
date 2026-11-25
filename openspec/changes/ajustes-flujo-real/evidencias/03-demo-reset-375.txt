@@ -1,0 +1,7 @@
+Base: f0d8e703b3b8e3411560c3d1a5cd663efa0bc50a
+Comando: pnpm demo:reset
+$ node --env-file=.env --import tsx apps/api/src/semilla/reset.ts
+Reinicio de la base de demo en el host localhost.
+Demo reiniciada: migración y semilla aplicadas.
+
+Exit code: 0

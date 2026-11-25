@@ -1,0 +1,8 @@
+Base: f0d8e703b3b8e3411560c3d1a5cd663efa0bc50a
+Comando: pnpm lint:deps
+$ depcruise --config .dependency-cruiser.cjs packages apps
+
+✔ no dependency violations found (204 modules, 617 dependencies cruised)
+
+
+Exit code: 0

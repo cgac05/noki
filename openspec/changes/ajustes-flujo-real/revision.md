@@ -1,0 +1,34 @@
+# Revisión: ajustes-flujo-real
+
+- Dictamen: PASS
+- Revisión inspeccionada: rama `feat/ajustes-flujo-real` sobre `main` `f0d8e70` (vigente), con el diff sin commit entregado por Codex (`implementacion.md`, manifiesto `evidencias/03-archivos-entregados.json`). Revisado el 2026-11-24.
+- Cobertura:
+  - Requisitos y escenarios de los deltas de `consolas-internas` («Cotización desde el catálogo») y de `cliente-api-canales` («Contexto de consulta en modo real»).
+  - Design D1–D3 y tareas 1.1–3.2.
+  - Archivos: `vistas/CallCenter.tsx`, `cliente/{ProveedorCliente.tsx,historialWa.ts}`, `README.md`, las pruebas nuevas `cliente/refrescoReal.test.tsx` y `vistas/catalogoReal.test.tsx`, y los ajustes de texto en `consolas.test.tsx`, `identidadAsesor.test.tsx` y `vistas.test.tsx`.
+- Autorización y alcance:
+  - Los hashes de `proposal.md`, `design.md` y los dos specs coinciden con la revisión 1 autorizada.
+  - `tasks.md` difiere solo por las casillas: al desmarcarlas da `cbb06f175331`, el hash autorizado.
+  - Cambios solo en `apps/web/**` y la carpeta del cambio. `.claude/launch.json`, sin versionar, lo creó Claude para levantar la web en el recorrido real; no forma parte del cambio. No hay commits.
+- Evidencia comprobada independientemente (Claude, este checkout):
+  - `eslint .`, `pnpm -r exec tsc --noEmit` y `tsc --project tests/tsconfig.json` → 0.
+  - `pnpm lint:deps` → 0; 204 módulos / 617 dependencias, sin violaciones.
+  - `pnpm test --maxWorkers=1` → 0; 54 archivos, 308/308.
+  - `pnpm test:integracion` → 0; 14 archivos, 38/38.
+  - `VITE_API=real VITE_DEMO=true pnpm --filter @noki/web build` → 0.
+  - `openspec validate ajustes-flujo-real --type change --strict` → válido.
+  - Sin rutas locales en `evidencias/`.
+- Lectura del código:
+  - D1: el botón dice `Cotizar {servicio} en {sede} · {dinero(precioCentavos)}`, con el mismo orden y la misma clave del catálogo, y los mismos comandos.
+  - D2: `contextoDemo` con `staleTime: 0`.
+  - D3: `HistorialWa` acepta `alResponder` y lo llama sin argumentos solo en la rama de éxito, después de guardar la respuesta redactada; en error no se llama. `ProveedorCliente` lo conecta a `invalidateQueries(['consulta'])`, sin pasar contenido.
+- Pruebas leídas:
+  - `catalogoReal.test.tsx`: doce ofertas distinguibles, sin reordenar, y los identificadores del paquete en Tepic.
+  - `refrescoReal.test.tsx`: nueva consulta del contexto al regresar a App; cita en App en la misma pestaña sin «Actualizar»; refresco solo tras éxito (con y sin fallo); `alResponder` sin argumentos ni contenido protegido.
+  - Rojo previo: `01-rojo.txt` y `02-rojo.txt`.
+- Recorrido real de Codex (3.2), con la API de `main` en local y `demo:reset` previo: inspeccioné `03-375-catalogo.jpg` (12 botones con servicio, sede y precio, sin desplazamiento horizontal) y `03-375-app-confirmada.jpg` (cita CONFIRMADA con QR). `03-recorrido-real.json` registra `actualizarPulsado: false` y `appFinalConfirmadaSinActualizar: true`.
+- Controles no ejecutados: Claude no repitió el recorrido real completo en navegador. Se acepta la evidencia de Codex, las pruebas con `ClienteReal` y la lectura del código.
+- Hallazgos: ninguno.
+- Riesgos residuales: siguen abiertas las fallas del frente A (A1 horarios a medianoche y sin día, A2 textos crudos del bot, A3 hilo en solo lectura en llamadas repetidas), fuera de este cambio.
+- Condiciones para recomendar el cierre: cumplidas.
+- Próximo responsable: `LuisMaster119`. Decide si autoriza el commit y el push de `feat/ajustes-flujo-real`, la integración en `main` y el cierre (sincronizar specs y archivar) con esta revisión.

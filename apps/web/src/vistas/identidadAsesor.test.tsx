@@ -67,7 +67,7 @@ it.each(['NINGUNO', 'referencia-opaca-demo'])('envía destinatario y candidato %
 });
 it('permite omitir identificación y cotizar sin bloquear las demás operaciones', async () => {
   const { usuario, recibidos } = await abrir();
-  await usuario.click(screen.getByRole('button', { name: 'Cotizar paquete en Tepic' }));
+  await usuario.click(screen.getByRole('button', { name: 'Cotizar Paquete US mamario + Papanicolaou en Tepic · $250.00' }));
   await waitFor(() => expect(recibidos.map(dato => dato.comando.tipo)).toContain('SeleccionarSede'));
   expect(recibidos.some(dato => dato.comando.tipo === 'IdentificarPaciente')).toBe(false);
 });

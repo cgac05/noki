@@ -1,0 +1,201 @@
+{
+  "fecha": "2026-11-24",
+  "base": "f0d8e703b3b8e3411560c3d1a5cd663efa0bc50a",
+  "resultado": "PASS",
+  "modo": "real",
+  "api": "main local, DEMO_MODE=true",
+  "web": "VITE_API=real, VITE_DEMO=true",
+  "anchos": [
+    375,
+    1280
+  ],
+  "reinicios": [
+    "03-demo-reset-375.txt",
+    "03-demo-reset-1280.txt"
+  ],
+  "capturas": [
+    "03-375-app-sin-contexto.jpg",
+    "03-375-catalogo.jpg",
+    "03-375-app-confirmada.jpg",
+    "03-1280-app-sin-contexto.jpg",
+    "03-1280-catalogo.jpg",
+    "03-1280-app-confirmada.jpg"
+  ],
+  "registros": [
+    {
+      "paso": "app-inicial-sin-contexto",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 375,
+      "desbordamiento": false,
+      "fechaExpuesta": false,
+      "ruta": "/app",
+      "simulado": false
+    },
+    {
+      "ancho": 375,
+      "ofertas": [
+        "Cotizar Consulta nutricional en Clínica Bahía de Banderas · $150.00",
+        "Cotizar Consulta nutricional en Clínica Tepic · $150.00",
+        "Cotizar Consulta nutricional en Clínica Tijuana · $150.00",
+        "Cotizar Paquete US mamario + Papanicolaou en Clínica Bahía de Banderas · $250.00",
+        "Cotizar Paquete US mamario + Papanicolaou en Clínica Tepic · $250.00",
+        "Cotizar Paquete US mamario + Papanicolaou en Clínica Tijuana · $250.00",
+        "Cotizar Química sanguínea en Clínica Bahía de Banderas · $55.00",
+        "Cotizar Química sanguínea en Clínica Tepic · $55.00",
+        "Cotizar Química sanguínea en Clínica Tijuana · $55.00",
+        "Cotizar Ultrasonido abdominal en Clínica Bahía de Banderas · $120.00",
+        "Cotizar Ultrasonido abdominal en Clínica Tepic · $120.00",
+        "Cotizar Ultrasonido abdominal en Clínica Tijuana · $120.00"
+      ],
+      "ofertasDistintas": 12
+    },
+    {
+      "paso": "catalogo-doce-ofertas",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desbordamiento": false,
+      "fechaExpuesta": false,
+      "ruta": "/callcenter",
+      "simulado": false
+    },
+    {
+      "paso": "continuidad-whatsapp",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desbordamiento": false,
+      "fechaExpuesta": false,
+      "ruta": "/wa",
+      "simulado": false
+    },
+    {
+      "paso": "flow-fecha-protegida",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desbordamiento": false,
+      "fechaExpuesta": false,
+      "ruta": "/wa",
+      "simulado": false
+    },
+    {
+      "paso": "cita-confirmada-whatsapp",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desbordamiento": false,
+      "fechaExpuesta": false,
+      "ruta": "/wa",
+      "simulado": false
+    },
+    {
+      "paso": "app-confirmada-sin-actualizar",
+      "alto": 812,
+      "ancho": 375,
+      "anchoDocumento": 360,
+      "desbordamiento": false,
+      "fechaExpuesta": false,
+      "ruta": "/app",
+      "simulado": false
+    },
+    {
+      "ancho": 375,
+      "actualizarPulsado": false,
+      "mismaPestana": true,
+      "citaConfirmadaVisible": true,
+      "erroresConsola": []
+    },
+    {
+      "paso": "app-inicial-sin-contexto",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1280,
+      "desbordamiento": false,
+      "fechaExpuesta": false,
+      "ruta": "/app",
+      "simulado": false
+    },
+    {
+      "ancho": 1280,
+      "ofertas": [
+        "Cotizar Consulta nutricional en Clínica Bahía de Banderas · $150.00",
+        "Cotizar Consulta nutricional en Clínica Tepic · $150.00",
+        "Cotizar Consulta nutricional en Clínica Tijuana · $150.00",
+        "Cotizar Paquete US mamario + Papanicolaou en Clínica Bahía de Banderas · $250.00",
+        "Cotizar Paquete US mamario + Papanicolaou en Clínica Tepic · $250.00",
+        "Cotizar Paquete US mamario + Papanicolaou en Clínica Tijuana · $250.00",
+        "Cotizar Química sanguínea en Clínica Bahía de Banderas · $55.00",
+        "Cotizar Química sanguínea en Clínica Tepic · $55.00",
+        "Cotizar Química sanguínea en Clínica Tijuana · $55.00",
+        "Cotizar Ultrasonido abdominal en Clínica Bahía de Banderas · $120.00",
+        "Cotizar Ultrasonido abdominal en Clínica Tepic · $120.00",
+        "Cotizar Ultrasonido abdominal en Clínica Tijuana · $120.00"
+      ],
+      "ofertasDistintas": 12
+    },
+    {
+      "paso": "catalogo-doce-ofertas",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desbordamiento": false,
+      "fechaExpuesta": false,
+      "ruta": "/callcenter",
+      "simulado": false
+    },
+    {
+      "paso": "continuidad-whatsapp",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desbordamiento": false,
+      "fechaExpuesta": false,
+      "ruta": "/wa",
+      "simulado": false
+    },
+    {
+      "paso": "flow-fecha-protegida",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1265,
+      "desbordamiento": false,
+      "fechaExpuesta": false,
+      "ruta": "/wa",
+      "simulado": false
+    },
+    {
+      "paso": "app-confirmada-sin-actualizar",
+      "alto": 900,
+      "ancho": 1280,
+      "anchoDocumento": 1280,
+      "desbordamiento": false,
+      "fechaExpuesta": false,
+      "ruta": "/app",
+      "simulado": false
+    },
+    {
+      "ancho": 1280,
+      "actualizarPulsado": false,
+      "mismaPestana": true,
+      "citaConfirmadaVisible": true,
+      "erroresConsola": []
+    }
+  ],
+  "comprobaciones": {
+    "ofertasDistintas": 12,
+    "servicioSedePrecio": true,
+    "appInicialSinContexto": true,
+    "appFinalConfirmadaSinActualizar": true,
+    "navegacionMismaPestana": true,
+    "fechaProtegida": true,
+    "desbordamientoDocumento": false
+  },
+  "observaciones": [
+    "Se reinició la base antes de cada ancho por A3.",
+    "El historial redactado de sesión persistió entre anchos; se usaron los controles habilitados.",
+    "Persisten los horarios de medianoche y textos crudos del bot A1-A2, fuera de este cambio.",
+    "Solo datos ficticios de semilla; no se registraron valores del Flow ni tokens."
+  ]
+}

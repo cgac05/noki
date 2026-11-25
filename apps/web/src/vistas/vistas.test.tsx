@@ -111,7 +111,7 @@ describe('Vistas del guion', () => {
     });
     const enviar = vi.spyOn(cliente, 'enviarComando').mockResolvedValue(GUION_FLUJO_A[2]!.respuesta);
     const { usuario } = abrir('/callcenter', cliente);
-    await usuario.click(await screen.findByRole('button', { name: 'Cotizar paquete en Compostela' }));
+    await usuario.click(await screen.findByRole('button', { name: 'Cotizar Otra oferta ficticia en Compostela · $300.00' }));
     await waitFor(() => expect(enviar).toHaveBeenCalledTimes(2));
     expect(enviar.mock.calls.map(([comando]) => comando)).toEqual([
       { canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'SeleccionarServicio', tramiteId: IDS.tramite, payload: { servicioId: oferta.servicioId } },
@@ -133,7 +133,7 @@ describe('Vistas del guion', () => {
       return original(comando, opciones);
     });
     const { usuario } = abrir('/callcenter', cliente);
-    await usuario.click(await screen.findByRole('button', { name: 'Cotizar paquete en Tepic' }));
+    await usuario.click(await screen.findByRole('button', { name: 'Cotizar Paquete US mamario + Papanicolaou en Tepic · $250.00' }));
     await usuario.click(await screen.findByRole('button', { name: 'Reintentar' }));
     expect(await screen.findByRole('button', { name: 'Continuar por WhatsApp' })).toBeDefined();
     expect(enviar.mock.calls.map(([comando]) => comando.tipo)).toEqual(['SeleccionarServicio', 'SeleccionarSede', 'SeleccionarSede']);
@@ -145,7 +145,7 @@ describe('Vistas del guion', () => {
     expect(await screen.findByText('•••• 0001')).toBeDefined();
     expect(screen.getByText('Ana')).toBeDefined();
     expect(document.body.textContent).not.toMatch(/5210000000001|fecha de nacimiento|246810/);
-    expect(await screen.findByRole('button', { name: 'Cotizar paquete en Tepic' })).toBeDefined();
+    expect(await screen.findByRole('button', { name: 'Cotizar Paquete US mamario + Papanicolaou en Tepic · $250.00' })).toBeDefined();
   });
 
   it('recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales', async () => {
@@ -153,7 +153,7 @@ describe('Vistas del guion', () => {
     // Este recorrido verifica respuestas y navegación, sin pausas artificiales entre teclas.
     const usuario = userEvent.setup({ delay: null });
     await usuario.click(await screen.findByRole('button', { name: 'Llamada entrante' }));
-    await usuario.click(await screen.findByRole('button', { name: 'Cotizar paquete en Tepic' }));
+    await usuario.click(await screen.findByRole('button', { name: 'Cotizar Paquete US mamario + Papanicolaou en Tepic · $250.00' }));
     const consentimiento = await screen.findByRole('checkbox', { name: 'El paciente aceptó continuar por WhatsApp' });
     await waitFor(() => expect((consentimiento as HTMLInputElement).disabled).toBe(false));
     await usuario.click(consentimiento);
@@ -254,7 +254,7 @@ describe('Vistas del guion', () => {
     const { usuario } = abrir('/callcenter', cliente);
     await usuario.click(await screen.findByRole('button', { name: 'Llamada entrante' }));
     await usuario.click(await screen.findByRole('button', { name: 'Reintentar' }));
-    expect(await screen.findByRole('button', { name: 'Cotizar paquete en Tepic' })).toBeDefined();
+    expect(await screen.findByRole('button', { name: 'Cotizar Paquete US mamario + Papanicolaou en Tepic · $250.00' })).toBeDefined();
     expect(enviar.mock.calls[0]![1]?.idempotencyKey).toBeTruthy();
     expect(enviar.mock.calls[1]![1]?.idempotencyKey).toBe(enviar.mock.calls[0]![1]?.idempotencyKey);
   });

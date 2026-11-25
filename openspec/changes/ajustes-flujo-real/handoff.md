@@ -1,0 +1,22 @@
+# Transferencia: ajustes-flujo-real
+
+- Responsable: frente B (canales), `LuisMaster119`. No toca archivos compartidos ni contratos; basta su autorización.
+- Objetivo: corregir las fallas B1 (botones de cotizar indistinguibles) y B2 (contexto de demo vacío en la misma pestaña) del primer recorrido real del Flujo A; ver `proposal.md` (Why).
+- Alcance autorizado: `proposal.md` (What Changes), sin lo listado en «Fuera de alcance»; design D1–D3.
+- Autorización de implementación: otorgada por `LuisMaster119`, responsable del frente B, en el chat de Claude Code el 2026-11-24, en respuesta a "¿Autorizas implementar ajustes-flujo-real con la revisión 1 presentada?". Cita: "Autorizo implementar". Cubre la revisión 1 (hashes de abajo, comprobados sin cambios al registrarla). No autoriza commits.
+- Revisión presentada: revisión 1 en la rama `feat/ajustes-flujo-real`, sobre `main` `f0d8e70`. SHA-256 (12 primeros caracteres): `proposal.md` 0355ea45c48c · `design.md` 107d8de43b14 · `tasks.md` cbb06f175331 · `specs/consolas-internas/spec.md` 9fd75a1719f7 · `specs/cliente-api-canales/spec.md` 94590d37d6c3. `openspec validate ajustes-flujo-real --type change --strict --no-interactive` → válido.
+- Artefactos a leer: `proposal.md`, los dos specs, `design.md`, `tasks.md`; `openspec/specs/{consolas-internas,cliente-api-canales}/spec.md`; `AGENTS.md` §5–§9.
+- Tareas pendientes: 1.1–3.2 de `tasks.md`.
+- Restricciones:
+  - Solo `apps/web/**`. Sin cambios en contratos ni archivos compartidos.
+  - El refresco tras WhatsApp no lleva contenido de mensajes ni datos capturados.
+  - Evidencia en la carpeta del cambio, sin rutas locales. No crear commits.
+- Criterios de aceptación: requisitos y escenarios de los deltas de `consolas-internas` y `cliente-api-canales`.
+- Validaciones requeridas: punto de control 3.1, incluido `pnpm test:integracion` con Docker, y recorrido real 3.2.
+- Detener la parte afectada si:
+  - la API de `main` cambia la forma de `catalogo` o de `contextoDemo`;
+  - una corrección del frente A (A1–A3) cambia lo que reciben estas vistas.
+- Autorización de cierre: otorgada por `LuisMaster119`, responsable del frente B, en el chat de Claude Code el 2026-11-24, en respuesta a "¿Autorizas commit, push, integrar en main y cerrar ajustes-flujo-real con esta revisión?". Cita: "Autorizo todo". Cubre:
+  - el commit de la implementación, la evidencia y la revisión, y el push de `feat/ajustes-flujo-real`;
+  - la integración en `main` por fast-forward y su push;
+  - la sincronización de specs y el archivado en `main` de la revisión con dictamen PASS de `revision.md` (base `f0d8e70`).

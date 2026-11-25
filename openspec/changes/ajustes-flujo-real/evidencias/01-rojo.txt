@@ -1,0 +1,37 @@
+Base: f0d8e703b3b8e3411560c3d1a5cd663efa0bc50a
+Comando: pnpm exec vitest run --project web src/vistas/catalogoReal.test.tsx
+
+ RUN  v4.0.14 <repo>
+
+ ❯ |web| src/vistas/catalogoReal.test.tsx (1 test | 1 failed) 349ms
+   × distingue las doce ofertas sin reordenarlas y cotiza los identificadores del paquete en Tepic 348ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/vistas/catalogoReal.test.tsx > distingue las doce ofertas sin reordenarlas y cotiza los identificadores del paquete en Tepic
+AssertionError: expected 3 to be 12 // Object.is equality
+
+- Expected
++ Received
+
+- 12
++ 3
+
+ ❯ src/vistas/catalogoReal.test.tsx:40:32
+     38|   const textos = botones.map(boton => boton.textContent);
+     39|   expect(botones).toHaveLength(12);
+     40|   expect(new Set(textos).size).toBe(12);
+       |                                ^
+     41|   expect(textos).toEqual(catalogo.map(oferta => `Cotizar ${oferta.serv…
+     42|   await usuario.click(screen.getByRole('button', { name: 'Cotizar Paqu…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  19:44:31
+   Duration  8.70s (transform 896ms, setup 0ms, import 3.69s, tests 349ms, environment 3.79s)
+
+
+Exit code: 1

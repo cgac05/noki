@@ -15,7 +15,7 @@ const ContextoRespuesta = createContext<{ respuesta: RespuestaComando | undefine
 export function ProveedorCliente({ cliente, children }: { cliente: ClienteApi; children: ReactNode }) {
   const [consultas] = useState(() => new QueryClient({ defaultOptions: { queries: { retry: false }, mutations: { retry: false } } }));
   const [respuesta, recordar] = useState<RespuestaComando>();
-  const [historial] = useState(() => new HistorialWa(cliente));
+  const [historial] = useState(() => new HistorialWa(cliente, { alResponder: () => { void consultas.invalidateQueries({ queryKey: ['consulta'] }); } }));
   useEffect(() => {
     let revisionGuion = cliente.demo?.revision();
     const actualizar = () => {
@@ -53,7 +53,7 @@ export function useContextoConsulta() {
   const cliente = useCliente();
   const { respuesta } = useRespuestaComando();
   const consultas = useQuery({
-    queryKey: ['consulta', 'contextoDemo', {}], enabled: cliente.modo === 'real', staleTime: Infinity,
+    queryKey: ['consulta', 'contextoDemo', {}], enabled: cliente.modo === 'real', staleTime: 0,
     queryFn: async () => {
       try { return await cliente.consultar('contextoDemo', {}); }
       catch (error) {

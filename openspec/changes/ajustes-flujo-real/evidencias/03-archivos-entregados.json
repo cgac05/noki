@@ -1,0 +1,231 @@
+{
+  "fecha": "2026-11-24",
+  "cambio": "ajustes-flujo-real",
+  "revisionAutorizada": 1,
+  "rama": "feat/ajustes-flujo-real",
+  "baseAutorizada": "f0d8e703b3b8e3411560c3d1a5cd663efa0bc50a",
+  "mainObservado": "f0d8e703b3b8e3411560c3d1a5cd663efa0bc50a",
+  "mainRemotoObservado": "f0d8e703b3b8e3411560c3d1a5cd663efa0bc50a",
+  "estado": "5/5 tareas completadas; entrega para revisión independiente",
+  "controles": {
+    "lint": "PASS",
+    "dependencias": "PASS: 204 módulos, 617 dependencias",
+    "pruebas": "PASS: 308 pruebas / 54 archivos",
+    "integracion": "PASS: 38 pruebas / 14 archivos",
+    "manual": "PASS: API real de main local; 375 y 1280 px; seis capturas y quince registros",
+    "resetDemo": "PASS antes de cada ancho",
+    "formato": "PASS",
+    "openspec": "PASS, estricto",
+    "planificacion": "PASS, hashes intactos y solo casillas en tasks.md"
+  },
+  "alcance": "PASS: apps/web/** y carpeta del cambio; sin dependencias nuevas ni cambios en lockfile",
+  "excluidosPreexistentes": [
+    {
+      "ruta": ".claude/launch.json",
+      "sha256": "1e60f70ce6a3e57d4f06e8feda6ef51c5510a715d05667769e95bd387b18428a",
+      "estado": "Sin cambios respecto al inicio; ajeno a la entrega"
+    }
+  ],
+  "commitsPropiosSobreMain": 0,
+  "pendientes": [
+    "Revisión independiente de Claude y autorización de cierre",
+    "A1-A3 son del frente A y permanecen fuera del cambio; reset previo por A3"
+  ],
+  "evidenciaRoja": [
+    "01-rojo.txt: una prueba falló por etiquetas indistinguibles",
+    "02-rojo.txt: cuatro fallos por contexto sin refresco y callback ausente"
+  ],
+  "archivoExcluidoDeAutohash": "openspec/changes/ajustes-flujo-real/evidencias/03-archivos-entregados.json",
+  "archivos": [
+    {
+      "ruta": "apps/web/README.md",
+      "bytes": 16484,
+      "sha256": "5e20f3e977263c2e20d8e8caa7c7a26d4b8e34eeae9e0f1bb649898f98445c4b"
+    },
+    {
+      "ruta": "apps/web/src/cliente/historialWa.ts",
+      "bytes": 8179,
+      "sha256": "190d70d4acb8544764213809d699fc3e220f90cdd8445a26f1925e7251edad4a"
+    },
+    {
+      "ruta": "apps/web/src/cliente/ProveedorCliente.tsx",
+      "bytes": 4248,
+      "sha256": "5f0499d86d8e58fad66b31bf25d889e0da4ded022946ca03b3a2034145f38a02"
+    },
+    {
+      "ruta": "apps/web/src/cliente/refrescoReal.test.tsx",
+      "bytes": 5918,
+      "sha256": "e5f64fbddb852c05b8b5faf639a16458376f78a6a0a051a88fabf419a40b18a6"
+    },
+    {
+      "ruta": "apps/web/src/vistas/CallCenter.tsx",
+      "bytes": 6679,
+      "sha256": "ac6fe089e5d40a7d3ef86e21ec2f4d49e3b0ec6f34291ad3b1408611a8c59994"
+    },
+    {
+      "ruta": "apps/web/src/vistas/catalogoReal.test.tsx",
+      "bytes": 3246,
+      "sha256": "6887211db3e6b3dce357f09a97715962fe75813c4064018f81513938002b19af"
+    },
+    {
+      "ruta": "apps/web/src/vistas/consolas.test.tsx",
+      "bytes": 16866,
+      "sha256": "377292ad3fbfb08eee161eb306905b8993bbf0fc72d38e31df63ae99392437d4"
+    },
+    {
+      "ruta": "apps/web/src/vistas/identidadAsesor.test.tsx",
+      "bytes": 11066,
+      "sha256": "065fdb84f4096b19090ac8012e624199d06f4f3279a154807406740d90b582ea"
+    },
+    {
+      "ruta": "apps/web/src/vistas/vistas.test.tsx",
+      "bytes": 18102,
+      "sha256": "1c8ba6ab13d1b77c3d135dd30b4adbe1aa9957fa931a5c848e1d46c46d395cbd"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/.openspec.yaml",
+      "bytes": 40,
+      "sha256": "0b89965c6919ee9f0b3679bc8491b3c9efd623f2ceac7e5bd3929eff87f22215"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/design.md",
+      "bytes": 2542,
+      "sha256": "107d8de43b14d85162130851f7261c118866a61420b0a757cff62089341ecb38"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/01-rojo.txt",
+      "bytes": 1332,
+      "sha256": "6a521051703768a226ac0315db31f78d6668662b17aabe7e1236c93c7dd298c6"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/01-verde.txt",
+      "bytes": 1764,
+      "sha256": "32f376825ff347652b71bf8a8a75d915a0fd72c1e341aea9f31f29eed7d7509b"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/02-rojo-arnes-intento.txt",
+      "bytes": 28001,
+      "sha256": "f699896713b59272e6d1b310699d0a1c2b0df2dc4dc9ecfc60b20c6a259e761f"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/02-rojo.txt",
+      "bytes": 27801,
+      "sha256": "d118d5c7c8b92d45a74447c40e03c8abab4427c0e06dedec66876ff52d465521"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/02-verde.txt",
+      "bytes": 1111,
+      "sha256": "29a05393e3b9d1aaee91097b68c3bfc700188c5b465175a7321d8f17f03763d6"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/03-1280-app-confirmada.jpg",
+      "bytes": 73835,
+      "sha256": "b0a17283235988367c3b4be349e5cf3c9c80691c7bfb1c68ac9bded1b7d6c968"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/03-1280-app-sin-contexto.jpg",
+      "bytes": 36563,
+      "sha256": "9ec6d3f8435c6a16f8d13696b3262ea082caf7919a7c84c71d87070c4482a91e"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/03-1280-catalogo.jpg",
+      "bytes": 146660,
+      "sha256": "8a6673dbe9ac3b958c2d679fdfd41173e80c9e4144545cbb1e5948e0a55d99a9"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/03-375-app-confirmada.jpg",
+      "bytes": 59969,
+      "sha256": "7b0c206d02c64d37464fe30807e9a4999f299ae9612d1ab2f8c6f361b4f21367"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/03-375-app-sin-contexto.jpg",
+      "bytes": 24042,
+      "sha256": "4353fc1227378f86b33c65be3f6be31bc25f5f5288ab6f77643b1613e57389f5"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/03-375-catalogo.jpg",
+      "bytes": 116545,
+      "sha256": "21e4b4562a5e471c2594d2c3707e8132d97b4ceac961c9ad484050c4fb97ce6d"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/03-demo-reset-1280.txt",
+      "bytes": 254,
+      "sha256": "edf6dc0e3dbb7ee1bcc6a27655c28c64295b23f1e0acb70980910abcf1f490de"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/03-demo-reset-375.txt",
+      "bytes": 254,
+      "sha256": "edf6dc0e3dbb7ee1bcc6a27655c28c64295b23f1e0acb70980910abcf1f490de"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/03-deps.txt",
+      "bytes": 225,
+      "sha256": "47d77a79bd37ca280f9c5f880747e8047c9c2100dea283a7e5e80c1d8ec1f432"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/03-integracion.txt",
+      "bytes": 2677,
+      "sha256": "08fd48e93213a8e28044cd15145be4da7fe930edf97999a4e916e7460937e610"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/03-lint.txt",
+      "bytes": 176,
+      "sha256": "0303a374a29db07b05edeb7772c34f965ea87c886075721ab68aa2aea9def902"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/03-recorrido-real.json",
+      "bytes": 6073,
+      "sha256": "2e1e86ffa7b5843b51de51d2114119ffda18bd293de102ca826a51abd7b8cd9b"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/03-test.txt",
+      "bytes": 8784,
+      "sha256": "308066bdeb64cb92b63aaced9a07f26eba3637629a408062934b747066320c43"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/03-validacion-entrega.txt",
+      "bytes": 1063,
+      "sha256": "78989b637d36378c3b7804d1c323a30d301130ec27323b99611ca739f231175a"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/control.ps1",
+      "bytes": 912,
+      "sha256": "9e8cb69f8c164322187e7b6084a5b4e13147c18d518a070228bbdf1f1170adb2"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/evidencias/ejecutar.ps1",
+      "bytes": 823,
+      "sha256": "ed67362df06aae72afa2bbebd821fce87e8889c6e33cf698904176874fb187be"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/handoff.md",
+      "bytes": 2129,
+      "sha256": "8eadb2d32f67680df0381e4a0c7369125b992837dba6915a08d4904c5842fa39"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/implementacion.md",
+      "bytes": 9404,
+      "sha256": "1dcb750ff98cc3889b43df3d64e1489d2a4ed31c24cf4370bb158f6de2c4704a"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/proposal.md",
+      "bytes": 2741,
+      "sha256": "0355ea45c48c993ab7eea6a1934fb6a94dd8b0b3dff84cb7fa54b4596ac72fdc"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/specs/cliente-api-canales/spec.md",
+      "bytes": 1800,
+      "sha256": "94590d37d6c39422bb0d158f0128e68177470024388b2fee49f74439a7476de6"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/specs/consolas-internas/spec.md",
+      "bytes": 939,
+      "sha256": "9fd75a1719f741910b8bf06dc8018a4d910a58a6e139599e08e8521203ae91b8"
+    },
+    {
+      "ruta": "openspec/changes/ajustes-flujo-real/tasks.md",
+      "bytes": 2185,
+      "sha256": "bcaaced616c0c613353b2f3c61341d22d0fd7dfe8d550fd7b368fda2310a186b"
+    }
+  ]
+}

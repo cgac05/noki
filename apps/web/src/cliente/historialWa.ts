@@ -31,9 +31,11 @@ export class HistorialWa {
   readonly #conversaciones = new Map<string, Conversacion>();
   readonly #oyentes = new Map<string, Set<() => void>>();
   readonly #almacenamiento: Almacenamiento | undefined;
+  readonly #alResponder: (() => void) | undefined;
   #activo: string | undefined;
 
-  constructor(private readonly cliente: Pick<ClienteApi, 'enviarMensajeWa'>, opciones: { almacenamiento?: Almacenamiento } = {}) {
+  constructor(private readonly cliente: Pick<ClienteApi, 'enviarMensajeWa'>, opciones: { almacenamiento?: Almacenamiento; alResponder?: () => void } = {}) {
+    this.#alResponder = opciones.alResponder;
     try { this.#almacenamiento = opciones.almacenamiento ?? globalThis.sessionStorage; } catch { this.#almacenamiento = undefined; }
   }
 
@@ -126,6 +128,7 @@ export class HistorialWa {
       const mensajes = respuesta.mensajes.map(mensaje => redactar<MensajeBot>(mensaje, secretos));
       conversacion.pendientes.delete(id);
       this.actualizar(waId, { entradas: [...conversacion.vista.entradas.map(e => e.id === id ? { ...e, estado: 'enviado' as const, error: undefined } : e), ...mensajes.map(mensaje => ({ id: crypto.randomUUID(), origen: 'bot' as const, tipo: 'mensaje-bot' as const, mensaje }))], enviando: false });
+      this.#alResponder?.();
       return true;
     } catch (error) {
       if (revision !== conversacion.revision) return false;

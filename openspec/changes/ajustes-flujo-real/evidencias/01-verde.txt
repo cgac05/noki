@@ -1,0 +1,28 @@
+Base: f0d8e703b3b8e3411560c3d1a5cd663efa0bc50a
+Comando: pnpm exec vitest run --project web src/vistas/catalogoReal.test.tsx src/vistas/vistas.test.tsx src/vistas/identidadAsesor.test.tsx src/vistas/consolas.test.tsx
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |web| src/vistas/catalogoReal.test.tsx (1 test) 661ms
+   ✓ distingue las doce ofertas sin reordenarlas y cotiza los identificadores del paquete en Tepic  660ms
+ ✓ |web| src/vistas/identidadAsesor.test.tsx (9 tests) 2746ms
+   ✓ envía destinatario y candidato NINGUNO; captura la fecha protegida y avanza  832ms
+   ✓ ofrece sin CURP junto al formulario y rechaza el formato antes de enviar  320ms
+   ✓ muestra código y mensaje del núcleo, conserva reiniciar y descarta al cancelar  344ms
+   ✓ reintenta sin recapturar y no filtra CURP, fecha ni datos básicos a cachés, consola, URL o almacenamiento  426ms
+ ✓ |web| src/vistas/consolas.test.tsx (16 tests) 3036ms
+     ✓ inicia con ANI de demo, valida el formato y descarta la captura al mostrar la ficha  990ms
+     ✓ exige consentimiento, envía una sola solicitud con doble clic y muestra el código de la lectura  460ms
+     ✓ permite reintentar la continuación fallida con la misma clave  357ms
+ ✓ |web| src/vistas/vistas.test.tsx (15 tests) 4051ms
+     ✓ Mensaje de lista: presenta secciones y envía el payload sin interpretarlo  422ms
+     ✓ recorre Call Center → WhatsApp → App → Clínica y conserva el paso entre canales  1855ms
+     ✓ permite escribir texto fuera del guion y muestra ayuda sin avanzar  326ms
+
+ Test Files  4 passed (4)
+      Tests  41 passed (41)
+   Start at  19:45:08
+   Duration  11.58s (transform 2.87s, setup 0ms, import 13.91s, tests 10.49s, environment 13.42s)
+
+
+Exit code: 0

@@ -1,0 +1,1089 @@
+Base: f0d8e703b3b8e3411560c3d1a5cd663efa0bc50a
+Comando: pnpm exec vitest run --project web src/cliente/refrescoReal.test.tsx
+
+ RUN  v4.0.14 <repo>
+
+ ❯ |web| src/cliente/refrescoReal.test.tsx (5 tests | 4 failed) 3702ms
+   × vuelve a consultar contextoDemo al regresar a App aunque el valor anterior fuera vacío 1101ms
+   × tras confirmar en WhatsApp muestra la cita en App en la misma pestaña sin Actualizar 1017ms
+   × refresca las lecturas activas solo tras respuesta exitosa de WhatsApp (fallo=false) 1407ms
+   ✓ refresca las lecturas activas solo tras respuesta exitosa de WhatsApp (fallo=true) 166ms
+   × alResponder se llama después de guardar cada éxito, sin argumentos ni contenido protegido 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |web| src/cliente/refrescoReal.test.tsx > vuelve a consultar contextoDemo al regresar a App aunque el valor anterior fuera vacío
+TestingLibraryElementError: Unable to find an element with the text: Todavía no hay un paciente con citas para mostrar.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          App
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Tus citas y el QR para continuar en clínica.
+        </p>
+        <div
+          class="seccion"
+        >
+          <p>
+            Aún no hay un paciente en el contexto de atención. Confirma una cita y vuelve a actualizar para ver tus citas.
+          </p>
+          <button
+            type="button"
+          >
+            Actualizar
+          </button>
+        </div>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          App
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Tus citas y el QR para continuar en clínica.
+        </p>
+        <div
+          class="seccion"
+        >
+          <p>
+            Aún no hay un paciente en el contexto de atención. Confirma una cita y vuelve a actualizar para ver tus citas.
+          </p>
+          <button
+            type="button"
+          >
+            Actualizar
+          </button>
+        </div>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/cliente/refrescoReal.test.tsx:46:16
+     44| it('vuelve a consultar contextoDemo al regresar a App aunque el valor …
+     45|   const { usuario, confirmarEnServidor, peticion } = preparar();
+     46|   await screen.findByText('Todavía no hay un paciente con citas para m…
+       |                ^
+     47|   await usuario.click(screen.getByRole('link', { name: 'WhatsApp' }));
+     48|   confirmarEnServidor();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  |web| src/cliente/refrescoReal.test.tsx > tras confirmar en WhatsApp muestra la cita en App en la misma pestaña sin Actualizar
+TestingLibraryElementError: Unable to find an element with the text: Todavía no hay un paciente con citas para mostrar.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          App
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Tus citas y el QR para continuar en clínica.
+        </p>
+        <div
+          class="seccion"
+        >
+          <p>
+            Aún no hay un paciente en el contexto de atención. Confirma una cita y vuelve a actualizar para ver tus citas.
+          </p>
+          <button
+            type="button"
+          >
+            Actualizar
+          </button>
+        </div>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <h1>
+          App
+        </h1>
+        <p
+          class="introduccion"
+        >
+          Tus citas y el QR para continuar en clínica.
+        </p>
+        <div
+          class="seccion"
+        >
+          <p>
+            Aún no hay un paciente en el contexto de atención. Confirma una cita y vuelve a actualizar para ver tus citas.
+          </p>
+          <button
+            type="button"
+          >
+            Actualizar
+          </button>
+        </div>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/cliente/refrescoReal.test.tsx:55:16
+     53| it('tras confirmar en WhatsApp muestra la cita en App en la misma pest…
+     54|   const { usuario } = preparar();
+     55|   await screen.findByText('Todavía no hay un paciente con citas para m…
+       |                ^
+     56|   await usuario.click(screen.getByRole('link', { name: 'WhatsApp' }));
+     57|   await usuario.type(screen.getByRole('textbox', { name: 'Mensaje' }),…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  |web| src/cliente/refrescoReal.test.tsx > refresca las lecturas activas solo tras respuesta exitosa de WhatsApp (fallo=false)
+TestingLibraryElementError: Unable to find an element with the text: Respuestas contabilizadas: 1. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <p>
+      Respuestas contabilizadas: 
+      0
+    </p>
+    <div
+      class="layout min-h-dvh flex flex-col"
+    >
+      <a
+        class="saltar-contenido"
+        href="#contenido"
+      >
+        Saltar al contenido
+      </a>
+      <header
+        class="cabecera flex items-center justify-between gap-6"
+      >
+        <a
+          aria-label="noki · Portada"
+          class="marca"
+          data-discover="true"
+          href="/"
+        >
+          noki
+        </a>
+        <div
+          class="contexto"
+        >
+          Salud Digna · HackaTec
+        </div>
+      </header>
+      <nav
+        aria-label="Canales de la demo"
+        class="barra-demo"
+      >
+        <ul>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/web"
+            >
+              Web
+            </a>
+          </li>
+          <li>
+            <a
+              aria-current="page"
+              class="active"
+              data-discover="true"
+              href="/wa"
+            >
+              WhatsApp
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/app"
+            >
+              App
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/callcenter"
+            >
+              Call Center
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/clinica"
+            >
+              Clínica
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/admin"
+            >
+              Admin
+            </a>
+          </li>
+          <li>
+            <a
+              class=""
+              data-discover="true"
+              href="/bandeja"
+            >
+              Bandeja
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <main
+        class="contenido flex-1"
+        id="contenido"
+        tabindex="-1"
+      >
+        <div
+          class="wa-simulador"
+        >
+          <h1>
+            WhatsApp
+          </h1>
+          <p
+            class="introduccion"
+          >
+            Tu atención continúa donde la dejaste.
+          </p>
+          <div
+            class="wa-herramientas"
+          >
+            <div>
+              <label
+                for="numero-wa"
+              >
+                Número de WhatsApp
+              </label>
+              <input
+                aria-invalid="false"
+                autocomplete="off"
+                id="numero-wa"
+                inputmode="numeric"
+                type="tel"
+                value="5210000000001"
+              />
+            </div>
+            <button
+              class="boton-secundario"
+              type="button"
+            >
+              Nueva conversación
+            </button>
+          </div>
+          <section
+            aria-label="Conversación de WhatsApp"
+            aria-live="polite"
+            aria-relevant="additions text"
+            class="wa-historial"
+            role="log"
+          >
+            <div
+              class="wa-burbuja wa-usuario"
+            >
+              <p>
+                Hola
+              </p>
+            </div>
+            <div
+              class="wa-burbuja wa-bot"
+            >
+              <article
+                class="mensaje-bot"
+              >
+                <p>
+                  Confirmación de prueba
+                </p>
+                <div
+                  class="acciones"
+                >
+                  <button
+                    type="button"
+                  >
+                    Confirmar cita
+                  </button>
+                </div>
+              </article>
+            </div>
+            <div />
+          </section>
+          <form
+            class="enviar-mensaje wa-compositor"
+          >
+            <label
+              for="mensaje-wa"
+            >
+              Mensaje
+            </label>
+            <div>
+              <input
+                autocomplete="off"
+                id="mensaje-wa"
+                placeholder="Escribe un mensaje"
+                value=""
+              />
+              <button
+                disabled=""
+                type="submit"
+              >
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+      <footer
+        class="pie flex flex-wrap justify-between gap-3"
+      >
+        <span>
+          Base en desarrollo
+        </span>
+        <span>
+          Entorno de demostración · Datos ficticios
+        </span>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<html>
+  <head />
+  <body>
+    <div>
+      <p>
+        Respuestas contabilizadas: 
+        0
+      </p>
+      <div
+        class="layout min-h-dvh flex flex-col"
+      >
+        <a
+          class="saltar-contenido"
+          href="#contenido"
+        >
+          Saltar al contenido
+        </a>
+        <header
+          class="cabecera flex items-center justify-between gap-6"
+        >
+          <a
+            aria-label="noki · Portada"
+            class="marca"
+            data-discover="true"
+            href="/"
+          >
+            noki
+          </a>
+          <div
+            class="contexto"
+          >
+            Salud Digna · HackaTec
+          </div>
+        </header>
+        <nav
+          aria-label="Canales de la demo"
+          class="barra-demo"
+        >
+          <ul>
+            <li>
+              <a
+                class=""
+                data-discover="true"
+                href="/web"
+              >
+                Web
+              </a>
+            </li>
+            <li>
+              <a
+                aria-current="page"
+                class="active"
+                data-discover="true"
+                href="/wa"
+              >
+                WhatsApp
+              </a>
+            </li>
+            <li>
+              <a
+                class=""
+                data-discover="true"
+                href="/app"
+              >
+                App
+              </a>
+            </li>
+            <li>
+              <a
+                class=""
+                data-discover="true"
+                href="/callcenter"
+              >
+                Call Center
+              </a>
+            </li>
+            <li>
+              <a
+                class=""
+                data-discover="true"
+                href="/clinica"
+              >
+                Clínica
+              </a>
+            </li>
+            <li>
+              <a
+                class=""
+                data-discover="true"
+                href="/admin"
+              >
+                Admin
+              </a>
+            </li>
+            <li>
+              <a
+                class=""
+                data-discover="true"
+                href="/bandeja"
+              >
+                Bandeja
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <main
+          class="contenido flex-1"
+          id="contenido"
+          tabindex="-1"
+        >
+          <div
+            class="wa-simulador"
+          >
+            <h1>
+              WhatsApp
+            </h1>
+            <p
+              class="introduccion"
+            >
+              Tu atención continúa donde la dejaste.
+            </p>
+            <div
+              class="wa-herramientas"
+            >
+              <div>
+                <label
+                  for="numero-wa"
+                >
+                  Número de WhatsApp
+                </label>
+                <input
+                  aria-invalid="false"
+                  autocomplete="off"
+                  id="numero-wa"
+                  inputmode="numeric"
+                  type="tel"
+                  value="5210000000001"
+                />
+              </div>
+              <button
+                class="boton-secundario"
+                type="button"
+              >
+                Nueva conversación
+              </button>
+            </div>
+            <section
+              aria-label="Conversación de WhatsApp"
+              aria-live="polite"
+              aria-relevant="additions text"
+              class="wa-historial"
+              role="log"
+            >
+              <div
+                class="wa-burbuja wa-usuario"
+              >
+                <p>
+                  Hola
+                </p>
+              </div>
+              <div
+                class="wa-burbuja wa-bot"
+              >
+                <article
+                  class="mensaje-bot"
+                >
+                  <p>
+                    Confirmación de prueba
+                  </p>
+                  <div
+                    class="acciones"
+                  >
+                    <button
+                      type="button"
+                    >
+                      Confirmar cita
+                    </button>
+                  </div>
+                </article>
+              </div>
+              <div />
+            </section>
+            <form
+              class="enviar-mensaje wa-compositor"
+            >
+              <label
+                for="mensaje-wa"
+              >
+                Mensaje
+              </label>
+              <div>
+                <input
+                  autocomplete="off"
+                  id="mensaje-wa"
+                  placeholder="Escribe un mensaje"
+                  value=""
+                />
+                <button
+                  disabled=""
+                  type="submit"
+                >
+                  Enviar
+                </button>
+              </div>
+            </form>
+          </div>
+        </main>
+        <footer
+          class="pie flex flex-wrap justify-between gap-3"
+        >
+          <span>
+            Base en desarrollo
+          </span>
+          <span>
+            Entorno de demostración · Datos ficticios
+          </span>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
+ ❯ Proxy.waitForWrapper ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ src/cliente/refrescoReal.test.tsx:73:11
+     71|     expect(peticion.mock.calls.filter(([url]) => String(url).endsWith(…
+     72|   } else {
+     73|     await waitFor(() => expect(screen.getByText('Respuestas contabiliz…
+       |           ^
+     74|     expect(peticion.mock.calls.filter(([url]) => String(url).endsWith(…
+     75|   }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  |web| src/cliente/refrescoReal.test.tsx > alResponder se llama después de guardar cada éxito, sin argumentos ni contenido protegido
+AssertionError: expected [] to deeply equal [ [], [], [] ]
+
+- Expected
++ Received
+
+- [
+-   [],
+-   [],
+-   [],
+- ]
++ []
+
+ ❯ src/cliente/refrescoReal.test.tsx:88:34
+     86|   expect(await historial.continuar(CONTACTO_DEMO, 'codigo-ficticio')).…
+     87|   expect(await historial.enviarFlow(CONTACTO_DEMO, { fechaNac: 'valor-…
+     88|   expect(alResponder.mock.calls).toEqual([[], [], []]);
+       |                                  ^
+     89|   expect(JSON.stringify(alResponder.mock.calls)).not.toContain('valor-…
+     90| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 1 passed (5)
+   Start at  19:47:04
+   Duration  9.53s (transform 1.03s, setup 0ms, import 2.92s, tests 3.70s, environment 2.39s)
+
+
+Exit code: 1

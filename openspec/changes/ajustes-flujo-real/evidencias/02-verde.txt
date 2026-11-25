@@ -1,0 +1,21 @@
+Base: f0d8e703b3b8e3411560c3d1a5cd663efa0bc50a
+Comando: pnpm exec vitest run --project web src/cliente/refrescoReal.test.tsx src/cliente/contexto.test.tsx src/cliente/historialWa.test.tsx src/cliente/conversacion.test.tsx
+
+ RUN  v4.0.14 <repo>
+
+ ✓ |web| src/cliente/historialWa.test.tsx (9 tests) 164ms
+ ✓ |web| src/cliente/contexto.test.tsx (5 tests) 795ms
+   ✓ comparte contextoDemo entre consumidores reales y da prioridad a la última respuesta por valor  536ms
+ ✓ |web| src/cliente/conversacion.test.tsx (2 tests) 833ms
+   ✓ la vista envía por el almacén y acumula la respuesta sin consultar lecturas de conversación  826ms
+ ✓ |web| src/cliente/refrescoReal.test.tsx (5 tests) 1443ms
+   ✓ vuelve a consultar contextoDemo al regresar a App aunque el valor anterior fuera vacío  771ms
+   ✓ tras confirmar en WhatsApp muestra la cita en App en la misma pestaña sin Actualizar  400ms
+
+ Test Files  4 passed (4)
+      Tests  21 passed (21)
+   Start at  19:48:36
+   Duration  8.09s (transform 1.51s, setup 0ms, import 10.83s, tests 3.24s, environment 11.82s)
+
+
+Exit code: 0
