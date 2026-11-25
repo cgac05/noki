@@ -3,7 +3,7 @@ npx vitest run --project web --maxWorkers=2 --configLoader runner apps/web/src/c
 Codigo de salida: 1
 
 
- RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-wa-a67810e3-7d98-4caa-b515-025639d327b7/repo
+ RUN  v4.0.14 <temporal>/noki-wa-a67810e3-7d98-4caa-b515-025639d327b7/repo
 
  ❯ |web| src/cliente/historialWa.test.tsx (15 tests | 4 failed) 108ms
    × muestra la hora local de envío y la conserva al reintentar 52ms
