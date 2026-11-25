@@ -94,6 +94,16 @@ La semilla incluye Tepic (`America/Mazatlan`), Bahía de Banderas (`America/Bahi
 
 `demo:reset` exige el valor exacto `true` en `DEMO_MODE` **antes de abrir una conexión**, anuncia el host y elimina todo el esquema público de la base indicada por `DATABASE_URL`. Usar únicamente una base de demo destinada a reiniciarse.
 
+## Reloj de demo
+
+Con `DEMO_MODE=true`, puedes adelantar el reloj de la API entre 1 y 10080 minutos enteros. Por ejemplo, para adelantarlo una hora desde PowerShell:
+
+```powershell
+Invoke-RestMethod -Method Post -Uri http://localhost:4000/api/demo/reloj -ContentType 'application/json' -Body '{"adelantarMinutos":60}'
+```
+
+La respuesta contiene `{ ahora }` en ISO 8601 UTC. El avance activa los temporizadores que ya vencieron según el nuevo reloj. Fuera del modo demo, el endpoint responde 404. El botón «Adelantar reloj» de `/admin` está previsto para el cambio de pantallas del frente B y usará el mismo contrato.
+
 ## Contratos y colaboración
 
 - [Contratos de canales](docs/contratos.md): esquemas Zod, vocabulario, mensajes, tiempo real y errores.

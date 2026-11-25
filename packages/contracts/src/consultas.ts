@@ -56,7 +56,6 @@ export type ContextoDemo = z.infer<typeof ContextoDemoSchema>;
 
 interface DefinicionConsulta {
   ruta: string;
-  metodo?: 'GET';
   parametros: z.ZodType;
   respuesta: z.ZodType;
   soloDemo?: true;
@@ -73,7 +72,7 @@ export const RUTAS_CONSULTAS = {
   llegadasSede: { ruta: '/api/sedes/:sedeId/llegadas', parametros: z.object({ sedeId: z.uuidv7() }), respuesta: z.array(LlegadaVistaSchema) },
   metricas: { ruta: '/api/admin/kpis', parametros: z.object({}), respuesta: MetricasVistaSchema },
   alertasSeguridad: {
-    metodo: 'GET', ruta: '/api/admin/alertas', parametros: z.object({}),
+    ruta: '/api/admin/alertas', parametros: z.object({}),
     respuesta: z.array(AlertaSeguridadSchema).max(50),
   },
   bandeja: { ruta: '/api/demo/bandeja', parametros: z.object({}), respuesta: z.array(MensajeBandejaSchema), soloDemo: true },

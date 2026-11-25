@@ -119,11 +119,11 @@ tests/load/        # k6
 
 ```
 paciente(id uuid, nombre, ap_paterno, ap_materno, fecha_nac, sexo, curp?, entidad_nac?, curp_base?, nivel_identidad int)
-   -- nivel_identidad: 0 declarado · 1 OTP a contacto previo · 2 INE en clínica
+   -- nivel_identidad: 0 declarado · 1 OTP a contacto previo · 2 reservado sin uso
 contacto_canal(id, canal, valor_externo, primer_contacto, ultimo_contacto)
 vinculo(contacto_id, paciente_id, relacion, metodo, nivel, verificado_en, ultimo_uso)
    -- relacion: TITULAR | FAMILIAR | TUTOR
-   -- metodo: FLOW_DECLARADO | OTP_EMAIL | OTP_SMS | TOKEN_WEB | TOKEN_CC | FOLIO_FECHA_NAC | INE_CLINICA
+   -- metodo: FLOW_DECLARADO | OTP_EMAIL | OTP_SMS | TOKEN_WEB | TOKEN_CC | FOLIO_FECHA_NAC | INE_CLINICA (reservado sin uso)
 credencial(paciente_id, tipo, hash, intentos_fallidos, bloqueado_hasta)   -- PIN
 hilo_atencion(id, paciente_id?, contacto_id, abierto_en, ultimo_canal)
 tramite(id, hilo_id, tipo, folio_externo, servicio_id?, sede_id?, paciente_id?, estado, version int,
@@ -252,7 +252,7 @@ La CURP completa es única cuando está presente. `curp_base` guarda los 16 cara
 | Acción | Requiere |
 |---|---|
 | cotizar, ver preparación | nada |
-| agendar | datos declarados (la clínica valida la INE en recepción) |
+| agendar | datos declarados (en clínica basta el QR firmado de la cita) |
 | retomar trámite | `wa_id` vinculado; si no lo está: folio + fecha de nacimiento |
 | reprogramar / cancelar | `wa_id` vinculado + **OTP** o botón de aprobación |
 | ver resultados | identidad ≥1 + **PIN**, vía **enlace mágico a la web** |
@@ -279,7 +279,7 @@ La CURP completa es única cuando está presente. `curp_base` guarda los 16 cara
 | `/wa` | Paciente | chat simulado; reconoce al paciente; retoma en `siguientePregunta`; modal tipo Flow; lista de trámites abiertos; resumen con ✅ de lo que ya existe; "¿Te aviso si se libera un espacio antes?"; recibe ofertas de hueco y recordatorios con botones; itinerario propuesto; turno en vivo; "Quiero hablar con alguien" → devolución de llamada; solicitud de factura |
 | `/app` | Paciente | ver citas, el QR firmado, el estado en vivo; login con PIN; **cancelar o reprogramar** (dispara el relleno de huecos); preferencias de contacto y suscripción a la lista de espera |
 | `/callcenter` | Asesor | "Llamada entrante" (ANI) → ficha del hilo (resumen + línea de tiempo) → operar el trámite *en nombre de* → "Continuar por WhatsApp" (consentimiento + plantilla con token) → la ficha pasa a solo lectura cuando el paciente continúa; **cola de devoluciones de llamada** con el motivo de la fricción; ver y corregir solicitudes de factura rechazadas |
-| `/clinica` | Recepción | escanear el QR → `RegistrarLlegada`; marcar "INE verificada" → `IdentidadComprobada`; avanzar la fila (genera `TurnoActualizado`) |
+| `/clinica` | Recepción | escanear el QR firmado → `RegistrarLlegada` y cerrar la atención → `CerrarAtencion` (genera `TurnoActualizado` para los turnos que avanzan) |
 | `/admin` | Administrador | tablero en vivo: trámites por estado, línea de tiempo por paciente con iconos de canal, cambios de canal, alertas de seguridad, cola de fallidos, **embudo de abandono por paso y canal**, **panel de huecos** y KPIs (§10.8) |
 | `/bandeja` | Demo | correos y SMS simulados (OTP) |
 

@@ -1,6 +1,6 @@
 # Eventos del núcleo
 
-La envoltura `EnvolturaEvento<T, P>` y la unión discriminada `EventoDominio` están en `packages/domain/src/eventos.ts`. Este cambio solo fija contratos: no emite eventos ni implementa transiciones, outbox o consumidores.
+La envoltura `EnvolturaEvento<T, P>` y la unión discriminada `EventoDominio` están en `packages/domain/src/eventos.ts`. El núcleo registra las transiciones del trámite y sus eventos en PostgreSQL mediante outbox. Un relay publica los eventos en Redis Streams, donde los procesan consumidores idempotentes por grupo.
 
 ## Envoltura común
 
@@ -54,4 +54,4 @@ Estos nombres de `PLAN.md` §7 están reservados y todavía no pertenecen a `Eve
 - Atención: `FriccionDetectada`, `DevolucionLlamadaSolicitada`, `DevolucionLlamadaAtendida`.
 - Facturación: `FacturaSolicitada`, `DatosFiscalesCapturados`, `FacturaValidada`, `FacturaRechazada`, `FacturaEmitida`, `FacturaEnviada`.
 
-La futura persistencia debe guardar estado y evento en una transacción mediante outbox; consumidores idempotentes y partición por paciente o hilo. Esta base no implementa esos comportamientos.
+PostgreSQL guarda el estado, el evento y su fila de outbox en la misma transacción. El relay publica en Redis Streams por partición de paciente o hilo, y cada grupo descarta los duplicados con su registro de claves de idempotencia.

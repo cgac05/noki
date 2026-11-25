@@ -1,6 +1,7 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import { crearApiPruebas } from '../../apps/api/src/pruebas.ts';
 import {
+  AdelantarRelojSchema, RespuestaRelojSchema, RUTA_RELOJ_DEMO,
   ComandoRequestSchema, SiguientePreguntaSchema, MensajeBotSchema, CampoFlowSchema,
   SolicitudMensajeWaSchema, RespuestaMensajeWaSchema, SalaSchema, CuerpoErrorSchema,
   RespuestaComandoSchema, TramiteVistaSchema, ESQUEMAS_EVENTOS_SOCKET, EVENTOS_CLIENTE_SOCKET, ESQUEMAS_EVENTOS_CLIENTE_SOCKET, type ComandoRequest, type NombreEventoSocket,
@@ -10,7 +11,7 @@ const id = '019b0000-0000-7000-8000-000000000001';
 const boton = { id: 'continuar', titulo: 'Continuar', payload: 'token-firmado' };
 
 describe('comandos de clínica en el adaptador HTTP', () => {
-  it('responde que la operación no está disponible sin modificar el trámite', async () => {
+  it('rechaza cerrar una atención sin llegada y conserva el trámite', async () => {
     const { app, ids, tramites } = crearApiPruebas();
     const enviar = (payload: object) => app.inject({
       method: 'POST', url: '/api/comandos', headers: { 'idempotency-key': ids.nuevo() }, payload,
@@ -26,11 +27,6 @@ describe('comandos de clínica en el adaptador HTTP', () => {
       expect(antes.statusCode).toBe(200);
       const eventosAntes = tramites.eventos().length;
       const clinica = { canal: 'clinica', actor: 'recepcion:demo', tramiteId: tramite.id };
-      const identidad = await enviar({ ...clinica, tipo: 'ComprobarIdentidad', payload: { metodo: 'INE_CLINICA' } });
-      expect(identidad.statusCode).toBe(404);
-      expect(CuerpoErrorSchema.parse(identidad.json()).error).toMatchObject({
-        codigo: 'NO_ENCONTRADO', datos: { entidad: 'operacion', id: tramite.id },
-      });
       const cierre = await enviar({ ...clinica, tipo: 'CerrarAtencion', payload: {} });
       expect(cierre.statusCode).toBe(409);
       expect(CuerpoErrorSchema.parse(cierre.json()).error.codigo).toBe('TRANSICION_INVALIDA');
@@ -42,14 +38,31 @@ describe('comandos de clínica en el adaptador HTTP', () => {
   });
 });
 
+describe('contrato del reloj de demo', () => {
+  it('publica la ruta POST y valida minutos enteros dentro del límite', () => {
+    expect(RUTA_RELOJ_DEMO).toEqual({ metodo: 'POST', ruta: '/api/demo/reloj', soloDemo: true });
+    expect(AdelantarRelojSchema.parse({ adelantarMinutos: 60 })).toEqual({ adelantarMinutos: 60 });
+    expect(AdelantarRelojSchema.safeParse({ adelantarMinutos: 10_080 }).success).toBe(true);
+    for (const adelantarMinutos of [0, 10_081, 1.5]) {
+      expect(AdelantarRelojSchema.safeParse({ adelantarMinutos }).success).toBe(false);
+    }
+  });
+
+  it('valida la hora devuelta en ISO UTC', () => {
+    const ahora = '2026-11-26T16:15:00.000Z';
+    expect(RespuestaRelojSchema.parse({ ahora })).toEqual({ ahora });
+    expect(RespuestaRelojSchema.safeParse({ ahora: 'mañana' }).success).toBe(false);
+  });
+});
+
 describe('contratos de todos los canales', () => {
-  it('valida la identidad comprobada en clínica sin datos de la credencial', () => {
-    const comando = { canal: 'clinica', actor: 'recepcion:demo', tipo: 'ComprobarIdentidad' };
-    const payload = { metodo: 'INE_CLINICA' };
-    expect(ComandoRequestSchema.parse({ ...comando, tramiteId: id, payload })).toEqual({ ...comando, tramiteId: id, payload });
-    expect(ComandoRequestSchema.safeParse({ ...comando, payload }).success).toBe(false);
-    expect(ComandoRequestSchema.safeParse({ ...comando, tramiteId: id, payload: { metodo: 'OTP_SMS' } }).success).toBe(false);
-    expect(ComandoRequestSchema.safeParse({ ...comando, tramiteId: id, payload: { ...payload, folio: '12345678' } }).success).toBe(false);
+  it('rechaza el tipo retirado de comprobación de identidad en clínica', () => {
+    const resultado = ComandoRequestSchema.safeParse({
+      canal: 'clinica', actor: 'recepcion:demo', tipo: 'Comprobar' + 'Identidad',
+      tramiteId: id, payload: { metodo: 'INE_CLINICA' },
+    });
+    expect(resultado.success).toBe(false);
+    if (!resultado.success) expect(resultado.error.issues[0]?.path).toEqual(['tipo']);
   });
 
   it('exige el trámite y un payload vacío para cerrar la atención', () => {

@@ -180,8 +180,7 @@ Body:    { canal, actor, tipo, tramiteId?, hiloId?, payload }
 - `actor`: `paciente | asesor:<id> | recepcion:<id> | sistema`
 - `SolicitarContinuacion` requiere `tramiteId` y `payload: { destino: 'whatsapp' }` para solicitar la continuación por WhatsApp.
 - `IdentificarPaciente` requiere `tramiteId` y un payload discriminado por `paso`. Consulta los pasos en [docs/contratos.md](docs/contratos.md). `AsignarPaciente` por ID es exclusivo del personal interno y `sistema`.
-- `ComprobarIdentidad` requiere `tramiteId` y `payload: { metodo: 'INE_CLINICA' }`. Recepción confirma la revisión de la INE sin enviar datos de la credencial.
-- `CerrarAtencion` requiere `tramiteId` y `payload: {}`. Cerrar la atención de la primera cita avanza la fila.
+- `CerrarAtencion` requiere `tramiteId` y `payload: {}`. Recepción puede cerrar cualquier cita en `EN_CLINICA` y avanzan los turnos posteriores.
 - El **token de contexto** (JWS con jose) lleva `pacienteId`, `nivel`, `canal` y `exp`.
 
 ### Consultas
@@ -195,7 +194,7 @@ Body:    { canal, actor, tipo, tramiteId?, hiloId?, payload }
 - `GET /api/pacientes/:pacienteId/citas`
 - `GET /api/sedes/:sedeId/llegadas`
 - `GET /api/admin/kpis`
-- `GET /api/admin/alertas` — contrato para hasta 50 alertas de seguridad sin datos personales. La ruta queda pendiente del cambio del núcleo.
+- `GET /api/admin/alertas` — devuelve hasta 50 alertas de seguridad sin datos personales.
 - `GET /api/demo/bandeja` — solo demo.
 - `GET /api/demo/contexto` — solo demo. Devuelve `hiloId`, `pacienteId` y `sedeId` nullables. La API debe responder 404 fuera de `DEMO_MODE=true`.
 
@@ -203,12 +202,16 @@ Pendientes de sus cambios, fuera de esta tabla por ahora: `GET /api/admin/embudo
 
 Las lecturas contienen solo datos; el canal arma los comandos copiando los IDs del dato elegido y el token del QR de la cita. La definición del contrato no implementa los endpoints. Estas consultas todavía no tienen autenticación y solo se usan en la demo hasta el cambio de seguridad.
 
+### Reloj de demo
+
+`POST /api/demo/reloj` solo existe con `DEMO_MODE=true`. Recibe `{ adelantarMinutos }` (entero de 1 a 10080) y devuelve `{ ahora }` en ISO 8601 UTC. Usa `RUTA_RELOJ_DEMO` y los esquemas de `@noki/contracts`.
+
 ### Simulador de WhatsApp
 `POST /api/canales/wa/mensajes` con `{ waId, texto?, payloadBoton?, flowResponse? }`. Es el **mismo contrato** que tendría el adaptador del webhook real de Meta; el adaptador traduce ambos a comandos.
 
 ### Eventos (Redis Streams)
 - Streams particionados: `eventos:{n}` con `n = hash(pacienteId ?? hiloId) % 8`. Así se conserva el orden por paciente.
-- Un grupo de consumidores por tipo de consumidor: `proyecciones`, `notificador`, `huecos`, `recordatorios`, `tiempo-real`.
+- Un grupo de consumidores por tipo de consumidor: `proyecciones`, `notificador`, `huecos`, `recordatorios`, `tiempo-real`, `temporizadores`.
 - **Todo consumidor es idempotente**: registra el `idempotency_key` procesado y descarta duplicados.
 - Tras N fallos → `eventos:fallidos` (visible en `/admin`).
 
@@ -216,7 +219,7 @@ Las lecturas contienen solo datos; el canal arma los comandos copiando los IDs d
 Salas: `tramite:<id>`, `hilo:<id>`, `paciente:<id>`, `sede:<id>`, `admin`. El cliente usa `sala:unirse` y `sala:salir` de `EVENTOS_CLIENTE_SOCKET` con un dato validado por `SalaSchema`. Al tablero se emiten métricas agregadas; el detalle solo cuando se abre un hilo.
 
 ### Trabajos diferidos (BullMQ)
-`job_id` determinista: `${tipo}:${tramiteId}` (ej. `PREPARACION:0193…`). Así se pueden cancelar o reprogramar al cambiar la cita.
+El `job_id` lógico es `${tipo}:${tramiteId}` (ej. `HOLD:0193…`). BullMQ guarda el `jobId` físico `${tipo}-${tramiteId}` porque sus IDs propios admiten el guion. El identificador determinista permite cancelar o reprogramar el trabajo.
 
 ---
 

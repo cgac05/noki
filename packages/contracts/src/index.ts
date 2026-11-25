@@ -6,3 +6,4 @@ export * from './whatsapp.ts';
 export * from './tiempoReal.ts';
 export * from './errores.ts';
 export * from './consultas.ts';
+export * from './demo.ts';

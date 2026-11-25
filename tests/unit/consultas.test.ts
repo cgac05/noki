@@ -128,7 +128,7 @@ describe('Tabla compartida de rutas GET', () => {
 
   it('publica las alertas de seguridad con un máximo de 50 elementos', () => {
     const ruta = RUTAS_CONSULTAS.alertasSeguridad;
-    expect(ruta.metodo).toBe('GET');
+    for (const consulta of Object.values(RUTAS_CONSULTAS)) expect(consulta).not.toHaveProperty('metodo');
     expect(rutaConsulta('alertasSeguridad', {})).toBe('/api/admin/alertas');
     expect(ruta).not.toHaveProperty('soloDemo', true);
     expect(ruta.respuesta.parse(Array.from({ length: 50 }, () => alerta))).toHaveLength(50);

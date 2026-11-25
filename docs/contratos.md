@@ -22,10 +22,7 @@ Canales: `web | whatsapp | app | callcenter | clinica`. Estados, casillas y tipo
 | ConfirmarCita | `{ reservaId }` |
 | CancelarCita | `{ motivo? }`, hasta 200 caracteres |
 | RegistrarLlegada | `{ token }`, nunca el folio del QR en claro |
-| ComprobarIdentidad | `{ metodo: 'INE_CLINICA' }` sin campos adicionales. Requiere `tramiteId`. Recepción confirma que revisó la INE. |
-| CerrarAtencion | `{}`. Requiere `tramiteId`. Cerrar la atención de la primera cita avanza la fila. |
-
-Hasta que el núcleo implemente `ComprobarIdentidad` y `CerrarAtencion`, el adaptador devuelve 404 con `NO_ENCONTRADO` para la entidad `operacion`.
+| CerrarAtencion | `{}`. Requiere `tramiteId`. Recepción puede cerrar cualquier cita en `EN_CLINICA` y avanzan los turnos posteriores. |
 
 `IdentificarPacienteSchema` acepta estos pasos:
 
@@ -60,7 +57,7 @@ No declaran fecha de nacimiento, correo del paciente, RFC, PIN ni CURP. El telé
 
 El QR contiene el token firmado de un solo uso que debe generar y consumir el núcleo (`PLAN.md` §8), nunca el folio. El esquema rechaza un `tokenQr` vacío o de 8–9 dígitos; no comprueba firmas ni sustituye al cambio de seguridad. Los tokens del mock son ficticios.
 
-`RUTAS_CONSULTAS` asocia cada nombre con la plantilla, el esquema de parámetros y el esquema de respuesta. Todas las entradas representan **GET**. Los tipos `NombreConsulta`, `ParametrosConsulta<N>` y `RespuestaConsulta<N>` se derivan de la tabla. `rutaConsulta(nombre, parametros)` valida antes de sustituir la plantilla y lanza un error Zod si los parámetros son inválidos.
+`RUTAS_CONSULTAS` asocia cada nombre con la plantilla, el esquema de parámetros y el esquema de respuesta. Todas las entradas representan **GET**. El método es uniforme y no se repite por entrada. Los tipos `NombreConsulta`, `ParametrosConsulta<N>` y `RespuestaConsulta<N>` se derivan de la tabla. `rutaConsulta(nombre, parametros)` valida antes de sustituir la plantilla y lanza un error Zod si los parámetros son inválidos.
 
 | Nombre | Ruta GET | Parámetros | Respuesta |
 |---|---|---|---|
@@ -76,7 +73,7 @@ El QR contiene el token firmado de un solo uso que debe generar y consumir el n�
 | `bandeja` | `/api/demo/bandeja` | ninguno | `MensajeBandeja[]`, `soloDemo: true` |
 | `contextoDemo` | `/api/demo/contexto` | ninguno | `ContextoDemo`, `soloDemo: true` |
 
-`alertasSeguridad` omite datos personales y el método de verificación. El intento que provoca el bloqueo lleva `bloqueado: true`. La consulta no está marcada como `soloDemo` y devuelve 404 hasta que el núcleo registre la ruta.
+`alertasSeguridad` omite datos personales y el método de verificación. El intento que provoca el bloqueo lleva `bloqueado: true`. `GET /api/admin/alertas` devuelve los 50 intentos más recientes como máximo, del más reciente al más antiguo.
 
 `contextoDemo` devuelve `{ hiloId, pacienteId, sedeId }` del último hilo con cita confirmada. Cada campo es UUID v7 o `null`. El servidor del cambio `api-comandos` debe responder 404 cuando `DEMO_MODE` es distinto de `true`.
 
@@ -85,6 +82,12 @@ Según el spec `consultas-api` de `api-comandos`, `metricas.kpis` contiene `camb
 Todos los IDs de ruta son UUID v7. Se conservan las rutas anteriores, con nombres explícitos de parámetros en sus plantillas. `GET /api/admin/embudo` y `GET /api/admin/huecos` siguen pendientes de sus cambios y no pertenecen aún a la tabla.
 
 Este contrato no implementa endpoints GET ni autenticación. Las consultas exponen datos personales (nombre de pila, contacto enmascarado, citas con token, llegadas y bandeja) y **solo pueden usarse en la demo** hasta cerrar el cambio de seguridad. La web valida las respuestas en ambos modos con esta tabla; en real, las consultas marcadas `soloDemo` requieren `VITE_DEMO=true`. Historial de WhatsApp y cotización web independiente siguen siendo lecturas exclusivas de demo.
+
+## demo.ts
+
+`RUTA_RELOJ_DEMO` define `POST /api/demo/reloj` como ruta disponible solo con `DEMO_MODE=true`. `AdelantarRelojSchema` valida `{ adelantarMinutos }` como un entero de 1 a 10080. `RespuestaRelojSchema` valida la respuesta 200 con `{ ahora }` en ISO 8601 UTC.
+
+Un cuerpo inválido devuelve 400 con `{ codigo: 'CUERPO_INVALIDO' }` y conserva la hora. La adopción de `CuerpoErrorSchema` para ese 400 queda pendiente. Fuera del modo demo, la ruta responde 404.
 
 ## siguientePregunta.ts
 
