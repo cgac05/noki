@@ -70,20 +70,25 @@ export type IdentificarPacientePayload =
 export class CasosTramite {
   constructor(private readonly puertos: Dependencias) {}
 
-  async iniciar(tipo: TipoTramite, valorContacto: string, comando: ContextoComando): Promise<ResultadoComando> {
+  async iniciar(tipo: TipoTramite, valorContacto: string, comando: ContextoComando, nuevo = false): Promise<ResultadoComando> {
     this.puertos.politica.exigir('agendar', comando);
     this.puertos.registro.obtener(tipo);
     const contexto = this.contexto(comando);
     const contacto = await this.contacto(valorContacto, contexto);
+    let pacienteAnterior: PacienteId | undefined;
     if (contexto.canal === 'callcenter' && contexto.actor.startsWith('asesor:') && /^\+?\d{10,15}$/u.test(valorContacto)) {
-      const enProceso = await (await this.tramitesEnProcesoPorTelefono(valorContacto, tipo))[0];
-      if (enProceso) {
+      const [enProceso] = await this.tramitesEnProcesoPorTelefono(valorContacto, tipo);
+      pacienteAnterior = enProceso?.pacienteId;
+      if (enProceso && !nuevo) {
         return this.retomarEnProceso(enProceso, contexto, 'LLAMADA_CC');
       }
     }
     const hilo = await this.puertos.hilos.obtener(contacto.hiloId);
     const tramite = Tramite.iniciar(this.puertos.ids.nuevo() as TramiteId, contacto.hiloId,
       tipo, this.puertos.registro, contexto);
+    if (pacienteAnterior) {
+      tramite.asignarPaciente(pacienteAnterior, { ...contexto, idempotencyKey: contexto.idempotencyKey + ':2' });
+    }
     const resultado = await this.guardar(tramite, contexto);
     if (hilo && hilo.ultimoCanal !== contexto.canal) {
       hilo.atenderEn(contexto.canal);

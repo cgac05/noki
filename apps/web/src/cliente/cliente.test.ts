@@ -13,7 +13,7 @@ import { ClienteReal } from './real/ClienteReal.ts';
 import type { DatosEventoSocket } from '@noki/contracts';
 
 const consultasGuion = (Object.keys(RUTAS_CONSULTAS) as Array<keyof typeof RUTAS_CONSULTAS>)
-  .filter(nombre => nombre !== 'sesionWebDemo');
+  .filter(nombre => nombre !== 'sesionWebDemo' && nombre !== 'fechaNacimientoLlamada');
 
 const iniciar = { canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR', contacto: '5210000000001' } } as const;
 

@@ -102,6 +102,24 @@ async function cotizarWa(casos: CasosTramite, numero: string) {
   return casos.seleccionarSede(tramite.id, sedeId, wa);
 }
 
+it.each([true, false])('abre otra cita con paciente heredado: %s', async conPaciente => {
+  const { casos, contactos, tramites } = escenario();
+  const numero = '3119990004';
+  const { tramite } = await cotizarWa(casos, numero);
+  if (conPaciente) await casos.asignarPaciente(tramite.id, pacienteId, { ...wa, actor: 'sistema' });
+  const anterior = await tramites.obtener(tramite.id);
+  const nueva = await casos.iniciar('AGENDAR', numero, cc, true);
+  expect(nueva.tramite.id).not.toBe(tramite.id);
+  expect(nueva.tramite.hiloId).toBe((await contactos.buscar('callcenter', numero))?.hiloId);
+  expect(nueva.tramite.pacienteId).toBe(anterior?.pacienteId);
+  expect(nueva.eventos.map(({ tipo }) => tipo)).toEqual(conPaciente
+    ? ['TramiteIniciado', 'PacienteAsignado'] : ['TramiteIniciado']);
+  expect(nueva.siguientePregunta).toMatchObject({ casilla: conPaciente ? 'servicio' : 'paciente' });
+  expect(await tramites.obtener(tramite.id)).toMatchObject({
+    estado: anterior?.estado, version: anterior?.version,
+  });
+});
+
 it.each(['0000000081', '5210000000081'])('retoma la cotización de WhatsApp del número de prueba %s', async numero => {
   const { casos, hilos, tramites } = escenario();
   const cotizacion = await cotizarWa(casos, numero);

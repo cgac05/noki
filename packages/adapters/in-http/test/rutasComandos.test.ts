@@ -87,7 +87,7 @@ describe('traducción y errores de comandos', () => {
     try {
       const inicio = await enviar({ ...base, tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR', contacto: '0000000001' } });
       expect(RespuestaComandoSchema.parse(inicio.json()).tramite.estado).toBe('COTIZADO');
-      expect(casos.iniciar).toHaveBeenCalledWith('AGENDAR', '0000000001', expect.objectContaining(base));
+      expect(casos.iniciar).toHaveBeenCalledWith('AGENDAR', '0000000001', expect.objectContaining(base), undefined);
       const servicio = await enviar({ ...base, tipo: 'SeleccionarServicio', tramiteId, payload: { servicioId: sedeId } });
       expect(RespuestaComandoSchema.parse(servicio.json()).tramite.estado).toBe('COTIZADO');
       expect(casos.seleccionarServicio).toHaveBeenCalledWith(tramiteId, sedeId, expect.objectContaining(base));

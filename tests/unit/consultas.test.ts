@@ -23,6 +23,17 @@ const hueco = {
 };
 
 describe('Modelos compartidos de consultas', () => {
+  it('valida la fecha de la llamada en una consulta de demo aparte', () => {
+    const ruta = RUTAS_CONSULTAS.fechaNacimientoLlamada;
+    expect(ruta.soloDemo).toBe(true);
+    expect(rutaConsulta('fechaNacimientoLlamada', { hiloId: ids.hilo }))
+      .toBe('/api/demo/callcenter/hilos/' + ids.hilo + '/fecha-nacimiento');
+    expect(ruta.respuesta.parse({ fechaNacimiento: '1990-02-28' })).toEqual({ fechaNacimiento: '1990-02-28' });
+    expect(ruta.respuesta.parse({ fechaNacimiento: null })).toEqual({ fechaNacimiento: null });
+    expect(ruta.respuesta.safeParse({ fechaNacimiento: '28/02/1990' }).success).toBe(false);
+    expect(FichaHiloSchema.parse({ ...ficha, fechaNacimiento: '1990-02-28' })).toEqual(ficha);
+  });
+
   it.each(['12345678', '123456789'])('Token del QR no es el folio: rechaza %s', tokenQr => {
     expect(CitaVistaSchema.safeParse({ ...cita, tokenQr }).success).toBe(false);
   });
@@ -135,8 +146,8 @@ describe('Tabla compartida de rutas GET', () => {
     expect(rutaConsulta('metricas', {})).toBe('/api/admin/kpis');
   });
 
-  it('publica las trece rutas y sus esquemas de respuesta sin acciones', () => {
-    expect(Object.keys(RUTAS_CONSULTAS)).toHaveLength(13);
+  it('publica las catorce rutas y sus esquemas de respuesta sin acciones', () => {
+    expect(Object.keys(RUTAS_CONSULTAS)).toHaveLength(14);
     expect(rutaConsulta('catalogo', {})).toBe('/api/catalogo');
     expect(rutaConsulta('sesionWebDemo', { telefono: '1000000001' })).toBe('/api/demo/sesion-web/1000000001');
     expect(RUTAS_CONSULTAS.sesionWebDemo.soloDemo).toBe(true);

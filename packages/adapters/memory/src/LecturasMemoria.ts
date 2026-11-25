@@ -1,6 +1,6 @@
 import { formatInTimeZone } from 'date-fns-tz';
 import type { AlertaSeguridadLeida, CitaLeida, DatosEmisionToken, LlegadaLeida, EventoLeido, GeneradorId, HuecoLeido, LecturasPort, OfertaLeida, RegistroTokensUsados } from '@noki/application';
-import { ESTADOS_TRAMITE, enmascararNombre, normalizarTelefono, type HiloId, type PacienteId, type SedeId, type Tramite, type TramiteId } from '@noki/domain';
+import { ESTADOS_TRAMITE, enmascararNombre, normalizarTelefono, type HiloId, type PacienteId, type SedeId, type Tramite, type TramiteId, type EventoDominio } from '@noki/domain';
 import type { AgendaMemoria } from './AgendaMemoria.ts';
 import type { ContactosMemoria } from './ContactosMemoria.ts';
 import type { EventosSinTramiteMemoria } from './EventosSinTramiteMemoria.ts';
@@ -94,15 +94,29 @@ export class LecturasMemoria implements LecturasPort {
 
   async zonaSede(id: SedeId) { return this.tramites.zonaSede(id) ?? null; }
 
+  private porActividad(descendentes: readonly Pick<EventoDominio, 'tramiteId' | 'ts'>[]) {
+    return (a: Tramite, b: Tramite) =>
+      (descendentes.find(e => e.tramiteId === b.id)?.ts ?? '').localeCompare(
+        descendentes.find(e => e.tramiteId === a.id)?.ts ?? '') || b.id.localeCompare(a.id);
+  }
+
+  private async ultimoTramiteAbierto(hiloId: HiloId, descendentes: readonly Pick<EventoDominio, 'tramiteId' | 'ts'>[]) {
+    return (await this.tramites.abiertosPorHilo(hiloId)).sort(this.porActividad(descendentes))[0];
+  }
+
+  async fechaNacimientoLlamada(hiloId: HiloId): Promise<string | null> {
+    const tramite = await this.ultimoTramiteAbierto(hiloId, this.eventos().reverse());
+    if (!tramite?.pacienteId) return null;
+    return (await this.pacientes.datosElegibilidad(tramite.pacienteId))?.fechaNac ?? null;
+  }
+
   async fichaHilo(hiloId: HiloId) {
     const valor = this.contactos.valorPorHilo(hiloId);
     if (valor === null) return null;
     const descendentes = this.eventos().reverse();
-    const porActividad = (a: Tramite, b: Tramite) =>
-      (descendentes.find(e => e.tramiteId === b.id)?.ts ?? '').localeCompare(
-        descendentes.find(e => e.tramiteId === a.id)?.ts ?? '') || b.id.localeCompare(a.id);
+    const porActividad = this.porActividad(descendentes);
     const tramites = this.tramites.todos().filter(t => t.hiloId === hiloId).sort(porActividad);
-    const reciente = (await this.tramites.abiertosPorHilo(hiloId)).sort(porActividad)[0];
+    const reciente = await this.ultimoTramiteAbierto(hiloId, descendentes);
     const nombre = reciente?.pacienteId ? this.pacientes.nombres(reciente.pacienteId)?.nombre : undefined;
     const telefono = /^\+?[0-9 ()-]+$/u.test(valor) ? normalizarTelefono(valor) : undefined;
     const oferta = this.ofertas.find(o => o.sedeId === reciente?.sedeId && o.servicioId === reciente.servicioId);

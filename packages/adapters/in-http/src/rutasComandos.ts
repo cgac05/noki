@@ -42,7 +42,7 @@ async function traducir(comando: ComandoRequest, contexto: ContextoComando,
   deps: DependenciasComandos, contactoIdentificacion?: string): Promise<ResultadoComando> {
   const { casos, lecturas, ids } = deps;
   if (comando.tipo === 'IniciarTramite') {
-    return casos.iniciar(comando.payload.tipoTramite, comando.payload.contacto ?? 'anonimo:' + ids.nuevo(), contexto);
+    return casos.iniciar(comando.payload.tipoTramite, comando.payload.contacto ?? 'anonimo:' + ids.nuevo(), contexto, comando.payload.nuevo);
   }
   if (comando.tipo === 'RegistrarLlegada') {
     return casos.registrarLlegada(comando.payload.token, contexto, comando.tramiteId as TramiteId | undefined);

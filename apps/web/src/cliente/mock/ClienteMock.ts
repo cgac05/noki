@@ -28,6 +28,8 @@ const citaBeto: CitaVista = {
 export class ClienteMock implements ClienteApi {
   readonly modo = 'mock';
   private indice = 0;
+  private readonly hilosLlamada = new Map<string, string>();
+  private readonly citasPorClave = new Map<string, ReturnType<ClienteMock['comandoWeb']>>();
   private indiceWeb = 0;
   private secuenciaWeb = 0;
   private readonly tramitesWeb = new Map<string, TramiteWeb>();
@@ -59,7 +61,7 @@ export class ClienteMock implements ClienteApi {
       elegirGuion: id => { this.guionActivo = validar(IdGuionSchema, id); this.demo.reiniciar(); },
       revision: () => this.revision,
       paso: () => this.actual().paso,
-      reiniciar: () => { this.revision++; this.indice = 0; this.indiceWeb = 0; this.tramitesWeb.clear(); this.telefonosWeb.clear(); this.codigosWeb.clear(); this.indiceComando = 0; this.ayuda = []; this.avisar(); },
+      reiniciar: () => { this.revision++; this.indice = 0; this.indiceWeb = 0; this.tramitesWeb.clear(); this.hilosLlamada.clear(); this.citasPorClave.clear(); this.telefonosWeb.clear(); this.codigosWeb.clear(); this.indiceComando = 0; this.ayuda = []; this.avisar(); },
       alCambiar: (recibir: () => void) => { this.cambios.add(recibir); return () => { this.cambios.delete(recibir); }; },
     };
   }
@@ -70,6 +72,26 @@ export class ClienteMock implements ClienteApi {
     const revision = this.revision;
     await this.esperar();
     this.comprobarRevision(revision);
+    if (entrada.canal === 'callcenter' && entrada.actor.startsWith('asesor:')
+        && entrada.tipo === 'IniciarTramite' && entrada.payload.contacto) {
+      const { contacto, nuevo } = entrada.payload;
+      const ficha = this.actual().lecturas.fichaHilo;
+      const previo: TramiteWeb | undefined = ficha.tramites.find(t => t.estado === 'COTIZADO'
+        && t.tipo === entrada.payload.tipoTramite && ficha.telefonoEnmascarado === '\u2022\u2022\u2022\u2022 ' + contacto.slice(-4)
+        && contacto.slice(-10) === CONTACTO_DEMO.slice(-10));
+      if (nuevo) {
+        const clave = opciones?.idempotencyKey;
+        const repetida = clave ? this.citasPorClave.get(clave) : undefined;
+        if (repetida) return repetida;
+        const respuesta = this.comandoWeb(entrada, previo?.pacienteId);
+        this.hilosLlamada.set(respuesta.tramite.hiloId, respuesta.tramite.id);
+        if (clave) this.citasPorClave.set(clave, respuesta);
+        return respuesta;
+      }
+      if (previo) return { ...this.actual().respuesta, tramite: previo, eventos: [] };
+    }
+    if (entrada.canal === 'callcenter' && entrada.tramiteId
+        && [...this.hilosLlamada.values()].includes(entrada.tramiteId)) return this.comandoWeb(entrada);
     if (entrada.canal === 'web' && this.sesionWebDemoHabilitada) return this.comandoWeb(entrada);
     if (entrada.canal === 'web') {
       const esperado = COMANDOS_WEB_ESPERADOS[this.indiceWeb];
@@ -156,6 +178,25 @@ export class ClienteMock implements ClienteApi {
       const delGuion = pacienteId === this.demo.ids.pacienteId ? lecturas.tramitesAbiertos : [];
       return validarConsulta(nombre, [...delGuion, ...[...this.tramitesWeb.values()].filter(t => t.pacienteId === pacienteId)]);
     }
+    if (nombre === 'fechaNacimientoLlamada') {
+      const { hiloId } = validar(RUTAS_CONSULTAS.fechaNacimientoLlamada.parametros, parametros);
+      const id = this.hilosLlamada.get(hiloId);
+      const tramite: TramiteWeb | undefined = id ? this.tramitesWeb.get(id)
+        : lecturas.fichaHilo.hiloId === hiloId ? lecturas.fichaHilo.tramites[0] : undefined;
+      return validarConsulta(nombre, { fechaNacimiento: tramite?.pacienteId === IDS.paciente ? '1990-01-01' : null });
+    }
+    if (nombre === 'fichaHilo') {
+      const { hiloId } = validar(RUTAS_CONSULTAS.fichaHilo.parametros, parametros);
+      const id = this.hilosLlamada.get(hiloId);
+      const tramite = id && this.tramitesWeb.get(id);
+      if (tramite) return validarConsulta(nombre, {
+        hiloId, nombrePila: tramite.pacienteId ? lecturas.fichaHilo.nombrePila : null,
+        telefonoEnmascarado: '\u2022\u2022\u2022\u2022 ' + this.telefonosWeb.get(tramite.id)?.slice(-4),
+        tramites: [tramite], lineaTiempo: [], soloLectura: false,
+        oferta: lecturas.catalogo.find(o => o.servicioId === tramite.servicioId && o.sedeId === tramite.sedeId) ?? null,
+        codigoContinuacion: this.codigosWeb.has(hiloId) ? 'CONTINUAR ' + IDS.tokenContinuacion : null,
+      });
+    }
     if (this.sesionWebDemoHabilitada && nombre === 'fichaHilo') {
       const { hiloId } = validar(RUTAS_CONSULTAS.fichaHilo.parametros, parametros);
       if (this.codigosWeb.has(hiloId)) return validarConsulta(nombre, {
@@ -180,14 +221,14 @@ export class ClienteMock implements ClienteApi {
 
   unirse(sala: string): () => void { void sala; return () => {}; }
 
-  private comandoWeb(comando: ComandoRequest) {
+  private comandoWeb(comando: ComandoRequest, pacienteId?: string) {
     const previo = comando.tramiteId && (this.tramitesWeb.get(comando.tramiteId)
       ?? this.actual().lecturas.tramitesAbiertos.find(t => t.id === comando.tramiteId));
     let tramite: TramiteWeb;
     if (comando.tipo === 'IniciarTramite') {
       const sufijo = (++this.secuenciaWeb).toString().padStart(12, '0');
       tramite = { id: '019aff30-0000-7000-8000-' + sufijo, hiloId: '019aff30-0001-7000-8000-' + sufijo,
-        tipo: comando.payload.tipoTramite, estado: 'BORRADOR', version: 1 };
+        tipo: comando.payload.tipoTramite, estado: 'BORRADOR', version: 1, ...(pacienteId ? { pacienteId } : {}) };
       if (comando.payload.contacto) this.telefonosWeb.set(tramite.id, comando.payload.contacto.slice(-10));
     } else {
       if (!previo) throw new ErrorCliente('API', 'No encontramos el trámite.', 'NO_ENCONTRADO');
@@ -205,7 +246,12 @@ export class ClienteMock implements ClienteApi {
     }
     if (!previo || this.tramitesWeb.has(tramite.id)) this.tramitesWeb.set(tramite.id, tramite);
     this.avisar();
-    return validar(RespuestaComandoSchema, { tramite, siguientePregunta: { tipo: 'COMPLETO' }, eventos: [] });
+    const eventos = comando.canal === 'callcenter' && comando.tipo === 'IniciarTramite'
+      ? [
+          { id: tramite.id, tipo: 'TramiteIniciado', canal: 'callcenter', ts: '2026-11-24T15:00:00.000Z' },
+          ...(pacienteId ? [{ id: tramite.hiloId, tipo: 'PacienteAsignado', canal: 'callcenter', ts: '2026-11-24T15:00:00.000Z' }] : []),
+        ] : [];
+    return validar(RespuestaComandoSchema, { tramite, siguientePregunta: { tipo: 'COMPLETO' }, eventos });
   }
 
   private actual() { return this.guiones[this.guionActivo].pasos[this.indice]!; }

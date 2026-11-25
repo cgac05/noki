@@ -11,6 +11,14 @@ const id = '019b0000-0000-7000-8000-000000000001';
 const boton = { id: 'continuar', titulo: 'Continuar', payload: 'token-firmado' };
 
 describe('comandos de clínica en el adaptador HTTP', () => {
+  it('acepta nuevo booleano al iniciar y rechaza otros valores', () => {
+    const comando = { canal: 'callcenter', actor: 'asesor:demo', tipo: 'IniciarTramite' };
+    const payload = { tipoTramite: 'AGENDAR', contacto: '3112111821' };
+    expect(ComandoRequestSchema.parse({ ...comando, payload: { ...payload, nuevo: true } }).payload)
+      .toEqual({ ...payload, nuevo: true });
+    expect(ComandoRequestSchema.safeParse({ ...comando, payload: { ...payload, nuevo: 'si' } }).success).toBe(false);
+  });
+
   it('rechaza cerrar una atención sin llegada y conserva el trámite', async () => {
     const { app, ids, tramites } = crearApiPruebas();
     const enviar = (payload: object) => app.inject({

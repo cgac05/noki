@@ -63,6 +63,9 @@ export const rutasConsultas: FastifyPluginAsync<DependenciasConsultas> = async (
   });
   registrar('tramitesAbiertos', async ({ pacienteId }) => (await lecturas.tramitesAbiertos(pacienteId as PacienteId)).map(vistaTramite));
   registrar('catalogo', () => lecturas.catalogo());
+  registrar('fechaNacimientoLlamada', async ({ hiloId }) => ({
+    fechaNacimiento: await lecturas.fechaNacimientoLlamada(hiloId as HiloId),
+  }));
   registrar('fichaHilo', async ({ hiloId }) => {
     const ficha = await lecturas.fichaHilo(hiloId as HiloId);
     if (!ficha) throw new NoEncontrado('hilo', hiloId);

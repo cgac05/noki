@@ -58,6 +58,15 @@ export class LecturasComandosPostgres implements LecturasPort {
     return rows[0]?.zona ?? null;
   }
 
+  async fechaNacimientoLlamada(id: HiloId): Promise<string | null> {
+    const { rows: [ultimo] } = await sql<{ fechaNacimiento: string | null }>`
+      SELECT to_char(p.fecha_nac, 'YYYY-MM-DD') AS "fechaNacimiento"
+      FROM tramite t LEFT JOIN paciente p ON p.id = t.paciente_id
+      WHERE t.hilo_id = ${id} AND t.estado NOT IN ('ATENDIDA','CANCELADA','NO_ASISTIO','EXPIRADO')
+      ORDER BY t.ultima_actividad DESC, t.id DESC LIMIT 1`.execute(this.db);
+    return ultimo?.fechaNacimiento ?? null;
+  }
+
   async fichaHilo(id: HiloId): Promise<FichaLeida | null> {
     const contacto = await this.contactoPorHilo(id);
     if (contacto === null) return null;

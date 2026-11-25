@@ -20,7 +20,7 @@ it('retoma por HTTP la cotización que WhatsApp guardó en Postgres', async () =
   }, () => {});
   const app = crearApi({
     databaseUrl, redisUrl: process.env['REDIS_URL'] ?? '', logger: false,
-    comandos: deps, whatsapp: deps.whatsapp,
+    comandos: deps, consultas: deps.consultas, whatsapp: deps.whatsapp,
   });
   const agenda = vi.spyOn(globalThis, 'fetch').mockImplementation(async entrada => {
     if (!(entrada instanceof URL) || entrada.origin !== 'https://agenda.example'
@@ -71,6 +71,36 @@ it('retoma por HTTP la cotización que WhatsApp guardó en Postgres', async () =
       "SELECT payload FROM evento WHERE tramite_id = $1 AND tipo = 'CanalCambiado'", [origen.id],
     );
     expect(eventos).toEqual([{ payload: { de: 'whatsapp', a: 'callcenter', metodo: 'LLAMADA_CC' } }]);
+    const { rows: [paciente] } = await pool.query<{ id: string; fecha: string }>(
+      "SELECT id, fecha_nac::text AS fecha FROM paciente WHERE nombre = 'Ana'",
+    );
+    if (!paciente) throw new Error('Falta la paciente de demo.');
+    const asignacion = await enviar('/api/comandos', {
+      tipo: 'AsignarPaciente', canal: 'callcenter', actor: 'asesor:demo', tramiteId: origen.id,
+      payload: { pacienteId: paciente.id },
+    });
+    expect(asignacion.statusCode).toBe(200);
+    const anterior = RespuestaComandoSchema.parse(asignacion.json()).tramite;
+    const nueva = await enviar('/api/comandos', {
+      tipo: 'IniciarTramite', canal: 'callcenter', actor: 'asesor:demo',
+      payload: { tipoTramite: 'AGENDAR', contacto: waId.slice(-10), nuevo: true },
+    });
+    expect(nueva.statusCode).toBe(200);
+    const cita = RespuestaComandoSchema.parse(nueva.json());
+    expect(cita.tramite.id).not.toBe(origen.id);
+    expect(cita.tramite.hiloId).not.toBe(origen.hilo_id);
+    expect(cita.eventos.map(({ tipo }) => tipo)).toEqual(['TramiteIniciado', 'PacienteAsignado']);
+    expect(cita.siguientePregunta).toMatchObject({ casilla: 'servicio' });
+    const { rows } = await pool.query(
+      'SELECT id, paciente_id, version FROM tramite WHERE id IN ($1, $2)', [origen.id, cita.tramite.id],
+    );
+    expect(rows).toEqual(expect.arrayContaining([
+      { id: origen.id, paciente_id: paciente.id, version: anterior.version },
+      { id: cita.tramite.id, paciente_id: paciente.id, version: cita.tramite.version },
+    ]));
+    const fecha = await app.inject('/api/demo/callcenter/hilos/' + cita.tramite.hiloId + '/fecha-nacimiento');
+    expect(fecha.statusCode).toBe(200);
+    expect(fecha.json()).toEqual({ fechaNacimiento: paciente.fecha });
   } finally {
     agenda.mockRestore();
     await app.close();

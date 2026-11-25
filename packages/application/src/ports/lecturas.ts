@@ -77,6 +77,7 @@ export interface LecturasPort {
   tramitesAbiertos(id: PacienteId): Promise<Tramite[]>;
   catalogo(): Promise<OfertaLeida[]>;
   zonaSede(id: SedeId): Promise<string | null>;
+  fechaNacimientoLlamada(id: HiloId): Promise<string | null>;
   fichaHilo(id: HiloId): Promise<FichaLeida | null>;
   citasPaciente(id: PacienteId): Promise<CitaLeida[]>;
   llegadasSede(id: SedeId, ts: string): Promise<LlegadaLeida[]>;

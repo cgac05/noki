@@ -81,6 +81,10 @@ export const RUTAS_CONSULTAS = {
   lineaTiempo: { ruta: '/api/hilos/:hiloId/linea-tiempo', parametros: z.object({ hiloId: z.uuidv7() }), respuesta: z.array(EventoVistaSchema) },
   tramitesAbiertos: { ruta: '/api/pacientes/:pacienteId/tramites-abiertos', parametros: z.object({ pacienteId: z.uuidv7() }), respuesta: z.array(TramiteVistaSchema) },
   catalogo: { ruta: '/api/catalogo', parametros: z.object({}), respuesta: z.array(OfertaCatalogoSchema) },
+  fechaNacimientoLlamada: {
+    ruta: '/api/demo/callcenter/hilos/:hiloId/fecha-nacimiento', soloDemo: true,
+    parametros: z.object({ hiloId: z.uuidv7() }), respuesta: z.object({ fechaNacimiento: z.iso.date().nullable() }),
+  },
   fichaHilo: { ruta: '/api/hilos/:hiloId/ficha', parametros: z.object({ hiloId: z.uuidv7() }), respuesta: FichaHiloSchema },
   citasPaciente: { ruta: '/api/pacientes/:pacienteId/citas', parametros: z.object({ pacienteId: z.uuidv7() }), respuesta: z.array(CitaVistaSchema) },
   llegadasSede: { ruta: '/api/sedes/:sedeId/llegadas', parametros: z.object({ sedeId: z.uuidv7() }), respuesta: z.array(LlegadaVistaSchema) },

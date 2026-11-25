@@ -93,3 +93,27 @@ it('lista el trámite de la llamada sin paciente ni eventos y permite continuarl
       .toMatchObject({ a: 'whatsapp', metodo: 'TOKEN_WEB' });
   } finally { await app.close(); }
 });
+
+it.each([true, false])('consulta la fecha de nacimiento de la llamada solo con demo=%s', async demo => {
+  const { app, casos, ids, pacientes } = crearApiPruebas({ demo });
+  const pacienteId = ids.nuevo() as PacienteId;
+  const contexto = {
+    canal: 'callcenter', actor: 'asesor:demo', nivel: 1, vinculado: false,
+    factores: new Set<never>(), correlationId: ids.nuevo(), idempotencyKey: ids.nuevo(),
+  } as const;
+  try {
+    const { tramite } = await casos.iniciar('AGENDAR', '3119990004', contexto);
+    const ruta = '/api/demo/callcenter/hilos/' + tramite.hiloId + '/fecha-nacimiento';
+    if (!demo) {
+      expect((await app.inject(ruta)).statusCode).toBe(404);
+      return;
+    }
+    expect((await app.inject(ruta)).json()).toEqual({ fechaNacimiento: null });
+    await pacientes.registrar(pacienteId, { nombre: 'Ana', apellidoPaterno: 'P', fechaNac: '1990-02-28', sexo: 'F' });
+    await casos.asignarPaciente(tramite.id, pacienteId, { ...contexto, idempotencyKey: ids.nuevo() });
+    expect((await app.inject(ruta)).json()).toEqual({ fechaNacimiento: '1990-02-28' });
+    const ficha = await app.inject('/api/hilos/' + tramite.hiloId + '/ficha');
+    expect(ficha.json()).toMatchObject({ nombrePila: 'Ana' });
+    expect(ficha.json()).not.toHaveProperty('fechaNacimiento');
+  } finally { await app.close(); }
+});

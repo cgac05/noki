@@ -28,7 +28,7 @@ export const IdentificarPacienteSchema = z.object({
   ]),
 });
 export const ComandoRequestSchema = z.discriminatedUnion('tipo', [
-  z.object({ ...comun, tipo: z.literal('IniciarTramite'), payload: z.object({ tipoTramite: TipoTramiteSchema, contacto: z.string().regex(/^\d{10,15}$/).optional() }) }),
+  z.object({ ...comun, tipo: z.literal('IniciarTramite'), payload: z.object({ tipoTramite: TipoTramiteSchema, contacto: z.string().regex(/^\d{10,15}$/).optional(), nuevo: z.boolean().optional() }) }),
   z.object({
     ...comun, tipo: z.literal('SolicitarContinuacion'), tramiteId: z.uuidv7(),
     payload: z.object({ destino: z.literal('whatsapp') }),

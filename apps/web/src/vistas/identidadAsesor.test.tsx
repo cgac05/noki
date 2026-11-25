@@ -38,6 +38,7 @@ async function abrir(paso: keyof typeof pistas | 'servicio' = 'DESTINATARIO', so
     }
     if (String(url).endsWith('/contexto')) return Response.json({ hiloId: null, pacienteId: null, sedeId: null });
     if (String(url).endsWith('/catalogo')) return Response.json(GUION_FLUJO_A[1]!.lecturas.catalogo);
+    if (String(url).endsWith('/fecha-nacimiento')) return Response.json({ fechaNacimiento: null });
     return Response.json({ ...GUION_FLUJO_A[1]!.lecturas.fichaHilo, soloLectura });
   });
   const cliente = new ClienteReal({ fetch: peticion, demo: true, fabricaSocket: () => new SocketFalso() });

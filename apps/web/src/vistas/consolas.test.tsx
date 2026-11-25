@@ -37,6 +37,73 @@ async function avanzarHasta(cliente: ClienteMock, id: string) {
 }
 
 describe('Call center autorizado', () => {
+  it('exige validar la fecha de nacimiento y la desmarca en la siguiente llamada', async () => {
+    const pasos = GUION_FLUJO_A.map(paso => paso.paso.id === 'COTIZADO' ? {
+      ...paso, lecturas: { ...paso.lecturas, fichaHilo: { ...paso.lecturas.fichaHilo,
+        tramites: paso.lecturas.fichaHilo.tramites.map(tramite => ({ ...tramite, pacienteId: IDS.paciente })),
+      } },
+    } : paso);
+    const original = new ClienteMock();
+    const ids = original.demo.ids;
+    const cliente = new ClienteMock({ latenciaMs: 0, guiones: {
+      flujoA: { pasos, ids }, flujoC: { pasos, ids },
+    } });
+    await avanzarHasta(cliente, 'COTIZADO');
+    const { usuario } = abrir(cliente);
+    const llamar = async () => {
+      await usuario.click(await screen.findByRole('button', { name: 'Volver a nueva llamada' }));
+      await usuario.click(screen.getByRole('button', { name: 'Llamada entrante' }));
+      await screen.findByText('01/01/1990');
+      await screen.findByRole('button', { name: 'Nueva cita' });
+    };
+    await llamar();
+    const casilla = screen.getByRole<HTMLInputElement>('checkbox', { name: 'Validé la fecha de nacimiento con el cliente' });
+    const acciones = ['Continuar con este estudio', 'Nueva cita', 'Completar la cita aquí']
+      .map(name => screen.getByRole<HTMLButtonElement>('button', { name }));
+    expect(acciones.every(boton => boton.disabled)).toBe(true);
+    await usuario.click(casilla);
+    expect(acciones.every(boton => !boton.disabled)).toBe(true);
+    await llamar();
+    expect(screen.getByRole<HTMLInputElement>('checkbox', { name: 'Validé la fecha de nacimiento con el cliente' }).checked).toBe(false);
+  });
+
+  it.each(['Continuar con este estudio', 'Nueva cita'])('permite elegir %s al retomar', async opcion => {
+    const cliente = new ClienteMock({ latenciaMs: 0 });
+    await avanzarHasta(cliente, 'COTIZADO');
+    const enviar = vi.spyOn(cliente, 'enviarComando');
+    const { usuario } = abrir(cliente);
+    await usuario.click(await screen.findByRole('button', { name: 'Volver a nueva llamada' }));
+    await usuario.click(screen.getByRole('button', { name: 'Llamada entrante' }));
+    await screen.findByText('Este número tiene un estudio en proceso: Paquete US mamario + Papanicolaou en Tepic');
+    expect(screen.queryByRole('checkbox', { name: /fecha de nacimiento/i })).toBeNull();
+    const boton = screen.getByRole('button', { name: opcion });
+    await waitFor(() => expect(boton).toHaveProperty('disabled', false));
+    act(() => { fireEvent.click(boton); fireEvent.click(boton); });
+    await waitFor(() => expect(screen.queryByRole('button', { name: opcion })).toBeNull());
+    if (opcion === 'Nueva cita') {
+      expect(enviar.mock.calls).toHaveLength(2);
+      expect(enviar.mock.calls[1]?.[0]).toMatchObject({ tipo: 'IniciarTramite',
+        payload: { contacto: CONTACTO_DEMO, nuevo: true } });
+      await screen.findByText('BORRADOR');
+      expect(screen.queryByRole('button', { name: 'Completar la cita aquí' })).toBeNull();
+      const cotizar = screen.getByRole('button', { name: /^Cotizar Paquete/ });
+      await usuario.click(cotizar);
+      await screen.findByText('COTIZADO');
+      const completar = await screen.findByRole('button', { name: 'Completar la cita aquí' });
+      const tramiteId = (await enviar.mock.results[1]!.value).tramite.id;
+      expect(tramiteId).not.toBe(IDS.tramite);
+      expect(enviar.mock.calls.slice(2).map(([comando]) => [comando.tipo, comando.tramiteId])).toEqual([
+        ['SeleccionarServicio', tramiteId], ['SeleccionarSede', tramiteId],
+      ]);
+      const mensaje = vi.spyOn(cliente, 'enviarMensajeWa');
+      await usuario.click(completar);
+      await waitFor(() => expect(mensaje).toHaveBeenCalledExactlyOnceWith({ waId: CONTACTO_DEMO, texto: 'Hola' }, expect.anything()));
+    } else {
+      expect(enviar.mock.calls).toHaveLength(1);
+      expect(screen.getByText('COTIZADO')).toBeTruthy();
+    }
+  });
+
   it('completa la cita en la ficha usando el ANI de la llamada', async () => {
     const cliente = new ClienteMock({ latenciaMs: 0 });
     const enviarComando = cliente.enviarComando.bind(cliente);
@@ -54,7 +121,9 @@ describe('Call center autorizado', () => {
     await usuario.clear(campo);
     await usuario.type(campo, ani);
     await usuario.click(screen.getByRole('button', { name: 'Llamada entrante' }));
-    await usuario.click(await screen.findByRole('button', { name: /^Cotizar Paquete/ }));
+    const cotizar = await screen.findByRole('button', { name: /^Cotizar Paquete/ });
+    expect(screen.queryByRole('button', { name: 'Nueva cita' })).toBeNull();
+    await usuario.click(cotizar);
     await screen.findByText('COTIZADO');
     const ficha = within(screen.getByRole('region', { name: 'Ficha del hilo' }));
     await usuario.dblClick(ficha.getByRole('button', { name: 'Completar la cita aquí' }));
@@ -206,6 +275,7 @@ describe('Call center autorizado', () => {
     const socket = new SocketFalso(); const lecturas = GUION_FLUJO_A[1]!.lecturas;
     const peticion = vi.fn<typeof fetch>().mockImplementation(async (url, opciones) => {
       if (opciones?.method === 'POST') return Response.json(GUION_FLUJO_A[1]!.respuesta);
+      if (String(url).endsWith('/fecha-nacimiento')) return Response.json({ fechaNacimiento: null });
       if (String(url).endsWith('/contexto')) return Response.json({ hiloId: IDS.reserva, pacienteId: IDS.paciente, sedeId: IDS.sede });
       return Response.json(String(url).endsWith('/catalogo') ? lecturas.catalogo : lecturas.fichaHilo);
     });
@@ -243,6 +313,7 @@ function prepararLecturas(contextoInicial?: ContextoDemo, demo = true) {
     if (ruta.endsWith('/llegadas')) return Response.json(lecturas.llegadasSede);
     if (ruta.includes('/sesion-web/')) return Response.json({ pacienteId: IDS.paciente, nombreVisible: 'Ana P.', tramitesEnProceso: [] });
     if (ruta.endsWith('/citas')) return Response.json(lecturas.citasPaciente);
+    if (ruta.endsWith('/fecha-nacimiento')) return Response.json({ fechaNacimiento: null });
     if (ruta.endsWith('/ficha')) return Response.json({ ...lecturas.fichaHilo, hiloId: contexto.hiloId });
     if (ruta.endsWith('/bandeja')) return Response.json([]);
     throw new Error('Consulta de prueba inesperada');

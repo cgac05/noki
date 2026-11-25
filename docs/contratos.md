@@ -12,7 +12,7 @@ Canales: `web | whatsapp | app | callcenter | clinica`. Estados, casillas y tipo
 
 | tipo | payload |
 |---|---|
-| IniciarTramite | `{ tipoTramite, contacto? }`. El ANI o número del canal debe tener entre 10 y 15 dígitos y solo se acepta como entrada. |
+| IniciarTramite | `{ tipoTramite, contacto?, nuevo? }`. El ANI o número del canal debe tener entre 10 y 15 dígitos y solo se acepta como entrada. Un asesor de call center con ANI puede usar `nuevo: true` para crear otra cita y conservar el paciente asignado al trámite que se habría retomado. |
 | SolicitarContinuacion | `{ destino: 'whatsapp' }`. Requiere `tramiteId` y solicita el consentimiento de contacto y el código de continuación. |
 | SeleccionarServicio | `{ servicioId }` |
 | SeleccionarSede | `{ sedeId }` |
@@ -67,6 +67,7 @@ El QR contiene el token firmado de un solo uso que debe generar y consumir el n�
 | `tramitesAbiertos` | `/api/pacientes/:pacienteId/tramites-abiertos` | `pacienteId` | `TramiteVista[]` |
 | `catalogo` | `/api/catalogo` | ninguno | `OfertaCatalogo[]` |
 | `fichaHilo` | `/api/hilos/:hiloId/ficha` | `hiloId` | `FichaHilo` |
+| `fechaNacimientoLlamada` | `/api/demo/callcenter/hilos/:hiloId/fecha-nacimiento` | `hiloId` | `{ fechaNacimiento }` (fecha ISO `AAAA-MM-DD` o `null`, solo demo y de uso exclusivo de la consola del asesor) |
 | `citasPaciente` | `/api/pacientes/:pacienteId/citas` | `pacienteId` | `CitaVista[]` |
 | `llegadasSede` | `/api/sedes/:sedeId/llegadas` | `sedeId` | `LlegadaVista[]` |
 | `metricas` | `/api/admin/kpis` | ninguno | `MetricasVista` |
