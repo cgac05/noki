@@ -116,6 +116,7 @@ export interface ConsultaDisponibilidad {
   sedeId: SedeId;
   servicioId: ServicioId;
   fecha: string;
+  zonaHoraria: string;
 }
 
 export interface AgendaExternaPort {

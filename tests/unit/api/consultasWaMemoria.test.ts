@@ -61,11 +61,11 @@ it('Solicitud WA vacía, sin trámites y opción vieja', async () => {
     };
     const horarios = await pulsar(vieja.mensajes, 'Tepic');
     expect(horarios[0]).toMatchObject({ tipo: 'lista', secciones: [{ filas: expect.arrayContaining([
-      expect.objectContaining({ titulo: '00:00' }),
+      expect.objectContaining({ titulo: 'mié 25 nov · 09:00' }),
     ]) }] });
-    const destinatario = await pulsar(horarios, '00:00');
+    const destinatario = await pulsar(horarios, 'mié 25 nov · 09:00');
     await agenda.apartar({
-      inicio: '2026-11-25T07:00:00.000Z', sedeId, servicioId,
+      inicio: '2026-11-25T16:00:00.000Z', sedeId, servicioId,
       reservaId: ids.nuevo() as ReservaId, tramiteId: ids.nuevo() as TramiteId,
       ts: reloj.ahora().toISOString(), ttlReservaMin: 60,
     });
@@ -79,8 +79,42 @@ it('Solicitud WA vacía, sin trámites y opción vieja', async () => {
     const ocupado = await leer({ flowResponse: { nombre: 'Paciente sintético', apellidoPaterno: 'Demo',
       sexo: 'F', entidadNacimiento: 'NT' } });
     expect(ocupado[0]).toMatchObject({ tipo: 'texto', texto: 'El horario ya no está disponible.' });
-    const reserva = await pulsar(ocupado, '00:30');
+    const reserva = await pulsar(ocupado, 'mié 25 nov · 09:30');
     expect(reserva[0]).toMatchObject({ tipo: 'botones', botones: [{ titulo: 'Confirmar cita' }] });
     expect(JSON.stringify(reserva)).not.toContain('Paciente sintético');
+  } finally { await app.close(); }
+});
+
+it('Requisitos con etiqueta muestra consentimiento y orden médica sin identificadores internos', async () => {
+  const { app, ids, catalogo, lecturas } = crearApiPruebas();
+  const sedeId = ids.nuevo() as SedeId;
+  const servicioId = ids.nuevo() as ServicioId;
+  catalogo.registrar(servicioId, {
+    tipo: 'ESTUDIO', modoAgenda: 'HORARIO', requiereProfesional: false,
+    requisitos: [{ tipo: 'CONSENTIMIENTO', documento: 'demo' }, { tipo: 'ORDEN_MEDICA' }],
+    duracionMin: 30, ttlReservaMin: 10, toleranciaMin: 5, limiteCambiosHoras: 24,
+    anticipacionMinimaHoras: 0, recordatorios: [],
+  }, new Map([[sedeId, 5500]]));
+  lecturas.registrarOferta({ sedeId, servicioId, sede: 'Tepic', servicio: 'Química', precioCentavos: 5500 }, 'America/Mazatlan');
+  const enviar = async (payload: object) => {
+    const respuesta = await app.inject({
+      method: 'POST', url: '/api/canales/wa/mensajes', headers: { 'idempotency-key': ids.nuevo() },
+      payload: { waId: '5210000000077', ...payload },
+    });
+    expect(respuesta.statusCode).toBe(200);
+    return RespuestaMensajeWaSchema.parse(respuesta.json()).mensajes;
+  };
+  try {
+    let mensajes = await enviar({ texto: 'Hola' });
+    for (const titulo of ['Química', 'Tepic', 'mié 25 nov · 09:00']) {
+      const filas = mensajes.flatMap(m => m.tipo === 'lista' ? m.secciones.flatMap(s => s.filas) : []);
+      const opcion = filas.find(fila => fila.titulo === titulo);
+      if (!opcion) throw new Error('Falta la opción ' + titulo);
+      mensajes = await enviar({ payloadBoton: opcion.payload });
+    }
+    expect(mensajes).toMatchObject([{ tipo: 'botones', botones: [
+      { titulo: 'Acepto el consentimiento' }, { titulo: 'Tengo mi orden médica' },
+    ] }]);
+    expect(JSON.stringify(mensajes)).not.toMatch(/CONSENTIMIENTO|ORDEN_MEDICA/u);
   } finally { await app.close(); }
 });

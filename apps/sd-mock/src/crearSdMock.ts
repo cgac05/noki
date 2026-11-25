@@ -1,9 +1,15 @@
+import { fromZonedTime } from 'date-fns-tz';
 import Fastify from 'fastify';
 import { z } from 'zod';
 import { setTimeout as esperar } from 'node:timers/promises';
 
 const citaSchema = z.object({ reservaId: z.uuid(), sedeId: z.uuid(), servicioId: z.uuid(), inicio: z.iso.datetime({ offset: true }) });
-const disponibilidadSchema = z.object({ sedeId: z.uuid(), servicioId: z.uuid(), fecha: z.iso.date() });
+const disponibilidadSchema = z.object({ sedeId: z.uuid(), servicioId: z.uuid(), fecha: z.iso.date(),
+  zonaHoraria: z.string().min(1).refine(zona => {
+    try { new Intl.DateTimeFormat('es-MX', { timeZone: zona }); return true; }
+    catch { return false; }
+  }),
+});
 const simulacionSchema = z.object({
   latenciaMs: z.number().int().min(0).max(30_000),
   falloPorcentaje: z.number().min(0).max(100),
@@ -47,7 +53,7 @@ export function crearSdMock(logger = true) {
   app.get('/agenda/disponibilidad', async (req, res) => {
     const validado = disponibilidadSchema.safeParse(req.query);
     if (!validado.success) return res.code(400).send(invalidos);
-    const comienzo = Date.parse(validado.data.fecha + 'T07:00:00Z');
+    const comienzo = fromZonedTime(validado.data.fecha + 'T09:00:00', validado.data.zonaHoraria).getTime();
     return { horarios: Array.from({ length: 15 }, (_, indice) => new Date(comienzo + indice * 1_800_000).toISOString()) };
   });
   app.post('/agenda/citas', async (req, res) => {

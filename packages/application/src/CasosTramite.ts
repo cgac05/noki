@@ -73,9 +73,15 @@ export class CasosTramite {
     this.puertos.registro.obtener(tipo);
     const contexto = this.contexto(comando);
     const contacto = await this.contacto(valorContacto, contexto);
+    const hilo = await this.puertos.hilos.obtener(contacto.hiloId);
     const tramite = Tramite.iniciar(this.puertos.ids.nuevo() as TramiteId, contacto.hiloId,
       tipo, this.puertos.registro, contexto);
-    return this.guardar(tramite, contexto);
+    const resultado = await this.guardar(tramite, contexto);
+    if (hilo && hilo.ultimoCanal !== contexto.canal) {
+      hilo.atenderEn(contexto.canal);
+      await this.puertos.hilos.guardar(hilo);
+    }
+    return resultado;
   }
 
   async solicitarContinuacion(id: TramiteId, comando: ContextoComando): Promise<ResultadoComando> {

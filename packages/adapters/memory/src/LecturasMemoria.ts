@@ -4,6 +4,7 @@ import { ESTADOS_TRAMITE, normalizarTelefono, type HiloId, type PacienteId, type
 import type { AgendaMemoria } from './AgendaMemoria.ts';
 import type { ContactosMemoria } from './ContactosMemoria.ts';
 import type { EventosSinTramiteMemoria } from './EventosSinTramiteMemoria.ts';
+import type { HiloRepoMemoria } from './HiloRepoMemoria.ts';
 import type { PacientesMemoria } from './PacientesMemoria.ts';
 import type { TramiteRepoMemoria } from './TramiteRepoMemoria.ts';
 
@@ -14,7 +15,7 @@ export class LecturasMemoria implements LecturasPort {
 
   constructor(private readonly tramites: TramiteRepoMemoria, private readonly contactos: ContactosMemoria,
     private readonly pacientes: PacientesMemoria, private readonly agenda: AgendaMemoria,
-    private readonly sinTramite: EventosSinTramiteMemoria, private readonly ids: GeneradorId) {}
+    private readonly sinTramite: EventosSinTramiteMemoria, private readonly ids: GeneradorId, private readonly hilos: HiloRepoMemoria) {}
 
   registrarOferta(oferta: OfertaLeida, zonaHoraria: string): void {
     this.ofertas.push({ ...oferta });
@@ -64,11 +65,12 @@ export class LecturasMemoria implements LecturasPort {
     const telefono = /^\+?[0-9 ()-]+$/u.test(valor) ? normalizarTelefono(valor) : undefined;
     const oferta = this.ofertas.find(o => o.sedeId === reciente?.sedeId && o.servicioId === reciente.servicioId);
     const cambio = descendentes.find(e => e.hiloId === hiloId && e.tipo === 'CanalCambiado');
+    const hilo = await this.hilos.obtener(hiloId);
     return {
       hiloId, tramites, nombrePila: nombre?.trim().split(/\s+/u)[0] || null,
       telefonoEnmascarado: telefono ? '•••• ' + telefono.slice(-4) : null,
       lineaTiempo: await this.lineaTiempo(hiloId) ?? [],
-      soloLectura: cambio?.tipo === 'CanalCambiado' && cambio.payload.de === 'callcenter' && cambio.payload.a !== 'callcenter',
+      soloLectura: hilo !== null && hilo.ultimoCanal !== 'callcenter' && cambio?.tipo === 'CanalCambiado' && cambio.payload.de === 'callcenter' && cambio.payload.a !== 'callcenter',
       oferta: oferta && reciente?.precioCentavos !== undefined ? { ...oferta, precioCentavos: reciente.precioCentavos } : null,
     };
   }

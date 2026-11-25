@@ -1,0 +1,22 @@
+# Transferencia: ajustes-flujo-a
+
+- Responsable: frente A (núcleo), co-responsables `J3sus-esb` y `cgac05`; basta uno. No toca archivos compartidos ni contratos (design D3 descarta cambiar `MetodoVinculo`).
+- Objetivo: corregir A1 (horarios a medianoche y sin día), A2 (textos crudos del bot) y A3 (ficha en solo lectura tras una llamada nueva) del recorrido real del Flujo A; ver `proposal.md` (Why).
+- Alcance propuesto: `proposal.md` (What Changes), sin lo listado en «Fuera de alcance»; design D1–D3.
+- Autorización de implementación: otorgada por `cgac05` (Christian Avila), co-responsable del frente A, en el hilo del proyecto el 2026-11-25. Cita: "Autorizo implementar ajustes-flujo-a con la revisión 1." Cubre la revisión 1 (hashes de abajo, sin cambios al registrarla). No autoriza commits.
+- Revisión presentada: revisión 1 en la rama local `feat/ajustes-flujo-a` (árbol `noki-identidad`), sobre `main` `c9d18dd`, sin commit. SHA-256 (12 primeros caracteres): `proposal.md` d638cea03ff1 · `design.md` fc4fe6af7d58 · `tasks.md` cb92424b295b · `specs/agenda-simulada/spec.md` 530ddb507daf · `specs/canal-whatsapp/spec.md` 36f3012fb85a · `specs/consultas-api/spec.md` b2c7637bb608 · `specs/continuidad-canales/spec.md` fe01852bb078. `openspec validate ajustes-flujo-a --type change --strict --no-interactive` → válido.
+- Base: `main` avanzó a `465f944` (temporizadores y permitir-builds-bullmq integrados) mientras Codex implementaba. Antes de integrar, hacer rebase sobre `main` vigente y repetir el punto de control 4.1. El borrador local de `contratos-clinica-alertas` se retiró de este árbol el 2026-11-25: vale la versión del frente B en `feat/contratos-clinica-alertas` (`d9929d9`).
+- Artefactos a leer: `proposal.md`, `design.md`, `tasks.md` y los deltas de `agenda-simulada`, `canal-whatsapp`, `continuidad-canales` y `consultas-api`; los specs vigentes de esas capacidades; `AGENTS.md` §5–§9.
+- Tareas pendientes: 1.1–4.2 de `tasks.md`.
+- Restricciones:
+  - Solo archivos del frente A; `apps/web` y `packages/contracts` no se tocan.
+  - Única dependencia nueva: `date-fns-tz` `3.2.0` en `apps/sd-mock`. Revertir cualquier línea que `pnpm install` agregue en `pnpm-workspace.yaml`.
+  - Los textos no incluyen datos personales ni valores capturados en el Flow.
+  - Evidencia en la carpeta del cambio, sin rutas locales. No crear commits.
+- Criterios de aceptación: requisitos y escenarios de los cuatro deltas.
+- Validaciones requeridas: punto de control 4.1, con `pnpm test:integracion` en el Postgres de prueba 55432, y recorrido real 4.2.
+- Detener la parte afectada si:
+  - una prueba del frente B fija los textos del bot o los inicios de las 07:00Z;
+  - `feat/temporizadores` llega a `main` con cambios en `ConversacionWa`, `CasosTramite.iniciar` o `HiloAtencion` (hacer rebase y avisar);
+  - la regla de `soloLectura` exige cambiar `FichaHiloSchema`.
+- Autorización de cierre: otorgada por `cgac05` (Christian Avila), co-responsable del frente A, en el hilo del proyecto el 2026-11-25, después de la segunda vuelta PASS de `revision.md`. Cita: "Autorizo commit, push de feat/ajustes-flujo-a, rebase sobre main, integrar en main por fast-forward y cerrar ajustes-flujo-a." Cubre el commit de la implementación, evidencia y revisión; el rebase sobre `main` vigente (H-04) con repetición de controles; el push de la rama; el fast-forward de `main` y su push; la sincronización de specs y el archivado.

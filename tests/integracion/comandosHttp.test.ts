@@ -6,7 +6,7 @@ import { ProgramadorBullMQ, PublicadorRedisStreams } from '../../packages/adapte
 import { crearTiempoReal } from '../../apps/api/src/tiempoReal.ts';
 import { clienteTiempoReal } from '../../apps/api/src/pruebas.ts';
 import { Pool } from 'pg';
-import { comprobarLecturasApi } from '../unit/api/bateriaLecturasApi.ts';
+import { comprobarLecturasApi, comprobarSoloLectura } from '../unit/api/bateriaLecturasApi.ts';
 import { migrar, OutboxPostgres } from '../../packages/adapters/out-postgres/src/index.ts';
 import { crearApi } from '../../apps/api/src/crearApi.ts';
 import { componerComandos } from '../../apps/api/src/componerComandos.ts';
@@ -141,7 +141,14 @@ it('Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez', async
   const wa = async (payload: object) => {
     const respuesta = await enviar('/api/canales/wa/mensajes', { waId: ana.wa, ...payload });
     expect(respuesta.statusCode, respuesta.body).toBe(200);
-    return RespuestaMensajeWaSchema.parse(respuesta.json()).mensajes;
+    const { mensajes } = RespuestaMensajeWaSchema.parse(respuesta.json());
+    const textos = mensajes.flatMap(mensaje => mensaje.tipo === 'flow'
+      ? [mensaje.titulo, ...mensaje.campos.map(campo => campo.etiqueta)] : [mensaje.texto]);
+    for (const textoVisible of [...textos, ...opciones(mensajes).map(opcion => opcion.titulo)]) {
+      expect(textoVisible).not.toMatch(/\b(?:callcenter|whatsapp|clinica|ORDEN_MEDICA|ACEPTAR_PREPARACION|DATOS_PACIENTE|CONSENTIMIENTO)\b|\d{4}-\d{2}-\d{2}T/u);
+      expect(textoVisible).not.toMatch(/^(?:servicio|sede|paciente|requisitos|elegibilidad|horario|web|app)$/u);
+    }
+    return mensajes;
   };
   const elegir = async (mensajes: MensajeBot[], titulo?: RegExp) => {
     const fila = opciones(mensajes).find(opcion => !titulo || titulo.test(opcion.titulo));
@@ -192,13 +199,16 @@ it('Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez', async
     const texto = 'CONTINUAR ' + ficha.codigoContinuacion;
     let mensajes = await wa({ texto });
     expect(JSON.stringify(mensajes)).toContain('Clínica Tepic');
+    expect(mensajes[0]).toMatchObject({ texto: expect.stringContaining('Lo iniciaste por teléfono.') });
+    expect(opciones(mensajes)[0]?.titulo).toMatch(/^[\p{L}]+ \d+ [\p{L}]+ · 09:00$/u);
     expect(await wa({ texto })).toMatchObject([{ tipo: 'texto' }]);
-    mensajes = await elegir(mensajes, /^\d{2}:\d{2}$/u);
+    mensajes = await elegir(mensajes, / · 09:00$/u);
     while (!opciones(mensajes).some(({ titulo }) => titulo === 'Para mí')) {
-      expect(opciones(mensajes).map(({ titulo }) => titulo)).toContain('Aceptar preparación');
-      mensajes = await elegir(mensajes, /Aceptar preparación/u);
+      expect(opciones(mensajes).map(({ titulo }) => titulo)).toContain('Acepto la preparación');
+      mensajes = await elegir(mensajes, /Acepto la preparación/u);
     }
     mensajes = await elegir(mensajes, /^Para mí$/u);
+    expect(mensajes[0]).toMatchObject({ texto: '¿Eres alguna de estas personas?' });
     mensajes = await elegir(mensajes, /^Soy Ana P\.$/u);
     expect(mensajes).toMatchObject([{ tipo: 'flow', campos: [{ id: 'fechaNac', captura: 'sensitive' }] }]);
     const intentosAntes = await pool.query("SELECT count(*)::int AS total FROM evento WHERE tipo = 'IntentoVerificacionFallido'");
@@ -211,6 +221,7 @@ it('Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez', async
     await elegir(incorrecta, /^Soy Ana P\.$/u);
     mensajes = await wa({ flowResponse: { fechaNac: ana.fechaNac } });
     mensajes = await elegir(mensajes, /^Confirmar cita$/u);
+    expect(mensajes[0]).toMatchObject({ texto: expect.stringMatching(/Cita confirmada para [\p{L}]+ \d+ de [\p{L}]+, 09:00/u) });
     expect(JSON.stringify(mensajes)).toContain('Tu QR está en la App');
     expect(JSON.stringify(mensajes)).not.toContain(ana.fechaNac);
 
@@ -239,6 +250,7 @@ it('Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez', async
     expect(CuerpoErrorSchema.parse(repetida.json()).error.datos?.['regla']).toBe('TOKEN_INVALIDO');
     const despues = RUTAS_CONSULTAS.fichaHilo.respuesta.parse(await leer(fichaRuta));
     expect(despues).toMatchObject({ codigoContinuacion: null, soloLectura: true, nombrePila: 'Ana' });
+    await comprobarSoloLectura(deps.lecturas, tramite.hiloId as HiloId, true);
     const guardado = await deps.lecturas.tramite(tramite.id as Parameters<typeof deps.lecturas.tramite>[0]);
     if (!guardado?.sedeId || !guardado.pacienteId) throw new Error('Faltan datos de la cita.');
     await comprobarLecturasApi(deps.lecturas, {
@@ -278,6 +290,12 @@ it('Flujo A por HTTP. Un token de un solo uso no funciona la segunda vez', async
     expect(RUTAS_CONSULTAS.bandeja.respuesta.parse(await leer('/api/demo/bandeja'))).toEqual([]);
     expect(RUTAS_CONSULTAS.metricas.respuesta.parse(await leer('/api/admin/kpis')).kpis)
       .toMatchObject({ citasConfirmadas: 1, llegadasRegistradas: 1, tramitesRecuperados: 1 });
+    const nueva = await cc('IniciarTramite', { tipoTramite: 'AGENDAR', contacto: ana.wa.slice(-10) });
+    expect(nueva.tramite.hiloId).toBe(tramite.hiloId);
+    await comprobarSoloLectura(deps.lecturas, tramite.hiloId as HiloId, false);
+    expect(RUTAS_CONSULTAS.fichaHilo.respuesta.parse(await leer(fichaRuta)).soloLectura).toBe(false);
+    await cc('SeleccionarServicio', { servicioId: oferta.servicioId }, nueva.tramite.id);
+    await cc('SeleccionarSede', { sedeId: oferta.sedeId }, nueva.tramite.id);
   } finally {
     socket.close();
     await tiempoReal.cerrar();

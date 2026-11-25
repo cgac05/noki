@@ -1,8 +1,55 @@
 import { expect, it, vi } from 'vitest';
-import { comprobarLecturasApi } from './bateriaLecturasApi.ts';
+import { comprobarLecturasApi, comprobarSoloLectura } from './bateriaLecturasApi.ts';
 import { crearApiPruebas } from '../../../apps/api/src/pruebas.ts';
 import { CuerpoErrorSchema, RespuestaComandoSchema } from '../../../packages/contracts/src/index.ts';
-import type { PacienteId, SedeId, ServicioId, TramiteId } from '../../../packages/domain/src/index.ts';
+import type { HiloId, PacienteId, SedeId, ServicioId, TramiteId } from '../../../packages/domain/src/index.ts';
+
+it('una llamada nueva permite cotizar el mismo hilo tras continuar en WhatsApp', async () => {
+  const { app, catalogo, ids, lecturas, reloj, tokens, tramites } = crearApiPruebas();
+  const sedeId = ids.nuevo() as SedeId;
+  const servicioId = ids.nuevo() as ServicioId;
+  catalogo.registrar(servicioId, {
+    tipo: 'ESTUDIO', modoAgenda: 'HORARIO', requiereProfesional: false, requisitos: [],
+    duracionMin: 30, ttlReservaMin: 10, toleranciaMin: 5, limiteCambiosHoras: 24,
+    anticipacionMinimaHoras: 0, recordatorios: [],
+  }, new Map([[sedeId, 5500]]));
+  lecturas.registrarOferta({ sedeId, servicioId, sede: 'Tepic', servicio: 'Química', precioCentavos: 5500 }, 'America/Mazatlan');
+  const contacto = '0000000001';
+  const iniciar = { tipoTramite: 'AGENDAR', contacto };
+  const enviar = async (tipo: string, payload: object, tramiteId?: string) => {
+    const respuesta = await app.inject({
+      method: 'POST', url: '/api/comandos', headers: { 'idempotency-key': ids.nuevo() },
+      payload: { canal: 'callcenter', actor: 'asesor:demo', tramiteId, tipo, payload },
+    });
+    expect(respuesta.statusCode).toBe(200);
+    return RespuestaComandoSchema.parse(respuesta.json()).tramite;
+  };
+  try {
+    const anterior = await enviar('IniciarTramite', iniciar);
+    const hiloId = anterior.hiloId as HiloId;
+    await enviar('SeleccionarServicio', { servicioId }, anterior.id);
+    await enviar('SeleccionarSede', { sedeId }, anterior.id);
+    await enviar('SolicitarContinuacion', { destino: 'whatsapp' }, anterior.id);
+    const evento = tramites.eventos().find(evento => evento.tipo === 'ConsentimientoContactoWA');
+    if (evento?.tipo !== 'ConsentimientoContactoWA') throw new Error('Falta el consentimiento.');
+    const token = await tokens.emitir({
+      jti: evento.payload.consentimientoId, uso: 'CONTINUIDAD', tramiteId: anterior.id as TramiteId,
+      hiloId, nivel: 0, canalOrigen: 'callcenter', metodo: 'TOKEN_CC',
+      emitidoEn: reloj.ahora().toISOString(), expiraEn: new Date(reloj.ahora().getTime() + 60_000).toISOString(),
+    });
+    const respuesta = await app.inject({
+      method: 'POST', url: '/api/canales/wa/mensajes', headers: { 'idempotency-key': ids.nuevo() },
+      payload: { waId: '521' + contacto, texto: 'CONTINUAR ' + token },
+    });
+    expect(respuesta.statusCode).toBe(200);
+    await comprobarSoloLectura(lecturas, hiloId, true);
+    const nuevo = await enviar('IniciarTramite', iniciar);
+    expect(nuevo.hiloId).toBe(hiloId);
+    await comprobarSoloLectura(lecturas, hiloId, false);
+    await enviar('SeleccionarServicio', { servicioId }, nuevo.id);
+    expect((await enviar('SeleccionarSede', { sedeId }, nuevo.id)).estado).toBe('COTIZADO');
+  } finally { await app.close(); }
+});
 
 it.each(['vigente', 'vencida', 'compensacion'])('idempotencia y registro de fallos (reserva %s)', async caso => {
   const vencida = caso === 'vencida';

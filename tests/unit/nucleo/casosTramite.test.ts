@@ -49,8 +49,37 @@ function escenario(registrarError = vi.fn<(datos: { correlation_id: string; codi
     tramites, hilos, contactos, tokens, pacientes, catalogo, agenda, agendaExterna, reloj, politica, ids,
     registro, resolvedor, intentos, registrarError,
   });
-  return { casos, reloj, contactos, tokens, intentos, tramites, eventos, agendaExterna, pacientes, agenda, registro, ids };
+  return { casos, reloj, contactos, tokens, intentos, tramites, eventos, agendaExterna, pacientes, agenda, registro, ids, hilos };
 }
+
+it('una llamada nueva recupera el canal del hilo y permite contar la segunda continuación', async () => {
+  const { casos, hilos, tokens, tramites } = escenario();
+  const numero = '5210000000001';
+  const continuar = async (tramite: Awaited<ReturnType<typeof casos.iniciar>>['tramite']) => {
+    await casos.asignarPaciente(tramite.id, pacienteId, cc);
+    const token = tokens.emitir({
+      tramiteId: tramite.id, hiloId: tramite.hiloId, pacienteId, nivel: 1, canalOrigen: 'callcenter', metodo: 'TOKEN_CC',
+    });
+    const resultado = await casos.retomar({ valorContacto: numero, token }, wa);
+    expect(resultado).toMatchObject({ tipo: 'RETOMADO', operacion: { eventos: expect.arrayContaining([
+      expect.objectContaining({ tipo: 'CanalCambiado', payload: { de: 'callcenter', a: 'whatsapp', metodo: 'TOKEN_CC' } }),
+    ]) } });
+  };
+  const primera = await casos.iniciar('AGENDAR', numero, cc);
+  await continuar(primera.tramite);
+  const cambios = () => tramites.eventos().filter(evento => evento.tipo === 'CanalCambiado').length;
+  const antes = cambios();
+  const segunda = await casos.iniciar('AGENDAR', numero, cc);
+  expect(segunda.tramite.id).not.toBe(primera.tramite.id);
+  expect(segunda.tramite).toMatchObject({ hiloId: primera.tramite.hiloId, canalOrigen: 'callcenter' });
+  expect((await hilos.obtener(segunda.tramite.hiloId))?.ultimoCanal).toBe('callcenter');
+  expect(cambios()).toBe(antes);
+  const mismoCanal = await casos.iniciar('AGENDAR', numero, cc);
+  expect(mismoCanal.tramite.hiloId).toBe(segunda.tramite.hiloId);
+  expect(cambios()).toBe(antes);
+  await continuar(segunda.tramite);
+  expect(cambios()).toBe(antes + 1);
+});
 
 async function listo(casos: CasosTramite) {
   const { tramite: { id } } = await casos.iniciar('AGENDAR', '5210000000001', cc);
@@ -618,4 +647,23 @@ it('rechaza coincidencias múltiples por base y por datos', async () => {
   await casos.identificarPaciente(tramite.id, { paso: 'CURP', curp: null }, n, cc);
   await expect(casos.identificarPaciente(tramite.id, { paso: 'DATOS', ...declarado }, n, cc))
     .rejects.toMatchObject({ regla: 'IDENTIDAD_AMBIGUA' });
+});
+
+it('un fallo al guardar el trámite nuevo conserva el último canal del hilo', async () => {
+  const { casos, hilos, tramites } = escenario();
+  const numero = '5210000000076';
+  const { tramite } = await casos.iniciar('AGENDAR', numero, cc);
+  const hilo = await hilos.obtener(tramite.hiloId);
+  if (!hilo) throw new Error('Falta el hilo.');
+  hilo.atenderEn('whatsapp');
+  await hilos.guardar(hilo);
+
+  const guardar = vi.spyOn(tramites, 'guardar').mockRejectedValueOnce(new Error('Fallo de persistencia simulado.'));
+  try {
+    await expect(casos.iniciar('AGENDAR', numero, cc)).rejects.toThrow('Fallo de persistencia simulado.');
+    expect((await hilos.obtener(tramite.hiloId))?.ultimoCanal).toBe('whatsapp');
+    expect((await tramites.abiertosPorHilo(tramite.hiloId)).map(({ id }) => id)).toEqual([tramite.id]);
+  } finally {
+    guardar.mockRestore();
+  }
 });

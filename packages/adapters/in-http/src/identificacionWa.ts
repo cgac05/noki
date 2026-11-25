@@ -15,7 +15,7 @@ export function mensajesIdentificacion(pista: PistaDominio, registrar: Registrar
       }];
     case 'CONFIRMAR':
       return [{
-        tipo: 'lista', texto: 'Elige una opción.', secciones: [{
+        tipo: 'lista', texto: '¿Eres alguna de estas personas?', secciones: [{
           filas: (pista.opciones ?? []).map(({ titulo, payload }, indice) => ({
             id: 'opcion-' + indice, titulo,
             payload: registrar({ paso: 'CONFIRMAR', candidato: payload === 'NINGUNO' ? null : payload }),

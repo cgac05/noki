@@ -10,6 +10,7 @@ import {
   ErrorDominio, siguientePregunta, type PistaDominio, type RegistroTiposTramite, type SedeId,
   type ServicioId, type Tramite, type TramiteId,
 } from '@noki/domain';
+import { canalOrigen, fechaCorta, fechaLarga, preguntaCasilla, requisito } from './textosWa.ts';
 import { mensajesIdentificacion, respuestaFlowIdentificacion } from './identificacionWa.ts';
 
 const accion = z.discriminatedUnion('tipo', [
@@ -80,7 +81,9 @@ export class ConversacionWa {
         delete estado.horario;
         const oferta = (await lecturas.catalogo()).find(o => o.servicioId === tramite?.servicioId && o.sedeId === tramite?.sedeId);
         const momento = tramite.horario && tramite.sedeId ? await this.formatear(tramite.horario.inicio, tramite.sedeId) : undefined;
-        mensajes.push(texto([oferta?.servicio, oferta?.sede, momento, tramite.canalOrigen].filter(Boolean).join(' · ')));
+        const detalle = [oferta?.servicio, oferta?.sede].filter(Boolean).join(' en ');
+        const resumen = detalle ? 'Retomamos tu trámite: ' + detalle : 'Retomamos tu trámite';
+        mensajes.push(texto(resumen + (momento ? ', ' + momento : '') + '. Lo iniciaste ' + canalOrigen[tramite.canalOrigen] + '.'));
       } else if (token || verificacion || tramiteElegidoId) {
         return [texto(resumenInvalido)];
       } else if (retomado.tipo === 'REQUIERE_VERIFICACION') {
@@ -97,7 +100,7 @@ export class ConversacionWa {
           estado.opciones[payload] = { tipo: 'retomar', id };
           const oferta = catalogo.find(fila => fila.servicioId === item.servicioId && fila.sedeId === item.sedeId);
           return [{ id: 'resumen-' + indice, payload,
-            titulo: [oferta?.servicio, oferta?.sede, item.canalOrigen].filter(Boolean).join(' · ') }];
+            titulo: [oferta?.servicio, oferta?.sede, canalOrigen[item.canalOrigen]].filter(Boolean).join(' · ') }];
         });
         await this.guardar(waId, estado, ts);
         return filas.length ? [{ tipo: 'lista', texto: 'Tienes varios trámites abiertos.', secciones: [{ filas }] }]
@@ -191,7 +194,7 @@ export class ConversacionWa {
 
   private async formatear(inicio: string, sedeId: SedeId): Promise<string> {
     const zona = await this.deps.lecturas.zonaSede(sedeId) ?? 'UTC';
-    return formatInTimeZone(inicio, zona, 'dd/MM/yyyy HH:mm');
+    return fechaLarga(inicio, zona);
   }
 
   private async mensajes(tramite: Tramite, estado: Estado, ts: string, correlationId: string): Promise<MensajeBot[]> {
@@ -220,7 +223,7 @@ export class ConversacionWa {
     if (casilla === 'requisitos') {
       const completados = tramite.instantanea().datos.requisitos;
       const botones = (tramite.perfil?.requisitos ?? []).filter(r => !completados.includes(r.tipo)).slice(0, 3)
-        .map(r => opcion({ tipo: 'requisito', requisito: r.tipo }, r.tipo === 'ACEPTAR_PREPARACION' ? 'Aceptar preparación' : r.tipo.replaceAll('_', ' ')));
+        .map(r => opcion({ tipo: 'requisito', requisito: r.tipo }, requisito[r.tipo]));
       return botones.length ? [{ tipo: 'botones', texto: 'Completa los requisitos del servicio.', botones }] : [texto('Revisa los requisitos.')];
     }
     type Opcion = ReturnType<typeof opcion>;
@@ -237,13 +240,13 @@ export class ConversacionWa {
       const zona = await this.deps.lecturas.zonaSede(sedeId) ?? 'UTC';
       const fecha = formatInTimeZone(new Date(Date.parse(ts) + 86_400_000), zona, 'yyyy-MM-dd');
       const [horarios, ocupados] = await Promise.all([
-        this.deps.agendaExterna.disponibilidad({ fecha, sedeId, servicioId }, correlationId),
+        this.deps.agendaExterna.disponibilidad({ fecha, sedeId, servicioId, zonaHoraria: zona }, correlationId),
         this.deps.lecturas.horariosOcupados(sedeId, fecha, ts),
       ]);
       filas = horarios.filter(inicio => !ocupados.includes(inicio) && Date.parse(inicio) > Date.parse(ts)).slice(0, 10)
-        .map(inicio => opcion({ tipo: 'horario', inicio }, formatInTimeZone(inicio, zona, 'HH:mm')));
+        .map(inicio => opcion({ tipo: 'horario', inicio }, fechaCorta(inicio, zona)));
     }
-    return filas.length ? [{ tipo: 'lista', texto: 'Selecciona ' + casilla + '.', secciones: [{ filas }] }]
+    return filas.length ? [{ tipo: 'lista', texto: preguntaCasilla[casilla] ?? '¿Qué opción prefieres?', secciones: [{ filas }] }]
       : [texto('No hay opciones disponibles.')];
   }
 }

@@ -65,10 +65,22 @@ it('Disponibilidad por el puerto coincide en memoria y sd-mock', async () => {
     const base = await servidor.listen({ host: '127.0.0.1', port: 0 });
     const cliente = new AgendaExternaSd(base);
     const memoria = new AgendaExternaMemoria();
-    const consulta = { sedeId: cita.sedeId, servicioId: cita.servicioId, fecha: '2026-11-25' };
+    const consulta = { sedeId: cita.sedeId, servicioId: cita.servicioId, fecha: '2026-11-26', zonaHoraria: 'America/Mazatlan' };
     const horarios = await cliente.disponibilidad(consulta, 'disponibilidad');
     expect(horarios).toEqual(await memoria.disponibilidad(consulta));
     expect(horarios).toHaveLength(15);
-    expect(horarios[0]).toBe('2026-11-25T07:00:00.000Z');
+    expect(horarios[0]).toBe('2026-11-26T16:00:00.000Z');
+    expect(horarios.at(-1)).toBe('2026-11-26T23:00:00.000Z');
+    const tijuana = { ...consulta, zonaHoraria: 'America/Tijuana' };
+    const horariosTijuana = await cliente.disponibilidad(tijuana, 'tijuana');
+    expect(horariosTijuana).toEqual(await memoria.disponibilidad(tijuana));
+    expect(horariosTijuana[0]).toBe('2026-11-26T17:00:00.000Z');
+    for (const zonaHoraria of ['', 'Marte/Base']) {
+      const query = new URLSearchParams({ ...consulta, zonaHoraria });
+      if (!zonaHoraria) query.delete('zonaHoraria');
+      const invalida = await servidor.inject({ url: '/agenda/disponibilidad?' + query });
+      expect(invalida.statusCode).toBe(400);
+      expect(invalida.json()).toEqual({ codigo: 'ENTRADA_INVALIDA' });
+    }
   } finally { await servidor.close(); }
 });

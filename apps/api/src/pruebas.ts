@@ -35,7 +35,7 @@ export function crearApiPruebas(opciones: {
     tokens, resolvedor, politica: new PoliticaIdentidad(),
     ...(opciones.registrarError ? { registrarError: opciones.registrarError } : {}),
   });
-  const lecturas = new LecturasMemoria(tramites, contactos, pacientes, agenda, sinTramite, ids);
+  const lecturas = new LecturasMemoria(tramites, contactos, pacientes, agenda, sinTramite, ids, hilos);
   const idempotencia = {
     reloj, registro: new RegistroComandosMemoria(),
     tieneEventos: async (clave: string) => (await lecturas.eventosPorClave(clave)).length > 0,
@@ -53,7 +53,8 @@ export function crearApiPruebas(opciones: {
     ...(opciones.salidaLog ? { salidaLog: opciones.salidaLog } : {}),
     ...(opciones.origen ? { origen: opciones.origen } : {}),
     consultas: { lecturas, reloj, emisor: tokens, bandeja: new BandejaMemoria(), demo: opciones.demo ?? true },
-    comandos: { casos, tokens, lecturas, ids, demo: opciones.demo ?? true, idempotencia }, whatsapp, relojDemo,
+    comandos: { casos, tokens, lecturas, ids, demo: opciones.demo ?? true, idempotencia,
+      solicitarContinuacion: casos.solicitarContinuacion.bind(casos) }, whatsapp, relojDemo,
   });
   return { app, casos, tokens, ids, reloj, lecturas, tramites, contactos, pacientes, catalogo, agenda, agendaExterna, temporizadores };
 }

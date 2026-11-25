@@ -7,6 +7,8 @@ export class HiloAtencion {
 
   get ultimoCanal(): Canal { return this.canal; }
 
+  atenderEn(canal: Canal): void { this.canal = canal; }
+
   retomar(canal: Canal, metodo: MetodoVinculo): PayloadsEvento['CanalCambiado'] | undefined {
     if (canal === this.canal) return undefined;
     const de = this.canal;

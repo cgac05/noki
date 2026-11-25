@@ -2,6 +2,10 @@ import { expect } from 'vitest';
 import type { LecturasPort } from '../../../packages/application/src/index.ts';
 import type { HiloId, PacienteId, SedeId, TramiteId } from '../../../packages/domain/src/index.ts';
 
+export async function comprobarSoloLectura(lecturas: LecturasPort, id: HiloId, esperado: boolean) {
+  expect(await lecturas.fichaHilo(id)).toMatchObject({ soloLectura: esperado });
+}
+
 export async function comprobarLecturasApi(lecturas: LecturasPort,
   datos?: { tramiteId: TramiteId; hiloId: HiloId; pacienteId: PacienteId; sedeId: SedeId; inicio: string }) {
   const metricas = await lecturas.metricas();

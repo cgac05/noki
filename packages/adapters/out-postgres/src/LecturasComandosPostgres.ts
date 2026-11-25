@@ -63,8 +63,10 @@ export class LecturasComandosPostgres implements LecturasPort {
       item => item.servicioId === cotizado.servicioId && item.sedeId === cotizado.sedeId,
     );
     const { rows: [cambio] } = await sql<{ solo: boolean }>`
-      SELECT payload->>'de' = 'callcenter' AND payload->>'a' <> 'callcenter' AS solo
-      FROM evento WHERE hilo_id = ${id} AND tipo = 'CanalCambiado' ORDER BY ts DESC, id DESC LIMIT 1`.execute(this.db);
+      SELECT e.payload->>'de' = 'callcenter' AND e.payload->>'a' <> 'callcenter'
+        AND h.ultimo_canal <> 'callcenter' AS solo
+      FROM evento e JOIN hilo_atencion h ON h.id = e.hilo_id
+      WHERE e.hilo_id = ${id} AND e.tipo = 'CanalCambiado' ORDER BY e.ts DESC, e.id DESC LIMIT 1`.execute(this.db);
     const telefono = /^\+?[0-9 ()-]+$/u.test(contacto) ? normalizarTelefono(contacto) : undefined;
     return {
       hiloId: id, tramites, lineaTiempo: await this.lineaTiempo(id) ?? [],

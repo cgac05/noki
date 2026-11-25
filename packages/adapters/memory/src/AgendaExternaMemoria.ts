@@ -1,3 +1,4 @@
+import { fromZonedTime } from 'date-fns-tz';
 import type { AgendaExternaPort, ConsultaDisponibilidad, SolicitudCitaExterna } from '@noki/application';
 import { ReglaViolada, type ReservaId } from '@noki/domain';
 
@@ -6,9 +7,9 @@ export class AgendaExternaMemoria implements AgendaExternaPort {
   private siguienteFolio = 10_000_000;
   fallar = false;
 
-  async disponibilidad({ fecha }: ConsultaDisponibilidad): Promise<string[]> {
+  async disponibilidad({ fecha, zonaHoraria }: ConsultaDisponibilidad): Promise<string[]> {
     if (this.fallar) throw new ReglaViolada('AGENDA_NO_DISPONIBLE');
-    const comienzo = Date.parse(fecha + 'T07:00:00Z');
+    const comienzo = fromZonedTime(fecha + 'T09:00:00', zonaHoraria).getTime();
     return Array.from({ length: 15 }, (_, indice) => new Date(comienzo + indice * 1_800_000).toISOString());
   }
 

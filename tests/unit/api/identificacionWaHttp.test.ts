@@ -53,7 +53,7 @@ async function hastaFechaNacimiento(salidaLog?: Writable) {
       emitidoEn: ahora, expiraEn: '2026-11-25T12:00:00Z',
     });
     const horarios = await enviar({ texto: 'CONTINUAR ' + token });
-    const destinatario = await pulsar(horarios, '00:00');
+    const destinatario = await pulsar(horarios, 'mié 25 nov · 09:00');
     const candidatos = await pulsar(destinatario, 'Para mí');
     const pregunta = await pulsar(candidatos, 'Soy Ana P.');
     expect(pregunta).toMatchObject([{ tipo: 'flow', campos: [{ id: 'fechaNac', captura: 'sensitive' }] }]);
