@@ -1,0 +1,240 @@
+Base a23d002, solo pruebas nuevas en copia temporal
+npx vitest run --project web --maxWorkers=2 --configLoader runner apps/web/src/cliente/historialWa.test.tsx
+Codigo de salida: 1
+
+
+ RUN  v4.0.14 C:/Users/guill/AppData/Local/Temp/noki-wa-a67810e3-7d98-4caa-b515-025639d327b7/repo
+
+ ❯ |web| src/cliente/historialWa.test.tsx (15 tests | 4 failed) 108ms
+   × muestra la hora local de envío y la conserva al reintentar 52ms
+   × muestra la hora de recepción en cada burbuja nueva del bot 9ms
+   × conserva las horas originales al recargar el historial 6ms
+   × carga el historial anterior sin agregar hora a las entradas antiguas 14ms
+   ✓ Historial acumulado: conserva usuario y bot en orden, por número e hidrata tras recarga 2ms
+   ✓ Código de continuación redactado y Flow: solo persiste burbujas sin valores ni solicitudes 2ms
+   ✓ Clave por mensaje y en reintento: misma solicitud/clave sin duplicar burbuja 2ms
+   ✓ bloquea dos envíos síncronos antes del primer await y notifica al terminar 1ms
+   ✓ Nueva conversación borra el número activo y descarta respuestas tardías 1ms
+   ✓ registra los códigos enviados solo en memoria y los libera al reiniciar el guion 1ms
+   ✓ conserva en memoria aunque sessionStorage no esté disponible o tenga contenido inválido 1ms
+   ✓ el cierre descarta la solicitud protegida pendiente y ya no puede reintentarse 1ms
+   ✓ el proveedor comparte el historial con el hook y reiniciar el guion vacía la sesión 11ms
+   ✓ agrega mensajes iniciados por la empresa con redacción, orden y persistencia solo de sesión 2ms
+   ✓ registra los tres números de demo y los conversados, ignora ajenos y marca solo los no visibles 1ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  |web| src/cliente/historialWa.test.tsx > muestra la hora local de envío y la conserva al reintentar
+TestingLibraryElementError: Unable to find an element with the text: 09:05, which matches selector '.wa-usuario time'. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-label="Conversación de WhatsApp"
+      aria-live="polite"
+      aria-relevant="additions text"
+      class="wa-historial"
+      role="log"
+    >
+      <div
+        class="wa-burbuja wa-usuario"
+      >
+        <p>
+          Hola
+        </p>
+      </div>
+      <div
+        class="wa-burbuja wa-bot"
+      >
+        <article
+          class="mensaje-bot"
+        >
+          <p>
+            Respuesta ficticia
+          </p>
+        </article>
+      </div>
+      <div />
+    </section>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/cliente/historialWa.test.tsx:36:23
+     34|   await historial.reintentar(numero, entrada.id);
+     35|   mostrarChat(historial);
+     36|   const hora = screen.getByText('09:05', { selector: '.wa-usuario time…
+       |                       ^
+     37|   expect(hora.getAttribute('datetime')).toBe(salida.toISOString());
+     38| });
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+ FAIL  |web| src/cliente/historialWa.test.tsx > muestra la hora de recepción en cada burbuja nueva del bot
+TestingLibraryElementError: Unable to find an element with the text: 09:06, which matches selector '.wa-bot time'. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-label="Conversación de WhatsApp"
+      aria-live="polite"
+      aria-relevant="additions text"
+      class="wa-historial"
+      role="log"
+    >
+      <div
+        class="wa-burbuja wa-usuario"
+      >
+        <p>
+          Hola
+        </p>
+      </div>
+      <div
+        class="wa-burbuja wa-bot"
+      >
+        <article
+          class="mensaje-bot"
+        >
+          <p>
+            Respuesta ficticia
+          </p>
+        </article>
+      </div>
+      <div
+        class="wa-burbuja wa-bot"
+      >
+        <article
+          class="mensaje-bot"
+        >
+          <p>
+            Otra respuesta
+          </p>
+        </article>
+      </div>
+      <div
+        class="wa-burbuja wa-bot"
+      >
+        <article
+          class="mensaje-bot"
+        >
+          <p>
+            Aviso de la empresa
+          </p>
+        </article>
+      </div>
+      <div />
+    </section>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:109:15
+ ❯ src/cliente/historialWa.test.tsx:53:24
+     51|   historial.recibirMensajes(numero, [{ tipo: 'texto', texto: 'Aviso de…
+     52|   mostrarChat(historial);
+     53|   const horas = screen.getAllByText('09:06', { selector: '.wa-bot time…
+       |                        ^
+     54|   expect(horas.map(hora => hora.getAttribute('datetime'))).toEqual(Arr…
+     55| });
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+ FAIL  |web| src/cliente/historialWa.test.tsx > conserva las horas originales al recargar el historial
+TestingLibraryElementError: Unable to find an element with the text: 18:07, which matches selector 'time'. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-label="Conversación de WhatsApp"
+      aria-live="polite"
+      aria-relevant="additions text"
+      class="wa-historial"
+      role="log"
+    >
+      <div
+        class="wa-burbuja wa-usuario"
+      >
+        <p>
+          Hola
+        </p>
+      </div>
+      <div
+        class="wa-burbuja wa-bot"
+      >
+        <article
+          class="mensaje-bot"
+        >
+          <p>
+            Respuesta ficticia
+          </p>
+        </article>
+      </div>
+      <div />
+    </section>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:109:15
+ ❯ src/cliente/historialWa.test.tsx:64:17
+     62|   vi.setSystemTime(new Date(2026, 10, 26, 0, 0));
+     63|   mostrarChat(new HistorialWa(cliente));
+     64|   expect(screen.getAllByText('18:07', { selector: 'time' })).toHaveLen…
+       |                 ^
+     65| });
+     66| 
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+ FAIL  |web| src/cliente/historialWa.test.tsx > carga el historial anterior sin agregar hora a las entradas antiguas
+TestingLibraryElementError: Unable to find an element with the text: 00:05, which matches selector 'time'. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-label="Conversación de WhatsApp"
+      aria-live="polite"
+      aria-relevant="additions text"
+      class="wa-historial"
+      role="log"
+    >
+      <div
+        class="wa-burbuja wa-usuario"
+      >
+        <p>
+          Mensaje anterior
+        </p>
+      </div>
+      <div
+        class="wa-burbuja wa-usuario"
+      >
+        <p>
+          Hola
+        </p>
+      </div>
+      <div
+        class="wa-burbuja wa-bot"
+      >
+        <article
+          class="mensaje-bot"
+        >
+          <p>
+            Respuesta ficticia
+          </p>
+        </article>
+      </div>
+      <div />
+    </section>
+  </div>
+</body>
+ ❯ Object.getElementError ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:109:15
+ ❯ src/cliente/historialWa.test.tsx:77:17
+     75|   mostrarChat(historial);
+     76|   expect(screen.getByText('Mensaje anterior').closest('.wa-burbuja')?.…
+     77|   expect(screen.getAllByText('00:05', { selector: 'time' })).toHaveLen…
+       |                 ^
+     78| });
+     79| 
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 11 passed (15)
+   Start at  10:42:01
+   Duration  2.85s (transform 340ms, setup 0ms, import 926ms, tests 108ms, environment 1.43s)
+

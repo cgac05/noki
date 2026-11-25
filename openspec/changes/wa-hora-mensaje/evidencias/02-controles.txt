@@ -1,0 +1,14 @@
+﻿Base a23d002 con los cuatro archivos modificados. Resumen de las salidas en copia temporal.
+
+npx vitest run --project web --maxWorkers=2 --configLoader runner
+Historial: 15 pruebas aprobadas, incluidas las cuatro nuevas.
+WhatsApp: 20 pruebas aprobadas. Flow: 7 pruebas aprobadas.
+Test Files  34 passed (34)
+     Tests  297 passed (297)
+Codigo de salida: 0
+
+npx eslint apps/web
+Codigo de salida: 0
+
+npx tsc --noEmit -p apps/web
+Codigo de salida: 0

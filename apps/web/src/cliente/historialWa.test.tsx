@@ -6,15 +6,76 @@ import { ClienteMock } from './mock/ClienteMock.ts';
 import { CONTACTO_DEMO } from './ClienteApi.ts';
 import { ProveedorCliente } from './ProveedorCliente.tsx';
 import { useConversacionWa } from './useConversacionWa.ts';
+import { ChatWa } from '../componentes/ChatWa.tsx';
 
 const numero = CONTACTO_DEMO;
 const respuesta: RespuestaMensajeWa = { mensajes: [{ tipo: 'texto', texto: 'Respuesta ficticia' }] };
-afterEach(() => { cleanup(); sessionStorage.clear(); localStorage.clear(); vi.restoreAllMocks(); });
+afterEach(() => { cleanup(); sessionStorage.clear(); localStorage.clear(); vi.useRealTimers(); vi.restoreAllMocks(); });
 function preparar() {
   const cliente = new ClienteMock({ latenciaMs: 0 });
   const enviar = vi.spyOn(cliente, 'enviarMensajeWa').mockResolvedValue(respuesta);
   return { cliente, enviar, historial: new HistorialWa(cliente) };
 }
+
+function mostrarChat(historial: HistorialWa) {
+  return render(<ChatWa entradas={historial.leer(numero).entradas} enviando={false}
+    onElegir={vi.fn()} onReintentar={vi.fn()} onFlow={vi.fn()} onDescartarFlow={vi.fn()} />);
+}
+
+it('muestra la hora local de envío y la conserva al reintentar', async () => {
+  const salida = new Date(2026, 10, 25, 9, 5);
+  vi.useFakeTimers();
+  vi.setSystemTime(salida);
+  const { historial, enviar } = preparar();
+  enviar.mockRejectedValueOnce(new Error('red'));
+  await historial.enviar({ waId: numero, texto: 'Hola' }, { tipo: 'texto', texto: 'Hola' });
+  const entrada = historial.leer(numero).entradas[0]!;
+  vi.setSystemTime(new Date(2026, 10, 25, 9, 6));
+  await historial.reintentar(numero, entrada.id);
+  mostrarChat(historial);
+  const hora = screen.getByText('09:05', { selector: '.wa-usuario time' });
+  expect(hora.getAttribute('datetime')).toBe(salida.toISOString());
+});
+
+it('muestra la hora de recepción en cada burbuja nueva del bot', async () => {
+  vi.useFakeTimers();
+  vi.setSystemTime(new Date(2026, 10, 25, 9, 5));
+  const { historial, enviar } = preparar();
+  let resolver!: (valor: RespuestaMensajeWa) => void;
+  enviar.mockImplementation(() => new Promise(resolve => { resolver = resolve; }));
+  const pendiente = historial.enviar({ waId: numero, texto: 'Hola' }, { tipo: 'texto', texto: 'Hola' });
+  const llegada = new Date(2026, 10, 25, 9, 6);
+  vi.setSystemTime(llegada);
+  resolver({ mensajes: [...respuesta.mensajes, { tipo: 'texto', texto: 'Otra respuesta' }] });
+  await pendiente;
+  historial.recibirMensajes(numero, [{ tipo: 'texto', texto: 'Aviso de la empresa' }]);
+  mostrarChat(historial);
+  const horas = screen.getAllByText('09:06', { selector: '.wa-bot time' });
+  expect(horas.map(hora => hora.getAttribute('datetime'))).toEqual(Array(3).fill(llegada.toISOString()));
+});
+
+it('conserva las horas originales al recargar el historial', async () => {
+  vi.useFakeTimers();
+  vi.setSystemTime(new Date(2026, 10, 25, 18, 7));
+  const { cliente, historial } = preparar();
+  await historial.enviar({ waId: numero, texto: 'Hola' }, { tipo: 'texto', texto: 'Hola' });
+  vi.setSystemTime(new Date(2026, 10, 26, 0, 0));
+  mostrarChat(new HistorialWa(cliente));
+  expect(screen.getAllByText('18:07', { selector: 'time' })).toHaveLength(2);
+});
+
+it('carga el historial anterior sin agregar hora a las entradas antiguas', async () => {
+  vi.useFakeTimers();
+  vi.setSystemTime(new Date(2026, 10, 25, 0, 5));
+  sessionStorage.setItem(`noki:wa:${numero}`, JSON.stringify([
+    { id: 'anterior', origen: 'usuario', tipo: 'texto', texto: 'Mensaje anterior' },
+  ]));
+  const { historial } = preparar();
+  await historial.enviar({ waId: numero, texto: 'Hola' }, { tipo: 'texto', texto: 'Hola' });
+  mostrarChat(historial);
+  expect(screen.getByText('Mensaje anterior').closest('.wa-burbuja')?.querySelector('time')).toBeNull();
+  expect(screen.getAllByText('00:05', { selector: 'time' })).toHaveLength(2);
+});
 
 it('Historial acumulado: conserva usuario y bot en orden, por número e hidrata tras recarga', async () => {
   const { cliente, historial } = preparar();

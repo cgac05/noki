@@ -150,6 +150,7 @@ small { display: block; margin-top: 0.25rem; font-size: 0.8125rem; color: var(--
 .wa-burbuja { max-width: 90%; padding: 0.75rem 1rem; border-radius: 0.75rem; overflow-wrap: anywhere; line-height: 1.6; }
 .wa-bot { background: var(--sd-fondo); }
 .wa-usuario { align-self: flex-end; background: var(--sd-fondo-interactivo); }
+.wa-hora { display: block; margin-top: 0.25rem; color: var(--tinta-secundaria); font-size: 0.75rem; line-height: 1.25; text-align: right; }
 .wa-burbuja p { margin: 0 0 0.5rem; }
 .wa-burbuja p:last-child { margin-bottom: 0; }
 .wa-burbuja .mensaje-bot { padding: 0; border: 0; }

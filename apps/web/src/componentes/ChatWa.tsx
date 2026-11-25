@@ -5,6 +5,8 @@ import { MensajeBot } from './MensajeBot.tsx';
 import { HojaOpciones } from './HojaOpciones.tsx';
 import { ModalFlow } from './ModalFlow.tsx';
 
+const formatoHora = new Intl.DateTimeFormat('es-MX', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+
 export function ChatWa({ entradas, enviando, onElegir, onReintentar, onFlow, onDescartarFlow }: { entradas: EntradaHistorial[]; enviando: boolean; onElegir: (payload: string, titulo: string) => void; onReintentar: (id: string) => void; onFlow: (valores: Record<string, string>, resumen: string) => Promise<boolean>; onDescartarFlow: () => void }) {
   const [lista, setLista] = useState<Extract<Mensaje, { tipo: 'lista' }> | null>(null);
   const [flow, setFlow] = useState<Extract<Mensaje, { tipo: 'flow' }> | null>(null);
@@ -26,6 +28,7 @@ export function ChatWa({ entradas, enviando, onElegir, onReintentar, onFlow, onD
           {mensaje?.tipo === 'lista' ? <><p>{mensaje.texto}</p><button type="button" className="boton-secundario" disabled={deshabilitado} onClick={() => setLista(mensaje)}>Ver opciones</button></>
             : mensaje ? <MensajeBot mensaje={mensaje} deshabilitado={deshabilitado} onAbrirFlow={() => { if (mensaje.tipo === 'flow') setFlow(mensaje); }} onElegir={payload => { const titulo = mensaje.tipo === 'botones' ? mensaje.botones.find(opcion => opcion.payload === payload)?.titulo : undefined; onElegir(payload, titulo ?? 'Opción elegida'); }} /> : <p>{entrada.texto}</p>}
           {entrada.estado === 'error' && <div className="wa-error" role="alert"><p>{entrada.error}</p>{entrada.tipo !== 'flow-resumen' && <button type="button" disabled={enviando} onClick={() => onReintentar(entrada.id)}>Reintentar</button>}</div>}
+          {entrada.enviadoEn && <time className="wa-hora" dateTime={entrada.enviadoEn}>{formatoHora.format(new Date(entrada.enviadoEn))}</time>}
         </div>;
       })}
       {enviando && <p className="wa-escribiendo" role="status">escribiendo…</p>}

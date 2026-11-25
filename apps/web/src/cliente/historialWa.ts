@@ -8,6 +8,7 @@ import { ErrorCliente, validar } from './errores.ts';
 const EntradaSchema = z.object({
   id: z.string(), origen: z.enum(['usuario', 'bot']), tipo: z.enum(['texto', 'opcion', 'flow-resumen', 'mensaje-bot']),
   texto: z.string().optional(), mensaje: MensajeBotSchema.optional(),
+  enviadoEn: z.iso.datetime().optional(),
   estado: z.enum(['enviando', 'enviado', 'error']).optional(), error: z.string().optional(),
 });
 export type EntradaHistorial = z.infer<typeof EntradaSchema>;
@@ -82,6 +83,7 @@ export class HistorialWa {
 
   recibirMensajes(waId: string, mensajes: MensajeBot[]) {
     if (!this.#numeros.includes(waId)) return;
+    const enviadoEn = new Date().toISOString();
     const conversacion = this.obtener(waId);
     const entradas = [...conversacion.vista.entradas];
     for (const dato of mensajes) {
@@ -90,7 +92,7 @@ export class HistorialWa {
       while (ultimoBot >= 0 && entradas[ultimoBot]?.origen !== 'bot') ultimoBot--;
       const anterior = entradas[ultimoBot];
       if (anterior?.mensaje && contenidoVisible(anterior.mensaje) === contenidoVisible(mensaje)) entradas[ultimoBot] = { ...anterior, mensaje };
-      else entradas.push({ id: crypto.randomUUID(), origen: 'bot', tipo: 'mensaje-bot', mensaje });
+      else entradas.push({ id: crypto.randomUUID(), origen: 'bot', tipo: 'mensaje-bot', mensaje, enviadoEn });
     }
     this.actualizar(waId, { ...conversacion.vista, entradas });
     if (waId !== this.#activo && !this.#nuevos.includes(waId)) {
@@ -115,7 +117,7 @@ export class HistorialWa {
     const id = crypto.randomUUID();
     const texto = entrada.texto && /^\s*CONTINUAR\s+\S+/i.test(entrada.texto) ? 'CONTINUAR ••••' : entrada.texto ?? resumen.texto;
     const secretos = Object.values(entrada.flowResponse ?? {});
-    const burbuja: EntradaHistorial = { id, origen: 'usuario', tipo: resumen.tipo, texto: redactar(texto, secretos), estado: 'enviando' };
+    const burbuja: EntradaHistorial = { id, origen: 'usuario', tipo: resumen.tipo, texto: redactar(texto, secretos), estado: 'enviando', enviadoEn: new Date().toISOString() };
     conversacion.pendientes.set(id, { solicitud: entrada, clave: crypto.randomUUID() });
     this.actualizar(entrada.waId, { entradas: [...conversacion.vista.entradas, burbuja], enviando: true });
     return this.ejecutar(entrada.waId, id);
@@ -165,7 +167,7 @@ export class HistorialWa {
   private actualizar(waId: string, vista: ConversacionWa) {
     this.obtener(waId).vista = vista;
     // Proyección explícita: nunca se serializan solicitudes, claves ni registros de códigos.
-    const entradas = vista.entradas.map(({ id, origen, tipo, texto, mensaje, estado, error }) => ({ id, origen, tipo, ...(texto !== undefined ? { texto } : {}), ...(mensaje ? { mensaje } : {}), ...(estado ? { estado } : {}), ...(error ? { error } : {}) }));
+    const entradas = vista.entradas.map(({ id, origen, tipo, texto, mensaje, estado, error, enviadoEn }) => ({ id, origen, tipo, enviadoEn, ...(texto !== undefined ? { texto } : {}), ...(mensaje ? { mensaje } : {}), ...(estado ? { estado } : {}), ...(error ? { error } : {}) }));
     try { this.#almacenamiento?.setItem(`noki:wa:${waId}`, JSON.stringify(entradas)); } catch { /* Se conserva el historial en memoria. */ }
     this.notificar(waId);
   }
@@ -176,11 +178,12 @@ export class HistorialWa {
     try {
       const respuesta = await this.cliente.enviarMensajeWa(pendiente.solicitud, { idempotencyKey: pendiente.clave });
       if (revision !== conversacion.revision) return false;
+      const enviadoEn = new Date().toISOString();
       const codigo = pendiente.solicitud.texto?.match(/^CONTINUAR\s+(.+)$/i)?.[1];
       const secretos = [...Object.values(pendiente.solicitud.flowResponse ?? {}), ...(codigo ? [codigo] : [])];
       const mensajes = respuesta.mensajes.map(mensaje => redactar<MensajeBot>(mensaje, secretos));
       conversacion.pendientes.delete(id);
-      this.actualizar(waId, { entradas: [...conversacion.vista.entradas.map(e => e.id === id ? { ...e, estado: 'enviado' as const, error: undefined } : e), ...mensajes.map(mensaje => ({ id: crypto.randomUUID(), origen: 'bot' as const, tipo: 'mensaje-bot' as const, mensaje }))], enviando: false });
+      this.actualizar(waId, { entradas: [...conversacion.vista.entradas.map(e => e.id === id ? { ...e, estado: 'enviado' as const, error: undefined } : e), ...mensajes.map(mensaje => ({ id: crypto.randomUUID(), origen: 'bot' as const, tipo: 'mensaje-bot' as const, mensaje, enviadoEn }))], enviando: false });
       this.#alResponder?.();
       return true;
     } catch (error) {
