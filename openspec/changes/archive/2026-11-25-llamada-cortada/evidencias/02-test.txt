@@ -1,0 +1,2 @@
+corepack pnpm test
+BLOQUEADO (salida 1): Error: EPERM: operation not permitted, open tsc.

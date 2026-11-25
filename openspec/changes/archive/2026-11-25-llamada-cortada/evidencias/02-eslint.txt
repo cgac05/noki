@@ -1,0 +1,2 @@
+corepack pnpm exec eslint .
+BLOQUEADO (salida 1): Error: EPERM: operation not permitted, open eslint.js.

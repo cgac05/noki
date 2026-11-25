@@ -1,0 +1,2 @@
+corepack pnpm lint:deps
+BLOQUEADO (salida 1): Error: EPERM: operation not permitted, open dependency-cruise.mjs.

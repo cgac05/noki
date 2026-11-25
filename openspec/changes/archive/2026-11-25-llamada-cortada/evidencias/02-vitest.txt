@@ -1,0 +1,2 @@
+corepack pnpm exec vitest run --project unitarios --project web --testTimeout=30000
+BLOQUEADO (salida 1): Error: EPERM: operation not permitted, open vitest.mjs.

@@ -1,0 +1,4 @@
+Comando: corepack pnpm exec vitest run --project web apps/web/src/vistas/webReal.test.tsx apps/web/src/vistas/identidadAsesor.test.tsx --testTimeout=30000
+Resultado: BLOQUEADO (salida 1) antes de editar código de producto.
+Node.js v24.13.0: EPERM (errno -4048), open de vitest/vitest.mjs.
+Vitest no llegó a ejecutar las aserciones; el rojo queda sin confirmar.

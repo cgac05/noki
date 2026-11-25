@@ -1,0 +1,3 @@
+﻿corepack pnpm exec vitest run --project unitarios --project web --testTimeout=30000 tests/unit/api/llamadaCortadaWa.test.ts apps/web/src/vistas/consolas.test.tsx
+BLOQUEADO (salida 1): Error: EPERM: operation not permitted, open vitest.mjs.
+Vitest no llegó a ejecutar las pruebas.
