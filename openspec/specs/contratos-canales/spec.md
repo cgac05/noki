@@ -59,7 +59,6 @@ El esquema de `POST /api/comandos` SHALL aceptar `{ canal, actor, tipo, tramiteI
 
 - `IniciarTramite` SHALL admitir `payload.contacto` opcional con 10 a 15 dígitos.
 - `SolicitarContinuacion` SHALL exigir `tramiteId` y `payload.destino` igual a `whatsapp`.
-- `ComprobarIdentidad` SHALL exigir `tramiteId` y `payload.metodo` igual a `INE_CLINICA`, sin más campos.
 - `CerrarAtencion` SHALL exigir `tramiteId` y un `payload` vacío.
 - `IdentificarPaciente` SHALL exigir `tramiteId` y un `payload` discriminado por `paso`:
   - `DESTINATARIO` con `para` (`MI` | `OTRA_PERSONA`);
@@ -99,13 +98,13 @@ La respuesta SHALL ser `{ tramite, siguientePregunta, eventos }` según `AGENTS.
 - **WHEN** se validan `IdentificarPaciente` con `{ paso: 'CURP', curp: null }`, con `{ paso: 'CONFIRMAR', candidato: null }`, con `{ paso: 'FECHA_NAC', fechaNac: '1990-02-30' }` y con `{ paso: 'DATOS', nombre: 'Ana', apellidoPaterno: 'Demo', entidadNacimiento: 'XX' }`
 - **THEN** los dos primeros son válidos y los otros dos fallan
 
-#### Scenario: Identidad comprobada en clínica
-- **WHEN** se validan `ComprobarIdentidad` con `tramiteId` y `{ metodo: 'INE_CLINICA' }`, sin `tramiteId`, con `{ metodo: 'OTP_SMS' }` y con `{ metodo: 'INE_CLINICA', folio: '12345678' }`
-- **THEN** solo el primero es válido
-
 #### Scenario: Cerrar atención
 - **WHEN** se validan `CerrarAtencion` con `tramiteId` y `payload: {}`, y sin `tramiteId`
 - **THEN** el primero es válido y el segundo falla
+
+#### Scenario: Identidad comprobada en clínica
+- **WHEN** se valida un comando `ComprobarIdentidad` con `tramiteId` y `{ metodo: 'INE_CLINICA' }`
+- **THEN** la validación falla porque el tipo no existe
 
 ### Requirement: Siguiente pregunta con pista de interfaz
 `SiguientePregunta` SHALL indicar la casilla a llenar y una pista de interfaz con el tipo de entrada (texto, botones, lista, modal tipo Flow o ninguna), las opciones cuando apliquen, qué campos se capturan como `sensitive` o `passcode` y, para la casilla `paciente`, el `paso` de identificación opcional (`DESTINATARIO` | `CONFIRMAR` | `FECHA_NAC` | `CURP` | `DATOS`). La ausencia de casillas pendientes MUST representarse con una variante explícita de completo.
@@ -184,3 +183,14 @@ Los enumerados que el paquete de contratos repite del dominio (canales, estados,
 #### Scenario: Divergencia detectada
 - **WHEN** se agrega un estado al dominio sin agregarlo al esquema de contratos
 - **THEN** la prueba de coherencia o la verificación de tipos falla
+
+### Requirement: Contrato del reloj de demo
+El paquete de contratos SHALL publicar el esquema del cuerpo de `POST /api/demo/reloj`, `{ adelantarMinutos }` (entero de 1 a 10080), el de su respuesta, `{ ahora }` (ISO 8601 UTC), y la ruta como constante, marcada como solo demo. La API SHALL validar el cuerpo con ese esquema y la web SHALL usar el mismo esquema y la misma constante para el botón «Adelantar reloj» de `/admin`.
+
+#### Scenario: Cuerpo del reloj
+- **WHEN** se validan `{ adelantarMinutos: 60 }`, `{ adelantarMinutos: 0 }`, `{ adelantarMinutos: 10081 }` y `{ adelantarMinutos: 1.5 }`
+- **THEN** solo el primero es válido
+
+#### Scenario: Respuesta del reloj
+- **WHEN** se valida `{ ahora: '2026-11-26T16:15:00.000Z' }` y `{ ahora: 'mañana' }`
+- **THEN** la primera es válida y la segunda falla
