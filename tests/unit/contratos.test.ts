@@ -25,20 +25,19 @@ describe('comandos de clínica en el adaptador HTTP', () => {
       const antes = await leer();
       expect(antes.statusCode).toBe(200);
       const eventosAntes = tramites.eventos().length;
-      for (const comando of [
-        { tipo: 'ComprobarIdentidad', payload: { metodo: 'INE_CLINICA' } },
-        { tipo: 'CerrarAtencion', payload: {} },
-      ]) {
-        const respuesta = await enviar({ canal: 'clinica', actor: 'recepcion:demo', tramiteId: tramite.id, ...comando });
-        expect(respuesta.statusCode).toBe(404);
-        expect(CuerpoErrorSchema.parse(respuesta.json()).error).toMatchObject({
-          codigo: 'NO_ENCONTRADO', datos: { entidad: 'operacion', id: tramite.id },
-        });
-        const despues = await leer();
-        expect(despues.statusCode).toBe(200);
-        expect(despues.json()).toEqual(antes.json());
-        expect(tramites.eventos()).toHaveLength(eventosAntes);
-      }
+      const clinica = { canal: 'clinica', actor: 'recepcion:demo', tramiteId: tramite.id };
+      const identidad = await enviar({ ...clinica, tipo: 'ComprobarIdentidad', payload: { metodo: 'INE_CLINICA' } });
+      expect(identidad.statusCode).toBe(404);
+      expect(CuerpoErrorSchema.parse(identidad.json()).error).toMatchObject({
+        codigo: 'NO_ENCONTRADO', datos: { entidad: 'operacion', id: tramite.id },
+      });
+      const cierre = await enviar({ ...clinica, tipo: 'CerrarAtencion', payload: {} });
+      expect(cierre.statusCode).toBe(409);
+      expect(CuerpoErrorSchema.parse(cierre.json()).error.codigo).toBe('TRANSICION_INVALIDA');
+      const despues = await leer();
+      expect(despues.statusCode).toBe(200);
+      expect(despues.json()).toEqual(antes.json());
+      expect(tramites.eventos()).toHaveLength(eventosAntes);
     } finally { await app.close(); }
   });
 });

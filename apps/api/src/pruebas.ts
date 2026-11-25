@@ -56,6 +56,6 @@ export function crearApiPruebas(opciones: {
     comandos: { casos, tokens, lecturas, ids, demo: opciones.demo ?? true, idempotencia,
       solicitarContinuacion: casos.solicitarContinuacion.bind(casos) }, whatsapp, relojDemo,
   });
-  return { app, casos, tokens, ids, reloj, lecturas, tramites, contactos, pacientes, catalogo, agenda, agendaExterna, temporizadores };
+  return { app, casos, tokens, ids, reloj, lecturas, tramites, contactos, pacientes, catalogo, agenda, agendaExterna, temporizadores, sinTramite };
 }
 export { io as clienteTiempoReal } from 'socket.io-client';

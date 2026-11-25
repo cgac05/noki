@@ -29,6 +29,7 @@ const wa = { ...cc, actor: 'paciente', canal: 'whatsapp', nivel: 0, idempotencyK
 
 function escenario(registrarError = vi.fn<(datos: { correlation_id: string; codigo: string }) => void>()) {
   const tramites = new TramiteRepoMemoria();
+  tramites.registrarZonaSede(sedeId, 'America/Mazatlan');
   const pacientes = new PacientesMemoria();
   const hilos = new HiloRepoMemoria();
   const contactos = new ContactosMemoria(pacientes);
@@ -296,6 +297,63 @@ it('registra llegada con el QR una sola vez', async () => {
   await expect(casos.retomar({ valorContacto: 'contacto', token: qr }, wa)).resolves.toEqual({ tipo: 'SIN_RESULTADO' });
   await expect(casos.registrarLlegada(qr, clinica)).resolves.toMatchObject({ tramite: { estado: 'EN_CLINICA' } });
   await expect(casos.registrarLlegada(qr, clinica)).rejects.toMatchObject({ regla: 'TOKEN_INVALIDO' });
+});
+
+const recepcion = { ...cc, canal: 'clinica', actor: 'recepcion:demo' } as const;
+
+async function formarFila(puertos: ReturnType<typeof escenario>) {
+  const { casos, tokens, reloj } = puertos;
+  const fila = [];
+  for (const hora of [20, 19, 18]) {
+    const id = await listo(casos);
+    await casos.reservar(id, `2026-11-25T${hora}:00:00Z`, cc);
+    const { tramite } = await casos.confirmar(id, cc);
+    const qr = tokens.emitir({
+      tramiteId: id, hiloId: tramite.hiloId, nivel: 1, canalOrigen: 'app', metodo: 'TOKEN_WEB',
+    }, 'LLEGADA');
+    await casos.registrarLlegada(qr, recepcion);
+    reloj.adelantar(1000);
+    fila.push(id);
+  }
+  return fila;
+}
+
+it.each([0, 1])('cierra la atención en el índice %i y actualiza solo los turnos posteriores', async indice => {
+  const puertos = escenario();
+  const fila = await formarFila(puertos);
+  const cierre = await puertos.casos.cerrarAtencion(fila[indice]!, recepcion);
+  expect(cierre).toMatchObject({ tramite: { estado: 'ATENDIDA' }, eventos: [{ tipo: 'AtencionCerrada' }] });
+  const turnos = puertos.tramites.eventos().filter(evento => evento.tipo === 'TurnoActualizado');
+  expect(turnos).toMatchObject(fila.slice(indice + 1).map((id, i) => ({
+    tramiteId: id, payload: { posicion: indice + i + 1 }, correlationId: recepcion.correlationId,
+  })));
+  expect(new Set(turnos.map(evento => evento.idempotencyKey)).size).toBe(turnos.length);
+});
+
+it('solo permite cerrar la atención a recepción desde clínica', async () => {
+  const puertos = escenario();
+  const [id] = await formarFila(puertos);
+  await expect(puertos.casos.cerrarAtencion(id!, cc)).rejects.toMatchObject({ regla: 'SOLO_RECEPCION' });
+  expect((await puertos.tramites.obtener(id!))?.estado).toBe('EN_CLINICA');
+});
+
+it('conserva la respuesta al fallar un turno y actualiza los siguientes', async () => {
+  const registrarError = vi.fn();
+  const puertos = escenario(registrarError);
+  const [primero, segundo, tercero] = await formarFila(puertos);
+  const guardar = puertos.tramites.guardar.bind(puertos.tramites);
+  vi.spyOn(puertos.tramites, 'guardar').mockImplementation(async tramite => {
+    if (tramite.id === segundo) throw new Error('Fallo simulado');
+    await guardar(tramite);
+  });
+  await expect(puertos.casos.cerrarAtencion(primero!, recepcion))
+    .resolves.toMatchObject({ tramite: { estado: 'ATENDIDA' } });
+  expect(registrarError).toHaveBeenCalledExactlyOnceWith({
+    codigo: 'TURNO_NO_ACTUALIZADO', correlation_id: recepcion.correlationId,
+  });
+  expect(puertos.tramites.eventos().filter(evento => evento.tipo === 'TurnoActualizado')).toMatchObject([
+    { tramiteId: tercero, payload: { posicion: 2 } },
+  ]);
 });
 
 it('pide fecha de nacimiento para un folio y bloquea al tercer intento', async () => {

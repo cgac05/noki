@@ -23,6 +23,20 @@ export interface CitaLeida {
   inicio: string;
 }
 
+export interface LlegadaLeida extends CitaLeida {
+  posicion?: number;
+}
+
+export interface AlertaSeguridadLeida {
+  id: string;
+  tipo: 'INTENTO_VERIFICACION_FALLIDO';
+  canal: Canal;
+  ts: string;
+  intentos: number;
+  bloqueado: boolean;
+  hiloId: HiloId | null;
+}
+
 export interface FichaLeida {
   hiloId: HiloId;
   nombrePila: string | null;
@@ -54,7 +68,8 @@ export interface LecturasPort {
   zonaSede(id: SedeId): Promise<string | null>;
   fichaHilo(id: HiloId): Promise<FichaLeida | null>;
   citasPaciente(id: PacienteId): Promise<CitaLeida[]>;
-  llegadasSede(id: SedeId, ts: string): Promise<CitaLeida[]>;
+  llegadasSede(id: SedeId, ts: string): Promise<LlegadaLeida[]>;
+  alertasSeguridad(): Promise<AlertaSeguridadLeida[]>;
   metricas(): Promise<MetricasLeidas>;
   contextoDemo(): Promise<ContextoDemoLeido>;
   horariosOcupados(id: SedeId, fecha: string, ts: string): Promise<string[]>;

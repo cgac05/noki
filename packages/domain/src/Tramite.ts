@@ -64,6 +64,7 @@ export interface TramiteInstantanea {
 
 export class Tramite {
   private readonly pendientes: EventoDominio[] = [];
+  private posicionTurno?: number;
 
   static rehidratar(instantanea: TramiteInstantanea, registro: RegistroTiposTramite): Tramite {
     const { id, hiloId, tipo, canalOrigen, datos } = instantanea;
@@ -335,6 +336,13 @@ export class Tramite {
 
   registrarLlegada(contexto: ContextoOperacion): void {
     this.transicionar('registrarLlegada', contexto, { tipo: 'PacienteLlego', payload: { sedeId: this.sede('registrarLlegada') } });
+  }
+
+  actualizarTurno(posicion: number, contexto: ContextoOperacion): void {
+    if (this.estado !== 'EN_CLINICA') throw new TransicionInvalida(this.estado, 'actualizarTurno');
+    if (this.posicionTurno === posicion) return;
+    this.posicionTurno = posicion;
+    this.anotar(contexto, { tipo: 'TurnoActualizado', payload: { posicion } });
   }
 
   cerrarAtencion(contexto: ContextoOperacion): void {

@@ -1,6 +1,5 @@
 import type { Server as ServidorHttp } from 'node:http';
 import { Server } from 'socket.io';
-import { formatInTimeZone } from 'date-fns-tz';
 import {
   ESQUEMAS_EVENTOS_SOCKET, EVENTOS_CLIENTE_SOCKET, EVENTOS_SOCKET, SalaSchema,
   type DatosEventoSocket, type NombreEventoSocket,
@@ -41,15 +40,16 @@ export function crearTiempoReal(servidor: ServidorHttp, origen: string, lecturas
     const linea = await lecturas.lineaTiempo(evento.hiloId);
     if (linea) emitir(hilo, EVENTOS_SOCKET.HILO_LINEA_TIEMPO, { hiloId: evento.hiloId, eventos: linea.slice(-200) });
     emitir('admin', EVENTOS_SOCKET.ADMIN_METRICAS, (await lecturas.metricas()).kpis);
-    if (evento.tipo === 'PacienteLlego' && evento.tramiteId) {
-      const { sedeId } = evento.payload;
+    if (!actual?.sedeId) return;
+    const { sedeId, id: tramiteId } = actual;
+    if (evento.tipo === 'AtencionCerrada') {
+      emitir('sede:' + sedeId, EVENTOS_SOCKET.SEDE_FILA, { tramiteId, posicion: 0 });
+    } else if (evento.tipo === 'TurnoActualizado') {
+      emitir('sede:' + sedeId, EVENTOS_SOCKET.SEDE_FILA, { tramiteId, posicion: evento.payload.posicion });
+    } else if (evento.tipo === 'PacienteLlego') {
       const llegadas = await lecturas.llegadasSede(sedeId, reloj.ahora().toISOString());
-      emitir('sede:' + sedeId, EVENTOS_SOCKET.SEDE_FILA, {
-        tramiteId: evento.tramiteId, posicion: llegadas.filter(cita =>
-          cita.tramite.estado === 'EN_CLINICA' &&
-          formatInTimeZone(cita.inicio, cita.zonaHoraria, 'yyyy-MM-dd') ===
-          formatInTimeZone(reloj.ahora(), cita.zonaHoraria, 'yyyy-MM-dd')).length,
-      });
+      const posicion = llegadas.find(cita => cita.tramite.id === tramiteId)?.posicion;
+      if (posicion !== undefined) emitir('sede:' + sedeId, EVENTOS_SOCKET.SEDE_FILA, { tramiteId, posicion });
     }
   }
 

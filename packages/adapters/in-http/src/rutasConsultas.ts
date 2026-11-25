@@ -63,10 +63,12 @@ export const rutasConsultas: FastifyPluginAsync<DependenciasConsultas> = async (
   registrar('citasPaciente', async ({ pacienteId }) => Promise.all(
     (await lecturas.citasPaciente(pacienteId as PacienteId)).map(cita => vistaCita(cita, emisor))));
   registrar('llegadasSede', async ({ sedeId }) => Promise.all(
-    (await lecturas.llegadasSede(sedeId as SedeId, reloj.ahora().toISOString())).map(async cita => ({
+    (await lecturas.llegadasSede(sedeId as SedeId, reloj.ahora().toISOString())).map(async ({ posicion, ...cita }) => ({
       cita: await vistaCita(cita, emisor), registrada: cita.tramite.estado === 'EN_CLINICA',
+      ...(posicion === undefined ? {} : { posicion }),
     }))));
   registrar('metricas', () => lecturas.metricas());
+  registrar('alertasSeguridad', () => lecturas.alertasSeguridad());
   registrar('bandeja', () => deps.bandeja.listar());
   registrar('contextoDemo', () => lecturas.contextoDemo());
 };

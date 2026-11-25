@@ -1,7 +1,7 @@
 import { Writable } from 'node:stream';
 import { expect, it } from 'vitest';
 import { crearApiPruebas } from '../../../apps/api/src/pruebas.ts';
-import { RespuestaMensajeWaSchema, type MensajeBot } from '../../../packages/contracts/src/index.ts';
+import { RespuestaMensajeWaSchema, RUTAS_CONSULTAS, type MensajeBot } from '../../../packages/contracts/src/index.ts';
 import type { PacienteId, SedeId, ServicioId } from '../../../packages/domain/src/index.ts';
 
 const waId = '5210000000075';
@@ -80,6 +80,13 @@ it('Fecha equivocada registra tres intentos y pide esperar sin repetir datos', a
       if (indice < 2) await pulsar(mensajes, 'Soy Ana P.');
       else expect(mensajes).toHaveLength(1);
     }
+    const respuesta = await app.inject({ url: '/api/admin/alertas' });
+    expect(respuesta.statusCode).toBe(200);
+    const alertas = RUTAS_CONSULTAS.alertasSeguridad.respuesta.parse(respuesta.json());
+    expect(alertas.map(({ intentos, bloqueado }) => ({ intentos, bloqueado }))).toEqual([
+      { intentos: 3, bloqueado: true }, { intentos: 2, bloqueado: false }, { intentos: 1, bloqueado: false },
+    ]);
+    for (const valor of [...fechas, fechaCorrecta, waId]) expect(respuesta.body).not.toContain(valor);
   } finally { await app.close(); }
 });
 

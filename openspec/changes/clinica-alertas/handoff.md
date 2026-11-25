@@ -1,0 +1,27 @@
+# Transferencia: clinica-alertas
+
+- Responsable: frente A (núcleo), co-responsables `J3sus-esb` y `cgac05`; basta uno. No toca archivos compartidos (design D6).
+- Objetivo: implementar en el núcleo y la API lo que fijó `contratos-clinica-alertas`, sin comprobación de identidad en clínica: cierre de atención con avance de la fila, posición en la fila y alertas de seguridad. Ver `proposal.md` (Why).
+- Alcance propuesto: `proposal.md` (What Changes), sin lo listado en «Fuera de alcance»; design D1–D6.
+- Historial: la revisión 1 incluía `ComprobarIdentidad` con INE. No se autorizó ni se implementó. Christian la descartó el 2026-11-25 («en clínica está bien que sea el QR porque ya pasamos por todo el apartado de confirmación con teléfono o CURP antes»), y de ahí salió la revisión 2 (design D2).
+- Autorización de implementación: otorgada por `cgac05` (Christian Avila), co-responsable del frente A, en el hilo del proyecto el 2026-11-25. Cita: "Autorizo implementar clinica-alertas con la revisión 2." Cubre la revisión 2 (hashes de abajo, sin cambios al registrarla). No autoriza commits.
+- Revisión presentada: revisión 2 en la rama local `feat/clinica-alertas` (árbol `noki-identidad`), sobre `main` `e3d49ea`, sin commit. SHA-256 (12 primeros caracteres): `proposal.md` 286ef4d6b492 · `design.md` 4467e81c6db3 · `tasks.md` 1b2597d74a4a · `specs/atencion-clinica/spec.md` e157de368558 · `specs/consultas-api/spec.md` 2c416547e709 · `specs/tiempo-real/spec.md` 02eaabf797f3. `openspec validate clinica-alertas --type change --strict --no-interactive` → válido.
+- Artefactos a leer:
+  - `proposal.md`, `design.md`, `tasks.md` y los deltas de `atencion-clinica`, `tiempo-real` y `consultas-api`;
+  - el archivo `openspec/changes/archive/2026-11-25-contratos-clinica-alertas/` (D2, D4 y D5);
+  - `openspec/specs/{tramite-nucleo,consultas-api,tiempo-real,contratos-consultas}/spec.md`;
+  - `AGENTS.md` §5–§9.
+- Tareas pendientes: 1.1–3.2 de `tasks.md`.
+- Restricciones:
+  - Solo archivos del frente A. No se tocan `packages/contracts`, `docs/`, `AGENTS.md`, `PLAN.md` ni `apps/web`.
+  - `ComprobarIdentidad` conserva su respuesta 404.
+  - Sin migraciones ni dependencias nuevas.
+  - Alertas, eventos y logs sin datos personales.
+  - Evidencia en la carpeta del cambio, sin rutas locales. No crear commits.
+  - No tocar `openspec/changes/documentacion-compartida/` si aparece en el mismo árbol.
+- Criterios de aceptación: requisitos y escenarios de los tres deltas.
+- Validaciones requeridas: punto de control 3.1 y recorrido 3.2.
+- Detener la parte afectada si:
+  - algo exige cambiar un contrato, `docs/eventos.md` o el vocabulario de errores;
+  - `filaSede` no da el mismo orden en memoria y en Postgres.
+- Autorización de cierre: otorgada por `cgac05` (Christian Avila), co-responsable del frente A, en el hilo del proyecto el 2026-11-25, después de la primera vuelta PASS de `revision.md`. Cita: "Autorizo commit, push de feat/clinica-alertas, integrar en main por fast-forward y cerrar clinica-alertas." Cubre el commit de la implementación, la evidencia y la revisión, el push de la rama, el fast-forward de `main` y su push, y la sincronización de specs y el archivado.

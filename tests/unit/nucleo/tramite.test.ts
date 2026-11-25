@@ -107,3 +107,25 @@ it('expira por inactividad antes de confirmar', () => {
   expect(tramite.estado).toBe('EXPIRADO');
   expect(tramite.eventosPendientes().at(-1)?.tipo).toBe('TramiteExpirado');
 });
+
+it('solo actualiza el turno en clínica y emite un evento por cambio de posición', () => {
+  const tramite = iniciar();
+  expect(() => tramite.actualizarTurno(2, contexto)).toThrow(expect.objectContaining({ de: 'BORRADOR' }));
+  tramite.seleccionarServicio(servicioId, perfil, null, contexto);
+  tramite.seleccionarSede(sedeId, cotizacion, contexto);
+  tramite.asignarPaciente(pacienteId, contexto);
+  tramite.apartar(reserva, contexto);
+  tramite.confirmar('12345678', contexto);
+  tramite.registrarLlegada(contexto);
+  tramite.marcarGuardado();
+
+  const anterior = tramite.version;
+  tramite.actualizarTurno(2, contexto);
+  tramite.actualizarTurno(2, contexto);
+
+  expect(tramite.estado).toBe('EN_CLINICA');
+  expect(tramite.version).toBe(anterior + 1);
+  expect(tramite.eventosPendientes()).toMatchObject([
+    { tipo: 'TurnoActualizado', payload: { posicion: 2 }, version: anterior + 1 },
+  ]);
+});

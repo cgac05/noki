@@ -6,6 +6,7 @@ import type {
 export interface TramiteRepo {
   obtener(id: TramiteId): Promise<Tramite | null>;
   guardar(tramite: Tramite): Promise<void>;
+  filaSede(id: SedeId, ts: string): Promise<TramiteId[]>;
   abiertosPorPaciente(id: PacienteId): Promise<Tramite[]>;
   abiertosPorHilo(id: HiloId): Promise<Tramite[]>;
   porFolio(folio: string): Promise<Tramite | null>;

@@ -108,6 +108,13 @@ it.each(['vigente', 'vencida', 'compensacion'])('idempotencia y registro de fall
     } else {
       expect(primera.statusCode).toBe(200);
       expect(RespuestaComandoSchema.parse(primera.json()).tramite.estado).toBe('CONFIRMADA');
+      const cierre = await app.inject({
+        method: 'POST', url: '/api/comandos', headers: { 'idempotency-key': ids.nuevo() },
+        payload: { tipo: 'CerrarAtencion', canal: 'clinica', actor: 'recepcion:demo', tramiteId: id, payload: {} },
+      });
+      expect(cierre.statusCode).toBe(409);
+      expect(CuerpoErrorSchema.parse(cierre.json()).error.codigo).toBe('TRANSICION_INVALIDA');
+      expect((await tramites.obtener(id as TramiteId))?.estado).toBe('CONFIRMADA');
       expect(tramites.eventos().filter(evento => evento.tipo === 'CitaConfirmada')).toHaveLength(1);
       await casos.retomar({ valorContacto: '0000000001', token: 'alterado' }, {
         actor: 'asesor:demo', canal: 'callcenter', nivel: 0, vinculado: false, factores: new Set(),

@@ -1,5 +1,5 @@
 import { formatInTimeZone } from 'date-fns-tz';
-import type { CitaLeida, EventoLeido, GeneradorId, LecturasPort, OfertaLeida } from '@noki/application';
+import type { AlertaSeguridadLeida, CitaLeida, LlegadaLeida, EventoLeido, GeneradorId, LecturasPort, OfertaLeida } from '@noki/application';
 import { ESTADOS_TRAMITE, normalizarTelefono, type HiloId, type PacienteId, type SedeId, type Tramite, type TramiteId } from '@noki/domain';
 import type { AgendaMemoria } from './AgendaMemoria.ts';
 import type { ContactosMemoria } from './ContactosMemoria.ts';
@@ -10,7 +10,7 @@ import type { TramiteRepoMemoria } from './TramiteRepoMemoria.ts';
 
 export class LecturasMemoria implements LecturasPort {
   private readonly ofertas: OfertaLeida[] = [];
-  private readonly zonas = new Map<SedeId, string>();
+
   private readonly idsEventos = new Map<string, string>();
 
   constructor(private readonly tramites: TramiteRepoMemoria, private readonly contactos: ContactosMemoria,
@@ -19,7 +19,7 @@ export class LecturasMemoria implements LecturasPort {
 
   registrarOferta(oferta: OfertaLeida, zonaHoraria: string): void {
     this.ofertas.push({ ...oferta });
-    this.zonas.set(oferta.sedeId, zonaHoraria);
+    this.tramites.registrarZonaSede(oferta.sedeId, zonaHoraria);
   }
 
   tramite(id: TramiteId) { return this.tramites.obtener(id); }
@@ -50,7 +50,7 @@ export class LecturasMemoria implements LecturasPort {
     return structuredClone(this.ofertas).sort((a, b) => a.servicio.localeCompare(b.servicio) || a.sede.localeCompare(b.sede));
   }
 
-  async zonaSede(id: SedeId) { return this.zonas.get(id) ?? null; }
+  async zonaSede(id: SedeId) { return this.tramites.zonaSede(id) ?? null; }
 
   async fichaHilo(hiloId: HiloId) {
     const valor = this.contactos.valorPorHilo(hiloId);
@@ -78,7 +78,7 @@ export class LecturasMemoria implements LecturasPort {
   private leerCitas(tramites: Tramite[]): CitaLeida[] {
     return tramites.flatMap(tramite => {
       const oferta = this.ofertas.find(o => o.sedeId === tramite.sedeId && o.servicioId === tramite.servicioId);
-      const zonaHoraria = tramite.sedeId ? this.zonas.get(tramite.sedeId) : undefined;
+      const zonaHoraria = tramite.sedeId ? this.tramites.zonaSede(tramite.sedeId) : undefined;
       const horario = tramite.horario;
       return oferta && zonaHoraria && horario ? [{
         tramite, servicio: oferta.servicio, sede: oferta.sede, zonaHoraria, inicio: horario.inicio,
@@ -91,11 +91,21 @@ export class LecturasMemoria implements LecturasPort {
       ['CONFIRMADA', 'EN_CLINICA', 'ATENDIDA'].includes(t.estado)));
   }
 
-  async llegadasSede(id: SedeId, ts: string) {
-    return this.leerCitas(this.tramites.todos().filter(t => t.sedeId === id &&
-      ['CONFIRMADA', 'EN_CLINICA'].includes(t.estado))).filter(cita =>
-        formatInTimeZone(cita.inicio, cita.zonaHoraria, 'yyyy-MM-dd') >= formatInTimeZone(ts, cita.zonaHoraria, 'yyyy-MM-dd'),
-      ).slice(0, 50);
+  async llegadasSede(id: SedeId, ts: string): Promise<LlegadaLeida[]> {
+    const fila = await this.tramites.filaSede(id, ts);
+    const posiciones = new Map(fila.map((tramiteId, indice) => [tramiteId, indice + 1]));
+    return this.leerCitas(this.tramites.citasSede(id, ts)).map(cita => {
+      const posicion = posiciones.get(cita.tramite.id);
+      return posicion === undefined ? cita : { ...cita, posicion };
+    });
+  }
+
+  async alertasSeguridad(): Promise<AlertaSeguridadLeida[]> {
+    return this.eventos().reverse().filter(evento => evento.tipo === 'IntentoVerificacionFallido')
+      .slice(0, 50).map(({ id, canal, ts, hiloId, payload: { intentos } }) => ({
+        id, tipo: 'INTENTO_VERIFICACION_FALLIDO', canal, ts, intentos, bloqueado: intentos >= 3,
+        hiloId: hiloId ?? null,
+      }));
   }
 
   async metricas() {
@@ -135,7 +145,7 @@ export class LecturasMemoria implements LecturasPort {
   }
 
   async horariosOcupados(id: SedeId, fecha: string, ts: string) {
-    const zona = this.zonas.get(id);
+    const zona = this.tramites.zonaSede(id);
     return zona ? this.agenda.horariosOcupados(id, ts)
       .filter(inicio => formatInTimeZone(inicio, zona, 'yyyy-MM-dd') === fecha) : [];
   }

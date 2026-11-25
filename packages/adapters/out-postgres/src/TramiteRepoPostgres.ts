@@ -2,7 +2,7 @@ import { sql, type Kysely, type RawBuilder } from 'kysely';
 import type { GeneradorId, TramiteRepo } from '@noki/application';
 import {
   ConflictoVersion, Tramite,
-  type HiloId, type PacienteId, type RegistroTiposTramite, type TramiteId, type TramiteInstantanea,
+  type HiloId, type PacienteId, type RegistroTiposTramite, type SedeId, type TramiteId, type TramiteInstantanea,
 } from '@noki/domain';
 import { insertarEventos } from './eventStore.ts';
 
@@ -14,6 +14,23 @@ export class TramiteRepoPostgres implements TramiteRepo {
     private readonly registro: RegistroTiposTramite,
     private readonly ids: GeneradorId,
   ) {}
+
+  async filaSede(id: SedeId, ts: string): Promise<TramiteId[]> {
+    const { rows } = await sql<{ id: TramiteId }>`
+      WITH citas AS (
+        SELECT t.id, t.estado FROM tramite t
+        JOIN sede d ON d.id = t.sede_id
+        JOIN reserva r ON r.tramite_id = t.id AND r.estado = 'CONFIRMADA'
+        WHERE t.sede_id = ${id} AND t.estado IN ('CONFIRMADA', 'EN_CLINICA')
+          AND r.inicio >= date_trunc('day', ${ts}::timestamptz AT TIME ZONE d.zona_horaria) AT TIME ZONE d.zona_horaria
+        ORDER BY r.inicio, t.id LIMIT 50
+      )
+      SELECT c.id FROM citas c JOIN evento e ON e.tramite_id = c.id AND e.tipo = 'PacienteLlego'
+      WHERE c.estado = 'EN_CLINICA'
+      GROUP BY c.id ORDER BY min(e.ts), c.id
+    `.execute(this.db);
+    return rows.map(({ id }) => id);
+  }
 
   async obtener(id: TramiteId): Promise<Tramite | null> {
     return (await this.buscar(sql`id = ${id}`))[0] ?? null;

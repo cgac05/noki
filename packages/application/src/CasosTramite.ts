@@ -374,6 +374,33 @@ export class CasosTramite {
     return this.guardar(tramite, contexto);
   }
 
+  async cerrarAtencion(id: TramiteId, comando: ContextoComando): Promise<ResultadoComando> {
+    const contexto = this.contexto(comando);
+    if (contexto.canal !== 'clinica' || !contexto.actor.startsWith('recepcion:')) {
+      throw new ReglaViolada('SOLO_RECEPCION');
+    }
+    const tramite = await this.cargar(id);
+    const fila = tramite.estado === 'EN_CLINICA' && tramite.sedeId
+      ? await this.puertos.tramites.filaSede(tramite.sedeId, contexto.ts)
+      : [];
+    tramite.cerrarAtencion(contexto);
+    const resultado = await this.guardar(tramite, contexto);
+    const indice = fila.indexOf(id);
+    if (indice < 0) return resultado;
+    for (const [desplazamiento, siguiente] of fila.slice(indice + 1).entries()) {
+      try {
+        const pendiente = await this.cargar(siguiente);
+        pendiente.actualizarTurno(indice + desplazamiento + 1, {
+          ...contexto, idempotencyKey: this.puertos.ids.nuevo(),
+        });
+        await this.puertos.tramites.guardar(pendiente);
+      } catch {
+        this.puertos.registrarError?.({ codigo: 'TURNO_NO_ACTUALIZADO', correlation_id: contexto.correlationId });
+      }
+    }
+    return resultado;
+  }
+
   async cancelar(id: TramiteId, comando: ContextoComando): Promise<ResultadoComando> {
     this.puertos.politica.exigir('cancelar', comando);
     const contexto = this.contexto(comando);

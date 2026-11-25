@@ -1,5 +1,5 @@
 import { sql, type Kysely } from 'kysely';
-import type { DatosEmisionToken, CitaLeida, ContextoDemoLeido, EventoLeido, FichaLeida, LecturasPort, MetricasLeidas, OfertaLeida, TramiteRepo } from '@noki/application';
+import type { AlertaSeguridadLeida, DatosEmisionToken, CitaLeida, LlegadaLeida, ContextoDemoLeido, EventoLeido, FichaLeida, LecturasPort, MetricasLeidas, OfertaLeida, TramiteRepo } from '@noki/application';
 import { ESTADOS_TRAMITE, normalizarTelefono, type Canal, type EstadoTramite, type HiloId, type PacienteId, type SedeId, type Tramite, type TramiteId } from '@noki/domain';
 
 export class LecturasComandosPostgres implements LecturasPort {
@@ -81,9 +81,28 @@ export class LecturasComandosPostgres implements LecturasPort {
     return this.leerCitas(sql`t.paciente_id = ${id} AND t.estado IN ('CONFIRMADA','EN_CLINICA','ATENDIDA')`, false);
   }
 
-  llegadasSede(id: SedeId, ts: string): Promise<CitaLeida[]> {
-    return this.leerCitas(sql`t.sede_id = ${id} AND t.estado IN ('CONFIRMADA','EN_CLINICA')
-      AND r.inicio >= date_trunc('day', ${ts}::timestamptz AT TIME ZONE d.zona_horaria) AT TIME ZONE d.zona_horaria`, true);
+  async llegadasSede(id: SedeId, ts: string): Promise<LlegadaLeida[]> {
+    const [citas, fila] = await Promise.all([
+      this.leerCitas(sql`t.sede_id = ${id} AND t.estado IN ('CONFIRMADA','EN_CLINICA')
+        AND r.inicio >= date_trunc('day', ${ts}::timestamptz AT TIME ZONE d.zona_horaria) AT TIME ZONE d.zona_horaria`, true),
+      this.tramites.filaSede(id, ts),
+    ]);
+    const posiciones = new Map(fila.map((tramiteId, indice) => [tramiteId, indice + 1]));
+    return citas.map(cita => {
+      const posicion = posiciones.get(cita.tramite.id);
+      return cita.tramite.estado === 'EN_CLINICA' && posicion !== undefined ? { ...cita, posicion } : cita;
+    });
+  }
+
+  async alertasSeguridad(): Promise<AlertaSeguridadLeida[]> {
+    const { rows } = await sql<Pick<AlertaSeguridadLeida, 'id' | 'canal' | 'hiloId' | 'intentos'> & { ts: Date }>`
+      SELECT id, canal, ts, hilo_id AS "hiloId", (payload->>'intentos')::int AS intentos
+      FROM evento WHERE tipo = 'IntentoVerificacionFallido'
+      ORDER BY ts DESC, id DESC LIMIT 50
+    `.execute(this.db);
+    return rows.map(({ ts, ...alerta }) => ({
+      ...alerta, ts: ts.toISOString(), tipo: 'INTENTO_VERIFICACION_FALLIDO', bloqueado: alerta.intentos >= 3,
+    }));
   }
 
   private async leerCitas(filtro: ReturnType<typeof sql>, limitar: boolean): Promise<CitaLeida[]> {
