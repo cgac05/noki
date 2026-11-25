@@ -1,4 +1,4 @@
-import { act, cleanup, render, screen, waitFor, within } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -64,6 +64,56 @@ describe('Mensajes y siguiente pregunta', () => {
 });
 
 describe('Vistas del guion', () => {
+  it('reiniciar el guion C descarta la confirmación y la aprobación pendiente de la cita', async () => {
+    const { usuario } = abrir('/app');
+    await usuario.selectOptions(screen.getByRole('combobox', { name: 'Guion de demo' }), 'flujoC');
+    await usuario.click(await screen.findByRole('button', { name: 'Cancelar cita' }));
+    await usuario.click(screen.getByRole('button', { name: 'Reiniciar guion' }));
+    expect(screen.queryByRole('button', { name: 'Confirmar cancelación' })).toBeNull();
+    await usuario.click(await screen.findByRole('button', { name: 'Cancelar cita' }));
+    await usuario.click(screen.getByRole('button', { name: 'Confirmar cancelación' }));
+    await screen.findByText(/cancelación espera aprobación en WhatsApp/i);
+    await usuario.click(screen.getByRole('button', { name: 'Reiniciar guion' }));
+    expect(screen.queryByText(/cancelación espera aprobación en WhatsApp/i)).toBeNull();
+    expect(await screen.findByRole('button', { name: 'Cancelar cita' })).toBeDefined();
+    expect(await screen.findByText(/Paso 1 de 4/)).toBeDefined();
+  });
+  it('elige Flujo C, cancela, aprueba, acepta la oferta, muestra dominó y vuelve al inicio del Flujo A', async () => {
+    const { cliente, usuario, router } = abrir('/app');
+    await usuario.selectOptions(screen.getByRole('combobox', { name: 'Guion de demo' }), 'flujoC');
+    expect(await screen.findByText(/Paso 1 de 4/)).toBeDefined();
+    await usuario.click(await screen.findByRole('button', { name: 'Cancelar cita' }));
+    await usuario.click(screen.getByRole('button', { name: 'Confirmar cancelación' }));
+    await usuario.click(await screen.findByRole('link', { name: 'Abrir WhatsApp' }));
+    expect(screen.getByText(/¿Confirmas que quieres cancelar tu cita de Ultrasonido abdominal en Tepic/)).toBeDefined();
+    await usuario.click(screen.getByRole('button', { name: 'Sí, cancelar' }));
+    await screen.findByText('Tu cita quedó cancelada.');
+    await usuario.click(await screen.findByRole('button', { name: /Ver mensajes de 5210000000002/ }));
+    expect(await screen.findByText(/Se liberó un espacio para Ultrasonido abdominal en Tepic/)).toBeDefined();
+    await usuario.click(screen.getByRole('link', { name: 'Admin' }));
+    let panel = await screen.findByRole('region', { name: 'Panel de huecos' });
+    expect(await within(panel).findByText('Ofrecido')).toBeDefined();
+    await usuario.click(screen.getByRole('link', { name: 'WhatsApp' }));
+    fireEvent.change(screen.getByLabelText('Número de WhatsApp'), { target: { value: '5210000000002' } });
+    await usuario.click(screen.getByRole('button', { name: 'Sí, adelantar' }));
+    await screen.findByText(/Listo, tu cita quedó el/);
+    await usuario.click(await screen.findByRole('button', { name: /Ver mensajes de 5210000000003/ }));
+    expect(await screen.findByText(/3 de diciembre de 2026/)).toBeDefined();
+    await usuario.click(screen.getByRole('link', { name: 'Admin' }));
+    panel = await screen.findByRole('region', { name: 'Panel de huecos' });
+    await within(panel).findByText('Asignado');
+    const filas = within(screen.getByRole('list', { name: 'Huecos liberados' })).getAllByRole('listitem').filter(fila => fila.parentElement?.getAttribute('aria-label') === 'Huecos liberados');
+    expect(filas[0]!.textContent).toContain('3 de diciembre');
+    expect(filas[1]!.textContent).toContain('Aceptada');
+    expect(screen.getByText('Horas de recurso recuperadas').parentElement?.textContent).toContain('0.5');
+    await usuario.selectOptions(screen.getByRole('combobox', { name: 'Guion de demo' }), 'flujoA');
+    expect(cliente.demo?.paso().id).toBe('INICIO');
+    expect(await screen.findByText(/Paso 1 de 14/)).toBeDefined();
+    for (const numero of ['5210000000001', '5210000000002', '5210000000003']) expect(sessionStorage.getItem(`noki:wa:${numero}`)).toBeNull();
+    await act(async () => { await router.navigate('/wa'); });
+    expect(screen.queryByText(/Se liberó un espacio/)).toBeNull();
+    expect(screen.queryByRole('button', { name: /Ver mensajes de/ })).toBeNull();
+  });
   it('muestra los campos ausentes de la ficha del Call Center sin inventar datos', async () => {
     const cliente = new ClienteMock({ latenciaMs: 0 });
     const consultar = cliente.consultar.bind(cliente);

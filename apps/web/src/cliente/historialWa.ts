@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { MensajeBotSchema, SolicitudMensajeWaSchema } from '@noki/contracts';
 import type { MensajeBot, SolicitudMensajeWa } from '@noki/contracts';
 import type { ClienteApi } from './ClienteApi.ts';
+import { CONTACTOS_DEMO } from './ClienteApi.ts';
 import { ErrorCliente, validar } from './errores.ts';
 
 const EntradaSchema = z.object({
@@ -27,12 +28,21 @@ function redactar<T>(dato: T, secretos: string[] = []): T {
   })) as T;
 }
 
+function contenidoVisible(mensaje: MensajeBot) {
+  return JSON.stringify(mensaje.tipo === 'botones'
+    ? { tipo: mensaje.tipo, texto: mensaje.texto, titulos: mensaje.botones.map(boton => boton.titulo) }
+    : mensaje);
+}
+
 export class HistorialWa {
   readonly #conversaciones = new Map<string, Conversacion>();
   readonly #oyentes = new Map<string, Set<() => void>>();
   readonly #almacenamiento: Almacenamiento | undefined;
   readonly #alResponder: (() => void) | undefined;
   #activo: string | undefined;
+  #numeros: readonly string[] = [...CONTACTOS_DEMO];
+  #nuevos: readonly string[] = [];
+  readonly #oyentesSesion = new Set<() => void>();
 
   constructor(private readonly cliente: Pick<ClienteApi, 'enviarMensajeWa'>, opciones: { almacenamiento?: Almacenamiento; alResponder?: () => void } = {}) {
     this.#alResponder = opciones.alResponder;
@@ -40,7 +50,6 @@ export class HistorialWa {
   }
 
   leer(waId: string): ConversacionWa {
-    this.#activo = waId;
     if (!this.#conversaciones.has(waId)) {
       let entradas: EntradaHistorial[] = [];
       try {
@@ -52,6 +61,44 @@ export class HistorialWa {
     return this.#conversaciones.get(waId)!.vista;
   }
 
+  numerosSesion = () => this.#numeros;
+  numerosNuevos = () => this.#nuevos;
+  suscribirSesion = (recibir: () => void) => {
+    this.#oyentesSesion.add(recibir);
+    return () => { this.#oyentesSesion.delete(recibir); };
+  };
+  private avisarSesion() { this.#oyentesSesion.forEach(recibir => recibir()); }
+
+  mostrar(waId: string) {
+    this.#activo = waId;
+    this.marcarLeido(waId);
+  }
+  ocultar(waId: string) { if (this.#activo === waId) this.#activo = undefined; }
+  private marcarLeido(waId: string) {
+    if (!this.#nuevos.includes(waId)) return;
+    this.#nuevos = this.#nuevos.filter(numero => numero !== waId);
+    this.avisarSesion();
+  }
+
+  recibirMensajes(waId: string, mensajes: MensajeBot[]) {
+    if (!this.#numeros.includes(waId)) return;
+    const conversacion = this.obtener(waId);
+    const entradas = [...conversacion.vista.entradas];
+    for (const dato of mensajes) {
+      const mensaje = redactar(validar(MensajeBotSchema, dato));
+      let ultimoBot = entradas.length - 1;
+      while (ultimoBot >= 0 && entradas[ultimoBot]?.origen !== 'bot') ultimoBot--;
+      const anterior = entradas[ultimoBot];
+      if (anterior?.mensaje && contenidoVisible(anterior.mensaje) === contenidoVisible(mensaje)) entradas[ultimoBot] = { ...anterior, mensaje };
+      else entradas.push({ id: crypto.randomUUID(), origen: 'bot', tipo: 'mensaje-bot', mensaje });
+    }
+    this.actualizar(waId, { ...conversacion.vista, entradas });
+    if (waId !== this.#activo && !this.#nuevos.includes(waId)) {
+      this.#nuevos = [...this.#nuevos, waId];
+      this.avisarSesion();
+    }
+  }
+
   suscribir(waId: string, recibir: () => void) {
     const oyentes = this.#oyentes.get(waId) ?? new Set(); oyentes.add(recibir); this.#oyentes.set(waId, oyentes);
     return () => { oyentes.delete(recibir); };
@@ -59,6 +106,10 @@ export class HistorialWa {
 
   async enviar(solicitud: SolicitudMensajeWa, resumen: ResumenWa): Promise<boolean> {
     const entrada = validar(SolicitudMensajeWaSchema, solicitud);
+    if (!this.#numeros.includes(entrada.waId)) {
+      this.#numeros = [...this.#numeros, entrada.waId];
+      this.avisarSesion();
+    }
     const conversacion = this.obtener(entrada.waId);
     if (conversacion.vista.enviando) return false;
     const id = crypto.randomUUID();
@@ -96,6 +147,7 @@ export class HistorialWa {
   }
 
   borrar(waId: string) {
+    this.marcarLeido(waId);
     const conversacion = this.obtener(waId); conversacion.revision++; conversacion.pendientes.clear();
     conversacion.vista = { entradas: [], enviando: false };
     try { this.#almacenamiento?.removeItem(`noki:wa:${waId}`); } catch { /* Sin almacenamiento, basta limpiar la memoria. */ }
@@ -104,6 +156,7 @@ export class HistorialWa {
 
   reiniciar() {
     if (this.#activo) this.borrar(this.#activo);
+    for (const numero of CONTACTOS_DEMO) this.borrar(numero);
     for (const conversacion of this.#conversaciones.values()) conversacion.codigos.clear();
   }
 

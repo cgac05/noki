@@ -21,6 +21,7 @@ function preparar() {
     if (ruta.endsWith('/contexto')) return Response.json({ hiloId: IDS.hilo, pacienteId: IDS.paciente, sedeId: IDS.sede });
     if (ruta.endsWith('/kpis')) return Response.json(lecturas.metricas);
     if (ruta.endsWith('/alertas')) return Response.json(lecturas.alertasSeguridad);
+    if (ruta.endsWith('/huecos')) return Response.json(lecturas.panelHuecos);
     if (ruta.endsWith('/ficha')) return Response.json(lecturas.fichaHilo);
     throw new Error('Consulta inesperada');
   });

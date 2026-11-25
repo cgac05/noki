@@ -32,6 +32,7 @@ function preparar(ruta = '/clinica', configurar?: (lecturas: typeof GUION_FLUJO_
     if (direccion.endsWith('/contexto')) return Response.json({ hiloId: IDS.hilo, pacienteId: IDS.paciente, sedeId: IDS.sede });
     if (direccion.endsWith('/llegadas')) return Response.json(lecturas.llegadasSede);
     if (direccion.endsWith('/kpis')) return Response.json(lecturas.metricas);
+    if (direccion.endsWith('/huecos')) return Response.json(lecturas.panelHuecos);
     if (direccion.endsWith('/ficha')) return Response.json(lecturas.fichaHilo);
     if (direccion.endsWith('/alertas')) return errorAlertas
       ? Response.json({ error: { codigo: 'NO_ENCONTRADO', mensaje: 'Consulta no disponible' } }, { status: 404 })

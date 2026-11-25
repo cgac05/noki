@@ -5,13 +5,19 @@ import { LineaTiempo, NOMBRES_CANAL } from '../componentes/LineaTiempo.tsx';
 import { EstadoContexto } from '../componentes/EstadoContexto.tsx';
 import { useSala } from '../cliente/useSala.ts';
 import { RelojDemo } from '../componentes/RelojDemo.tsx';
+import type { HuecoVista } from '@noki/contracts';
+import { fechaEnSede } from '../componentes/formato.ts';
 
 const ETIQUETAS_KPI: Record<string, string> = {
   cambiosCanal: 'Cambios de canal', cambiosCanalPorHilo: 'Cambios de canal por hilo',
   tramitesRecuperados: 'Trámites recuperados', citasConfirmadas: 'Citas confirmadas',
   llegadasRegistradas: 'Llegadas registradas', datosRepetidos: 'Datos repetidos',
   intentosVerificacionFallidos: 'Intentos de verificación fallidos',
+  huecosLiberados: 'Huecos liberados', huecosRecuperados: 'Huecos recuperados',
+  horasRecursoRecuperadas: 'Horas de recurso recuperadas', diasAdelantadosPromedio: 'Días adelantados en promedio',
 };
+const ESTADOS_HUECO: Record<HuecoVista['estado'], string> = { DETECTADO: 'Detectado', OFRECIDO: 'Ofrecido', ASIGNADO: 'Asignado', DESIERTO: 'Desierto' };
+const ESTADOS_OFERTA: Record<HuecoVista['ofertas'][number]['estado'], string> = { OFRECIDA: 'Ofrecida', ACEPTADA: 'Aceptada', RECHAZADA: 'Rechazada', EXPIRADA: 'Expirada', PERDIDA: 'Perdida' };
 const formatoNumero = new Intl.NumberFormat('es-MX', { maximumSignificantDigits: 21 });
 const formatoHora = new Intl.DateTimeFormat('es-MX', { dateStyle: 'short', timeStyle: 'short' });
 
@@ -19,6 +25,7 @@ export function Admin() {
   const cliente = useCliente();
   const metricas = useConsulta('metricas', {});
   const alertas = useConsulta('alertasSeguridad', {});
+  const huecos = useConsulta('panelHuecos', {});
   const contexto = useContextoConsulta();
   const { hiloId } = contexto;
   useSala('admin');
@@ -32,6 +39,25 @@ export function Admin() {
       <section className="seccion"><h2>Trámites por estado</h2><dl className="datos">{metricas.data.porEstado.map(fila => <div key={fila.estado}><dt>{fila.estado}</dt><dd>{fila.cantidad}</dd></div>)}</dl></section>
       <section className="seccion"><h2>Indicadores disponibles</h2><dl className="datos">{Object.entries(metricas.data.kpis).map(([nombre, valor]) => <div key={nombre}><dt>{Object.hasOwn(ETIQUETAS_KPI, nombre) ? ETIQUETAS_KPI[nombre] : nombre}</dt><dd>{formatoNumero.format(valor)}</dd></div>)}</dl></section>
     </>}
+    <section className="seccion" aria-labelledby="titulo-huecos">
+      <h2 id="titulo-huecos">Panel de huecos</h2>
+      {huecos.isPending && <EstadoCarga texto="Cargando huecos…" />}
+      {huecos.isError && <EstadoError error={huecos.error} onReintentar={() => { void huecos.refetch(); }} />}
+      {huecos.data?.length === 0 && <p>No hay huecos liberados.</p>}
+      {huecos.data && huecos.data.length > 0 && <ol className="panel-huecos" aria-label="Huecos liberados">{huecos.data.map(hueco => <li key={hueco.id}>
+        <h3>{hueco.servicio}</h3>
+        <dl className="datos">
+          <div><dt>Sede</dt><dd>{hueco.sede}</dd></div>
+          <div><dt>Fecha y hora en la sede</dt><dd><time dateTime={hueco.inicio}>{fechaEnSede(hueco.inicio, hueco.zonaHoraria)}</time><small>{hueco.zonaHoraria}</small></dd></div>
+          <div><dt>Estado del hueco</dt><dd>{ESTADOS_HUECO[hueco.estado]}</dd></div>
+        </dl>
+        <ol className="ofertas-hueco" aria-label={`Ofertas de ${hueco.servicio}`}>{hueco.ofertas.map((oferta, indice) => <li key={indice}>
+          <strong>{ESTADOS_OFERTA[oferta.estado]}</strong>
+          <dl className="datos"><div><dt>Envío</dt><dd><time dateTime={oferta.enviadaEn}>{formatoHora.format(new Date(oferta.enviadaEn))}</time></dd></div>
+            <div><dt>Vencimiento</dt><dd><time dateTime={oferta.expiraEn}>{formatoHora.format(new Date(oferta.expiraEn))}</time></dd></div></dl>
+        </li>)}</ol>
+      </li>)}</ol>}
+    </section>
     <section className="seccion" aria-labelledby="titulo-alertas">
       <h2 id="titulo-alertas">Alertas de seguridad</h2>
       {alertas.isPending && <EstadoCarga texto="Cargando alertas de seguridad…" />}

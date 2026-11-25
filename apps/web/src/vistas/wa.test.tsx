@@ -12,6 +12,7 @@ import { GUION_FLUJO_A, IDS } from '../cliente/mock/guionFlujoA.ts';
 import { rutas } from '../rutas.tsx';
 import '../pruebas/dialogo.ts';
 import { identificarEnWa, prepararContinuacionWa } from '../pruebas/identificarEnWa.ts';
+import { SocketFalso } from '../pruebas/socketFalso.ts';
 
 afterEach(() => { cleanup(); sessionStorage.clear(); localStorage.clear(); vi.restoreAllMocks(); });
 it('identifica por opciones opacas y fecha sin repetirla en la conversación ni en sesión', async () => {
@@ -152,4 +153,62 @@ it('Modo simulado: la insignia es visible en cualquier ruta', async () => {
   for (const ruta of ['/web', '/wa', '/app', '/callcenter', '/clinica', '/admin', '/bandeja']) {
     await act(async () => { await router.navigate(ruta); }); expect(screen.getByText('Modo simulado')).toBeDefined();
   }
+});
+
+function prepararEmpuje(ruta = '/wa') {
+  const socket = new SocketFalso();
+  const peticion = vi.fn<typeof fetch>().mockImplementation(async () => Response.json({ mensajes: [{ tipo: 'texto', texto: 'Respuesta posterior' }] }));
+  const cliente = new ClienteReal({ fetch: peticion, fabricaSocket: () => socket });
+  const vista = abrir(cliente, ruta);
+  act(() => socket.recibir('connect'));
+  const empujar = (waId: string, mensajes: MensajeBot[]) => act(() => socket.recibir('wa:mensajes', { waId, mensajes }));
+  return { ...vista, socket, peticion, empujar };
+}
+const ofertaEntrante: MensajeBot = { tipo: 'botones', texto: 'Espacio disponible en Tepic', botones: [{ id: 'aceptar', titulo: 'Aceptar espacio', payload: 'ref.opaca.7xK' }] };
+
+it('reenvío de oferta reemplaza la última burbuja y envía el payload vigente', async () => {
+  const { usuario, empujar, peticion } = prepararEmpuje();
+  empujar(CONTACTO_DEMO, [ofertaEntrante]);
+  empujar(CONTACTO_DEMO, [{ ...ofertaEntrante, botones: [{ id: 'aceptar', titulo: 'Aceptar espacio', payload: 'ref.opaca.nueva' }] }]);
+  expect(within(screen.getByRole('log')).getAllByText('Espacio disponible en Tepic')).toHaveLength(1);
+  await usuario.click(screen.getByRole('button', { name: 'Aceptar espacio' }));
+  await screen.findByText('Respuesta posterior');
+  expect(JSON.parse(peticion.mock.calls[0]![1]!.body as string).payloadBoton).toBe('ref.opaca.nueva');
+  expect(sessionStorage.getItem(`noki:wa:${CONTACTO_DEMO}`)).not.toContain('ref.opaca.7xK');
+});
+
+it('recibe en el número activo y envía payloadBoton; otro mensaje deshabilita los botones anteriores', async () => {
+  const { usuario, peticion, empujar } = prepararEmpuje();
+  fireEvent.change(screen.getByLabelText('Número de WhatsApp'), { target: { value: '5210000000002' } });
+  empujar('5210000000002', [ofertaEntrante]);
+  const boton = await screen.findByRole('button', { name: 'Aceptar espacio' });
+  expect((boton as HTMLButtonElement).disabled).toBe(false);
+  await usuario.click(boton);
+  await screen.findByText('Respuesta posterior');
+  expect(JSON.parse(peticion.mock.calls[0]![1]!.body as string)).toEqual({ waId: '5210000000002', payloadBoton: 'ref.opaca.7xK' });
+  expect((boton as HTMLButtonElement).disabled).toBe(true);
+});
+
+it('escucha los tres números desde el proveedor y conserva mensajes recibidos estando en app', async () => {
+  const { socket, router, empujar } = prepararEmpuje('/app');
+  for (const waId of ['5210000000001', '5210000000002', '5210000000003']) expect(socket.emit).toHaveBeenCalledWith('sala:unirse', `wa:${waId}`);
+  empujar(CONTACTO_DEMO, [ofertaEntrante]);
+  await act(async () => { await router.navigate('/wa'); });
+  expect(await screen.findByText('Espacio disponible en Tepic')).toBeDefined();
+});
+
+it('avisa y cambia a Beto o Carla sin mezclar historiales, e ignora números ajenos', async () => {
+  const { usuario, empujar } = prepararEmpuje();
+  empujar('5210000000009', [{ tipo: 'texto', texto: 'No debe aparecer' }]);
+  expect(screen.queryByText('No debe aparecer')).toBeNull();
+  expect(screen.queryByRole('button', { name: /5210000000009/ })).toBeNull();
+  empujar('5210000000002', [ofertaEntrante]);
+  empujar('5210000000003', [{ tipo: 'texto', texto: 'Oferta para Carla' }]);
+  expect(screen.queryByText('Espacio disponible en Tepic')).toBeNull();
+  await usuario.click(await screen.findByRole('button', { name: /5210000000002/ }));
+  expect(await screen.findByText('Espacio disponible en Tepic')).toBeDefined();
+  expect(screen.queryByRole('button', { name: /5210000000002/ })).toBeNull();
+  await usuario.click(screen.getByRole('button', { name: /5210000000003/ }));
+  expect(await screen.findByText('Oferta para Carla')).toBeDefined();
+  expect(screen.queryByText('Espacio disponible en Tepic')).toBeNull();
 });

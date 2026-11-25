@@ -120,3 +120,34 @@ it('el proveedor comparte el historial con el hook y reiniciar el guion vacía l
   expect(screen.getByText('0')).toBeDefined();
   expect(sessionStorage.getItem(`noki:wa:${numero}`)).toBeNull();
 });
+
+it('agrega mensajes iniciados por la empresa con redacción, orden y persistencia solo de sesión', () => {
+  const { cliente, historial } = preparar();
+  historial.recibirMensajes(numero, [
+    { tipo: 'texto', texto: 'CONTINUAR referencia-protegida' },
+    { tipo: 'flow', titulo: 'Verifica', campos: [{ id: 'dato', etiqueta: 'Dato protegido', captura: 'sensitive', requerido: true, valorInicial: '1234' }] },
+  ]);
+  expect(historial.leer(numero).entradas.map(e => e.origen)).toEqual(['bot', 'bot']);
+  const guardado = sessionStorage.getItem(`noki:wa:${numero}`)!;
+  expect(guardado).toContain('CONTINUAR ••••');
+  expect(guardado).not.toMatch(/referencia-protegida|valorInicial|1234/);
+  expect(new HistorialWa(cliente).leer(numero).entradas).toEqual(historial.leer(numero).entradas);
+  expect(localStorage.length).toBe(0);
+});
+
+it('registra los tres números de demo y los conversados, ignora ajenos y marca solo los no visibles', async () => {
+  const { historial } = preparar();
+  expect(historial.numerosSesion()).toEqual(['5210000000001', '5210000000002', '5210000000003']);
+  historial.mostrar(numero);
+  historial.recibirMensajes(numero, respuesta.mensajes);
+  expect(historial.numerosNuevos()).toEqual([]);
+  historial.recibirMensajes('5210000000003', respuesta.mensajes);
+  expect(historial.numerosNuevos()).toEqual(['5210000000003']);
+  historial.mostrar('5210000000003');
+  expect(historial.numerosNuevos()).toEqual([]);
+  historial.recibirMensajes('5210000000009', respuesta.mensajes);
+  expect(sessionStorage.getItem('noki:wa:5210000000009')).toBeNull();
+  expect(historial.numerosNuevos()).toEqual([]);
+  await historial.enviar({ waId: '5210000000008', texto: 'Hola' }, { tipo: 'texto', texto: 'Hola' });
+  expect(historial.numerosSesion()).toContain('5210000000008');
+});

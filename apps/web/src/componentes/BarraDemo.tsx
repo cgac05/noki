@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router';
 import { useEffect, useRef, useSyncExternalStore } from 'react';
 import { useCliente } from '../cliente/ProveedorCliente.tsx';
+import { IdGuionSchema } from '../cliente/demo.ts';
 
 const sinCambios = () => () => {};
 const sinPaso = () => null;
@@ -32,7 +33,7 @@ export function BarraDemo() {
           <li key={ruta}><NavLink to={ruta}>{nombre}</NavLink></li>
         ))}
       </ul>
-      {paso && <div className="control-demo"><p role="status">Paso {paso.numero} de {paso.total} · {paso.titulo}</p><button type="button" onClick={() => demo?.reiniciar()}>Reiniciar guion</button></div>}
+      {paso && <div className="control-demo"><label>Guion de demo <select value={demo?.guion()} onChange={evento => demo?.elegirGuion(IdGuionSchema.parse(evento.target.value))}><option value="flujoA">Flujo A</option><option value="flujoC">Flujo C</option></select></label><p role="status">Paso {paso.numero} de {paso.total} · {paso.titulo}</p><button type="button" onClick={() => demo?.reiniciar()}>Reiniciar guion</button></div>}
     </nav>
   );
 }

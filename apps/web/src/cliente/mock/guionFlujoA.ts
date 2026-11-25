@@ -1,4 +1,4 @@
-import type { CitaVista, ComandoRequest, DatosEventoSocket, EventoVista, MensajeBot, NombreEventoSocket, RespuestaComando, SiguientePregunta, SolicitudMensajeWa } from '@noki/contracts';
+import type { CitaVista, ComandoRequest, CuerpoError, DatosEventoSocket, EventoVista, MensajeBot, NombreEventoSocket, RespuestaComando, SiguientePregunta, SolicitudMensajeWa } from '@noki/contracts';
 import { CONTACTO_DEMO } from '../ClienteApi.ts';
 import type { PasoGuion } from '../demo.ts';
 import type { LecturasCliente } from '../consultas.ts';
@@ -52,6 +52,7 @@ export interface PasoFixture {
   paso: PasoGuion;
   espera: EntradaGuion | null;
   respuesta: RespuestaComando;
+  rechazo?: CuerpoError['error'];
   lecturas: LecturasCliente;
   mensajes: MensajeBot[];
   eventosSocket: EventoGuion[];

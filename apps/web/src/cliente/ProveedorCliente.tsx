@@ -15,11 +15,24 @@ const ContextoRespuesta = createContext<{ respuesta: RespuestaComando | undefine
 export function ProveedorCliente({ cliente, children }: { cliente: ClienteApi; children: ReactNode }) {
   const [consultas] = useState(() => new QueryClient({ defaultOptions: { queries: { retry: false }, mutations: { retry: false } } }));
   const [respuesta, recordar] = useState<RespuestaComando>();
+  const [revisionVista, reiniciarVistas] = useState(() => cliente.demo?.revision() ?? 0);
   const [historial] = useState(() => new HistorialWa(cliente, { alResponder: () => { void consultas.invalidateQueries({ queryKey: ['consulta'] }); } }));
+  useEffect(() => {
+    const salas = new Map<string, () => void>();
+    const unirNumeros = () => {
+      for (const numero of historial.numerosSesion()) if (!salas.has(numero)) salas.set(numero, cliente.unirse(`wa:${numero}`));
+    };
+    const dejarMensajes = cliente.suscribir('wa:mensajes', ({ waId, mensajes }) => historial.recibirMensajes(waId, mensajes));
+    const dejarSesion = historial.suscribirSesion(unirNumeros);
+    unirNumeros();
+    return () => { dejarMensajes(); dejarSesion(); salas.forEach(dejar => dejar()); };
+  }, [cliente, historial]);
   useEffect(() => {
     let revisionGuion = cliente.demo?.revision();
     const actualizar = () => {
-      if (cliente.demo?.paso().id === 'INICIO' && cliente.demo.revision() !== revisionGuion) { recordar(undefined); historial.reiniciar(); }
+      if (cliente.demo?.paso().numero === 1 && cliente.demo.revision() !== revisionGuion) {
+        recordar(undefined); historial.reiniciar(); reiniciarVistas(cliente.demo.revision());
+      }
       revisionGuion = cliente.demo?.revision();
       void consultas.invalidateQueries();
     };
@@ -28,7 +41,7 @@ export function ProveedorCliente({ cliente, children }: { cliente: ClienteApi; c
     return () => { dejar.forEach(cancelar => cancelar()); consultas.clear(); };
   }, [cliente, consultas, historial]);
 
-  return <ContextoCliente.Provider value={cliente}><ContextoHistorial.Provider value={historial}><ContextoRespuesta.Provider value={{ respuesta, recordar }}><QueryClientProvider client={consultas}>{children}</QueryClientProvider></ContextoRespuesta.Provider></ContextoHistorial.Provider></ContextoCliente.Provider>;
+  return <ContextoCliente.Provider value={cliente}><ContextoHistorial.Provider value={historial}><ContextoRespuesta.Provider key={revisionVista} value={{ respuesta, recordar }}><QueryClientProvider client={consultas}>{children}</QueryClientProvider></ContextoRespuesta.Provider></ContextoHistorial.Provider></ContextoCliente.Provider>;
 }
 
 export function useHistorialWa() {

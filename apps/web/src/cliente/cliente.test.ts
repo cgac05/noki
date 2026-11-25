@@ -10,6 +10,7 @@ import { GUION_FLUJO_A, IDS } from './mock/guionFlujoA.ts';
 import { CATALOGO_DEMO, COMANDOS_WEB_ESPERADOS, DATOS_WEB } from './mock/datosWeb.ts';
 import { ESQUEMAS_DEMO } from './demo.ts';
 import { ClienteReal } from './real/ClienteReal.ts';
+import type { DatosEventoSocket } from '@noki/contracts';
 
 const iniciar = { canal: 'callcenter', actor: 'asesor:asesor1', tipo: 'IniciarTramite', payload: { tipoTramite: 'AGENDAR', contacto: '5210000000001' } } as const;
 
@@ -43,6 +44,48 @@ describe('Configuración y contrato de lecturas', () => {
 });
 
 describe('Cliente simulado', () => {
+  it('Flujo C: aprobación por 403, oferta privada, efecto dominó y lecturas/eventos válidos', async () => {
+    const cliente = new ClienteMock({ latenciaMs: 0 });
+    cliente.demo.elegirGuion('flujoC');
+    expect(cliente.demo.guion()).toBe('flujoC');
+    expect(cliente.demo.paso()).toMatchObject({ id: 'C_INICIO', numero: 1 });
+    const { GUION_FLUJO_C } = await import('./mock/guionFlujoC.ts');
+    const recibir = vi.fn<(dato: DatosEventoSocket['wa:mensajes']) => void>(); cliente.suscribir('wa:mensajes', recibir);
+    for (const paso of GUION_FLUJO_C) {
+      if (paso.espera?.tipo === 'comando') {
+        await expect(cliente.enviarComando(paso.espera.comando)).rejects.toMatchObject({ tipo: 'API', codigo: 'STEP_UP_REQUERIDO' });
+        expect(recibir).toHaveBeenLastCalledWith(expect.objectContaining({ waId: '5210000000001' }));
+      } else if (paso.espera?.tipo === 'wa') await cliente.enviarMensajeWa(paso.espera.mensaje);
+      expect(cliente.demo.paso().id).toBe(paso.paso.id);
+      expect(RespuestaComandoSchema.safeParse(paso.respuesta).success).toBe(true);
+      expect(RespuestaMensajeWaSchema.safeParse({ mensajes: paso.mensajes }).success).toBe(true);
+      for (const [nombre, datos] of Object.entries(paso.lecturas)) {
+        const esquema = nombre === 'web' ? ESQUEMAS_DEMO.web : RUTAS_CONSULTAS[nombre as keyof typeof RUTAS_CONSULTAS].respuesta;
+        expect(esquema.safeParse(datos).success, `${paso.paso.id}: ${nombre}`).toBe(true);
+      }
+      const parametros = { ...cliente.demo.ids, tramiteId: paso.respuesta.tramite.id };
+      for (const nombre of Object.keys(RUTAS_CONSULTAS) as Array<keyof typeof RUTAS_CONSULTAS>) expect(await cliente.consultar(nombre, parametros)).toEqual(paso.lecturas[nombre]);
+      for (const evento of paso.eventosSocket) expect(ESQUEMAS_EVENTOS_SOCKET[evento.nombre].safeParse(evento.datos).success).toBe(true);
+    }
+    const ofertas = recibir.mock.calls.map(([dato]) => dato).filter(dato => dato.waId !== '5210000000001');
+    expect(ofertas.map(dato => dato.waId)).toEqual(['5210000000002', '5210000000003']);
+    for (const dato of ofertas) {
+      const mensaje = dato.mensajes[0];
+      if (mensaje?.tipo !== 'botones') throw new Error('La oferta del guion debe contener botones');
+      expect(mensaje.texto).toMatch(/^Se liberó un espacio para Ultrasonido abdominal en Tepic el .+\. ¿Quieres adelantar tu cita\?$/);
+      expect(mensaje.texto).not.toMatch(/Ana|Beto|Carla|521000|019aff/);
+      expect(mensaje.botones.map((b: { titulo: string }) => b.titulo)).toEqual(['Sí, adelantar', 'No, gracias']);
+      for (const boton of mensaje.botones) expect(boton.payload).toMatch(/^demo\.ref\.[a-zA-Z0-9]+$/);
+    }
+    const panel = await cliente.consultar('panelHuecos', {});
+    expect(panel.map(h => h.estado)).toEqual(['OFRECIDO', 'ASIGNADO']);
+    expect(panel[0]!.inicio).toBe('2026-12-03T16:15:00.000Z');
+    expect(panel[1]!.ofertas[0]!.estado).toBe('ACEPTADA');
+    expect((await cliente.consultar('metricas', {})).kpis).toMatchObject({ huecosLiberados: 2, huecosRecuperados: 1, horasRecursoRecuperadas: 0.5, diasAdelantadosPromedio: 7 });
+    cliente.demo.elegirGuion('flujoA');
+    expect(cliente.demo.paso().id).toBe('INICIO');
+    expect(cliente.demo.ids.hiloId).toBe(IDS.hilo);
+  });
   it('Datos simulados con el contrato compartido: valida todas las consultas en cada paso, sin acciones', async () => {
     const cliente = new ClienteMock({ latenciaMs: 0 });
     const parametros = { tramiteId: IDS.tramite, hiloId: IDS.hilo, pacienteId: IDS.paciente, sedeId: IDS.sede };
