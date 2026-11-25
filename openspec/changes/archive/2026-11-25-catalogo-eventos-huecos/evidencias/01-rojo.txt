@@ -1,0 +1,121 @@
+
+ RUN  v4.0.14 C:/Users/Luis Rodriguez/Documents/TEC/HackaTec/noki
+
+ ❯ |unitarios| tests/unit/dominio.test.ts (8 tests | 3 failed) 21ms
+     × declara exactamente los estados vigentes y ninguna fase obsoleta 10ms
+     ✓ exige el nivel de riesgo y rechaza el payload de un hueco 1ms
+     ✓ no referencia a quien liberó el horario en eventos del candidato 0ms
+     × mantiene las tablas de eventos tipados del documento iguales al catálogo 4ms
+     × no reserva los once eventos de huecos ni el de predicción 4ms
+     ✓ exige el tipo de trámite y vincula el payload al evento 0ms
+     ✓ detecta una rama de evento omitida y payloads con claves sensibles 0ms
+     ✓ conserva código y datos de los errores y todos son Error 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |unitarios| tests/unit/dominio.test.ts > vocabulario y eventos de dominio > declara exactamente los estados vigentes y ninguna fase obsoleta
+AssertionError: expected [ 'TramiteIniciado', …(39) ] to have a length of 41 but got 40
+
+- Expected
++ Received
+
+- 41
++ 40
+
+ ❯ tests/unit/dominio.test.ts:22:29
+     20|     expect(CASILLAS).toEqual(['servicio', 'sede', 'paciente', 'requisi…
+     21|     expect(TIPOS_TRAMITE).toEqual(['AGENDAR', 'ADELANTO', 'FACTURA']);
+     22|     expect(EVENTOS_DOMINIO).toHaveLength(41);
+       |                             ^
+     23|     expect(EVENTOS_DOMINIO).toEqual(expect.arrayContaining([...eventos…
+     24|     expectTypeOf<(typeof EVENTOS_DOMINIO)[number]>().toEqualTypeOf<Eve…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  |unitarios| tests/unit/dominio.test.ts > vocabulario y eventos de dominio > mantiene las tablas de eventos tipados del documento iguales al catálogo
+AssertionError: expected [ 'AtencionCerrada', …(28) ] to deeply equal [ 'AtencionCerrada', …(39) ]
+
+- Expected
++ Received
+
+@@ -1,33 +1,22 @@
+  [
+    "AtencionCerrada",
+    "CanalCambiado",
+-   "CitaAdelantada",
+    "CitaCancelada",
+    "CitaConfirmada",
+    "CitaReprogramada",
+    "ConsentimientoContactoWA",
+    "ConsentimientoOtorgado",
+    "CotizacionGenerada",
+    "DestinatarioDeclarado",
+    "HorarioReservado",
+-   "HuecoAsignado",
+-   "HuecoDesierto",
+-   "HuecoLiberado",
+    "IdentidadComprobada",
+    "IdentidadVinculada",
+    "Inasistencia",
+    "IntentoVerificacionFallido",
+-   "InteresAdelantoCancelado",
+-   "InteresAdelantoRegistrado",
+    "ItinerarioAceptado",
+    "ItinerarioPropuesto",
+-   "OfertaAceptada",
+-   "OfertaEnviada",
+-   "OfertaExpirada",
+-   "OfertaPerdida",
+-   "OfertaRechazada",
+    "PacienteAsignado",
+    "PacienteLlego",
+    "PacienteReconocido",
+    "PacienteRegistrado",
+    "PreparacionAceptada",
+
+ ❯ tests/unit/dominio.test.ts:50:28
+     48|     const tablas = documento.split(/^## /m).filter(seccion => seccion.…
+     49|     const nombres = tablas.flatMap(tabla => [...tabla.matchAll(/^\| `(…
+     50|     expect(nombres.sort()).toEqual([...EVENTOS_DOMINIO].sort());
+       |                            ^
+     51|   });
+     52| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  |unitarios| tests/unit/dominio.test.ts > vocabulario y eventos de dominio > no reserva los once eventos de huecos ni el de predicción
+AssertionError: expected '\n\nEstos nombres de `PLAN.md` §7 est…' not to contain '`HuecoLiberado`'
+
+- Expected
++ Received
+
+- `HuecoLiberado`
++
++
++ Estos nombres de `PLAN.md` §7 están reservados y todavía no pertenecen a `EventoDominio`:
++
++ - Resultados: `ResultadoDisponible`, `ResultadoConsultado`.
++ - Relleno de huecos: `InteresAdelantoRegistrado`, `InteresAdelantoCancelado`, `HuecoLiberado`, `OfertaEnviada`, `OfertaAceptada`, `OfertaRechazada`, `OfertaExpirada`, `OfertaPerdida`, `CitaAdelantada`, `HuecoAsignado`, `HuecoDesierto`.
++ - Seguimiento: `RecordatorioProgramado`, `RecordatorioEnviado`, `RecordatorioCancelado`, `AsistenciaConfirmada`, `PreparacionConfirmada`.
++ - Atención: `FriccionDetectada`, `DevolucionLlamadaSolicitada`, `DevolucionLlamadaAtendida`.
++ - Facturación: `FacturaSolicitada`, `DatosFiscalesCapturados`, `FacturaValidada`, `FacturaRechazada`, `FacturaEmitida`, `FacturaEnviada`.
++
++ PostgreSQL guarda el estado, el evento y su fila de outbox en la misma transacción. El relay publica en Redis Streams por partición de paciente o hilo, y cada grupo descarta los duplicados con su registro de claves de idempotencia.
++
+
+ ❯ tests/unit/dominio.test.ts:57:85
+     55|     const reservadas = documento.split('## Familias reservadas')[1];
+     56|     expect(reservadas).toBeDefined();
+     57|     for (const tipo of [...eventosHuecos, 'RiesgoEstimado']) expect(re…
+       |                                                                                     ^
+     58|   });
+     59| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 5 passed (8)
+   Start at  04:16:59
+   Duration  689ms (transform 249ms, setup 0ms, import 323ms, tests 21ms, environment 0ms)
+

@@ -1,0 +1,22 @@
+[
+  {
+    "comando": "corepack pnpm lint",
+    "codigo": 0,
+    "evidencia": "openspec/changes/catalogo-eventos-huecos/evidencias/03-lint.txt"
+  },
+  {
+    "comando": "corepack pnpm lint:deps",
+    "codigo": 0,
+    "evidencia": "openspec/changes/catalogo-eventos-huecos/evidencias/03-deps.txt"
+  },
+  {
+    "comando": "corepack pnpm test",
+    "codigo": 0,
+    "evidencia": "openspec/changes/catalogo-eventos-huecos/evidencias/03-test.txt"
+  },
+  {
+    "comando": "corepack pnpm test:integracion",
+    "codigo": 0,
+    "evidencia": "openspec/changes/catalogo-eventos-huecos/evidencias/03-integracion.txt"
+  }
+]

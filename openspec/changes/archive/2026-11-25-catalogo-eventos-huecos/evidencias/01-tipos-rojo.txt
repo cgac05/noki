@@ -1,0 +1,1 @@
+tests/unit/dominio.test.ts(29,49): error TS2344: Type 'Pick<RiesgoEstimado, "nivel" | "origen" | "probabilidad" | "versionModelo">' does not satisfy the constraint '"Expected: ..., Actual: never"'.
